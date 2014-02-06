@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Notes | williamdemeo.org]]></title>
+  <title><![CDATA[Category: Notes | williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-06T00:06:38-05:00</updated>
+  <updated>2014-02-06T00:09:56-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
