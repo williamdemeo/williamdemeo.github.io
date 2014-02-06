@@ -22,7 +22,7 @@ Carl Boettiger has an amazing [open notebook](http://carlboettiger.info/index.ht
 
 1.  Get the source:
 
-        git clone -b source git@github.com:uwilliamdemeo/williamdemeo.github.io.git octopress
+        git clone -b source git@github.com:williamdemeo/williamdemeo.github.io.git octopress
         cd octopress
         git clone git@github.com:williamdemeo/williamdemeo.github.io.git _deploy 
    
