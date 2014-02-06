@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-06T06:27:46-05:00</updated>
+  <updated>2014-02-06T06:49:29-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,17 +18,33 @@
     <link href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/"/>
     <updated>2014-02-05T22:52:59-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem</id>
-    <content type="html"><![CDATA[<p>These are very rough notes for my own reference.  Please see
-<a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
-for a nice discussion of this topic.  (In fact, I learned some of this stuff
-from François’ blog!)
-<!-- more --></p>
+    <content type="html"><![CDATA[<p>I learned about
+<a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
+from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>
+
+<p>This describes the proof as it was presented by Bauer.  These notes are rough
+and intended for my own reference.
+Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
+for a nice discussion of this topic.</p>
+
+<!-- more -->
 
 <ul>
   <li>
+    <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
+sets, then there is a choice function $f$ that can be used to select an element
+from each set in $\mathcal{S}$.  Another way to state this is as follows: if
+$S$ is a set, then there is a function $f$ from the powerset $\mathcal{P}(S)$
+into $S$ such that for all $A \in \mathcal{P}(S)$ we have $f(A) \in A$.</p>
+  </li>
+  <li>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
+either P or ¬P holds.</p>
+  </li>
+  <li>
     <p><strong>Diaconescu’s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
 
-    <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P$ or $\neg P$.  </p>
+    <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove that $P \bigvee \neg P$ holds.  </p>
 
     <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
 
@@ -38,7 +54,9 @@ from François’ blog!)
 
 <script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
 
-    <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to $B$. </p>
+    <p>Note that $P \Rightarrow A = B = \mathbf{2}$.</p>
+
+    <p>Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$. </p>
 
     <p>Therefore, $\{A, B\}$ is a set of nonempty sets.  </p>
 
@@ -56,35 +74,32 @@ by induction on $\mathbb{N}$), we can consider cases:</p>
 
     <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.</p>
 
-    <p>If $f(A) \neq f(B)$, then $1 \in A$, so $\neg P$.</p>
+    <p>If $f(A) \neq f(B)$, then $A \neq B$ so $P$ cannot hold.
+(Recall, $P \Rightarrow A = B = \mathbf{2}$.)</p>
+
+    <p>We have covered all cases and found that $P \bigvee \neg P$ holds. 
+<span style="float:right">∎</span></p>
   </li>
 </ul>
+
+<hr />
+
+<h2 id="coq">Coq</h2>
+
+<p><a href="http://coq.inria.fr/V8.1/stdlib/Coq.Logic.Diaconescu.html">Proofs of Diaconescu’s Theorem in Coq</a></p>
 
 <hr />
 
 <h2 id="appendix">Appendix</h2>
 
 <ul>
-  <li>
-    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
-either P or ¬P holds.</p>
-  </li>
-  <li>
-    <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
-sets, then there is a choice function $f$ that can be used to select an element
-from each set in $\mathcal{S}$.  Another way to state this is as follows: if
-$S$ is a set, then there is a function $f$ from the powerset $\mathcal{P}(S)$
-into $S$ such that for all $A \in \mathcal{P}(S)$ we have $f(A) \in A$.</p>
-  </li>
-  <li>
-    <p><strong>Decidable Sets.</strong>
+  <li><strong>Decidable Sets.</strong>
 A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have
 $x = y \bigvee x \neq y$. The empty set and singleton sets are trivially
 decidable, but some more complicated sets are decidable too. For example, one
 can use induction to show that the set of natural numbers is decidable. This
 and the following fact shows that every set of natural numbers, in particular
-$\{0,1\}$, is also decidable. </p>
-  </li>
+$\{0,1\}$, is also decidable. </li>
 </ul>
 
 ]]></content>
