@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[William DeMeo]]></title>
+  <title><![CDATA[williamdemeo.org]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-05T23:54:08-05:00</updated>
+  <updated>2014-02-06T00:06:38-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -49,15 +49,15 @@ that every set of natural numbers, in particular $\{0,1\}$, is also decidable.  
 or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br />
 Define the following sets:</p>
 
-<script type="math/tex; mode=display">A = \\{x \mid x = 0 \bigvee x = P\\}</script>
+<script type="math/tex; mode=display">A = \{x \mid x = 0 \bigvee x = P\}</script>
 
-<script type="math/tex; mode=display">B = \\{x \mid x = 1 \bigvee x = P\\}</script>
+<script type="math/tex; mode=display">B = \{x \mid x = 1 \bigvee x = P\}</script>
 
     <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
-$B$. Therefore, $\{A, B\}$ is a set of nonempty sets so there is a choice
+$B$. Therefore, ${A, B}$ is a set of nonempty sets so there is a choice
 function,  </p>
 
-<script type="math/tex; mode=display">f : \\{A, B\\} \rightarrow \\{0, 1\\}.</script>
+<script type="math/tex; mode=display">f : \{A, B\} \rightarrow \{0, 1\}.</script>
 
     <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
 
