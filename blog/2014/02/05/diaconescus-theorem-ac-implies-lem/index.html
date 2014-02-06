@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - My Octopress Blog</title>
+  <title>Diaconescu's Theorem: AC Implies LEM - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="Blog Archive 2014 Diaconescu&#8217;s Theorem: AC Implies LEM
-Feb 05 2014 posted in Notes Algebra and Logic Seminar: Feb 7
-Feb 05 2014 Recent Posts &hellip;">
+  <meta name="description" content="These are very rough notes for my own reference. Please see
+Fran&#231;ois Dorais&#8217; blog post
+for a nice discussion of this topic. (In fact, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Feb 05 2014 Recent Posts &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://williamdemeo.github.io/blog/archives">
+  <link rel="canonical" href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -124,45 +124,128 @@ Feb 05 2014 Recent Posts &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Diaconescu's Theorem: AC Implies LEM</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-05T22:52:59-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>These are very rough notes for my own reference.  Please see
+<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&#8217; blog post</a>
+for a nice discussion of this topic.  (In fact, I learned some of this stuff
+from Fran&#231;ois&#8217; blog!)</p>
 
-  
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/02/05/diaconescus-theorem-ac-implies-lem/">Diaconescu&#8217;s Theorem: AC Implies LEM</a></h1>
-<time datetime="2014-02-05T22:52:59-05:00" pubdate><span class='month'>Feb</span> <span class='day'>05</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/notes/'>Notes</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<ul>
+<li><p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
+either P or &not;P holds.</p></li>
+<li><p><strong>The Axiom of Choice</strong> (AC) states that if S is a collection of nonempty sets,
+then there is a choice function f that can be used to select an element from
+each set in S.</p></li>
+<li><p><strong>Decidable Sets.</strong>
+A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have $x = y \bigvee x \neq y$.
+The empty set and singleton sets are trivially decidable, but some more
+complicated sets are decidable too. For example, one can use induction to show
+that the set of natural numbers is decidable. This and the following fact shows
+that every set of natural numbers, in particular $\{0,1\}$, is also decidable.</p></li>
+<li><p><strong>Diaconescu&rsquo;s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
 
+<p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
+or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br/>
+Define the following sets:</p>
 
+<p>$$A = \{x \mid x = 0 \bigvee x = P\}$$</p>
 
-<article>
-  
-<h1><a href="/blog/2014/02/05/algebra-and-logic-seminar-feb-7/">Algebra and Logic Seminar: Feb 7</a></h1>
-<time datetime="2014-02-05T22:49:19-05:00" pubdate><span class='month'>Feb</span> <span class='day'>05</span> <span class='year'>2014</span></time>
+<p>$$B = \{x \mid x = 1 \bigvee x = P\}$$</p>
 
+<p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
+$B$. Therefore, $\{A, B\}$ is a set of nonempty sets so there is a choice
+function,</p>
 
-</article>
+<p>$$f : \{A, B\} \rightarrow \{0, 1\}.$$</p>
+
+<p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
+
+<p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P=1$.</p>
+
+<p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
+
+<p>&hellip;to be continued&hellip;</p></li>
+</ul>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-05T22:52:59-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/notes/'>Notes</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem/" data-via="" data-counturl="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/05/algebra-and-logic-seminar-feb-7/" title="Previous Post: Algebra and Logic Seminar: Feb 7">&laquo; Algebra and Logic Seminar: Feb 7</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

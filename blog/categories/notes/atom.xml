@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Notes | My Octopress Blog]]></title>
+  <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
   <updated>2014-02-05T23:37:25-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
@@ -19,9 +19,9 @@
     <updated>2014-02-05T22:52:59-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem</id>
     <content type="html"><![CDATA[<p>These are very rough notes for my own reference.  Please see
-<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&#8217; blog post</a>
+<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais' blog post</a>
 for a nice discussion of this topic.  (In fact, I learned some of this stuff
-from Fran&#231;ois&#8217; blog!)</p>
+from Fran&#231;ois' blog!)</p>
 
 <!-- more -->
 
@@ -63,15 +63,6 @@ function,</p>
 <p>&hellip;to be continued&hellip;</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Algebra and Logic Seminar: Feb 7]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/05/algebra-and-logic-seminar-feb-7/"/>
-    <updated>2014-02-05T22:49:19-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/05/algebra-and-logic-seminar-feb-7</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
