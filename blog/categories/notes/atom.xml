@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-06T05:48:19-05:00</updated>
+  <updated>2014-02-06T06:27:46-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -26,6 +26,46 @@ from François’ blog!)
 
 <ul>
   <li>
+    <p><strong>Diaconescu’s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
+
+    <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P$ or $\neg P$.  </p>
+
+    <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
+
+    <p>Define the following sets:</p>
+
+<script type="math/tex; mode=display">A = \{x \mid (x = 0) \bigvee P\}</script>
+
+<script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
+
+    <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to $B$. </p>
+
+    <p>Therefore, $\{A, B\}$ is a set of nonempty sets.  </p>
+
+    <!-- Note that the set $\\{A, B\\}$ is defined as $\\{A, B\\} = \\{X \in
+\mathbf{Set} | X = A \bigvee X = B\\}$ (by pairing axiom).-->
+
+    <p>Since $\{A, B\}$ is a collection of nonempty sets, by AC we have a choice function,</p>
+
+<script type="math/tex; mode=display">f : \{A, B\} \rightarrow A \cup B, \text{ and note that } A\cup B = \{0, 1\}.</script>
+
+    <p>Now, because equality on $\mathbb{N}$ <em>is</em> decidabile (which can be proved
+by induction on $\mathbb{N}$), we can consider cases:</p>
+
+    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.</p>
+
+    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.</p>
+
+    <p>If $f(A) \neq f(B)$, then $1 \in A$, so $\neg P$.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="appendix">Appendix</h2>
+
+<ul>
+  <li>
     <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
 either P or ¬P holds.</p>
   </li>
@@ -44,31 +84,6 @@ decidable, but some more complicated sets are decidable too. For example, one
 can use induction to show that the set of natural numbers is decidable. This
 and the following fact shows that every set of natural numbers, in particular
 $\{0,1\}$, is also decidable. </p>
-  </li>
-  <li>
-    <p><strong>Diaconescu’s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
-
-    <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
-or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br />
-Define the following sets:</p>
-
-<script type="math/tex; mode=display">A = \{x \mid x = 0 \bigvee x = P\}</script>
-
-<script type="math/tex; mode=display">B = \{x \mid x = 1 \bigvee x = P\}</script>
-
-    <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
-$B$. Therefore, $\{A, B\}$ is a set of nonempty sets so there is a choice
-function,  </p>
-
-<script type="math/tex; mode=display">f : \{A, B\} \rightarrow \{0, 1\}.</script>
-
-    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
-
-    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P=1$.</p>
-
-    <p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
-
-    <p>…to be continued…</p>
   </li>
 </ul>
 
