@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-06T02:40:44-05:00</updated>
+  <updated>2014-02-06T03:49:06-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,20 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Diaconescu's Theorem: AC Implies LEM]]></title>
+    <title type="html"><![CDATA[Diaconescu's Theorem: AC implies LEM]]></title>
     <link href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem/"/>
     <updated>2014-02-05T22:52:59-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem</id>
     <content type="html"><![CDATA[<p>These are very rough notes for my own reference.  Please see
-<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&rsquo; blog post</a> 
+<a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
 for a nice discussion of this topic.  (In fact, I learned some of this stuff
-from Fran&#231;ois&rsquo; blog!)
+from François’ blog!)
 <!-- more --></p>
 
 <ul>
   <li>
     <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
-either P or &not;P holds.</p>
+either P or ¬P holds.</p>
   </li>
   <li>
     <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
@@ -46,7 +46,7 @@ and the following fact shows that every set of natural numbers, in particular
 $\{0,1\}$, is also decidable. </p>
   </li>
   <li>
-    <p><strong>Diaconescu&rsquo;s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
+    <p><strong>Diaconescu’s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
 
     <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
 or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br />
@@ -68,7 +68,7 @@ function,  </p>
 
     <p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
 
-    <p>&hellip;to be continued&hellip;</p>
+    <p>…to be continued…</p>
   </li>
 </ul>
 
