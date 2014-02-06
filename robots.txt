@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://williamdemeo.github.io/sitemap.xml 

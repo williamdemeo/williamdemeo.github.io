@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[williamdemeo.github.io]]></title>
+  <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2014-02-06T05:48:19-05:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Diaconescu's Theorem]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/"/>
+    <updated>2014-02-05T22:52:59-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem</id>
+    <content type="html"><![CDATA[<p>These are very rough notes for my own reference.  Please see
+<a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
+for a nice discussion of this topic.  (In fact, I learned some of this stuff
+from François’ blog!)
+<!-- more --></p>
+
+<ul>
+  <li>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
+either P or ¬P holds.</p>
+  </li>
+  <li>
+    <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
+sets, then there is a choice function $f$ that can be used to select an element
+from each set in $\mathcal{S}$.  Another way to state this is as follows: if
+$S$ is a set, then there is a function $f$ from the powerset $\mathcal{P}(S)$
+into $S$ such that for all $A \in \mathcal{P}(S)$ we have $f(A) \in A$.</p>
+  </li>
+  <li>
+    <p><strong>Decidable Sets.</strong>
+A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have
+$x = y \bigvee x \neq y$. The empty set and singleton sets are trivially
+decidable, but some more complicated sets are decidable too. For example, one
+can use induction to show that the set of natural numbers is decidable. This
+and the following fact shows that every set of natural numbers, in particular
+$\{0,1\}$, is also decidable. </p>
+  </li>
+  <li>
+    <p><strong>Diaconescu’s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
+
+    <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
+or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br />
+Define the following sets:</p>
+
+<script type="math/tex; mode=display">A = \{x \mid x = 0 \bigvee x = P\}</script>
+
+<script type="math/tex; mode=display">B = \{x \mid x = 1 \bigvee x = P\}</script>
+
+    <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
+$B$. Therefore, $\{A, B\}$ is a set of nonempty sets so there is a choice
+function,  </p>
+
+<script type="math/tex; mode=display">f : \{A, B\} \rightarrow \{0, 1\}.</script>
+
+    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
+
+    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P=1$.</p>
+
+    <p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
+
+    <p>…to be continued…</p>
+  </li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Algebra and Logic Seminar]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/05/algebra-and-logic-seminar/"/>
+    <updated>2014-02-05T22:49:19-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/05/algebra-and-logic-seminar</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
