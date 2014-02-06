@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-06T06:49:29-05:00</updated>
+  <updated>2014-02-06T06:51:04-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -22,7 +22,7 @@
 <a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
 from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>
 
-<p>This describes the proof as it was presented by Bauer.  These notes are rough
+<p>This post describes the proof as it was presented by Bauer.  These notes are rough
 and intended for my own reference.
 Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
 for a nice discussion of this topic.</p>
