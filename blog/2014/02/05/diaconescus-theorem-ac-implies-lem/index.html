@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Diaconescu's Theorem: AC Implies LEM - My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>Diaconescu's Theorem: AC Implies LEM - William DeMeo</title>
+  <meta name="author" content="William DeMeo">
 
   
   <meta name="description" content="These are very rough notes for my own reference. Please see
-Fran&#231;ois Dorais&#8217; blog post
-for a nice discussion of this topic. (In fact, I &hellip;">
+Fran&#231;ois Dorais&rsquo; blog post for a nice discussion of this topic. (In fact, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +22,7 @@ for a nice discussion of this topic. (In fact, I &hellip;">
   <link rel="canonical" href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem-ac-implies-lem">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -96,9 +95,7 @@ for a nice discussion of this topic. (In fact, I &hellip;">
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
+  <h1><a href="/">William DeMeo</a></h1>
   
 </hgroup>
 
@@ -152,48 +149,54 @@ for a nice discussion of this topic. (In fact, I &hellip;">
 
 
 <div class="entry-content"><p>These are very rough notes for my own reference.  Please see
-<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&#8217; blog post</a>
+<a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&rsquo; blog post</a> 
 for a nice discussion of this topic.  (In fact, I learned some of this stuff
-from Fran&#231;ois&#8217; blog!)</p>
-
-<!-- more -->
-
+from Fran&#231;ois&rsquo; blog!)
+<!-- more --></p>
 
 <ul>
-<li><p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
-either P or &not;P holds.</p></li>
-<li><p><strong>The Axiom of Choice</strong> (AC) states that if S is a collection of nonempty sets,
+  <li>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for any proposition P
+either P or &not;P holds.</p>
+  </li>
+  <li>
+    <p><strong>The Axiom of Choice</strong> (AC) states that if S is a collection of nonempty sets,
 then there is a choice function f that can be used to select an element from
-each set in S.</p></li>
-<li><p><strong>Decidable Sets.</strong>
+each set in S.</p>
+  </li>
+  <li>
+    <p><strong>Decidable Sets.</strong>
 A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have $x = y \bigvee x \neq y$.
 The empty set and singleton sets are trivially decidable, but some more
 complicated sets are decidable too. For example, one can use induction to show
 that the set of natural numbers is decidable. This and the following fact shows
-that every set of natural numbers, in particular $\{0,1\}$, is also decidable.</p></li>
-<li><p><strong>Diaconescu&rsquo;s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
+that every set of natural numbers, in particular $\{0,1\}$, is also decidable.  </p>
+  </li>
+  <li>
+    <p><strong>Diaconescu&rsquo;s Theorem:</strong> AC $\longrightarrow$ LEM.</p>
 
-<p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
-or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br/>
+    <p><em>Proof:</em>  Assume AC.  Let $P$ be any proposition.  We will show that either $P=0$
+or $P=1$.  <!--Define $\mathbf{2} = \\{0, 1\\}$.--><br />
 Define the following sets:</p>
 
-<p>$$A = \{x \mid x = 0 \bigvee x = P\}$$</p>
+<script type="math/tex; mode=display">A = \\{x \mid x = 0 \bigvee x = P\\}</script>
 
-<p>$$B = \{x \mid x = 1 \bigvee x = P\}$$</p>
+<script type="math/tex; mode=display">B = \\{x \mid x = 1 \bigvee x = P\\}</script>
 
-<p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
+    <p>Both of these sets are nonempty since 0 belongs to $A$ and 1 belongs to
 $B$. Therefore, $\{A, B\}$ is a set of nonempty sets so there is a choice
-function,</p>
+function,  </p>
 
-<p>$$f : \{A, B\} \rightarrow \{0, 1\}.$$</p>
+<script type="math/tex; mode=display">f : \\{A, B\\} \rightarrow \\{0, 1\\}.</script>
 
-<p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
+    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P=0$.</p>
 
-<p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P=1$.</p>
+    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P=1$.</p>
 
-<p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
+    <p>If $f(A) \neq f(B)$, then $1 \in A$, so $P=1$.</p>
 
-<p>&hellip;to be continued&hellip;</p></li>
+    <p>&hellip;to be continued&hellip;</p>
+  </li>
 </ul>
 
 </div>
@@ -204,7 +207,7 @@ function,</p>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+<span class="byline author vcard">Posted by <span class="fn">William DeMeo</span></span>
 
       
 
@@ -278,7 +281,7 @@ function,</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
+  Copyright &copy; 2014 - William DeMeo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
