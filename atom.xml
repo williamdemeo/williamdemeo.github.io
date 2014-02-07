@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[williamdemeo.github.io]]></title>
+  <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2014-02-07T03:09:35-05:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Computability at higher types]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/06/computability-at-higher-types/"/>
+    <updated>2014-02-06T19:41:12-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/06/computability-at-higher-types</id>
+    <content type="html"><![CDATA[<p>These are rough notes about some notions of computability, mainly based on
+<a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Longley’s article</a>.  Please ignore this post and read the article instead!
+<!-- more --></p>
+
+<hr />
+
+<p>What does it mean for an ordinary first order function on $\mathbb{N}$ to be “computable?”</p>
+
+<p>Many different approaches to defining a notion of computable function—via
+Turing machines, $\lambda$-calculus, recursion equations, etc.—lead to
+essentially the same answer, namely the class of (total or partial) <em>recursive</em>
+functions.</p>
+
+<p>Church’s thesis proposes that for functions from $\mathbb{N}$ to \mathbb{N}$ we
+identify the informal notion of an “effectively computable” function with the
+precise mathematical notion of a recursive function.</p>
+
+<p>Whether or not one believes that the recursive functions include all effectively
+computable functions, there is good evidence that they represent a
+mathematically natural and robust class of functions.</p>
+
+<p>Now suppose we consider second order functions which map first order
+functions to $\mathbb{N}$, say, and then third order functions mapping
+second order functions to $\mathbb{N}$, and so on. We will use the word
+<em>functional</em> to mean a function that takes functions of some kind as arguments.</p>
+
+<p>What does it mean at these higher types for a functional to be “computable?” </p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Intuitionistic type theory]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory/"/>
+    <updated>2014-02-06T18:30:02-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory</id>
+    <content type="html"><![CDATA[<p>These notes are rough and intended for my own reference.
+<!-- more --></p>
+
+<hr />
+
+<h2 id="type-theory">Type Theory</h2>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a> is a formal system in which every “term” has a “type” and
+operations are restricted to terms of a certain type. </p>
+
+<p>The types in type theory play a similar role to sets in set theory, but
+<em>functions definable in type theory are always computable.</em></p>
+
+<p>Some type theories can serve as alternatives to set theory as a foundation for math;
+e.g., Church’s <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a> and Martin-Löf’s <a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a>.</p>
+
+<h2 id="intuitionistic-type-theory">Intuitionistic Type Theory</h2>
+
+<ul>
+  <li>
+    <p>Introduced in 1972 by Per Martin-Löf, and also known as “constructive type
+theory,” or “Martin-Löf type theory.” </p>
+  </li>
+  <li>
+    <p>An alternative foundation of mathematics based on the principles of
+mathematical constructivism.</p>
+  </li>
+  <li>
+    <p>Central idea: identify a proposition with the type of its proofs.  </p>
+  </li>
+  <li>
+    <p>Intuitionistic type theory extends this identification to predicate logic by
+introducing dependent types, that is, types that depend on a value. </p>
+  </li>
+</ul>
+
+<h2 id="related-wikipedia-pages">Related Wikipedia Pages</h2>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Seemingly impossible functional programs]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/06/seemingly-impossible-functional-programs/"/>
+    <updated>2014-02-06T16:40:23-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/06/seemingly-impossible-functional-programs</id>
+    <content type="html"><![CDATA[<p>These are some sketchy notes about 
+<a href="http://math.andrej.com/2007/09/28/seemingly-impossible-functional-programs/">Martin Escardo’s post</a>
+of the same title. I recommend that you immediately go to Martin’s post on this
+topic and ingore my derivative version.
+<!-- more --></p>
+
+<hr />
+
+<p><strong>Claim:</strong> There are infinite sets that admit mechanical exhaustive search in finite time.</p>
+
+<p><a href="http://www.cs.swan.ac.uk/~csulrich/">Ulrich Berger</a> (1990) discovered an
+algorithm that performs exhaustive search over the <em>Cantor space</em> of infinite binary
+sequences. </p>
+
+<p>Many problems the following form:</p>
+
+<ul>
+  <li>Given a set $K$ and a property $p$, check whether or not all elements of $K$
+satisfy $p$.</li>
+</ul>
+
+<p>We say that $K$ is <em>exhaustible</em> if this problem can be algorithmically solved
+in finite time, for any <em>decidable</em> property $p$, uniformly in $p$. </p>
+
+<p>Thus, the input of the algorithm is $p$ and the output is the truth value of the
+statement that all elements of $K$ satisfy $p$. In the realm of
+higher-type computability theory (see <a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Longley, 2003</a>), the algorithm has type
+$(C \rightarrow B)\rightarrow B$, where $C$ is a type, $K \subseteq C$, and $B$
+is the type of booleans, so that $(C \rightarrow B)$ is the type of decidable
+predicates on $C$.</p>
+
+<p>Clearly, finite sets of computable elements are exhaustible. What may be rather
+unclear is whether there are infinite examples. </p>
+
+<p>Intuitively, there can be none: how could one possibly check infinitely many
+cases in finite time? </p>
+
+<p>This intuition is correct when $K$ is a set of natural numbers: it is
+a theorem that, in this case, $K$ is exhaustible if and only if it is
+finite. </p>
+
+<p>But a proof is non-trivial, usually by reduction to the halting problem, goes
+beyond cardinality considerations, and relies on particular properties of the
+set of natural numbers that don’t necessarily hold for other infinite sets.</p>
+
+<p>Thus, the question remains, which kinds of infinite sets, if any, are
+exhaustible? </p>
+
+<p>It turns out that there is a rich supply. A first example, the Cantor set of
+infinite sequences of binary digits, goes back to the 1950’s, as discussed in
+the related-work paragraph below.</p>
+
+<p><em>Weak form of exhaustive search:</em> check whether a total predicate holds for all
+elements of the Cantor space. This amounts to universal quantification over the
+Cantor space.</p>
+
+<p>Can this possibly be done algorithmically, in finite time? </p>
+
+<p><em>Stronger form:</em> find an example where the predicate holds, if such an example
+exists, otherwise say there is no example.</p>
+
+<h2 id="the-program">The program</h2>
+
+<p>Represent the binary digits as a type called Bit:</p>
+
+<pre><code>&gt; data Bit = Zero | One
+&gt;          deriving (Eq)
+</code></pre>
+
+<p>The deriving clause tells Haskell to figure out how to decide equality of bits
+automatically. </p>
+
+<p>Regard sequences as functions defined on the natural numbers:</p>
+
+<pre><code>&gt; type Natural = Integer
+&gt; type Cantor = Natural -&gt; Bit
+</code></pre>
+
+<p>An object of type Cantor is a function that maps Natural type to Bit type.</p>
+
+<p>The operator <code>(#)</code> takes a bit x and a sequence y and produces a new sequence 
+<code>x # y</code> with x as the head and y as the tail:</p>
+
+<pre><code>&gt; (#) :: Bit -&gt; Cantor -&gt; Cantor
+&gt; x # a = \i -&gt; if i == 0 then x else a(i-1)
+</code></pre>
+
+<p><code>(#)</code> is defined using currying, but you can interpret
+<code>(#) :: Bit -&gt; Cantor -&gt; Cantor</code> to mean that (#) takes a pair
+(Bit, Cantor) and returns a Cantor. </p>
+
+<p>Notice also that the notation <code>\i -&gt;</code> stands for $\lambda i$.</p>
+
+<p>The <code>find</code> function will perform an exhaustive search over the Cantor space.
+The specification of this function is that, for any total predicate <code>p</code>, 
+<code>find p</code> is always a total element of the Cantor space, and, moreover, if there
+is an <code>a</code> in the Cantor space with <code>p a = True</code>, then <code>a = find p</code> is an example of
+such an <code>a</code>.</p>
+
+<pre><code>&gt; forsome, forevery :: (Cantor -&gt; Bool) -&gt; Bool
+&gt; find :: (Cantor -&gt; Bool) -&gt; Cantor
+</code></pre>
+
+<p>The function <code>find</code> takes a predicate on the Cantor space, and hence it will
+typically have a $\lambda$-expression as argument. In the following definition
+this is not necessary, because <code>(\a -&gt; p a) = p</code> by the $\eta$ rule. </p>
+
+<p>Nonetheless, we use a $\lambda$-expression for clarity, and we can read 
+<code>find(\a -&gt; p a)</code> as “find a such that p(a)”: </p>
+
+<pre><code>&gt; forsome p = p(find(\a -&gt; p a))
+&gt; forevery p = not(forsome(\a -&gt; not(p a)))
+</code></pre>
+
+<p>Notice that the function forevery (universal quantification) is obtained from
+the function <code>forsome</code> (existential quantification) via DeMorgan’s Law. The
+functionals <code>forsome</code> and <code>find_i</code> are defined by mutual recursion: </p>
+
+<pre><code>&gt; find_i :: (Cantor -&gt; Bool) -&gt; Cantor
+&gt; find_i p = if forsome(\a -&gt; p(Zero # a))
+&gt;            then Zero # find_i(\a -&gt; p(Zero # a))
+&gt;            else One  # find_i(\a -&gt; p(One  # a))
+</code></pre>
+
+<p>The intuitive idea of the algorithm <code>find_i</code> is clear: if there is an example
+starting with zero, then the result is taken to start with zero, otherwise it
+must start with one. Then we recursively build the tail using the same
+idea. </p>
+
+<p>What may not be clear is whether the recursion eventually produces a digit,
+because of the indirect recursive call via the call to forsome. </p>
+
+<p>A mathematical proof proceeds by induction on the modulus of uniform continuity
+of p, defined below. </p>
+
+<p>It may be more natural to return an example only if there is one, and otherwise
+tell there isn’t any:</p>
+
+<pre><code>&gt; search :: (Cantor -&gt; Bool) -&gt; Maybe Cantor
+&gt; search p = if forsome(\a -&gt; p a) then Just(find(\a -&gt; p a)) else Nothing
+</code></pre>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.lmcs-online.org/ojs/viewarticle.php?id=395&amp;layout=abstract">Exhaustible sets in higher-type computation</a>, <a href="http://www.cs.bham.ac.uk/~mhe/">Martin Escardo</a> (2008)</p>
+  </li>
+  <li>
+    <p><a href="http://www.cs.bham.ac.uk/~mhe/papers/exhaustive.pdf">Inﬁnite sets that admit fast exhaustive search</a>, <a href="http://www.cs.bham.ac.uk/~mhe/">Martin Escardo</a> (2007)</p>
+  </li>
+  <li>
+    <p><a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Notions of computability at higher types I</a>, John R. Longley (2003)</p>
+  </li>
+  <li>
+    <p><a href="http://www.sciencedirect.com/science/article/pii/0304397576900293">Computability concepts for programming language semantics</a>, Egli and Constable (1976)</p>
+  </li>
+  <li>
+    <p><a href="http://www.sciencedirect.com/science/article/pii/0304397577900457">Effectively given domains</a>, M.B. Smyth (1977)</p>
+  </li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Diaconescu's Theorem]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/"/>
+    <updated>2014-02-05T22:52:59-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem</id>
+    <content type="html"><![CDATA[<p>I learned about
+<a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
+from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>
+
+<p>This post describes the proof as it was presented by Bauer.  These notes are rough
+and intended for my own reference.
+Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
+for a nice discussion of this topic.</p>
+
+<!-- more -->
+<hr />
+
+<ul>
+  <li>
+    <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
+sets, then there is a choice function $f$ that can be used to select an element
+from each set in $\mathcal{S}$.</p>
+  </li>
+  <li>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for all propositions $P$, we have
+$P \bigvee \neg P$ is true.</p>
+  </li>
+  <li>
+    <p><strong>Diaconescu’s Theorem:</strong> AC $\rightarrow$ LEM.</p>
+
+    <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove
+$P \bigvee \neg P$ is true.  </p>
+
+    <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
+
+    <p>Define the following sets:</p>
+
+<script type="math/tex; mode=display">A = \{x \mid (x = 0) \bigvee P\}</script>
+
+<script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
+
+    <p>Note that $P \Rightarrow A = B = \mathbf{2}$.</p>
+
+    <p>Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$. </p>
+
+    <p>Therefore, $\{A, B\}$ is a set of nonempty sets, so by AC we have a choice function,
+<!-- Note that the set $\\{A, B\\}$ is defined as $\\{A, B\\} = \\{X \in
+\mathbf{Set} | X = A \bigvee X = B\\}$ (by pairing axiom).--></p>
+
+<script type="math/tex; mode=display">f : \{A, B\} \rightarrow A \cup B, \text{ and note that } A\cup B = \{0, 1\}.</script>
+
+    <p>Now, because equality on $\mathbb{N}$ <em>is</em> decidabile (which can be proved
+by induction on $\mathbb{N}$), we can consider cases:</p>
+
+    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.</p>
+
+    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.</p>
+
+    <p>If $f(A) \neq f(B)$, then $A \neq B$ so $P$ cannot hold.
+(Recall, $P \Rightarrow A = B = \mathbf{2}$.)</p>
+
+    <p>We have covered all cases and found that $P \bigvee \neg P$ holds. 
+<span style="float:right">∎</span></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="coq">Coq</h2>
+
+<p><a href="http://coq.inria.fr/V8.1/stdlib/Coq.Logic.Diaconescu.html">Proofs of Diaconescu’s Theorem in Coq</a></p>
+
+<hr />
+
+<h2 id="appendix">Appendix</h2>
+
+<ul>
+  <li><strong>Decidable Sets.</strong>
+A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have
+$x = y \bigvee x \neq y$. The empty set and singleton sets are trivially
+decidable, but some more complicated sets are decidable too. For example, one
+can use induction to show that the set of natural numbers is decidable. This
+and the following fact shows that every set of natural numbers, in particular
+$\{0,1\}$, is also decidable. </li>
+</ul>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Diaconescu, “Axiom of choice and complementation,” <em>Proc. AMS</em> 51 (1975), 176–178. <a href="http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X">doi:10.1090/S0002-9939-1975-0373893-X</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>
