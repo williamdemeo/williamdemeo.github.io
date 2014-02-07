@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T03:09:35-05:00</updated>
+  <updated>2014-02-07T03:12:27-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -19,12 +19,12 @@
     <updated>2014-02-05T22:52:59-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem</id>
     <content type="html"><![CDATA[<p>I learned about
-<a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
-from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>
+<a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu&rsquo;s Theorem</a>
+from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer&rsquo;s lecture</a>.</p>
 
 <p>This post describes the proof as it was presented by Bauer.  These notes are rough
 and intended for my own reference.
-Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
+Please see <a href="http://dorais.org/archives/1031">Fran&#231;ois Dorais&rsquo; blog post</a> 
 for a nice discussion of this topic.</p>
 
 <!-- more -->
@@ -41,7 +41,7 @@ from each set in $\mathcal{S}$.</p>
 $P \bigvee \neg P$ is true.</p>
   </li>
   <li>
-    <p><strong>Diaconescu’s Theorem:</strong> AC $\rightarrow$ LEM.</p>
+    <p><strong>Diaconescu&rsquo;s Theorem:</strong> AC $\rightarrow$ LEM.</p>
 
     <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove
 $P \bigvee \neg P$ is true.  </p>
@@ -75,7 +75,7 @@ by induction on $\mathbb{N}$), we can consider cases:</p>
 (Recall, $P \Rightarrow A = B = \mathbf{2}$.)</p>
 
     <p>We have covered all cases and found that $P \bigvee \neg P$ holds. 
-<span style="float:right">∎</span></p>
+<span style="float:right">&#x220E;</span></p>
   </li>
 </ul>
 
@@ -83,7 +83,7 @@ by induction on $\mathbb{N}$), we can consider cases:</p>
 
 <h2 id="coq">Coq</h2>
 
-<p><a href="http://coq.inria.fr/V8.1/stdlib/Coq.Logic.Diaconescu.html">Proofs of Diaconescu’s Theorem in Coq</a></p>
+<p><a href="http://coq.inria.fr/V8.1/stdlib/Coq.Logic.Diaconescu.html">Proofs of Diaconescu&rsquo;s Theorem in Coq</a></p>
 
 <hr />
 
@@ -104,7 +104,7 @@ $\{0,1\}$, is also decidable. </li>
 <h2 id="references">References</h2>
 
 <ul>
-  <li>Diaconescu, “Axiom of choice and complementation,” <em>Proc. AMS</em> 51 (1975), 176–178. <a href="http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X">doi:10.1090/S0002-9939-1975-0373893-X</a></li>
+  <li>Diaconescu, &ldquo;Axiom of choice and complementation,&rdquo; <em>Proc. AMS</em> 51 (1975), 176&ndash;178. <a href="http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X">doi:10.1090/S0002-9939-1975-0373893-X</a></li>
 </ul>
 ]]></content>
   </entry>
