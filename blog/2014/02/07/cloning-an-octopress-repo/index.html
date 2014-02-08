@@ -220,16 +220,16 @@ rake deploy
 </code></pre>
   </li>
   <li>
-    <p>Posts live in <code>source/_posts</code>.  Edit one and push the changes to source branch.</p>
+    <p>Posts live in <code>source/_posts</code>.  Edit one and push the changes to source
+branch either directly with Magit or with</p>
 
-    <pre><code>rake generate
-git add .
-git commit -am "Some comment here." 
-git push origin source  # update the remote source branch 
+    <pre><code>git add .
+git commit -am "explanation of changes" 
+git push origin source
 </code></pre>
   </li>
   <li>
-    <p>Now preview the changes: <code>rake preview</code> then point a browser to <code>http://localhost:4000</code>.</p>
+    <p>Now preview the changes: <code>rake preview</code> and load <code>http://localhost:4000</code> in browser.</p>
   </li>
   <li>
     <p>When satisfied, <code>rake deploy</code>.</p>
