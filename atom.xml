@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T21:27:33-05:00</updated>
+  <updated>2014-02-07T21:28:59-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -106,7 +106,6 @@ git push origin source
 <hr />
 
 <h2 id="other-resources">Other Resources</h2>
-<p>I found the following posts helpful when creating it:</p>
 
 <ul>
   <li><a href="http://stackoverflow.com/questions/14245822/cannot-install-redcloth">Get RedCloth installed properly on Ubuntu</a>   </li>
@@ -117,9 +116,8 @@ git push origin source
   <li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Select a nice theme</a>  </li>
   <li><a href="http://stackoverflow.com/questions/17031651/invalid-byte-sequence-in-us-ascii-argument-error-when-i-run-rake-dbseed-inra">Troubleshoot UTF-8 locale</a>  </li>
   <li><a href="http://blog.bigdinosaur.org/changing-octopresss-header/">Changing fonts and colors</a></li>
+  <li>Carl Boettiger has an awesome <a href="http://carlboettiger.info/index.html">open notebook</a>.</li>
 </ul>
-
-<p>Carl Boettiger has an awesome <a href="http://carlboettiger.info/index.html">open notebook</a>.</p>
 ]]></content>
   </entry>
   
