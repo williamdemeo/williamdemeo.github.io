@@ -281,11 +281,74 @@ because of the indirect recursive call via the call to forsome. </p>
 <p>A mathematical proof proceeds by induction on the modulus of uniform continuity
 of p, defined below. </p>
 
-<p>It may be more natural to return an example only if there is one, and otherwise
-tell there isn’t any:</p>
+<p>Common wisdom tells us that function types don’t have decidable equality. In
+fact, e.g. the function type Integer -&gt; Integer doesn’t have decidable equality
+because of the Halting Problem, as is well known. However, common wisdom is not
+always correct, and, in fact, some other function types do have decidable
+equality, for example the type Cantor -&gt; y for any type y with decidable
+equality, without contradicting Turing:  </p>
 
-<pre><code>&gt; search :: (Cantor -&gt; Bool) -&gt; Maybe Cantor
-&gt; search p = if forsome(\a -&gt; p a) then Just(find(\a -&gt; p a)) else Nothing
+<pre><code>&gt; equal :: Eq y =&gt; (Cantor -&gt; y) -&gt; (Cantor -&gt; y) -&gt; Bool
+&gt; equal f g = forevery(\a -&gt; f a == g a)
+</code></pre>
+
+<p>This seems strange, even fishy, because the Cantor space is in some sense bigger
+than the integers. This has to do with the fact that the Cantor space is
+topologically compact, but the integers are not. </p>
+
+<hr />
+<p><strong>Example:</strong></p>
+
+<pre><code>&gt; coerce :: Bit -&gt; Natural
+&gt; coerce Zero = 0
+&gt; coerce One = 1
+
+&gt; f, g, h :: Cantor -&gt; Integer
+
+&gt; f a = coerce(a(7 * coerce(a 4) +  4 * (coerce(a 7)) + 4))
+
+&gt; g a = coerce(a(coerce(a 4) + 11 * (coerce(a 7))))
+
+&gt; h a = if a 7 == Zero
+&gt;       then if a 4 == Zero then coerce(a  4) else coerce(a 11)
+&gt;       else if a 4 == One  then coerce(a 15) else coerce(a  8)
+</code></pre>
+
+<p>Now we call the ghci interpreter:</p>
+
+<p>*Main&gt;</p>
+
+<p>At this point we can evaluate expressions at the interpreter’s prompt. First I
+ask it to print time and space usage after each evaluation: </p>
+
+<pre><code>*Main&gt; :set +s
+</code></pre>
+
+<p>On a Dell 410 laptop running at 1.73GHz, Martin tests the following expressions:</p>
+
+<pre><code>*Main&gt; equal f g
+False
+(0.10 secs, 3490296 bytes)
+
+*Main&gt; equal f h
+True
+(0.87 secs, 36048844 bytes)
+
+*Main&gt; equal g h
+False
+(0.09 secs, 3494064 bytes)
+
+*Main&gt; equal f f
+True
+(0.91 secs, 38642544 bytes)
+
+*Main&gt; equal g g
+True
+(0.15 secs, 6127796 bytes)
+
+*Main&gt; equal h h
+True
+(0.83 secs, 32787372 bytes)
 </code></pre>
 
 <h2 id="references">References</h2>
