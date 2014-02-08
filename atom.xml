@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T20:09:24-05:00</updated>
+  <updated>2014-02-07T20:24:34-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -21,8 +21,6 @@
     <content type="html"><![CDATA[<p>These are rough notes about some notions of computability, mainly based on
 <a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Longley’s article</a>.  Please ignore this post and read the article instead!
 <!-- more --></p>
-
-<hr />
 
 <p>What does it mean for an ordinary first order function on $\mathbb{N}$ to be “computable?”</p>
 
@@ -54,10 +52,7 @@ second order functions to $\mathbb{N}$, and so on. We will use the word
     <link href="http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory/"/>
     <updated>2014-02-06T18:30:02-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory</id>
-    <content type="html"><![CDATA[<p>These notes are rough and intended for my own reference.
-<!-- more --></p>
-
-<hr />
+    <content type="html"><![CDATA[<!-- more -->
 
 <h2 id="type-theory">Type Theory</h2>
 
@@ -70,7 +65,7 @@ operations are restricted to terms of a certain type. </p>
 <p>Some type theories can serve as alternatives to set theory as a foundation for math;
 e.g., Church’s <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a> and Martin-Löf’s <a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a>.</p>
 
-<h2 id="intuitionistic-type-theory">Intuitionistic Type Theory</h2>
+<h2 id="intuitionistic-type-theory-itt">Intuitionistic Type Theory (ITT)</h2>
 
 <ul>
   <li>
@@ -85,8 +80,8 @@ mathematical constructivism.</p>
     <p>Central idea: identify a proposition with the type of its proofs.  </p>
   </li>
   <li>
-    <p>Intuitionistic type theory extends this identification to predicate logic by
-introducing dependent types, that is, types that depend on a value. </p>
+    <p>ITT extends this identification to predicate logic by introducing dependent
+types, that is, types that depend on a value. </p>
   </li>
 </ul>
 
@@ -348,7 +343,6 @@ Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog po
 for a nice discussion of this topic.</p>
 
 <!-- more -->
-<hr />
 
 <ul>
   <li>
