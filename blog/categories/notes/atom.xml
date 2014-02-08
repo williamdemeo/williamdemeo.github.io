@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T21:28:59-05:00</updated>
+  <updated>2014-02-07T21:45:24-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -29,6 +29,8 @@ for a nice discussion of this topic.</p>
 
 <!-- more -->
 
+<hr />
+
 <ul>
   <li>
     <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
@@ -36,14 +38,14 @@ sets, then there is a choice function $f$ that can be used to select an element
 from each set in $\mathcal{S}$.</p>
   </li>
   <li>
-    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for all propositions $P$, we have
-$P \bigvee \neg P$ is true.</p>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that $P$ is a proposition, then
+$P \bigvee \neg P$.</p>
   </li>
   <li>
     <p><strong>Diaconescu’s Theorem:</strong> AC $\rightarrow$ LEM.</p>
 
     <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove
-$P \bigvee \neg P$ is true.  </p>
+$P \bigvee \neg P$.</p>
 
     <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
 
@@ -53,7 +55,8 @@ $P \bigvee \neg P$ is true.  </p>
 
 <script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
 
-    <p>Note that $P \Rightarrow A = B = \mathbf{2}$.</p>
+    <p>Note that $P \Rightarrow A = B = \mathbf{2}$. Therefore,
+$A \neq B \Rightarrow \neg P$.</p>
 
     <p>Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$. </p>
 

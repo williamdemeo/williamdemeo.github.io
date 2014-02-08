@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T21:28:59-05:00</updated>
+  <updated>2014-02-07T21:45:24-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -127,8 +127,11 @@ git push origin source
     <updated>2014-02-06T19:41:12-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/06/computability-at-higher-types</id>
     <content type="html"><![CDATA[<p>These are rough notes about some notions of computability, mainly based on
-<a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Longley’s article</a>.  Please ignore this post and read the article instead!
-<!-- more --></p>
+<a href="http://homepages.inf.ed.ac.uk/jrl/Research/notions1.pdf">Longley’s article</a>.  Please ignore this post and read the article instead!</p>
+
+<!-- more -->
+
+<hr />
 
 <p>What does it mean for an ordinary first order function on $\mathbb{N}$ to be “computable?”</p>
 
@@ -160,7 +163,14 @@ second order functions to $\mathbb{N}$, and so on. We will use the word
     <link href="http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory/"/>
     <updated>2014-02-06T18:30:02-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/06/intuitionistic-type-theory</id>
-    <content type="html"><![CDATA[<!-- more -->
+    <content type="html"><![CDATA[<p>This post contains some very rough notes on <a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a>, and
+is intended for my own reference.  Since there are so many other online
+resources providing better explanations of this topic, I would not recommend
+this post to anyone. Instead, check out some of <a href="https://github.com/williamdemeo/TypeFunc">these resources</a>.</p>
+
+<!-- more -->
+
+<hr />
 
 <h2 id="type-theory">Type Theory</h2>
 
@@ -173,7 +183,7 @@ operations are restricted to terms of a certain type. </p>
 <p>Some type theories can serve as alternatives to set theory as a foundation for math;
 e.g., Church’s <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a> and Martin-Löf’s <a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a>.</p>
 
-<h2 id="intuitionistic-type-theory-itt">Intuitionistic Type Theory (ITT)</h2>
+<h2 id="intuitionistic-type-theory">Intuitionistic Type Theory</h2>
 
 <ul>
   <li>
@@ -188,8 +198,8 @@ mathematical constructivism.</p>
     <p>Central idea: identify a proposition with the type of its proofs.  </p>
   </li>
   <li>
-    <p>ITT extends this identification to predicate logic by introducing dependent
-types, that is, types that depend on a value. </p>
+    <p>Intuitionistic type theory extends this identification to predicate logic by
+introducing dependent types, that is, types that depend on a value. </p>
   </li>
 </ul>
 
@@ -452,6 +462,8 @@ for a nice discussion of this topic.</p>
 
 <!-- more -->
 
+<hr />
+
 <ul>
   <li>
     <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
@@ -459,14 +471,14 @@ sets, then there is a choice function $f$ that can be used to select an element
 from each set in $\mathcal{S}$.</p>
   </li>
   <li>
-    <p><strong>Law of the Excluded Middle</strong> (LEM) states that for all propositions $P$, we have
-$P \bigvee \neg P$ is true.</p>
+    <p><strong>Law of the Excluded Middle</strong> (LEM) states that $P$ is a proposition, then
+$P \bigvee \neg P$.</p>
   </li>
   <li>
     <p><strong>Diaconescu’s Theorem:</strong> AC $\rightarrow$ LEM.</p>
 
     <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove
-$P \bigvee \neg P$ is true.  </p>
+$P \bigvee \neg P$.</p>
 
     <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
 
@@ -476,7 +488,8 @@ $P \bigvee \neg P$ is true.  </p>
 
 <script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
 
-    <p>Note that $P \Rightarrow A = B = \mathbf{2}$.</p>
+    <p>Note that $P \Rightarrow A = B = \mathbf{2}$. Therefore,
+$A \neq B \Rightarrow \neg P$.</p>
 
     <p>Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$. </p>
 
