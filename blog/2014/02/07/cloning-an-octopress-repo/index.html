@@ -148,8 +148,9 @@
 
 <div class="entry-content clearfix"><p>When attempting to clone my Octopress repository on a new machine, I had the
 same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
-This post explains how to resolve this.  (This works on Ubuntu 13.10 and
-probably other variants.)</p>
+Based on the information provided on that page, combined with a few other
+commands required for Ubuntu machines, this post provides instructions for
+cloning an Octopress repository.  (This works on Ubuntu 13.10 and probably other variants.)</p>
 
 <!-- more -->
 
@@ -197,8 +198,8 @@ rake deploy
   </li>
 </ol>
 
-<p><strong>Troubleshooting.</strong> If <code>rake generate</code> fails with lots of messages saying
-“invalid byte sequence in US-ASCII” then try the following: </p>
+<p><strong>Troubleshooting.</strong> 
+If <code>rake generate</code> produces “invalid byte sequence in US-ASCII” then try the following: </p>
 
 <pre><code>    # from the command line
     export LANG=en_US.UTF-8
@@ -210,8 +211,6 @@ rake deploy
 <hr />
 
 <h2 id="workflow">Workflow</h2>
-
-<p>(Just a test to see if you need to do <code>rake generate</code> every time.)</p>
 
 <ol>
   <li>
