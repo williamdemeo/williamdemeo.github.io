@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T20:55:42-05:00</updated>
+  <updated>2014-02-07T20:56:57-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -23,8 +23,6 @@ same  <code>Updates were rejected</code> problem that is described on <a href="h
 This post explains how to resolve this (on a Ubuntu 13.10 machine).</p>
 
 <!-- more -->
-
-<p>(just a test to see if conflicts caused by magit push)</p>
 
 <hr />
 
@@ -81,6 +79,8 @@ rake deploy
 </code></pre>
 
 <hr />
+
+<p>(just a test to see if conflicts caused by magit push)</p>
 
 <h2 id="workflow">Workflow</h2>
 
