@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T21:26:17-05:00</updated>
+  <updated>2014-02-07T21:27:33-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -27,11 +27,6 @@ cloning an Octopress repository.  (This works on Ubuntu 13.10 and probably other
 <!-- more -->
 
 <hr />
-
-<p>Combining the instructions on
-<a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">the page mentioned above</a>.
-with some other setup commands required on Ubuntu 13.10 results in the following
-procedure for cloning an existing Octopress repository to a new machine:</p>
 
 <ol>
   <li>
