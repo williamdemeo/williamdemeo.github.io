@@ -4,7 +4,7 @@
   <title><![CDATA[williamdemeo.github.io]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-07T21:00:09-05:00</updated>
+  <updated>2014-02-07T21:05:15-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,9 +18,10 @@
     <link href="http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo/"/>
     <updated>2014-02-07T20:46:19-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo</id>
-    <content type="html"><![CDATA[<p>When attempting to clone my Octopress repository to a new machine, I had the
+    <content type="html"><![CDATA[<p>When attempting to clone my Octopress repository on a new machine, I had the
 same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
-This post explains how to resolve this (on a Ubuntu 13.10 machine).</p>
+This post explains how to resolve this.  (This works on Ubuntu 13.10 and
+probably other variants.)</p>
 
 <!-- more -->
 
@@ -79,8 +80,6 @@ rake deploy
 </code></pre>
 
 <hr />
-
-<p>(just a test to see if conflicts caused by magit push)</p>
 
 <h2 id="workflow">Workflow</h2>
 
