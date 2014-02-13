@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T09:39:04-05:00</updated>
+  <updated>2014-02-13T09:54:37-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,13 +14,50 @@
 
   
   <entry>
+    <title type="html"><![CDATA[On a problem of Palfy and Saxl]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/13/on-a-problem-of-palfy-and-saxl/"/>
+    <updated>2014-02-13T09:41:27-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/13/on-a-problem-of-palfy-and-saxl</id>
+    <content type="html"><![CDATA[<p>The GitHub repsitory called <a href="https://github.com/williamdemeo/PalfySaxlProblem">PalfyAndSaxl</a> 
+contains notes on an approach I learned from Werner’s paper about graphical
+compositions.  I think it may enable us to answer this nice question of theirs, which is: Given an $M_n$
+lattice with at least $n\geq 3$ atoms. If 3 of the atoms pairwise permute, must
+they all pairwise permute?</p>
+
+<!-- more -->
+
+<p><strong>Problem.</strong>
+Let A be a finite algebra with Con(A) isomorphic to M_n, for some n at least 4. 
+If three nontrivial congruences of A pairwise permute, does it follow
+that every pair of congruences of A permute?</p>
+
+<p>The main files in the repository are:</p>
+
+<ol>
+  <li>
+    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">PalfySaxlProblem.pdf</a> – Notes on the problem.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">PalfySaxl-ConLatAndFactGroups.pdf</a> – A scanned copy of the article by Palfy and Saxl, “Congruence lattices of finite algebras and factorizations of groups.” Comm. Algebra, 1990.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner-PartLatConLat.pdf</a> – A scanned copy of the article by Werner, “Which partition lattices are congruence lattices?”, Colloquia Mathematica, 1974.</p>
+  </li>
+</ol>
+
+<p>To contribute to this repository you can <a href="https://help.github.com/articles/fork-a-repo">fork it</a> using the Fork button above, then edit some files, and then submit a <a href="https://help.github.com/articles/using-pull-requests">pull request</a>.  If you don’t understand the previous sentence means, you might consider learning <a href="http://try.github.io/levels/1/challenges/1">the basics of Git in 15 minutes</a>.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Algebra &amp; Logic Meetings]]></title>
     <link href="http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings/"/>
     <updated>2014-02-13T09:31:06-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings</id>
     <content type="html"><![CDATA[<p>A collection of dates of meetings in areas that I find most
-interesting: algebra, logic, proof theory, category theory, type theory, 
-and functional programming.</p>
+interesting: algebra, lattice theory,  logic, proof theory, category theory,
+type theory, and functional programming.</p>
 
 <!-- more -->
 
