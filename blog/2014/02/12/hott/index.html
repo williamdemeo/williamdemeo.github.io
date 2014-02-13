@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HoTT - William DeMeo</title>
+  <meta name="author" content="William DeMeo">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="This post is an amalgamation of information from various sources
+intuitionistic type theory and homotopy type theory.
+These notes are in very rough &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://williamdemeo.github.io/blog/2014/02/12/hott/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="William DeMeo" />
+  <meta name="og:title" content="HoTT" />
+  <meta name="og:description" content="This post is an amalgamation of information from various sources
+intuitionistic type theory and homotopy type theory.
+These notes are in very rough &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/blog/2014/02/12/hott/"/>
+  <meta name="url" content="http://williamdemeo.github.io/blog/2014/02/12/hott/">
+  
+  <meta name="subject" content=""/>
+  <meta name="category" content=""/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44974674-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">William DeMeo</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Archives</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:williamdemeo.github.io" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title">HoTT</h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">William DeMeo</span></a></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-12T07:04:34-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time> - 
+        
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post is an amalgamation of information from various sources
+<a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a> and <a href="http://en.wikipedia.org/wiki/Homotopy_type_theory">homotopy type theory</a>.
+These notes are in very rough form and were compiled for my own reference. There
+are many other <a href="#references">online resources</a> providing better explanations of this topic.
+<!-- more --></p>
+
+<h2 id="background">Background</h2>
+
+<h3 id="type-theory">Type Theory</h3>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a> is a formal system in which every “term” has a “type” and
+operations are restricted to terms of a certain type. 
+The types in type theory play a similar role to sets in set theory, but
+<em>functions definable in type theory are always computable.</em></p>
+
+<p>Some type theories can serve as alternatives to set theory as a foundation for math;
+e.g., Church’s <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a> and Martin-Löf’s <a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a>.</p>
+
+<hr />
+
+<h3 id="intuitionistic-type-theory">Intuitionistic Type Theory</h3>
+<p>Adopting Brouwer’s constructive viewpoint, intuitionistic theories
+developed as an alternative foundation of mathematics, one in which proofs are
+seen as the fundamental forms of construction.  The notion of <em>proof 
+relevance</em> is thus a characteristic feature of an intuitionistic approach.
+(Here, intuitionism and constructivism are used interchangeably.) </p>
+
+<p>The main idea of <em>intuitionistic type theory</em> is the identification of a
+proposition with the type of its proof.
+Intuitionistic type theory extends this identification to predicate logic by
+introducing dependent types, that is, types that depend on a value. </p>
+
+<hr />
+
+<h3 id="proof-versus-formal-proof">Proof versus formal proof</h3>
+<p>We defer to Robert Harper’s <a href="#references">blog posts</a> about this, but
+here are some highlights:</p>
+
+<p>In the context of HoTT, proof relevance means that proofs become mathematical
+objects. To fully understand this standpoint, it is necessary
+to draw a distinction between the notion of a <em>proof</em> and the notion of
+<em>formal proof</em>. </p>
+
+<p>A <em>formal proof</em> is a proof given in a fixed formal system, such as the axiomatic
+theory of sets, and arises from the application of the inductively defined rules
+in that system.  Whereas every formal proof is also a proof (assuming soundness
+of the system) the converse is not true.  This follows from
+Gödel’s Incompleteness Theorem, which states that there exist true
+propositions (with a proof) that cannot be proved formally using the rules of
+the system.</p>
+
+<p>Unlike conventional formally defined systems, HoTT does not surmise that all
+possible proofs can be fully circumscribed by its rules, but accepts proofs that
+cannot be formalized in HoTT.  These are exactly the proofs that are considered
+to be <em>relevant</em> and, being treated as mathematical objects, they can be
+codified internally as objects of the type theory.</p>
+
+<p>As Harper puts it, “In intuitionistic mathematics proofs are themselves
+‘first-class’ mathematical objects that inhabit types that may as well be
+identified with the proposition that they prove. Proving a proposition is no
+different than constructing a program of a type. In this sense logic is a
+branch of mathematics, the branch concerned with those constructions that are
+proofs.”</p>
+
+<h3 id="decidability-of-types">Decidability of types</h3>
+<p>HoTT is constructive, which means at the very least it does not postulate that
+all types are decidable. <em>Any type with decidable equality is a set</em>, by
+Hedberg’s Theorem (see the <a href="http://homotopytypetheory.org/book/">HoTT book</a> Section 7.2), so a blanket adoption of
+the classical law of the excluded middle would immediately rule out any
+higher-dimensional structure.</p>
+
+<h3 id="relation-of-hott-to-other-type-theories">Relation of HoTT to other type theories</h3>
+<p>HoTT unites homotopy theory with type theory, by embodying Brouwer’s
+intuitionism and drawing from Gentzen’s proof theory.  It is based on the 
+observation that <em>types</em> classify the admissible forms of constructions and thus
+are programmatically sufficient to encompass all known mathematical
+constructions.</p>
+
+<p><strong>ITT</strong> (<em>intentional type theory</em>) serves as the core for other type theories.</p>
+
+<p><strong>ETT</strong> (<em>extensional type theory</em>) extends ITT
+with <a href="#equality-of-reflection">equality of reflection</a> (ER) 
+and <a href="#uniqueness-of-identity-proofs">uniqueness of identity proofs</a> (UIP):</p>
+
+<p>ETT = ITT + ER + UIP</p>
+
+<p>In ETT types are sets, so ETT is an intuitionistic theory of sets.</p>
+
+<p><strong>HoTT</strong> extends ITT with 
+<a href="#higher-inductive-types">higher inductive types</a>
+and the <a href="#univalence-axiom">univalence axiom</a>:</p>
+
+<p>HoTT = ITT + HIT + UA</p>
+
+<p>In HoTT types are abstract spaces, and HoTT is an intuitionistic
+theory of <a href="weak-infinity-groupoids">weak infinity groupoids</a>.</p>
+
+<hr />
+
+<h2 id="intuitionistic-propositional-logic">Intuitionistic Propositional Logic</h2>
+
+<p>As advanced by Per Martin-Löf, <em>intuitionistic propositional logic</em> (IPL)
+distinguishes the notions of judgment and proposition.</p>
+
+<p>A <em>judgment</em> is something that may be known.</p>
+
+<p>A <em>proposition</em> is something that sensibly may be the subject of a judgment.</p>
+
+<p>In IPL there are two basic ‘atomic’ judgments:</p>
+
+<ul>
+  <li>
+    <p>$A$ prop <br />
+is the judgement that $A$ is a well-formed proposition.</p>
+  </li>
+  <li>
+    <p>$A$ true <br />
+is the judgement that $A$ is intuitionistically true; i.e., has a proof.</p>
+  </li>
+</ul>
+
+<p>The inference rules for the prop judgment are called <em>formation rules</em>.</p>
+
+<p>The inference rules for the true judgment are divided into classes:
+<strong>introduction rules</strong> and <strong>elimination rules</strong>.</p>
+
+<p>The meaning of a proposition $A$ is given by the introduction rules for the
+judgment $A$ true.</p>
+
+<p>The elimination rules are dual and describe what may be deduced from a proof of
+$A$ true.</p>
+
+<p>The principle of <em>internal coherence</em> also known as <em>Gentzen’s principle
+of inversion</em>, is that the introduction and elimination rules for a proposition
+$A$ fit together properly.  </p>
+
+<p>The elimination rules should be strong enough to deduce all information that was
+used to introduce $A$ (local completeness), but not so strong as to deduce
+information that might not have been used to introduce $A$ (<em>local soundness</em>).  </p>
+
+<h3 id="negative-fragment-of-ipl">Negative fragment of IPL</h3>
+
+<p><strong>Conjunction</strong><br />
+If $A$ and $B$ are well-formed propositions, then so is their conjunction, which
+we write as $A \wedge B$. </p>
+
+<p>The <em>formation rule for conjunction</em> serves as evidence of the judgment 
+$A \wedge B$ prop, and follows from the evidence for the judgments 
+$A$ prop and $B$ prop.</p>
+
+<hr />
+
+<!-- more -->
+
+<h3 id="equality-of-reflection">equality of reflection</h3>
+<p>coming soon</p>
+
+<h3 id="uniqueness-of-identity-proofs">uniqueness of identity proofs</h3>
+<p>coming soon</p>
+
+<h3 id="higher-inductive-types">higher inductive types</h3>
+<p>coming soon</p>
+
+<h3 id="univalence-axiom">univalence axiom</h3>
+<p>coming soon</p>
+
+<h3 id="weak-infinity-groupoids">weak infinity groupoids</h3>
+<p>coming soon</p>
+
+<hr />
+
+<h3 id="references">References</h3>
+<ul>
+  <li><a href="http://homotopytypetheory.org/book/">HoTT book</a>  </li>
+  <li><a href="http://existentialtype.wordpress.com/2013/07/10/constructive-mathematics-is-not-meta-mathematics/">Constructive Mathematics Is Not Metamathematics</a>  </li>
+  <li><a href="http://existentialtype.wordpress.com/2012/08/11/extensionality-intensionality-and-brouwers-dictum/">Extensionality, Intensionality, and Brouwer’s Dictum</a>  </li>
+  <li><a href="http://www.cs.cmu.edu/~rwh/courses/hott/">Robert Harper’s graduate seminar on HoTT</a></li>
+</ul>
+
+<h3 id="related-wikipedia-pages">Related Wikipedia Pages</h3>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed $\lambda$-calculi</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Homotopy_type_theory">homotopy type theory</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">William DeMeo</span></a></span>
+  
+
+ - 
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-12T07:04:34-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time> - 
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+</div>
+
+    
+    
+      <a class="pull-left" href="/blog/2014/02/07/cloning-an-octopress-repo/" title="Previous Post: Cloning an Octopress repo">&laquo; Cloning an Octopress repo</a>
+    
+    
+      <a class="pull-right" href="/blog/2014/02/13/groupsound/" title="Next Post: GroupSound">GroupSound &raquo;</a>
+    
+  </footer>
+
+</div>
+
+        
+      </article>
+    </div>
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>recent posts</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/blog/2014/02/13/groupsound/">GroupSound</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2014/02/12/hott/">HoTT</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2014/02/07/cloning-an-octopress-repo/">Cloning an Octopress repo</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2014/02/05/diaconescus-theorem/">Diaconescu's Theorem</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/blog/archives">archives</a></h2>
+  </div>
+  <!-- <div class="span3"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span6">
+    
+<h2>recent git activity</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="williamdemeo" data-github-repo-count="4" data-github-skip-forks="true">
+  <dd class="loading">updating...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
+
+  </div>
+  <!-- <div class="span4"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span2">
+    <h2>found on</h2>
+
+<a href="https://github.com/williamdemeo/" rel="tooltip" title="GitHub"><img class="social_icon" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+
+
+<a href="https://plus.google.com/u/0/+williamdemeo?rel=author" rel="tooltip" title="Google Plus"><img class="social_icon" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
+
+
+
+
+
+<a href="http://mathoverflow.net/users/9124/william-demeo/" rel="tooltip" title="MathOverflow"><img class="social_icon" alt="math overflow icon" src="/images/mathoverflow.ico"></a>
+
+
+
+<a href="http://math.stackexchange.com/users/10915/william-demeo/" rel="tooltip" title="Math SE"><img class="social_icon" alt="math overflow icon" src="/images/mathstackexchange.ico"></a>
+
+
+
+<h2>contact at</h2>
+<a href="mailto:williamdemeo@gmail.com">williamdemeo@gmail.com</a>
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">William DeMeo</a>
+  - Copyright &copy; 2014 - William DeMeo
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+</body>
+</html>
