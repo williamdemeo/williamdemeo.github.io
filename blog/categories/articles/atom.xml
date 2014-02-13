@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Articles | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/articles/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T08:48:14-05:00</updated>
+  <updated>2014-02-13T08:50:37-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,9 +18,10 @@
     <link href="http://williamdemeo.github.io/blog/2014/02/13/ieprops/"/>
     <updated>2014-02-13T08:42:42-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/ieprops</id>
-    <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article</p>
+    <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article
+<a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
 
-<p><a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
+<!-- more -->
 
 <p>The paper has been accepted and is in the final review stage. It should appear in print sometime in 2014.
 The original submission is available in the file <a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">DeMeo-IEProps-rev1.pdf</a>. The latest revision is in the tex directory.</p>
