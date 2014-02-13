@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T08:40:33-05:00</updated>
+  <updated>2014-02-13T08:48:14-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Overalgebras]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/13/overalgebras/"/>
+    <updated>2014-02-13T08:42:53-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/13/overalgebras</id>
+    <content type="html"><![CDATA[<p>The Overalgebras repository contains my article</p>
+
+<p><a href="https://github.com/williamdemeo/Overalgebras/raw/master/DeMeo-Expansions-AU-2013.pdf">Expansions of finite algebras and their congruence lattices</a>, <em>Algebra Universalis</em>, <strong>69</strong>, 2013,</p>
+
+<p>as well as the GAP software I wrote for constructing new finite algebras by
+extending and expanding transitive G-sets, as described in the paper. </p>
+
+<p>The published version of the paper is in the file <a href="https://github.com/williamdemeo/Overalgebras/raw/master/DeMeo-Expansions-AU-2013.pdf">DeMeo-Expansions-AU-2013.pdf</a>,
+and is also available at <a href="http://link.springer.com">springer.com</a>. </p>
+
+<p>In the file <a href="https://github.com/williamdemeo/Overalgebras/blob/master/gap2uacalc.g">gap2uacalc.g</a> is a GAP program that can be used on its own to convert GAP groups and G-sets into UACalc .ua files,
+which can then be imported into the <a href="http://uacalc.org">Universal Algebra Calculator</a>.
+See <a href="http://universalalgebra.wordpress.org/documentation/gap/gap-and-uacalc/">universalalgebra.org</a> for more information about <a href="https://github.com/williamdemeo/Overalgebras/blob/master/gap2uacalc.g">gap2uacalc.g</a>.</p>
+
+<p>For questions, comments, or suggestions please <a href="https://github.com/williamdemeo/Overalgebras/issues">submit an issue</a>.</p>
+
+<p>Thanks for your interest in this work!</p>
+
+<p><a href="https://github.com/williamdemeo">@williamdemeo</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IEProps]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/13/ieprops/"/>
+    <updated>2014-02-13T08:42:42-05:00</updated>
+    <id>http://williamdemeo.github.io/blog/2014/02/13/ieprops</id>
+    <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article</p>
+
+<p><a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
+
+<p>The paper has been accepted and is in the final review stage. It should appear in print sometime in 2014.
+The original submission is available in the file <a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">DeMeo-IEProps-rev1.pdf</a>. The latest revision is in the tex directory.</p>
+
+<p>For questions, comments, or suggestions please <a href="https://github.com/williamdemeo/IEProps/issues">submit an issue</a>.</p>
+
+<p>Thanks for your interest in this work!</p>
+
+<p><a href="https://github.com/williamdemeo">@williamdemeo</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GroupSound]]></title>
