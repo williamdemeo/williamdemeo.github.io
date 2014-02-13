@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T09:34:00-05:00</updated>
+  <updated>2014-02-13T09:39:04-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,9 +18,9 @@
     <link href="http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings/"/>
     <updated>2014-02-13T09:31:06-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings</id>
-    <content type="html"><![CDATA[<h1 id="conferences">Conferences</h1>
-
-<p>Conferences in algebra, logic, and computer science.</p>
+    <content type="html"><![CDATA[<p>A collection of dates of meetings in areas that I find most
+interesting: algebra, logic, proof theory, category theory, type theory, 
+and functional programming.</p>
 
 <!-- more -->
 
