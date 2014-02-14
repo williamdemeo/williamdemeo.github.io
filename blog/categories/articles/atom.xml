@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Articles | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/articles/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-14T03:28:31-05:00</updated>
+  <updated>2014-02-14T03:33:57-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -27,7 +27,7 @@ distinct mathematical objects, but also they are not even isomorphic!</p>
 
 <p><em>Isotopy</em> is another well known notion of “sameness” that is 
 broader than isomorphism. However, in a recent paper I proved
-that isotopy does not capture the notion of algebraic equivalence. 
+that isotopy also fails to capture algebraic equivalence. 
 <!-- more --></p>
 
 <p>$\def\bA{\bf A} \def\bB{\bf B}$
