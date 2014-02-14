@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Articles | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/articles/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T22:50:54-05:00</updated>
+  <updated>2014-02-14T00:34:10-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,20 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[It walks like a duck...]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/it-walks-like-a-duck/"/>
+    <title type="html"><![CDATA[If it walks like a duck...]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck/"/>
     <updated>2014-02-13T21:21:00-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/it-walks-like-a-duck</id>
-    <content type="html"><![CDATA[<p>It’s easy to construct two finite algebras that are the same
+    <id>http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck</id>
+    <content type="html"><![CDATA[<p>Consider two finite algebras that are the same
 except for a relabelling of the operations.
 Our intuition tells us that these are simply different names for the same
-algebraic structure.
-But according to the classical definitions, not only are such algebras distinct
-mathematical objects, but also they are nonisomorphic!</p>
+mathematical structure.
+According to the standard definitions, however, not only are such algebras
+distinct mathematical objects, but also they are nonisomorphic!</p>
 
 <p><em>Isotopy</em> is another well known notion of “sameness” that is 
-broader than isomorphism. However, I recently proved a result establishing that
-isotopy is not a notion of algebraic equivalence. 
+broader than isomorphism. However, in a recent paper I proved 
+that isotopy is not a notion of algebraic equivalence. 
 <!-- more --></p>
 
 <p>$\def\bA{\bf A} \def\bB{\bf B}$

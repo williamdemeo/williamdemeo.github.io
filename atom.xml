@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T22:50:54-05:00</updated>
+  <updated>2014-02-14T00:34:10-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,20 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[It walks like a duck...]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/it-walks-like-a-duck/"/>
+    <title type="html"><![CDATA[If it walks like a duck...]]></title>
+    <link href="http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck/"/>
     <updated>2014-02-13T21:21:00-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/it-walks-like-a-duck</id>
-    <content type="html"><![CDATA[<p>It’s easy to construct two finite algebras that are the same
+    <id>http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck</id>
+    <content type="html"><![CDATA[<p>Consider two finite algebras that are the same
 except for a relabelling of the operations.
 Our intuition tells us that these are simply different names for the same
-algebraic structure.
-But according to the classical definitions, not only are such algebras distinct
-mathematical objects, but also they are nonisomorphic!</p>
+mathematical structure.
+According to the standard definitions, however, not only are such algebras
+distinct mathematical objects, but also they are nonisomorphic!</p>
 
 <p><em>Isotopy</em> is another well known notion of “sameness” that is 
-broader than isomorphism. However, I recently proved a result establishing that
-isotopy is not a notion of algebraic equivalence. 
+broader than isomorphism. However, in a recent paper I proved 
+that isotopy is not a notion of algebraic equivalence. 
 <!-- more --></p>
 
 <p>$\def\bA{\bf A} \def\bB{\bf B}$
@@ -165,26 +165,20 @@ type theory, and functional programming.</p>
     <link href="http://williamdemeo.github.io/blog/2014/02/13/typefunc/"/>
     <updated>2014-02-13T09:23:58-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/typefunc</id>
-    <content type="html"><![CDATA[<p>I started the <a href="https://github.com/williamdemeo/TypeFunc">TypeFunc</a> repository in
-an effort to get my head around the massive amount of online resources for
-learning about type theory, functional programming, category theory, 
-$\lambda$-calculus, and connections between topology and computing.  </p>
+    <content type="html"><![CDATA[<p>I started the TypeFunc repository in an effort to get my head around the massive
+amount of online resources for learning about type theory, functional
+programming, category theory, $\lambda$-calculus, and connections between
+topology and computing. 
+<!-- more --></p>
 
-<!-- more -->
-
-<p>The repository collects mostly links as well as some other
-resources related to software.  I may move the links to this post in the future.
-resources for learning about type theory, functional programming, </p>
-
-<p>Below is simply a copy of what’s posted on the README.md page in that
-directory.  I will eventually abandone the README.md and just maintain this
-post. </p>
+<p>So far, the <a href="https://github.com/williamdemeo/TypeFunc">TypeFunc</a> repository is
+primarily a collection of links, but it also includes some software notes and
+resources that may be useful.  The links have all been migrated 
+to this post, but these and other resources will remain in the repository.  I
+plan to grow and curate the respoitory as I gain more experience in this area.</p>
 
 <hr />
-
-<h1 id="typefunc">TypeFunc</h1>
-<p>This repository collects some links and resources for learning about type
-theory, functional programming, and connections between topology and computing.</p>
+<p>## Online resources</p>
 
 <h2 id="courses">Courses</h2>
 <ul>
