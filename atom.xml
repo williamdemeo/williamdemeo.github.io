@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-14T07:22:09-05:00</updated>
+  <updated>2014-02-14T08:18:42-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -33,7 +33,10 @@ shows why isotopy also fails to capture algebraic equivalence.
 <!-- more -->
 $\def\bA{\bf A} \def\bB{\bf B} \def\bC{\bf C}$ </p>
 
-<h2 id="examples">Examples</h2>
+<hr />
+
+<h2 id="example">Example</h2>
+
 <p>Let us consider an example of two algebras that are the same 
 except for the naming of their operations.  (This is an 
 elaboration on Exercises 5.1 in
@@ -63,28 +66,37 @@ partitions as follows:</p>
 <script type="math/tex; mode=display">0_A = \mid 1 \mid 2 \mid 3 \mid 4 \mid </script>
 
 <p>Now consider the algebras 
-$\mathbf{A}/\theta_1$ and 
-$\mathbf{A}/\theta_2$, which have universes
-$\{ 1 /\theta_1, 3/\theta_1\}$ and $\{ 1/\theta_2, 2 /\theta_2\}$, respectively.</p>
+$\mathbf{A}/\theta_1$,
+$\mathbf{A}/\theta_2$, and
+$\mathbf{A}/\theta_3$ which have respective universes</p>
 
-<p>The algebra $\mathbf{A}/\theta_1$ has operations $f^{\bA/\theta_1}$ and
-$g^{\bA/\theta_1}$, where $g^{\bA/\theta_1}$ permutes the blocks $1/\theta_1
-\longleftrightarrow 3/\theta_1$, and $f^{\bA/\theta_1}$ leaves them fixed,
-that is, $f^{\bA/\theta_1} = \operatorname{id}_{\bA/\theta_1}$.</p>
+<script type="math/tex; mode=display">\{ \{1, 2\}, \{3, 4\}\}, \quad  \{ \{1, 3\}, \{2, 4\}\}, \quad 
+\{ \{1, 4\}, \{2, 3\}\}.</script>
 
-<p>On the other hand, the algebra $\bA/\theta_2$ has operations $f^{\bA/\theta_2}$
-and $g^{\bA/\theta_2}$, where $f^{\bA/\theta_2}$ permutes the blocks $1/\theta_2
-\longleftrightarrow 2/\theta_2$ and $g^{\bA/\theta_2}$ acts as the identity,
-$\operatorname{id}_{\bA/\theta_2}$.</p>
+<p>It is clear that</p>
 
-<p>Technically, the algebras $\bA/\theta_1$ and $\bA/\theta_2$
+<script type="math/tex; mode=display">\bA \cong \mathbf{A}/\theta_1 \times \mathbf{A}/\theta_2 \cong
+\mathbf{A}/\theta_1 \times\mathbf{A}/\theta_3 \cong \mathbf{A}/\theta_2
+\times\mathbf{A}/\theta_3,</script>
+
+<p>and that the algebras $\bA/\theta_1$ and $\bA/\theta_2$
 are not isomorphic according to the classical definition.
 The problem, of course, is the naming of the operation symbols.</p>
 
-<p>The operation in $\bA/\theta_1$ corresponding to the symbol $f$ is
+<p>The algebra $\mathbf{A}/\theta_1$ has operations $f^{\bA/\theta_1}$ and
+$g^{\bA/\theta_1}$, where $g^{\bA/\theta_1}$ permutes the blocks 
+$\{1, 2\}\longleftrightarrow  \{3, 4\}$
+and $f^{\bA/\theta_1}$ leaves them fixed.</p>
+
+<p>On the other hand, the algebra $\bA/\theta_2$ has operations $f^{\bA/\theta_2}$
+and $g^{\bA/\theta_2}$, where $f^{\bA/\theta_2}$ permutes the blocks
+$\{1, 3\} \longleftrightarrow \{2, 4\}$
+and $g^{\bA/\theta_2}$ leaves them fixed.</p>
+
+<p>Thus, the operation in $\bA/\theta_1$ corresponding to the symbol $f$ is
 the identity, while in $\bA/\theta_2$ the $f$ symbol corresponds to the
 nonidentity permutation. But apart from this trivial relabeling, these two
-algebraic structures are the same.</p>
+algebraic structures are the same. </p>
 
 <p>This technicality is easily overcome by simply viewing the two
 algebras as <em>nonindexed algebras</em> (see, e.g.,
@@ -92,14 +104,51 @@ algebras as <em>nonindexed algebras</em> (see, e.g.,
 <em>up to a relabeling of the operation symbols,</em> the two algebras 
 are isomorphic.</p>
 
-<p>The <a href="https://github.com/williamdemeo/Isotopy">Isotopy GitHub repository</a>
-contains an article in which I present algebras that are isotopic and yet
-have vastly different congruence lattices.</p>
+<p>However, it would be preferable to have a notion of algebraic equivalence that
+didn’t require us to worry about these operation alignment issue.</p>
 
-<p>Congruence relations of algebras are the kernels of homomorphisms, and the 
+<hr />
+
+<h2 id="isotopy">Isotopy</h2>
+
+<p>Any reasonable notion of algebraic equivalence should at least respect
+congruences lattice structure.
+The congruence relations of algebras are the kernels of homomorphisms, and the 
 congruence lattice is a basic “algebraic” feature of an algebra. Certainly we
 cannot accept a notion of “sameness” that equates two algebras with different
-congruence lattices.</p>
+congruence lattices (puting aside for now what it means for two congruence
+lattices to be “different”).</p>
+
+<p><em>Isotopy</em>  provides a notion of “sameness” of
+algebras that is less demanding than isomorphism, so there is some hope that 
+it provides a reasonably intuitive notion of algebraic equivalence. </p>
+
+<p>But by the foregoing remark, if isotopy is to serve as a notion of algebraic
+equivalence, we should at least demand that two isotopic algebras have the
+“same” congruence lattices, and for two lattices to be the “same” in
+any sense, they must have the same number of elements so that we can at least
+find a bijection between them (even if it is not a “structure preserving”
+bijection).</p>
+
+<p>However, I prove in the paper that, for any number $N \in \mathbb{N}$, we can
+find a pair of isotopic algebras with congruence lattices that differ in size by
+more than $N$ elements.  We see from this that that there is no hope for isotopy
+as a reasonable notion of algebraic equivalence.</p>
+
+<p>Later, we will explore Voevodsky’s <em>univalence</em> principle and try 
+to write down the definitions of universal algebras as higher types so that we
+can exploit the ideas of homotopy type theory in order to arrive at a 
+sound definition of algebraic equivalence.</p>
+
+<hr />
+
+<h2 id="open-github-repository">Open GitHub repository</h2>
+
+<p>The <a href="https://github.com/williamdemeo/Isotopy">Isotopy GitHub repository</a>
+contains
+<a href="https://github.com/williamdemeo/Isotopy/blob/master/Isotopy.pdf?raw=true">my article</a>
+in which I present isotopic algebras with congruence lattices that are vastly
+different in size.</p>
 
 ]]></content>
   </entry>
