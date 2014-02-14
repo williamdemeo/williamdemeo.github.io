@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Articles | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/articles/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-14T06:02:23-05:00</updated>
+  <updated>2014-02-14T06:59:28-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -12,96 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[If it walks like a duck...]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck/"/>
-    <updated>2014-02-13T21:21:00-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/if-it-walks-like-a-duck</id>
-    <content type="html"><![CDATA[<p><em>Equivalence of algebraic structures</em></p>
-
-<p>Consider two finite algebras that are the same
-except for a relabelling of the operations.
-Our intuition tells us that these are simply different names for the same
-mathematical structure.
-Formally, however, not only are these distinct mathematical objects, but also
-they are <em>nonisomorphic!</em></p>
-
-<p><em>Isotopy</em> is another well known notion of “sameness” that is 
-broader than isomorphism. However, I recently proved a result that
-shows why isotopy also fails to capture algebraic equivalence. 
-<!-- more -->
-$\def\bA{\bf A} \def\bB{\bf B}  \def\bC{\bf C} \def\Con{\operatorname{Con}}$</p>
-
-<h2 id="example">Example</h2>
-<p>Below we give examples of algebraic structures that are the same 
-except for the naming of their operations, yet they are not isomorphic.  (This
-is an elaboration of Excercise 5.1 in
-<a href="http://books.google.com/books/about/Algebras_lattices_varieties.html">Algebras, Lattices, Varieties</a>.)</p>
-
-<p>Let $\bA$ be an algebra of size 4 and label the elements of the universe $\{1,2,3,4\}$.
-Suppose $\bA$ has two unary operations, $f^\bA$ 
-and $g^\bA$, where $f^\bA$ is the permutation $(1,2)(3,4)$ and 
-$g^\bA$ is the permutation $(1,3)(2,4)$.  </p>
-
-<p>Thus, the operations permute the elements as follows:</p>
-
-<p><img src="/images/permutations.png" width="150" height="250"></p>
-
-<p>The congruence lattice of the algebra $\bA$ is 
-$M<em>3 = \{ 0_A , \theta</em>1, \theta<em>2, \theta</em>3, 1<em>A\}$, where (by abuse of
-notation) we identify the congruences with their corrsponding partitions as
-follows:
-$0_A = |1|2|3|4| $,
-$ \theta</em>1 = |1,2|3,4| $,
-$\theta<em>2 = |1,3|2,4| $, $\theta</em>3 = |1,4|2,3| $, $1_A = |1,2,3,4|$.</p>
-
-<p>Now, let </p>
-
-<script type="math/tex; mode=display">\bB = \bA/\theta_1 = \{ 1/\theta_1, 3/\theta_1\},</script>
-
-<p>and let </p>
-
-<script type="math/tex; mode=display">\bC = \bA/\theta_2 = \{ 1/\theta_2, 2/\theta_2\}.</script>
-
-<p>$\bB$ has operation $f^{\bB} = f^{\bA/\theta<em>1}$  and $g^{\bA/\theta</em>1}$, where </p>
-
-<p>$f^{\bA/\theta<em>1}$ acts as the identity on the
-classes  $1/\theta</em>1$ and $3/\theta<em>1$, thus $f^{\bA/\theta</em>1} =
-\operatorname{id}_\bB$,</p>
-
-<p>$g^{\bA/\theta<em>1}$ permutes the
-classes  $1/\theta</em>1 \leftrightarrow 3/\theta_1$.</p>
-
-<p>On the other hand, $\bC$ has operation $f^{\bA/\theta<em>2}$  and $g^{\bA/\theta</em>2}$, where </p>
-
-<p>$f^{\bA/\theta<em>2}$ permutes the
-classes  $1/\theta</em>2 \leftrightarrow 2/\theta_2$,</p>
-
-<p>$g^{\bA/\theta<em>2}$ acts as the identity on the
-classes  $1/\theta</em>2$ and $2/\theta<em>2$, thus $g^{\bA/\theta</em>2} =
-\operatorname{id}_\bC$. </p>
-
-<p>We can’t technically call $\bB$ and $\bC$ isomorphic because the $f$ map in
-$\bB$ corresponds to the identity, while in $\bC$ it corresponds to the
-permutation.  However, they are isomorphic as “nonindexed algebras.”</p>
-
-<p>Clearly we have simply swapped the names of the operations, and any sane person
-would agree that we have two “equivalent” algebraic structures. But these are
-not considered equivalent, and they are not even isomorphic according to the
-classical definition.</p>
-
-<p>The <a href="https://github.com/williamdemeo/Isotopy">Isotopy GitHub repository</a>
-contains an article in which I present algebras that are isotopic and yet
-have vastly different congruence lattices.</p>
-
-<p>Congruence relations of algebras are the kernels of homomorphisms, and the 
-congruence lattice is a basic “algebraic” feature of an algebra. Certainly we
-cannot accept a notion of “sameness” that equates two algebras with different
-congruence lattices.</p>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[IEProps]]></title>
