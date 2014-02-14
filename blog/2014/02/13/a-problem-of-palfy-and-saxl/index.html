@@ -14,7 +14,7 @@
     
   
   <meta name="description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
-If the three $\alpha_i$’s pairwise permute, then every pair of &hellip;">
+If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -31,7 +31,7 @@ If the three $\alpha_i$’s pairwise permute, then every pair of &hellip;">
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="A problem of P&aacute;lfy and Saxl" />
   <meta name="og:description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
-If the three $\alpha_i$’s pairwise permute, then every pair of &hellip;" />
+If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/"/>
   <meta name="url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/">
   
@@ -150,54 +150,54 @@ MathJax.Hub.Config({
 <p><img src="/images/PSM4.png" /></p>
 
 <p><strong>Claim:</strong>
-If the three $\alpha_i$’s pairwise permute, then every pair of elements in the
-lattice permutes. </p>
-
-<p>Whether this claim is true is a simple case of a question left open by
-Pálfy and Saxl at the end of 
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. </p>
-
-<p>I recently developed a method, based on the idea of <em>graphical composition</em>,
-that I believe will settle this question.
+If the three $\alpha_i$’s pairwise permute, then all pairs in the lattice permute. 
 <!-- more --></p>
 
-<p>My <a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">notes</a>
-on this problem are available in a
-<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>.
-In the notes I develop an extension of a method described in
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>
-called “graphical composition.”  </p>
+<p>Whether or not this claim is true is a simplified version of a question left open by
+Pálfy and Saxl at the end of
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. Below
+is a more formal description of the problem and a hint about how I intend to 
+solve it.</p>
 
-<p>A more formal statement of what I call the Pálfy-Saxl problem is as follows:</p>
+<hr />
+
+<h2 id="graphical-composition">Graphical composition</h2>
+<p>In order to prove the claim above and its generalization I developed an extension of
+an idea described in
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Heinrich Werner’s paper</a>
+called <em>graphical composition</em>.</p>
+
+<hr />
+
+<h2 id="the-problem">The problem</h2>
+<p>Here we state the problem more precisely.</p>
+
+<p>Given two equivalence relations $\alpha$ and $\beta$ on a set $X$, the relation</p>
+
+<script type="math/tex; mode=display">\alpha \circ \beta = \{(x,y) \in X^2: (\exists z)(x \; \alpha \; z \; \beta \; y)\}</script>
+
+<p>is called the <em>composition</em> of $\alpha$ and $\beta$, and if 
+$\alpha \circ \beta = \beta \circ \alpha$ then $\alpha$ and $\beta$ are said to
+<em>permute</em>, or to be <em>permuting</em> equivalence relations.  </p>
 
 <p><strong>Problem.</strong>
-Let A be a finite algebra with Con(A) isomorphic to M_n, for some n at least 4. 
-If three nontrivial congruences of A pairwise permute, does it follow
-that every pair of congruences of A permute?</p>
+$\def\bA{\bf A} \def\bB{\bf B}$
+Let $\bA$ be a finite algebra with $\operatorname{Con} \bA$ isomorphic to
+$M_n$, for some $n\geq 4$.  If three nontrivial congruences of $\bA$ pairwise
+permute, does it follow that every pair of congruences of $\bA$ permute?</p>
 
-<p>The main files in the repository are:</p>
+<hr />
 
-<ol>
-  <li>
-    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">PalfySaxlProblem.pdf</a> – Notes on the problem.</p>
-  </li>
-  <li>
-    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">PalfySaxl-ConLatAndFactGroups.pdf</a>
-– A scanned copy of the article by Palfy and Saxl, “Congruence lattices of
-finite algebras and factorizations of groups.” Comm. Algebra, 1990. </p>
-  </li>
-  <li>
-    <p><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner-PartLatConLat.pdf</a> – A scanned copy of the article by Werner, “Which partition lattices are congruence lattices?”, Colloquia Mathematica, 1974.</p>
-  </li>
-</ol>
+<h2 id="open-github-repository">Open GitHub repository</h2>
+<p>In my
+<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>
+you can find    </p>
 
-<p>To contribute to this repository you can
-<a href="https://help.github.com/articles/fork-a-repo">fork it</a> using the Fork button
-above, then edit some files, and then submit a
-<a href="https://help.github.com/articles/using-pull-requests">pull request</a>.  If you
-don’t understand the previous sentence, consider learning
-<a href="http://try.github.io/levels/1/challenges/1">Git in 15 minutes</a>. </p>
-
+<ul>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">my notes</a>  </li>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">Pálfy and Saxl’s paper</a>  </li>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>.</li>
+</ul>
 </div>
 
 
