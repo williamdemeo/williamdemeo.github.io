@@ -39,19 +39,19 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
@@ -73,10 +73,84 @@ MathJax.Hub.Config({
   </script>
 
 
+
+
 </head>
+
 
 <body   >
   
+
+
+    <article class="post"><div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/13/if-it-walks-like-a-duck/">If It Walks Like a Duck&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">William DeMeo</span></a></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-13T21:21:00-05:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/articles/'>Articles</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Equivalence of algebraic structures</em></p>
+
+<p>Consider two finite algebras that are the same
+except for a relabelling of the operations.
+Our intuition tells us that these are simply different names for the same
+mathematical structure.
+Formally, however, not only are these distinct mathematical objects, but also
+they are <em>nonisomorphic!</em></p>
+
+<p><em>Isotopy</em> is another well known notion of “sameness” that is 
+broader than isomorphism. However, I recently proved a result that
+shows why isotopy also fails to capture algebraic equivalence. 
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/13/if-it-walks-like-a-duck/">more &rarr;</a>
+    </footer>
+  
+
+
+</div>
+</article>
 
 
     <article class="post"><div class="article-format">
@@ -574,6 +648,10 @@ for a nice discussion of this topic.</p>
     <ul class="recent_posts">
       
         <li>
+          <a href="/blog/2014/02/13/if-it-walks-like-a-duck/">If it walks like a duck...</a>
+        </li>
+      
+        <li>
           <a href="/blog/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
         </li>
       
@@ -587,10 +665,6 @@ for a nice discussion of this topic.</p>
       
         <li>
           <a href="/blog/2014/02/13/overalgebras/">Overalgebras</a>
-        </li>
-      
-        <li>
-          <a href="/blog/2014/02/13/ieprops/">IEProps</a>
         </li>
       
     </ul>

@@ -38,19 +38,19 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
@@ -72,7 +72,10 @@ MathJax.Hub.Config({
   </script>
 
 
+
+
 </head>
+
 
 <nav role="navigation"><div class="navbar">
   <div class="navbar-inner">
@@ -116,6 +119,20 @@ MathJax.Hub.Config({
 
 <article class="archive-article-format">
   
+<h2><a href="/blog/2014/02/13/if-it-walks-like-a-duck/">If It Walks Like a Duck...</a></h2>
+<time datetime="2014-02-13T21:21:00-05:00" pubdate><span class='month'>Feb</span> <span class='day'>13</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories meta">posted in <a class='category' href='/blog/categories/articles/'>Articles</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article class="archive-article-format">
+  
 <h2><a href="/blog/2014/02/13/ieprops/">IEProps</a></h2>
 <time datetime="2014-02-13T08:42:42-05:00" pubdate><span class='month'>Feb</span> <span class='day'>13</span> <span class='year'>2014</span></time>
 
@@ -142,6 +159,10 @@ MathJax.Hub.Config({
     <ul class="recent_posts">
       
         <li>
+          <a href="/blog/2014/02/13/if-it-walks-like-a-duck/">If it walks like a duck...</a>
+        </li>
+      
+        <li>
           <a href="/blog/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
         </li>
       
@@ -155,10 +176,6 @@ MathJax.Hub.Config({
       
         <li>
           <a href="/blog/2014/02/13/overalgebras/">Overalgebras</a>
-        </li>
-      
-        <li>
-          <a href="/blog/2014/02/13/ieprops/">IEProps</a>
         </li>
       
     </ul>
