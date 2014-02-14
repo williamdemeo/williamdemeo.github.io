@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-14T07:16:34-05:00</updated>
+  <updated>2014-02-14T07:22:09-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -64,7 +64,7 @@ partitions as follows:</p>
 
 <p>Now consider the algebras 
 $\mathbf{A}/\theta_1$ and 
-$\mathbf{A}/\theta_2$ which have universes
+$\mathbf{A}/\theta_2$, which have universes
 $\{ 1 /\theta_1, 3/\theta_1\}$ and $\{ 1/\theta_2, 2 /\theta_2\}$, respectively.</p>
 
 <p>The algebra $\mathbf{A}/\theta_1$ has operations $f^{\bA/\theta_1}$ and
@@ -77,21 +77,20 @@ and $g^{\bA/\theta_2}$, where $f^{\bA/\theta_2}$ permutes the blocks $1/\theta_2
 \longleftrightarrow 2/\theta_2$ and $g^{\bA/\theta_2}$ acts as the identity,
 $\operatorname{id}_{\bA/\theta_2}$.</p>
 
-<p>Clearly we have simply swapped the names of the operation symbols, and, apart from
-this trivial relabeling, we have two “equivalent” algebraic structures. But
-they are not even isomorphic according to the classical definition.</p>
+<p>Technically, the algebras $\bA/\theta_1$ and $\bA/\theta_2$
+are not isomorphic according to the classical definition.
+The problem, of course, is the naming of the operation symbols.</p>
 
-<p>The problem of course is that the operation in
-$\bA/\theta_1$ corresponding to the operation symbol $f$ is the identity, while
-in $\bA/\theta_2$ the $f$ symbol corresponds to the nonidentity permutation. </p>
+<p>The operation in $\bA/\theta_1$ corresponding to the symbol $f$ is
+the identity, while in $\bA/\theta_2$ the $f$ symbol corresponds to the
+nonidentity permutation. But apart from this trivial relabeling, these two
+algebraic structures are the same.</p>
 
 <p>This technicality is easily overcome by simply viewing the two
-algebras as <em>nonindexed algebras</em>. (See, e.g.,
-<a href="http://dml.cz/dmlcz/106973">Polák</a>) Thus,
+algebras as <em>nonindexed algebras</em> (see, e.g.,
+<a href="http://dml.cz/dmlcz/106973">Polák</a>), and we can certainly say that
 <em>up to a relabeling of the operation symbols,</em> the two algebras 
 are isomorphic.</p>
-
-<p>Another </p>
 
 <p>The <a href="https://github.com/williamdemeo/Isotopy">Isotopy GitHub repository</a>
 contains an article in which I present algebras that are isotopic and yet
