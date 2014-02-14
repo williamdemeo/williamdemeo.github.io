@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-14T00:34:10-05:00</updated>
+  <updated>2014-02-14T01:21:24-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -23,7 +23,7 @@ except for a relabelling of the operations.
 Our intuition tells us that these are simply different names for the same
 mathematical structure.
 According to the standard definitions, however, not only are such algebras
-distinct mathematical objects, but also they are nonisomorphic!</p>
+distinct mathematical objects, but also they are not even isomorphic!</p>
 
 <p><em>Isotopy</em> is another well known notion of “sameness” that is 
 broader than isomorphism. However, in a recent paper I proved 
@@ -67,18 +67,30 @@ congruence lattices.</p>
     <link href="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/"/>
     <updated>2014-02-13T09:41:27-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl</id>
-    <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/PalfySaxlProblem">PalfyAndSaxl</a> GitHub repsitory 
-contains
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">notes</a>
-on an extension of a method described in
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>
-called “graphical
-composition.” In the notes I consider how this technique could be applied to
-answer the following question of Pálfy and Saxl: Given $M_n$
-(a height two lattice with $n$ atoms), if 3 of the atoms pairwise permute, must
-they all pairwise permute? </p>
+    <content type="html"><![CDATA[<p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
 
-<!-- more -->
+<p><img src="http://williamdemeo.github.io/images/PSM4.png" /></p>
+
+<p><strong>Claim:</strong>
+If the three $\alpha_i$’s pairwise permute, then every pair of elements in the
+lattice permutes. </p>
+
+<p>Whether this claim is true is a simple case of a question left open by
+Pálfy and Saxl at the end of 
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. </p>
+
+<p>I recently developed a method, based on the idea of <em>graphical composition</em>,
+that I believe will settle this question.
+<!-- more --></p>
+
+<p>My <a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">notes</a>
+on this problem are available in a
+<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>.
+In the notes I develop an extension of a method described in
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>
+called “graphical composition.”  </p>
+
+<p>A more formal statement of what I call the Pálfy-Saxl problem is as follows:</p>
 
 <p><strong>Problem.</strong>
 Let A be a finite algebra with Con(A) isomorphic to M_n, for some n at least 4. 

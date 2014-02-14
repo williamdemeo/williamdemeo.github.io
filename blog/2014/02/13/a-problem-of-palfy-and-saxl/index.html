@@ -13,12 +13,8 @@
   
     
   
-  <meta name="description" content="The PalfyAndSaxl GitHub repsitory contains
-notes
-on an extension of a method described in
-Werner’s paper
-called “graphical
-composition.” In the &hellip;">
+  <meta name="description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
+If the three $\alpha_i$’s pairwise permute, then every pair of &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -34,12 +30,8 @@ composition.” In the &hellip;">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="A problem of P&aacute;lfy and Saxl" />
-  <meta name="og:description" content="The PalfyAndSaxl GitHub repsitory contains
-notes
-on an extension of a method described in
-Werner’s paper
-called “graphical
-composition.” In the &hellip;" />
+  <meta name="og:description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
+If the three $\alpha_i$’s pairwise permute, then every pair of &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/"/>
   <meta name="url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/">
   
@@ -51,21 +43,25 @@ composition.” In the &hellip;" />
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
+<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
-        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-      //,
-      //displayAlign: "left",
-      //displayIndent: "2em"
-    });
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+
+
 
   
   <script type="text/javascript">
@@ -149,18 +145,30 @@ composition.” In the &hellip;" />
   </header>
 
 
-  <div class="entry-content"><p>The <a href="https://github.com/williamdemeo/PalfySaxlProblem">PalfyAndSaxl</a> GitHub repsitory 
-contains
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">notes</a>
-on an extension of a method described in
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>
-called “graphical
-composition.” In the notes I consider how this technique could be applied to
-answer the following question of Pálfy and Saxl: Given $M_n$
-(a height two lattice with $n$ atoms), if 3 of the atoms pairwise permute, must
-they all pairwise permute? </p>
+  <div class="entry-content"><p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
 
-<!-- more -->
+<p><img src="/images/PSM4.png" /></p>
+
+<p><strong>Claim:</strong>
+If the three $\alpha_i$’s pairwise permute, then every pair of elements in the
+lattice permutes. </p>
+
+<p>Whether this claim is true is a simple case of a question left open by
+Pálfy and Saxl at the end of 
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. </p>
+
+<p>I recently developed a method, based on the idea of <em>graphical composition</em>,
+that I believe will settle this question.
+<!-- more --></p>
+
+<p>My <a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">notes</a>
+on this problem are available in a
+<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>.
+In the notes I develop an extension of a method described in
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>
+called “graphical composition.”  </p>
+
+<p>A more formal statement of what I call the Pálfy-Saxl problem is as follows:</p>
 
 <p><strong>Problem.</strong>
 Let A be a finite algebra with Con(A) isomorphic to M_n, for some n at least 4. 
