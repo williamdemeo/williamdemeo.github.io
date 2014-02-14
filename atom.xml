@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-13T22:35:20-05:00</updated>
+  <updated>2014-02-13T22:44:22-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -28,11 +28,9 @@ mathematical objects, but also they are nonisomorphic!</p>
 <p><em>Isotopy</em> is another well known notion of “sameness” that is 
 broader than isomorphism. However, I recently proved a result establishing that
 isotopy is not a notion of algebraic equivalence. 
-<!-- more --></p>
-
-<p>$\def\bA{\bf A} \def\bB{\bf B}$</p>
-
-<p>Here is an example of two algebraic structures that are obviously the same
+<!-- more -->
+$\def\bA{\bf A} \def\bB{\bf B}$
+Here is an example of two algebraic structures that are obviously the same
 except for a relabelling of the operations: let $\bA$ be an
 algebra of size 4 and label the elements of the universe ${1,2,3,4}$.
 Suppose $\bA$ has two unary operations, which we label $f^\bA$ 
@@ -49,13 +47,15 @@ would agree that we have two “equivalent” algebraic structures. But these ar
 not considered equivalent, and they are not even isomorphic according to the
 classical definition.</p>
 
+<p>(Insert brief paragraph about isotopy here.)</p>
+
 <p>The <a href="https://github.com/williamdemeo/Isotopy">Isotopy GitHub repository</a>
 contains an article in which I present algebras that are isotopic and yet
 have vastly different congruence lattices.</p>
 
 <p>Congruence relations of algebras are the kernels of homomorphisms, and the 
 congruence lattice is a basic “algebraic” feature of an algebra. Certainly we
-can’t accept a notion of “sameness” that equates two algebras with different
+cannot accept a notion of “sameness” that equates two algebras with different
 congruence lattices.</p>
 
 ]]></content>
