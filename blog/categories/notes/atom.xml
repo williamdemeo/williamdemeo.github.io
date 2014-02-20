@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Notes | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/notes/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-15T18:49:10-05:00</updated>
+  <updated>2014-02-19T23:13:50-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -96,9 +96,7 @@ by induction on $\mathbb{N}$), we can consider cases:</p>
 A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have
 $x = y \bigvee x \neq y$. The empty set and singleton sets are trivially
 decidable, but some more complicated sets are decidable too. For example, one
-can use induction to show that the set of natural numbers is decidable. This
-and the following fact shows that every set of natural numbers, in particular
-$\{0,1\}$, is also decidable. </li>
+can use induction to show that the set of natural numbers is decidable. </li>
 </ul>
 
 <hr />
