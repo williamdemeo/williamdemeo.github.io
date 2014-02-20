@@ -2,86 +2,86 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/</loc>
-        <lastmod>2014-02-19T23:07:30-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo/</loc>
-        <lastmod>2014-02-13T06:12:20-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/groupsound/</loc>
-        <lastmod>2014-02-13T09:00:21-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/ieprops/</loc>
-        <lastmod>2014-02-13T08:49:23-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/overalgebras/</loc>
-        <lastmod>2014-02-13T09:21:22-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/typefunc/</loc>
-        <lastmod>2014-02-13T23:52:14-05:00</lastmod>
+        <lastmod>2014-02-20T13:38:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings/</loc>
-        <lastmod>2014-02-15T18:48:51-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/</loc>
-        <lastmod>2014-02-15T11:05:21-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/blog/2014/02/13/isotopy/</loc>
-        <lastmod>2014-02-15T18:44:47-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/components.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/customize.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/getting-started.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/css.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/javascript.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/migration.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/</loc>
-        <lastmod>2014-02-19T23:07:30-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/about.html</loc>
-        <lastmod>2014-02-13T03:55:25-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/blog/archives/</loc>
-        <lastmod>2014-02-19T23:07:30-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/blog/</loc>
-        <lastmod>2014-02-19T23:07:30-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/William_DeMeo_pub.txt</loc>
-        <lastmod>2014-02-13T23:40:54-05:00</lastmod>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/</loc>
-        <lastmod>2014-02-19T23:07:30-05:00</lastmod>
+        <lastmod>2014-02-20T13:38:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/William_DeMeo_pub.txt</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/</loc>
+        <lastmod>2014-02-20T13:38:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/customize.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/migration.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/about.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/css.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/components.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/javascript.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/assets/bootstrap/docs/getting-started.html</loc>
+        <lastmod>2014-02-20T13:35:25-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/blog/</loc>
+        <lastmod>2014-02-20T13:38:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/blog/archives/</loc>
+        <lastmod>2014-02-20T13:38:30-05:00</lastmod>
     </url>
 </urlset>
