@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resources | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/resources/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-20T13:39:30-05:00</updated>
+  <updated>2014-02-22T22:37:25-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,17 +18,17 @@
     <link href="http://williamdemeo.github.io/blog/2014/02/13/typefunc/"/>
     <updated>2014-02-13T09:23:58-05:00</updated>
     <id>http://williamdemeo.github.io/blog/2014/02/13/typefunc</id>
-    <content type="html"><![CDATA[<p>I started the TypeFunc repository in an effort to get my head around the massive
-amount of online resources for learning about type theory, functional
+    <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
+the massive amount of online resources for learning about type theory, functional
 programming, category theory, $\lambda$-calculus, and connections between
 topology and computing. 
 <!-- more --></p>
 
-<p>So far, the <a href="https://github.com/williamdemeo/TypeFunc">TypeFunc</a> repository is
-primarily a collection of links, but it also includes some software notes and
-resources that may be useful.  The links have all been migrated 
-to this post, but these and other resources will remain in the repository.  I
-plan to grow and curate the respoitory as I gain more experience in this area.</p>
+<p>So far, the <a href="https://github.com/williamdemeo/TypeFunc">TypeFunc</a> repository is primarily a collection of links, but it
+also includes some notes and software resources that may be useful.  The
+collection of links has been migrated to this post and appears below, but these
+and other resources will remain in the repository.  I will continue to grow and
+curate the respoitory as I gain more experience in the area.</p>
 
 <hr />
 
@@ -60,13 +60,13 @@ logic, and static type systems).</li>
 <ul>
   <li><a href="http://www.scala-lang.org/">Scala</a><br />
     <ul>
-      <li><a href="https://www.coursera.org/course/progfun">2013 course “Functional programming principles in Scala”</a> – Coursera course by Martin Odersky.</li>
+      <li><a href="https://www.coursera.org/course/progfun">2013 course “Functional programming principles in Scala”</a> by Martin Odersky.</li>
     </ul>
   </li>
   <li><a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage">Agda</a><br />
     <ul>
       <li><a href="https://github.com/williamdemeo/learn-you-an-agda">Learn you an agda</a> – fork of Liam O’Connor’s repo with fixed links.  </li>
-      <li><a href="http://www.cs.swan.ac.uk/~csetzer/lectures/intertheo/07/interactiveTheoremProvingForAgdaUsers.html">Interactive Theorem Proving for Agda Users</a> – Swansea University, UK.    </li>
+      <li><a href="http://www.cse.chalmers.se/~peterd/papers/DependentTypesAtWork.pdf">Dependent Types at Work</a> by Ana Bove and Peter Dybjer.  </li>
     </ul>
   </li>
   <li><a href="http://coq.inria.fr/">Coq</a><br />
