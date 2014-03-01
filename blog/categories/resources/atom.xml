@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resources | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/resources/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-02-22T22:37:25-05:00</updated>
+  <updated>2014-03-01T02:41:21-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -21,71 +21,13 @@
     <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
 the massive amount of online resources for learning about type theory, functional
 programming, category theory, $\lambda$-calculus, and connections between
-topology and computing. 
-<!-- more --></p>
+topology and computing. </p>
 
-<p>So far, the <a href="https://github.com/williamdemeo/TypeFunc">TypeFunc</a> repository is primarily a collection of links, but it
-also includes some notes and software resources that may be useful.  The
-collection of links has been migrated to this post and appears below, but these
-and other resources will remain in the repository.  I will continue to grow and
-curate the respoitory as I gain more experience in the area.</p>
+<!-- more -->
 
-<hr />
-
-<h2 id="courses">Courses</h2>
-<ul>
-  <li><a href="http://www.cs.uoregon.edu/research/summerschool/summer14/index.html">2014 Oregon Programming Languages Summer School</a>  on types, logic, semantics, and verification.  </li>
-  <li><a href="http://www.cs.nott.ac.uk/~txa/mgs.2014/">2014 Midlands Workshop in Foundations of CS</a>  at University of Nottingham, UK.</li>
-  <li><a href="http://www.cs.cmu.edu/~rwh/courses/hott/">2013 CMU graduate seminar on HoTT</a>  by Robert Harper with <a href="http://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=" title="07756bb0-b872-4a4a-95b1-b77ad206dab3">recorded lectures</a>.  </li>
-  <li><a href="http://www.cs.uoregon.edu/research/summerschool/summer13/">2013 Oregon Programming Languages Summer School</a>  on types, logic, and verification.  </li>
-  <li><a href="http://www.cs.bham.ac.uk/~mhe/.talks/EWSCS2012/">2012 course on topology for functional programming</a>  by Martin Escardo.  </li>
-  <li><a href="http://www.cs.uoregon.edu/research/summerschool/summer12/">2012 Oregon Programming Languages Summer School</a>  on logic, languages, compilation, and verification.</li>
-  <li><a href="http://www.cs.cmu.edu/~fp/courses/15816-s12/">2012 CMU graduate course on linear logic</a>  by Frank Pfenning.</li>
-  <li><a href="http://www.cs.ru.nl/~freek/courses/tt-2011/">2011 course on type theory and Coq</a>  at Radboud University, NL.</li>
-  <li><a href="http://www.cs.cmu.edu/~fp/courses/15816-s10/index.html">2010 CMU course on classical and intuitionistic modal logic</a>  by Frank Pfenning and André Platzer.</li>
-</ul>
-
-<h2 id="books-and-papers">Books and Papers</h2>
-<ul>
-  <li><a href="http://homotopytypetheory.org/book/">The HoTT Book</a> – textbook on informal homotopy type theory (HoTT);<br />
-see also <a href="http://homotopytypetheory.org/">homotopytypetheory.org</a> and <a href="https://github.com/HoTT/book">github.com/HoTT</a>.   </li>
-  <li><a href="http://arxiv.org/abs/1401.0053">Experimental library of univalent formalization of mathematics</a>, Vladimir Voevodsky.</li>
-  <li><a href="http://carlossicoli.free.fr/A/Awodey_S.-Category_theory-Oxford_University_Press,_USA(2010).pdf">Category Theory</a>, Steve Awodey.  </li>
-  <li><a href="http://www.cis.upenn.edu/~bcpierce/sf/">Software Fondations</a>, Pierce, et al. (topics: logic, computer-assisted
-theorem proving, Coq, functional programming, operational semantics, Hoare
-logic, and static type systems).</li>
-</ul>
-
-<h2 id="programming">Programming</h2>
-<ul>
-  <li><a href="http://www.scala-lang.org/">Scala</a><br />
-    <ul>
-      <li><a href="https://www.coursera.org/course/progfun">2013 course “Functional programming principles in Scala”</a> by Martin Odersky.</li>
-    </ul>
-  </li>
-  <li><a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage">Agda</a><br />
-    <ul>
-      <li><a href="https://github.com/williamdemeo/learn-you-an-agda">Learn you an agda</a> – fork of Liam O’Connor’s repo with fixed links.  </li>
-      <li><a href="http://www.cse.chalmers.se/~peterd/papers/DependentTypesAtWork.pdf">Dependent Types at Work</a> by Ana Bove and Peter Dybjer.  </li>
-    </ul>
-  </li>
-  <li><a href="http://coq.inria.fr/">Coq</a><br />
-    <ul>
-      <li><a href="http://adam.chlipala.net/cpdt/cpdt.pdf">Certified Programming with Dependent Types</a> (book)  </li>
-      <li><a href="http://www.cis.upenn.edu/~bcpierce/sf/">Software Fondations</a> (book)  </li>
-      <li><a href="http://web.cecs.pdx.edu/~apt/coq_hints.html">Software Foundations in Coq</a> – tips from OPLSS  </li>
-      <li><a href="http://www.cs.ru.nl/~freek/courses/tt-2011/">2011 Course on Type Theory and Coq</a>  </li>
-      <li><a href="http://youtu.be/l6zqLJQCnzo">How to use Coq with Proof General</a> (YouTube)  </li>
-      <li><a href="http://www.youtube.com/watch?v=COe0VTNF2EA&amp;list=PLDD40A96C2ED54E99&amp;feature=share">Nine short YouTube tutorials</a> (YouTube), by Andrej Bauer.</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="miscellaneous">Miscellaneous</h2>
-<ul>
-  <li><a href="http://lists.seas.upenn.edu/mailman/listinfo/types-list">types-forum</a> and <a href="http://lists.seas.upenn.edu/mailman/listinfo/types-announce">types-announce</a> mailing lists.</li>
-  <li><a href="http://www.cse.chalmers.se/research/group/logic/Types/index.html">types project</a></li>
-</ul>
+<p>At this point, <a href="https://github.com/williamdemeo/TypeFunc">the TypeFunc repository</a>
+is mostly a collection of links, but it also includes notes and
+software resources that I have found helpful.</p>
 
 ]]></content>
   </entry>

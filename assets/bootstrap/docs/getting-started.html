@@ -106,24 +106,20 @@
 
   <h3 id="download-cdn">Bootstrap CDN</h3>
   <p>The folks over at <a href="http://www.maxcdn.com/">MaxCDN</a> graciously provide CDN support for Bootstrap&#8217;s CSS and JavaScript. Just use these <a href="http://www.bootstrapcdn.com/">Bootstrap CDN</a> links.</p>
-<div>
-  <pre><code class='html'>&lt;!-- Latest compiled and minified CSS --&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;
+<div class="highlight"><pre><code class="html"><span class="c">&lt;!-- Latest compiled and minified CSS --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
 
-&lt;!-- Optional theme --&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;
+<span class="c">&lt;!-- Optional theme --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
 
-&lt;!-- Latest compiled and minified JavaScript --&gt;
-&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code></pre>
-</div>
-
+<span class="c">&lt;!-- Latest compiled and minified JavaScript --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
 
   <h3 id="download-bower">Install with Bower</h3>
   <p>Install and manage Bootstrap&#8217;s Less, CSS, JavaScript, and fonts using <a href="http://bower.io">Bower</a>.</p>
-  <div>
-  <pre><code class='bash'>$ bower install bootstrap</code></pre>
-</div>
-
+  <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>bower install bootstrap
+</code></pre></div>
 </div>
 
 
@@ -144,8 +140,7 @@
   <p>Once downloaded, unzip the compressed folder to see the structure of (the compiled) Bootstrap. You&#8217;ll see something like this:</p>
 <!-- NOTE: This info is intentionally duplicated in the README.
 Copy any changes made here over to the README too. -->
-<div>
-  <pre><code class='bash'>bootstrap/
+<div class="highlight"><pre><code class="bash">bootstrap/
 ├── css/
 │   ├── bootstrap.css
 │   ├── bootstrap.min.css
@@ -158,16 +153,14 @@ Copy any changes made here over to the README too. -->
     ├── glyphicons-halflings-regular.eot
     ├── glyphicons-halflings-regular.svg
     ├── glyphicons-halflings-regular.ttf
-    └── glyphicons-halflings-regular.woff</code></pre>
-</div>
-
+    └── glyphicons-halflings-regular.woff
+</code></pre></div>
 
   <p>This is the most basic form of Bootstrap: precompiled files for quick drop-in usage in nearly any web project. We provide compiled CSS and JS (<code>bootstrap.*</code>), as well as compiled and minified CSS and JS (<code>bootstrap.min.*</code>). Fonts from Glyphicons are included, as is the optional Bootstrap theme.</p>
 
   <h2 id="whats-included-source">Bootstrap source code</h2>
   <p>The Bootstrap source code download includes the precompiled CSS, JavaScript, and font assets, along with source Less, JavaScript, and documentation. More specifically, it includes the following and more:</p>
-<div>
-  <pre><code class='bash'>bootstrap/
+<div class="highlight"><pre><code class="bash">bootstrap/
 ├── less/
 ├── js/
 ├── fonts/
@@ -176,9 +169,8 @@ Copy any changes made here over to the README too. -->
 │   ├── js/
 │   └── fonts/
 └── docs/
-    └── examples/</code></pre>
-</div>
-
+    └── examples/
+</code></pre></div>
   <p>The <code>less/</code>, <code>js/</code>, and <code>fonts/</code> are the source code for our CSS, JS, and icon fonts (respectively). The <code>dist/</code> folder includes everything listed in the precompiled download section above. The <code>docs/</code> folder includes the source code for our documentation, and <code>examples/</code> of Bootstrap usage. Beyond that, any other included file provides support for packages, license information, and development.</p>
 </div>
 
@@ -192,36 +184,34 @@ Copy any changes made here over to the README too. -->
   <p class="lead">Start with this basic HTML template, or modify <a href="#examples">these examples</a>. We hope you&#8217;ll customize our templates and examples, adapting them to suit your needs.</p>
 
   <p>Copy the HTML below to begin working with a minimal Bootstrap document.</p>
-<div>
-  <pre><code class='html'>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;title&gt;Bootstrap 101 Template&lt;/title&gt;
+<div class="highlight"><pre><code class="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Bootstrap 101 Template<span class="nt">&lt;/title&gt;</span>
 
-    &lt;!-- Bootstrap --&gt;
-    &lt;link href=&quot;css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    <span class="c">&lt;!-- Bootstrap --&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;css/bootstrap.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 
-    &lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;
-    &lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// --&gt;
-    &lt;!--[if lt IE 9]&gt;
-      &lt;script src=&quot;https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js&quot;&gt;&lt;/script&gt;
-      &lt;script src=&quot;https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
-    &lt;![endif]--&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    <span class="c">&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;</span>
+    <span class="c">&lt;!-- WARNING: Respond.js doesn&#39;t work if you view the page via file:// --&gt;</span>
+    <span class="c">&lt;!--[if lt IE 9]&gt;</span>
+<span class="c">      &lt;script src=&quot;https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js&quot;&gt;&lt;/script&gt;</span>
+<span class="c">      &lt;script src=&quot;https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;</span>
+<span class="c">    &lt;![endif]--&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span>
 
-    &lt;!-- jQuery (necessary for Bootstrap's JavaScript plugins) --&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery.js&quot;&gt;&lt;/script&gt;
-    &lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;
-    &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-
+    <span class="c">&lt;!-- jQuery (necessary for Bootstrap&#39;s JavaScript plugins) --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://code.jquery.com/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="c">&lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
 </div>
 
 
@@ -554,42 +544,34 @@ Copy any changes made here over to the README too. -->
 
   <h3 id="support-ie-compatibility-modes">IE Compatibility modes</h3>
   <p>Bootstrap is not supported in the old Internet Explorer compatibility modes. To be sure you&#8217;re using the latest rendering mode for IE, consider including the appropriate <code>&lt;meta&gt;</code> tag in your pages:</p>
-<div>
-  <pre><code class='html'>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</code></pre>
-</div>
-
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
+</code></pre></div>
   <p>Confirm the document mode by opening the debugging tools: press <kbd>F12</kbd> and check the &#8220;Document Mode&#8221;.</p>
   <p>This tag is included in all Bootstrap&#8217;s documentation and examples to ensure the best rendering possible in each supported version of Internet Explorer.</p>
   <p>See <a href="http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge">this StackOverflow question</a> for more information.</p>
 
   <h3 id="support-ie10-width">Internet Explorer 10 in Windows 8 and Windows Phone 8</h3>
   <p>Internet Explorer 10 doesn&#8217;t differentiate <strong>device width</strong> from <strong>viewport width</strong>, and thus doesn&#8217;t properly apply the media queries in Bootstrap&#8217;s CSS. Normally you&#8217;d just add a quick snippet of CSS to fix this:</p>
-<div>
-  <pre><code class='css'>@-ms-viewport       { width: device-width; }</code></pre>
-</div>
-
+<div class="highlight"><pre><code class="css"><span class="k">@-ms-viewport</span>       <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+</code></pre></div>
   <p>However, this doesn&#8217;t work for devices running Windows Phone 8 versions older than <a href="http://blogs.windows.com/windows_phone/b/wpdev/archive/2013/10/14/introducing-windows-phone-preview-for-developers.aspx">Update 3 (a.k.a. GDR3)</a>, as it causes such devices to show a mostly desktop view instead of narrow &#8220;phone&#8221; view. To address this, you&#8217;ll need to <strong>include the following CSS and JavaScript to work around the bug</strong>.</p>
-<div>
-  <pre><code class='css'>@-webkit-viewport   { width: device-width; }
-@-moz-viewport      { width: device-width; }
-@-ms-viewport       { width: device-width; }
-@-o-viewport        { width: device-width; }
-@viewport           { width: device-width; }</code></pre>
-</div>
+<div class="highlight"><pre><code class="css"><span class="k">@-webkit-viewport</span>   <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+<span class="k">@-moz-viewport</span>      <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+<span class="k">@-ms-viewport</span>       <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+<span class="k">@-o-viewport</span>        <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+<span class="k">@viewport</span>           <span class="p">{</span> <span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span> <span class="p">}</span>
+</code></pre></div>
 
-
-<div>
-  <pre><code class='js'>if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-  var msViewportStyle = document.createElement('style')
-  msViewportStyle.appendChild(
-    document.createTextNode(
-      '@-ms-viewport{width:auto!important}'
-    )
-  )
-  document.querySelector('head').appendChild(msViewportStyle)
-}</code></pre>
-</div>
-
+<div class="highlight"><pre><code class="js"><span class="k">if</span> <span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/IEMobile\/10\.0/</span><span class="p">))</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">msViewportStyle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">)</span>
+  <span class="nx">msViewportStyle</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span>
+      <span class="s1">&#39;@-ms-viewport{width:auto!important}&#39;</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;head&#39;</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">msViewportStyle</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
   <p>For more information and usage guidelines, read <a href="http://timkadlec.com/2013/01/windows-phone-8-and-device-width/">Windows Phone 8 and Device-Width</a>.</p>
   <p>As a heads up, we include this in the Bootstrap docs as an example.</p>
 
@@ -624,16 +606,14 @@ Copy any changes made here over to the README too. -->
   <p>Out of the box, Android 4.1 (and even some newer releases apparently) ship with the Browser app as the default web browser of choice (as opposed to Chrome). Unfortunately, the Browser app has lots of bugs and inconsistencies with CSS in general.</p>
   <h4>Select menus</h4>
   <p>On <code>&lt;select&gt;</code> elements, the Android stock browser will not display the side controls if there is a <code>border-radius</code> and/or <code>border</code> applied. Use the snippet of code below to remove the offending CSS and render the <code>&lt;select&gt;</code> as an unstyled element on the Android stock browser. The user agent sniffing avoids interference with Chrome, Safari, and Mozilla browsers.</p>
-<div>
-  <pre><code class='html'>&lt;script&gt;
-var nua = navigator.userAgent;
-var isAndroid = (nua.indexOf('Mozilla/5.0') &gt; -1 &amp;&amp; nua.indexOf('Android ') &gt; -1 &amp;&amp; nua.indexOf('AppleWebKit') &gt; -1 &amp;&amp; nua.indexOf('Chrome') === -1);
-if (isAndroid) {
-  $('select.form-control').removeClass('form-control').css('width', '100%');
-}
-&lt;/script&gt;</code></pre>
-</div>
-
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">nua</span> <span class="o">=</span> <span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isAndroid</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nua</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;Mozilla/5.0&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">nua</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;Android &#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">nua</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;AppleWebKit&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">nua</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;Chrome&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isAndroid</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;select.form-control&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;form-control&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
   <p>Want to see an example? <a href="http://jsbin.com/OyaqoDO/2">Check out this JS Bin demo.</a></p>
 </div>
 
@@ -648,50 +628,48 @@ if (isAndroid) {
   <h3 id="third-box-sizing">Box-sizing</h3>
   <p>Some third party software, including Google Maps and Google Custom Search Engine, conflict with Bootstrap due to <code>* { box-sizing: border-box; }</code>, a rule which makes it so <code>padding</code> does not affect the final computed width of an element. Learn more about <a href="http://css-tricks.com/box-sizing/">box model and sizing at CSS Tricks</a>.</p>
   <p>Depending on the context, you may override as-needed (Option 1) or reset the box-sizing for entire regions (Option 2).</p>
-<div>
-  <pre><code class='css'>/* Box-sizing resets
- *
- * Reset individual elements or override regions to avoid conflicts due to
- * global box model settings of Bootstrap. Two options, individual overrides and
- * region resets, are available as plain CSS and uncompiled Less formats.
- */
+<div class="highlight"><pre><code class="css"><span class="c">/* Box-sizing resets</span>
+<span class="c"> *</span>
+<span class="c"> * Reset individual elements or override regions to avoid conflicts due to</span>
+<span class="c"> * global box model settings of Bootstrap. Two options, individual overrides and</span>
+<span class="c"> * region resets, are available as plain CSS and uncompiled Less formats.</span>
+<span class="c"> */</span>
 
-/* Option 1A: Override a single element's box model via CSS */
-.element {
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
-}
+<span class="c">/* Option 1A: Override a single element&#39;s box model via CSS */</span>
+<span class="nc">.element</span> <span class="p">{</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+     <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+          <span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+<span class="p">}</span>
 
-/* Option 1B: Override a single element's box model by using a Bootstrap Less mixin */
-.element {
-  .box-sizing(content-box);
-}
+<span class="c">/* Option 1B: Override a single element&#39;s box model by using a Bootstrap Less mixin */</span>
+<span class="nc">.element</span> <span class="p">{</span>
+  <span class="o">.</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="p">(</span><span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">);</span>
+<span class="p">}</span>
 
-/* Option 2A: Reset an entire region via CSS */
-.reset-box-sizing,
-.reset-box-sizing *,
-.reset-box-sizing *:before,
-.reset-box-sizing *:after {
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
-}
+<span class="c">/* Option 2A: Reset an entire region via CSS */</span>
+<span class="nc">.reset-box-sizing</span><span class="o">,</span>
+<span class="nc">.reset-box-sizing</span> <span class="o">*,</span>
+<span class="nc">.reset-box-sizing</span> <span class="o">*</span><span class="nd">:before</span><span class="o">,</span>
+<span class="nc">.reset-box-sizing</span> <span class="o">*</span><span class="nd">:after</span> <span class="p">{</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+     <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+          <span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+<span class="p">}</span>
 
-/* Option 2B: Reset an entire region with a custom Less mixin */
-.reset-box-sizing {
-  &amp;,
-  *,
-  *:before,
-  *:after {
-    .box-sizing(content-box);
-  }
-}
-.element {
-  .reset-box-sizing();
-}</code></pre>
-</div>
-
+<span class="c">/* Option 2B: Reset an entire region with a custom Less mixin */</span>
+<span class="nc">.reset-box-sizing</span> <span class="p">{</span>
+  <span class="o">&amp;,</span>
+  <span class="o">*,</span>
+  <span class="o">*:</span><span class="n">before</span><span class="o">,</span>
+  <span class="o">*:</span><span class="n">after</span> <span class="err">{</span>
+    <span class="o">.</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="p">(</span><span class="k">content</span><span class="o">-</span><span class="n">box</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="nc">.element</span> <span class="p">{</span>
+  <span class="o">.</span><span class="n">reset</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 </div>
 
 
@@ -704,15 +682,13 @@ if (isAndroid) {
 
   <h3>Skip navigation</h3>
   <p>If your navigation contains many links and comes before the main content in the DOM, add a <code>Skip to main content</code> link immediately after your opening <code>&lt;body&gt;</code> tag. <a href="http://a11yproject.com/posts/skip-nav-links/">(read why)</a></p>
-<div>
-  <pre><code class='html'>&lt;body&gt;
-  &lt;a href=&quot;#content&quot; class=&quot;sr-only&quot;&gt;Skip to main content&lt;/a&gt;
-  &lt;div class=&quot;container&quot; id=&quot;content&quot;&gt;
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#content&quot;</span> <span class="na">class=</span><span class="s">&quot;sr-only&quot;</span><span class="nt">&gt;</span>Skip to main content<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
     The main page content.
-  &lt;/div&gt;
-&lt;/body&gt;</code></pre>
-</div>
-
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div>
 
   <h3>Nested headings</h3>
   <p>When nesting headings (<code>&lt;h1&gt;</code> - <code>&lt;h6&gt;</code>), your primary document header should be an <code>&lt;h1&gt;</code>. Subsequent headings should make logical use of <code>&lt;h2&gt;</code> - <code>&lt;h6&gt;</code> such that screen readers can construct a table of contents for your pages.</p>
@@ -784,43 +760,39 @@ if (isAndroid) {
   <p>We define <em>light customizations</em> as superficial changes, for example, color and font changes to existing Bootstrap components. A light customization example is the <a href="http://translate.twitter.com">Twitter Translation Center</a> (coded by <a href="https://twitter.com/mdo">@mdo</a>). Let&#8217;s look at how to implement the custom button we wrote for this site, <code>.btn-ttc</code>.</p>
   <p>The stock Bootstrap buttons require just one class, <code>.btn</code>, to start.  Here we extend the <code>.btn</code> style with a new modifier class, <code>.btn-ttc</code>, that we will create. This gives us a distinct custom look with minimal effort.</p>
   <p>Our customized button will be coded like this:</p>
-<div>
-  <pre><code class='html'>&lt;button type=&quot;button&quot; class=&quot;btn btn-ttc&quot;&gt;Save changes&lt;/button&gt;</code></pre>
-</div>
-
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-ttc&quot;</span><span class="nt">&gt;</span>Save changes<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>
   <p>Note how <code>.btn-ttc</code> is added to the standard <code>.btn</code> class.</p>
 
   <p>To implement this, in the custom stylesheet, add the following CSS:</p>
 
-<div>
-  <pre><code class='css'>/* Custom button
--------------------------------------------------- */
+<div class="highlight"><pre><code class="css"><span class="c">/* Custom button</span>
+<span class="c">-------------------------------------------------- */</span>
 
-/* Override base .btn styles */
-/* Apply text and background changes to three key states: default, hover, and active (click). */
-.btn-ttc,
-.btn-ttc:hover,
-.btn-ttc:active {
-  color: white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #007da7;
-}
+<span class="c">/* Override base .btn styles */</span>
+<span class="c">/* Apply text and background changes to three key states: default, hover, and active (click). */</span>
+<span class="nc">.btn-ttc</span><span class="o">,</span>
+<span class="nc">.btn-ttc</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nc">.btn-ttc</span><span class="nd">:active</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+  <span class="k">text-shadow</span><span class="o">:</span> <span class="m">0</span> <span class="m">-1px</span> <span class="m">0</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">.</span><span class="m">25</span><span class="p">);</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#007da7</span><span class="p">;</span>
+<span class="p">}</span>
 
-/* Apply the custom-colored gradients */
-/* Note: you'll need to include all the appropriate gradients for various browsers and standards. */
-.btn-ttc {
-  background-repeat: repeat-x;
-  background-image: linear-gradient(top, #009ED2 0%, #007DA7 100%);
-  ...
-}
+<span class="c">/* Apply the custom-colored gradients */</span>
+<span class="c">/* Note: you&#39;ll need to include all the appropriate gradients for various browsers and standards. */</span>
+<span class="nc">.btn-ttc</span> <span class="p">{</span>
+  <span class="k">background-repeat</span><span class="o">:</span> <span class="k">repeat-x</span><span class="p">;</span>
+  <span class="k">background-image</span><span class="o">:</span> <span class="n">linear</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span><span class="k">top</span><span class="o">,</span> <span class="m">#009ED2</span> <span class="m">0</span><span class="o">%,</span> <span class="m">#007DA7</span> <span class="m">100</span><span class="o">%</span><span class="p">);</span>
+  <span class="o">...</span>
+<span class="p">}</span>
 
-/* Set the hover state */
-/* An easy hover state is just to move the gradient up a small amount. Add other embellishments as you see fit. */
-.btn-ttc:hover {
-  background-position: 0 -15px;
-}</code></pre>
-</div>
-
+<span class="c">/* Set the hover state */</span>
+<span class="c">/* An easy hover state is just to move the gradient up a small amount. Add other embellishments as you see fit. */</span>
+<span class="nc">.btn-ttc</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="k">background-position</span><span class="o">:</span> <span class="m">0</span> <span class="m">-15px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
   <p>In short: Look to the style source and duplicate the selectors you need for your modifications.</p>
   <p><strong>In summary, here&#8217;s the basic workflow:</strong></p>
