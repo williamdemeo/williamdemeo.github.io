@@ -1,3 +1,5 @@
+-- Based on the tutorial "Learn You an Agda"
+
 module IPL where
 
   data ℕ : Set where
