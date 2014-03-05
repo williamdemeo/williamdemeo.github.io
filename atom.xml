@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-03-04T18:52:47-05:00</updated>
+  <updated>2014-03-04T19:02:15-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -150,14 +150,15 @@ any sense, they must have the same number of elements so that we can at least
 find a bijection between them (even if it is not a “structure preserving”
 bijection).</p>
 
-<p>However, I prove in the paper that, for any number $N \in \mathbb{N}$, we can
-find a pair of isotopic algebras with congruence lattices that differ in size by
-more than $N$ elements.  We see from this that that there is no hope for isotopy
-as a reasonable notion of algebraic equivalence.</p>
+<p>However, I recently proved that, for any number $N \in \mathbb{N}$, it’s easy to
+construct a pair of isotopic algebras with congruence lattices that differ in
+size by more than $N$ elements.  We see from this that there is no hope for
+isotopy as a reasonable notion of algebraic equivalence.  (A link to my short
+article describing the construction appears below.)</p>
 
 <p>Later, we will explore Voevodsky’s <em>univalence</em> principle and try 
 to write down the definitions of universal algebras as higher types so that we
-can exploit the ideas of homotopy type theory in order to arrive at a 
+can exploit the ideas of homotopy type theory in order to possibly arrive at a 
 more useful, intuitionistic definition of algebraic equivalence.</p>
 
 <hr />
