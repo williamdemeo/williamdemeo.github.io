@@ -180,7 +180,8 @@ which is available at the </p>
     <p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Oracle JDK 7 downloads page</a>.</p>
 
     <p>For example, I’m now using jdk-7u51-linux-x64.tar.gz, but you should pick the
-tarball that is most appropriate for your hardware. If the link above doesn’t work, try the following:</p>
+tarball that is most appropriate for your hardware. If the link above doesn’t
+work, try the following:</p>
 
     <p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
   </li>
@@ -214,9 +215,16 @@ and invoke the command </p>
 
 <ol>
   <li>
-    <p><strong>Move the jdk directory</strong></p>
+    <p><strong>Move the jdk directory</strong><br />
+If you already have directory named /usr/lib/jvm/jdk1.7.0, move it out of the
+way:</p>
 
-    <pre><code> sudo mv jdk1.7.0_* /usr/lib/jvm/jdk1.7.0
+    <pre><code> sudo mv /usr/lib/jvm/jdk1.7.0{,.orig}
+</code></pre>
+
+    <p>and replace it with your newly unpacked directory (e.g. jdk1.7.0_51):</p>
+
+    <pre><code> sudo mv jdk1.7.0_*/ /usr/lib/jvm/jdk1.7.0/
 </code></pre>
   </li>
 </ol>
