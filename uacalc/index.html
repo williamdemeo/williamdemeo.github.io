@@ -238,24 +238,30 @@ way:</p>
 We will use the <code>update-alternatives</code> program for this
 (see also: <a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">notes on configuring JDK 1.7 on Ubuntu</a>):</p>
 
+    <p>This first block of 9 commands can be copy-and-pasted to the command line all at once:</p>
+
     <pre><code> sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1;
  sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1;
  sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1;
  sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.7.0/bin/jcontrol" 1;
-
  sudo chmod a+x /usr/bin/java;
  sudo chmod a+x /usr/bin/javac;
  sudo chmod a+x /usr/bin/javaws;
  sudo chmod a+x /usr/bin/jcontrol;
-
  sudo chown -R root:root /usr/lib/jvm/jdk1.7.0;
- sudo update-alternatives --config java;
- sudo update-alternatives --config javac;
- sudo update-alternatives --config javaws;
 </code></pre>
 
-    <p>(The <code>jcontrol</code> command is not mentioned in 
-<a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">the notes cited above</a>, but we will need it.)</p>
+    <p>The following commands are interactive and should be invoked individually:</p>
+
+    <pre><code> sudo update-alternatives --config java
+ sudo update-alternatives --config javac
+ sudo update-alternatives --config javaws
+ sudo update-alternatives --config jcontrol
+</code></pre>
+
+    <p>(Note: the <code>jcontrol</code> command is not mentioned in 
+<a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">the notes cited above</a>, 
+but we will need it below.)</p>
   </li>
 </ol>
 
