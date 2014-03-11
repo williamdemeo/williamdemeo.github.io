@@ -222,9 +222,10 @@ way:</p>
     <pre><code> sudo mv /usr/lib/jvm/jdk1.7.0{,.orig}
 </code></pre>
 
-    <p>and replace it with your newly unpacked directory (e.g. jdk1.7.0_51):</p>
+    <p>Now move your newly unpacked jdk directory (e.g. jdk1.7.0_51) to
+/usr/lib/jvm and rename it jdk1.7.0:</p>
 
-    <pre><code> sudo mv jdk1.7.0_*/ /usr/lib/jvm/jdk1.7.0/
+    <pre><code> sudo mv jdk1.7.0_* /usr/lib/jvm/jdk1.7.0
 </code></pre>
   </li>
 </ol>
@@ -234,7 +235,7 @@ way:</p>
 <ol>
   <li>
     <p><strong>Make jdk1.7.0 the default Java</strong><br />
-We will use the <code>update-alternatives</code> program for this, as follows
+We will use the <code>update-alternatives</code> program for this
 (see also: <a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">notes on configuring JDK 1.7 on Ubuntu</a>):</p>
 
     <pre><code> sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1
