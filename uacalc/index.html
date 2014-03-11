@@ -167,7 +167,7 @@ that call UACalc Java packages.</p>
 <hr />
 
 <h3 id="install-java">Install Java</h3>
-<p>Here is one way to install Java on Ubuntu Linux 13.10. It is not the only way,
+<p>Here is one way to install Java on Linux (Ubuntu 13.10). It is not the only way,
 but it seems to work.  (Alternative instructions for installing the JDK on Linux
 are <a href="http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html">here</a>.)</p>
 
@@ -271,15 +271,7 @@ but we will need it below.)</p>
 
 <h3 id="add-uacalc-to-java-security-exceptions-list">Add UACalc to Java Security Exceptions List</h3>
 
-<ol>
-  <li>
-    <p><strong>Get the uacalc.jnlp file</strong><br />
-Go to <a href="http://www.uacalc.org">uacalc.org</a> and download the uacalc.jnlp file that is most 
-appropriate for your hardware.  For example, if your machine has 8Gb 
-of RAM, you probably want
-<a href="http://www.uacalc.org/uacalcbig8.jnlp">uacalcbig8.jnlp</a>.</p>
-
-    <p>In an ideal world, assuming you successfully installed Java as described in 
+<p>In an ideal world, assuming you successfully installed Java as described in 
 the previous step, you would now be able to go to <a href="http://www.uacalc.org">uacalc.org</a> 
 and click a <code>Launch</code> button.  However, the world is not idea, and launching
 UACalc for the first time now requires an extra step.
@@ -287,7 +279,13 @@ We must first tell Java that we trust the site www.uacalc.org.
 (This used to be a simple matter of checking a box, but Oracle has 
 recently made the procedure for accepting security certificates even 
 more annoying.)</p>
-  </li>
+
+<ol>
+  <li><strong>Get the uacalc.jnlp file</strong><br />
+Go to <a href="http://www.uacalc.org">uacalc.org</a> and download the uacalc.jnlp file that is most 
+appropriate for your hardware.  For example, if your machine has 8Gb 
+of RAM, you probably want
+<a href="http://www.uacalc.org/uacalcbig8.jnlp">uacalcbig8.jnlp</a>.</li>
 </ol>
 
 <hr />
