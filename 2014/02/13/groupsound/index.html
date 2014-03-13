@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A problem of P&aacute;lfy and Saxl - William DeMeo</title>
+  <title>GroupSound - William DeMeo</title>
   <meta name="author" content="William DeMeo">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,8 +13,8 @@
   
     
   
-  <meta name="description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
-If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;">
+  <meta name="description" content="What does a nonabelian group sound like? The GroupSound project is
+about harmonic analysis on finite groups. Classical dsp filtering algorithms can &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -22,18 +22,18 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/">
+  <link rel="canonical" href="http://williamdemeo.github.io/2014/02/13/groupsound/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
-  <meta name="og:title" content="A problem of P&aacute;lfy and Saxl" />
-  <meta name="og:description" content="Suppose the lattice shown below is a congruence lattice of an algebra. Claim:
-If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
-  <meta name="og:url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/"/>
-  <meta name="url" content="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/">
+  <meta name="og:title" content="GroupSound" />
+  <meta name="og:description" content="What does a nonabelian group sound like? The GroupSound project is
+about harmonic analysis on finite groups. Classical dsp filtering algorithms can &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/2014/02/13/groupsound/"/>
+  <meta name="url" content="http://williamdemeo.github.io/2014/02/13/groupsound/">
   
   <meta name="subject" content=""/>
   <meta name="category" content=""/>
@@ -88,7 +88,7 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
     <a class="brand" href="/">William DeMeo</a>
     <ul class="nav">
       <li><a href="/">Home</a></li>
-      <li><a href="/blog/archives">Archives</a></li>
+      <li><a href="/archives">Archives</a></li>
     </ul>
     <ul class="nav" data-subscription="rss">
       <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
@@ -113,7 +113,7 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
 
   <header>
     
-      <h1 class="entry-title">A Problem of P&aacute;lfy and Saxl</h1>
+      <h1 class="entry-title">GroupSound</h1>
     
     
       <p class="meta">
@@ -138,7 +138,7 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
   
 
 
-<time datetime="2014-02-13T09:41:27-05:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time> - 
+<time datetime="2014-02-13T06:23:41-05:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time> - 
         
 
 
@@ -148,60 +148,31 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the &hellip;" />
   </header>
 
 
-  <div class="entry-content"><p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
+  <div class="entry-content"><p><em>What does a nonabelian group sound like?</em></p>
 
-<p><img src="/images/PSM4.png" /></p>
-
-<p><strong>Claim:</strong>
-If the three $\alpha_i$’s pairwise permute, then all pairs in the lattice permute. 
+<p><a href="http://soundmath.github.io/GroupSound/">The GroupSound project</a> is
+about harmonic analysis on finite groups. Classical dsp filtering algorithms can
+be implemented as operations involving functions (e.g., audio signals) defined
+on a finite group. That is, the group serves as the domain, or “index set,” of
+the functions.  In this project, we explore the idea of using the finite group 
+as an adjustable parameter of a digital audio filter. 
 <!-- more --></p>
 
-<p>Whether or not this claim is true is a simplified version of a question left open by
-Pálfy and Saxl at the end of
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. Below
-is a more formal statement of the problem, and a link to my notes which suggest
-a method for solving the problem.  There remains one gap in the proof, that I’m
-not yet sure how to fill, but I am still hopeful that the overall strategy will work.</p>
+<p>Underlying many digital signal processing (dsp) algorithms, in particular those
+used for digital audio filters, is the convolution operation, which is a
+weighted sum of translations $f(x-y)$. Most classical results of dsp are easily
+and elegantly derived if we define our functions on $\mathbb{Z}/n\mathbb{Z}$, the
+abelian group of integers modulo n. If we replace this underlying “index set”
+with a nonabelian group, then translation may be written $f(y^{-1}x)$, and the
+resulting audio filters arising from convolution naturally produce different
+effects than those obtained with ordinary (abelian group) convolution. </p>
 
-<hr />
+<p>By listening to samples produced using various nonabelian groups, we try to get
+a sense of the “acoustical characters” of finite groups.  </p>
 
-<h2 id="graphical-composition">Graphical composition</h2>
-<p>In order to prove the claim above and its generalization I developed an extension of
-an idea described in
-<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Heinrich Werner’s paper</a>
-called <em>graphical composition</em>.</p>
-
-<hr />
-
-<h2 id="the-problem">The problem</h2>
-<p>Here we state the problem more precisely.</p>
-
-<p>Given two equivalence relations $\alpha$ and $\beta$ on a set $X$, the relation</p>
-
-<script type="math/tex; mode=display">\alpha \circ \beta = \{(x,y) \in X^2: (\exists z)(x \; \alpha \; z \; \beta \; y)\}</script>
-
-<p>is called the <em>composition</em> of $\alpha$ and $\beta$, and if 
-$\alpha \circ \beta = \beta \circ \alpha$ then $\alpha$ and $\beta$ are said to
-<em>permute</em>.</p>
-
-<p><strong>Problem.</strong>
-$\def\bA{\bf A} \def\bB{\bf B}$
-Let $\bA$ be a finite algebra with $\operatorname{Con} \bA$ isomorphic to
-$M_n$, for some $n\geq 4$.  If three nontrivial congruences of $\bA$ pairwise
-permute, does it follow that every pair of congruences of $\bA$ permute?</p>
-
-<hr />
-
-<h2 id="open-github-repository">Open GitHub repository</h2>
-<p>In my
-<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>
-you can find    </p>
-
-<ul>
-  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">my notes</a>  </li>
-  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">Pálfy and Saxl’s paper</a>  </li>
-  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>.</li>
-</ul>
+<p>Please visit
+<a href="http://soundmath.github.io/GroupSound/">the GroupSound project webpage</a> for
+more details. </p>
 </div>
 
 
@@ -228,7 +199,7 @@ you can find    </p>
   
 
 
-<time datetime="2014-02-13T09:41:27-05:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time> - 
+<time datetime="2014-02-13T06:23:41-05:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time> - 
       
 
 
@@ -244,10 +215,10 @@ you can find    </p>
 
     
     
-      <a class="pull-left" href="/blog/2014/02/13/algebra-and-logic-meetings/" title="Previous Post: Algebra &amp; Logic Meetings">&laquo; Algebra &amp; Logic Meetings</a>
+      <a class="pull-left" href="/2014/02/07/cloning-an-octopress-repo/" title="Previous Post: Cloning an Octopress repo">&laquo; Cloning an Octopress repo</a>
     
     
-      <a class="pull-right" href="/blog/2014/02/13/isotopy/" title="Next Post: Isotopy">Isotopy &raquo;</a>
+      <a class="pull-right" href="/2014/02/13/ieprops/" title="Next Post: IEProps">IEProps &raquo;</a>
     
   </footer>
 
@@ -265,23 +236,23 @@ you can find    </p>
     <ul class="recent_posts">
       
         <li>
-          <a href="/blog/2014/02/13/isotopy/">Isotopy</a>
+          <a href="/2014/02/13/isotopy/">Isotopy</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
+          <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
+          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/typefunc/">TypeFunc</a>
+          <a href="/2014/02/13/typefunc/">TypeFunc</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/overalgebras/">Overalgebras</a>
+          <a href="/2014/02/13/overalgebras/">Overalgebras</a>
         </li>
       
     </ul>

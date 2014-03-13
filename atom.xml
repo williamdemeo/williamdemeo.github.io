@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-03-11T04:49:55-04:00</updated>
+  <updated>2014-03-13T11:08:56-04:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Isotopy]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/isotopy/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/isotopy/"/>
     <updated>2014-02-13T21:21:00-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/isotopy</id>
+    <id>http://williamdemeo.github.io/2014/02/13/isotopy</id>
     <content type="html"><![CDATA[<p><em>Equivalence of algebraic structures</em></p>
 
 <p>Consider two finite algebras that are the same
@@ -186,9 +186,9 @@ different in size.</p>
   
   <entry>
     <title type="html"><![CDATA[A problem of P&aacute;lfy and Saxl]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl/"/>
     <updated>2014-02-13T09:41:27-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl</id>
+    <id>http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl</id>
     <content type="html"><![CDATA[<p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
 
 <p><img src="http://williamdemeo.github.io/images/PSM4.png" /></p>
@@ -248,9 +248,9 @@ you can find    </p>
   
   <entry>
     <title type="html"><![CDATA[Algebra &amp; Logic Meetings]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/algebra-and-logic-meetings/"/>
     <updated>2014-02-13T09:31:06-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings</id>
+    <id>http://williamdemeo.github.io/2014/02/13/algebra-and-logic-meetings</id>
     <content type="html"><![CDATA[<p>A collection of links to upcoming meetings in algebra, logic, computer science and related fields.</p>
 
 <!-- more -->
@@ -298,9 +298,9 @@ Nottingham, UK, April 22–26.   </li>
   
   <entry>
     <title type="html"><![CDATA[TypeFunc]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/typefunc/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/typefunc/"/>
     <updated>2014-02-13T09:23:58-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/typefunc</id>
+    <id>http://williamdemeo.github.io/2014/02/13/typefunc</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
 the massive amount of online resources for learning about type theory, functional
 programming, category theory, $\lambda$-calculus, and connections between
@@ -317,9 +317,9 @@ software resources that I have found helpful.</p>
   
   <entry>
     <title type="html"><![CDATA[Overalgebras]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/overalgebras/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/overalgebras/"/>
     <updated>2014-02-13T08:42:53-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/overalgebras</id>
+    <id>http://williamdemeo.github.io/2014/02/13/overalgebras</id>
     <content type="html"><![CDATA[<p>In the <a href="https://github.com/williamdemeo/Overalgebras">Overalgebras GitHub repo</a>
 resides the article
 <a href="https://github.com/williamdemeo/Overalgebras/raw/master/DeMeo-Expansions-AU-2013.pdf">Expansions of finite algebras and their congruence lattices</a>, <em>Algebra
@@ -347,9 +347,9 @@ See <a href="http://universalalgebra.wordpress.org/documentation/gap/gap-and-uac
   
   <entry>
     <title type="html"><![CDATA[IEProps]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/ieprops/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/ieprops/"/>
     <updated>2014-02-13T08:42:42-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/ieprops</id>
+    <id>http://williamdemeo.github.io/2014/02/13/ieprops</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article
 <a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
 
@@ -369,9 +369,9 @@ The original submission is available in the file <a href="https://github.com/wil
   
   <entry>
     <title type="html"><![CDATA[GroupSound]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/13/groupsound/"/>
+    <link href="http://williamdemeo.github.io/2014/02/13/groupsound/"/>
     <updated>2014-02-13T06:23:41-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/13/groupsound</id>
+    <id>http://williamdemeo.github.io/2014/02/13/groupsound</id>
     <content type="html"><![CDATA[<p><em>What does a nonabelian group sound like?</em></p>
 
 <p><a href="http://soundmath.github.io/GroupSound/">The GroupSound project</a> is
@@ -402,9 +402,9 @@ more details. </p>
   
   <entry>
     <title type="html"><![CDATA[Cloning an Octopress repo]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo/"/>
+    <link href="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/"/>
     <updated>2014-02-07T20:46:19-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo</id>
+    <id>http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo</id>
     <content type="html"><![CDATA[<p>When attempting to clone my Octopress repository on a new machine, I had the
 same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
 Based on the information provided on that page, combined with a few other
@@ -512,9 +512,9 @@ git push origin source
   
   <entry>
     <title type="html"><![CDATA[Diaconescu's Theorem]]></title>
-    <link href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/"/>
+    <link href="http://williamdemeo.github.io/2014/02/05/diaconescus-theorem/"/>
     <updated>2014-02-05T22:52:59-05:00</updated>
-    <id>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem</id>
+    <id>http://williamdemeo.github.io/2014/02/05/diaconescus-theorem</id>
     <content type="html"><![CDATA[<p>I learned about
 <a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
 from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>

@@ -1,39 +1,39 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/05/diaconescus-theorem/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/07/cloning-an-octopress-repo/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/groupsound/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/groupsound/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/ieprops/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/ieprops/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/overalgebras/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/overalgebras/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/typefunc/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/typefunc/</loc>
         <lastmod>2014-02-28T23:39:01-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/algebra-and-logic-meetings/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/algebra-and-logic-meetings/</loc>
         <lastmod>2014-03-11T00:47:08-04:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/a-problem-of-palfy-and-saxl/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl/</loc>
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
-        <loc>http://williamdemeo.github.io/blog/2014/02/13/isotopy/</loc>
+        <loc>http://williamdemeo.github.io/2014/02/13/isotopy/</loc>
         <lastmod>2014-03-11T00:47:08-04:00</lastmod>
     </url>
     <url>
@@ -69,6 +69,18 @@
         <lastmod>2014-02-27T06:23:44-05:00</lastmod>
     </url>
     <url>
+        <loc>http://williamdemeo.github.io/linux/update-alternatives.html</loc>
+        <lastmod>2014-03-13T10:32:46-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/linux/</loc>
+        <lastmod>2014-03-13T11:00:12-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://williamdemeo.github.io/archives/</loc>
+        <lastmod>2014-03-11T00:47:08-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://williamdemeo.github.io/agda/</loc>
         <lastmod>2014-03-11T00:47:08-04:00</lastmod>
     </url>
@@ -79,14 +91,6 @@
     <url>
         <loc>http://williamdemeo.github.io/uacalc/</loc>
         <lastmod>2014-03-11T04:49:38-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/blog/archives/</loc>
-        <lastmod>2014-03-11T00:47:08-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://williamdemeo.github.io/blog/</loc>
-        <lastmod>2014-03-11T00:47:08-04:00</lastmod>
     </url>
     <url>
         <loc>http://williamdemeo.github.io/William_DeMeo_pub.txt</loc>

@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Diaconescu's Theorem - William DeMeo</title>
+  <title>Cloning an Octopress repo - William DeMeo</title>
   <meta name="author" content="William DeMeo">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,9 +13,8 @@
   
     
   
-  <meta name="description" content="I learned about
-Diaconescu’s Theorem
-from Andrej Bauer’s lecture. This post describes the proof as it was presented by Bauer. These notes are rough &hellip;">
+  <meta name="description" content="When attempting to clone my Octopress repository on a new machine, I had the
+same Updates were rejected problem that is described on this page. &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -23,22 +22,21 @@ from Andrej Bauer’s lecture. This post describes the proof as it was presented
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/">
+  <link rel="canonical" href="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
-  <meta name="og:title" content="Diaconescu's Theorem" />
-  <meta name="og:description" content="I learned about
-Diaconescu’s Theorem
-from Andrej Bauer’s lecture. This post describes the proof as it was presented by Bauer. These notes are rough &hellip;" />
-  <meta name="og:url" content="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/"/>
-  <meta name="url" content="http://williamdemeo.github.io/blog/2014/02/05/diaconescus-theorem/">
+  <meta name="og:title" content="Cloning an Octopress repo" />
+  <meta name="og:description" content="When attempting to clone my Octopress repository on a new machine, I had the
+same Updates were rejected problem that is described on this page. &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/"/>
+  <meta name="url" content="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/">
   
-  <meta name="subject" content="Notes"/>
-  <meta name="category" content="Notes"/>
+  <meta name="subject" content=""/>
+  <meta name="category" content=""/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -90,7 +88,7 @@ from Andrej Bauer’s lecture. This post describes the proof as it was presented
     <a class="brand" href="/">William DeMeo</a>
     <ul class="nav">
       <li><a href="/">Home</a></li>
-      <li><a href="/blog/archives">Archives</a></li>
+      <li><a href="/archives">Archives</a></li>
     </ul>
     <ul class="nav" data-subscription="rss">
       <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
@@ -115,7 +113,7 @@ from Andrej Bauer’s lecture. This post describes the proof as it was presented
 
   <header>
     
-      <h1 class="entry-title">Diaconescu's Theorem</h1>
+      <h1 class="entry-title">Cloning an Octopress Repo</h1>
     
     
       <p class="meta">
@@ -140,15 +138,8 @@ from Andrej Bauer’s lecture. This post describes the proof as it was presented
   
 
 
-<time datetime="2014-02-05T22:52:59-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time> - 
+<time datetime="2014-02-07T20:46:19-05:00" pubdate data-updated="true">Feb 7<span>th</span>, 2014</time> - 
         
-
-posted in
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/notes/'>Notes</a>
-  
-</span>
 
 
         
@@ -157,93 +148,107 @@ posted in
   </header>
 
 
-  <div class="entry-content"><p>I learned about
-<a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
-from <a href="http://video.ias.edu/members/1213/0318-AndrejBauer">Andrej Bauer’s lecture</a>.</p>
+  <div class="entry-content"><p>When attempting to clone my Octopress repository on a new machine, I had the
+same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
+Based on the information provided on that page, combined with a few other
+commands required for Ubuntu machines, this post provides instructions for
+cloning an Octopress repository.<br />
+<!-- more --></p>
 
-<p>This post describes the proof as it was presented by Bauer.  These notes are rough
-and intended for my own reference.
-Please see <a href="http://dorais.org/archives/1031">François Dorais’ blog post</a> 
-for a nice discussion of this topic.</p>
-
-<!-- more -->
+<p>(This works on Ubuntu 13.10 and probably other variants.)</p>
 
 <hr />
 
-<ul>
+<ol>
   <li>
-    <p><strong>The Axiom of Choice</strong> (AC) states that if $\mathcal{S}$ is a collection of nonempty
-sets, then there is a choice function $f$ that can be used to select an element
-from each set in $\mathcal{S}$.</p>
+    <p>Make sure ruby1.9.1-dev and gem are installd:</p>
+
+    <pre><code>sudo apt-get install ruby1.9.1-dev gem
+gem install bundler
+rbenv rehash
+</code></pre>
   </li>
   <li>
-    <p><strong>Law of the Excluded Middle</strong> (LEM) states that $P$ is a proposition, then
-$P \bigvee \neg P$.</p>
+    <p>Get the source and initialize empty _deploy directory:</p>
+
+    <pre><code>git clone git@github.com:williamdemeo/williamdemeo.github.io.git
+cd williamdemeo.github.io/
+git checkout source
+mkdir _deploy
+cd _deploy
+git init
+git remote add -t master -f origin git@github.com:williamdemeo/williamdemeo.github.io.git
+cd ..
+</code></pre>
   </li>
   <li>
-    <p><strong>Diaconescu’s Theorem:</strong> AC $\rightarrow$ LEM.</p>
+    <p>Use bundler to check that all the dependencies in GemFile are met:</p>
 
-    <p><strong>Proof:</strong>  Assume AC.  Let $P$ be any proposition.  We will prove
-$P \bigvee \neg P$.</p>
-
-    <p>Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.</p>
-
-    <p>Define the following sets:</p>
-
-<script type="math/tex; mode=display">A = \{x \mid (x = 0) \bigvee P\}</script>
-
-<script type="math/tex; mode=display">B = \{y \mid (y = 1) \bigvee P\}</script>
-
-    <p>Note that $P \Rightarrow A = B = \mathbf{2}$. Therefore,
-$A \neq B \Rightarrow \neg P$.</p>
-
-    <p>Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$. </p>
-
-    <p>Therefore, $\{A, B\}$ is a set of nonempty sets, so by AC we have a choice function,
-<!-- Note that the set $\\{A, B\\}$ is defined as $\\{A, B\\} = \\{X \in
-\mathbf{Set} | X = A \bigvee X = B\\}$ (by pairing axiom).--></p>
-
-<script type="math/tex; mode=display">f : \{A, B\} \rightarrow A \cup B, \text{ and note that } A\cup B = \{0, 1\}.</script>
-
-    <p>Now, because equality on $\mathbb{N}$ <em>is</em> decidabile (which can be proved
-by induction on $\mathbb{N}$), we can consider cases:</p>
-
-    <p>If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.</p>
-
-    <p>If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.</p>
-
-    <p>If $f(A) \neq f(B)$, then $A \neq B$ so $P$ cannot hold.
-(Recall, $P \Rightarrow A = B = \mathbf{2}$.)</p>
-
-    <p>We have covered all cases and found that $P \bigvee \neg P$ holds. 
-<span style="float:right">∎</span></p>
+    <pre><code>bundle install
+</code></pre>
   </li>
-</ul>
+  <li>
+    <p>Generate the pages and deploy:</p>
+
+    <pre><code>rake generate
+rake deploy
+</code></pre>
+  </li>
+</ol>
+
+<p><strong>Troubleshooting.</strong> 
+If <code>rake generate</code> produces “invalid byte sequence in US-ASCII” then try the following: </p>
+
+<pre><code>    # from the command line
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+    bundle
+</code></pre>
 
 <hr />
 
-<h2 id="coq">Coq</h2>
+<h2 id="workflow">Workflow</h2>
 
-<p><a href="http://coq.inria.fr/V8.1/stdlib/Coq.Logic.Diaconescu.html">Proofs of Diaconescu’s Theorem in Coq</a></p>
+<ol>
+  <li>
+    <p>Make some changes, e.g., create a new post:</p>
+
+    <pre><code>rake new_post["title"]
+</code></pre>
+  </li>
+  <li>
+    <p>Posts live in <code>source/_posts</code>.  Edit one and push the changes to source
+branch either directly with Magit or with</p>
+
+    <pre><code>git add .
+git commit -am "explanation of changes" 
+git push origin source
+</code></pre>
+  </li>
+  <li>
+    <p>Now preview the changes: <code>rake preview</code> and load <code>http://localhost:4000</code> in browser.</p>
+  </li>
+  <li>
+    <p>When satisfied, <code>rake deploy</code>.</p>
+  </li>
+</ol>
 
 <hr />
 
-<h2 id="appendix">Appendix</h2>
+<h2 id="other-resources">Other Resources</h2>
 
 <ul>
-  <li><strong>Decidable Sets.</strong>
-A set $S$ is <strong>decidable</strong> if for all $x, y \in S$ we have
-$x = y \bigvee x \neq y$. The empty set and singleton sets are trivially
-decidable, but some more complicated sets are decidable too. For example, one
-can use induction to show that the set of natural numbers is decidable. </li>
-</ul>
-
-<hr />
-
-<h2 id="references">References</h2>
-
-<ul>
-  <li>Diaconescu, “Axiom of choice and complementation,” <em>Proc. AMS</em> 51 (1975), 176–178. <a href="http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X">doi:10.1090/S0002-9939-1975-0373893-X</a></li>
+  <li><a href="http://stackoverflow.com/questions/14245822/cannot-install-redcloth">Get RedCloth installed properly on Ubuntu</a>   </li>
+  <li><a href="http://paulsturgess.co.uk/blog/2013/04/24/hello-octopress-and-github-pages/">Setup Octopress, pick a theme, maintain with rake</a>  </li>
+  <li><a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">Setup an existing Octopress repo</a>  </li>
+  <li><a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">Maintain Octopress repo on multiple machines</a>  </li>
+  <li><a href="http://www.lucypark.kr/blog/2013/02/25/mathjax-kramdown-and-octopress/">Get MathJax working (one way)</a></li>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Get MathJax working (another)</a>  </li>
+  <li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Select a nice theme</a>  </li>
+  <li><a href="http://stackoverflow.com/questions/17031651/invalid-byte-sequence-in-us-ascii-argument-error-when-i-run-rake-dbseed-inra">Troubleshoot UTF-8 locale</a>  </li>
+  <li><a href="http://blog.bigdinosaur.org/changing-octopresss-header/">Changing fonts and colors</a></li>
+  <li>Carl Boettiger has an awesome <a href="http://carlboettiger.info/index.html">open notebook</a>.</li>
 </ul>
 </div>
 
@@ -271,15 +276,8 @@ can use induction to show that the set of natural numbers is decidable. </li>
   
 
 
-<time datetime="2014-02-05T22:52:59-05:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time> - 
+<time datetime="2014-02-07T20:46:19-05:00" pubdate data-updated="true">Feb 7<span>th</span>, 2014</time> - 
       
-
-posted in
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/notes/'>Notes</a>
-  
-</span>
 
 
     </p>
@@ -294,8 +292,10 @@ posted in
 
     
     
+      <a class="pull-left" href="/2014/02/05/diaconescus-theorem/" title="Previous Post: Diaconescu's Theorem">&laquo; Diaconescu's Theorem</a>
     
-      <a class="pull-right" href="/blog/2014/02/07/cloning-an-octopress-repo/" title="Next Post: Cloning an Octopress repo">Cloning an Octopress repo &raquo;</a>
+    
+      <a class="pull-right" href="/2014/02/13/groupsound/" title="Next Post: GroupSound">GroupSound &raquo;</a>
     
   </footer>
 
@@ -313,23 +313,23 @@ posted in
     <ul class="recent_posts">
       
         <li>
-          <a href="/blog/2014/02/13/isotopy/">Isotopy</a>
+          <a href="/2014/02/13/isotopy/">Isotopy</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
+          <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
+          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/typefunc/">TypeFunc</a>
+          <a href="/2014/02/13/typefunc/">TypeFunc</a>
         </li>
       
         <li>
-          <a href="/blog/2014/02/13/overalgebras/">Overalgebras</a>
+          <a href="/2014/02/13/overalgebras/">Overalgebras</a>
         </li>
       
     </ul>
