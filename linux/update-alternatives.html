@@ -179,14 +179,17 @@ plugins that are only available for some versions and not others.</p>
 <p>I have three <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a> 
 of Eclipse—Juno, Kepler, and Luna—installed right now.
 (<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
-Here is how they are all made available (in decending order of priority):</p>
+Here is how they are all made available on the same machine:</p>
 
 <pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
 sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
 sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
 </code></pre>
 
-<p>Now the command <code>update-alternatives --config eclipse</code> gives the following output:</p>
+<p>Note that the numbers 500, 400, 300 indicate the respective priorities, and
+since Lina has the highest number, it will be the initial default program.</p>
+
+<p>The command <code>update-alternatives --config eclipse</code> gives the following output:</p>
 
 <pre><code>There are 3 choices for the alternative eclipse (providing /usr/bin/eclipse).
 
