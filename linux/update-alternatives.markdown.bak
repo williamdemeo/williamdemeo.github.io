@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content="Here are some notes on update-alternatives and some examples demonstrating its
+  <meta name="description" content="Here are some notes on `update-alternatives` and some examples demonstrating its
 use. The purpose of the update-alternatives utility program is to &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,7 @@ use. The purpose of the update-alternatives utility program is to &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://williamdemeo.github.io/linux/update-alternatives.html">
+  <link rel="canonical" href="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -30,10 +30,10 @@ use. The purpose of the update-alternatives utility program is to &hellip;">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="update-alternatives" />
-  <meta name="og:description" content="Here are some notes on update-alternatives and some examples demonstrating its
+  <meta name="og:description" content="Here are some notes on `update-alternatives` and some examples demonstrating its
 use. The purpose of the update-alternatives utility program is to &hellip;" />
-  <meta name="og:url" content="http://williamdemeo.github.io/linux/update-alternatives.html"/>
-  <meta name="url" content="http://williamdemeo.github.io/linux/update-alternatives.html">
+  <meta name="og:url" content="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak"/>
+  <meta name="url" content="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak">
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -125,153 +125,137 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
 <time datetime="2014-03-13T10:30:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
         </header>
         
-        <p>Here are some notes on <code>update-alternatives</code> and some examples demonstrating its
+        Here are some notes on `update-alternatives` and some examples demonstrating its
 use. The purpose of the update-alternatives utility program is to manage,
 on a single machine, serveral versions of programs that all provide the same
-functionality. </p>
+functionality. 
 
-<hr />
+----------------------------------------------
 
-<h2 id="contents">Contents</h2>
-<ul>
-  <li><a href="#synopsis">Synopsis</a></li>
-  <li><a href="#examples">Examples</a>
-    <ul>
-      <li><a href="#eclipse">Eclipse</a></li>
-      <li><a href="#java">Java</a></li>
-      <li><a href="#ruby">Ruby</a></li>
-    </ul>
-  </li>
-</ul>
+## Synopsis 
 
-<hr />
+Excerpts from the [update-alternatives man page](http://linux.die.net/man/8/update-alternatives):
 
-<h2 id="synopsis">Synopsis</h2>
-
-<p>Excerpts from the <a href="http://linux.die.net/man/8/update-alternatives">update-alternatives man page</a>:</p>
-
-<p>It is possible for several programs fulfilling the same or similar functions to
-be installed on a single system at the same time. Debian’s alternatives system
+It is possible for several programs fulfilling the same or similar functions to
+be installed on a single system at the same time. Debian's alternatives system
 aims to manage this situation.  A generic name in the filesystem is shared by
 all files providing interchangeable functionality.  The alternatives system and
 the system administrator together determine which actual file is referenced by
-this generic name.  </p>
+this generic name.  
 
-<p>The generic name is not a direct symbolic link to the selected alternative.
+The generic name is not a direct symbolic link to the selected alternative.
 Instead, it is a symbolic link to  a  name in the alternatives  directory, which
 in turn is a symbolic link to the actual file referenced.  This is done so that 
-the system administrator’s changes can be confined within the /etc directory.</p>
+the system administrator's changes can be confined within the /etc directory.
 
-<p>When  each  package  providing a file with a particular functionality is
+When  each  package  providing a file with a particular functionality is
 installed, changed or removed, update-alternatives is called to update
-information about that file in  the  alternatives  system. </p>
+information about that file in  the  alternatives  system. 
 
-<hr />
+-----------------------------------------------------------
 
-<h2 id="examples">Examples</h2>
+## Examples
 
-<h3 id="eclipse">Eclipse</h3>
+### Eclipse
 
-<p>Eclipse seems idosyncratic and tempremental to me, and I have found various
+Eclipse seems idosyncratic and tempremental to me, and I have found various
 versions working well sometimes and poorly other times.  Also, there are useful
-plugins that are only available for some versions and not others.</p>
+plugins that are only available for some versions and not others.
 
-<p>I have three <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a> 
-of Eclipse—Juno, Kepler, and Luna—installed right now.
-(<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
-Here is how they are all made available (in decending order of priority):</p>
+I have three [simultaneous releases](http://wiki.eclipse.org/Simultaneous_Release) 
+of Eclipse---Juno, Kepler, and Luna---installed right now.
+([Luna][] is a [developer build][].)
+Here is how they are all made available (in decending order of priority):
 
-<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
-sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
-sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
-</code></pre>
+	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
+	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
+	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
 
-<p>Now the command <code>update-alternatives --config eclipse</code> gives the following output:</p>
+Now the command `update-alternatives --config eclipse` gives the following output:
 
-<pre><code>There are 3 choices for the alternative eclipse (providing /usr/bin/eclipse).
+    There are 3 choices for the alternative eclipse (providing /usr/bin/eclipse).
 
-Selection    Path                                      Priority   Status
-------------------------------------------------------------
-* 0            /home/william/opt/Eclipse/luna/eclipse     500       auto mode
-  1            /home/william/opt/Eclipse/juno/eclipse     300       manual mode
-  2            /home/william/opt/Eclipse/kepler/eclipse   400       manual mode
-  3            /home/william/opt/Eclipse/luna/eclipse     500       manual mode
-</code></pre>
+    Selection    Path                                      Priority   Status
+    ------------------------------------------------------------
+    * 0            /home/william/opt/Eclipse/luna/eclipse     500       auto mode
+      1            /home/william/opt/Eclipse/juno/eclipse     300       manual mode
+      2            /home/william/opt/Eclipse/kepler/eclipse   400       manual mode
+      3            /home/william/opt/Eclipse/luna/eclipse     500       manual mode
 
-<p>The command <code>update-alternatives --query eclipse</code> prints:</p>
+	
+The command `update-alternatives --query eclipse` prints:
 
-<pre><code>Name: eclipse
-Link: /usr/bin/eclipse
-Status: auto
-Best: /home/william/opt/Eclipse/luna/eclipse
-Value: /home/william/opt/Eclipse/luna/eclipse
+    Name: eclipse
+    Link: /usr/bin/eclipse
+    Status: auto
+    Best: /home/william/opt/Eclipse/luna/eclipse
+    Value: /home/william/opt/Eclipse/luna/eclipse
 
-Alternative: /home/william/opt/Eclipse/juno/eclipse
-Priority: 300
+    Alternative: /home/william/opt/Eclipse/juno/eclipse
+    Priority: 300
 
-Alternative: /home/william/opt/Eclipse/kepler/eclipse
-Priority: 400
+    Alternative: /home/william/opt/Eclipse/kepler/eclipse
+    Priority: 400
 
-Alternative: /home/william/opt/Eclipse/luna/eclipse
-Priority: 500
-</code></pre>
+    Alternative: /home/william/opt/Eclipse/luna/eclipse
+    Priority: 500
 
-<hr />
+----------------------------------------------------------
 
-<h3 id="java">Java</h3>
-<p>After downloading JDK 7 from the <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Oracle JDK 7 downloads page</a>.
+### Java
+After downloading JDK 7 from the [Oracle JDK 7 downloads page](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
 I unpacked it and moved it to a directory called /usr/lib/jvm/jdk1.7.0/. I then
 made it the default Java on my machine using the commands below. (The first
-block of 9 commands can be copy-and-pasted to the command line all at once.) </p>
+block of 9 commands can be copy-and-pasted to the command line all at once.) 
+		
+        sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1;
+        sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1;
+        sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1;
+		sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.7.0/bin/jcontrol" 1;
+        sudo chmod a+x /usr/bin/java;
+        sudo chmod a+x /usr/bin/javac;
+        sudo chmod a+x /usr/bin/javaws;
+        sudo chmod a+x /usr/bin/jcontrol;
+        sudo chown -R root:root /usr/lib/jvm/jdk1.7.0;
 
-<pre><code>    sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1;
-    sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1;
-    sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1;
-	sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.7.0/bin/jcontrol" 1;
-    sudo chmod a+x /usr/bin/java;
-    sudo chmod a+x /usr/bin/javac;
-    sudo chmod a+x /usr/bin/javaws;
-    sudo chmod a+x /usr/bin/jcontrol;
-    sudo chown -R root:root /usr/lib/jvm/jdk1.7.0;
-</code></pre>
+The following commands are interactive and should be invoked individually:
+		
+        sudo update-alternatives --config java
+        sudo update-alternatives --config javac
+        sudo update-alternatives --config javaws
+        sudo update-alternatives --config jcontrol
 
-<p>The following commands are interactive and should be invoked individually:</p>
 
-<pre><code>    sudo update-alternatives --config java
-    sudo update-alternatives --config javac
-    sudo update-alternatives --config javaws
-    sudo update-alternatives --config jcontrol
-</code></pre>
+----------------------------------------------------------
 
-<hr />
+### Ruby
 
-<h3 id="ruby">Ruby</h3>
+This is from an old
+[forum post](https://groups.google.com/forum/#!topic/rails-oceania/iislbRF9tJ8)
+from 2008
 
-<p>This is from an old
-<a href="https://groups.google.com/forum/#!topic/rails-oceania/iislbRF9tJ8">forum post</a>
-from 2008</p>
+    # install ruby1.8 & friends with priority 500
+    # so this will be the default "auto" choice
+    update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.8 500 \
+                        --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
+                                      /usr/share/man/man1/ruby.1.8.gz \
+                        --slave   /usr/bin/ri ri /usr/bin/ri1.8 \
+                        --slave   /usr/bin/irb irb /usr/bin/irb1.8 
 
-<pre><code># install ruby1.8 &amp; friends with priority 500
-# so this will be the default "auto" choice
-update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.8 500 \
-                    --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
-                                  /usr/share/man/man1/ruby.1.8.gz \
-                    --slave   /usr/bin/ri ri /usr/bin/ri1.8 \
-                    --slave   /usr/bin/irb irb /usr/bin/irb1.8 
+    # install ruby1.9 & friends with priority 400
+    update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9 400 \
+                        --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
+                                       /usr/share/man/man1/ruby.1.9.gz \
+                        --slave   /usr/bin/ri ri /usr/bin/ri1.9 \
+                        --slave   /usr/bin/irb irb /usr/bin/irb1.9 
 
-# install ruby1.9 &amp; friends with priority 400
-update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9 400 \
-                    --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
-                                   /usr/share/man/man1/ruby.1.9.gz \
-                    --slave   /usr/bin/ri ri /usr/bin/ri1.9 \
-                    --slave   /usr/bin/irb irb /usr/bin/irb1.9 
-
-# choose your interpreter 
-# changes symlinks for /usr/bin/ruby , 
-# /usr/bin/irb, /usr/bin/ri and man (1) ruby
-update-alternatives --config ruby 
-</code></pre>
-
+    # choose your interpreter 
+    # changes symlinks for /usr/bin/ruby , 
+    # /usr/bin/irb, /usr/bin/ri and man (1) ruby
+    update-alternatives --config ruby 
+	
+[Luna]:	https://www.eclipse.org/downloads/index-developer.php
+[developer build]: https://www.eclipse.org/downloads/index-developer.php
 
         
           <footer>
