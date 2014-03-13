@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-03-13T12:25:52-04:00</updated>
+  <updated>2014-03-13T14:26:25-04:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -200,24 +200,25 @@ If the three $\alpha_i$’s pairwise permute, then all pairs in the lattice perm
 <p>Whether or not this claim is true is a simplified version of a question left open by
 Pálfy and Saxl at the end of
 <a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. Below
-is a more formal statement of the problem, and a link to my notes which suggest
-a method for solving the problem.  There remains one gap in the proof, that I’m
-not yet sure how to fill, but I am still hopeful that the overall strategy will work.</p>
+is a more formal statement of the problem, and a link to my notes describing
+a proposed method of solution.  There remains one gap in the proof, that I’m
+not yet sure how to fill, but I am hopeful that the overall strategy will work.</p>
 
 <hr />
 
-<h2 id="graphical-composition">Graphical composition</h2>
-<p>In order to prove the claim above and its generalization I developed an extension of
+<h3 id="graphical-composition">Graphical composition</h3>
+<p>In an attempt to prove the claim above and its generalization, I apply
 an idea described in
 <a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Heinrich Werner’s paper</a>
 called <em>graphical composition</em>.</p>
 
 <hr />
 
-<h2 id="the-problem">The problem</h2>
-<p>Here we state the problem more precisely.</p>
+<h3 id="the-problem">The Problem</h3>
 
-<p>Given two equivalence relations $\alpha$ and $\beta$ on a set $X$, the relation</p>
+<p>Before giving a more precise statement of the problem, let us recall a couple of
+basic definitions.  Given two equivalence relations $\alpha$ and $\beta$ on a
+set $X$, the relation </p>
 
 <script type="math/tex; mode=display">\alpha \circ \beta = \{(x,y) \in X^2: (\exists z)(x \; \alpha \; z \; \beta \; y)\}</script>
 
@@ -233,10 +234,9 @@ permute, does it follow that every pair of congruences of $\bA$ permute?</p>
 
 <hr />
 
-<h2 id="open-github-repository">Open GitHub repository</h2>
-<p>In my
-<a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>
-you can find    </p>
+<h2 id="github-repository">GitHub repository</h2>
+<p>My <a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>
+contains the following:</p>
 
 <ul>
   <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">my notes</a>  </li>
