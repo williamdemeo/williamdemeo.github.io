@@ -176,12 +176,15 @@ information about that file in  the  alternatives  system. </p>
 versions working well sometimes and poorly other times.  Also, there are useful
 plugins that are only available for some versions and not others.</p>
 
-<p>I have three <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a> 
-of Eclipse—Juno, Kepler, and Luna—installed right now.
+<p>I currently have four versions of Eclipse installed—a version provided by TypeSafe
+customized for Scala, and three
+<a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>, 
+Juno, Kepler, and Luna.
 (<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
 Here is how they are all made available on the same machine:</p>
 
-<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
+<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/scala/eclipse/eclipse 500
+sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
 sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
 sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
 </code></pre>
@@ -193,12 +196,13 @@ since Lina has the highest number, it will be the initial default program.</p>
 
 <pre><code>There are 3 choices for the alternative eclipse (providing /usr/bin/eclipse).
 
-Selection    Path                                      Priority   Status
+  Selection    Path                                      Priority   Status
 ------------------------------------------------------------
-* 0            /home/william/opt/Eclipse/luna/eclipse     500       auto mode
+* 0            /home/william/opt/scala/eclipse/eclipse    600       auto mode
   1            /home/william/opt/Eclipse/juno/eclipse     300       manual mode
   2            /home/william/opt/Eclipse/kepler/eclipse   400       manual mode
   3            /home/william/opt/Eclipse/luna/eclipse     500       manual mode
+  4            /home/william/opt/scala/eclipse/eclipse    600       manual mode
 </code></pre>
 
 <p>The command <code>update-alternatives --query eclipse</code> prints:</p>
@@ -206,8 +210,8 @@ Selection    Path                                      Priority   Status
 <pre><code>Name: eclipse
 Link: /usr/bin/eclipse
 Status: auto
-Best: /home/william/opt/Eclipse/luna/eclipse
-Value: /home/william/opt/Eclipse/luna/eclipse
+Best: /home/william/opt/scala/eclipse/eclipse
+Value: /home/william/opt/scala/eclipse/eclipse
 
 Alternative: /home/william/opt/Eclipse/juno/eclipse
 Priority: 300
@@ -217,6 +221,9 @@ Priority: 400
 
 Alternative: /home/william/opt/Eclipse/luna/eclipse
 Priority: 500
+
+Alternative: /home/william/opt/scala/eclipse/eclipse
+Priority: 600
 </code></pre>
 
 <hr />
