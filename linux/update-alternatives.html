@@ -40,6 +40,9 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/foundation.min.js"></script>
+
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       jax: ["input/TeX", "output/HTML-CSS"],
@@ -72,7 +75,6 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
-
 
 
 
@@ -176,9 +178,6 @@ information about that file in  the  alternatives  system. </p>
 versions working well sometimes and poorly other times.  Also, there are useful
 plugins that are only available for some versions and not others.</p>
 
-<p>(By the way, if your Eclipse menus are no longer visible after upgrading to
-Ubuntu 13.10, see <a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.)</p>
-
 <p>I currently have four versions of Eclipse installed—a version provided by TypeSafe
 customized for Scala, and three
 <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>, 
@@ -228,6 +227,45 @@ Priority: 500
 Alternative: /home/william/opt/scala/eclipse/eclipse
 Priority: 600
 </code></pre>
+
+<p><strong>Troubleshooting Ubuntu</strong> Apparently, there is a bug in Ubuntu 13.10 which
+makes it impossible to view the Eclipse menus.  A workaround is to use the Alt
+key (e.g., Alt+F for the File menu) to pull down the menus when needed, but that
+is less than ideal.</p>
+
+<p>One popular method for solving the menu problem is described 
+on
+<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.
+Unfortunately, that solution doesn’t work for me.  Rather, a less popular
+solutions described in the same post works.</p>
+
+<ol>
+  <li>
+    <p>Create the following three files, and give each one the name eclipse:</p>
+
+    <pre><code> #!/bin/bash
+ # put this in the file named: $HOME/opt/Eclipse/juno/eclipse
+ export UBUNTU_MENUPROXY=0
+ $HOME/opt/Eclipse/juno/eclipse-juno
+
+ #!/bin/bash
+ # put this in the file named: $HOME/opt/Eclipse/kepler/eclipse
+ export UBUNTU_MENUPROXY=0
+ $HOME/opt/Eclipse/kepler/eclipse-kepler
+
+ #!/bin/bash
+ # file3 name: $HOME/opt/scala
+ # put this in the file named: $HOME/eclipse
+ export UBUNTU_MENUPROXY=0
+ $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse-scala	
+</code></pre>
+  </li>
+</ol>
+
+<p>more eclipse
+#!/bin/bash
+export UBUNTU_MENUPROXY=0
+$HOME/opt/Eclipse/juno/eclipse-juno</p>
 
 <hr />
 
@@ -339,7 +377,7 @@ update-alternatives --config ruby
         </li>
       
     </ul>
-    <h2><a href="/blog/archives">archives</a></h2>
+    <h2><a href="/archives">archives</a></h2>
   </div>
   <!-- <div class="span3"> -->
   <!--   
