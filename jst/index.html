@@ -183,7 +183,7 @@ $20 \cdot 19\cdot 18\cdot 17$, to arrive at the same answer as above:</p>
 </script>
 
 <h3 id="question-2">Question 2</h3>
-<p>Suppose you have an 8 sided die with sides labeled 1 to 8.  You roll the die
+<p>Suppose you have an 8 sided die with sides labeled $1, 2, \dots, 8$.  You roll the die
 once and observe the number $f$ showing on the first roll.  Then you have the
 option of rolling a second time.  If you decline the option to roll again, you win
 $f$ dollars. If instead you exercise the option to roll a second time, 
@@ -211,10 +211,10 @@ winnings are</p>
 <p>where $\chi$ denotes the characteristic function, that is,
 $\chi_{\mathrm{True}}=1$ and $\chi_{\mathrm{False}}=0$.</p>
 
-<p>If we let $N= \min{8, 10 - f -1}$, then the expected value of rolling twice is</p>
+<p>If we let $N$ be the smaller of 8 and $10 - f -1$, then the expected value of rolling twice is</p>
 
 <script type="math/tex; mode=display">
-E(W | f, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{N} (f+s)
+E(W | f, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{N} (f+s).
 </script>
 
 <p>If we observe $f=1$ on the first roll, then </p>
@@ -252,7 +252,7 @@ E(W | f=4, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{5} (4+s)
 
 <script type="math/tex; mode=display">
 E(W | f=5, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{4} (5+s)
-= \frac{1}{8}((5)(4)+1 + 2+ 3+ \cdots + 4)
+= \frac{1}{8}(5\cdot 4 + 1 + 2+ 3+ \cdots + 4)
 = \frac{30}{8}.
 </script>
 
@@ -273,7 +273,7 @@ arbitrary probabilities that sum to 1.)</p>
 
 <p>Suppose you have a bag with $n$ coins, $C_1, C_2, \dots, C_n$,  and coin
 $C_i$ has probability $p_i$ of coming up heads when flipped.  Assume 
-$p_1 + p_2 + \cdots p_n = 1$.  Suppose you draw a coin from the bag at random
+$p_1 + p_2 + \cdots + p_n = 1$.  Suppose you draw a coin from the bag at random
 and flip it and it comes up heads.  If you flip
 the same coin it again, what is the probability it comes up heads?</p>
 
