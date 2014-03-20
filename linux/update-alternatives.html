@@ -44,22 +44,22 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
 <script src="/javascripts/foundation.min.js"></script>
 
 <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
-        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-      //,
-      //displayAlign: "left",
-      //displayIndent: "2em",
-      //messageStyle: "none",
-      //"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"]
+  MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+  TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
     });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="/javascripts/AMSmath.js" type="text/javascript"></script>
 
 
   
@@ -182,16 +182,28 @@ customized for Scala, and three
 <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>, 
 Juno, Kepler, and Luna.
 (<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
-Here is how they are all made available on the same machine:</p>
+This section describes how they are all made available on the same machine.</p>
 
-<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/scala/eclipse/eclipse 500
-sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
-sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
-sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
+<p>To work around an Ubuntu bug that prevents Eclipse menus from showing up, create
+bash scripts in the appropriate directories as described in the section
+<a href="#troubleshooting-ubuntu">Troubleshooting Ubuntu</a> below.</p>
+
+<p>Next, do the following:</p>
+
+<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/scala/eclipse-scala 400
+sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/luna/eclipse-luna 300
+sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt//Eclipse/kepler/eclipse-kepler 200
+sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/juno/eclipse-juno 100
 </code></pre>
 
 <p>Note that the numbers 500, 400, 300 indicate the respective priorities, and
 since Lina has the highest number, it will be the initial default program.</p>
+
+<p>If you want to remove any alternative that you added accidentally, the command
+to use is, e.g.,</p>
+
+<pre><code>sudo update-alternatives --remove eclipse $HOME/opt/scala/eclipse-scala
+</code></pre>
 
 <p>The command <code>update-alternatives --config eclipse</code> gives the following output:</p>
 
@@ -227,44 +239,49 @@ Alternative: /home/william/opt/scala/eclipse/eclipse
 Priority: 600
 </code></pre>
 
-<p><strong>Troubleshooting Ubuntu</strong> Apparently, there is a bug in Ubuntu 13.10 which
+<p>If you want to create an application launcher for the Unity dash for any of these
+alternatives, do so with the following commands:</p>
+
+<pre><code>mkdir -p ~/.local/share/applications
+gnome-desktop-item-edit --create-new ~/.local/share/applications/
+</code></pre>
+
+<hr />
+
+<h3 id="troubleshooting-ubuntu">Troubleshooting Ubuntu</h3>
+<p>Apparently, there is a bug in Ubuntu 13.10 which
 makes it impossible to view the Eclipse menus.  A workaround is to use the Alt
 key (e.g., Alt+F for the File menu) to pull down the menus when needed, but that
 is less than ideal.</p>
 
-<p>One popular method for solving the menu problem is described 
-on
+<p>Some methods for solving the menu problem are described on
 <a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.
-Unfortunately, that solution doesn’t work for me.  Rather, a less popular
-solutions described in the same post works.</p>
+The solution that worked for me was the following:</p>
 
 <ol>
   <li>
     <p>Create the following three files, and give each one the name eclipse:</p>
 
     <pre><code> #!/bin/bash
- # put this in the file named: $HOME/opt/Eclipse/juno/eclipse
+ # put this in the file named: $HOME/opt/Eclipse/juno/eclipse-juno
  export UBUNTU_MENUPROXY=0
- $HOME/opt/Eclipse/juno/eclipse-juno
+ $HOME/opt/Eclipse/juno/eclipse
 
  #!/bin/bash
- # put this in the file named: $HOME/opt/Eclipse/kepler/eclipse
+ # put this in the file named: $HOME/opt/Eclipse/kepler/eclipse-kepler
  export UBUNTU_MENUPROXY=0
- $HOME/opt/Eclipse/kepler/eclipse-kepler
+ $HOME/opt/Eclipse/kepler/eclipse
 
  #!/bin/bash
- # file3 name: $HOME/opt/scala
- # put this in the file named: $HOME/eclipse
+ # put this in the file named: $HOME/opt/scala/eclipse-scala
  export UBUNTU_MENUPROXY=0
- $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse-scala	
+ $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
 </code></pre>
   </li>
+  <li>
+    <p>Follow the instructions in the <a href="#eclipse">Eclipse</a> section above.</p>
+  </li>
 </ol>
-
-<p>more eclipse
-#!/bin/bash
-export UBUNTU_MENUPROXY=0
-$HOME/opt/Eclipse/juno/eclipse-juno</p>
 
 <hr />
 
@@ -356,6 +373,10 @@ update-alternatives --config ruby
     <ul class="recent_posts">
       
         <li>
+          <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
+        </li>
+      
+        <li>
           <a href="/2014/02/13/isotopy/">Isotopy</a>
         </li>
       
@@ -369,10 +390,6 @@ update-alternatives --config ruby
       
         <li>
           <a href="/2014/02/13/typefunc/">TypeFunc</a>
-        </li>
-      
-        <li>
-          <a href="/2014/02/13/overalgebras/">Overalgebras</a>
         </li>
       
     </ul>

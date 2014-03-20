@@ -42,22 +42,22 @@
 <script src="/javascripts/foundation.min.js"></script>
 
 <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
-        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-      //,
-      //displayAlign: "left",
-      //displayIndent: "2em",
-      //messageStyle: "none",
-      //"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"]
+  MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+  TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
     });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="/javascripts/AMSmath.js" type="text/javascript"></script>
 
 
   
@@ -160,6 +160,10 @@
     <ul class="recent_posts">
       
         <li>
+          <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
+        </li>
+      
+        <li>
           <a href="/2014/02/13/isotopy/">Isotopy</a>
         </li>
       
@@ -173,10 +177,6 @@
       
         <li>
           <a href="/2014/02/13/typefunc/">TypeFunc</a>
-        </li>
-      
-        <li>
-          <a href="/2014/02/13/overalgebras/">Overalgebras</a>
         </li>
       
     </ul>
