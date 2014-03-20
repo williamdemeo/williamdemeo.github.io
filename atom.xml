@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-03-20T07:33:49-04:00</updated>
+  <updated>2014-03-20T07:35:56-04:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -323,7 +323,7 @@ Haskell platform’s <code>cabal-install</code> tool to download, compile, and s
 </ul>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ cabal install agda
+  <div class="code"><pre>$ cabal install agda
 </pre></div>
 </div>
 </div>
@@ -334,7 +334,7 @@ your <code>PATH</code>):</li>
 </ul>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ agda-mode setup
+  <div class="code"><pre>$ agda-mode setup
 </pre></div>
 </div>
 </div>
@@ -344,7 +344,7 @@ your <code>PATH</code>):</li>
 </ul>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ agda-mode compile
+  <div class="code"><pre>$ agda-mode compile
 </pre></div>
 </div>
 </div>
@@ -383,8 +383,8 @@ type <code>\-&gt;</code>.  I’m going to demonstrate this line by line, so bear
 <p>First, open a file named <tt>LearnYouAn.agda</tt> in Emacs and type the following:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>module LearnYouAn where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  data ℕ : Set where
+  <div class="code"><pre>module LearnYouAn where
+  data ℕ : Set where
 </pre></div>
 </div>
 </div>
@@ -423,7 +423,7 @@ with no values is categorically wrong. So, the first natural number we’ll defi
 is zero: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>    zero : ℕ 
+  <div class="code"><pre>    zero : ℕ 
 </pre></div>
 </div>
 </div>
@@ -432,9 +432,9 @@ is zero: </p>
 <code>ℕ</code>. We could continue to define more numbers this way: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>    zero : ℕ 
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    one : ℕ
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    two : ℕ
+  <div class="code"><pre>    zero : ℕ 
+    one : ℕ
+    two : ℕ
 </pre></div>
 </div>
 </div>
@@ -478,9 +478,9 @@ another natural number. In other words, <code>suc</code> could be considered a
 number. In Agda, we define the constructor <code>suc</code> like so: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  data ℕ : Set where 
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    zero : ℕ
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    suc : ℕ → ℕ
+  <div class="code"><pre>  data ℕ : Set where 
+    zero : ℕ
+    suc : ℕ → ℕ
 </pre></div>
 </div>
 </div>
@@ -494,7 +494,7 @@ zero)</code>, and the number three as <code>suc (suc (suc zero))</code>, and so 
 <p>Incidentally, this definition of natural numbers corresponds to the Haskell data type:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data Nat = Zero | Suc Nat
+  <div class="code"><pre>data Nat = Zero | Suc Nat
 </pre></div>
 </div>
 </div>
@@ -507,9 +507,9 @@ intuition for how to define constructors in Agda.</p>
 which allows you to define data types Agda style: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data Nat :: * where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  Zero :: Nat
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  Suc  :: Nat -&gt; Nat
+  <div class="code"><pre>data Nat :: * where
+  Zero :: Nat
+  Suc  :: Nat -&gt; Nat
 </pre></div>
 </div>
 </div>
@@ -526,7 +526,7 @@ book won’t carry over directly to extended Haskell. </p>
 numbers. Let’s try addition, first. </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  _+_ : ℕ → ℕ → ℕ 
+  <div class="code"><pre>  _+_ : ℕ → ℕ → ℕ 
 </pre></div>
 </div>
 </div>
@@ -546,7 +546,7 @@ underscores to refer to the “holes” where the arguments are meant to go. </p
 <p>So, an if-then-else construct in Agda can be declared with:<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  if_then_else_ : ∀ { a } → Bool → a → a → a
+  <div class="code"><pre>  if_then_else_ : ∀ { a } → Bool → a → a → a
 </pre></div>
 </div>
 </div>
@@ -563,9 +563,9 @@ much, as it can get very confusing! </p>
 <p>Now, let’s implement and check the sum function by structural recursion.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  _+_ : ℕ → ℕ → ℕ
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  zero + m = m
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  (suc n) + m = suc (n + m)
+  <div class="code"><pre>  _+_ : ℕ → ℕ → ℕ
+  zero + m = m
+  (suc n) + m = suc (n + m)
 </pre></div>
 </div>
 </div>
@@ -592,15 +592,15 @@ be proved by Agda to terminate.</p>
 the indentation!):</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>module First where
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  data ℕ : Set where
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    zero : ℕ
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    suc : ℕ → ℕ
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  _+_ : ℕ → ℕ → ℕ
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  zero + m = m
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  (suc n) + m = suc (n + m)
+  <div class="code"><pre>module First where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + m = m
+  (suc n) + m = suc (n + m)
 </pre></div>
 </div>
 </div>
@@ -729,7 +729,7 @@ use the judgment in post-fix form. As our judgment is over the language of
 natural numbers, we <em>index</em> the type constructor for our judgment by the type <code>ℕ</code>.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data _even : ℕ → Set where
+  <div class="code"><pre>data _even : ℕ → Set where
 </pre></div>
 </div>
 </div>
@@ -738,7 +738,7 @@ natural numbers, we <em>index</em> the type constructor for our judgment by the 
 constructor for the type <code>zero even</code> as follows:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>   ZERO : zero even
+  <div class="code"><pre>   ZERO : zero even
 </pre></div>
 </div>
 </div>
@@ -747,7 +747,7 @@ constructor for the type <code>zero even</code> as follows:</p>
 the presence of the metavariable $x$. If we just write the rule as-is,</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>   STEP : x even → suc (suc x) even
+  <div class="code"><pre>   STEP : x even → suc (suc x) even
 </pre></div>
 </div>
 </div>
@@ -765,7 +765,7 @@ when scope checking x
 this variable $x$, and specify that $x$ must be of type ℕ, as follows:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>   STEP : (x : ℕ) → x even → suc (suc x) even
+  <div class="code"><pre>   STEP : (x : ℕ) → x even → suc (suc x) even
 </pre></div>
 </div>
 </div>
@@ -779,19 +779,19 @@ described above.</p>
 <p>At this point, our full program looks as follows:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>module LearnYouAn where
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  data ℕ : Set where
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    zero : ℕ
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    suc : ℕ → ℕ
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  _+_ : ℕ → ℕ → ℕ
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  zero + n = n
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  (suc n) + m = suc (n + m)
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  data _even : ℕ → Set where
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    ZERO : zero even
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    STEP : (x : ℕ) → x even → suc (suc x) even
+  <div class="code"><pre>module LearnYouAn where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + n = n
+  (suc n) + m = suc (n + m)
+
+  data _even : ℕ → Set where
+    ZERO : zero even
+    STEP : (x : ℕ) → x even → suc (suc x) even
 </pre></div>
 </div>
 </div>
@@ -806,9 +806,9 @@ instance of type <code>ℕ</code> as an argument.  Therefore, so we can use the 
 symbol to introduce <code>x</code> and omit the type.  So, our final definition of <code>_even</code> is</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data _even : ℕ → Set where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>   ZERO : zero even
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>   STEP : ∀ x → x even → suc (suc x) even
+  <div class="code"><pre>data _even : ℕ → Set where
+   ZERO : zero even
+   STEP : ∀ x → x even → suc (suc x) even
 </pre></div>
 </div>
 </div>
@@ -823,8 +823,8 @@ an emacs buffer, and then type <code>C-c C-l</code> (use <code>\_1</code> to typ
 symbol ₁):</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = ?
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = ?
 </pre></div>
 </div>
 </div>
@@ -833,8 +833,8 @@ symbol ₁):</p>
 notation for a <em>hole</em> in the program (i.e., a hole in the proof).</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = { }0
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = { }0
 </pre></div>
 </div>
 </div>
@@ -851,8 +851,8 @@ notation for a <em>hole</em> in the program (i.e., a hole in the proof).</p>
 C-space</code>. This splits the hole in two more holes. </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP { }1 { }2
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP { }1 { }2
 </pre></div>
 </div>
 </div>
@@ -870,8 +870,8 @@ In this case, there is only one constructor that fits
 into another <code>STEP</code> call for us, resulting in two more holes, <code>?3</code> and <code>?4</code>.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP { }1 (STEP { }3 { }4)
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP { }1 (STEP { }3 { }4)
 </pre></div>
 </div>
 </div>
@@ -884,8 +884,8 @@ into another <code>STEP</code> call for us, resulting in two more holes, <code>?
 <p>Another <code>C-c C-r</code> in hole <code>?4</code> will finally fill it in with <code>ZERO</code>. </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  proof₁ : suc (suc (suc (suc zero))) even 
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  proof₁ = STEP { } (STEP { } ZERO)
+  <div class="code"><pre>  proof₁ : suc (suc (suc (suc zero))) even 
+  proof₁ = STEP { } (STEP { } ZERO)
 </pre></div>
 </div>
 </div>
@@ -907,8 +907,8 @@ to Agda by using the “Show Constraints” option, or by typing
 <code>C-c C-s</code>, and our final proof becomes</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
 </pre></div>
 </div>
 </div>
@@ -927,8 +927,8 @@ are. In these situations, you can use a single underscore (<code>_</code>) to in
 you wish Agda to infer the value in this position during type-checking.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP _ (STEP _ ZERO)
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP _ (STEP _ ZERO)
 </pre></div>
 </div>
 </div>
@@ -942,9 +942,9 @@ constraints what the value of those numbers should be. In these cases, it’s
 common to use an <em>implicit parameter</em> when declaring the type:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data _even : ℕ → Set where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>   ZERO : zero even
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>   STEP : ∀ {x} → x even → suc (suc x) even    -- long form { x : ℕ } is also fine
+  <div class="code"><pre>data _even : ℕ → Set where
+   ZERO : zero even
+   STEP : ∀ {x} → x even → suc (suc x) even    -- long form { x : ℕ } is also fine
 </pre></div>
 </div>
 </div>
@@ -953,8 +953,8 @@ common to use an <em>implicit parameter</em> when declaring the type:</p>
 <code>STEP</code>. This lets us omit the number entirely when writing our proof:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP (STEP ZERO)
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP (STEP ZERO)
 </pre></div>
 </div>
 </div>
@@ -965,8 +965,8 @@ those scenarios, you can manually specify the value of the implicit parameter by
 using braces: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₁ : suc (suc (suc (suc zero))) even
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₁ = STEP {suc (suc zero)} (STEP {zero} ZERO)
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP {suc (suc zero)} (STEP {zero} ZERO)
 </pre></div>
 </div>
 </div>
@@ -997,8 +997,8 @@ Let’s prove this in Agda! </p>
 that is, “if natural numbers exist, then natural numbers exist.” </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₂ : ℕ → ℕ
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₂ ν = ν      -- type \nu for ν.
+  <div class="code"><pre>proof₂ : ℕ → ℕ
+proof₂ ν = ν      -- type \nu for ν.
 </pre></div>
 </div>
 </div>
@@ -1020,8 +1020,8 @@ identity function take an additional parameter—a type. Given a type, we then
 return an identity function, instantiated for that type.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₂′ : (A : Set) → A → A
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₂′ _ x = x
+  <div class="code"><pre>proof₂′ : (A : Set) → A → A
+proof₂′ _ x = x
 </pre></div>
 </div>
 </div>
@@ -1040,8 +1040,8 @@ Making propositions about <em>all</em> members of a set (or universe) is called
 general <code>proof₂′</code>, as follows: </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>proof₂ : ℕ → ℕ
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>proof₂ = proof₂′ ℕ
+  <div class="code"><pre>proof₂ : ℕ → ℕ
+proof₂ = proof₂′ ℕ
 </pre></div>
 </div>
 </div>
@@ -1053,28 +1053,28 @@ list the full contents of our first Agda program, which resides in the file
 <a href="http://williamdemeo.github.io/downloads/code/agda/LearnYouAn2.agda">LearnYouAn2.agda</a>.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>module LearnYouAn2 where
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  data ℕ : Set where
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    zero : ℕ
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    suc : ℕ → ℕ
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  _+_ : ℕ → ℕ → ℕ
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>  zero + n = n
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  (suc n) + m = suc (n + m)
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>  data _even : ℕ → Set where
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    ZERO : zero even
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    STEP : ∀ x → x even → suc (suc x) even
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>  proof₁ : suc (suc (suc (suc zero))) even 
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>  proof₂ : ℕ → ℕ
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>  proof₂ ν = ν
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>  proof₂′ : (A : Set) → A → A
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>  proof₂′ _ x = x
+  <div class="code"><pre>module LearnYouAn2 where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + n = n
+  (suc n) + m = suc (n + m)
+
+  data _even : ℕ → Set where
+    ZERO : zero even
+    STEP : ∀ x → x even → suc (suc x) even
+
+  proof₁ : suc (suc (suc (suc zero))) even 
+  proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
+
+  proof₂ : ℕ → ℕ
+  proof₂ ν = ν
+
+  proof₂′ : (A : Set) → A → A
+  proof₂′ _ x = x
 </pre></div>
 </div>
 </div>
@@ -1103,10 +1103,10 @@ a proof of $Q$.  Thus, the introduction rule for conjunction is,</p>
 containing the following (and check it with <code>C-c C-l</code>):</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>module IPL where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>  data _∧_ (P : Set) (Q : Set) : Set where
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    ∧-intro : P → Q → (P ∧ Q)
+  <div class="code"><pre>module IPL where
+
+  data _∧_ (P : Set) (Q : Set) : Set where
+    ∧-intro : P → Q → (P ∧ Q)
 </pre></div>
 </div>
 </div>
@@ -1125,8 +1125,8 @@ is not supported by proofs of each component.</p>
 <p>We now prove some simple properties about conjunctions, such as <code>P ∧ Q ⇒ P</code>.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>  proof₁ : {P Q : Set} → (P ∧ Q) → P
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  proof₁ (∧-intro p q) = p
+  <div class="code"><pre>  proof₁ : {P Q : Set} → (P ∧ Q) → P
+  proof₁ (∧-intro p q) = p
 </pre></div>
 </div>
 </div>
@@ -1135,17 +1135,17 @@ is not supported by proofs of each component.</p>
 If we define a similar rule for “and-elim-2”, we have the following program:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>module IPL where
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>  data _∧_ (P : Set) (Q : Set) : Set where
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    ∧-intro : P → Q → (P ∧ Q)
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>  proof₁ : {P Q : Set} → (P ∧ Q) → P
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>  proof₁ (∧-intro p q) = p
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  proof₂ : {P Q : Set} → (P ∧ Q) → Q
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  proof₂ (∧-intro p q) = q
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>
+  <div class="code"><pre>module IPL where
+
+  data _∧_ (P : Set) (Q : Set) : Set where
+    ∧-intro : P → Q → (P ∧ Q)
+
+  proof₁ : {P Q : Set} → (P ∧ Q) → P
+  proof₁ (∧-intro p q) = p
+
+  proof₂ : {P Q : Set} → (P ∧ Q) → Q
+  proof₂ (∧-intro p q) = q
+
 </pre></div>
 </div>
 </div>
@@ -1162,8 +1162,8 @@ is also true. In logic, this is called <em>bijection</em> and is written as
 If A is true then B is true, and if B is true then A is true. </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>_⇔_ : (P : Set) → (Q : Set) → Set
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>a ⇔ b = (a → b) ∧ (b → a)
+  <div class="code"><pre>_⇔_ : (P : Set) → (Q : Set) → Set
+a ⇔ b = (a → b) ∧ (b → a)
 </pre></div>
 </div>
 </div>
@@ -1179,11 +1179,11 @@ conjunction. The commutative property says that
 $A \conj B \Leftrightarrow B \conj A$.  Let’s prove it:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧-comm′ (∧-intro p q) = ∧-intro q p
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∧-comm = ∧-intro (∧-comm′ {P} {Q}) (∧-comm′ {Q} {P}) -- implicits provided for clarity only.
+  <div class="code"><pre>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
+∧-comm′ (∧-intro p q) = ∧-intro q p
+
+∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
+∧-comm = ∧-intro (∧-comm′ {P} {Q}) (∧-comm′ {Q} {P}) -- implicits provided for clarity only.
 </pre></div>
 </div>
 </div>
@@ -1191,11 +1191,11 @@ $A \conj B \Leftrightarrow B \conj A$.  Let’s prove it:</p>
 <p>Remove the implicits and have Agda check the following:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧-comm′ (∧-intro p q) = ∧-intro q p
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∧-comm = ∧-intro ∧-comm′ ∧-comm′
+  <div class="code"><pre>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
+∧-comm′ (∧-intro p q) = ∧-intro q p
+
+∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
+∧-comm = ∧-intro ∧-comm′ ∧-comm′
 </pre></div>
 </div>
 </div>
@@ -1203,14 +1203,14 @@ $A \conj B \Leftrightarrow B \conj A$.  Let’s prove it:</p>
 <p>Let’s also prove associativity.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧-assoc₁ : { P Q R : Set } → ((P ∧ Q) ∧ R) → (P ∧ (Q ∧ R))
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧-assoc₁ (∧-intro (∧-intro p q) r) = ∧-intro p (∧-intro q r)
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧-assoc₂ : { P Q R : Set } → (P ∧ (Q ∧ R)) → ((P ∧ Q) ∧ R)
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∧-assoc₂ (∧-intro p (∧-intro q r)) = ∧-intro (∧-intro p q) r
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>∧-assoc : { P Q R : Set } → ((P ∧ Q) ∧ R) ⇔  (P ∧ (Q ∧ R))
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>∧-assoc = ∧-intro ∧-assoc₁ ∧-assoc₂
+  <div class="code"><pre>∧-assoc₁ : { P Q R : Set } → ((P ∧ Q) ∧ R) → (P ∧ (Q ∧ R))
+∧-assoc₁ (∧-intro (∧-intro p q) r) = ∧-intro p (∧-intro q r)
+
+∧-assoc₂ : { P Q R : Set } → (P ∧ (Q ∧ R)) → ((P ∧ Q) ∧ R)
+∧-assoc₂ (∧-intro p (∧-intro q r)) = ∧-intro (∧-intro p q) r
+
+∧-assoc : { P Q R : Set } → ((P ∧ Q) ∧ R) ⇔  (P ∧ (Q ∧ R))
+∧-assoc = ∧-intro ∧-assoc₁ ∧-assoc₂
 </pre></div>
 </div>
 </div>
@@ -1226,9 +1226,9 @@ requires one proof in order to hold. In order to model this in Agda, we add
 disjunction. </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data _∨_ (P Q : Set) : Set where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>   ∨-intro₁ : P → P ∨ Q
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>   ∨-intro₂ : Q → P ∨ Q
+  <div class="code"><pre>data _∨_ (P Q : Set) : Set where
+   ∨-intro₁ : P → P ∨ Q
+   ∨-intro₂ : Q → P ∨ Q
 </pre></div>
 </div>
 </div>
@@ -1244,9 +1244,9 @@ In other symbols, </p>
 $A$ is true or $B$ is true, then if follows that $C$ is true.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∨-elim : {A B C : Set} → (A → C) → (B → C) → (A ∨ B) → C
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∨-elim ac bc (∨-intro₁ a) = ac a
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∨-elim ac bc (∨-intro₂ b) = bc b
+  <div class="code"><pre>∨-elim : {A B C : Set} → (A → C) → (B → C) → (A ∨ B) → C
+∨-elim ac bc (∨-intro₁ a) = ac a
+∨-elim ac bc (∨-intro₂ b) = bc b
 </pre></div>
 </div>
 </div>
@@ -1254,12 +1254,12 @@ $A$ is true or $B$ is true, then if follows that $C$ is true.</p>
 <p>We can also prove the algebraic properties of disjunction, such as commutativity:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∨-comm′ : {P Q : Set} → (P ∨ Q) → (Q ∨ P)
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∨-comm′ (∨-intro₁ p) = ∨-intro₂ p
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∨-comm′ (∨-intro₂ q) = ∨-intro₁ q
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∨-comm : {P Q : Set} → (P ∨ Q) ⇔ (Q ∨ P)
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>∨-comm = ∧-intro ∨-comm′ ∨-comm′
+  <div class="code"><pre>∨-comm′ : {P Q : Set} → (P ∨ Q) → (Q ∨ P)
+∨-comm′ (∨-intro₁ p) = ∨-intro₂ p
+∨-comm′ (∨-intro₂ q) = ∨-intro₁ q
+
+∨-comm : {P Q : Set} → (P ∨ Q) ⇔ (Q ∨ P)
+∨-comm = ∧-intro ∨-comm′ ∨-comm′
 </pre></div>
 </div>
 </div>
@@ -1284,7 +1284,7 @@ that contains no values. We call this type <code>⊥</code>, pronounced “botto
 it like so:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>data ⊥ : Set where
+  <div class="code"><pre>data ⊥ : Set where
 </pre></div>
 </div>
 </div>
@@ -1295,8 +1295,8 @@ us to define negation (<code>¬A</code>) as true if <code>A</code> being true wo
 (which is impossible). Or, in more formal terms:  <code>¬A ⇔ (A ⇒ ⊥)</code> </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>¬ : Set → Set -- for ¬ type \neg
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>¬ A = A → ⊥
+  <div class="code"><pre>¬ : Set → Set -- for ¬ type \neg
+¬ A = A → ⊥
 </pre></div>
 </div>
 </div>
@@ -1333,11 +1333,11 @@ filling them in.  As we learned above, Agda calls such gaps “holes”.</p>
 <p>Open a file called HoleFilling.agda and put the following code in it:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>module HoleFilling where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>data Bool : Set where
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  false : Bool
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>  true : Bool
+  <div class="code"><pre>module HoleFilling where
+
+data Bool : Set where
+  false : Bool
+  true : Bool
 </pre></div>
 </div>
 </div>
@@ -1350,8 +1350,8 @@ of the four possible pairs of <code>Bool</code> values.  We begin by entering th
 (put this outside the indentation block of <code>data Bool</code>):</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧ a b = ?
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ a b = ?
 </pre></div>
 </div>
 </div>
@@ -1362,14 +1362,14 @@ it can write much of the function for us.  As usual, invoke <code>C-c C-l</code>
 Agda creates a hole where we had a question mark. Our program should now look like this</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>module HoleFilling where
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>data Bool : Set where
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  false : Bool
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>  true : Bool
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span>
-<span class="line-numbers"><a href="#n7" name="n7">7</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n8" name="n8">8</a></span>∧ a b = {!!}
+  <div class="code"><pre>module HoleFilling where
+
+data Bool : Set where
+  false : Bool
+  true : Bool
+
+∧ : Bool → Bool → Bool
+∧ a b = {!!}
 </pre></div>
 </div>
 </div>
@@ -1389,9 +1389,9 @@ a : Bool
 Next to the phrase  enter the variable <code>b</code>, to which Agda responds with </p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧ a false = {!!}
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∧ a true = {!!}
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ a false = {!!}
+∧ a true = {!!}
 </pre></div>
 </div>
 </div>
@@ -1400,10 +1400,10 @@ Next to the phrase  enter the variable <code>b</code>, to which Agda responds wi
 enter a in response to the “pattern variables to case” prompt.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧ false false = {!!}
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∧ true false = {!!}
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧ a true = {!!}
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = {!!}
+∧ true false = {!!}
+∧ a true = {!!}
 </pre></div>
 </div>
 </div>
@@ -1411,11 +1411,11 @@ enter a in response to the “pattern variables to case” prompt.</p>
 <p>With the cursor in the hole, type <code>C-c C-c</code> and again enter a.</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧ false false = {!!}
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∧ true false = {!!}
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧ false true = {!!}
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∧ true true = {!!}
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = {!!}
+∧ true false = {!!}
+∧ false true = {!!}
+∧ true true = {!!}
 </pre></div>
 </div>
 </div>
@@ -1423,11 +1423,11 @@ enter a in response to the “pattern variables to case” prompt.</p>
 <p>Finally, we fill in the right hand sides to comport with conjunction:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>∧ : Bool → Bool → Bool
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>∧ false false = false
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>∧ true false = false
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>∧ false true = false
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span>∧ true true = true
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = false
+∧ true false = false
+∧ false true = false
+∧ true true = true
 </pre></div>
 </div>
 </div>
