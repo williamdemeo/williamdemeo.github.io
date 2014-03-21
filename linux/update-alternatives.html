@@ -177,12 +177,13 @@ information about that file in  the  alternatives  system. </p>
 versions working well sometimes and poorly other times.  Also, there are useful
 plugins that are only available for some versions and not others.</p>
 
-<p>I currently have four versions of Eclipse installed—a version provided by TypeSafe
-customized for Scala, and three
+<p>I currently have three versions of Eclipse installed—a
+<a href="http://scala-ide.org/download/sdk.html">version from TypeSafe</a> customized for Scala, and two
 <a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>, 
-Juno, Kepler, and Luna.
-(<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
-This section describes how they are all made available on the same machine.</p>
+<a href="http://www.eclipse.org/downloads/">Kepler</a> and <a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> (a developer build).
+This section describes how they are all made available on the same machine.
+For some installation links and tips, see
+<a href="#installing-multiple-versions-of-eclipse">the appendix</a>.</p>
 
 <hr />
 
@@ -191,11 +192,16 @@ menus from showing up, create a startup script for each version of Eclipse.
 It should look like the following example (modify the path as appropriate for
 your Eclipse installation):</p>
 
-<p>In the file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code> I have</p>
+<p>In the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code> I have</p>
 
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/kepler/eclipse
+<pre><code>#!/bin/bash
+export UBUNTU_MENUPROXY=0
+$HOME/opt/Eclipse/kepler/eclipse
+</code></pre>
+
+<p>Make these files executable, e.g.,</p>
+
+<pre><code>chmod a+x $HOME/opt/Eclipse/kepler/eclipse-kepler
 </code></pre>
 
 <p>See also: 
@@ -205,9 +211,9 @@ your Eclipse installation):</p>
 
 <p>Next, do the following:</p>
 
-<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/scala/eclipse-scala 400
+<pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/scala/eclipse-scala 400
 sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/luna/eclipse-luna 300
-sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt//Eclipse/kepler/eclipse-kepler 200
+sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/kepler/eclipse-kepler 200
 sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/juno/eclipse-juno 100
 </code></pre>
 
@@ -217,7 +223,7 @@ since Lina has the highest number, it will be the initial default program.</p>
 <p>If you want to remove any alternative that you added accidentally, the command
 to use is, e.g.,</p>
 
-<pre><code>sudo update-alternatives --remove eclipse $HOME/opt/scala/eclipse-scala
+<pre><code>sudo update-alternatives --remove eclipse $HOME/opt/Eclipse/scala/eclipse-scala
 </code></pre>
 
 <p>The command <code>update-alternatives --config eclipse</code> gives the following output:</p>
@@ -226,7 +232,7 @@ to use is, e.g.,</p>
 
   Selection    Path                                      Priority   Status
 ------------------------------------------------------------
-* 0            /home/william/opt/scala/eclipse/eclipse    600       auto mode
+* 0            /home/william/opt/Eclipse/scala/eclipse    600       auto mode
   1            /home/william/opt/Eclipse/juno/eclipse     300       manual mode
   2            /home/william/opt/Eclipse/kepler/eclipse   400       manual mode
   3            /home/william/opt/Eclipse/luna/eclipse     500       manual mode
@@ -238,8 +244,8 @@ to use is, e.g.,</p>
 <pre><code>Name: eclipse
 Link: /usr/bin/eclipse
 Status: auto
-Best: /home/william/opt/scala/eclipse/eclipse
-Value: /home/william/opt/scala/eclipse/eclipse
+Best: /home/william/opt/Eclipse/scala/eclipse
+Value: /home/william/opt/Eclipse/scala/eclipse
 
 Alternative: /home/william/opt/Eclipse/juno/eclipse
 Priority: 300
@@ -250,7 +256,7 @@ Priority: 400
 Alternative: /home/william/opt/Eclipse/luna/eclipse
 Priority: 500
 
-Alternative: /home/william/opt/scala/eclipse/eclipse
+Alternative: /home/william/opt/Eclipse/scala/eclipse
 Priority: 600
 </code></pre>
 
@@ -318,17 +324,12 @@ update-alternatives --config ruby
 
 <hr />
 
-<h3 id="appendix-trivial-details">Appendix: trivial details</h3>
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="startup-scripts">Startup scripts</h3>
 
 <p>Here are the four startup scripts for Eclipse I needed to create because
 of a bug in Ubuntu:</p>
-
-<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-juno</code></p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/juno/eclipse
-</code></pre>
 
 <p>The file <code>$HOME/opt/Eclipse/juno/eclipse-luna</code></p>
 
@@ -337,19 +338,53 @@ of a bug in Ubuntu:</p>
     $HOME/opt/Eclipse/luna/eclipse
 </code></pre>
 
-<p>The file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code></p>
+<p>The file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code></p>
 
 <pre><code>    #!/bin/bash
     export UBUNTU_MENUPROXY=0
     $HOME/opt/Eclipse/kepler/eclipse
 </code></pre>
 
-<p>The file <code>$HOME/opt/scala/eclipse-scala</code></p>
+<p>The file <code>$HOME/opt/Eclipse/scala/eclipse-scala</code></p>
 
 <pre><code>    #!/bin/bash
     export UBUNTU_MENUPROXY=0
-    $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
+    $HOME/opt/Eclipse/scala/eclipse
 </code></pre>
+
+<h3 id="installing-multiple-versions-of-eclipse">Installing multiple versions of Eclipse</h3>
+
+<ol>
+  <li>
+    <p>Make a directory under your home directory called <code>~/opt/Eclipse</code>.</p>
+  </li>
+  <li>
+    <p>Download the versions of Eclipse you want to 
+try—e.g., <a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a>, <a href="http://www.eclipse.org/downloads/">Kepler</a>, the <a href="http://scala-ide.org/download/sdk.html">version from TypeSafe</a>—and 
+place the tar.gz files in <code>~/opt/Eclipse</code>.</p>
+  </li>
+  <li>
+    <p>Untar each tar.gz file, and rename it appropriately.  For example,</p>
+
+    <pre><code> tar xvzf eclipse-standard-luna-M6-linux-gtk-x86_64.tar.gz 
+ mv eclipse luna
+</code></pre>
+
+    <p>That is, each time you untar one of these files, the resulting directory will
+be called eclipse.  You should change the name eclipse to the name of the
+version so that they don’t conflict with one another.</p>
+
+    <p>In the end you should have, say, three directories:</p>
+
+    <pre><code> ~/opt/Eclipse/luna
+ ~/opt/Eclipse/kepler
+ ~/opt/Eclipse/scala
+</code></pre>
+
+    <p>each one containing a different version of Eclipse.  Now you can follow the
+instructions above to get them configured as alternatives in Linux.</p>
+  </li>
+</ol>
 
 
         
