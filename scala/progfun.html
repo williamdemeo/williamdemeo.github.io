@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>update-alternatives - William DeMeo</title>
+  <title>Scala Coursera Course Notes - William DeMeo</title>
   <meta name="author" content="William DeMeo">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,8 +13,8 @@
   
     
   
-  <meta name="description" content="Here are some notes on `update-alternatives` and some examples demonstrating its
-use. The purpose of the update-alternatives utility program is to &hellip;">
+  <meta name="description" content="Tools Setup for Linux
+See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/ &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -22,18 +22,18 @@ use. The purpose of the update-alternatives utility program is to &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak">
+  <link rel="canonical" href="http://williamdemeo.github.io/scala/progfun.html">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
-  <meta name="og:title" content="update-alternatives" />
-  <meta name="og:description" content="Here are some notes on `update-alternatives` and some examples demonstrating its
-use. The purpose of the update-alternatives utility program is to &hellip;" />
-  <meta name="og:url" content="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak"/>
-  <meta name="url" content="http://williamdemeo.github.io/linux/update-alternatives.markdown.bak">
+  <meta name="og:title" content="Scala Coursera Course Notes" />
+  <meta name="og:description" content="Tools Setup for Linux
+See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/ &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/scala/progfun.html"/>
+  <meta name="url" content="http://williamdemeo.github.io/scala/progfun.html">
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -110,7 +110,7 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
       <div role="div">
         
         <header>
-          <h1 class="entry-title">Update-alternatives</h1>
+          <h1 class="entry-title">Scala Coursera Course Notes</h1>
           <p class="meta">
 
 
@@ -123,140 +123,57 @@ use. The purpose of the update-alternatives utility program is to &hellip;" />
   
 
 
-<time datetime="2014-03-13T10:30:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
+<time datetime="2014-03-13T00:57:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
         </header>
         
-        Here are some notes on `update-alternatives` and some examples demonstrating its
-use. The purpose of the update-alternatives utility program is to manage,
-on a single machine, serveral versions of programs that all provide the same
-functionality. 
+        <h3 id="tools-setup-for-linux">Tools Setup for Linux</h3>
+<p>See <a href="https://class.coursera.org/progfun-003/wiki/ToolsSetup">this page</a></p>
 
-----------------------------------------------
+<ol>
+  <li>Download the <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">sbt.tgz</a> file from </li>
+</ol>
 
-## Synopsis 
+<p><a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/">http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/</a></p>
 
-Excerpts from the [update-alternatives man page](http://linux.die.net/man/8/update-alternatives):
+<p>I chose <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">version 0.13.1</a>, which was the latest at the time of this writing (March
+2014).</p>
 
-It is possible for several programs fulfilling the same or similar functions to
-be installed on a single system at the same time. Debian's alternatives system
-aims to manage this situation.  A generic name in the filesystem is shared by
-all files providing interchangeable functionality.  The alternatives system and
-the system administrator together determine which actual file is referenced by
-this generic name.  
+<ol>
+  <li>
+    <p>Unpack the archive to a directory of your choice.</p>
 
-The generic name is not a direct symbolic link to the selected alternative.
-Instead, it is a symbolic link to  a  name in the alternatives  directory, which
-in turn is a symbolic link to the actual file referenced.  This is done so that 
-the system administrator's changes can be confined within the /etc directory.
+    <pre><code> tar xvzf sbt.tgz
+</code></pre>
+  </li>
+  <li>
+    <p>Add the <code>bin/</code> directory to the <code>PATH</code> environment variable:</p>
 
-When  each  package  providing a file with a particular functionality is
-installed, changed or removed, update-alternatives is called to update
-information about that file in  the  alternatives  system. 
+    <pre><code> echo "export PATH=/PATH/TO/YOUR/sbt/bin:$PATH" &gt;&gt; ~/.bash_profile
+ source ~/.bash_profile
+</code></pre>
+  </li>
+</ol>
 
------------------------------------------------------------
+<p>in an editor (create it if it doesn’t exist) and add the following line export 
+Verify that sbt is installed correctly: Open a new terminal (to apply the changed .bashrc) and type sbt -h, you should see a help message from sbt. If you have problems installing sbt, ask for help on the forums.</p>
 
-## Examples
+<h3 id="lecture-11">Lecture 1.1</h3>
+<p>The key point of this lecture is</p>
 
-### Eclipse
+<p><em>If we want to implement high-level concepts following their mathematical
+theories, there’s no place for mutation.</em></p>
 
-Eclipse seems idosyncratic and tempremental to me, and I have found various
-versions working well sometimes and poorly other times.  Also, there are useful
-plugins that are only available for some versions and not others.
+<p>Avoid mutations; get new ways to abstract and compose functions.</p>
 
-I have three [simultaneous releases](http://wiki.eclipse.org/Simultaneous_Release) 
-of Eclipse---Juno, Kepler, and Luna---installed right now.
-([Luna][] is a [developer build][].)
-Here is how they are all made available (in decending order of priority):
+<p>Outside resource Cited:<br />
+<a href="http://youtu.be/3jg1AheF4n0">YouTube: O’Reilly OSCON Java 2011: “Working Hard to Keep It Simple”</a></p>
 
-	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/luna/eclipse 500
-	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/kepler/eclipse 400
-	sudo update-alternatives --install /usr/bin/eclipse eclipse /home/william/opt/Eclipse/juno/eclipse 300
+<ul>
+  <li>non-determinism results from parallel processing plus mutable state.  </li>
+  <li>Functional programming (with immutable variables) makes concurrency much easier
+to deal with.</li>
+</ul>
 
-Now the command `update-alternatives --config eclipse` gives the following output:
-
-    There are 3 choices for the alternative eclipse (providing /usr/bin/eclipse).
-
-    Selection    Path                                      Priority   Status
-    ------------------------------------------------------------
-    * 0            /home/william/opt/Eclipse/luna/eclipse     500       auto mode
-      1            /home/william/opt/Eclipse/juno/eclipse     300       manual mode
-      2            /home/william/opt/Eclipse/kepler/eclipse   400       manual mode
-      3            /home/william/opt/Eclipse/luna/eclipse     500       manual mode
-
-	
-The command `update-alternatives --query eclipse` prints:
-
-    Name: eclipse
-    Link: /usr/bin/eclipse
-    Status: auto
-    Best: /home/william/opt/Eclipse/luna/eclipse
-    Value: /home/william/opt/Eclipse/luna/eclipse
-
-    Alternative: /home/william/opt/Eclipse/juno/eclipse
-    Priority: 300
-
-    Alternative: /home/william/opt/Eclipse/kepler/eclipse
-    Priority: 400
-
-    Alternative: /home/william/opt/Eclipse/luna/eclipse
-    Priority: 500
-
-----------------------------------------------------------
-
-### Java
-After downloading JDK 7 from the [Oracle JDK 7 downloads page](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
-I unpacked it and moved it to a directory called /usr/lib/jvm/jdk1.7.0/. I then
-made it the default Java on my machine using the commands below. (The first
-block of 9 commands can be copy-and-pasted to the command line all at once.) 
-		
-        sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1;
-        sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1;
-        sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1;
-		sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.7.0/bin/jcontrol" 1;
-        sudo chmod a+x /usr/bin/java;
-        sudo chmod a+x /usr/bin/javac;
-        sudo chmod a+x /usr/bin/javaws;
-        sudo chmod a+x /usr/bin/jcontrol;
-        sudo chown -R root:root /usr/lib/jvm/jdk1.7.0;
-
-The following commands are interactive and should be invoked individually:
-		
-        sudo update-alternatives --config java
-        sudo update-alternatives --config javac
-        sudo update-alternatives --config javaws
-        sudo update-alternatives --config jcontrol
-
-
-----------------------------------------------------------
-
-### Ruby
-
-This is from an old
-[forum post](https://groups.google.com/forum/#!topic/rails-oceania/iislbRF9tJ8)
-from 2008
-
-    # install ruby1.8 & friends with priority 500
-    # so this will be the default "auto" choice
-    update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.8 500 \
-                        --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
-                                      /usr/share/man/man1/ruby.1.8.gz \
-                        --slave   /usr/bin/ri ri /usr/bin/ri1.8 \
-                        --slave   /usr/bin/irb irb /usr/bin/irb1.8 
-
-    # install ruby1.9 & friends with priority 400
-    update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9 400 \
-                        --slave   /usr/share/man/man1/ruby.1.gz ruby.1.gz \
-                                       /usr/share/man/man1/ruby.1.9.gz \
-                        --slave   /usr/bin/ri ri /usr/bin/ri1.9 \
-                        --slave   /usr/bin/irb irb /usr/bin/irb1.9 
-
-    # choose your interpreter 
-    # changes symlinks for /usr/bin/ruby , 
-    # /usr/bin/irb, /usr/bin/ri and man (1) ruby
-    update-alternatives --config ruby 
-	
-[Luna]:	https://www.eclipse.org/downloads/index-developer.php
-[developer build]: https://www.eclipse.org/downloads/index-developer.php
 
         
           <footer>
@@ -274,7 +191,7 @@ from 2008
   
 
 
-<time datetime="2014-03-13T10:30:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+<time datetime="2014-03-13T00:57:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
               
             </p>
           </footer>

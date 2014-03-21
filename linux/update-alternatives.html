@@ -184,9 +184,37 @@ Juno, Kepler, and Luna.
 (<a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> is a <a href="https://www.eclipse.org/downloads/index-developer.php">developer build</a>.)
 This section describes how they are all made available on the same machine.</p>
 
-<p>To work around an Ubuntu bug that prevents Eclipse menus from showing up, create
-bash scripts in the appropriate directories as described in the section
-<a href="#troubleshooting-ubuntu">Troubleshooting Ubuntu</a> below.</p>
+<hr />
+
+<p><strong>Update:</strong> To work around a bug in Ubuntu that prevents Eclipse
+menus from showing up, create the following startup scripts
+in three separate files (modify the paths as appropriate for your eclipse installtion):</p>
+
+<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-juno</code> contains</p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/juno/eclipse
+</code></pre>
+
+<p>The file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/kepler/eclipse
+</code></pre>
+
+<p>The file <code>$HOME/opt/scala/eclipse-scala</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
+</code></pre>
+
+<p>(See also: 
+<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.)</p>
+
+<hr />
 
 <p>Next, do the following:</p>
 
@@ -245,43 +273,6 @@ alternatives, do so with the following commands:</p>
 <pre><code>mkdir -p ~/.local/share/applications
 gnome-desktop-item-edit --create-new ~/.local/share/applications/
 </code></pre>
-
-<hr />
-
-<h3 id="troubleshooting-ubuntu">Troubleshooting Ubuntu</h3>
-<p>Apparently, there is a bug in Ubuntu 13.10 which
-makes it impossible to view the Eclipse menus.  A workaround is to use the Alt
-key (e.g., Alt+F for the File menu) to pull down the menus when needed, but that
-is less than ideal.</p>
-
-<p>Some methods for solving the menu problem are described on
-<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.
-The solution that worked for me was the following:</p>
-
-<ol>
-  <li>
-    <p>Create the following three files, and give each one the name eclipse:</p>
-
-    <pre><code> #!/bin/bash
- # put this in the file named: $HOME/opt/Eclipse/juno/eclipse-juno
- export UBUNTU_MENUPROXY=0
- $HOME/opt/Eclipse/juno/eclipse
-
- #!/bin/bash
- # put this in the file named: $HOME/opt/Eclipse/kepler/eclipse-kepler
- export UBUNTU_MENUPROXY=0
- $HOME/opt/Eclipse/kepler/eclipse
-
- #!/bin/bash
- # put this in the file named: $HOME/opt/scala/eclipse-scala
- export UBUNTU_MENUPROXY=0
- $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
-</code></pre>
-  </li>
-  <li>
-    <p>Follow the instructions in the <a href="#eclipse">Eclipse</a> section above.</p>
-  </li>
-</ol>
 
 <hr />
 

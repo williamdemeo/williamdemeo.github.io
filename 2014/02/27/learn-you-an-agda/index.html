@@ -1499,7 +1499,7 @@ of the four possible pairs of <code>Bool</code> values.  We begin by entering th
 
 <p>Note that <code>Bool → Bool → Bool</code> indicates the types of arguments <code>∧</code> should expect
 (namely, <code>∧</code> is a function from <code>Bool</code> type to <code>Bool → Bool</code> type).  Since Agda knows what to expect, 
-it can write much of the function for us.  As usual, invoke <code>C-c C-l</code> to type-check the program, and 
+it can write much of the function for us.  As usual, use <code>C-c C-l</code> to type-check the program, and 
 Agda creates a hole where we had a question mark. Our program should now look like this</p>
 
 <div><div class="CodeRay">
@@ -1516,7 +1516,7 @@ data Bool : Set where
 </div>
 
 <p>Now, with the cursor in the hole (i.e., at the braces { }), and with the hole highlighted, 
-invoke <code>C-c C-,</code> and Agda should respond with a list of goals that we must accomplish in order to give a 
+type <code>C-c C-,</code> and Agda should respond with a list of goals that we must accomplish in order to give a 
 valid definition of <code>∧</code> for type <code>Bool</code>.</p>
 
 <pre><code>Goal: Bool
@@ -1525,7 +1525,7 @@ b : Bool
 a : Bool
 </code></pre>
 
-<p>With the cursor still in the hole, invoke <code>C-c C-c</code> and Agda responds with
+<p>With the cursor still in the hole, hit <code>C-c C-c</code> and Agda responds with
 “pattern variables to case”, which prompts us to introduce a case for the first variable.
 Next to the phrase  enter the variable <code>b</code>, to which Agda responds with </p>
 
@@ -1573,11 +1573,10 @@ enter a in response to the “pattern variables to case” prompt.</p>
 </div>
 </div>
 
-<p>Instead of filling in the holes in the end manually, you could try 
-placing the cursor in each of the holes and invoking <code>C-c C-a</code>.<br />
-The result will be four <code>false</code>’s. This probably wouldn’t be a very 
-useful definition of conjunction, and you’re probably better off manually 
-changing the last <code>false</code> to <code>true</code>!</p>
+<p>Instead of filling in the holes in the end manually, you could
+place the cursor in each of the holes and hit <code>C-c C-a</code>.
+The result will be four <code>false</code>’s, which wouldn’t be a very 
+useful definition of conjunction… so change the last <code>false</code> to <code>true</code>!</p>
 
 <hr />
 <hr />
