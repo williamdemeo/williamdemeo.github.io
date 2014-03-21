@@ -187,32 +187,19 @@ This section describes how they are all made available on the same machine.</p>
 <hr />
 
 <p><strong>Update:</strong> To work around a bug in Ubuntu that prevents Eclipse
-menus from showing up, create the following startup scripts
-in three separate files (modify the paths as appropriate for your eclipse installtion):</p>
+menus from showing up, create a startup script for each version of Eclipse.
+It should look like the following example (modify the path as appropriate for
+your Eclipse installation):</p>
 
-<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-juno</code> contains</p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/juno/eclipse
-</code></pre>
-
-<p>The file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code></p>
+<p>In the file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code> I have</p>
 
 <pre><code>    #!/bin/bash
     export UBUNTU_MENUPROXY=0
     $HOME/opt/Eclipse/kepler/eclipse
 </code></pre>
 
-<p>The file <code>$HOME/opt/scala/eclipse-scala</code></p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
-</code></pre>
-
-<p>(See also: 
-<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.)</p>
+<p>See also: 
+<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.</p>
 
 <hr />
 
@@ -327,6 +314,41 @@ update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9 400 \
 # changes symlinks for /usr/bin/ruby , 
 # /usr/bin/irb, /usr/bin/ri and man (1) ruby
 update-alternatives --config ruby 
+</code></pre>
+
+<hr />
+
+<h3 id="appendix-trivial-details">Appendix: trivial details</h3>
+
+<p>Here are the four startup scripts for Eclipse I needed to create because
+of a bug in Ubuntu:</p>
+
+<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-juno</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/juno/eclipse
+</code></pre>
+
+<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-luna</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/luna/eclipse
+</code></pre>
+
+<p>The file <code>$HOME/opt/Eclipse/keplar/eclipse-keplar</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/kepler/eclipse
+</code></pre>
+
+<p>The file <code>$HOME/opt/scala/eclipse-scala</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/scala/scala-SDK-3.0.2-vfinal-2.10-linux.gtk.x86_64/eclipse
 </code></pre>
 
 
