@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-03-20T07:52:20-04:00</updated>
+  <updated>2014-03-20T22:23:06-04:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -303,6 +303,13 @@ a generic installation of Ubuntu 13.10, e.g., an Amazon Web Services server.)</p
 <pre><code>sudo apt-get install agda-mode
 sudo apt-get install agda-stdlib
 </code></pre>
+
+<p>That’s it!  Now, when you launch Emacs and edit a file with the .agda extension,
+it should switch to <code>agda-mode</code> or <code>agda2-mode</code>. If not, you can switch manually
+by invoking one of the following (in Emacs, of course): <code>M-x agda-mode</code> or 
+<code>M-x agda2-mode</code> or <code>Esc-x agda-mode</code>.  (The quick and dirty way to find out
+which agda modes are available is to just type <code>M-x agda</code> and then hit tab a
+couple of times to see the possible completions.) </p>
 
 <h3 id="installing-agda-the-old-way">Installing Agda: the old way</h3>
 
