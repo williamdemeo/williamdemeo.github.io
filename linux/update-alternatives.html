@@ -178,12 +178,18 @@ versions working well sometimes and poorly other times.  Also, there are useful
 plugins that are only available for some versions and not others.</p>
 
 <p>I currently have three versions of Eclipse installed—a
-<a href="http://scala-ide.org/download/sdk.html">version from TypeSafe</a> customized for Scala, and two
-<a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>, 
+<a href="http://scala-ide.org/download/sdk.html">version from TypeSafe</a> and two
+<a href="http://wiki.eclipse.org/Simultaneous_Release">simultaneous releases</a>: 
 <a href="http://www.eclipse.org/downloads/">Kepler</a> and <a href="https://www.eclipse.org/downloads/index-developer.php">Luna</a> (a developer build).
-This section describes how they are all made available on the same machine.
-For some installation links and tips, see
-<a href="#installing-multiple-versions-of-eclipse">the appendix</a>.</p>
+(The version from TypeSafe is just a Kepler release with 
+the Scala IDE plugin preinstalled.  Note that you can manually install the Scala
+IDE plugin to most other versions Eclipse.)
+This section describes how these multiple versions of Eclipse can be made
+available on the same machine. </p>
+
+<p>If you don’t already have any Eclipse versions install, see 
+<a href="#installing-multiple-versions-of-eclipse">the appendix</a>
+for some installation links and tips.</p>
 
 <hr />
 
@@ -270,12 +276,15 @@ gnome-desktop-item-edit --create-new ~/.local/share/applications/
 
 <p>Click on the icon in the dialog box that pops up, and choose, for
 example, <code>$HOME/opt/Eclipse/scala/icon.xpm</code>.  Fill in the rest of the dialog box
-as appropriate.</p>
+as appropriate. For example, you want the Command field to point to one of the bash
+scripts we created above—like <code>$HOME/opt/Eclipse/scala/eclipse-scala</code>—and
+not directly to an <code>eclipse</code> command.</p>
 
 <hr />
 
 <h3 id="java">Java</h3>
-<p>After downloading JDK 7 from the <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Oracle JDK 7 downloads page</a>.
+<p>After downloading JDK 7 from the
+<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Oracle JDK 7 downloads page</a>.
 I unpacked it and moved it to a directory called /usr/lib/jvm/jdk1.7.0/. I then
 made it the default Java on my machine using the commands below. (The first
 block of 9 commands can be copy-and-pasted to the command line all at once.) </p>
@@ -390,6 +399,12 @@ version so that they don’t conflict with one another.</p>
 instructions above to get them configured as alternatives in Linux.</p>
   </li>
 </ol>
+
+<h3 id="out-of-memory-errors">Out of Memory Errors</h3>
+
+<p>If you are getting out of memory erros when running your programs in Eclipse,
+check out
+<a href="http://wiki.eclipse.org/FAQ_How_do_I_increase_the_heap_size_available_to_Eclipse%3F">this page</a>.</p>
 
 
         

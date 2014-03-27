@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Scala Coursera Course Notes - William DeMeo</title>
+  <title>Scala Course Notes - William DeMeo</title>
   <meta name="author" content="William DeMeo">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,8 +13,9 @@
   
     
   
-  <meta name="description" content="Tools Setup for Linux
-See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/ &hellip;">
+  <meta name="description" content="These are personal notes from a Coursera course I took in 2013 called
+Functional Programming Principles in Scala.
+(The course will be run again in &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -29,9 +30,10 @@ See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.c
   <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
-  <meta name="og:title" content="Scala Coursera Course Notes" />
-  <meta name="og:description" content="Tools Setup for Linux
-See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/ &hellip;" />
+  <meta name="og:title" content="Scala Course Notes" />
+  <meta name="og:description" content="These are personal notes from a Coursera course I took in 2013 called
+Functional Programming Principles in Scala.
+(The course will be run again in &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/scala/progfun.html"/>
   <meta name="url" content="http://williamdemeo.github.io/scala/progfun.html">
   
@@ -110,7 +112,7 @@ See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.c
       <div role="div">
         
         <header>
-          <h1 class="entry-title">Scala Coursera Course Notes</h1>
+          <h1 class="entry-title">Scala Course Notes</h1>
           <p class="meta">
 
 
@@ -126,7 +128,18 @@ See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.c
 <time datetime="2014-03-13T00:57:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
         </header>
         
-        <h3 id="tools-setup-for-linux">Tools Setup for Linux</h3>
+        <p>These are personal notes from a Coursera course I took in 2013 called
+<a href="https://class.coursera.org/progfun-003">Functional Programming Principles in Scala</a>.
+(The course will be run again in <a href="https://www.coursera.org/course/progfun">April 2014</a>.)</p>
+
+<p>A follow up course called <a href="https://class.coursera.org/reactive-001">Principles of Reactive Programming</a> 
+covers parallel programming and concurrency in Scala.</p>
+
+<hr />
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="tools-setup-for-linux">Tools Setup for Linux</h3>
 <p>See <a href="https://class.coursera.org/progfun-003/wiki/ToolsSetup">this page</a></p>
 
 <ol>
@@ -135,8 +148,7 @@ See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.c
 
 <p><a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/">http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/</a></p>
 
-<p>I chose <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">version 0.13.1</a>, which was the latest at the time of this writing (March
-2014).</p>
+<p>(I have upgraded to <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">version 0.13.1</a>, which was the latest as of March 2014.)</p>
 
 <ol>
   <li>
@@ -155,10 +167,15 @@ See this page Download the sbt.tgz file from http://scalasbt.artifactoryonline.c
 </ol>
 
 <p>in an editor (create it if it doesn’t exist) and add the following line export 
-Verify that sbt is installed correctly: Open a new terminal (to apply the changed .bashrc) and type sbt -h, you should see a help message from sbt. If you have problems installing sbt, ask for help on the forums.</p>
+Verify that sbt is installed correctly: Open a new terminal (to apply the
+changed .bashrc) and type sbt -h, you should see a help message from sbt. If you
+have problems installing sbt, ask for help on the forums. </p>
 
-<h3 id="lecture-11">Lecture 1.1</h3>
-<p>The key point of this lecture is</p>
+<hr />
+
+<h2 id="week-1">Week 1</h2>
+<p>### Lecture 1.1 - Programming Paradigms
+The key point of this lecture is</p>
 
 <p><em>If we want to implement high-level concepts following their mathematical
 theories, there’s no place for mutation.</em></p>
@@ -174,6 +191,444 @@ theories, there’s no place for mutation.</em></p>
 to deal with.</li>
 </ul>
 
+<h3 id="lecture-12---elements-of-programming">Lecture 1.2 - Elements of Programming</h3>
+
+<p><strong>Main Ideas</strong>
++ Model of evaluation: the substitution model.<br />
++ Definitions: the keyword <code>def</code><br />
++ Function parameters come with their types.<br />
++ evaluate function arguments from left to right.<br />
++ The substituion model: all evaluation does is reduce an expression to a
+value.<br />
++ This model can express every algorithm (Church; $\lambda$-calculus)<br />
++ This can be applied to all expressions as long as there are <em>no side effects.</em>
+  e.g., you can’t represent <code>x++</code> using substituion evaluation.<br />
++ Does every expression reduce to a value in a finite number of steps? No.
+  Example: <code>def loop: Int = loop</code>  </p>
+
+<h3 id="lecture-13---evaluation-strategies-and-termination">Lecture 1.3 - Evaluation Strategies and Termination</h3>
+<ul>
+  <li>Two forms of substitution evaluation strategies: <em>call-by-value</em> and
+<em>call-by-name</em>. Both strategies reduce to the same final values assuming the
+evaluation terminates.  If a call-by-value evaltion terminates, then so does
+call by name, but not conversely.  </li>
+  <li><em>Scala is usually call-by-value</em>  (but if the type of a function parameter
+starts with =&gt;, Scala uses call-by-name). The reason Scala uses call-by-value
+is because it often has exponentially better performance, since you only need
+to evaluate a given argument once, whereas call-by-name performs a new
+evaluation of this same argument for each appearance of the argument inside
+the function.  Also, it’s usually easier to know exactly when an expression
+will be evaluated under call-by-value.</li>
+  <li>
+    <p>You can force Scala to use call-by-name as follows: </p>
+
+    <pre><code>  def constOne(x: Int, y: =&gt; Int) = 1
+</code></pre>
+
+    <p>Here, the line <code>constOne(1+2, loop)</code> would terminate because the second
+argument is call-by-name, whereas <code>constOne(loop,1+2)</code> would not terminate
+because the first argument is call-by-value.</p>
+  </li>
+</ul>
+
+<h3 id="lecture-14---conditionals-and-value-definitions">Lecture 1.4 - Conditionals and Value Definitions</h3>
+<ul>
+  <li><strong>Boolean expressions</strong><br />
+Constants: true false<br />
+Negation: !b<br />
+Conunction: b &amp;&amp; b<br />
+Disjunction: b || b<br />
+Comparison operations: e &lt;= e, e &gt;= e, e &lt; e, e &gt; e, e == e, e != e   </li>
+  <li><strong>Rewrite Rules</strong><br />
+Note that<br />
+<code>true &amp;&amp; e</code> evaluates to <code>e</code>, <code>false &amp;&amp; e</code> evaluates to <code>false</code>, <br />
+<code>true || e</code> evaluates to <code>true</code>, <code>false || e</code> evaluates to <code>e</code>,<br />
+so, we could rewrite <code>if (b) e1 else e2</code> as <code>b &amp;&amp; e1 || e2</code>.  </li>
+  <li>
+    <p><strong>def versus val</strong><br />
+Definitions that use <code>def</code> are <em>by-name</em>; the right-hand-side is evaluated on <em>each use</em>.<br />
+Definitions that use <code>val</code> are <em>by-value</em>; the right-hand-side is evaluated
+immediately and only once. For example,</p>
+
+    <pre><code>  val x = 2
+  val y = square(x)
+</code></pre>
+
+    <p>Since the right-hand side of a <code>val</code> is evaluated at the point of definition,
+<code>y</code> has the value 4, not the value <code>square(x)</code>.</p>
+
+    <p>Example:</p>
+
+    <pre><code>  def loop: Boolean = loop
+</code></pre>
+
+    <p>This defines loop as a function that is supposed to return a Boolean, 
+but simply calls itself. Now, <code>def x = loop</code> sets x equal to the loop function, 
+which is no problem, but <code>val x = loop</code> crashes because it attempts to evaluate 
+immediately and gets caught in the infinite recursive call.  In the REPL:</p>
+
+    <p>scala&gt; def loop: Boolean = loop
+  loop: Boolean</p>
+
+    <p>scala&gt; def x = loop
+  x: Boolean</p>
+
+    <p>scala&gt; val x = loop</p>
+  </li>
+  <li>
+    <p><strong>Exercise</strong> Write <code>and</code> and <code>or</code> function without using <code>&amp;&amp;</code> and <code>||</code>.</p>
+
+    <pre><code>def and(x: Boolean, y: Boolean) = if(x) y else false
+def or(x: Boolean, y: Boolean) = if(x) true else y
+</code></pre>
+
+    <p>Now suppose the second argument of <code>and</code> is nonterminating, say, </p>
+
+    <pre><code>and(false, loop)
+</code></pre>
+
+    <p>Even though <code>and</code> should short circuit because of the false first argument, 
+this doesn’t work because the second argument is call-by-value.  We can fix 
+this by modifying the argument to be call-by-name as follows:</p>
+
+    <pre><code>def and(x: Boolean, y: =&gt; Boolean) = if(x) y else false
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="lecture-15---example-square-roots-with-newtons-method">Lecture 1.5 - Example: square roots with Newton’s method</h3>
+
+<p>First Scala program in Eclipse!</p>
+
+<ul>
+  <li>Scala needs an explicit return type for recursive functions.  </li>
+  <li><code>Ctrl-Shift-f</code> nicely formats (indents) all code in the current buffer</li>
+</ul>
+
+<p>(easy stuff)</p>
+
+<h3 id="lecture-16---blocks-and-lexical-scope">Lecture 1.6 - Blocks and Lexical Scope</h3>
+<p>(easy stuff)</p>
+
+<h3 id="lecture-17---tail-recursion">Lecture 1.7 - Tail Recursion</h3>
+
+<ul>
+  <li>
+    <p><strong>Evaluating a function application</strong>
+Rewriting rule:</p>
+
+    <pre><code>  def f(x1, ..., xn) = B; ... f(v1, ..., vn)
+</code></pre>
+
+    <p>could be written </p>
+
+    <pre><code>  def f(x1, ..., xn) = B; ... [v1/x1, ..., vn/xn]B
+</code></pre>
+
+    <p>Here, the notation <code>[v1/x1, ..., vn/xn]B</code> means 
+“v1 for x1, …, vn for xn in B”, that is, 
+substitute the value vi for xi in the function body B.</p>
+  </li>
+  <li>
+    <p><strong>Tail Recursion</strong><br />
+If a function simply calls itself as its last action, the function’s
+stack frame can be reused.  This is called <em>tail recursion</em>.</p>
+
+    <p>A tail recursive function can execute in constant stack space, so</p>
+
+    <p><em>tail recursive functions are iterative processes.</em></p>
+
+    <p>A tail recursive function is the functional programmer’s loop—it excutes
+just as efficiently as a loop in an imperative program.</p>
+
+    <p>More generally, if the last action of a function consists of calling
+a single function (which may be the same function), one stack frame
+would be sufficient for both functions. Such calls are called <em>tail-calls.</em></p>
+
+    <p>Here is a non-example (i.e., a recursive function that is not tail recursive):</p>
+
+    <pre><code>  def factorial( n: Int ): Int = 
+      if (n==0) 1 else n * factorial( n-1 )
+</code></pre>
+
+    <p>Notice that after the recursive call to factorial, there is still work to be done.</p>
+
+    <p>We will rewrite factorial in a tail-recursive way.  However, we pause to ask:</p>
+
+    <p>Should every recursive function be reformulated to be tail recursive?</p>
+
+    <p>No.  Tail recursion is used to avoid very deep recursive chains.  Most JVM implementations 
+limit the maximal depth of recursion to a couple of thousands of stack frames.</p>
+
+    <p>The factorial function is not succeptible to this because the values computed 
+by factorial grow so quickly that they exceed the range of integers before 
+stack overflow. In such cases, use the simpler function definitions and heed Knuth:</p>
+
+    <p>“Premature optimization is the root of all evil.” –Donald Knuth</p>
+
+    <p>To define a tail recursive version of factorial, we use an accumulator:</p>
+
+    <pre><code>  def factorial( n: Int , acc: Int ): Int = 
+      if ( n == 0 ) acc else factorial( n-1, acc*n )
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="week-2">Week 2</h2>
+
+<h3 id="lecture-21---higher-order-functions">Lecture 2.1 - Higher-Order Functions</h3>
+<p>We could sum the integers between a and b (inclusive) as follows:</p>
+
+<pre><code>def sumInts(a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else a + sumInts(a+1, b)
+</code></pre>
+
+<p>Then sum the squares of integers between a and b (inclusive):</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else a*a + sumSquares(a+1, b)
+</code></pre>
+
+<p>Sum the cubes or sum the factorials, etc.  But this can be done more 
+generally and elegantly if we simply pass the functions—e.g., square, 
+cube, factorial—as arguments:</p>
+
+<pre><code>def sumFunc(f: Int =&gt; Int, a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else f(a) + sumFunc(f, a+1, b)
+</code></pre>
+
+<p>Then <code>sumSquares</code> could be implemented as</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc(square, a, b)
+def square(a: Int): Int = a * a
+</code></pre>
+
+<p>But even that’s not great because then we end up defining all these
+little auxiliary functions.  Since functions are first class objects, we 
+use anonymous functions as “function literals” just as we use string literals
+as follows:</p>
+
+<pre><code>println("abc")
+</code></pre>
+
+<p>Instead of the also correct, but more tedious,</p>
+
+<pre><code>def str = "abc"
+println(str)
+</code></pre>
+
+<p>The syntax for anonymous functions in Scala is as follows:</p>
+
+<pre><code>(x: Int) =&gt; x * x
+(x: Int, y: Int) =&gt; x + y
+</code></pre>
+
+<p>Every anonymous function can be expressed using def instead. That is,</p>
+
+<pre><code>(x1: T1, ..., xn: Tn) =&gt; E
+</code></pre>
+
+<p>can be implemented as follows:</p>
+
+<pre><code>def f(x1: T1, ..., xn: Tn) =&gt; E; f
+</code></pre>
+
+<p>But sometimes we need brackets so the name f doesn’t get confused with another function:</p>
+
+<pre><code>{def f(x1: T1, ..., xn: Tn) =&gt; E; f}
+</code></pre>
+
+<p>So, returning to the example above, we could have defined sumSquares as:</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc((x: Int) =&gt; x*x, a, b)
+</code></pre>
+
+<p>or, more simply,</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc(x =&gt; x*x, a, b)
+</code></pre>
+
+<p>The sum function above uses linear recursion.  We can write a tail recursive version.
+(Here the tail recursion is actually useful, unlike in the factorial case.)</p>
+
+<pre><code>def sum(f: Int =&gt; Int, a: Int, b: Int): Int = {
+    def sumAux(a: Int, acc: Int): Int = {
+        if (a &gt; b) acc else sumAux(a+1, acc + f(a))
+  		}
+    sumAux(a, 0)
+}  
+
+sum(x =&gt; x*x, 0,3)   //&gt; res4: Int = 14
+</code></pre>
+
+<h3 id="lecture-22---currying">Lecture 2.2 - Currying</h3>
+<p>Another version of the sum function could employ Currying.<br />
+First, we could do this simply as follows:</p>
+
+<pre><code>def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = {
+    def sumAux(a: Int, acc: Int): Int = {
+        if (a &gt; b) acc else sumAux(a+1, acc + f(a))
+  		}
+    sumAux(a, 0)
+}  
+</code></pre>
+
+<p>Then, the expression </p>
+
+<pre><code>sum(x =&gt; x*x)_
+</code></pre>
+
+<p>is valid.  It is a “partially applied” function.  </p>
+
+<p>Alternatively, we could get rid of the a and b parameters:</p>
+
+<pre><code>def sum(f: Int =&gt; Int): (Int, Int) =&gt; Int = {
+    def sumAux(a: Int, b: Int): Int = {
+        if (a &gt; b) 0 
+		else f(a) + sumAux(a+1, b)
+  		}
+    sumAux
+}  
+</code></pre>
+
+<p>This gives us a function that returns, not an <code>Int</code>, but a function
+of type <code>(Int, Int) =&gt; Int</code>.  So now we could define sumSquares as follows:</p>
+
+<pre><code>def sumSquares = sum(x =&gt; x*x)
+sumSquares(0, 3) //&gt; res3: Int = 14
+</code></pre>
+
+<p>Or avoid the middle man and use the sum function directly, as in</p>
+
+<pre><code>sum(x=&gt; x*x*x)(0, 3)  //&gt; res3: Int = 36
+</code></pre>
+
+<p>This is the same as</p>
+
+<pre><code>(sum(x=&gt; x*x*x))(0, 3)
+</code></pre>
+
+<p>So we see that function application associates to the left.</p>
+
+<p><strong>Products</strong><br />
+We can define a product function in a similar way.  We just need to abstract 
+out the identity and the binary operation (instead of 0 we have 1, and instead of + we have *).</p>
+
+<pre><code>def product(f:Int =&gt; Int)(a: Int, b: Int): Int = {
+    if (a&gt;b) 1
+    else f(a) * product(f)(a+1, b)
+}                                               //&gt; product: (f: Int =&gt; Int)(a: Int, b: Int)Int
+</code></pre>
+
+<p>We can define factorial in terms of this product function.</p>
+
+<pre><code>def factorial(b: Int): Int = product(a=&gt;a)(1,b) //&gt; factorial: (b: Int)Int
+// Test it:
+factorial(3)                                    //&gt; res0: Int = 6
+</code></pre>
+
+<p><strong>MapReduce</strong> We can simultaneously generalize sum and product.  Since we are 
+providing a mapping (with f), and then reducing (with the binary op), we should call
+the generalized version <code>mapReduce</code>.</p>
+
+<pre><code>def mapReduce(map: Int =&gt; Int, reduce: (Int, Int) =&gt; Int, unit: Int)(a: Int, b: Int): Int = {
+  	    if(a &gt; b) unit
+    else reduce(map(a), mapReduce(map, reduce, unit)(a+1, b))
+}
+
+// Test it:
+mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
+</code></pre>
+
+<h3 id="lecture-23---example-finding-fixed-points">Lecture 2.3 - Example: Finding Fixed Points</h3>
+
+<h3 id="lecture-24---scala-syntax-summary">Lecture 2.4 - Scala Syntax Summary</h3>
+
+<h3 id="lecture-25---functions-and-data">Lecture 2.5 - Functions and Data</h3>
+
+<h3 id="lecture-26---more-fun-with-rationals">Lecture 2.6 - More Fun With Rationals</h3>
+
+<h3 id="lecture-27---evaluation-and-operators">Lecture 2.7 - Evaluation and Operators</h3>
+
+<hr />
+
+<h2 id="week-3-data-and-abstraction">Week 3: Data and Abstraction</h2>
+
+<h3 id="lecture-31---class-hierarchies">Lecture 3.1 - Class Hierarchies</h3>
+
+<h3 id="lecture-32---how-classes-are-organized">Lecture 3.2 - How Classes Are Organized</h3>
+
+<h3 id="lecture-33---polymorphism">Lecture 3.3 - Polymorphism</h3>
+
+<hr />
+
+<h2 id="week-4-types-and-pattern-matching">Week 4: Types and Pattern Matching</h2>
+
+<h3 id="lecture-41---functions-as-objects">Lecture 4.1 - Functions as Objects</h3>
+
+<h3 id="lecture-43---subtyping-and-generics">Lecture 4.3 - Subtyping and Generics</h3>
+
+<h3 id="lecture-42---objects-everywhere">Lecture 4.2 - Objects Everywhere</h3>
+
+<h3 id="lecture-44---variance">Lecture 4.4 - Variance</h3>
+
+<h3 id="lecture-45---decomposition">Lecture 4.5 - Decomposition</h3>
+
+<h3 id="lecture-46---pattern-matching">Lecture 4.6 - Pattern Matching</h3>
+
+<hr />
+
+<h2 id="week-5-lists">Week 5: Lists</h2>
+
+<h3 id="lecture-51---more-functions-on-lists">Lecture 5.1 - More Functions on Lists</h3>
+
+<h3 id="lecture-52---pairs-and-tuples">Lecture 5.2 - Pairs and Tuples</h3>
+
+<h3 id="lecture-53---implicit-parameters">Lecture 5.3 - Implicit Parameters</h3>
+
+<h3 id="lecture-54---higher-order-list-functions">Lecture 5.4 - Higher-Order List Functions</h3>
+
+<h3 id="lecture-55---reduction-of-lists">Lecture 5.5 - Reduction of Lists</h3>
+
+<h3 id="lecture-56---reasoning-about-concat">Lecture 5.6 - Reasoning About Concat</h3>
+
+<h3 id="lecture-57---a-larger-equational-proof-on-lists">Lecture 5.7 - A Larger Equational Proof on Lists</h3>
+
+<hr />
+
+<h2 id="week-6-collections">Week 6: Collections</h2>
+
+<h3 id="lecture-61---other-collections">Lecture 6.1 - Other Collections</h3>
+
+<h3 id="lecture-62---combinatorial-search-and-for-expressions">Lecture 6.2 - Combinatorial Search and For-Expressions</h3>
+
+<h3 id="lecture-63---combinatorial-search-example">Lecture 6.3 - Combinatorial Search Example</h3>
+
+<h3 id="lecture-64---queries-with-for">Lecture 6.4 - Queries with For</h3>
+
+<h3 id="lecture-65---translation-of-for">Lecture 6.5 - Translation of For</h3>
+
+<h3 id="lecture-66---maps">Lecture 6.6 - Maps</h3>
+
+<h3 id="lecture-67---putting-the-pieces-together">Lecture 6.7 - Putting the Pieces Together</h3>
+
+<hr />
+
+<h2 id="week-7-lazy-evaluation">Week 7: Lazy Evaluation</h2>
+
+<h3 id="lecture-71---structural-induction-on-trees">Lecture 7.1 - Structural Induction on Trees</h3>
+
+<h3 id="lecture-72---streams">Lecture 7.2 - Streams</h3>
+
+<h3 id="lecture-73---lazy-evaluation">Lecture 7.3 - Lazy Evaluation</h3>
+
+<h3 id="lecture-74---computing-with-infinite-sequences">Lecture 7.4 - Computing with Infinite Sequences</h3>
+
+<h3 id="lecture-75---case-study-the-water-pouring-problem">Lecture 7.5 - Case Study: the Water Pouring Problem</h3>
+
+<h3 id="lecture-76---course-conclusion">Lecture 7.6 - Course Conclusion</h3>
 
         
           <footer>
