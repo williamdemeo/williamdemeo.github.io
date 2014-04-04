@@ -13,9 +13,9 @@
   
     
   
-  <meta name="description" content="These are personal notes from a Coursera course I took in 2013 called
+  <meta name="description" content="These are very rough personal notes from a Coursera course I took in 2013 called
 Functional Programming Principles in Scala.
-(The course will be run again in &hellip;">
+(The course will be run &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -31,9 +31,9 @@ Functional Programming Principles in Scala.
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="Scala Course Notes" />
-  <meta name="og:description" content="These are personal notes from a Coursera course I took in 2013 called
+  <meta name="og:description" content="These are very rough personal notes from a Coursera course I took in 2013 called
 Functional Programming Principles in Scala.
-(The course will be run again in &hellip;" />
+(The course will be run &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/scala/progfun.html"/>
   <meta name="url" content="http://williamdemeo.github.io/scala/progfun.html">
   
@@ -128,7 +128,7 @@ Functional Programming Principles in Scala.
 <time datetime="2014-03-13T00:57:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
         </header>
         
-        <p>These are personal notes from a Coursera course I took in 2013 called
+        <p>These are <em>very rough</em> personal notes from a Coursera course I took in 2013 called
 <a href="https://class.coursera.org/progfun-003">Functional Programming Principles in Scala</a>.
 (The course will be run again in <a href="https://www.coursera.org/course/progfun">April 2014</a>.)</p>
 
@@ -174,8 +174,9 @@ have problems installing sbt, ask for help on the forums. </p>
 <hr />
 
 <h2 id="week-1">Week 1</h2>
-<p>### Lecture 1.1 - Programming Paradigms
-The key point of this lecture is</p>
+
+<h3 id="lecture-11---programming-paradigms">Lecture 1.1 - Programming Paradigms</h3>
+<p>The key point of this lecture is</p>
 
 <p><em>If we want to implement high-level concepts following their mathematical
 theories, there’s no place for mutation.</em></p>
@@ -193,20 +194,24 @@ to deal with.</li>
 
 <h3 id="lecture-12---elements-of-programming">Lecture 1.2 - Elements of Programming</h3>
 
-<p><strong>Main Ideas</strong>
-+ Model of evaluation: the substitution model.<br />
-+ Definitions: the keyword <code>def</code><br />
-+ Function parameters come with their types.<br />
-+ evaluate function arguments from left to right.<br />
-+ The substituion model: all evaluation does is reduce an expression to a
-value.<br />
-+ This model can express every algorithm (Church; $\lambda$-calculus)<br />
-+ This can be applied to all expressions as long as there are <em>no side effects.</em>
-  e.g., you can’t represent <code>x++</code> using substituion evaluation.<br />
-+ Does every expression reduce to a value in a finite number of steps? No.
-  Example: <code>def loop: Int = loop</code>  </p>
+<p><strong>Main Ideas</strong></p>
+
+<ul>
+  <li>Model of evaluation: the substitution model.  </li>
+  <li>Definitions: the keyword <code>def</code>  </li>
+  <li>Function parameters come with their types.  </li>
+  <li>evaluate function arguments from left to right.  </li>
+  <li>The substituion model: all evaluation does is reduce an expression to a
+value.  </li>
+  <li>This model can express every algorithm (Church; $\lambda$-calculus)  </li>
+  <li>This can be applied to all expressions as long as there are <em>no side effects.</em>
+e.g., you can’t represent <code>x++</code> using substituion evaluation.  </li>
+  <li>Does every expression reduce to a value in a finite number of steps? No.
+Example: <code>def loop: Int = loop</code>  </li>
+</ul>
 
 <h3 id="lecture-13---evaluation-strategies-and-termination">Lecture 1.3 - Evaluation Strategies and Termination</h3>
+
 <ul>
   <li>Two forms of substitution evaluation strategies: <em>call-by-value</em> and
 <em>call-by-name</em>. Both strategies reduce to the same final values assuming the
@@ -547,6 +552,8 @@ mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
 <h3 id="lecture-24---scala-syntax-summary">Lecture 2.4 - Scala Syntax Summary</h3>
 
 <h3 id="lecture-25---functions-and-data">Lecture 2.5 - Functions and Data</h3>
+<p>At about 3’30” of the video lecture, the (Java) package called week3 and a
+new scala worksheet called rationals.sc are created.</p>
 
 <h3 id="lecture-26---more-fun-with-rationals">Lecture 2.6 - More Fun With Rationals</h3>
 
@@ -557,10 +564,153 @@ mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
 <h2 id="week-3-data-and-abstraction">Week 3: Data and Abstraction</h2>
 
 <h3 id="lecture-31---class-hierarchies">Lecture 3.1 - Class Hierarchies</h3>
+<p>abstract class – may contain members that are not implemented.  You cannot
+instantiate abstract classes.  You must implement them with a class that extends
+the abstract class.</p>
+
+<p><strong>Example:</strong> IntSet (abstract), Empty extends IntSet, NonEmpty extends IntSet.
+The classes that extend (implement) the abstract class implement all the
+unimplemented members of the abstract class.  They can also implement members
+that were already implmented in the abstract class, but then you need to use
+<em>override.</em></p>
+
+<p>superclasses, subclasses.  Every class extends another class.  If no explicit
+class is given, then the standard Java Object class is assumed.</p>
+
+<p>The direct or indirect superclasses of a class are called the <em>base classes.</em></p>
+
+<p>Standalone applications.  Hello world program.  Create this in Eclipse not as a Scala
+worksheet, but as a <em>Scala Object.</em></p>
+
+<p>The implementation of the union operation for IntSet is a really nice example of
+functional object oriented programming.  The union is implemented recursively.
+For the Empty object, union obviously returns the argument</p>
+
+<pre><code>def union(other: IntSet) = other
+</code></pre>
+
+<p>For the NonEmpty class, the union is implemented as follows:</p>
+
+<pre><code>class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet {
+
+    def union(other: IntSet): IntSet =
+	    ((left union right) union other) incl elem
+
+}
+</code></pre>
+
+<p>How cool is <em>that</em>?!</p>
+
+<p>How is this done in an object oriented language?<br />
+Using the <em>dynamic method dispatch</em> model.  This means that the code invoked by a
+method call depends on the runtime type of the object that contains the method.</p>
+
+<p>Dynamic dispatch is analogous to calls to higher-order functions in a purely
+functional language.</p>
 
 <h3 id="lecture-32---how-classes-are-organized">Lecture 3.2 - How Classes Are Organized</h3>
+<p>Classes and objects are organized in packages.  Packages are imported with the
+<code>import</code> statement.  Some entities are imported automatically in every Scala
+program.  These are </p>
+
+<ul>
+  <li>all members of package scala  </li>
+  <li>all members of package java.lang</li>
+  <li>all memebers of singleton object scala.Predef</li>
+</ul>
+
+<p>You can explore the standard Scala library using the scaladoc web pages at</p>
+
+<p><a href="www.scala-lang.org/api/current/index.html">www.scala-lang.org/api/current/index.html</a></p>
+
+<p><strong>Traits</strong>
+In Scala, like Java, a class can only have one super class.  That is, Scala
+is a <em>single inheritance</em> language. But sometimes, we want a class to inherit
+properties from several super entities.  To do this we use <em>traits</em>.  For example,</p>
+
+<pre><code>trait Planar {
+	def height: Int
+	def width: Int
+	def surface = height * width
+}
+</code></pre>
+
+<p>Classes can inherit from at most one class but from arbitrarily many traits.
+For example,</p>
+
+<pre><code>class Square extends Shape with Planar with Movable
+</code></pre>
+
+<p>Thus, Square has one superclass called Shape, but it also inherits traits Planar
+and Movable.</p>
+
+<p><strong>Main distinction</strong> Traits do not have val members.</p>
+
+<p>Special types in the hierarchy:  At the top, there is the <code>Any</code> class and its
+subclasses, <code>AnyVal</code> and <code>AnyRef</code>.  At the bottom, there is the <code>Nothing</code> class
+which is a subclass of <code>Null</code>.</p>
+
+<p>Null is a subclass of all the types that are reference types.  If, for example, a String
+is expected, then you can pass a null value.</p>
+
+<pre><code>val x = null
+val y: String = x
+</code></pre>
+
+<p>However, <code>val z: Int = null</code> doesn’t work because Null is not a subclass of
+subclasses of AnyVal.</p>
+
+<p>Consider the line</p>
+
+<pre><code>if (true) 1 else false                    //&gt; res1: AnyVal = 1
+</code></pre>
+
+<p>The result is of type AnyVal, because the type checker picks a type that
+is the least upper bound of the types involved in the expression.  In
+this example, we have 1 and false, which are Int and Boolean, resp.  The
+“least” type that contains both is AnyVal.</p>
+
+<p><strong>Errors</strong></p>
+
+<p>To immediately halt execution of the program and output an error message:</p>
+
+<pre><code>def error(msg: String) = throw new Error(msg)
+</code></pre>
 
 <h3 id="lecture-33---polymorphism">Lecture 3.3 - Polymorphism</h3>
+
+<p><strong>Type parameterization</strong> Running example: the immutable list</p>
+
+<p><strong>Cons-List</strong></p>
+
+<p>Nil – the empty list<br />
+Cons – a cell containing the first element of the list and a pointer to the
+rest of the list</p>
+
+<p>In Eclipse, create a Scala Trait called <code>List</code>.  (at 5’55” of Lecture 3.3)</p>
+
+<p><strong>Generics</strong></p>
+
+<p>In Scala, you can put field definitions in parameter lists, instead of in the
+body of the class.  For example, the following:</p>
+
+<pre><code>class Cons[T](val head: T, val tail: List[T]) extends List[T] {
+    def isEmpty = false
+}
+</code></pre>
+
+<p>is equivalent to</p>
+
+<pre><code>class Cons[T](_head: T, _tail: List[T]) extends List[T] {
+    def isEmpty = false
+	val head = _head
+	val tail = _tail
+}
+</code></pre>
+
+<p><strong>Type Erasure</strong> Type parameters do not affect evaluation in Scala.  We can
+  assume that ll type parameters and type arguments are removed before
+  evaluating the program.  Scala shares this with Java, Haskell, ML and OCaml.</p>
 
 <hr />
 
@@ -569,14 +719,170 @@ mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
 <h3 id="lecture-41---functions-as-objects">Lecture 4.1 - Functions as Objects</h3>
 
 <h3 id="lecture-43---subtyping-and-generics">Lecture 4.3 - Subtyping and Generics</h3>
+<p>Two basic principles of polymorphism are subtyping and generics.</p>
+
+<p>(See page 54 of Scala by Example, Odersky.)</p>
+
+<p>If we have a function that takes any subtype of IntSet and returns something of
+that same type, the interface could be something like this:</p>
+
+<pre><code>def assertAllPos(r: IntSet): IntSet = ...
+</code></pre>
+
+<p>But this isn’t very precise.  Instead, we could specify that the return type is
+the same as follows:</p>
+
+<pre><code>def assertAllPos[S &lt;: IntSet](r: S): S = ... 
+</code></pre>
+
+<p>Here, “&lt;: IntSet” is an upper bound on the type parameter S.  It means S can be
+instantiated only to types that conform to IntSet.  I believe this means that
+once we are passed the parameter r of a specific type S, then the return type
+must also be of type S.  (It’s not clear whether this allows return type
+to be a subtype of type S.  We should check this.)</p>
+
+<p>Generally, the notation</p>
+
+<pre><code>S &lt;: T // means S is a subtype of T
+S &gt;: T // means S is a supertype of T
+</code></pre>
+
+<p>With the &gt;: operation we can be even more precise:</p>
+
+<pre><code>def assertAllPos[S &gt;: NonEmpty &lt;: IntSet](r: S): S = ...
+</code></pre>
+
+<p>would restrict S to be of a type between NonEmpty and IntSet.</p>
+
+<p>Question: How do we specify that S must be of a specific type and not of a
+subtype?  Perhaps as follows?</p>
+
+<pre><code>def assertAllPos[S &gt;: IntSet &lt;: IntSet](r: S): S = ...
+</code></pre>
+
+<p><strong>Important:</strong> Arrays are not covariant in Scala, unlike in Java, <em>because they
+  are mutable</em>.  (Lists in Scala are immutable, so they are covariant.) For example,
+  in Java, one would have</p>
+
+<pre><code>    NonEmpty[] &lt;: IntSet[]
+</code></pre>
+
+<p>This causes problems and leads to runtime errors.  (See Lecture 4.4 on <em>variance</em>
+for more details.)</p>
+
+<p><strong>Liskov Substitution Principle</strong>
+If A &lt;: B, and if q(x) is a property provable for objects x:B,
+then q(y) should be provable for objects y:A.</p>
 
 <h3 id="lecture-42---objects-everywhere">Lecture 4.2 - Objects Everywhere</h3>
+<p><em>This is an important lecture.</em></p>
+
+<p>After explaining how to implement Boolean as a class instead of a primitive type
+(see also page 37 of Scala by Example), Odersky explains how to implement the
+type Nat (the Peano numbers) in Scala.</p>
 
 <h3 id="lecture-44---variance">Lecture 4.4 - Variance</h3>
 
 <h3 id="lecture-45---decomposition">Lecture 4.5 - Decomposition</h3>
 
+<p>Suppose we want to write a small interpreter for arithmetic expressions.  Let’s
+restrict to just numbers and sums of numbers.  We will have an expression class
+Expr with two subclasses, Number and Sum.  We could have, outside our Expr
+class, an eval method that tests whether the input is a number or a sum and then
+evaluates it.  First solution, use type tests and type casts.  This is low
+level and potentailly unsafe.  Here’s a better, object oriented solution:</p>
+
+<pre><code>trait Expr {
+	def eval: Int
+}
+	
+class Number(n: Int) extends Expr {
+	def eval: Int = n
+}
+
+class Sum(e1: Expr, e2: Expr) extends Expr {
+	def eval: Int = e1.eval + e2.eval
+}
+</code></pre>
+
+<p>But what if we decide later to have other subclasses?  Then we need
+to implement an eval method for each. It is tedious to have to modify all the
+subclasses of Expr.  Also, what if we now want a show method to print out the
+string representation of Expr subclass objects.  Worse than that, what if we
+want to simplify expressions?  A given expression might be a composition of sums
+and products and it’s not clear how to implement a simplify method.  The
+solution is pattern matching, which we take up in the next lecture.</p>
+
 <h3 id="lecture-46---pattern-matching">Lecture 4.6 - Pattern Matching</h3>
+<p>(See page 43 of Scala by Example.)</p>
+
+<p>Pattern matching allows us to find a general and convenient way to access
+objects in an extensible class hierarchy.</p>
+
+<p>The three solutions we have seen all have shortcomings.  They were:</p>
+
+<ul>
+  <li>Classification and access methods: quadratic explosion.</li>
+  <li>Type tests and casts: unsafe, low-level.</li>
+  <li>Object oriented decomposition: does not always work, need to touch all classes
+to implement a new method. (Doesn’t work for non-local stuff.)</li>
+</ul>
+
+<p><strong>Case Classes</strong> the sole purpose of test and accessor functions is to reverse
+  the construction process.  This is automated by pattern matching.</p>
+
+<pre><code>trait Expr
+case class Number(n: Int) extends Expr
+case class Sum(e1: Expr, e2: Expr) extends Expr
+</code></pre>
+
+<p>We get added functionality by adding case.  The compiler implicitly adds
+companion objects:</p>
+
+<pre><code>object Number {
+	def apply(n: Int) = new Number(n)
+}
+
+object Sum {
+	def apply(e1: Expr, e2: Expr) = new Sum(e1, e2)
+}
+</code></pre>
+
+<p>We saw earlier that you can manually do this.  Put a <code>def apply</code> method in your
+class and then you can instantiate the class without the new keyword, as in
+<code>Number(2)</code> instead of <code>new Number(2)</code>.</p>
+
+<p>Pattern matching is a generalization of switch from C or Java. It is expressed
+in Scala using the keyword match.  For example,</p>
+
+<pre><code>def eval(e: Expr): Int = e match {
+	case Number(n) =&gt; n
+	case Sum(e1, e2) =&gt; eval(e1) + eval(e2)
+}
+</code></pre>
+
+<p>Patterns are constructed from:</p>
+
+<ul>
+  <li>constructors; e.g., Number, Sum</li>
+  <li>variables; e.g., n, e1, e2</li>
+  <li>wildcard patters _</li>
+  <li>constants; e.g. 1, true</li>
+</ul>
+
+<p>Note: <em>variables always begin with a lowercase letter; constants begin
+with a capital letter</em> (except for reserved words like null, true, false).</p>
+
+<p>As an alternative to the above implementation of eval, we could make eval a
+member method of the Expr trait:</p>
+
+<pre><code>trait Expr {
+	def eval: Int = this match {
+		case Number(n) =&gt; n
+		case Sum(e1, e2) =&gt; e1.eval + e2.eval
+	}
+}
+</code></pre>
 
 <hr />
 
@@ -591,6 +897,9 @@ mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
 <h3 id="lecture-54---higher-order-list-functions">Lecture 5.4 - Higher-Order List Functions</h3>
 
 <h3 id="lecture-55---reduction-of-lists">Lecture 5.5 - Reduction of Lists</h3>
+
+<p><strong>Fold and reduce combinators</strong>
+(<em>*</em>) stands for ((x,y) =&gt; x*y)</p>
 
 <h3 id="lecture-56---reasoning-about-concat">Lecture 5.6 - Reasoning About Concat</h3>
 

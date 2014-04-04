@@ -149,7 +149,8 @@ functionality. </p>
 
 <h2 id="synopsis">Synopsis</h2>
 
-<p>Excerpts from the <a href="http://linux.die.net/man/8/update-alternatives">update-alternatives man page</a>:</p>
+<p>Excerpts from the
+<a href="http://linux.die.net/man/8/update-alternatives">update-alternatives man page</a>:</p>
 
 <p>It is possible for several programs fulfilling the same or similar functions to
 be installed on a single system at the same time. Debian’s alternatives system
@@ -193,32 +194,37 @@ for some installation links and tips.</p>
 
 <hr />
 
-<p><strong>Update:</strong> To work around a bug in Ubuntu that prevents Eclipse
-menus from showing up, create a startup script for each version of Eclipse.
-It should look like the following example (modify the path as appropriate for
-your Eclipse installation):</p>
-
-<p>In the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code> I have</p>
+<p><strong>Update:</strong> To work around <a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">a bug in Ubuntu</a>
+that prevents Eclipse menus from showing up, create a startup script for each
+version of Eclipse. (You may not need to do this, depending on which Ubuntu
+edition you’re using.  If you start Eclipse normally and the menus work fine,
+then skip this step.)
+For example, in the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code> put</p>
 
 <pre><code>#!/bin/bash
 export UBUNTU_MENUPROXY=0
-$HOME/opt/Eclipse/kepler/eclipse
+$HOME/opt/Eclipse/kepler/eclipse -vmargs -Xmx4096M
 </code></pre>
 
-<p>Make these files executable, e.g.,</p>
+<p>You can either remove or adjust the command line option <code>-vmargs -Xmx4096M</code> to
+suit your hardware.  (See
+<a href="http://wiki.eclipse.org/FAQ_How_do_I_increase_the_heap_size_available_to_Eclipse%3F">this page</a>
+for more about the vmargs command line uption.)</p>
 
-<pre><code>chmod a+x $HOME/opt/Eclipse/kepler/eclipse-kepler
+<p>Now, make the files you just created executable; e.g.,</p>
+
+<pre><code>chmod a+x $HOME/opt/Eclipse/scala/eclipse-scala
+chmod a+x $HOME/opt/Eclipse/kepler/eclipse-kepler
+chmod a+x $HOME/opt/Eclipse/luna/eclipse-luna
 </code></pre>
-
-<p>See also: 
-<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">this post</a>.</p>
 
 <hr />
 
-<p>Assuming you following the directions in
-<a href="#installing-multiple-versions-of-eclipse">the appendix</a>, and each of your
-versions of eclipse is stored in it own directory under <code>$HOME/opt/Eclipse</code>, you
-can install these versions by invoking the following at the command line:</p>
+<p>Assuming each of your versions of eclipse is stored in it own directory under
+<code>$HOME/opt/Eclipse</code>
+(as described in <a href="#installing-multiple-versions-of-eclipse">the appendix</a>),
+you can now configure these various versions of Eclipse by invoking the
+following at the command line:</p>
 
 <pre><code>sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/scala/eclipse-scala 400
 sudo update-alternatives --install /usr/bin/eclipse eclipse $HOME/opt/Eclipse/luna/eclipse-luna 300
