@@ -911,6 +911,28 @@ member method of the Expr trait:</p>
 
 <h3 id="lecture-61---other-collections">Lecture 6.1 - Other Collections</h3>
 
+<p><strong>Vector</strong></p>
+
+<p>This lecture has some crucial tips on when to use <code>List</code> and when to use
+<code>Vector</code>.  <code>Vector</code> has more evenly balanced access patterns than <code>List</code>.  So,
+why would you ever want to use <code>List.</code>  The <code>List</code> type is most useful in
+recursive algorithms where you are repeatedly acting on the head (a constant
+time access), and then passing the tail to the recursion.  With <code>Vector</code>,
+accessing the leading element might require going down a few levels in the (albeit shallow)
+tree, and splitting off the “tail” of a vector is not as clean as with a list.</p>
+
+<pre><code>val nums = Vector(1, 2, 3, -88)
+val people = Vector("Bob", "Jim")
+</code></pre>
+
+<p>This type supports the same operations as <code>List</code> except concat ::.  Instead of
+<code>x :: xs</code>, there is <code>x +: xs</code> and ‘xs :+ x`.</p>
+
+<p>A common base class of <code>List</code> and <code>Vector</code> is <code>Seq</code>, which (along with <code>Set</code>
+and <code>Map</code> types) is a subclass of <code>Iterable</code>. <code>Array</code> and <code>String</code> are
+also sequence like classes.  The usual operations on sequences like <code>map</code> and
+<code>filter</code> and <code>take while</code> and <code>fold</code> can be applied to all of these types.</p>
+
 <h3 id="lecture-62---combinatorial-search-and-for-expressions">Lecture 6.2 - Combinatorial Search and For-Expressions</h3>
 
 <h3 id="lecture-63---combinatorial-search-example">Lecture 6.3 - Combinatorial Search Example</h3>
