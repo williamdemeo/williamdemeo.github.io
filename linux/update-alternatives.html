@@ -194,33 +194,63 @@ for some installation links and tips.</p>
 
 <hr />
 
-<p><strong>Update:</strong> To work around <a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">a bug in Ubuntu</a>
-that prevents Eclipse menus from showing up, create a startup script for each
-version of Eclipse. (You may not need to do this, depending on which Ubuntu
-edition you’re using.  If you start Eclipse normally and the menus work fine,
-then skip this step.)
-For example, in the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code> put</p>
+<p><strong>Optional step</strong> Create a startup script for each version of Eclipse.  This
+step is optional, but the steps below use names that refer to startup
+scripts created here. You can skip this step, if you wish, and modify the names
+below accordingly.</p>
+
+<p>We create a startup script for Eclipse, in which we set any options that
+we might otherwise add to the command line when launching Eclipse.
+For example, in the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code>, we put</p>
 
 <pre><code>#!/bin/bash
 export UBUNTU_MENUPROXY=0
 $HOME/opt/Eclipse/kepler/eclipse -vmargs -Xmx4096M
 </code></pre>
 
-<p>You can either remove or adjust the command line option <code>-vmargs -Xmx4096M</code> to
-suit your hardware.  (See
+<p>The option <code>-vmargs -Xmx4096M</code> sets the available memory to 4096 Mb.  You can
+either adjust or remove this parameter to suit your hardware.  (See
 <a href="http://wiki.eclipse.org/FAQ_How_do_I_increase_the_heap_size_available_to_Eclipse%3F">this page</a>
 for more about the vmargs command line uption.)</p>
 
-<p>Now, make the files you just created executable; e.g.,</p>
+<p>The line <code>export UBUNTU_MENUPROXY=0</code> was added to work around
+<a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">a bug</a>,
+in earlier versions of Ubuntu, which prevented Eclipse menus from showing up.
+However, as of Ubuntu 14.04 LTS, it seems this is no longer needed, and you can remove
+that line if unless you experience problems with Eclipse’s menus.</p>
 
-<pre><code>chmod a+x $HOME/opt/Eclipse/scala/eclipse-scala
-chmod a+x $HOME/opt/Eclipse/kepler/eclipse-kepler
-chmod a+x $HOME/opt/Eclipse/luna/eclipse-luna
+<p>Now, make the file you just created executable; e.g.,</p>
+
+<pre><code>chmod a+x $HOME/opt/Eclipse/kepler/eclipse-kepler
+</code></pre>
+
+<p>To summarize, here are three example startup scripts I use for three different
+versions of Eclipse:</p>
+
+<p>In the file <code>$HOME/opt/Eclipse/luna/eclipse-luna</code>,</p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/luna/eclipse
+</code></pre>
+
+<p>In the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code>,</p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/kepler/eclipse
+</code></pre>
+
+<p>In, the file <code>$HOME/opt/Eclipse/scala/eclipse-scala</code></p>
+
+<pre><code>    #!/bin/bash
+    export UBUNTU_MENUPROXY=0
+    $HOME/opt/Eclipse/scala/eclipse
 </code></pre>
 
 <hr />
 
-<p>Assuming each of your versions of eclipse is stored in it own directory under
+<p>Assuming each of your versions of Eclipse is stored in it own directory under
 <code>$HOME/opt/Eclipse</code>
 (as described in <a href="#installing-multiple-versions-of-eclipse">the appendix</a>),
 you can now configure these various versions of Eclipse by invoking the
@@ -345,32 +375,6 @@ update-alternatives --config ruby
 <hr />
 
 <h2 id="appendix">Appendix</h2>
-
-<h3 id="startup-scripts">Startup scripts</h3>
-
-<p>Here are the four startup scripts for Eclipse I needed to create because
-of a bug in Ubuntu:</p>
-
-<p>The file <code>$HOME/opt/Eclipse/juno/eclipse-luna</code></p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/luna/eclipse
-</code></pre>
-
-<p>The file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code></p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/kepler/eclipse
-</code></pre>
-
-<p>The file <code>$HOME/opt/Eclipse/scala/eclipse-scala</code></p>
-
-<pre><code>    #!/bin/bash
-    export UBUNTU_MENUPROXY=0
-    $HOME/opt/Eclipse/scala/eclipse
-</code></pre>
 
 <h3 id="installing-multiple-versions-of-eclipse">Installing multiple versions of Eclipse</h3>
 
