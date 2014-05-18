@@ -194,14 +194,13 @@ for some installation links and tips.</p>
 
 <hr />
 
-<p><strong>Optional step</strong> Create a startup script for each version of Eclipse.  This
-step is optional, but the steps below use names that refer to startup
-scripts created here. You can skip this step, if you wish, and modify the names
-below accordingly.</p>
+<p><strong>Create startup scripts</strong> This step may become optional in the future, but it
+seems for now they are needed to work around bugs in Ubuntu and/or Eclipse that effect the Eclipse
+menus.</p>
 
-<p>We create a startup script for Eclipse, in which we set any options that
-we might otherwise add to the command line when launching Eclipse.
-For example, in the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code>, we put</p>
+<p>For each version of Eclipse, we create a startup script in which we set any options that
+would otherwise be added to the command line when launching Eclipse.
+For example, in the file <code>$HOME/opt/Eclipse/kepler/eclipse-kepler</code>, put</p>
 
 <pre><code>#!/bin/bash
 export UBUNTU_MENUPROXY=0
@@ -215,9 +214,7 @@ for more about the vmargs command line uption.)</p>
 
 <p>The line <code>export UBUNTU_MENUPROXY=0</code> was added to work around
 <a href="http://stackoverflow.com/questions/19452390/eclipse-menus-dont-show-up-after-upgrading-to-ubuntu-13-10">a bug</a>,
-in earlier versions of Ubuntu, which prevented Eclipse menus from showing up.
-However, as of Ubuntu 14.04 LTS, it seems this is no longer needed, and you can remove
-that line if unless you experience problems with Eclipse’s menus.</p>
+in Ubuntu, which prevented Eclipse menus from showing up.</p>
 
 <p>Now, make the file you just created executable; e.g.,</p>
 
