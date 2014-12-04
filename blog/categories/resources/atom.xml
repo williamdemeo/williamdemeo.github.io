@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Resources | William DeMeo]]></title>
+  <link href="http://williamdemeo.github.io/blog/categories/resources/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2014-12-04T14:53:58-06:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TypeFunc]]></title>
+    <link href="http://williamdemeo.github.io/2014/02/13/typefunc/"/>
+    <updated>2014-02-13T08:23:58-06:00</updated>
+    <id>http://williamdemeo.github.io/2014/02/13/typefunc</id>
+    <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
+the massive amount of online resources for learning about type theory, functional
+programming, category theory, $\lambda$-calculus, and connections between
+topology and computing. </p>
+
+<!-- more -->
+
+<p>At this point, <a href="https://github.com/williamdemeo/TypeFunc">the TypeFunc repository</a>
+is mostly a collection of links, but it also includes notes and
+software resources that I have found helpful.</p>
+
+]]></content>
+  </entry>
+  
+</feed>

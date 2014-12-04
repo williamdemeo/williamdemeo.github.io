@@ -1,0 +1,1822 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learn You an Agda - William DeMeo</title>
+  <meta name="author" content="William DeMeo">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="This is a markdown version of the tutorial
+Learn You an Agda and Achieve Enlightenment!
+by Liam O’Connor-Davis. I made this version for my own &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://williamdemeo.github.io/2014/02/27/learn-you-an-agda/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="William DeMeo" />
+  <meta name="og:title" content="Learn You an Agda" />
+  <meta name="og:description" content="This is a markdown version of the tutorial
+Learn You an Agda and Achieve Enlightenment!
+by Liam O’Connor-Davis. I made this version for my own &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/2014/02/27/learn-you-an-agda/"/>
+  <meta name="url" content="http://williamdemeo.github.io/2014/02/27/learn-you-an-agda/">
+  
+  <meta name="subject" content=""/>
+  <meta name="category" content=""/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/foundation.min.js"></script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+  TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="/javascripts/AMSmath.js" type="text/javascript"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44974674-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">William DeMeo</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/archives">Archives</a></li>
+<!--      <li><a href="/pages">Pages</a></li>-->
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:williamdemeo.github.io" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title">Learn You an Agda</h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">Liam O'Connor-Davis (with a few additions by wjd)</span></a></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T00:00:00-06:00" pubdate data-updated="true"></time> - 
+        
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is a markdown version of the tutorial
+<a href="https://github.com/liamoc/learn-you-an-agda">Learn You an Agda and Achieve Enlightenment!</a>
+by <a href="http://liamoc.net/">Liam O’Connor-Davis</a>.  </p>
+
+<p>I made this version for my own reference, while working through the
+tutorial, making some revisions and additions, and a few
+corrections.  You may prefer
+<a href="https://github.com/liamoc/learn-you-an-agda">the original</a>.</p>
+
+<!-- more -->
+<p>$\def\N{\mathbb N} \def\true{\mathsf{true}} \def\conj{\wedge} \def\disj{\vee}$
+<img src="/images/cover.png" /></p>
+
+<hr />
+
+<p><strong>Table of Contents</strong></p>
+
+<ul>
+  <li><a href="#introduction">1. Introduction</a>
+    <ul>
+      <li><a href="#about-this-tutorial">About this tutorial</a></li>
+      <li><a href="#step-one-learn-haskell">Step One: Learn Haskell</a></li>
+      <li><a href="#what-is-agda-anyway">What is Agda, anyway?</a>
+        <ul>
+          <li><a href="#types-are-proofs">Types are Proofs</a></li>
+          <li><a href="#why-prove-when-you-can-just-test">Why prove when you can just test?</a></li>
+        </ul>
+      </li>
+      <li><a href="#how-do-i-get-started">How do I get started?</a>
+        <ul>
+          <li><a href="#installing-agda-the-new-way">Installing Agda: the new way</a></li>
+          <li><a href="#installing-agda-the-old-way">Installing Agda: the old way</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#hello-peano">2. Hello, Peano</a>
+    <ul>
+      <li><a href="#definitions-definitions">Definitions, Definitions</a>
+        <ul>
+          <li><a href="#hold-on-a-second-types-have-types">Hold on a second, types have types?</a></li>
+          <li><a href="#structural-induction">Structural Induction</a></li>
+          <li><a href="#aside-haskell">Aside: Haskell</a></li>
+        </ul>
+      </li>
+      <li><a href="#one-two-five!">One, Two, …Five!</a>
+        <ul>
+          <li><a href="#aside-what-do-those-underscores-mean">Aside: What do those underscores mean?</a></li>
+        </ul>
+      </li>
+      <li><a href="#our-first-check">Our First Check</a>
+        <ul>
+          <li><a href="#i-have-merely-proven-it-correct">“I Have Merely Proven It Correct”</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#propositions-and-predicates">3. Propositions and Predicates</a>
+    <ul>
+      <li><a href="#logic-is-the-art-of-going-wrong-with-confidence">“Logic is the art of going wrong with confidence”</a></li>
+      <li><a href="#how-does-it-all-relate-to-agda">How does it all relate to Agda?</a>
+        <ul>
+          <li><a href="#four-is-an-even-number">Four is an even number</a></li>
+          <li><a href="#implicits">Implicits</a></li>
+          <li><a href="#implication">Implication</a></li>
+          <li><a href="#universal-quantification">Universal Quantification</a></li>
+          <li><a href="#conjunction">Conjunction</a></li>
+          <li><a href="#bijection">Bijection</a></li>
+          <li><a href="#proving-conjunction-properties">Proving conjunction properties</a></li>
+          <li><a href="#disjunction">Disjunction</a></li>
+          <li><a href="#negation">Negation</a></li>
+        </ul>
+      </li>
+      <li><a href="#the-curry-howard-correspondence">The Curry Howard Correspondence</a></li>
+    </ul>
+  </li>
+  <li><a href="#much-needed-hole-filling">4. Much needed hole filling</a></li>
+  <li><a href="#notes">Notes</a>  </li>
+  <li><a href="#copyright">Copyright</a></li>
+</ul>
+
+<p><a href="#copyright">Copyright (c) 2013, Liam O’Connor-Davis</a></p>
+
+<hr />
+
+<h1 id="introduction">Introduction</h1>
+
+<h2 id="about-this-tutorial">About this tutorial</h2>
+
+<p>Welcome to <em>Learn You an Agda and Achieve Enlightenment!</em>
+If you’re reading this, you’re probably curious as to what Agda is, why you want
+to learn it, and in general what the big deal is about dependently typed, purely
+functional programming.</p>
+
+<p>Inspired by BONUS, the writer of
+<a href="http://learnyouahaskell.com">Learn You a Haskell</a>, I decided
+that I should write an approachable Agda tutorial that would introduce dependently typed
+programming to ordinary people rather than Ivory Tower Academics. Of course, seeing as
+<em>I</em> am one of those Ivory Tower Academics, this might not be easy. I am, however, prepared
+to give it a try. Learning Agda was a very rewarding but very difficult process for me. It
+is my hope that, by writing this tutorial, it will become a little bit easier for everyone
+else.</p>
+
+<hr />
+
+<h2 id="step-one-learn-haskell">Step One: Learn Haskell</h2>
+
+<p>(The original tutorial suggested that Haskell should be learned before Agda.
+However, if one already knows some functional programming, then
+Agda should not be very hard to learn. This should be especially true for those
+with some background in logic and experience with other dependently typed languages.)</p>
+
+<div class="span3">
+<img src="/images/koala.png" />
+</div>
+
+<p>This tutorial is not aimed at those who are completely new to functional
+programming. Agda is similar on a basic level to typed functional languages such
+as Haskell and ML, and so knowing a language in the ML family will certainly
+make learning Agda a great deal easier. </p>
+
+<p>If you don’t know a statically typed functional language, I recommend that you
+learn Haskell, as Agda has a close relationship with the Haskell ecosystem. If
+you’re looking for a good Haskell tutorial, look no further than this book’s
+companion, <a href="http://learnyouahaskell.com">Learn You a Haskell</a>. </p>
+
+<p>If you don’t know how purely functional programming works, learn a little of it before 
+trying to tackle Agda.</p>
+
+<p>Understanding of imperative and object oriented programming (C, Java, Ruby..) isn’t
+necessary. In fact, trying to apply skills learned from these languages might even be
+harmful when you’re trying to learn Agda.</p>
+
+<p>The moral of the story is: keep an open mind. A lot of Agda’s power comes from features 
+that are at first difficult to understand. It took a long time for everything in Agda 
+to fall into place in my head. Agda is <em>hard</em>. After some time, though, Agda’s inherent
+awesomeness comes to the fore, and it all just clicks. If you encounter 
+obstacles in your Agda learning, don’t be discouraged! Keep working, and eventually 
+you will be a master of Agda fu.</p>
+
+<hr />
+
+<h2 id="what-is-agda-anyway">What is Agda, anyway?</h2>
+
+<p>Agda is a programming language, but not a programming language like Java. It’s not 
+even very much like Haskell, although it’s a lot more like Haskell than Java. </p>
+
+<p>Agda is a programming language that uses <em>dependent types</em>. Many of you would
+be familiar with types from imperative languages such as Java or C++, and if you’re
+reading up to this point, you should also have a familiarity with types from
+Haskell.</p>
+
+<p>Types in these languages essentially annotate expressions with a tag. At a simple level,
+an expression’s type might just be a concrete type, like <code>Bool</code> or <code>Int</code>. Java (through
+generics), C++ (through templates) and Haskell all support polymorphic types as well,
+such as <code>List a</code> or <code>Map k v</code>.</p>
+
+<div class="span4">
+<img src="/images/types.png" />
+</div>
+
+<p>But, if <code>List a</code> is a type, then what exactly <em>is</em> just <code>List</code> (without the parameter)? 
+Haskell calls it a “type constructor”, but really it’s a <em>function</em> at the type
+level. <code>List</code> takes in a type, say <code>Int</code>, and returns a new type, <code>List
+Int</code>. Haskell (with appropriate extensions) even supports arbitrary functions on
+the type level, that don’t necessarily have to construct a type term, and
+instead can simply refer to existing ones. </p>
+
+<p>So, Haskell has type-level functions, even type-level types (kinds). It almost seems like
+an entirely new language, overlaid over Haskell, that operates at compile time,
+manipulating type terms. </p>
+
+<p>In fact, you could think of any type system this way. In C++, people exploit the
+Turing-completeness of their type system to perform compile-time analysis and
+computation. While such type level work is very powerful, I fear that such type
+machinery is very often difficult to understand and manipulate. Even in Haskell,
+applications that make extensive use of type-level computation are very often
+substantially harder to comprehend. The type-level “language” is almost always
+substantially more complicated to work with than the value-level “language.”</p>
+
+<p>In Agda, the distinction between types and values does not exist. Instead, the
+language you use to manipulate type terms is exactly the same language that you
+use to manipulate values. </p>
+
+<p>This means that you can actually include values <em>inside</em> a type. For example, the <code>List</code>
+type constructor can be parameterized by both the type of its contents <em>and</em> the length of 
+the list in question (we’ll be doing this later). This allows the compiler to check for you
+to make sure there are no cases where you attempt to call <code>head</code> on a
+potentially empty list, for example. Being able to include values inside a type,
+and use all the same value-level operations on them, is what makes Agda
+<em>dependently typed</em> - Not only can values have a type, but types can have a value.</p>
+
+<p>In fact, seeing as the language of values and the language of types are the
+same, <em>any property</em> that you can express about a value can be expressed
+statically in its type, and machine checked by Agda. We can statically eliminate
+any error scenario from our program.</p>
+
+<hr />
+
+<h3 id="types-are-proofs">Types are Proofs</h3>
+
+<div class="span4">
+<img src="/images/owl.png" />
+</div>
+
+<p>If I can come up with a function of type <code>Foo -&gt; Bar</code> (and Agda says that it’s
+type correct) that means that I’ve written not only a program, but also a proof
+by construction that, assuming some premise <code>Foo</code>, the judgment <code>Bar</code>
+holds. (We’ll touch more on proofs later; I don’t want to get bogged down in
+details just yet.)</p>
+
+<p>Seeing as our <code>Foo</code> and <code>Bar</code> can be as expressive as we like, this lets us
+prove <em>anything we want</em> about our program simply by exploiting this
+correspondence between proofs and programs - called the
+<a href="http://en.wikipedia.org/wiki/Curry–Howard_correspondence">Curry-Howard Correspondence</a>,
+discovered by two brilliant logicians in the sixties.</p>
+
+<hr />
+
+<h3 id="why-prove-when-you-can-just-test">Why prove when you can just test?</h3>
+
+<p>The validity of formal verification of software is often hotly contested by
+programmers who usually have no experience in formal verification. Often testing
+methodologies are presented as a more viable alternative.</p>
+
+<p>While formal verification is excessive in some situations where bugs are
+acceptable, I hardly think that testing could replace formal verification
+completely. Here are three reasons for this:</p>
+
+<ul>
+  <li><strong>Proofs work in concurrent scenarios</strong>. You can’t reliably unit test against
+ race conditions, starvation or deadlock. All of these things can be
+ eliminated via formal methods.</li>
+  <li><strong>Proofs, like programs, are compositional</strong>. Tests are not. In testing
+scenarios, one typically has to write both unit tests and integration tests:
+unit tests for testing small components individually, and integration tests
+for testing the interaction between those small components. If I have proofs
+of the behavior of those small components, I can simply use those proof
+results to satisfy a proof obligation about their interaction – there is no
+need to reinvent everything for both testing scenarios.</li>
+  <li><strong>Proofs are fool-proof</strong>. If I have a suite of tests to show some property,
+it’s possible that that property does not actually hold - I simply have not
+been thorough enough in my tests. With formal verification, it’s impossible
+for violations of your properties to slip through the cracks like that.</li>
+</ul>
+
+<p>Of course, proofs are not for every scenario, but I think they should be far
+more widely used than they currently are.</p>
+
+<p>Thanks to Curry-Howard, Agda can also be used as a <em>proof</em> language, as opposed
+to a <em>programming</em> language. You can construct a proof not just about your
+program, but about anything you like. </p>
+
+<p>In fact, Curry-Howard shows us that the fundamentals of functional programming
+(Lambda Calculus), and the fundamentals of mathematical proof (Logic) are in
+fact the same thing (<em>isomorphic</em>). This means that we can structure
+mathematical proofs in Agda as <em>programs</em>, and have Agda check them for us. It’s
+just as valid as a standard pen-and-paper mathematical proof (probably more so,
+seeing as Agda doesn’t let us leave anything as “an exercise for the reader” -
+and Agda can check our proof’s correctness automatically for us. We’ll be doing
+this later by proving some basic mathematical properties on Peano natural numbers.</p>
+
+<p>So, Agda is a language that really lives the dream of the Curry-Howard
+correspondence. An Agda program is also a proof of the formula represented in
+its type.</p>
+
+<h2 id="how-do-i-get-started">How do I get started?</h2>
+
+<p>At the time of writing, it is only really feasible to edit Agda code using
+Emacs. GNU Emacs or XEmacs are both fine. However, you don’t need a great deal
+of Emacs proficiency to edit Agda code. </p>
+
+<h3 id="installing-agda">Installing Agda</h3>
+
+<p>(If you are using Ubuntu Linux, you may wish to skip to the next section,
+<a href="#installing-on-Ubuntu-Linux">Installing on Ubuntu Linux</a>.)</p>
+
+<p>You’ll need GHC, a Haskell compiler, and an assortment of tools and libraries
+that make up the <a href="http://hackage.haskell.org/platform/">Haskell Platform</a>. It is
+the best way to get started using Haskell, and it’s also the easiest way to get Agda.</p>
+
+<p>Once you have Haskell and Emacs, there are three things you still need to do:</p>
+
+<ul>
+  <li>Install Agda. Linux users may have Agda packages available from their package
+manager (search for “agda” to find out). If not or otherwise, simply use the
+Haskell platform’s <code>cabal-install</code> tool to download, compile, and set up Agda.</li>
+</ul>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>$ cabal install agda
+</pre></div>
+</div>
+</div>
+
+<ul>
+  <li>Install Agda mode for emacs. Simply type in a command prompt (where Agda is in
+your <code>PATH</code>):</li>
+</ul>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>$ agda-mode setup
+</pre></div>
+</div>
+</div>
+
+<ul>
+  <li>Compile Agda mode as well (you’ll need to do this again if you update Agda):</li>
+</ul>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>$ agda-mode compile
+</pre></div>
+</div>
+</div>
+
+<p>By then you should be all set. To find out if everything went as well as
+expected, head on over to the <a href="#hello-peano">next section</a>.</p>
+
+<h3 id="installing-on-ubuntu-linux">Installing on Ubuntu Linux</h3>
+
+<p>The following commands, which work on Ubuntu Linux 13.10 and probably others,
+take a few minutes to run: </p>
+
+<pre><code>sudo apt-get install agda-mode
+sudo apt-get install agda-stdlib
+</code></pre>
+
+<p>That’s it!  Now, when you launch Emacs and edit a file with the .agda extension,
+it should switch to <code>agda-mode</code> or <code>agda2-mode</code>. If not, you can switch manually
+by invoking one of the following (in Emacs, of course): <code>M-x agda-mode</code> or 
+<code>M-x agda2-mode</code> or <code>Esc-x agda-mode</code>.  (An easy way to find out which agda
+modes are available is to type <code>M-x agda</code> and then hit tab a couple of times to
+see the possible completions.)</p>
+
+<hr />
+<hr />
+
+<h1 id="hello-peano">Hello, Peano</h1>
+
+<p>(There is a new section below called <a href="#much-needed-hole-filling">Much needed hole filling</a>,
+which did not appear in the original tutorial, is essentially independent 
+of the section you are now reading, and could be read first.)</p>
+
+<h2 id="definitions-definitions">Definitions, Definitions</h2>
+
+<p>Unlike the previous section, this section will actually involve some coding in Agda.</p>
+
+<p>Most language tutorials start with the typical “Hello, World” example, but this
+is not really appropriate for a first example in Agda. Unlike other languages,
+which rely on a whole lot of primitive operations and special cases for basic
+constructs, Agda is very minimal - most of the “language constructs” are
+actually defined in libraries. </p>
+
+<p>Agda doesn’t even have numbers built in, so the first thing we’re going to do is
+define them - specifically <em>natural numbers</em>. Natural numbers are positive
+integers, that is, the whole numbers starting with zero and going
+up. Mathematics uses the symbol $\N$ to represent natural numbers, so we’re going
+to borrow that for our example (Another thing that sets Agda apart from other
+languages is its extensive use of unicode to make mathematical constructs  more
+natural). To enter ℕ into emacs, type <code>\bn</code>. To enter the unicode arrow (→),
+type <code>\-&gt;</code>.  I’m going to demonstrate this line by line, so bear with me.</p>
+
+<p>First, open a file named <tt>LearnYouAn.agda</tt> in Emacs and type the following:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module LearnYouAn where
+  data ℕ : Set where
+</pre></div>
+</div>
+</div>
+
+<p>The <code>data</code> keyword means we’re defining a type—in this case, <code>ℕ</code>.
+In this example, we’re specifying that the type <code>ℕ</code> is of type <code>Set</code> (that’s
+what the colon means).</p>
+
+<hr />
+
+<h3 id="hold-on-a-second-types-have-types">Hold on a second, types have types?</h3>
+
+<p>If you recall the introduction, I mentioned that in Agda, types and values are
+treated the same way. This means that, seeing as values are given types, types
+are given types as well. Types are merely a special group of language terms, and
+in Agda, all terms have types. </p>
+
+<p>Even <code>Set</code> (the type of our type <code>ℕ</code>) has a type: <code>Set₁</code>, which has a type
+<code>Set₂</code>, going on all the way up to infinity. We’ll touch more on what these
+<code>Set</code> types mean later, but for now you can think of <code>Set</code> as the type we give
+to all the data types we use in our program. </p>
+
+<p>This infinite hierarchy of types provides an elegant solution to 
+<a href="http://en.wikipedia.org/wiki/Russell's_paradox">Russell’s Paradox</a>.
+Seeing as for any ν∈ ℕ, <code>Set ν</code> contains only values “smaller” than ν, (for
+example, <code>Set₁</code> cannot contain <code>Set₁</code> or <code>Set₂</code>, only <code>Set</code>), Russell’s
+problematic set (which contains itself) cannot exist and is not admissible.</p>
+
+<hr />
+
+<h3 id="structural-induction">Structural Induction</h3>
+
+<p>Okay, so, we’ve defined our type, but now we need to fill the type with
+values. While a type with no values does have its uses, a natural numbers type
+with no values is categorically wrong. So, the first natural number we’ll define
+is zero: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>    zero : ℕ 
+</pre></div>
+</div>
+</div>
+
+<p>Here we are simply declaring the term <code>zero</code> to be a member of our new type
+<code>ℕ</code>. We could continue to define more numbers this way: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>    zero : ℕ 
+    one : ℕ
+    two : ℕ
+</pre></div>
+</div>
+</div>
+
+<p>But we’d quickly find our text editor full of definitions and we’d be no closer
+to defining all the natural numbers than when we started. So, we should instead
+refer to a strict mathematical definition. </p>
+
+<ul>
+  <li>Zero is a natural number ($0\in\mathbb{N}$). </li>
+  <li>For any natural number $n$, $n + 1$ is also a natural number. For convenience,
+We shall refer to $n + 1$ as $\mathtt{suc}\ n.$<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>
+($\forall n \in \mathbb{N}.\ \mathtt{suc}\ n \in \mathbb{N}$).</li>
+</ul>
+
+<p>(The notation I’m using here should be
+familiar to anyone who knows set theory and/or first-order logic.  Don’t panic
+if you don’t know these things, we’ll be developing models for similar things in
+Agda later, so you will be able to pick it up as we go along.)</p>
+
+<p>This is called an <em>inductive definition</em> of natural numbers. We call it
+<em>inductive</em> because it consists of a <em>base</em> rule, where we define a fixed
+starting point, and an <em>inductive</em> rule that, when applied to an element of the
+set, <em>induces</em> the next element of the set. This is a very elegant way to define
+infinitely large sets. This way of defining natural numbers was developed by a
+mathematician named Giuseppe Peano, and so they’re called the Peano numbers. </p>
+
+<p>We will look at inductive <em>proof</em> in the coming sections, which shares a similar structure.</p>
+
+<p>For the base case, we’ve already defined zero to be in $\mathbb{N}$ by saying:
+<code>zero : ℕ</code>.  To define the natural numbers inductively, let’s recall the
+induction step of first order logic.  This can be written as follows:</p>
+
+<center>
+   $\forall n \in \mathbb{N}.\ \mathtt{suc}\ n \in \mathbb{N}$
+</center>
+
+<p>Given a natural number <code>n</code>, the constructor <code>suc</code> will return
+another natural number. In other words, <code>suc</code> could be considered a
+<em>function</em> that, when given a natural number, produces the next natural
+number. In Agda, we define the constructor <code>suc</code> like so: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  data ℕ : Set where 
+    zero : ℕ
+    suc : ℕ → ℕ
+</pre></div>
+</div>
+</div>
+
+<p>Now we can express the number one as <code>suc zero</code>, and the number two as <code>suc (suc
+zero)</code>, and the number three as <code>suc (suc (suc zero))</code>, and so on. </p>
+
+<hr />
+
+<h3 id="aside-haskell">Aside: Haskell</h3>
+<p>Incidentally, this definition of natural numbers corresponds to the Haskell data type:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data Nat = Zero | Suc Nat
+</pre></div>
+</div>
+</div>
+
+<p>If you load that into GHCi and ask it what the type of <code>Suc</code> is, it
+(unsurprisingly) will tell you: <code>Nat -&gt; Nat</code>. This is a good way to get an
+intuition for how to define constructors in Agda.</p>
+
+<p>Also, GHC supports an extension, Generalized Algebraic Data Types or GADTs,
+which allows you to define data types Agda style: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data Nat :: * where
+  Zero :: Nat
+  Suc  :: Nat -&gt; Nat
+</pre></div>
+</div>
+</div>
+
+<p>It’s worth noting that GADTs are not exactly the same as Agda data definitions,
+and Haskell is still not dependently typed, so much of what you learn in this
+book won’t carry over directly to extended Haskell. </p>
+
+<hr />
+
+<h2 id="one-two-five">One, Two, …Five!</h2>
+
+<p>Now we’re going to define some arithmetic operations on our natural
+numbers. Let’s try addition, first. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  _+_ : ℕ → ℕ → ℕ 
+</pre></div>
+</div>
+</div>
+
+<p>Here I’m declaring a function. To start with, I give it a type<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>—it takes
+two natural numbers, and returns a natural number.</p>
+
+<hr />
+
+<h3 id="aside-what-do-those-underscores-mean">Aside: What do those underscores mean?</h3>
+
+<p>Unlike Haskell which has only prefix functions (ordinary functions) and infix
+functions (operators), Agda supports <em>mixfix</em> syntax. This allows you to declare
+functions where the arguments can appear anywhere within a term. You use
+underscores to refer to the “holes” where the arguments are meant to go. </p>
+
+<p>So, an if-then-else construct in Agda can be declared with:<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  if_then_else_ : ∀ { a } → Bool → a → a → a
+</pre></div>
+</div>
+</div>
+
+<p>This can be used with great flexibility: You can call this function with <code>if a
+then b else c</code>, which Agda interprets as <code>if_then_else_ a b c</code>. This syntactic
+flexibility delivers great expressive power, but be careful about using it too
+much, as it can get very confusing! </p>
+
+<hr />
+
+<h2 id="our-first-check">Our First Check</h2>
+
+<p>Now, let’s implement and check the sum function by structural recursion.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  _+_ : ℕ → ℕ → ℕ
+  zero + m = m
+  (suc n) + m = suc (n + m)
+</pre></div>
+</div>
+</div>
+
+<p>Normally we’d run the program at this point to verify that it works, but in Agda
+we <em>check</em> our code. This checks that all our <em>proof obligations</em> have been met:</p>
+
+<ul>
+  <li>It checks your types. Types are how you encode proofs in Agda (although we
+haven’t done any non-trivial proofs yet), so this is important. </li>
+  <li>It checks that your program provably terminates. </li>
+</ul>
+
+<p>Proof obligations of a program can only be machine-checked by if your program
+terminates, but checking that any program terminates is in general
+undecidable (see <a href="http://en.wikipedia.org/wiki/Halting_problem">The Halting Problem</a>).
+To circumvent this dilemma, Agda runs its checker only on <em>structural</em> recursion
+with finite data structures, and warns that it can’t check proof obligations in
+which non-structural recursion is used. We will discuss this more in later
+sections, but all of the examples in the early part of this tutorial can
+be proved by Agda to terminate.</p>
+
+<p>At this point, the contents of the LearnYouAn.agda file should be as follows (note
+the indentation!):</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module First where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + m = m
+  (suc n) + m = suc (n + m)
+</pre></div>
+</div>
+</div>
+
+<p>To check this program, type <code>C-c C-l</code> in Emacs (or choose Load from the Agda
+menu). If your program checks correctly, there will be no error messages, no hole markers
+(yellow highlighting) and no orange-highlighted non-terminating sections. It
+should also say <code>Agda: Checked</code> at the bottom of the window, and you get syntax
+highlighting. </p>
+
+<p>Right now, our checks aren’t all that meaningful—the only thing they prove is
+that our addition function does indeed take any natural number and produce a
+natural number, as the type suggests. Later on, when we encode more information
+in our types, our checks can mean a lot more—even more than running and
+testing the program. </p>
+
+<hr />
+
+<h3 id="i-have-merely-proven-it-correct">“I Have Merely Proven It Correct”</h3>
+
+<p>To evaluate an expression (just to verify that it truly does work), we can type
+<code>C-c C-n</code> into emacs, or select “Evaluate term to normal form” from the Agda
+menu. Then, in the minibuffer, we can type an expression for 3 + 2:</p>
+
+<pre><code>(suc (suc (suc zero))) + (suc (suc zero))
+</code></pre>
+
+<p>And we get the result (5):</p>
+
+<pre><code>(suc (suc (suc (suc (suc zero)))))
+</code></pre>
+
+<p>In this section we have examined the Peano natural numbers, and defined some
+basic functions and data types in Agda. In the next section, we’ll look at
+propositional logic, and how to encode logical proofs in Agda using this system.</p>
+
+<hr />
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you are having trouble getting the First program to work, make sure you have
+the indentation right.  It might help to download the
+<a href="/downloads/code/agda/LearnYouAn.agda">LearnYouAn.agda</a> file, just to be sure.</p>
+
+<hr />
+<hr />
+
+<h1 id="propositions-and-predicates">Propositions and Predicates</h1>
+
+<h2 id="logic-is-the-art-of-going-wrong-with-confidence">“Logic is the art of going wrong with confidence”</h2>
+
+<p>Now that we’ve defined the natural numbers, we’re going to do some simple
+example proofs of some basic mathematical properties. We’ll first discuss logic
+and logic specification in <em>natural deduction</em>, and as we go, we’ll discuss the
+application to Agda. </p>
+
+<p>At a fundamental level, a logic is a system of <em>judgments</em>. Judgments are
+statements in a mathematical <em>language</em> that may be proven, or unproven. A
+<em>language</em> is usually described as a set of strings, which make up every <em>term</em>
+in the language, but this is a simplification: a language can be made up of
+arbitrary data structures. We just use strings to represent these structures
+because any data structure can be represented in some string form. </p>
+
+<p>For our example, we will define a very simple logic based on the language of
+<em>natural numbers</em> $\mathbb{N}$ we used earlier.</p>
+
+<p>We’re going to have just one type of judgment, of the form $\mathbb{N}\
+\textbf{even}$, which is provable only when the given number is even.</p>
+
+<p>A logic consists of a set of <em>axioms</em> and a set of <em>rules</em>. Axioms are the
+foundation of the logic: they’re the basic, simple statements that are assumed
+to be true. <em>Rules</em> describe how to produce new <em>theorems</em> from existing ones.
+A theorem is a proposition that has been proved. Thus, the rules tell us how to
+construct proofs of statements using proofs of other statements.  We can
+formally specify these axioms and rules in a <em>meta-logic</em> called <em>natural
+deduction</em>, by writing them in the form of <em>inference rules</em>, which look like this: </p>
+
+<script type="math/tex; mode=display">\frac{P_1 \quad P_2\quad\cdots\quad P_n}{C} \text{(name of rule)}</script>
+
+<p>This says that if we can prove all of the <em>premises</em> $P_1 \cdots P_n$, then we
+can prove the <em>conclusion</em> $C$.</p>
+
+<p>For our purposes, we have just one axiom, that the number zero is even. Axioms
+are written as inference rules with no premises:</p>
+
+<script type="math/tex; mode=display">\frac{}{\mathtt{zero}\ \textbf{even}} {\rm Z\scriptsize ERO}</script>
+
+<p>Then, based on the inductive reasoning we used earlier, the <em>rules</em> for our
+logic should express that if some number $m$ is even, then $m + 2$ is also
+even. We do this by writing an <em>inference rule schema</em>, which describes a <em>set</em> of
+rules, by including one or more <em>metavariables</em> in an inference rule. </p>
+
+<p>If we have some metavariable $x$ in a rule schema, we can substitute <em>any</em> term
+in the language for $x$, and the result is a valid rule. For example,</p>
+
+<script type="math/tex; mode=display">\frac{x\ \textbf{even}}{\mathtt{suc}\ (\mathtt{suc}\ x)\ \textbf{even}}
+ {\rm S\scriptsize TEP}</script>
+
+<p>If we want to show that four is even, we apply this rule twice
+(once where $x$ is two, and once when $x$ is zero), leaving the obligation
+$\mathtt{zero}\ \textbf{even}$ which is shown by the axiom ${\rm Z\scriptsize
+ERO}$. </p>
+
+<p>We can write this proof using natural deduction in a “proof tree” format:</p>
+
+<script type="math/tex; mode=display"> \frac{\large \frac{\LARGE \frac{}{\mathtt{zero}\ \textbf{even}}{\rm\large Z\normalsize ERO}} {\mathtt{suc}\ (\mathtt{suc}\ \mathtt{zero})\ \textbf{even}}{\rm\small S\scriptsize TEP}} {\mathtt{suc}\ (\mathtt{suc}\ (\mathtt{suc}\ (\mathtt{suc}\ \mathtt{zero})))\ \textbf{even}} {\rm S\scriptsize TEP} </script>
+
+<p>When proving a theorem, we work from the bottom of this tree upwards, applying
+rules that fit the form of the goal as we go. When reading the proof, we work
+downwards, reasoning from known axioms to the theorem that we want.</p>
+
+<hr />
+
+<h2 id="how-does-it-all-relate-to-agda">How does it all relate to Agda?</h2>
+
+<p>Agda’s types correspond to judgments. If we can construct a value of a certain
+type, we have simultaneously constructed a <em>proof</em> that the theorem encoded by
+that type holds. </p>
+
+<p>As types are judgments, and values are theorems, <em>data constructors</em> for a type
+correspond to <em>inference rules</em> for the corresponding proposition. </p>
+
+<p>Let’s encode the judgment $\textbf{even}$ in Agda, based on our definition in
+natural deduction.
+We’ll use the mix-fix name <code>_even</code> here rather than just <code>even</code> so that we can
+use the judgment in post-fix form. As our judgment is over the language of
+natural numbers, we <em>index</em> the type constructor for our judgment by the type <code>ℕ</code>.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data _even : ℕ → Set where
+</pre></div>
+</div>
+</div>
+
+<p>Then we can define the axiom ${\rm Z\scriptsize ERO}$ as a
+constructor for the type <code>zero even</code> as follows:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>   ZERO : zero even
+</pre></div>
+</div>
+</div>
+
+<p>The ${\rm S\scriptsize TEP}$ axiom is a little more complicated, due to
+the presence of the metavariable $x$. If we just write the rule as-is,</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>   STEP : x even → suc (suc x) even
+</pre></div>
+</div>
+</div>
+
+<p>Agda responds with the following:</p>
+
+<pre><code>/home/username/LearnYouAn.agda:14,12-13
+Not in scope:
+  x
+  at /home/username/LearnYouAn.agda:14,12-13
+when scope checking x
+</code></pre>
+
+<p>To resolve this, we let <code>STEP</code> depend on a parameter, or variable.  We name
+this variable $x$, and specify that $x$ must be of type ℕ, as follows:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>   STEP : (x : ℕ) → x even → suc (suc x) even
+</pre></div>
+</div>
+</div>
+
+<p>This is an example of a <em>dependent type</em>, which provides a means of defining a
+<em>rule schema</em> (a collection of rules parameterized by a variable).
+Here, for example, <code>STEP zero</code> refers to the rule <code>zero even → suc (suc zero) even</code>.
+Thus <code>STEP</code> has the same substitution semantics for metavariables that we
+described above.</p>
+
+<p>At this point, our full program looks as follows:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module LearnYouAn where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + n = n
+  (suc n) + m = suc (n + m)
+
+  data _even : ℕ → Set where
+    ZERO : zero even
+    STEP : (x : ℕ) → x even → suc (suc x) even
+</pre></div>
+</div>
+</div>
+
+<p>You should type this program into your Emacs buffer, save it as the file
+LearnYouAn.agda, and check it with <code>C-c C-l</code></p>
+
+<p>Before we go on to use our program to actually prove something, we make
+one more observation.  In the current version of our program, the type of <code>x</code>
+can be inferred from its context, since we use it with <code>_even</code>, which takes a
+instance of type <code>ℕ</code> as an argument.  Therefore, so we can use the special <code>∀</code>
+symbol to introduce <code>x</code> and omit the type.  So, our final definition of <code>_even</code> is</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data _even : ℕ → Set where
+   ZERO : zero even
+   STEP : ∀ x → x even → suc (suc x) even
+</pre></div>
+</div>
+</div>
+
+<p>(This change will appear in the file
+<a href="/downloads/code/agda/LearnYouAn2.agda">LearnYouAn2.agda</a> below.)</p>
+
+<h3 id="four-is-an-even-number">Four is an even number</h3>
+
+<p>Now we use our Agda program to prove that four is even. Type the following into
+an emacs buffer, and then type <code>C-c C-l</code> (use <code>\_1</code> to type the subscript
+symbol ₁):</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = ?
+</pre></div>
+</div>
+</div>
+
+<p>Agda will convert the question mark into the symbols <code>{ }0</code>, which is Agda’s
+notation for a <em>hole</em> in the program (i.e., a hole in the proof).</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = { }0
+</pre></div>
+</div>
+</div>
+
+<p>The following will appear in a separate Emacs buffer:</p>
+
+<pre><code>?0 : suc (suc (suc (suc zero))) even
+</code></pre>
+
+<p>This tells us that our proof obligation at hole <code>?0</code> is 
+<code>suc (suc (suc (suc zero))) even</code>. </p>
+
+<p>Next, put your cursor into the hole, and type <code>STEP ? ?</code>, and then type <code>C-c
+C-space</code>. This splits the hole in two more holes. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP { }1 { }2
+</pre></div>
+</div>
+</div>
+
+<pre><code>?1 : ℕ
+?2 : suc (suc zero) even
+</code></pre>
+
+<p>The obligation <code>?1</code> is the number to provide for <code>x</code> in <code>STEP</code>.<br />
+Hole <code>?2</code> is a proof obligation to show that two is even. 
+In this case, there is only one constructor that fits
+<code>?2</code>—namely, <code>STEP</code>. </p>
+
+<p>If we move the cursor to hole <code>?2</code> and type <code>C-c C-r</code>, then Agda splits the hole
+into another <code>STEP</code> call for us, resulting in two more holes, <code>?3</code> and <code>?4</code>.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP { }1 (STEP { }3 { }4)
+</pre></div>
+</div>
+</div>
+
+<pre><code>?1 : ℕ
+?3 : ℕ
+?4 : zero even
+</code></pre>
+
+<p>Another <code>C-c C-r</code> in hole <code>?4</code> will finally fill it in with <code>ZERO</code>. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  proof₁ : suc (suc (suc (suc zero))) even 
+  proof₁ = STEP { } (STEP { } ZERO)
+</pre></div>
+</div>
+</div>
+
+<pre><code>?1 : ℕ
+?3 : ℕ
+</code></pre>
+
+<p>The remaining two holes, <code>?1</code> and <code>?3</code>, can also be filled automatically based
+on the surrounding context. We can see what <em>constraints</em> on the holes are known
+to Agda by using the “Show Constraints” option, or by typing 
+<code>C-c C-=</code>. For the present example, this prints the following:</p>
+
+<pre><code>?1 := suc (suc zero)
+?3 := zero
+</code></pre>
+
+<p>Agda will fill in the holes for us if we use the “Solve Constraints” option, or
+<code>C-c C-s</code>, and our final proof becomes</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
+</pre></div>
+</div>
+</div>
+
+<p>Another feature worth mentioning is Agsy, an automatic proof searcher for
+Agda. Simply type <code>C-c C-a</code> in any hole and Agsy will search for an appropriate
+term to fill it. It’s not guaranteed to find anything, but it can be useful. 
+(In the example above, it works well.)</p>
+
+<hr />
+<p>### Implicits</p>
+
+<p>It can be annoying, though, to have to pass in those numbers to <code>STEP</code>
+explicitly, when Agda already knows from surrounding context exactly what they
+are. In these situations, you can use a single underscore (<code>_</code>) to indicate that
+you wish Agda to infer the value in this position during type-checking.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP _ (STEP _ ZERO)
+</pre></div>
+</div>
+</div>
+
+<p>If Agda cannot infer the value of the implicit underscore, an “unsolved
+metavariable” will be shown in the goals window, and the underscore will be
+highlighted in yellow. </p>
+
+<p>For this particular judgment, however, it is almost always obvious from known
+constraints what the value of those numbers should be. In these cases, it’s
+common to use an <em>implicit parameter</em> when declaring the type:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data _even : ℕ → Set where
+   ZERO : zero even
+   STEP : ∀ {x} → x even → suc (suc x) even    -- long form { x : ℕ } is also fine
+</pre></div>
+</div>
+</div>
+
+<p>Note that here we have added braces around the variable <code>x</code> in our definition of
+<code>STEP</code>. This lets us omit the number entirely when writing our proof:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP (STEP ZERO)
+</pre></div>
+</div>
+</div>
+
+<p>If Agda cannot, for whatever reason, infer the value of the implicit parameter,
+yellow highlighting and an unsolved metavariable will be added, as before. In
+those scenarios, you can manually specify the value of the implicit parameter by
+using braces: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
+proof₁ = STEP {suc (suc zero)} (STEP {zero} ZERO)
+</pre></div>
+</div>
+</div>
+
+<p>For <code>_even</code>, this is not usually necessary, but if you find yourself specifying
+implicit parameters frequently, you may wish to consider making it explicit.</p>
+
+<hr />
+
+<h3 id="implication">Implication</h3>
+
+<p>In Agda, an implication proposition corresponds to a <em>function type</em>.</p>
+
+<p>When we prove an implication, say <code>A ⇒ B</code>, we assume the premise <code>A</code>, and
+derive the conclusion <code>B</code>.  In terms of proof by construction, this
+is the same as implementing a function—a function that, when given an argument
+of type <code>A</code>, constructs an return value of type <code>B</code>. </p>
+
+<p>In other words, given a proof (by construction) of some proposition
+<code>A</code>, our function produces a proof of some proposition <code>B</code>.
+By writing such a function (and having Agda check it), we have constructed a
+proof of <code>A ⇒ B</code>.</p>
+
+<p>Consider the simple tautology <code>A ⇒ A</code>. 
+Let’s prove this in Agda! </p>
+
+<p>First, we prove it for the proposition that natural numbers exist, 
+that is, “if natural numbers exist, then natural numbers exist.” </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₂ : ℕ → ℕ
+proof₂ ν = ν      -- type \nu for ν.
+</pre></div>
+</div>
+</div>
+
+<p>So, proof of this tautology corresponds to the identity function. The reason for
+this is fairly clear: Given a proof of <code>A</code>, there’s one obvious way to produce
+a proof of <code>A</code>, and that is to produce the proof you were just given.</p>
+
+<hr />
+
+<h3 id="universal-quantification">Universal Quantification</h3>
+
+<p>It would be nice though, to make the above proof about <em>all</em> propositions, not merely
+the proposition that natural numbers exist—after all, the proof is the same
+regardless of the proposition involved!</p>
+
+<p>To do this, we have to exploit Agda’s flexible type system a little. We make our
+identity function take an additional parameter—a type. Given a type, we then
+return an identity function, instantiated for that type.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₂′ : (A : Set) → A → A
+proof₂′ _ x = x
+</pre></div>
+</div>
+</div>
+
+<p>The new type signature here means: Given some value of type <code>Set</code> (i.e., a type),
+called <code>A</code>, return a function from <code>A</code> to <code>A</code>.  We take this to be equivalent to
+the logical statement, “For any proposition <code>A</code>, <code>A ⇒ A</code>.” </p>
+
+<p>In logic, the <em>universal quantifier</em> symbol <code>∀</code> means “for any” or “for all”. 
+So, the above type signature could be stated as, $(\forall A) (A \Rightarrow A)$.
+Making propositions about <em>all</em> members of a set (or universe) is called
+<em>universal quantification</em>, and it corresponds to <em>parametric polymorphism</em>
+(including Java generics and C++ templates) in type system lingo.</p>
+
+<p>Now we can implement our special case proof, <code>proof₂</code>, in terms of the more
+general <code>proof₂′</code>, as follows: </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>proof₂ : ℕ → ℕ
+proof₂ = proof₂′ ℕ
+</pre></div>
+</div>
+</div>
+
+<p>In other words, “to prove ℕ → ℕ, apply <code>proof₂′</code> to type ℕ.”</p>
+
+<p>In the next section we will start a new Agda program so, before moving on, we
+list the full contents of our first Agda program, which resides in the file
+<a href="/downloads/code/agda/LearnYouAn2.agda">LearnYouAn2.agda</a>.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module LearnYouAn2 where
+
+  data ℕ : Set where
+    zero : ℕ
+    suc : ℕ → ℕ
+
+  _+_ : ℕ → ℕ → ℕ
+  zero + n = n
+  (suc n) + m = suc (n + m)
+
+  data _even : ℕ → Set where
+    ZERO : zero even
+    STEP : ∀ x → x even → suc (suc x) even
+
+  proof₁ : suc (suc (suc (suc zero))) even 
+  proof₁ = STEP (suc (suc zero)) (STEP zero ZERO)
+
+  proof₂ : ℕ → ℕ
+  proof₂ ν = ν
+
+  proof₂′ : (A : Set) → A → A
+  proof₂′ _ x = x
+</pre></div>
+</div>
+</div>
+
+<hr />
+
+<h3 id="conjunction">Conjunction</h3>
+
+<p>Unlike universal quantification or implication, conjunction and disjunction do
+not correspond to built-in types in Agda, however they are fairly
+straightforward to define. </p>
+
+<p>The <em>conjunction</em> of the propositions $P$ and $Q$ is denoted by 
+$P\conj Q$.  Informally, to prove the conjunction $P\conj Q$, we prove each of
+its components. If we have a proof each component, then we automatically have a
+proof of their conjunction. Thus conjunction corresponds to a <em>pair</em> or a <em>tuple</em>
+(more formally known as a <em>product type</em>) in Agda. </p>
+
+<p>More formally, to give meaning to conjunction, we must say how to introduce the
+judgment $P \conj Q\ \true$. A verification of $P \conj Q$ requires a proof of $P$ and
+a proof of $Q$.  Thus, the introduction rule for conjunction is,</p>
+
+<script type="math/tex; mode=display">\frac{P\ \true \quad Q\ \true}{P \conj Q\ \true}\quad \conj \mathrm{I}</script>
+
+<p>Let’s introduce conjunction in Agda.  Create a file called <tt>IPL.agda</tt>
+containing the following (and check it with <code>C-c C-l</code>):</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module IPL where
+
+  data _∧_ (P : Set) (Q : Set) : Set where
+    ∧-intro : P → Q → (P ∧ Q)
+</pre></div>
+</div>
+</div>
+
+<p>(The symbol <code>∧</code> is produced by typing <tt>\and</tt>.)</p>
+
+<p>Here we’ve defined a new data type, this time it is <em>parameterized</em> by two
+propositions, which make up the components of the conjunction. Conjunction
+itself is also a proposition, and we give it the type Set.</p>
+
+<p>Notice how the <code>∧-intro</code> constructor can only produce a proof of <code>P ∧ Q</code> if it
+is passed both a proof of <code>P</code> and a proof of <code>Q</code>. This is how conjunction is
+demonstrated <em>by construction</em>—it is impossible to construct a conjunction that
+is not supported by proofs of each component.</p>
+
+<p>We now prove some simple properties about conjunctions, such as <code>P ∧ Q ⇒ P</code>.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>  proof₁ : {P Q : Set} → (P ∧ Q) → P
+  proof₁ (∧-intro p q) = p
+</pre></div>
+</div>
+</div>
+
+<p>This is the elimination rule sometimes called “and-elim-1” or “and-elim-left.”<br />
+If we define a similar rule for “and-elim-2”, we have the following program:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module IPL where
+
+  data _∧_ (P : Set) (Q : Set) : Set where
+    ∧-intro : P → Q → (P ∧ Q)
+
+  proof₁ : {P Q : Set} → (P ∧ Q) → P
+  proof₁ (∧-intro p q) = p
+
+  proof₂ : {P Q : Set} → (P ∧ Q) → Q
+  proof₂ (∧-intro p q) = q
+
+</pre></div>
+</div>
+</div>
+
+<hr />
+
+<h3 id="bijection">Bijection</h3>
+
+<p>Now that we have defined conjunction and implication, we can define a notion of
+logical <em>equivalence</em>. Two propositions are <em>equivalent</em> if both propositions
+can be considered to be the same. This is defined as: if one is true, the other
+is also true. In logic, this is called <em>bijection</em> and is written as 
+<code>A ⇔ B</code>. Bijection can be expressed simply as a conjunction of two implications:
+If A is true then B is true, and if B is true then A is true. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>_⇔_ : (P : Set) → (Q : Set) → Set
+a ⇔ b = (a → b) ∧ (b → a)
+</pre></div>
+</div>
+</div>
+
+<p>(The symbol <code>⇔</code> is produced by typing <tt>&lt;=&gt;</tt>.)</p>
+
+<hr />
+
+<h3 id="proving-conjunction-properties">Proving conjunction properties</h3>
+
+<p>We can write programs (i.e. proofs) of the algebraic properties of
+conjunction. The commutative property says that 
+$A \conj B \Leftrightarrow B \conj A$.  Let’s prove it:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
+∧-comm′ (∧-intro p q) = ∧-intro q p
+
+∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
+∧-comm = ∧-intro (∧-comm′ {P} {Q}) (∧-comm′ {Q} {P}) -- implicits provided for clarity only.
+</pre></div>
+</div>
+</div>
+
+<p>Remove the implicits and have Agda check the following:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧-comm′ : {P Q : Set} → (P ∧ Q) → (Q ∧ P)
+∧-comm′ (∧-intro p q) = ∧-intro q p
+
+∧-comm : {P Q : Set} → (P ∧ Q) ⇔ (Q ∧ P)
+∧-comm = ∧-intro ∧-comm′ ∧-comm′
+</pre></div>
+</div>
+</div>
+
+<p>Let’s also prove associativity.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧-assoc₁ : { P Q R : Set } → ((P ∧ Q) ∧ R) → (P ∧ (Q ∧ R))
+∧-assoc₁ (∧-intro (∧-intro p q) r) = ∧-intro p (∧-intro q r)
+
+∧-assoc₂ : { P Q R : Set } → (P ∧ (Q ∧ R)) → ((P ∧ Q) ∧ R)
+∧-assoc₂ (∧-intro p (∧-intro q r)) = ∧-intro (∧-intro p q) r
+
+∧-assoc : { P Q R : Set } → ((P ∧ Q) ∧ R) ⇔  (P ∧ (Q ∧ R))
+∧-assoc = ∧-intro ∧-assoc₁ ∧-assoc₂
+</pre></div>
+</div>
+</div>
+
+<hr />
+
+<h3 id="disjunction">Disjunction</h3>
+
+<p>If conjunction is a <em>pair</em>, because it requires <em>both</em> proofs to hold, then
+disjunction is a <em>sum type</em> (also known as an <code>Either</code> type), because it only
+requires one proof in order to hold. In order to model this in Agda, we add
+<em>two</em> constructors to the type, one for each possible component of the
+disjunction. </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data _∨_ (P Q : Set) : Set where
+   ∨-intro₁ : P → P ∨ Q
+   ∨-intro₂ : Q → P ∨ Q
+</pre></div>
+</div>
+</div>
+
+<p>Using this, we can come up with some interesting proofs. The simplest one to
+prove is <em>disjunction elimination</em>, which is the rule 
+<code>∀A B C ⇒ ((A ⇒ C) ∧ (B ⇒ C) ∧ (A ∨ B))⇒ C</code>. 
+In other symbols, </p>
+
+<script type="math/tex; mode=display">\frac{A \disj B \quad A \Rightarrow C  \quad B \Rightarrow C}{C}</script>
+
+<p>In words, if $A$ implies $C$ and $B$ implies $C$, and
+$A$ is true or $B$ is true, then if follows that $C$ is true.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∨-elim : {A B C : Set} → (A → C) → (B → C) → (A ∨ B) → C
+∨-elim ac bc (∨-intro₁ a) = ac a
+∨-elim ac bc (∨-intro₂ b) = bc b
+</pre></div>
+</div>
+</div>
+
+<p>We can also prove the algebraic properties of disjunction, such as commutativity:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∨-comm′ : {P Q : Set} → (P ∨ Q) → (Q ∨ P)
+∨-comm′ (∨-intro₁ p) = ∨-intro₂ p
+∨-comm′ (∨-intro₂ q) = ∨-intro₁ q
+
+∨-comm : {P Q : Set} → (P ∨ Q) ⇔ (Q ∨ P)
+∨-comm = ∧-intro ∨-comm′ ∨-comm′
+</pre></div>
+</div>
+</div>
+
+<p>The associativity proof is left as an exercise for the reader.</p>
+
+<hr />
+
+<h3 id="negation">Negation</h3>
+
+<p>You have probably noticed if you’re familiar with boolean logic that I’ve
+avoided mentioning <em>false</em> throughout this entire section. Unlike boolean logic,
+Agda’s <em>intuitionistic</em> logic does not have a well-defined notion of “false”. In
+<em>classical</em> and boolean logics, all propositions are considered to be either
+true or false. Intuitionistic logic, by contrast, is purely <em>constructive</em>. You
+can either construct a proof for a proposition, making it true, or you can fail to
+construct a proof, making you feel bad.</p>
+
+<p>The only “false” values that exist in intuitionistic logic, therefore, are
+values for which <em>there can exist no proof</em>. In Agda, this corresponds to a type
+that contains no values. We call this type <code>⊥</code>, pronounced “bottom”. We define
+it like so:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>data ⊥ : Set where
+</pre></div>
+</div>
+</div>
+
+<p>That’s right. No, it’s not a mistake. There are no constructors for <code>⊥</code>. It is a
+type for which it is <em>impossible</em> to produce a value. Having such a value allows
+us to define negation (<code>¬A</code>) as true if <code>A</code> being true would mean bottom is true
+(which is impossible). Or, in more formal terms:  <code>¬A ⇔ (A ⇒ ⊥)</code> </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>¬ : Set → Set -- for ¬ type \neg
+¬ A = A → ⊥
+</pre></div>
+</div>
+</div>
+
+<hr />
+
+<h2 id="the-curry-howard-correspondence">The Curry Howard Correspondence</h2>
+
+<p>This section has taught you how to encode propositional logic into Agda’s type
+system. The correspondences discussed here between disjunction and sum types,
+conjunction and product types, functions and implication, and propositions and
+types are the fundamentals behind the 
+<a href="http://en.wikipedia.org/wiki/Curry–Howard_correspondence">Curry-Howard Correspondence</a>.
+Using these tools, you can encode any constructive proof in Agda, which covers a
+vast range of possible proofs, including the vast majority of proofs encountered
+in program verification.</p>
+
+<p>Future sections will introduce relational equality, and begin proving some
+theorems about the Peano numbers we introduced in the previous section.</p>
+
+<hr />
+<hr />
+
+<h1 id="much-needed-hole-filling">Much needed hole filling</h1>
+
+<p>(This section did not appear in the original version of the tutorial.  It is
+adapted from <a href="http://www.stephendiehl.com/posts/agda.html">Stephen Diehl’s tutorial</a>, 
+is essentially independent of the rest of the tutorial, and could be read immediately 
+after Section 1.)</p>
+
+<p>Let’s get some practice creating “much needed”<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup> gaps in our proofs and then
+filling them in.  As we learned above, Agda calls such gaps “holes”.</p>
+
+<p>Open a file called HoleFilling.agda and put the following code in it:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module HoleFilling where
+
+data Bool : Set where
+  false : Bool
+  true : Bool
+</pre></div>
+</div>
+</div>
+
+<p>Above we saw how to implement a general conjunction, but here we will implement a simpler 
+(post-fix) conjunction for the <code>Bool</code> type in order to demonstrate the creation and removal of holes.</p>
+
+<p>To implement conjunction for <code>Bool</code>, we merely have to give the value of the conjunction for each 
+of the four possible pairs of <code>Bool</code> values.  We begin by entering the following 
+(put this outside the indentation block of <code>data Bool</code>):</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ a b = ?
+</pre></div>
+</div>
+</div>
+
+<p>Note that <code>Bool → Bool → Bool</code> indicates the types of arguments <code>∧</code> should expect
+(namely, <code>∧</code> is a function from <code>Bool</code> type to <code>Bool → Bool</code> type).  Since Agda knows what to expect, 
+it can write much of the function for us.  As usual, use <code>C-c C-l</code> to type-check the program, and 
+Agda creates a hole where we had a question mark. Our program should now look like this</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>module HoleFilling where
+
+data Bool : Set where
+  false : Bool
+  true : Bool
+
+∧ : Bool → Bool → Bool
+∧ a b = {!!}
+</pre></div>
+</div>
+</div>
+
+<p>Now, with the cursor in the hole (i.e., at the braces { }), and with the hole highlighted, 
+type <code>C-c C-,</code> and Agda should respond with a list of goals that we must accomplish in order to give a 
+valid definition of <code>∧</code> for type <code>Bool</code>.</p>
+
+<pre><code>Goal: Bool
+————————————————————————————————————————————————————————————
+b : Bool
+a : Bool
+</code></pre>
+
+<p>With the cursor still in the hole, hit <code>C-c C-c</code> and Agda responds with
+“pattern variables to case”, which prompts us to introduce a case for the first variable.
+Next to the phrase  enter the variable <code>b</code>, to which Agda responds with </p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ a false = {!!}
+∧ a true = {!!}
+</pre></div>
+</div>
+</div>
+
+<p>Put the cursor in the first of the two new holes and again type <code>C-c C-c</code> but this time 
+enter a in response to the “pattern variables to case” prompt.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = {!!}
+∧ true false = {!!}
+∧ a true = {!!}
+</pre></div>
+</div>
+</div>
+
+<p>With the cursor in the hole, type <code>C-c C-c</code> and again enter a.</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = {!!}
+∧ true false = {!!}
+∧ false true = {!!}
+∧ true true = {!!}
+</pre></div>
+</div>
+</div>
+
+<p>Finally, we fill in the right hand sides to comport with conjunction:</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>∧ : Bool → Bool → Bool
+∧ false false = false
+∧ true false = false
+∧ false true = false
+∧ true true = true
+</pre></div>
+</div>
+</div>
+
+<p>Instead of filling in the holes in the end manually, you could
+place the cursor in each of the holes and hit <code>C-c C-a</code>.
+The result will be four <code>false</code>’s, which wouldn’t be a very 
+useful definition of conjunction… so change the last <code>false</code> to <code>true</code>!</p>
+
+<hr />
+<hr />
+
+<h1 id="copyright">Copyright</h1>
+
+<p>Copyright (c) 2013, Liam O’Connor-Davis</p>
+
+<p>All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+
+<ul>
+  <li>
+    <p>Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.</p>
+  </li>
+  <li>
+    <p>Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided
+with the distribution.</p>
+  </li>
+  <li>
+    <p>Neither the name of Liam O’Connor-Davis nor the names of other
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.</p>
+  </li>
+</ul>
+
+<p><small>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+“AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</small></p>
+
+<hr />
+<hr />
+
+<h1 id="notes">Notes</h1>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><code>suc</code> standing for successor.  <a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Unlike Haskell, type declarations are mandatory.  <a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Don’t worry if you’re scared by that <code>∀</code> sign, all will be explained in time.  <a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Don’t be scared by the term - structural recursion is when a recursive function follows the structure of a recursive data type - it occurs very frequently in functional programs.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>If you don’t get this reference, type “much needed gap” into your favorite search engine.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">Liam O'Connor-Davis (with a few additions by wjd)</span></a></span>
+  
+
+ - 
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T00:00:00-06:00" pubdate data-updated="true"></time> - 
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+</div>
+
+    
+    
+      <a class="pull-left" href="/2014/02/13/isotopy/" title="Previous Post: Isotopy">&laquo; Isotopy</a>
+    
+    
+  </footer>
+
+</div>
+
+        
+      </article>
+    </div>
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>recent posts</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/isotopy/">Isotopy</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/typefunc/">TypeFunc</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/archives">archives</a></h2>
+  </div>
+  <!-- <div class="span3"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span7">
+    
+<h2>recent git activity</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="williamdemeo" data-github-repo-count="5" data-github-skip-forks="true">
+  <dd class="loading">updating...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
+
+  </div>
+  <!-- <div class="span4"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span2">
+    <h2>found on</h2>
+
+<a href="https://github.com/williamdemeo/" rel="tooltip" title="GitHub"><img class="social_icon" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+
+
+<a href="https://plus.google.com/u/0/+williamdemeo?rel=author" rel="tooltip" title="Google Plus"><img class="social_icon" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
+
+
+
+
+
+<a href="http://mathoverflow.net/users/9124/william-demeo/" rel="tooltip" title="MathOverflow"><img class="social_icon" alt="math overflow icon" src="/images/mathoverflow.ico"></a>
+
+
+
+<a href="http://math.stackexchange.com/users/10915/william-demeo/" rel="tooltip" title="Math SE"><img class="social_icon" alt="math overflow icon" src="/images/mathstackexchange.ico"></a>
+
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">William DeMeo</a>
+  - Copyright &copy; 2014 - William DeMeo
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+</body>
+</html>

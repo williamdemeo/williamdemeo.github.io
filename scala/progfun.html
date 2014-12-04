@@ -1,0 +1,1113 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Scala Course Notes - William DeMeo</title>
+  <meta name="author" content="William DeMeo">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="These are very rough personal notes from a Coursera course I took in 2013 called
+Functional Programming Principles in Scala.
+(The course will be run &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://williamdemeo.github.io/scala/progfun.html">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="William DeMeo" />
+  <meta name="og:title" content="Scala Course Notes" />
+  <meta name="og:description" content="These are very rough personal notes from a Coursera course I took in 2013 called
+Functional Programming Principles in Scala.
+(The course will be run &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/scala/progfun.html"/>
+  <meta name="url" content="http://williamdemeo.github.io/scala/progfun.html">
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/foundation.min.js"></script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+  TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="/javascripts/AMSmath.js" type="text/javascript"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44974674-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">William DeMeo</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/archives">Archives</a></li>
+<!--      <li><a href="/pages">Pages</a></li>-->
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:williamdemeo.github.io" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+<div class="wrapper_single">
+  <div class="container">
+    <article class="span8 offset2 article-format" role="article">
+      <div role="div">
+        
+        <header>
+          <h1 class="entry-title">Scala Course Notes</h1>
+          <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T00:57:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time></p>
+        </header>
+        
+        <p>These are <em>very rough</em> personal notes from a Coursera course I took in 2013 called
+<a href="https://class.coursera.org/progfun-003">Functional Programming Principles in Scala</a>.
+(The course will be run again in <a href="https://www.coursera.org/course/progfun">April 2014</a>.)</p>
+
+<p>A follow up course called <a href="https://class.coursera.org/reactive-001">Principles of Reactive Programming</a> 
+covers parallel programming and concurrency in Scala.</p>
+
+<hr />
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="tools-setup-for-linux">Tools Setup for Linux</h3>
+<p>See <a href="https://class.coursera.org/progfun-003/wiki/ToolsSetup">this page</a></p>
+
+<ol>
+  <li>Download the <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">sbt.tgz</a> file from </li>
+</ol>
+
+<p><a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/">http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/</a></p>
+
+<p>(I have upgraded to <a href="http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.tgz">version 0.13.1</a>, which was the latest as of March 2014.)</p>
+
+<ol>
+  <li>
+    <p>Unpack the archive to a directory of your choice.</p>
+
+    <pre><code> tar xvzf sbt.tgz
+</code></pre>
+  </li>
+  <li>
+    <p>Add the <code>bin/</code> directory to the <code>PATH</code> environment variable:</p>
+
+    <pre><code> echo "export PATH=/PATH/TO/YOUR/sbt/bin:$PATH" &gt;&gt; ~/.bash_profile
+ source ~/.bash_profile
+</code></pre>
+  </li>
+</ol>
+
+<p>in an editor (create it if it doesn’t exist) and add the following line export 
+Verify that sbt is installed correctly: Open a new terminal (to apply the
+changed .bashrc) and type sbt -h, you should see a help message from sbt. If you
+have problems installing sbt, ask for help on the forums. </p>
+
+<hr />
+
+<h2 id="week-1">Week 1</h2>
+
+<h3 id="lecture-11---programming-paradigms">Lecture 1.1 - Programming Paradigms</h3>
+<p>The key point of this lecture is</p>
+
+<p><em>If we want to implement high-level concepts following their mathematical
+theories, there’s no place for mutation.</em></p>
+
+<p>Avoid mutations; get new ways to abstract and compose functions.</p>
+
+<p>Outside resource Cited:<br />
+<a href="http://youtu.be/3jg1AheF4n0">YouTube: O’Reilly OSCON Java 2011: “Working Hard to Keep It Simple”</a></p>
+
+<ul>
+  <li>non-determinism results from parallel processing plus mutable state.  </li>
+  <li>Functional programming (with immutable variables) makes concurrency much easier
+to deal with.</li>
+</ul>
+
+<h3 id="lecture-12---elements-of-programming">Lecture 1.2 - Elements of Programming</h3>
+
+<p><strong>Main Ideas</strong></p>
+
+<ul>
+  <li>Model of evaluation: the substitution model.  </li>
+  <li>Definitions: the keyword <code>def</code>  </li>
+  <li>Function parameters come with their types.  </li>
+  <li>evaluate function arguments from left to right.  </li>
+  <li>The substituion model: all evaluation does is reduce an expression to a
+value.  </li>
+  <li>This model can express every algorithm (Church; $\lambda$-calculus)  </li>
+  <li>This can be applied to all expressions as long as there are <em>no side effects.</em>
+e.g., you can’t represent <code>x++</code> using substituion evaluation.  </li>
+  <li>Does every expression reduce to a value in a finite number of steps? No.
+Example: <code>def loop: Int = loop</code>  </li>
+</ul>
+
+<h3 id="lecture-13---evaluation-strategies-and-termination">Lecture 1.3 - Evaluation Strategies and Termination</h3>
+
+<ul>
+  <li>Two forms of substitution evaluation strategies: <em>call-by-value</em> and
+<em>call-by-name</em>. Both strategies reduce to the same final values assuming the
+evaluation terminates.  If a call-by-value evaltion terminates, then so does
+call by name, but not conversely.  </li>
+  <li><em>Scala is usually call-by-value</em>  (but if the type of a function parameter
+starts with =&gt;, Scala uses call-by-name). The reason Scala uses call-by-value
+is because it often has exponentially better performance, since you only need
+to evaluate a given argument once, whereas call-by-name performs a new
+evaluation of this same argument for each appearance of the argument inside
+the function.  Also, it’s usually easier to know exactly when an expression
+will be evaluated under call-by-value.</li>
+  <li>
+    <p>You can force Scala to use call-by-name as follows: </p>
+
+    <pre><code>  def constOne(x: Int, y: =&gt; Int) = 1
+</code></pre>
+
+    <p>Here, the line <code>constOne(1+2, loop)</code> would terminate because the second
+argument is call-by-name, whereas <code>constOne(loop,1+2)</code> would not terminate
+because the first argument is call-by-value.</p>
+  </li>
+</ul>
+
+<h3 id="lecture-14---conditionals-and-value-definitions">Lecture 1.4 - Conditionals and Value Definitions</h3>
+<ul>
+  <li><strong>Boolean expressions</strong><br />
+Constants: true false<br />
+Negation: !b<br />
+Conunction: b &amp;&amp; b<br />
+Disjunction: b || b<br />
+Comparison operations: e &lt;= e, e &gt;= e, e &lt; e, e &gt; e, e == e, e != e   </li>
+  <li><strong>Rewrite Rules</strong><br />
+Note that<br />
+<code>true &amp;&amp; e</code> evaluates to <code>e</code>, <code>false &amp;&amp; e</code> evaluates to <code>false</code>, <br />
+<code>true || e</code> evaluates to <code>true</code>, <code>false || e</code> evaluates to <code>e</code>,<br />
+so, we could rewrite <code>if (b) e1 else e2</code> as <code>b &amp;&amp; e1 || e2</code>.  </li>
+  <li>
+    <p><strong>def versus val</strong><br />
+Definitions that use <code>def</code> are <em>by-name</em>; the right-hand-side is evaluated on <em>each use</em>.<br />
+Definitions that use <code>val</code> are <em>by-value</em>; the right-hand-side is evaluated
+immediately and only once. For example,</p>
+
+    <pre><code>  val x = 2
+  val y = square(x)
+</code></pre>
+
+    <p>Since the right-hand side of a <code>val</code> is evaluated at the point of definition,
+<code>y</code> has the value 4, not the value <code>square(x)</code>.</p>
+
+    <p>Example:</p>
+
+    <pre><code>  def loop: Boolean = loop
+</code></pre>
+
+    <p>This defines loop as a function that is supposed to return a Boolean, 
+but simply calls itself. Now, <code>def x = loop</code> sets x equal to the loop function, 
+which is no problem, but <code>val x = loop</code> crashes because it attempts to evaluate 
+immediately and gets caught in the infinite recursive call.  In the REPL:</p>
+
+    <p>scala&gt; def loop: Boolean = loop
+  loop: Boolean</p>
+
+    <p>scala&gt; def x = loop
+  x: Boolean</p>
+
+    <p>scala&gt; val x = loop</p>
+  </li>
+  <li>
+    <p><strong>Exercise</strong> Write <code>and</code> and <code>or</code> function without using <code>&amp;&amp;</code> and <code>||</code>.</p>
+
+    <pre><code>def and(x: Boolean, y: Boolean) = if(x) y else false
+def or(x: Boolean, y: Boolean) = if(x) true else y
+</code></pre>
+
+    <p>Now suppose the second argument of <code>and</code> is nonterminating, say, </p>
+
+    <pre><code>and(false, loop)
+</code></pre>
+
+    <p>Even though <code>and</code> should short circuit because of the false first argument, 
+this doesn’t work because the second argument is call-by-value.  We can fix 
+this by modifying the argument to be call-by-name as follows:</p>
+
+    <pre><code>def and(x: Boolean, y: =&gt; Boolean) = if(x) y else false
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="lecture-15---example-square-roots-with-newtons-method">Lecture 1.5 - Example: square roots with Newton’s method</h3>
+
+<p>First Scala program in Eclipse!</p>
+
+<ul>
+  <li>Scala needs an explicit return type for recursive functions.  </li>
+  <li><code>Ctrl-Shift-f</code> nicely formats (indents) all code in the current buffer</li>
+</ul>
+
+<p>(easy stuff)</p>
+
+<h3 id="lecture-16---blocks-and-lexical-scope">Lecture 1.6 - Blocks and Lexical Scope</h3>
+<p>(easy stuff)</p>
+
+<h3 id="lecture-17---tail-recursion">Lecture 1.7 - Tail Recursion</h3>
+
+<ul>
+  <li>
+    <p><strong>Evaluating a function application</strong>
+Rewriting rule:</p>
+
+    <pre><code>  def f(x1, ..., xn) = B; ... f(v1, ..., vn)
+</code></pre>
+
+    <p>could be written </p>
+
+    <pre><code>  def f(x1, ..., xn) = B; ... [v1/x1, ..., vn/xn]B
+</code></pre>
+
+    <p>Here, the notation <code>[v1/x1, ..., vn/xn]B</code> means 
+“v1 for x1, …, vn for xn in B”, that is, 
+substitute the value vi for xi in the function body B.</p>
+  </li>
+  <li>
+    <p><strong>Tail Recursion</strong><br />
+If a function simply calls itself as its last action, the function’s
+stack frame can be reused.  This is called <em>tail recursion</em>.</p>
+
+    <p>A tail recursive function can execute in constant stack space, so</p>
+
+    <p><em>tail recursive functions are iterative processes.</em></p>
+
+    <p>A tail recursive function is the functional programmer’s loop—it excutes
+just as efficiently as a loop in an imperative program.</p>
+
+    <p>More generally, if the last action of a function consists of calling
+a single function (which may be the same function), one stack frame
+would be sufficient for both functions. Such calls are called <em>tail-calls.</em></p>
+
+    <p>Here is a non-example (i.e., a recursive function that is not tail recursive):</p>
+
+    <pre><code>  def factorial( n: Int ): Int = 
+      if (n==0) 1 else n * factorial( n-1 )
+</code></pre>
+
+    <p>Notice that after the recursive call to factorial, there is still work to be done.</p>
+
+    <p>We will rewrite factorial in a tail-recursive way.  However, we pause to ask:</p>
+
+    <p>Should every recursive function be reformulated to be tail recursive?</p>
+
+    <p>No.  Tail recursion is used to avoid very deep recursive chains.  Most JVM implementations 
+limit the maximal depth of recursion to a couple of thousands of stack frames.</p>
+
+    <p>The factorial function is not succeptible to this because the values computed 
+by factorial grow so quickly that they exceed the range of integers before 
+stack overflow. In such cases, use the simpler function definitions and heed Knuth:</p>
+
+    <p>“Premature optimization is the root of all evil.” –Donald Knuth</p>
+
+    <p>To define a tail recursive version of factorial, we use an accumulator:</p>
+
+    <pre><code>  def factorial( n: Int , acc: Int ): Int = 
+      if ( n == 0 ) acc else factorial( n-1, acc*n )
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="week-2">Week 2</h2>
+
+<h3 id="lecture-21---higher-order-functions">Lecture 2.1 - Higher-Order Functions</h3>
+<p>We could sum the integers between a and b (inclusive) as follows:</p>
+
+<pre><code>def sumInts(a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else a + sumInts(a+1, b)
+</code></pre>
+
+<p>Then sum the squares of integers between a and b (inclusive):</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else a*a + sumSquares(a+1, b)
+</code></pre>
+
+<p>Sum the cubes or sum the factorials, etc.  But this can be done more 
+generally and elegantly if we simply pass the functions—e.g., square, 
+cube, factorial—as arguments:</p>
+
+<pre><code>def sumFunc(f: Int =&gt; Int, a: Int, b: Int): Int =
+  	    if (a &gt; b) 0 else f(a) + sumFunc(f, a+1, b)
+</code></pre>
+
+<p>Then <code>sumSquares</code> could be implemented as</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc(square, a, b)
+def square(a: Int): Int = a * a
+</code></pre>
+
+<p>But even that’s not great because then we end up defining all these
+little auxiliary functions.  Since functions are first class objects, we 
+use anonymous functions as “function literals” just as we use string literals
+as follows:</p>
+
+<pre><code>println("abc")
+</code></pre>
+
+<p>Instead of the also correct, but more tedious,</p>
+
+<pre><code>def str = "abc"
+println(str)
+</code></pre>
+
+<p>The syntax for anonymous functions in Scala is as follows:</p>
+
+<pre><code>(x: Int) =&gt; x * x
+(x: Int, y: Int) =&gt; x + y
+</code></pre>
+
+<p>Every anonymous function can be expressed using def instead. That is,</p>
+
+<pre><code>(x1: T1, ..., xn: Tn) =&gt; E
+</code></pre>
+
+<p>can be implemented as follows:</p>
+
+<pre><code>def f(x1: T1, ..., xn: Tn) =&gt; E; f
+</code></pre>
+
+<p>But sometimes we need brackets so the name f doesn’t get confused with another function:</p>
+
+<pre><code>{def f(x1: T1, ..., xn: Tn) =&gt; E; f}
+</code></pre>
+
+<p>So, returning to the example above, we could have defined sumSquares as:</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc((x: Int) =&gt; x*x, a, b)
+</code></pre>
+
+<p>or, more simply,</p>
+
+<pre><code>def sumSquares(a: Int, b: Int): Int = sumFunc(x =&gt; x*x, a, b)
+</code></pre>
+
+<p>The sum function above uses linear recursion.  We can write a tail recursive version.
+(Here the tail recursion is actually useful, unlike in the factorial case.)</p>
+
+<pre><code>def sum(f: Int =&gt; Int, a: Int, b: Int): Int = {
+    def sumAux(a: Int, acc: Int): Int = {
+        if (a &gt; b) acc else sumAux(a+1, acc + f(a))
+  		}
+    sumAux(a, 0)
+}  
+
+sum(x =&gt; x*x, 0,3)   //&gt; res4: Int = 14
+</code></pre>
+
+<h3 id="lecture-22---currying">Lecture 2.2 - Currying</h3>
+<p>Another version of the sum function could employ Currying.<br />
+First, we could do this simply as follows:</p>
+
+<pre><code>def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = {
+    def sumAux(a: Int, acc: Int): Int = {
+        if (a &gt; b) acc else sumAux(a+1, acc + f(a))
+  		}
+    sumAux(a, 0)
+}  
+</code></pre>
+
+<p>Then, the expression </p>
+
+<pre><code>sum(x =&gt; x*x)_
+</code></pre>
+
+<p>is valid.  It is a “partially applied” function.  </p>
+
+<p>Alternatively, we could get rid of the a and b parameters:</p>
+
+<pre><code>def sum(f: Int =&gt; Int): (Int, Int) =&gt; Int = {
+    def sumAux(a: Int, b: Int): Int = {
+        if (a &gt; b) 0 
+		else f(a) + sumAux(a+1, b)
+  		}
+    sumAux
+}  
+</code></pre>
+
+<p>This gives us a function that returns, not an <code>Int</code>, but a function
+of type <code>(Int, Int) =&gt; Int</code>.  So now we could define sumSquares as follows:</p>
+
+<pre><code>def sumSquares = sum(x =&gt; x*x)
+sumSquares(0, 3) //&gt; res3: Int = 14
+</code></pre>
+
+<p>Or avoid the middle man and use the sum function directly, as in</p>
+
+<pre><code>sum(x=&gt; x*x*x)(0, 3)  //&gt; res3: Int = 36
+</code></pre>
+
+<p>This is the same as</p>
+
+<pre><code>(sum(x=&gt; x*x*x))(0, 3)
+</code></pre>
+
+<p>So we see that function application associates to the left.</p>
+
+<p><strong>Products</strong><br />
+We can define a product function in a similar way.  We just need to abstract 
+out the identity and the binary operation (instead of 0 we have 1, and instead of + we have *).</p>
+
+<pre><code>def product(f:Int =&gt; Int)(a: Int, b: Int): Int = {
+    if (a&gt;b) 1
+    else f(a) * product(f)(a+1, b)
+}                                               //&gt; product: (f: Int =&gt; Int)(a: Int, b: Int)Int
+</code></pre>
+
+<p>We can define factorial in terms of this product function.</p>
+
+<pre><code>def factorial(b: Int): Int = product(a=&gt;a)(1,b) //&gt; factorial: (b: Int)Int
+// Test it:
+factorial(3)                                    //&gt; res0: Int = 6
+</code></pre>
+
+<p><strong>MapReduce</strong> We can simultaneously generalize sum and product.  Since we are 
+providing a mapping (with f), and then reducing (with the binary op), we should call
+the generalized version <code>mapReduce</code>.</p>
+
+<pre><code>def mapReduce(map: Int =&gt; Int, reduce: (Int, Int) =&gt; Int, unit: Int)(a: Int, b: Int): Int = {
+  	    if(a &gt; b) unit
+    else reduce(map(a), mapReduce(map, reduce, unit)(a+1, b))
+}
+
+// Test it:
+mapReduce(x =&gt; x*x, (a, b) =&gt; a+b, 0)(0, 3)  //&gt; res1: Int = 14
+</code></pre>
+
+<h3 id="lecture-23---example-finding-fixed-points">Lecture 2.3 - Example: Finding Fixed Points</h3>
+
+<h3 id="lecture-24---scala-syntax-summary">Lecture 2.4 - Scala Syntax Summary</h3>
+
+<h3 id="lecture-25---functions-and-data">Lecture 2.5 - Functions and Data</h3>
+<p>At about 3’30” of the video lecture, the (Java) package called week3 and a
+new scala worksheet called rationals.sc are created.</p>
+
+<h3 id="lecture-26---more-fun-with-rationals">Lecture 2.6 - More Fun With Rationals</h3>
+
+<h3 id="lecture-27---evaluation-and-operators">Lecture 2.7 - Evaluation and Operators</h3>
+
+<hr />
+
+<h2 id="week-3-data-and-abstraction">Week 3: Data and Abstraction</h2>
+
+<h3 id="lecture-31---class-hierarchies">Lecture 3.1 - Class Hierarchies</h3>
+<p>abstract class – may contain members that are not implemented.  You cannot
+instantiate abstract classes.  You must implement them with a class that extends
+the abstract class.</p>
+
+<p><strong>Example:</strong> IntSet (abstract), Empty extends IntSet, NonEmpty extends IntSet.
+The classes that extend (implement) the abstract class implement all the
+unimplemented members of the abstract class.  They can also implement members
+that were already implmented in the abstract class, but then you need to use
+<em>override.</em></p>
+
+<p>superclasses, subclasses.  Every class extends another class.  If no explicit
+class is given, then the standard Java Object class is assumed.</p>
+
+<p>The direct or indirect superclasses of a class are called the <em>base classes.</em></p>
+
+<p>Standalone applications.  Hello world program.  Create this in Eclipse not as a Scala
+worksheet, but as a <em>Scala Object.</em></p>
+
+<p>The implementation of the union operation for IntSet is a really nice example of
+functional object oriented programming.  The union is implemented recursively.
+For the Empty object, union obviously returns the argument</p>
+
+<pre><code>def union(other: IntSet) = other
+</code></pre>
+
+<p>For the NonEmpty class, the union is implemented as follows:</p>
+
+<pre><code>class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet {
+
+    def union(other: IntSet): IntSet =
+	    ((left union right) union other) incl elem
+
+}
+</code></pre>
+
+<p>How cool is <em>that</em>?!</p>
+
+<p>How is this done in an object oriented language?<br />
+Using the <em>dynamic method dispatch</em> model.  This means that the code invoked by a
+method call depends on the runtime type of the object that contains the method.</p>
+
+<p>Dynamic dispatch is analogous to calls to higher-order functions in a purely
+functional language.</p>
+
+<h3 id="lecture-32---how-classes-are-organized">Lecture 3.2 - How Classes Are Organized</h3>
+<p>Classes and objects are organized in packages.  Packages are imported with the
+<code>import</code> statement.  Some entities are imported automatically in every Scala
+program.  These are </p>
+
+<ul>
+  <li>all members of package scala  </li>
+  <li>all members of package java.lang</li>
+  <li>all memebers of singleton object scala.Predef</li>
+</ul>
+
+<p>You can explore the standard Scala library using the scaladoc web pages at</p>
+
+<p><a href="www.scala-lang.org/api/current/index.html">www.scala-lang.org/api/current/index.html</a></p>
+
+<p><strong>Traits</strong>
+In Scala, like Java, a class can only have one super class.  That is, Scala
+is a <em>single inheritance</em> language. But sometimes, we want a class to inherit
+properties from several super entities.  To do this we use <em>traits</em>.  For example,</p>
+
+<pre><code>trait Planar {
+	def height: Int
+	def width: Int
+	def surface = height * width
+}
+</code></pre>
+
+<p>Classes can inherit from at most one class but from arbitrarily many traits.
+For example,</p>
+
+<pre><code>class Square extends Shape with Planar with Movable
+</code></pre>
+
+<p>Thus, Square has one superclass called Shape, but it also inherits traits Planar
+and Movable.</p>
+
+<p><strong>Main distinction</strong> Traits do not have val members.</p>
+
+<p>Special types in the hierarchy:  At the top, there is the <code>Any</code> class and its
+subclasses, <code>AnyVal</code> and <code>AnyRef</code>.  At the bottom, there is the <code>Nothing</code> class
+which is a subclass of <code>Null</code>.</p>
+
+<p>Null is a subclass of all the types that are reference types.  If, for example, a String
+is expected, then you can pass a null value.</p>
+
+<pre><code>val x = null
+val y: String = x
+</code></pre>
+
+<p>However, <code>val z: Int = null</code> doesn’t work because Null is not a subclass of
+subclasses of AnyVal.</p>
+
+<p>Consider the line</p>
+
+<pre><code>if (true) 1 else false                    //&gt; res1: AnyVal = 1
+</code></pre>
+
+<p>The result is of type AnyVal, because the type checker picks a type that
+is the least upper bound of the types involved in the expression.  In
+this example, we have 1 and false, which are Int and Boolean, resp.  The
+“least” type that contains both is AnyVal.</p>
+
+<p><strong>Errors</strong></p>
+
+<p>To immediately halt execution of the program and output an error message:</p>
+
+<pre><code>def error(msg: String) = throw new Error(msg)
+</code></pre>
+
+<h3 id="lecture-33---polymorphism">Lecture 3.3 - Polymorphism</h3>
+
+<p><strong>Type parameterization</strong> Running example: the immutable list</p>
+
+<p><strong>Cons-List</strong></p>
+
+<p>Nil – the empty list<br />
+Cons – a cell containing the first element of the list and a pointer to the
+rest of the list</p>
+
+<p>In Eclipse, create a Scala Trait called <code>List</code>.  (at 5’55” of Lecture 3.3)</p>
+
+<p><strong>Generics</strong></p>
+
+<p>In Scala, you can put field definitions in parameter lists, instead of in the
+body of the class.  For example, the following:</p>
+
+<pre><code>class Cons[T](val head: T, val tail: List[T]) extends List[T] {
+    def isEmpty = false
+}
+</code></pre>
+
+<p>is equivalent to</p>
+
+<pre><code>class Cons[T](_head: T, _tail: List[T]) extends List[T] {
+    def isEmpty = false
+	val head = _head
+	val tail = _tail
+}
+</code></pre>
+
+<p><strong>Type Erasure</strong> Type parameters do not affect evaluation in Scala.  We can
+  assume that ll type parameters and type arguments are removed before
+  evaluating the program.  Scala shares this with Java, Haskell, ML and OCaml.</p>
+
+<hr />
+
+<h2 id="week-4-types-and-pattern-matching">Week 4: Types and Pattern Matching</h2>
+
+<h3 id="lecture-41---functions-as-objects">Lecture 4.1 - Functions as Objects</h3>
+
+<h3 id="lecture-43---subtyping-and-generics">Lecture 4.3 - Subtyping and Generics</h3>
+<p>Two basic principles of polymorphism are subtyping and generics.</p>
+
+<p>(See page 54 of Scala by Example, Odersky.)</p>
+
+<p>If we have a function that takes any subtype of IntSet and returns something of
+that same type, the interface could be something like this:</p>
+
+<pre><code>def assertAllPos(r: IntSet): IntSet = ...
+</code></pre>
+
+<p>But this isn’t very precise.  Instead, we could specify that the return type is
+the same as follows:</p>
+
+<pre><code>def assertAllPos[S &lt;: IntSet](r: S): S = ... 
+</code></pre>
+
+<p>Here, “&lt;: IntSet” is an upper bound on the type parameter S.  It means S can be
+instantiated only to types that conform to IntSet.  I believe this means that
+once we are passed the parameter r of a specific type S, then the return type
+must also be of type S.  (It’s not clear whether this allows return type
+to be a subtype of type S.  We should check this.)</p>
+
+<p>Generally, the notation</p>
+
+<pre><code>S &lt;: T // means S is a subtype of T
+S &gt;: T // means S is a supertype of T
+</code></pre>
+
+<p>With the &gt;: operation we can be even more precise:</p>
+
+<pre><code>def assertAllPos[S &gt;: NonEmpty &lt;: IntSet](r: S): S = ...
+</code></pre>
+
+<p>would restrict S to be of a type between NonEmpty and IntSet.</p>
+
+<p>Question: How do we specify that S must be of a specific type and not of a
+subtype?  Perhaps as follows?</p>
+
+<pre><code>def assertAllPos[S &gt;: IntSet &lt;: IntSet](r: S): S = ...
+</code></pre>
+
+<p><strong>Important:</strong> Arrays are not covariant in Scala, unlike in Java, <em>because they
+  are mutable</em>.  (Lists in Scala are immutable, so they are covariant.) For example,
+  in Java, one would have</p>
+
+<pre><code>    NonEmpty[] &lt;: IntSet[]
+</code></pre>
+
+<p>This causes problems and leads to runtime errors.  (See Lecture 4.4 on <em>variance</em>
+for more details.)</p>
+
+<p><strong>Liskov Substitution Principle</strong>
+If A &lt;: B, and if q(x) is a property provable for objects x:B,
+then q(y) should be provable for objects y:A.</p>
+
+<h3 id="lecture-42---objects-everywhere">Lecture 4.2 - Objects Everywhere</h3>
+<p><em>This is an important lecture.</em></p>
+
+<p>After explaining how to implement Boolean as a class instead of a primitive type
+(see also page 37 of Scala by Example), Odersky explains how to implement the
+type Nat (the Peano numbers) in Scala.</p>
+
+<h3 id="lecture-44---variance">Lecture 4.4 - Variance</h3>
+
+<h3 id="lecture-45---decomposition">Lecture 4.5 - Decomposition</h3>
+
+<p>Suppose we want to write a small interpreter for arithmetic expressions.  Let’s
+restrict to just numbers and sums of numbers.  We will have an expression class
+Expr with two subclasses, Number and Sum.  We could have, outside our Expr
+class, an eval method that tests whether the input is a number or a sum and then
+evaluates it.  First solution, use type tests and type casts.  This is low
+level and potentailly unsafe.  Here’s a better, object oriented solution:</p>
+
+<pre><code>trait Expr {
+	def eval: Int
+}
+	
+class Number(n: Int) extends Expr {
+	def eval: Int = n
+}
+
+class Sum(e1: Expr, e2: Expr) extends Expr {
+	def eval: Int = e1.eval + e2.eval
+}
+</code></pre>
+
+<p>But what if we decide later to have other subclasses?  Then we need
+to implement an eval method for each. It is tedious to have to modify all the
+subclasses of Expr.  Also, what if we now want a show method to print out the
+string representation of Expr subclass objects.  Worse than that, what if we
+want to simplify expressions?  A given expression might be a composition of sums
+and products and it’s not clear how to implement a simplify method.  The
+solution is pattern matching, which we take up in the next lecture.</p>
+
+<h3 id="lecture-46---pattern-matching">Lecture 4.6 - Pattern Matching</h3>
+<p>(See page 43 of Scala by Example.)</p>
+
+<p>Pattern matching allows us to find a general and convenient way to access
+objects in an extensible class hierarchy.</p>
+
+<p>The three solutions we have seen all have shortcomings.  They were:</p>
+
+<ul>
+  <li>Classification and access methods: quadratic explosion.</li>
+  <li>Type tests and casts: unsafe, low-level.</li>
+  <li>Object oriented decomposition: does not always work, need to touch all classes
+to implement a new method. (Doesn’t work for non-local stuff.)</li>
+</ul>
+
+<p><strong>Case Classes</strong> the sole purpose of test and accessor functions is to reverse
+  the construction process.  This is automated by pattern matching.</p>
+
+<pre><code>trait Expr
+case class Number(n: Int) extends Expr
+case class Sum(e1: Expr, e2: Expr) extends Expr
+</code></pre>
+
+<p>We get added functionality by adding case.  The compiler implicitly adds
+companion objects:</p>
+
+<pre><code>object Number {
+	def apply(n: Int) = new Number(n)
+}
+
+object Sum {
+	def apply(e1: Expr, e2: Expr) = new Sum(e1, e2)
+}
+</code></pre>
+
+<p>We saw earlier that you can manually do this.  Put a <code>def apply</code> method in your
+class and then you can instantiate the class without the new keyword, as in
+<code>Number(2)</code> instead of <code>new Number(2)</code>.</p>
+
+<p>Pattern matching is a generalization of switch from C or Java. It is expressed
+in Scala using the keyword match.  For example,</p>
+
+<pre><code>def eval(e: Expr): Int = e match {
+	case Number(n) =&gt; n
+	case Sum(e1, e2) =&gt; eval(e1) + eval(e2)
+}
+</code></pre>
+
+<p>Patterns are constructed from:</p>
+
+<ul>
+  <li>constructors; e.g., Number, Sum</li>
+  <li>variables; e.g., n, e1, e2</li>
+  <li>wildcard patters _</li>
+  <li>constants; e.g. 1, true</li>
+</ul>
+
+<p>Note: <em>variables always begin with a lowercase letter; constants begin
+with a capital letter</em> (except for reserved words like null, true, false).</p>
+
+<p>As an alternative to the above implementation of eval, we could make eval a
+member method of the Expr trait:</p>
+
+<pre><code>trait Expr {
+	def eval: Int = this match {
+		case Number(n) =&gt; n
+		case Sum(e1, e2) =&gt; e1.eval + e2.eval
+	}
+}
+</code></pre>
+
+<hr />
+
+<h2 id="week-5-lists">Week 5: Lists</h2>
+
+<h3 id="lecture-51---more-functions-on-lists">Lecture 5.1 - More Functions on Lists</h3>
+
+<h3 id="lecture-52---pairs-and-tuples">Lecture 5.2 - Pairs and Tuples</h3>
+
+<h3 id="lecture-53---implicit-parameters">Lecture 5.3 - Implicit Parameters</h3>
+
+<h3 id="lecture-54---higher-order-list-functions">Lecture 5.4 - Higher-Order List Functions</h3>
+
+<h3 id="lecture-55---reduction-of-lists">Lecture 5.5 - Reduction of Lists</h3>
+
+<p><strong>Fold and reduce combinators</strong>
+(<em>*</em>) stands for ((x,y) =&gt; x*y)</p>
+
+<h3 id="lecture-56---reasoning-about-concat">Lecture 5.6 - Reasoning About Concat</h3>
+
+<h3 id="lecture-57---a-larger-equational-proof-on-lists">Lecture 5.7 - A Larger Equational Proof on Lists</h3>
+
+<hr />
+
+<h2 id="week-6-collections">Week 6: Collections</h2>
+
+<h3 id="lecture-61---other-collections">Lecture 6.1 - Other Collections</h3>
+
+<p><strong>Vector</strong></p>
+
+<p>This lecture has some crucial tips on when to use <code>List</code> and when to use
+<code>Vector</code>.  <code>Vector</code> has more evenly balanced access patterns than <code>List</code>.  So,
+why would you ever want to use <code>List.</code>  The <code>List</code> type is most useful in
+recursive algorithms where you are repeatedly acting on the head (a constant
+time access), and then passing the tail to the recursion.  With <code>Vector</code>,
+accessing the leading element might require going down a few levels in the (albeit shallow)
+tree, and splitting off the “tail” of a vector is not as clean as with a list.</p>
+
+<pre><code>val nums = Vector(1, 2, 3, -88)
+val people = Vector("Bob", "Jim")
+</code></pre>
+
+<p>This type supports the same operations as <code>List</code> except concat ::.  Instead of
+<code>x :: xs</code>, there is <code>x +: xs</code> and ‘xs :+ x`.</p>
+
+<p>A common base class of <code>List</code> and <code>Vector</code> is <code>Seq</code>, which (along with <code>Set</code>
+and <code>Map</code> types) is a subclass of <code>Iterable</code>. <code>Array</code> and <code>String</code> are
+also sequence like classes.  The usual operations on sequences like <code>map</code> and
+<code>filter</code> and <code>take while</code> and <code>fold</code> can be applied to all of these types.</p>
+
+<h3 id="lecture-62---combinatorial-search-and-for-expressions">Lecture 6.2 - Combinatorial Search and For-Expressions</h3>
+
+<h3 id="lecture-63---combinatorial-search-example">Lecture 6.3 - Combinatorial Search Example</h3>
+
+<h3 id="lecture-64---queries-with-for">Lecture 6.4 - Queries with For</h3>
+
+<h3 id="lecture-65---translation-of-for">Lecture 6.5 - Translation of For</h3>
+
+<h3 id="lecture-66---maps">Lecture 6.6 - Maps</h3>
+
+<h3 id="lecture-67---putting-the-pieces-together">Lecture 6.7 - Putting the Pieces Together</h3>
+
+<hr />
+
+<h2 id="week-7-lazy-evaluation">Week 7: Lazy Evaluation</h2>
+
+<h3 id="lecture-71---structural-induction-on-trees">Lecture 7.1 - Structural Induction on Trees</h3>
+
+<h3 id="lecture-72---streams">Lecture 7.2 - Streams</h3>
+
+<h3 id="lecture-73---lazy-evaluation">Lecture 7.3 - Lazy Evaluation</h3>
+
+<h3 id="lecture-74---computing-with-infinite-sequences">Lecture 7.4 - Computing with Infinite Sequences</h3>
+
+<h3 id="lecture-75---case-study-the-water-pouring-problem">Lecture 7.5 - Case Study: the Water Pouring Problem</h3>
+
+<h3 id="lecture-76---course-conclusion">Lecture 7.6 - Course Conclusion</h3>
+
+        
+          <footer>
+            <p class="meta">
+              
+              
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T00:57:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+              
+            </p>
+          </footer>
+        
+      </div>
+    
+    </article>
+  </div>
+</div>
+<div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>recent posts</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/isotopy/">Isotopy</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/13/typefunc/">TypeFunc</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/archives">archives</a></h2>
+  </div>
+  <!-- <div class="span3"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span7">
+    
+<h2>recent git activity</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="williamdemeo" data-github-repo-count="5" data-github-skip-forks="true">
+  <dd class="loading">updating...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
+
+  </div>
+  <!-- <div class="span4"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span2">
+    <h2>found on</h2>
+
+<a href="https://github.com/williamdemeo/" rel="tooltip" title="GitHub"><img class="social_icon" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+
+
+<a href="https://plus.google.com/u/0/+williamdemeo?rel=author" rel="tooltip" title="Google Plus"><img class="social_icon" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
+
+
+
+
+
+<a href="http://mathoverflow.net/users/9124/william-demeo/" rel="tooltip" title="MathOverflow"><img class="social_icon" alt="math overflow icon" src="/images/mathoverflow.ico"></a>
+
+
+
+<a href="http://math.stackexchange.com/users/10915/william-demeo/" rel="tooltip" title="Math SE"><img class="social_icon" alt="math overflow icon" src="/images/mathstackexchange.ico"></a>
+
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">William DeMeo</a>
+  - Copyright &copy; 2014 - William DeMeo
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
+</p>
+
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
