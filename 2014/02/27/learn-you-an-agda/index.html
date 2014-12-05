@@ -959,9 +959,8 @@ symbol to introduce <code>x</code> and omit the type.  So, our final definition 
 
 <h3 id="four-is-an-even-number">Four is an even number</h3>
 
-<p>Now we use our Agda program to prove that four is even. Type the following into
-an emacs buffer, and then type <code>C-c C-l</code> (use <code>\_1</code> to type the subscript
-symbol ₁):</p>
+<p>Now we use our Agda program to prove that four is even. Add the following lines
+to your LearnYouAn.agda file, and then type <code>C-c C-l</code> (use <code>\_1</code> to type the subscript symbol ₁):</p>
 
 <div><div class="CodeRay">
   <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
@@ -1002,13 +1001,14 @@ proof₁ = STEP { }1 { }2
 ?2 : suc (suc zero) even
 </code></pre>
 
-<p>The obligation <code>?1</code> is the number to provide for <code>x</code> in <code>STEP</code>.<br />
-Hole <code>?2</code> is a proof obligation to show that two is even. 
-In this case, there is only one constructor that fits
-<code>?2</code>—namely, <code>STEP</code>. </p>
+<p>The obligation <code>?1</code>, corresponding to hole <code>{ }1</code>, is the number we must provide
+for <code>x</code> when applying the <code>STEP</code> constructor. <br />
+Hole <code>{ }2</code> corresponds to proof obligation <code>?2</code>, which is the obligation to
+show that two is even. In this case, there is only one constructor that fits
+the obligation—namely, <code>STEP</code>. </p>
 
-<p>If we move the cursor to hole <code>?2</code> and type <code>C-c C-r</code>, then Agda splits the hole
-into another <code>STEP</code> call for us, resulting in two more holes, <code>?3</code> and <code>?4</code>.</p>
+<p>Move the cursor inside hole <code>{ }2</code> and type <code>C-c C-r</code>. Agda splits the hole
+into another <code>STEP</code> call for us, resulting in two more holes, <code>{ }3</code> and <code>{ }4</code>.</p>
 
 <div><div class="CodeRay">
   <div class="code"><pre>proof₁ : suc (suc (suc (suc zero))) even
@@ -1022,7 +1022,7 @@ proof₁ = STEP { }1 (STEP { }3 { }4)
 ?4 : zero even
 </code></pre>
 
-<p>Another <code>C-c C-r</code> in hole <code>?4</code> will finally fill it in with <code>ZERO</code>. </p>
+<p>Another <code>C-c C-r</code> in hole <code>{ }4</code> will fill it with <code>ZERO</code>. </p>
 
 <div><div class="CodeRay">
   <div class="code"><pre>  proof₁ : suc (suc (suc (suc zero))) even 
@@ -1035,7 +1035,7 @@ proof₁ = STEP { }1 (STEP { }3 { }4)
 ?3 : ℕ
 </code></pre>
 
-<p>The remaining two holes, <code>?1</code> and <code>?3</code>, can also be filled automatically based
+<p>The remaining obligations, <code>?1</code> and <code>?3</code>, can also be fulfilled automatically based
 on the surrounding context. We can see what <em>constraints</em> on the holes are known
 to Agda by using the “Show Constraints” option, or by typing 
 <code>C-c C-=</code>. For the present example, this prints the following:</p>
@@ -1059,8 +1059,7 @@ Agda. Simply type <code>C-c C-a</code> in any hole and Agsy will search for an a
 term to fill it. It’s not guaranteed to find anything, but it can be useful. 
 (In the example above, it works well.)</p>
 
-<hr />
-<p>### Implicits</p>
+<h3 id="implicits">Implicits</h3>
 
 <p>It can be annoying, though, to have to pass in those numbers to <code>STEP</code>
 explicitly, when Agda already knows from surrounding context exactly what they
@@ -1461,6 +1460,8 @@ theorems about the Peano numbers we introduced in the previous section.</p>
 <hr />
 <hr />
 
+<p><code>C-c C-space</code>.</p>
+
 <h1 id="much-needed-hole-filling">Much needed hole filling</h1>
 
 <p>(This section did not appear in the original version of the tutorial.  It is
@@ -1579,9 +1580,58 @@ The result will be four <code>false</code>’s, which wouldn’t be a very
 useful definition of conjunction… so change the last <code>false</code> to <code>true</code>!</p>
 
 <hr />
-<hr />
 
-<h1 id="copyright">Copyright</h1>
+<h2 id="some-emacs-agda-mode-key-bindings">Some Emacs agda-mode key bindings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Key binding</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Load</td>
+      <td>C-c C-l</td>
+    </tr>
+    <tr>
+      <td>Evaluate term</td>
+      <td>C-c C-n</td>
+    </tr>
+    <tr>
+      <td>Show goals</td>
+      <td>C-c C-?</td>
+    </tr>
+    <tr>
+      <td>Next goal</td>
+      <td>C-c C-f</td>
+    </tr>
+    <tr>
+      <td>Split obligation</td>
+      <td>C-c C-space</td>
+    </tr>
+    <tr>
+      <td>Split again</td>
+      <td>C-c C-r</td>
+    </tr>
+    <tr>
+      <td>Show Constraints</td>
+      <td>C-c C-=</td>
+    </tr>
+    <tr>
+      <td>Solve Constraints</td>
+      <td>C-c C-s</td>
+    </tr>
+    <tr>
+      <td>Agsy find proof term</td>
+      <td>C-c C-a</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<p># Copyright</p>
 
 <p>Copyright (c) 2013, Liam O’Connor-Davis</p>
 
