@@ -153,13 +153,13 @@ by Liam O’Connor-Davis. I made this version for my own &hellip;" />
 
 
   <div class="entry-content"><p>This is a markdown version of the tutorial
-<a href="https://github.com/liamoc/learn-you-an-agda">Learn You an Agda and Achieve Enlightenment!</a>
+<a href="http://learnyouanagda.liamoc.net/">Learn You an Agda and Achieve Enlightenment!</a>
 by <a href="http://liamoc.net/">Liam O’Connor-Davis</a>.  </p>
 
 <p>I made this version for my own reference, while working through the
 tutorial, making some revisions and additions, and a few
 corrections.  You may prefer
-<a href="https://github.com/liamoc/learn-you-an-agda">the original</a>.</p>
+<a href="http://learnyouanagda.liamoc.net/">the original</a>.</p>
 
 <!-- more -->
 <p>$\def\N{\mathbb N} \def\true{\mathsf{true}} \def\conj{\wedge} \def\disj{\vee}$
@@ -419,6 +419,8 @@ this later by proving some basic mathematical properties on Peano natural number
 correspondence. An Agda program is also a proof of the formula represented in
 its type.</p>
 
+<hr />
+
 <h2 id="how-do-i-get-started">How do I get started?</h2>
 
 <p>At the time of writing, it is only really feasible to edit Agda code using
@@ -489,7 +491,6 @@ modes are available is to type <code>M-x agda</code> and then hit tab a couple o
 see the possible completions.)</p>
 
 <hr />
-<hr />
 
 <h1 id="hello-peano">Hello, Peano</h1>
 
@@ -508,7 +509,7 @@ constructs, Agda is very minimal - most of the “language constructs” are
 actually defined in libraries. </p>
 
 <p>Agda doesn’t even have numbers built in, so the first thing we’re going to do is
-define them - specifically <em>natural numbers</em>. Natural numbers are positive
+define them—specifically <em>natural numbers</em>. Natural numbers are nonnegative
 integers, that is, the whole numbers starting with zero and going
 up. Mathematics uses the symbol $\N$ to represent natural numbers, so we’re going
 to borrow that for our example (Another thing that sets Agda apart from other
@@ -534,7 +535,7 @@ what the colon means).</p>
 <h3 id="hold-on-a-second-types-have-types">Hold on a second, types have types?</h3>
 
 <p>If you recall the introduction, I mentioned that in Agda, types and values are
-treated the same way. This means that, seeing as values are given types, types
+treated the same way. Since values are given types, types
 are given types as well. Types are merely a special group of language terms, and
 in Agda, all terms have types. </p>
 
@@ -545,7 +546,7 @@ to all the data types we use in our program. </p>
 
 <p>This infinite hierarchy of types provides an elegant solution to 
 <a href="http://en.wikipedia.org/wiki/Russell's_paradox">Russell’s Paradox</a>.
-Seeing as for any ν∈ ℕ, <code>Set ν</code> contains only values “smaller” than ν, (for
+Since, for any ν∈ ℕ, <code>Set ν</code> contains only values “smaller” than ν, (for
 example, <code>Set₁</code> cannot contain <code>Set₁</code> or <code>Set₂</code>, only <code>Set</code>), Russell’s
 problematic set (which contains itself) cannot exist and is not admissible.</p>
 
@@ -715,7 +716,7 @@ haven’t done any non-trivial proofs yet), so this is important. </li>
   <li>It checks that your program provably terminates. </li>
 </ul>
 
-<p>Proof obligations of a program can only be machine-checked by if your program
+<p>Proof obligations of a program can only be machine-checked if the program
 terminates, but checking that any program terminates is in general
 undecidable (see <a href="http://en.wikipedia.org/wiki/Halting_problem">The Halting Problem</a>).
 To circumvent this dilemma, Agda runs its checker only on <em>structural</em> recursion
@@ -724,11 +725,10 @@ which non-structural recursion is used. We will discuss this more in later
 sections, but all of the examples in the early part of this tutorial can
 be proved by Agda to terminate.</p>
 
-<p>At this point, the contents of the LearnYouAn.agda file should be as follows (note
-the indentation!):</p>
+<p>At this point, the contents of the LearnYouAn.agda file should be as follows:</p>
 
 <div><div class="CodeRay">
-  <div class="code"><pre>module First where
+  <div class="code"><pre>module LearnYouAn where
 
   data ℕ : Set where
     zero : ℕ
@@ -741,11 +741,16 @@ the indentation!):</p>
 </div>
 </div>
 
-<p>To check this program, type <code>C-c C-l</code> in Emacs (or choose Load from the Agda
+<p>Make sure you get the indentation right!  In particular, the constructors
+for <code>zero</code> and <code>suc</code> start in the 5th
+column (below the t in <code>data</code>), whereas all three lines in the definition of
+<code>_+_</code> begin in column 3.</p>
+
+<p>To check the program, type <code>C-c C-l</code> in Emacs (or choose Load from the Agda
 menu). If your program checks correctly, there will be no error messages, no hole markers
-(yellow highlighting) and no orange-highlighted non-terminating sections. It
-should also say <code>Agda: Checked</code> at the bottom of the window, and you get syntax
-highlighting. </p>
+(yellow highlighting) and no orange-highlighted non-terminating sections. Also,
+the words <code>(Agda: Checked)</code> should appear in the Emacs mode line, and you should
+notice that the colors of characters have changed.</p>
 
 <p>Right now, our checks aren’t all that meaningful—the only thing they prove is
 that our addition function does indeed take any natural number and produce a
@@ -764,7 +769,7 @@ menu. Then, in the minibuffer, we can type an expression for 3 + 2:</p>
 <pre><code>(suc (suc (suc zero))) + (suc (suc zero))
 </code></pre>
 
-<p>And we get the result (5):</p>
+<p>This produces the following representation of the number 5:</p>
 
 <pre><code>(suc (suc (suc (suc (suc zero)))))
 </code></pre>
@@ -851,9 +856,9 @@ downwards, reasoning from known axioms to the theorem that we want.</p>
 
 <h2 id="how-does-it-all-relate-to-agda">How does it all relate to Agda?</h2>
 
-<p>Agda’s types correspond to judgments. If we can construct a value of a certain
-type, we have simultaneously constructed a <em>proof</em> that the theorem encoded by
-that type holds. </p>
+<p>Agda’s types correspond to judgments. If we can construct a value, or
+“inhabitant,” of a certain type, we have simultaneously constructed a <em>proof</em>
+that the theorem encoded by that type holds. </p>
 
 <p>As types are judgments, and values are theorems, <em>data constructors</em> for a type
 correspond to <em>inference rules</em> for the corresponding proposition. </p>
