@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-10-14T04:03:29-05:00</updated>
+  <updated>2014-12-04T20:21:52-06:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -246,7 +246,7 @@ methodologies are presented as a more viable alternative.</p>
 
 <p>While formal verification is excessive in some situations where bugs are
 acceptable, I hardly think that testing could replace formal verification
-completely. Here’s three of reasons why: </p>
+completely. Here are three reasons for this:</p>
 
 <ul>
   <li><strong>Proofs work in concurrent scenarios</strong>. You can’t reliably unit test against
@@ -270,14 +270,14 @@ more widely used than they currently are.</p>
 
 <p>Thanks to Curry-Howard, Agda can also be used as a <em>proof</em> language, as opposed
 to a <em>programming</em> language. You can construct a proof not just about your
-program, but anything you like. </p>
+program, but about anything you like. </p>
 
 <p>In fact, Curry-Howard shows us that the fundamentals of functional programming
 (Lambda Calculus), and the fundamentals of mathematical proof (Logic) are in
 fact the same thing (<em>isomorphic</em>). This means that we can structure
 mathematical proofs in Agda as <em>programs</em>, and have Agda check them for us. It’s
 just as valid as a standard pen-and-paper mathematical proof (probably more so,
-seeing as Agda doesn’t let us leave anything as “an exercise to the reader” -
+seeing as Agda doesn’t let us leave anything as “an exercise for the reader” -
 and Agda can check our proof’s correctness automatically for us. We’ll be doing
 this later by proving some basic mathematical properties on Peano natural numbers.</p>
 
@@ -291,31 +291,10 @@ its type.</p>
 Emacs. GNU Emacs or XEmacs are both fine. However, you don’t need a great deal
 of Emacs proficiency to edit Agda code. </p>
 
-<h3 id="installing-agda-the-new-way">Installing Agda: the new way</h3>
+<h3 id="installing-agda">Installing Agda</h3>
 
-<p>This works on Ubuntu 13.10 and probably others, assuming you have a fresh
-installation.  (Of course, it is impossible to predict whether this will work if
-you have a highly customized installation of Ubuntu, but this has been tested on
-a generic installation of Ubuntu 13.10, e.g., an Amazon Web Services server.)</p>
-
-<p>The following commands take a few minutes to run:</p>
-
-<pre><code>sudo apt-get install agda-mode
-sudo apt-get install agda-stdlib
-</code></pre>
-
-<p>That’s it!  Now, when you launch Emacs and edit a file with the .agda extension,
-it should switch to <code>agda-mode</code> or <code>agda2-mode</code>. If not, you can switch manually
-by invoking one of the following (in Emacs, of course): <code>M-x agda-mode</code> or 
-<code>M-x agda2-mode</code> or <code>Esc-x agda-mode</code>.  (The quick and dirty way to find out
-which agda modes are available is to just type <code>M-x agda</code> and then hit tab a
-couple of times to see the possible completions.) </p>
-
-<h3 id="installing-agda-the-old-way">Installing Agda: the old way</h3>
-
-<p>This is the section that appeared in the original version of Liam’s book. If
-the instructions in the previous section worked, you can skip to the
-<a href="#hello-peano">next section</a>.</p>
+<p>(If you are using Ubuntu Linux, you may wish to skip to the next section,
+<a href="#installing-on-Ubuntu-Linux">Installing on Ubuntu Linux</a>.)</p>
 
 <p>You’ll need GHC, a Haskell compiler, and an assortment of tools and libraries
 that make up the <a href="http://hackage.haskell.org/platform/">Haskell Platform</a>. It is
@@ -358,6 +337,22 @@ your <code>PATH</code>):</li>
 
 <p>By then you should be all set. To find out if everything went as well as
 expected, head on over to the <a href="#hello-peano">next section</a>.</p>
+
+<h3 id="installing-on-ubuntu-linux">Installing on Ubuntu Linux</h3>
+
+<p>The following commands, which work on Ubuntu Linux 13.10 and probably others,
+take a few minutes to run: </p>
+
+<pre><code>sudo apt-get install agda-mode
+sudo apt-get install agda-stdlib
+</code></pre>
+
+<p>That’s it!  Now, when you launch Emacs and edit a file with the .agda extension,
+it should switch to <code>agda-mode</code> or <code>agda2-mode</code>. If not, you can switch manually
+by invoking one of the following (in Emacs, of course): <code>M-x agda-mode</code> or 
+<code>M-x agda2-mode</code> or <code>Esc-x agda-mode</code>.  (An easy way to find out which agda
+modes are available is to type <code>M-x agda</code> and then hit tab a couple of times to
+see the possible completions.)</p>
 
 <hr />
 <hr />
