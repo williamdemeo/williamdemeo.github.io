@@ -1005,7 +1005,7 @@ proof₁ = STEP { }1 { }2
 for <code>x</code> when applying the <code>STEP</code> constructor. <br />
 Hole <code>{ }2</code> corresponds to proof obligation <code>?2</code>, which is the obligation to
 show that two is even. In this case, there is only one constructor that fits
-the obligation—namely, <code>STEP</code>. </p>
+the obligation—namely, <code>STEP</code> </p>
 
 <p>Move the cursor inside hole <code>{ }2</code> and type <code>C-c C-r</code>. Agda splits the hole
 into another <code>STEP</code> call for us, resulting in two more holes, <code>{ }3</code> and <code>{ }4</code>.</p>
@@ -1126,7 +1126,7 @@ is the same as implementing a function—a function that, when given an argument
 of type <code>A</code>, constructs an return value of type <code>B</code>. </p>
 
 <p>In other words, given a proof (by construction) of some proposition
-<code>A</code>, our function produces a proof of some proposition <code>B</code>.
+<code>A</code>, our function produces a proof of proposition <code>B</code>.
 By writing such a function (and having Agda check it), we have constructed a
 proof of <code>A ⇒ B</code>.</p>
 
@@ -1145,7 +1145,7 @@ proof₂ ν = ν      -- type \nu for ν.
 
 <p>So, proof of this tautology corresponds to the identity function. The reason for
 this is fairly clear: Given a proof of <code>A</code>, there’s one obvious way to produce
-a proof of <code>A</code>, and that is to produce the proof you were just given.</p>
+a proof of <code>A</code>: present the same proof you were just given!</p>
 
 <hr />
 
@@ -1581,7 +1581,10 @@ useful definition of conjunction… so change the last <code>false</code> to <co
 
 <hr />
 
-<h2 id="some-emacs-agda-mode-key-bindings">Some Emacs agda-mode key bindings</h2>
+<h2 id="emacs-agda-mode-key-bindings">Emacs agda-mode key bindings</h2>
+
+<p>Below is a list of the Emacs commands we encountered above.  For a more complete
+ list, visit <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Docs.EmacsModeKeyCombinations">the Agda Wiki</a>.</p>
 
 <table>
   <thead>
