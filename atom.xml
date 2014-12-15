@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-12-04T23:03:26-06:00</updated>
+  <updated>2014-12-15T13:19:21-06:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -95,7 +95,7 @@ corrections.  You may prefer
       <li><a href="#the-curry-howard-correspondence">The Curry Howard Correspondence</a></li>
     </ul>
   </li>
-  <li><a href="#much-needed-hole-filling">4. Much needed hole filling</a></li>
+  <li><a href="#hole-filling">4. Hole filling</a></li>
   <li><a href="#notes">Notes</a>  </li>
   <li><a href="#copyright">Copyright</a></li>
 </ul>
@@ -359,10 +359,6 @@ see the possible completions.)</p>
 <hr />
 
 <h1 id="hello-peano">Hello, Peano</h1>
-
-<p>(There is a new section below called <a href="#much-needed-hole-filling">Much needed hole filling</a>,
-which did not appear in the original tutorial, is essentially independent 
-of the section you are now reading, and could be read first.)</p>
 
 <h2 id="definitions-definitions">Definitions, Definitions</h2>
 
@@ -1324,18 +1320,15 @@ in program verification.</p>
 theorems about the Peano numbers we introduced in the previous section.</p>
 
 <hr />
-<hr />
 
-<p><code>C-c C-space</code>.</p>
-
-<h1 id="much-needed-hole-filling">Much needed hole filling</h1>
+<h1 id="hole-filling">Hole filling</h1>
 
 <p>(This section did not appear in the original version of the tutorial.  It is
 adapted from <a href="http://www.stephendiehl.com/posts/agda.html">Stephen Diehl’s tutorial</a>, 
 is essentially independent of the rest of the tutorial, and could be read immediately 
 after Section 1.)</p>
 
-<p>Let’s get some practice creating “much needed”<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup> gaps in our proofs and then
+<p>Let’s get some practice creating “much needed”[^5] gaps in our proofs and then
 filling them in.  As we learned above, Agda calls such gaps “holes”.</p>
 
 <p>Open a file called HoleFilling.agda and put the following code in it:</p>
@@ -1500,7 +1493,8 @@ useful definition of conjunction… so change the last <code>false</code> to <co
 </table>
 
 <hr />
-<p># Copyright</p>
+
+<h1 id="copyright">Copyright</h1>
 
 <p>Copyright (c) 2013, Liam O’Connor-Davis</p>
 
@@ -1542,7 +1536,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </small></p>
 
 <hr />
-<hr />
 
 <h1 id="notes">Notes</h1>
 
@@ -1559,9 +1552,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </li>
     <li id="fn:4">
       <p>Don’t be scared by the term - structural recursion is when a recursive function follows the structure of a recursive data type - it occurs very frequently in functional programs.<a href="#fnref:4" rel="reference">&#8617;</a></p>
-    </li>
-    <li id="fn:5">
-      <p>If you don’t get this reference, type “much needed gap” into your favorite search engine.<a href="#fnref:5" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>
