@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2014-12-15T13:21:42-06:00</updated>
+  <updated>2015-01-11T21:35:20-06:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -1787,56 +1787,6 @@ contains the following:</p>
   <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">my notes</a>  </li>
   <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">Pálfy and Saxl’s paper</a>  </li>
   <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>.</li>
-</ul>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Algebra &amp; Logic Meetings]]></title>
-    <link href="http://williamdemeo.github.io/2014/02/13/algebra-and-logic-meetings/"/>
-    <updated>2014-02-13T08:31:06-06:00</updated>
-    <id>http://williamdemeo.github.io/2014/02/13/algebra-and-logic-meetings</id>
-    <content type="html"><![CDATA[<p>A collection of links to upcoming meetings in algebra, logic, computer science and related fields.</p>
-
-<!-- more -->
-
-<h2 id="section">2014</h2>
-<ul>
-  <li><a href="http://vsl2014.at/">Vienna Summer of Logic</a> Vienna, July 9–24.
-    <ul>
-      <li><a href="http://www.logic.at/lc2014/">Logic Colloquium</a> July 14–19.</li>
-      <li><a href="http://www.logic.at/latd2014/">Logic, Algebra and Truth Degrees</a> July 16–19.</li>
-      <li><a href="http://lii.rwth-aachen.de/lics/csl-lics14/">Computer Science Logic (CSL) and Logic in Computer Science (LICS)</a> July 14–18.  </li>
-      <li><a href="http://vsl2014.at/pages/RTATLCA-cfp.html">Typed Lambda Calculi and Applications</a> July 14–17.  </li>
-      <li><a href="http://vsl2014.at/pages/UNIF-index.html">Workshop on Unification</a> July 13.  </li>
-      <li><a href="http://vsl2014.at/pages/Coq-index.html">Coq Workshop</a> July 18.  </li>
-      <li><a href="http://cs.nyu.edu/ijcar2014/">International Joint Conference on Automated Reasoning (IJCAR)</a> July 19–22.  </li>
-    </ul>
-  </li>
-  <li><a href="http://kaluzhnin-conf.incarne.net/">International Algebraic Conference: Kaluzhnin Memorial</a> Kyiv, Ukraine, July 7–12.</li>
-  <li><a href="http://www.win.tue.nl/~hansc/agc2014/index.html">Algebra, Geometry and Computation</a> Eindhoven, The Netherlands, July 2–4.</li>
-  <li><a href="http://www.karlin.mff.cuni.cz/~alc2014/">Algebras and Clones fest</a> Prague, June 30–July 3.</li>
-  <li><a href="http://cie2014.inf.elte.hu/">Computability in Europe</a> Budapest, June 23–27.</li>
-  <li><a href="http://www.jku.at/algebra/content/e176230/e176557/e213618">88th Workshop on General Algebra</a> Warsaw, June 19–22.</li>
-  <li><a href="http://scaladays.org/">Scala Days</a> Berlin, June 16–18.  </li>
-  <li><a href="http://www.kpfu.ru/main_page?p_sub=25931">Algebra and Mathematical Logic: Theory and Applications</a> Kazan, Russia, June 2–6.</li>
-  <li><a href="http://www.aslonline.org/asl_meetings.php">Association for Symbolic Logic North American Meeting</a> Boulder, May 19–22.</li>
-  <li><a href="http://www.dagstuhl.de/14201">Horn formulas, directed hypergraphs, lattices and closure systems</a> Dagstuhl, Germany, May 11–16.</li>
-  <li><a href="http://www.math.osu.edu/conferences/denison32">32nd Ohio State-Denison Math Conference</a>
-Columbus, Ohio, May 9–11.  </li>
-  <li><a href="http://www.cs.nott.ac.uk/~txa/mgs.2014/">Midlands Grad School in Foundations of CS</a>
-Nottingham, UK, April 22–26.   </li>
-  <li><a href="http://www.dipmat.unisa.it/ischiagrouptheory/">Ichia Group Theory</a> Ichia, Italy, April 1–5. </li>
-  <li><a href="http://www.jku.at/algebra/content/e176230/e176557/e213625">87th Workshop on General Algebra</a> Linz, Austria, February 7–9.</li>
-</ul>
-
-<h2 id="other-conference-lists">Other Conference Lists</h2>
-<ul>
-  <li><a href="http://spot.colorado.edu/~kearnes/conf.html">General Algebra Conferences</a></li>
-  <li><a href="http://www.conference-service.com/conferences/algebra.html">COMS: Algebra</a></li>
-  <li><a href="http://www.conference-service.com/conferences/logic.html">COMS: Mathematical Logic</a></li>
-  <li><a href="http://www2.informatik.hu-berlin.de/~lics/logic-confs/index.html">Logic Related Conferences</a></li>
-  <li><a href="http://cstheory.stackexchange.com/questions/7900/list-of-tcs-conferences-and-workshops">A list of conferences in theoretical computer science</a></li>
 </ul>
 ]]></content>
   </entry>
