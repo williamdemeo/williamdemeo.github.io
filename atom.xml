@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2015-01-12T02:45:46-06:00</updated>
+  <updated>2015-01-12T02:56:30-06:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -15,20 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[3-SAT and partition lattices]]></title>
-    <link href="http://williamdemeo.github.io/2015/01/11/cccp-is-np-complete/"/>
+    <link href="http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices/"/>
     <updated>2015-01-11T21:53:17-06:00</updated>
-    <id>http://williamdemeo.github.io/2015/01/11/cccp-is-np-complete</id>
+    <id>http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices</id>
     <content type="html"><![CDATA[<p>It is not hard to see that <a href="https://en.wikipedia.org/wiki/3sat">3-SAT</a>
-reduces to the problem of counting the number of coatoms of a partition
-lattice that are contained in the union of a certain collection of principal
-filters. Therefore, the latter problem, which we call the
+reduces to the problem of counting in a partition lattice
+the number of coatoms contained in the union of a collection of
+principal filters. Therefore, the latter problem, which we call the
 <em>counting covered coatoms problem</em> (CCCP), is NP-complete.
-In this post we simply define CCCP.</p>
+In this post we simply define CCCP. Later we check that 3-SAT reduces to CCCP,
+and then develop some ideas about constructing a feasible algorithm to solve CCCP.</p>
 
 <!-- more -->
-<p>(Later we will show that 3-SAT
-reduces to CCCP, and then develop some ideas about 
-constructing a feasible algorithm to solve CCCP.)</p>
 
 <p>Consider the relational structure $\mathbf B = \langle \{0, 1\}, R\rangle$
 where $R$ is the ternary relation $\{0, 1\}^3 - \{(0,0,0), (1,1,1)\}$.
