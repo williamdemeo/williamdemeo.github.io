@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2015-01-12T02:56:30-06:00</updated>
+  <updated>2015-01-20T23:01:21-06:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -19,12 +19,12 @@
     <updated>2015-01-11T21:53:17-06:00</updated>
     <id>http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices</id>
     <content type="html"><![CDATA[<p>It is not hard to see that <a href="https://en.wikipedia.org/wiki/3sat">3-SAT</a>
-reduces to the problem of counting in a partition lattice
-the number of coatoms contained in the union of a collection of
-principal filters. Therefore, the latter problem, which we call the
-<em>counting covered coatoms problem</em> (CCCP), is NP-complete.
-In this post we simply define CCCP. Later we check that 3-SAT reduces to CCCP,
-and then develop some ideas about constructing a feasible algorithm to solve CCCP.</p>
+reduces to the problem of deciding whether all coatoms in a certain partition
+lattice are contained in the union of a collection of certain principal filters.
+Therefore, the latter problem, which we will call the
+<em>covered coatoms problem</em> (CCP), is NP-complete.
+In this post we simply define CCP. Later we check that 3-SAT reduces to CCP,
+and then develop some ideas about constructing a feasible algorithm to solve CCP.</p>
 
 <!-- more -->
 
@@ -93,6 +93,16 @@ Therefore, a solution to the instance $\mathbf A = \langle A, S \rangle$ of
 $\operatorname{CSP}(\mathbf B)$ exists if and only if there is at least one coatom
 in the lattice of equivalence relations of $A$ that is not contained in the union
 $ \bigcup_{s\in S} \, ^\uparrow\langle s \rangle $ of principal filters.</p>
+
+<p>The <strong>Covered Coatoms Problem</strong> is the following: Given a set $A$ and a list
+$s_1 = (a_1, b_1, c_1), s_2=(a_2, b_2, c_2), \dots, s_n =(a_n, b_n, c_n)$
+of 3-tuples with elements drawn from $A$, decide whether all of the coatoms
+of the lattice $\prod_A$ of partitions of $A$ are contained in the union
+$ \bigcup_{i=1}^n \, ^\uparrow\langle s_i \rangle $ of principal filters.</p>
+
+<p>If we find an algorithm that decides this in polynomial time (in the size
+of the set $A$), or if we prove that no such algorithm exists, then this
+would answer the P versus NP question.</p>
 
 <!-- Therefore, we see that determining whether an instance of -->
 <!-- $\operatorname{CSP}(\mathbf B)$ has a solution is equivalent to -->

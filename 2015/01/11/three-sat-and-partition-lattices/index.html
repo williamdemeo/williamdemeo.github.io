@@ -14,8 +14,8 @@
     
   
   <meta name="description" content="It is not hard to see that 3-SAT
-reduces to the problem of counting in a partition lattice
-the number of coatoms contained in the union of a &hellip;">
+reduces to the problem of deciding whether all coatoms in a certain partition
+lattice are contained in the union of &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -32,8 +32,8 @@ the number of coatoms contained in the union of a &hellip;">
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="3-SAT and partition lattices" />
   <meta name="og:description" content="It is not hard to see that 3-SAT
-reduces to the problem of counting in a partition lattice
-the number of coatoms contained in the union of a &hellip;" />
+reduces to the problem of deciding whether all coatoms in a certain partition
+lattice are contained in the union of &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices/"/>
   <meta name="url" content="http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices/">
   
@@ -153,12 +153,12 @@ the number of coatoms contained in the union of a &hellip;" />
 
 
   <div class="entry-content"><p>It is not hard to see that <a href="https://en.wikipedia.org/wiki/3sat">3-SAT</a>
-reduces to the problem of counting in a partition lattice
-the number of coatoms contained in the union of a collection of
-principal filters. Therefore, the latter problem, which we call the
-<em>counting covered coatoms problem</em> (CCCP), is NP-complete.
-In this post we simply define CCCP. Later we check that 3-SAT reduces to CCCP,
-and then develop some ideas about constructing a feasible algorithm to solve CCCP.</p>
+reduces to the problem of deciding whether all coatoms in a certain partition
+lattice are contained in the union of a collection of certain principal filters.
+Therefore, the latter problem, which we will call the
+<em>covered coatoms problem</em> (CCP), is NP-complete.
+In this post we simply define CCP. Later we check that 3-SAT reduces to CCP,
+and then develop some ideas about constructing a feasible algorithm to solve CCP.</p>
 
 <!-- more -->
 
@@ -227,6 +227,16 @@ Therefore, a solution to the instance $\mathbf A = \langle A, S \rangle$ of
 $\operatorname{CSP}(\mathbf B)$ exists if and only if there is at least one coatom
 in the lattice of equivalence relations of $A$ that is not contained in the union
 $ \bigcup_{s\in S} \, ^\uparrow\langle s \rangle $ of principal filters.</p>
+
+<p>The <strong>Covered Coatoms Problem</strong> is the following: Given a set $A$ and a list
+$s_1 = (a_1, b_1, c_1), s_2=(a_2, b_2, c_2), \dots, s_n =(a_n, b_n, c_n)$
+of 3-tuples with elements drawn from $A$, decide whether all of the coatoms
+of the lattice $\prod_A$ of partitions of $A$ are contained in the union
+$ \bigcup_{i=1}^n \, ^\uparrow\langle s_i \rangle $ of principal filters.</p>
+
+<p>If we find an algorithm that decides this in polynomial time (in the size
+of the set $A$), or if we prove that no such algorithm exists, then this
+would answer the P versus NP question.</p>
 
 <!-- Therefore, we see that determining whether an instance of -->
 <!-- $\operatorname{CSP}(\mathbf B)$ has a solution is equivalent to -->
