@@ -140,57 +140,65 @@ by Martin Odersky, Erik Meijer, Roland Kuhn.</p>
 
 <hr />
 
-<h1 id="getting-started">Getting Started!</h1>
+<h1 id="getting-started-assignment-0">Getting Started! (Assignment 0)</h1>
 
 <p>This is the first assignment.  The goal is to familiarize yourself with the
 infrastructure and the tools required during this class. The grade
 in this assignment will be excluded from your final grade for the course.</p>
 
-<p><strong>Installing Required Tools</strong>
-Before anything else, it is most important that you make sure that all tools are
-correctly installed. Take a very careful look at the
+<h2 id="part-0-install-required-tools">Part 0: Install Required Tools</h2>
+<p>Before anything else, we need to make sure that all tools are
+correctly installed. Take a look at the
 <a href="https://class.coursera.org/reactive-002/wiki/ToolsSetup">Tools Setup</a> page and
-verify that all of the listed tools work on your machine. </p>
+verify that all of the listed tools work.</p>
 
-<h1 id="the-assignment">The Assignment</h1>
+<p>(If you already did all this for the progfun course, you don’t need to do anything more.)</p>
 
 <h2 id="part-1-obtain-the-project-files">Part 1: Obtain the Project Files</h2>
 <p>Download the
 <a href="https://d28rh4a8wq0iu5.cloudfront.net/reactive/assignments/example.zip">example.zip</a>
 handout archive file and extract it somewhere on your machine. </p>
 
-<hr />
-
-<h2 id="part-2-using-the-scala-repl">Part 2: Using the Scala REPL</h2>
+<h2 id="part-2-make-sure-the-scala-repl-is-working">Part 2: Make sure the Scala REPL is working</h2>
 <p>During this class we will always launch the Scala REPL (the interactive Scala
-console) through sbt. This way you don’t need to install the Scala distribution
-on your machine, having sbt is enough. (In case you prefer to have the scala
-command available on your machine, you can download the Scala distribution from
+console) through sbt, so we don’t need to install the Scala
+distribution—having sbt is enough. (In case you prefer to have the scala
+command, you can download the Scala distribution from 
 the <a href="http://www.scala-lang.org/downloads">scala-lang.org website</a>.) </p>
 
-<p>Open the
+<p><strong>Note that <code>sbt</code> can only be started inside a project directory</strong>, so we first
+navigate to the example directory created in Part 1, then enter <code>sbt</code>.</p>
+
+<p>In the future, we can type <code>console</code> to get the Scala REPL, but for now, just type</p>
+
+<pre><code>&gt; eclipse
+</code></pre>
+
+<p>at the sbt prompt to generate the files needed to load the project into
+Eclipse.  See next section for more details.  You can exit sbt with <code>ctrl-c</code>.</p>
+
+<p>(If something goes wrong with sbt, open the
 <a href="https://class.coursera.org/reactive-002/wiki/SbtTutorial">Sbt Tutorial</a>
-page and follow the first steps until “Running the Scala Interpreter.” Note that
-sbt can only be started inside a project directory, so first navigate to the
-project directory that you created in Part 1, then type <code>sbt</code> on the command line. 
-Then type <code>console</code> to get the Scala REPL. Finally, enter a few Scala
-expressions to make sure everything is working as expected. </p>
+page and follow the first steps until “Running the Scala Interpreter.”)</p>
 
 <hr />
 
 <h2 id="part-3-opening-the-project-in-eclipse">Part 3: Opening the Project in Eclipse</h2>
-<p>To work on the source code of the project, you have to import it into
-eclipse.</p>
 
-<h3 id="creating-the-eclipse-project-from-sbt">Creating the Eclipse project from sbt</h3>
-<p>First, you need to create the Eclipse from sbt, using the eclipse command:</p>
+<p>To work on the source code of the project, we must import it into
+Eclipse.</p>
+
+<h3 id="creating-the-eclipse-project-from-sbt">3.1. Creating the Eclipse project from sbt</h3>
+
+<p><strong>IMPORTANT</strong> Before importing the project into Eclipse, we must first create
+the Eclipse project from the sbt command line as mentioned above.</p>
 
 <pre><code>$ sbt
 &gt; eclipse
 ...
 </code></pre>
 
-<h3 id="opening-the-project-in-eclipse">Opening the Project in Eclipse</h3>
+<h3 id="importing-the-project-in-eclipse">3.2. Importing the Project in Eclipse</h3>
 
 <p>Once the Eclipse project has been created from sbt, you can import it in
 Eclipse. Follow these steps to work on the project using the Scala IDE: </p>
@@ -203,7 +211,7 @@ Eclipse. Follow these steps to work on the project using the Scala IDE: </p>
   <li>Click “Finish”.</li>
 </ol>
 
-<h3 id="working-with-eclipse">Working with Eclipse</h3>
+<h3 id="working-with-eclipse">3.3. Working with Eclipse</h3>
 <p>In the folder <code>src/main/scala</code>, open the package <code>example</code> and double-click the
 file <code>Lists.scala</code>. There are two methods in this file that need to be
 implemented (<code>sum</code> and <code>max</code>).</p>
@@ -219,7 +227,7 @@ tutorial video which is available here:
 This website also contains a lot more useful information and handy tricks that
 make working with eclipse more efficient. </p>
 
-<h3 id="running-tests-inside-eclipse">Running Tests inside Eclipse</h3>
+<h3 id="running-tests-inside-eclipse">3.4. Running Tests inside Eclipse</h3>
 <p>You can easily execute the test suites directly inside eclipse. Simply navigate
 to source file of the test suite in <code>src/test/scala</code>, right-click on it and select
 “Run As” - “JUnit Test”. </p>
@@ -233,7 +241,7 @@ to source file of the test suite in <code>src/test/scala</code>, right-click on 
 examples to see if it works correctly. We present two possibilities to run the
 methods you implemented. </p>
 
-<h3 id="using-the-scala-repl">Using the Scala REPL</h3>
+<h3 id="using-the-scala-repl">4.1. Using the Scala REPL</h3>
 
 <p>In the sbt console, start the Scala REPL by typing <code>console</code>.</p>
 
@@ -253,7 +261,7 @@ scala&gt; max(List(1,3,2))
 res1: Int = 3
 </code></pre>
 
-<h3 id="using-a-main-object">Using a Main Object</h3>
+<h3 id="using-a-main-object">4.2. Using a Main Object</h3>
 
 <p>Another way to run your code is to create a new Main object that can be executed
 by the Java Virtual Machine. </p>
@@ -294,22 +302,26 @@ you have go back later to change some code that you wrote earlier on. </p>
 <p>We will be using the ScalaTest testing framework to write our unit tests. In
 eclipse, navigate to the folder <code>src/test/scala</code> and open the file
 <code>ListsSuite.scala</code> in package <code>example</code>. This file contains a step-by-step tutorial
-to learn how to write and execute ScalaTest unit tests. </p>
+to learn how to write and execute ScalaTest unit tests.</p>
+
+<p>The <code>ListSuite.scala</code> file is <a href="/scala/reactive/ListSuite.scala">here</a>:</p>
 
 <hr />
 
 <h2 id="part-6-submitting-your-solution">Part 6: Submitting your Solution</h2>
 
-<p>Once you implemented all the required methods and tested you code thoroughly,
-you can submit it to Coursera. The only way to submit your solution is through
-sbt, so you need to start the sbt console in your project directory. </p>
+<p>The only way to submit your solution is through sbt.</p>
 
+<h3 id="generate-a-new-password">6.1. Generate a new password</h3>
 <p>In order to submit, you need to have your coursera username and your submission
-password. Note that the submission password is NOT your login password, instead
-it is a special password generated by Coursera. You can look it up on the
-<a href="https://class.coursera.org/reactive-002/assignment/index">assignments page</a>. </p>
+password. Note that the submission password is a special password you must generate
+using a button on the <a href="https://class.coursera.org/reactive-002/assignment/index">assignments page</a>. </p>
 
-<p>Submitting in sbt is simply done by invoking the <code>submit</code> task:</p>
+<h3 id="start-sbt">6.2. Start sbt</h3>
+<p><strong>Important:</strong> Open a terminal, change to your project directory, and start the
+  sbt console.  That is, you must start sbt from within your project directory. </p>
+
+<h3 id="issue-the-command-for-submitting-in-sbt">6.3. Issue the command for submitting in sbt:</h3>
 
 <pre><code>&gt; submit your.email@domain.com submissionPassword
 [info] Connecting to coursera. Obtaining challenge...
