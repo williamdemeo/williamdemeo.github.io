@@ -160,6 +160,8 @@ to encode $\mathbf{S}$),
 then we say that $\operatorname{CSP}(\mathbf{R})$
 is <strong>tractable</strong>.  Otherwise, we call it <strong>intractable</strong>.</p>
 
+<hr />
+
 <h3 id="connection-a-la-galois-to-algebraic-csp">Connection (a la Galois) to algebraic CSP</h3>
 
 <p>Given a relational structure
@@ -232,6 +234,8 @@ tractable iff <strong>A</strong> has a WNU term operation.</p>
    it is not known whether each of the equivalent conditions on <strong>A</strong> above is
    sufficient to prove tractability of the associated CSP. </p>
 
+<hr />
+
 <h3 id="taylor-terms">Taylor terms</h3>
 
 <p>Walter Taylor proved in [<a href="#bibliography">1</a>]
@@ -244,13 +248,17 @@ tractable iff <strong>A</strong> has a WNU term operation.</p>
    $i$-th position on either side of the identity.  (Such a term $t$ is called a
    “Taylor term”.) </p>
 
-<h3 id="taylor-iff-no-type-1">Taylor iff no Type 1</h3>
+<hr />
+
+<h3 id="taylor-term-iff-no-type-1">Taylor term iff no Type 1</h3>
 
 <p>Hobby and McKenzie proved in [<a href="#bibliography">2</a>] that
    a finite algebra <strong>A</strong> has a Taylor term iff <strong>1</strong> does not belong to the
    set of TCT-types of V(<strong>A</strong>). (We say V(<strong>A</strong>) “omits type 1” in this case.)</p>
 
-<h3 id="type-1-iff-2-set">Type 1 iff 2-set</h3>
+<hr />
+
+<h3 id="no-type-1-iff-no-trivial-divisors">no Type 1 iff no trivial divisors</h3>
 
 <p>Freese and Valeriote proved in [<a href="#bibliography">3</a>]
    that, for a finite idempotent algebra <strong>A</strong>,
@@ -265,7 +273,9 @@ is a two element algebra with only the trivial
 projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divisor” of <strong>A</strong>.) </p>
 </blockquote>
 
-<h3 id="no-tractability-without-taylor-terms">No tractability without Taylor terms</h3>
+<hr />
+
+<h3 id="tractable-only-if-taylor-term">Tractable only if Taylor term</h3>
 
 <p>If the algebra <strong>B</strong>, consisting of
    the set $\{0, 1\}$ along with trivial projection operations, occurs in the
@@ -273,19 +283,25 @@ projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divis
    $\operatorname{CSP}(\langle A, \operatorname{Rel}(\mathbf{A})\rangle)$
    is NP-complete.</p>
 
-<p>(To see this, note that the problem $\operatorname{CSP}(\mathbf{S})$ for the
+<p>To see this, note that the problem $\operatorname{CSP}(\mathbf{S})$ for the
    relational structure $\mathbf{S} = \langle \{0, 1\}, T\rangle$, where
    $T = \{0, 1\}^3 - \{(0,0,0), (1,1,1)\}$,
    is NP-complete, and
    $\operatorname{CSP}(\mathbf{S})\leq \operatorname{CSP}(\langle A,
    \operatorname{Rel}(\mathbf{A})\rangle)$.
-   So it follows from the paragraph above that tractability of
-   $\operatorname{CSP}(\langle A, \operatorname{Rel}(\mathbf{A})\rangle)$
-   implies V(<strong>A</strong>) has a Taylor term operation.)</p>
+   So it follows from the paragraph above that</p>
+
+<blockquote>
+  <p>tractability of
+$\operatorname{CSP}(\langle A, \operatorname{Rel}(\mathbf{A})\rangle)$
+implies V(<strong>A</strong>) has a Taylor term operation.</p>
+</blockquote>
 
 <p><!--$$T = \\{(0, 0, 1), (0,1,0), (0,1,1),  (1,0,0), (1, 0, 1), (1,1,0)\\}$$--></p>
 
-<h3 id="taylor-iff-wnu">Taylor iff WNU</h3>
+<hr />
+
+<h3 id="taylor-term-iff-wnu-term">Taylor term iff WNU term</h3>
 
 <p>Maroti and McKenzie proved in [<a href="#bibliography">4</a>] that a
    finite idempotent algebra has a Taylor term iff it has a weak near-unanimity
@@ -293,7 +309,9 @@ projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divis
    that
    <script type="math/tex">w(y,x,\dots,x) \approx w(x,y,x,\dots,x) \approx \cdots \approx w(x,\dots,x,y).</script></p>
 
-<h3 id="taylor-iff-cyclic">Taylor iff Cyclic</h3>
+<hr />
+
+<h3 id="taylor-term-iff-cyclic-term">Taylor term iff Cyclic term</h3>
 
 <p>Barto and Kozik proved in [<a href="#bibliography">5</a>] that a finite
    idempotent algebra has a WNU term iff it has a special type of WNU term
@@ -304,13 +322,19 @@ projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divis
 <p>Note that the above term conditions place no bounds on the value of $k$, that
    is, the arity of the term operations involved in the given identities.</p>
 
-<h3 id="taylor-iff-siggers">Taylor iff Siggers</h3>
+<hr />
+
+<h3 id="taylor-term-iff-siggers-term">Taylor term iff Siggers term</h3>
 
 <p>Siggers proved in [<a href="#bibliography">6</a>] that the above term
    conditions are equivalent to one involving a term of bounded arity–namely, a
    six-place term operation. Kearnes, Markovic, and McKenzie in
    [<a href="#bibliography">7</a>] improved this to a 4-place term $t(x_1,x_2,x_3,x_4)$
    satisfying $t(x,y,x,z)\approx t(y,x,z,y)$. </p>
+
+<hr />
+
+<hr />
 
 <h2 id="bibliography">Bibliography</h2>
 
