@@ -13,8 +13,8 @@
   
     
   
-  <meta name="description" content="Getting Started with Proof General This section collects some notes on basic commands used to interact with Coq
-using [Proof General]. We will begin &hellip;">
+  <meta name="description" content="Background This page collects some basic information about Coq, and is mainly intended for
+my research students interested in learning how to use &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -30,8 +30,8 @@ using [Proof General]. We will begin &hellip;">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="Coq" />
-  <meta name="og:description" content="Getting Started with Proof General This section collects some notes on basic commands used to interact with Coq
-using [Proof General]. We will begin &hellip;" />
+  <meta name="og:description" content="Background This page collects some basic information about Coq, and is mainly intended for
+my research students interested in learning how to use &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/coq/index.html"/>
   <meta name="url" content="http://williamdemeo.github.io/coq/index.html">
   
@@ -126,7 +126,68 @@ using [Proof General]. We will begin &hellip;" />
 <time datetime="2014-06-06T00:00:00-05:00" pubdate data-updated="true">Jun 6<span>th</span>, 2014</time></p>
         </header>
         
-        <h2 id="getting-started-with-proof-general">Getting Started with Proof General</h2>
+        <h2 id="background">Background</h2>
+
+<p>This page collects some basic information about Coq, and is mainly intended for
+my research students interested in learning how to use Coq.</p>
+
+<ul>
+  <li>
+    <p><strong>What is Coq?</strong>
+Coq is a proof assistant and a functional programming language.</p>
+  </li>
+  <li>
+    <p><strong>What is a proof assistant?</strong>
+A proof assistant is a tool that automates the more routine aspects of building
+proofs while depending on human guidance for more difficult aspects.
+Coq is one such tool. It provides a rich environment for interactive
+development of machine-checked formal reasoning.  </p>
+  </li>
+  <li>
+    <p><strong>How to get started?</strong>
+There are a number of ways to get started with Coq. Here I’ll first give
+an overview of my experience, and then, further on down the page, I’ll provide
+some more details.</p>
+
+    <p>I got started with Coq by watching
+<a href="http://www.youtube.com/watch?v=COe0VTNF2EA&amp;list=PLDD40A96C2ED54E99&amp;feature=share">Andrej Bauer’s series of YouTube tutorials</a>.
+These videos give some nice introductory lessons which show exactly how one
+interacts with Coq. For example, in the video
+<a href="http://youtu.be/l6zqLJQCnzo">How to use Coq with Proof General</a>, Andrej shows how to use Coq to prove
+that <em>Pierce’s Law</em> is equivalent to the <em>Law of Excluded Middle</em>.  </p>
+
+    <p>(Proof General is one way to interact with Coq, which is the great for
+those accustomed to the Emacs editor. For those who aren’t into Emacs,
+an alternative interface to Coq exists, called CoqIDE, about which I know
+absolutely nothing. I installed Coq and Proof General on Ubuntu 14.04 very
+easily using the Synaptic package manager; no custom configuration required.)</p>
+  </li>
+  <li>
+    <p><strong>How to continue?</strong>
+Again, more details about how to really get going with Coq and how to use it
+for theorem proving and functional programming, but if you want to stop
+reading here, then I highly recommend reading (and solving the
+exercises in) the first 5 or 6 chapters of the book,
+<a href="http://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>.</p>
+
+    <p>(The link above expands to: 
+<a href="http://www.cis.upenn.edu/~bcpierce/sf/current/index.html">http://www.cis.upenn.edu/~bcpierce/sf/current/index.html</a>)</p>
+
+    <p>The <a href="http://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>.
+book is an outstanding resource.  Not only is it well written and
+accessible, even to non-computer scientists, but also it’s fun to read because
+of the many engaging exercises sprinkled throughout the book that test your
+understanding of the material.</p>
+
+    <p>With some prior programming experience—and especially with some functional
+programming experience—you can probably proceed quickly through SF and learn
+a lot about Coq by solving most, if not all, of the exercises. I would guess
+that an intelligent undergraduate, with a little background in elementary 
+logic, math, and programming, could get through a few chapters of SF per week.</p>
+  </li>
+</ul>
+
+<h2 id="getting-started-with-proof-general">Getting Started with Proof General</h2>
 
 <p>This section collects some notes on basic commands used to interact with Coq
 using [Proof General].  We will begin with Andrej Bauer’s YouTube tutorials,
@@ -260,7 +321,7 @@ below assume we are working in the ~/git/Coq directory.</p>
 </ol>
 
 <h3 id="basics">Basics</h3>
-<p>Load the Basics.v</p>
+<p>To be continued…</p>
 
         
           <footer>
@@ -296,6 +357,10 @@ below assume we are working in the ~/git/Coq directory.</p>
     <ul class="recent_posts">
       
         <li>
+          <a href="/2015/01/11/three-sat-and-partition-lattices/">3-SAT and partition lattices</a>
+        </li>
+      
+        <li>
           <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
         </li>
       
@@ -305,10 +370,6 @@ below assume we are working in the ~/git/Coq directory.</p>
       
         <li>
           <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
-        </li>
-      
-        <li>
-          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
         </li>
       
         <li>
@@ -374,7 +435,7 @@ below assume we are working in the ~/git/Coq directory.</p>
   <div class="container">
     <p class="pull-left">
   <a href="/">William DeMeo</a>
-  - Copyright &copy; 2014 - William DeMeo
+  - Copyright &copy; 2015 - William DeMeo
 </p>
 <p class="pull-right">
   <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>

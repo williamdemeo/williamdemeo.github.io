@@ -13,7 +13,10 @@
   
     
   
-  <meta name="description" content="Conjecture: The CSP associated with a finite idempotent algebra A is tractable iff A has a WNU term operation. Let A be a finite idempotent algebra &hellip;">
+  <meta name="description" content="Definition of a CSP problem Given a relational structure,
+$\mathbf{R} = \langle X, \Gamma \rangle$,
+that is, set $X$ along with a collection
+$\gamma &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -29,7 +32,10 @@
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="The Algebraic CSP Dichotomy Conjecture" />
-  <meta name="og:description" content="Conjecture: The CSP associated with a finite idempotent algebra A is tractable iff A has a WNU term operation. Let A be a finite idempotent algebra &hellip;" />
+  <meta name="og:description" content="Definition of a CSP problem Given a relational structure,
+$\mathbf{R} = \langle X, \Gamma \rangle$,
+that is, set $X$ along with a collection
+$\gamma &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/csp/index.html"/>
   <meta name="url" content="http://williamdemeo.github.io/csp/index.html">
   
@@ -124,7 +130,81 @@
 <time datetime="2014-10-14T01:15:00-05:00" pubdate data-updated="true">Oct 14<span>th</span>, 2014</time></p>
         </header>
         
-        <p><strong>Conjecture:</strong> The CSP associated with a finite idempotent algebra <strong>A</strong> is
+        <h2 id="definition-of-a-csp-problem">Definition of a CSP problem</h2>
+
+<p>Given a <strong>relational structure</strong>,
+$\mathbf{R} = \langle X, \Gamma \rangle$,
+that is, set $X$ along with a collection
+$\gamma \subseteq \bigcup_{n&gt;0} \mathcal{P}(X^n)$ of <em>relations</em> 
+(subsets of powers of $X$), we associate a <strong>constraint satisfaction problem</strong>
+denoted by
+$\operatorname{CSP}(\mathbf{R})$.
+This is a decision
+problem that we solve by finding an algorithm or program that does the
+following: take as input any</p>
+
+<ul>
+  <li><strong>instance:</strong> a relational structure
+$\mathbf{S} = \langle Y, \Gamma’ \rangle$ with the same signature as $\mathbf{R}$.</li>
+</ul>
+
+<p>and <em>decide</em> (output “yes” or “no”) if there is or is not a</p>
+
+<ul>
+  <li><strong>solution:</strong> a homomorphism $h: \mathbf{S} \to \mathbf{R}$.</li>
+</ul>
+
+<p>If there is such an algorithm that takes at most a power of $n$ operations
+to finish when given an input of size $n$ (bits of memory), then we say that
+$\operatorname{CSP}(\mathbf{R})$
+is <em>tractable</em>.  Otherwise, we call it <strong>intractable</strong>.</p>
+
+<h2 id="connection-to-algebraic-structures-a-la-galois">Connection to algebraic structures (a la Galois)</h2>
+
+<p>Given a relational structure
+$\mathbf{R} = \langle X, \Gamma \rangle$,
+consider the set
+$\operatorname{Poly}(\Gamma)$
+of functions
+$f: X^k \to X$ that respect all relations in $\Gamma$.
+These are sometimes called <em>polymorphisms</em> of $\mathbf{R}$.
+(In other terms, $f$ is polymorphism of $\mathbf{R}$
+if every $\gamma \in \Gamma$ is a subalgebra of a (finite)
+power of the algebra $\langlel X, {f}\rangle$.)</p>
+
+<p>Let $\mathbf{A}(\mathbf{R})$ denote the algebraic structure
+with universe $X$ and operations $\operatorname{Poly}(\Gamma)$.
+Then (as the parenthetical remark above implies), every 
+$\gamma \in \Gamma$ is a subalgebra of a power of
+$\mathbf{A}(\mathbf{R})$.</p>
+
+<p>If we now go back and consider the set of relations respected by
+all the polymorphisms, we complete the Galois connection and
+arive at a the set of “invariant” relations. Let’s denote these by
+$\operatorname{Inv}(\mathbf{A}(\mathbf{R}))$.  Clearly
+$\operatorname{Inv}(\mathbf{A}(\mathbf{R})) =
+\operatorname{S}\operatorname{P}_{fin}(\mathbf{A}(\mathbf{R})$,
+the set of all subalgebras of finite powers of $\mathbf{A}(\mathbf{R})$.
+Also clear is that 
+$\Gamma \subseteq \operatorname{Rel}(\mathbf{A}(\mathbf{R}))$. </p>
+
+<p>The reason this Galois connection is useful
+is due to a crucial observation of Jeavons from 1998 [8]:</p>
+
+<blockquote>
+  <p>If $\mathbf{R} = \langle X, \Gamma \rangle$
+is a finite relational structure and if
+$\Gamma’\subseteq \operatorname{Rel}(\mathbf{A}(\mathbf{R}))$
+is finite, then $\operatorname{CSP}\langle X, \Gamma’\rangle$
+is reducible in polynomial time to $\operatorname{CSP}(\mathbf{R})$.</p>
+</blockquote>
+
+<p>In particular, the tractability of a CSP depends only on
+its associated algebra.</p>
+
+<hr />
+
+<p><strong>Conjecture:</strong> The CSP associated with a finite idempotent algebra <strong>A</strong> is
    tractable iff <strong>A</strong> has a WNU term operation.</p>
 
 <p>Let <strong>A</strong> be a finite idempotent algebra and let V(<strong>A</strong>) denote the variety
@@ -160,7 +240,7 @@
 
 <h3 id="taylor-iff-no-type-1">Taylor iff no Type 1</h3>
 
-<p>Hobby and McKenzie proved in [<a href="#bibliography">2</a>] proved that
+<p>Hobby and McKenzie proved in [<a href="#bibliography">2</a>] that
    a finite algebra <strong>A</strong> has a Taylor term iff <strong>1</strong> does not belong to the TCT
    type set of V(<strong>A</strong>). </p>
 
@@ -233,20 +313,24 @@ Contemporary Mathematics, AMS <strong>76</strong> (1988).</p>
     <p>[3] Freese and Valeriote, <a href="http://www.math.hawaii.edu/~ralph/Preprints/IJAC_1901_P41.pdf">On the complexity of some Maltsev conditions.</a> Internat. J. Algebra Comput. <strong>19</strong> (2009).</p>
   </li>
   <li>
-    <p>[4] Maroti and McKenzie, <a href="csp/MarotiMcKenzie-ExistenceTheorems-AU59-2008.pdf">Existence theorems for weakly symmetric operations.</a> 
+    <p>[4] Maroti and McKenzie, <a href="MarotiMcKenzie-ExistenceTheorems-AU59-2008.pdf">Existence theorems for weakly symmetric operations.</a> 
 Algebra Universalis <strong>59</strong> (2008).</p>
   </li>
   <li>
-    <p>[5] Barto and Kozik, <a href="csp/BartoKozik-AbsorbingSubalgebras-LMCS-2012.pdf">Absorbing subalgebras, cyclic terms, and the
+    <p>[5] Barto and Kozik, <a href="BartoKozik-AbsorbingSubalgebras-LMCS-2012.pdf">Absorbing subalgebras, cyclic terms, and the
 constraint satisfaction problem.</a>
 Log. Methods Comput. Sci. <strong>8</strong> (2012).</p>
   </li>
   <li>
-    <p>[6] Siggers, <a href="csp/Siggers-StrongMalcevCondition-AU-2010.pdf">A strong Malcev condition for locally finite varieties omitting the unary type.</a> Algebra Universalis <strong>64</strong> (2010).</p>
+    <p>[6] Siggers, <a href="Siggers-StrongMalcevCondition-AU-2010.pdf">A strong Malcev condition for locally finite varieties omitting the unary type.</a> Algebra Universalis <strong>64</strong> (2010).</p>
   </li>
   <li>
     <p>[7] Kearnes, Markovic, and McKenzie, 
-<a href="csp/KearnesMarkovicMcKenzie-OptimalMalcevForNoType1-AU-2014.pdf">Optimal strong Mal’cev conditions for omitting type 1 in locally finite varieties.</a> Algebra Universalis <strong>72</strong> (2014).</p>
+<a href="KearnesMarkovicMcKenzie-OptimalMalcevForNoType1-AU-2014.pdf">Optimal strong Mal’cev conditions for omitting type 1 in locally finite varieties.</a> Algebra Universalis <strong>72</strong> (2014).</p>
+  </li>
+  <li>
+    <p>[8] Jeavons, Peter, 
+<a href="Jeavons-AlgStructCombProbs-TCS-1998.pdf">On the algebraic structure of combinatorial problems</a> Theoretical Computer Science <strong>200</strong> (1998).</p>
   </li>
 </ol>
 
@@ -284,6 +368,10 @@ Log. Methods Comput. Sci. <strong>8</strong> (2012).</p>
     <ul class="recent_posts">
       
         <li>
+          <a href="/2015/01/11/three-sat-and-partition-lattices/">3-SAT and partition lattices</a>
+        </li>
+      
+        <li>
           <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
         </li>
       
@@ -293,10 +381,6 @@ Log. Methods Comput. Sci. <strong>8</strong> (2012).</p>
       
         <li>
           <a href="/2014/02/13/a-problem-of-palfy-and-saxl/">A problem of P&aacute;lfy and Saxl</a>
-        </li>
-      
-        <li>
-          <a href="/2014/02/13/algebra-and-logic-meetings/">Algebra &amp; Logic Meetings</a>
         </li>
       
         <li>
@@ -362,7 +446,7 @@ Log. Methods Comput. Sci. <strong>8</strong> (2012).</p>
   <div class="container">
     <p class="pull-left">
   <a href="/">William DeMeo</a>
-  - Copyright &copy; 2014 - William DeMeo
+  - Copyright &copy; 2015 - William DeMeo
 </p>
 <p class="pull-right">
   <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
