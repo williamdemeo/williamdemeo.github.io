@@ -13,9 +13,10 @@
   
     
   
-  <meta name="description" content="Definition of a relational CSP problem Given a relational structure,
+  <meta name="description" content="Definition of relational CSP Given a relational structure,
 $\mathbf{R} = \langle X, \Gamma \rangle$,
-that is, set $X$ along with a &hellip;">
+that is, set $X$ along with a collection
+$\ &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -31,9 +32,10 @@ that is, set $X$ along with a &hellip;">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="William DeMeo" />
   <meta name="og:title" content="The Algebraic CSP Dichotomy Conjecture" />
-  <meta name="og:description" content="Definition of a relational CSP problem Given a relational structure,
+  <meta name="og:description" content="Definition of relational CSP Given a relational structure,
 $\mathbf{R} = \langle X, \Gamma \rangle$,
-that is, set $X$ along with a &hellip;" />
+that is, set $X$ along with a collection
+$\ &hellip;" />
   <meta name="og:url" content="http://williamdemeo.github.io/csp/index.html"/>
   <meta name="url" content="http://williamdemeo.github.io/csp/index.html">
   
@@ -128,7 +130,7 @@ that is, set $X$ along with a &hellip;" />
 <time datetime="2014-10-14T01:15:00-05:00" pubdate data-updated="true">Oct 14<span>th</span>, 2014</time></p>
         </header>
         
-        <h3 id="definition-of-a-relational-csp-problem">Definition of a relational CSP problem</h3>
+        <h3 id="definition-of-relational-csp">Definition of relational CSP</h3>
 
 <p>Given a <strong>relational structure</strong>,
 $\mathbf{R} = \langle X, \Gamma \rangle$,
@@ -153,12 +155,12 @@ $\mathbf{S} = \langle Y, \Gamma’ \rangle$ with the same signature as $\mathbf{
 </ul>
 
 <p>If there is such an algorithm that takes at most a power of $n$ operations
-to finish when given an input $\mathbf{S}$ of size $n$ (bits of memory required
+to process an input $\mathbf{S}$ of size $n$ (bits of memory required
 to encode $\mathbf{S}$),
 then we say that $\operatorname{CSP}(\mathbf{R})$
 is <strong>tractable</strong>.  Otherwise, we call it <strong>intractable</strong>.</p>
 
-<h3 id="connection-a-la-galois-to-an-algebraic-csp-problem">Connection (a la Galois) to an algebraic CSP problem</h3>
+<h3 id="connection-a-la-galois-to-algebraic-csp">Connection (a la Galois) to algebraic CSP</h3>
 
 <p>Given a relational structure
 $\mathbf{R} = \langle X, \Gamma \rangle$,
@@ -169,7 +171,7 @@ $f: X^k \to X$ that respect all relations in $\Gamma$,
 sometimes called <em>polymorphisms</em> of $\mathbf{R}$.
 (In other terms, $f$ is polymorphism of $\mathbf{R}$
 if every $\gamma \in \Gamma$ is a subalgebra of a (finite)
-power of the algebra $\langle X, {f}\rangle$.)</p>
+power of the algebra $\langle X, \{ f \} \rangle$.)</p>
 
 <p>Let $\mathbf{A}(\mathbf{R})$ denote the algebraic structure
 with universe $X$ and operations $\operatorname{Poly}(\Gamma)$.
@@ -245,16 +247,18 @@ tractable iff <strong>A</strong> has a WNU term operation.</p>
 <h3 id="taylor-iff-no-type-1">Taylor iff no Type 1</h3>
 
 <p>Hobby and McKenzie proved in [<a href="#bibliography">2</a>] that
-   a finite algebra <strong>A</strong> has a Taylor term iff <strong>1</strong> does not belong to the TCT
-   type set of V(<strong>A</strong>). </p>
+   a finite algebra <strong>A</strong> has a Taylor term iff <strong>1</strong> does not belong to the
+   set of TCT-types of V(<strong>A</strong>). (We say V(<strong>A</strong>) “omits type 1” in this case.)</p>
 
-<h3 id="type-1-iff-trivial-2">Type 1 iff Trivial 2</h3>
+<h3 id="type-1-iff-2-set">Type 1 iff 2-set</h3>
 
 <p>Freese and Valeriote proved in [<a href="#bibliography">3</a>]
-   that, for a finite idempotent algebra <strong>A</strong>, TCT type 1 occurs in the type set
-   of V(<strong>A</strong>) iff there is a subalgebra <strong>B</strong> of <strong>A</strong>, and a congruence $\eta$,
+   that, for a finite idempotent algebra <strong>A</strong>,
+   V(<strong>A</strong>) omits type 1 iff <strong>A</strong> omits “trivial divisors.” More precisely,
+   1 occurs in the TCT-type set of V(<strong>A</strong>) iff there is a subalgebra
+	<strong>B</strong> of <strong>A</strong>, and a congruence $\eta$,
    such that <strong>B</strong>$/\eta$ is a two element algebra with only the trivial
-   projection operations.</p>
+   projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divisor” of <strong>A</strong>.) </p>
 
 <h3 id="no-tractability-without-taylor-terms">No tractability without Taylor terms</h3>
 
