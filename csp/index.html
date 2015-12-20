@@ -226,15 +226,17 @@ fact that Peter Jeavons first observed in the late
 1990’s (see [<a href="#bibliography">0</a>]):</p>
 
 <blockquote>
-  <p>If $\mathbb{R} = \langle X, \Gamma \rangle$
+  <p>If $\langle X, \Gamma \rangle$
 is a finite relational structure and if
-$\Gamma’\subseteq \operatorname{Inv}(\mathbf{A}(\mathbb{R}))$
+$\Gamma’\subseteq \operatorname{Inv}(\operatorname{Fix}(\Gamma))$
 is finite, then $\operatorname{CSP}\langle X, \Gamma’\rangle$
-is reducible in polynomial time to $\operatorname{CSP}(\mathbb{R})$.</p>
+is reducible in polynomial time to
+$\operatorname{CSP}\langle X, \Gamma \rangle$.</p>
 </blockquote>
 
 <p>In particular, the tractability of a CSP depends only on
-its associated algebra.</p>
+its associated algebra
+$\mathbf{A}(\mathbb{R}) := \langle X, \operatorname{Fix}(\Gamma)\rangle$.</p>
 
 <hr />
 
