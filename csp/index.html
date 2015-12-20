@@ -177,36 +177,52 @@ it belongs to the set $\operatorname{CSP}(\mathbb{R})$.</p>
 <hr />
 
 <h3 id="connection-to-algebraic-csp">Connection to algebraic CSP</h3>
-<p>Let $X$ be a set and let $Op(X)$ denote the set of all operations
-$f:X^k \to X$ ($k \geq 0$).</p>
+<p>Let $X$ be a set, let $Op(X)$ denote the set of all operations
+on $X$, and $Rel(X)$ the set of all relations on $X$.</p>
 
-<p>Let $\Gamma$ be a set of relations on $X$ and define</p>
+<p>Given $\Gamma\subseteq Rel(X)$, define the set of
+all operations that leave the relations in $\Gamma$ “fixed” as follows:</p>
 
 <script type="math/tex; mode=display">\operatorname{Fix}(\Gamma) = \{f \in Op(X) \mid f \text{ respects every }
 \gamma \in \Gamma\}.</script>
 
+<p>By “$f$ respects every $\gamma$” we mean that each
+$\gamma$ is a subalgebra of a (finite)
+power of the algebra $\langle X, \{ f \} \rangle$.</p>
+
 <p>If $\mathbb{R} = \langle X, \Gamma \rangle$ is
 a relational structure, then the set
 $\operatorname{Fix}(\Gamma)$
-is sometimes called the set of <em>polymorphisms</em> of $\mathbb{R}$.
-In other words, $f$ is polymorphism of $\mathbb{R}$
-if every $\gamma \in \Gamma$ is a subalgebra of a (finite)
-power of the algebra $\langle X, \{ f \} \rangle$.</p>
+is sometimes called the set of <em>polymorphisms</em> of $\mathbb{R}$.</p>
+
+<p>Going the other way, starting with a collection $F\subseteq Op(X)$,
+define the set of all relations left “invariant” by
+the functions in $F$ as follows:</p>
+
+<script type="math/tex; mode=display">\operatorname{Inf}(F) = \{\gamma \in Rel(X) \mid \gamma \text{ is respected by
+every } f \in F\}.</script>
+
+<p>It is easy to see that</p>
+
+<script type="math/tex; mode=display">\Gamma \subseteq \operatorname{Inv}(\operatorname{Fix}(\Gamma))</script>
+
+<p>and</p>
+
+<script type="math/tex; mode=display">F \subseteq \operatorname{Fix}(\operatorname{Inv}(F)).</script>
+
+<hr />
 
 <p>Let $\mathbf{A}(\mathbb{R})$ denote the algebraic structure
 with universe $X$ and operations $\operatorname{Fix}(\Gamma)$.
 Then every $\gamma \in \Gamma$ is a subalgebra of a power of
-$\mathbf{A}(\mathbb{R})$.</p>
-
-<p>If we now go back the other way and consider the set of relations
-respected by all the polymorphisms, we complete a <em>Galois connection</em>
-and arive at the set of “invariant” relations, which we denote by
-$\operatorname{Inv}(\mathbf{A}(\mathbb{R}))$.  Clearly
-$\operatorname{Inv}(\mathbf{A}(\mathbb{R})) =
+$\mathbf{A}(\mathbb{R})$.
+Clearly
+$\operatorname{Inv}(\operatorname{Fix}(\Gamma))$ =
 \operatorname{S}\operatorname{P}_{fin}(\mathbf{A}(\mathbb{R}))$,
 the set of all subalgebras of finite powers of $\mathbf{A}(\mathbb{R})$.
 Also clear is that 
-$\Gamma \subseteq \operatorname{Inv}(\mathbf{A}(\mathbb{R}))$. </p>
+$\Gamma \subseteq
+\operatorname{Inv}(\operatorname{Fix}(\Gamma))$.</p>
 
 <p>The reason this Galois connection is useful is due to the following
 fact that Peter Jeavons first observed in the late
