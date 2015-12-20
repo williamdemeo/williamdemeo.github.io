@@ -164,7 +164,7 @@ is <strong>tractable</strong>.  Otherwise, we call it <strong>intractable</stron
 $\operatorname{CSP}(\mathbb{R})$ to be the set</p>
 
 <script type="math/tex; mode=display"> \operatorname{CSP}(\mathbb{R}) =
-\{\mathbb{S} | \text{ there is a homomorphism } h : \mathbb{S} \to
+\{\mathbb{S} \mid \text{ there is a homomorphism } h : \mathbb{S} \to
 \mathbb{R} \}.
 </script>
 
@@ -178,37 +178,35 @@ it belongs to the set $\operatorname{CSP}(\mathbb{R})$.</p>
 
 <h3 id="connection-to-algebraic-csp">Connection to algebraic CSP</h3>
 <p>Let $X$ be a set and let $Op(X)$ denote the set of all operations
-$f:X^k \to X$ ($k \geq 0$).  Let $\Gamma$ be a set of relations on $X$
-and define</p>
+$f:X^k \to X$ ($k \geq 0$).</p>
+
+<p>Let $\Gamma$ be a set of relations on $X$ and define</p>
 
 <script type="math/tex; mode=display">\operatorname{Fix}(\Gamma) = \{f \in Op(X) \mid f \text{ respects every }
 \gamma \in \Gamma\}.</script>
 
-<p>Given a relational structure
-$\mathbb{R} = \langle X, \Gamma \rangle$,
-consider the set
-$\operatorname{Poly}(\Gamma)$
-of functions
-$f: X^k \to X$ that respect all relations in $\Gamma$,
-sometimes called <em>polymorphisms</em> of $\mathbb{R}$.
+<p>If $\mathbb{R} = \langle X, \Gamma \rangle$ is
+a relational structure, then the set
+$\operatorname{Fix}(\Gamma)$
+is sometimes called the set of <em>polymorphisms</em> of $\mathbb{R}$.
 In other words, $f$ is polymorphism of $\mathbb{R}$
 if every $\gamma \in \Gamma$ is a subalgebra of a (finite)
 power of the algebra $\langle X, \{ f \} \rangle$.</p>
 
 <p>Let $\mathbf{A}(\mathbb{R})$ denote the algebraic structure
-with universe $X$ and operations $\operatorname{Poly}(\Gamma)$.
+with universe $X$ and operations $\operatorname{Fix}(\Gamma)$.
 Then every $\gamma \in \Gamma$ is a subalgebra of a power of
 $\mathbf{A}(\mathbb{R})$.</p>
 
 <p>If we now go back the other way and consider the set of relations
 respected by all the polymorphisms, we complete a <em>Galois connection</em>
 and arive at the set of “invariant” relations, which we denote by
-$\operatorname{Rel}(\mathbf{A}(\mathbb{R}))$.  Clearly
-$\operatorname{Rel}(\mathbf{A}(\mathbb{R})) =
+$\operatorname{Inv}(\mathbf{A}(\mathbb{R}))$.  Clearly
+$\operatorname{Inv}(\mathbf{A}(\mathbb{R})) =
 \operatorname{S}\operatorname{P}_{fin}(\mathbf{A}(\mathbb{R}))$,
 the set of all subalgebras of finite powers of $\mathbf{A}(\mathbb{R})$.
 Also clear is that 
-$\Gamma \subseteq \operatorname{Rel}(\mathbf{A}(\mathbb{R}))$. </p>
+$\Gamma \subseteq \operatorname{Inv}(\mathbf{A}(\mathbb{R}))$. </p>
 
 <p>The reason this Galois connection is useful
 is due to a crucial observation of Jeavons from 1998 [<a href="#bibliography">0</a>]:</p>
@@ -216,7 +214,7 @@ is due to a crucial observation of Jeavons from 1998 [<a href="#bibliography">0<
 <blockquote>
   <p>If $\mathbb{R} = \langle X, \Gamma \rangle$
 is a finite relational structure and if
-$\Gamma’\subseteq \operatorname{Rel}(\mathbf{A}(\mathbb{R}))$
+$\Gamma’\subseteq \operatorname{Inv}(\mathbf{A}(\mathbb{R}))$
 is finite, then $\operatorname{CSP}\langle X, \Gamma’\rangle$
 is reducible in polynomial time to $\operatorname{CSP}(\mathbb{R})$.</p>
 </blockquote>
@@ -302,7 +300,7 @@ projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divis
 <p>If the algebra <strong>B</strong>, consisting of
    the set $\{0, 1\}$ along with trivial projection operations, occurs in the
    variety V(<strong>A</strong>), then the associated 
-   $\operatorname{CSP}(\langle A, \operatorname{Rel}(\mathbf{A})\rangle)$
+   $\operatorname{CSP}(\langle A, \operatorname{Inv}(\mathbf{A})\rangle)$
    is NP-complete.</p>
 
 <p>To see this, note that the problem $\operatorname{CSP}(\mathbb{S})$ for the
@@ -310,13 +308,13 @@ projection operations. (That is, <strong>B</strong>$/\eta$ is a “trivial divis
    $T = \{0, 1\}^3 - \{(0,0,0), (1,1,1)\}$,
    is NP-complete, and
    $\operatorname{CSP}(\mathbb{S})\leq \operatorname{CSP}(\langle A,
-   \operatorname{Rel}(\mathbf{A})\rangle)$.</p>
+   \operatorname{Inv}(\mathbf{A})\rangle)$.</p>
 
 <p>It follows that</p>
 
 <blockquote>
   <p>Tractability of
-$\operatorname{CSP}(\langle A, \operatorname{Rel}(\mathbf{A})\rangle)$
+$\operatorname{CSP}(\langle A, \operatorname{Inv}(\mathbf{A})\rangle)$
 implies V(<strong>A</strong>) has a Taylor term operation.</p>
 </blockquote>
 
