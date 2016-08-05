@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2016-07-17T17:36:59-05:00</updated>
+  <updated>2016-08-04T22:00:32-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -147,7 +147,7 @@ corrections.  You may prefer
       <li><a href="#step-one-learn-haskell">Step One: Learn Haskell</a></li>
       <li><a href="#what-is-agda-anyway">What is Agda, anyway?</a>
         <ul>
-          <li><a href="#types-are-proofs">Types are Proofs</a></li>
+          <li><a href="#programs-are-proofs">Programs are Proofs</a></li>
           <li><a href="#why-prove-when-you-can-just-test">Why prove when you can just test?</a></li>
         </ul>
       </li>
@@ -323,7 +323,7 @@ any error scenario from our program.</p>
 
 <hr />
 
-<h3 id="types-are-proofs">Types are Proofs</h3>
+<h3 id="programs-are-proofs">Programs are Proofs</h3>
 
 <div class="span4">
 <img src="http://williamdemeo.github.io/images/owl.png" />
