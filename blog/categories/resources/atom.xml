@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resources | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/resources/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2016-08-04T22:00:32-05:00</updated>
+  <updated>2016-12-30T22:16:10-05:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[TypeFunc]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/typefunc/"/>
-    <updated>2014-02-13T08:23:58-06:00</updated>
+    <updated>2014-02-13T09:23:58-05:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/typefunc</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
 the massive amount of online resources for learning about type theory, functional
