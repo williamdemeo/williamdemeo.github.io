@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2016-12-30T22:16:10-05:00</updated>
+  <updated>2017-04-02T20:07:14-10:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[3-SAT and partition lattices]]></title>
     <link href="http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices/"/>
-    <updated>2015-01-11T22:53:17-05:00</updated>
+    <updated>2015-01-11T17:53:17-10:00</updated>
     <id>http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices</id>
     <content type="html"><![CDATA[<p>It is not hard to see that <a href="https://en.wikipedia.org/wiki/3sat">3-SAT</a>
 reduces to the problem of deciding whether all coatoms in a certain partition
@@ -121,7 +121,7 @@ would answer the P versus NP question.</p>
   <entry>
     <title type="html"><![CDATA[Learn You an Agda]]></title>
     <link href="http://williamdemeo.github.io/2014/02/27/learn-you-an-agda/"/>
-    <updated>2014-02-27T00:00:00-05:00</updated>
+    <updated>2014-02-27T00:00:00-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/27/learn-you-an-agda</id>
     <content type="html"><![CDATA[<p>This is a markdown version of the tutorial
 <a href="http://learnyouanagda.liamoc.net/">Learn You an Agda and Achieve Enlightenment!</a>
@@ -1665,7 +1665,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <entry>
     <title type="html"><![CDATA[Isotopy]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/isotopy/"/>
-    <updated>2014-02-13T21:21:00-05:00</updated>
+    <updated>2014-02-13T16:21:00-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/isotopy</id>
     <content type="html"><![CDATA[<p><em>Equivalence of algebraic structures</em></p>
 
@@ -1836,7 +1836,7 @@ different in size.</p>
   <entry>
     <title type="html"><![CDATA[A problem of P&aacute;lfy and Saxl]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl/"/>
-    <updated>2014-02-13T09:41:27-05:00</updated>
+    <updated>2014-02-13T04:41:27-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl</id>
     <content type="html"><![CDATA[<p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
 
@@ -1898,7 +1898,7 @@ contains the following:</p>
   <entry>
     <title type="html"><![CDATA[TypeFunc]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/typefunc/"/>
-    <updated>2014-02-13T09:23:58-05:00</updated>
+    <updated>2014-02-13T04:23:58-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/typefunc</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
 the massive amount of online resources for learning about type theory, functional
@@ -1917,7 +1917,7 @@ software resources that I have found helpful.</p>
   <entry>
     <title type="html"><![CDATA[Overalgebras]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/overalgebras/"/>
-    <updated>2014-02-13T08:42:53-05:00</updated>
+    <updated>2014-02-13T03:42:53-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/overalgebras</id>
     <content type="html"><![CDATA[<p>In the <a href="https://github.com/williamdemeo/Overalgebras">Overalgebras GitHub repo</a>
 resides the article
@@ -1947,7 +1947,7 @@ See <a href="http://universalalgebra.wordpress.org/documentation/gap/gap-and-uac
   <entry>
     <title type="html"><![CDATA[IEProps]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/ieprops/"/>
-    <updated>2014-02-13T08:42:42-05:00</updated>
+    <updated>2014-02-13T03:42:42-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/ieprops</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article
 <a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
@@ -1969,7 +1969,7 @@ The original submission is available in the file <a href="https://github.com/wil
   <entry>
     <title type="html"><![CDATA[GroupSound]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/groupsound/"/>
-    <updated>2014-02-13T06:23:41-05:00</updated>
+    <updated>2014-02-13T01:23:41-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/groupsound</id>
     <content type="html"><![CDATA[<p><em>What does a nonabelian group sound like?</em></p>
 
@@ -2002,7 +2002,7 @@ more details. </p>
   <entry>
     <title type="html"><![CDATA[Cloning an Octopress repo]]></title>
     <link href="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/"/>
-    <updated>2014-02-07T20:46:19-05:00</updated>
+    <updated>2014-02-07T15:46:19-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo</id>
     <content type="html"><![CDATA[<p>When attempting to clone my Octopress repository on a new machine, I had the
 same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
@@ -2112,7 +2112,7 @@ git push origin source
   <entry>
     <title type="html"><![CDATA[Diaconescu's Theorem]]></title>
     <link href="http://williamdemeo.github.io/2014/02/05/diaconescus-theorem/"/>
-    <updated>2014-02-05T22:52:59-05:00</updated>
+    <updated>2014-02-05T17:52:59-10:00</updated>
     <id>http://williamdemeo.github.io/2014/02/05/diaconescus-theorem</id>
     <content type="html"><![CDATA[<p>I learned about
 <a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>
