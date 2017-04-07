@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Probability | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/probability/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-06T22:08:53-10:00</updated>
+  <updated>2017-04-06T22:10:52-10:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,19 +14,19 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Jane Street Probability Questions]]></title>
+    <title type="html"><![CDATA[Jane Street Test]]></title>
     <link href="http://williamdemeo.github.io/2014/03/19/probability-quiz/"/>
     <updated>2014-03-19T14:27:46-10:00</updated>
     <id>http://williamdemeo.github.io/2014/03/19/probability-quiz</id>
-    <content type="html"><![CDATA[<p>The following four questions appeared on an online test administered by 
+    <content type="html"><![CDATA[<p>The questions below appeared on an online test administered by 
 Jane Street Capital Management to assess whether a person is worthy of 
 a phone interview.</p>
+
+<!-- more -->
 
 <h3 id="question-1">Question 1</h3>
 <p>Suppose we choose four numbers at random without replacement from the first
 20 prime numbers. What is the probability that the sum of these four numbers is odd?</p>
-
-<!-- more -->
 
 <p><strong>Solution</strong> By definition, an <em>even</em> number is an integer multiple of 2; that
 is, even numbers have the form $2n$, for some integer $n$. An <em>odd</em> number is
