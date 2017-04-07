@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-02T23:04:19-10:00</updated>
+  <updated>2017-04-06T22:04:39-10:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Conferences in Algebra]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
+    <updated>2017-04-06T21:44:46-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
+try to keep up with the vast number of meetings in these areas and help make 
+summer travel plans accordingly.</p>
+
+<p>The <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> repository is simply a list of links to the conferences 
+listed.</p>
+
+<!-- more -->
+
+<p>Here are some other more general conference listings that may be updated more frequently than mine:</p>
+
+<ul>
+  <li><a href="http://www.wikicfp.com/cfp/">WikiCFP</a> A wiki for calls for papers.  </li>
+  <li><a href="http://spot.colorado.edu/~kearnes/conf.html">General Algebra Conferences</a></li>
+  <li><a href="http://www.conference-service.com/conferences/algebra.html">COMS: Algebra</a></li>
+  <li><a href="http://www.conference-service.com/conferences/logic.html">COMS: Mathematical Logic</a></li>
+  <li><a href="http://www2.informatik.hu-berlin.de/~lics/logic-confs/index.html">Logic Related Conferences</a></li>
+  <li><a href="http://cstheory.stackexchange.com/questions/7900/list-of-tcs-conferences-and-workshops">A list of conferences in theoretical computer science</a>  </li>
+  <li><a href="https://googledrive.com/host/0BxA1GnxVACojZWEtY0NCMzhSbjg/noteworthy.html">Peter Jipsen’s List</a></li>
+  <li><a href="http://portal.core.edu.au/conf-ranks/">Conference rankings</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Congruences of Partial Algebras]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras/"/>
+    <updated>2017-04-06T21:08:13-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras</id>
+    <content type="html"><![CDATA[<p>The repository <a href="https://github.com/UniversalAlgebra/par-alg-rep">par-alg-rep</a>
+contains some notes describing a few results that we worked out in the 
+fall of 2016, while I was a postdoc at University of 
+Hawaii, although the main result—a straight-forward proof of the fact 
+that every finite lattice is the congruence lattice of a 
+finite partial algebra—was discovered during a
+visit to Chapman University in October 2016.</p>
+
+<!-- more  -->
+
+<p>Bill Lampe pointed out that the main result here has been known for 
+a long time. However, our proof seems new and simpler to us.</p>
+
+<p>The note also describes closure operators and reviews some useful 
+facts about them. Finally, we recall a theorem from Berman’s 
+thesis that relates congruence lattices of partial algebras 
+with those of total algebras.</p>
+
+<p>The main purpose of the note is to describe some tools 
+that we plan to exploit in our quest to represent every finite 
+lattice as the congruence lattice of a finite algebra.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[3-SAT and partition lattices]]></title>
@@ -114,6 +173,302 @@ would answer the P versus NP question.</p>
 <!-- We will show that any instance of 3-SAT can be reduced to an instance of -->
 <!--  $\operatorname{CSP}(\mathbf B)$.  Then  -->
 <!-- is the -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jane Street Probability Questions]]></title>
+    <link href="http://williamdemeo.github.io/2014/03/19/probability-quiz/"/>
+    <updated>2014-03-19T14:27:46-10:00</updated>
+    <id>http://williamdemeo.github.io/2014/03/19/probability-quiz</id>
+    <content type="html"><![CDATA[<p>The following four questions appeared on an online test administered by 
+Jane Street Capital Management to assess whether a person is worthy of 
+a phone interview.</p>
+
+<h3 id="question-1">Question 1</h3>
+<p>Suppose we choose four numbers at random without replacement from the first
+20 prime numbers. What is the probability that the sum of these four numbers is odd?</p>
+
+<!-- more -->
+
+<p><strong>Solution</strong> By definition, an <em>even</em> number is an integer multiple of 2; that
+is, even numbers have the form $2n$, for some integer $n$. An <em>odd</em> number is
+one more than an even number; that is, odd numbers have the form $2n+1$ for
+some integer $n$. </p>
+
+<p>If all four numbers are odd, then the sum is even.  This follows
+from the fact that the sum of two odd numbers is even: $(2n+1) + (2k+1) =
+2(n+k) + 2 = 2(n+k+1)$.  And the sum of two even numbers is again even: $2n+2k =
+2(n+k)$.  Therefore, in order for the sum of the four primes chosen to
+be odd, the only even prime number, 2, must be among the four numbers we
+selected.</p>
+
+<p>Here are two ways to compute the probability that 2 is one of the four numbers selected:
+First, consider the probability of <em>not</em> selecting 2:
+$$
+P(\text{2 is not among the chosen primes}) = 
+\frac{19}{20}
+\frac{18}{19}
+\frac{17}{18}
+\frac{16}{17}
+=
+\frac{16}{20}
+=
+\frac{4}{5}.
+$$</p>
+
+<p>Then the probability that 2 is among the four chosen prime numbers is 
+$1 - \frac{4}{5}$, or $\frac{1}{5}$.</p>
+
+<p>Alternatively, we could count the number of four-tuples that have a 2.  This is
+the same as taking 4 times the number of ways to choose the other three numbers: 
+$19\cdot 18\cdot 17$. (The factor of 4 appears since we could put the 2 in any of four
+positions).  Now divide this by the total number of four-tuples, 
+$20 \cdot 19\cdot 18\cdot 17$, to arrive at the same answer as above:</p>
+
+<script type="math/tex; mode=display">
+\frac{4\cdot 19\cdot 18\cdot 17}
+{20 \cdot 19\cdot 18\cdot 17} = 
+\frac{4}{20} = \frac{1}{5}.
+</script>
+
+<h3 id="question-2">Question 2</h3>
+<p>Suppose you have an 8 sided die with sides labeled 1 to 8.  You roll the die
+once and observe the number $f$ showing on the first roll.  Then you have the
+option of rolling a second time.  If you decline the option to roll again, you win
+$f$ dollars. If instead you exercise the option to roll a second time, 
+and if $s$ shows on the second roll, then you win $f + s$ dollars if $f+s &lt; 10$ 
+and 0 dollars if $f+s \geq 10$.  What is the best strategy?</p>
+
+<p><strong>Solution</strong> </p>
+
+<p>A strategy is given by specifying what to do in response to 
+each possible first roll, $f$. The best strategy will maximize the expected winnings.</p>
+
+<p>The expected winnings if we roll just once is simply the number that appears, $f$.</p>
+
+<p>Let $S$ be the random variable representing the value showing on the second
+roll. This is uniformly distributed with $P(S=s) = 1/8$.
+Therefore, if we observe $f$ and then decide to roll twice, the expected
+winnings are</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+  E(W | f, \mathrm{roll\ twice}) = \sum_{s=1}^8 (f+s)\chi_{\{f+s < 10\}} P(S=s)
+  = \frac{1}{8}\sum_{s=1}^8 (f+s)\chi_{\{f+s < 10\}}
+ %]]&gt;</script>
+
+<p>where $\chi$ denotes the characteristic function, that is,
+$\chi_{\mathrm{True}}=1$ and $\chi_{\mathrm{False}}=0$.</p>
+
+<p>If we let $N= \min{8, 10 - f -1}$, then the expected value of rolling twice is</p>
+
+<script type="math/tex; mode=display">
+E(W | f, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{N} (f+s)
+</script>
+
+<p>If we observe $f=1$ on the first roll, then </p>
+
+<script type="math/tex; mode=display">
+E(W | f=1, \mathrm{roll\ twice})  = \frac{1}{8} \sum_{s=1}^8 (1+s)= \frac{11}{2}.
+</script>
+
+<p>Since this is greater than 1, we should certainly exercise the option to roll
+twice if 1 shows up on the first roll.</p>
+
+<p>Continuing this way, we have</p>
+
+<script type="math/tex; mode=display">
+E(W | f=2, \mathrm{roll\ twice}) =  \frac{1}{8}\sum_{s=1}^{7} (2+s)
+=  \frac{1}{8}(2\cdot7 + 1 + 2+ 3+ \cdots + 7)
+= 6.
+</script>
+
+<script type="math/tex; mode=display">
+E(W | f=3, \mathrm{roll\ twice}) =\frac{1}{8}\sum_{s=1}^{6} (3+s)
+= \frac{1}{8}(3\cdot 6 +1 + 2+ 3+ \cdots + 6)
+= \frac{39}{8}.
+</script>
+
+<script type="math/tex; mode=display">
+E(W | f=4, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{5} (4+s)
+= \frac{1}{8}(4\cdot 5+1 + 2+ 3+ \cdots + 5)
+= \frac{35}{8}.
+</script>
+
+<p>Since this is larger than 4, we should roll twice when observing 4 on the first roll.</p>
+
+<p>However, if $f = 5$, then </p>
+
+<script type="math/tex; mode=display">
+E(W | f=5, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{4} (5+s)
+= \frac{1}{8}((5)(4)+1 + 2+ 3+ \cdots + 4)
+= \frac{30}{8}.
+</script>
+
+<p>Since this is <em>less</em> than 5, we should <em>not</em> roll a second time when a 5 is observed
+on the first roll.</p>
+
+<p><strong>General strategy:</strong> Exercise the option to roll a second time if the first
+results in 1, 2, 3, or 4.  Otherwise, decline the second roll and take the value
+shown on the first roll. </p>
+
+<hr />
+
+<h3 id="question-3">Question 3</h3>
+
+<p>(The original question was for 3 coins, with respective probabilities 0.5, 0.3, and
+0.2 of coming up heads.  This version is a generalization to $n$ coins with
+arbitrary probabilities that sum to 1.)</p>
+
+<p>Suppose you have a bag with $n$ coins, $C_1, C_2, \dots, C_n$,  and coin
+$C_i$ has probability $p_i$ of coming up heads when flipped.  Assume 
+$p_1 + p_2 + \cdots p_n = 1$.  Suppose you draw a coin from the bag at random
+and flip it and it comes up heads.  If you flip
+the same coin it again, what is the probability it comes up heads?</p>
+
+<p>Denote by $H_i$ the event that heads turns up on the $i$-th flip, and by a
+slight abuse of notation, let $C_i$ denote the event that we are flipping coin $C_i$.
+Then </p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = \sum_{i=1}^n P(H_2| C_i, H_1) P(C_i|H_1)
+= \sum_{i=1}^n p_i P(C_i|H_1)
+</script>
+
+<p>Applying Bayes’ Theorem,</p>
+
+<script type="math/tex; mode=display">
+P(C_i|H_1) = \frac{P(C_i,H_1)}{P(H_1)} = 
+\frac{P(H_1|C_i) P(C_i)}{P(H_1)}.
+</script>
+
+<p>Assuming all coins are equally likely to have been drawn from the bag,
+$P(C_i)=\frac{1}{n}$. Therefore,</p>
+
+<script type="math/tex; mode=display">
+P(H_1) = \sum_{i=1}^n P(H_1| C_i) P(C_i) = \frac{1}{n}\sum_{i=1}^n p_i =
+\frac{1}{n},
+</script>
+
+<p>whence,</p>
+
+<script type="math/tex; mode=display">
+P(C_i|H_1) = \frac{P(H_1|C_i) P(C_i)}{P(H_1)} = p_i \frac{1/n}{1/n} = p_i.
+</script>
+
+<p>Therefore,</p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = \sum_{i=1}^n p_i^2.
+</script>
+
+<p>For the special case given in the original problem, we have</p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = (0.5)^2 + (0.3)^2 + (0.2)^2 = 0.25 + 0.09 + 0.04 = 0.38.
+</script>
+
+<hr />
+
+<h3 id="question-4">Question 4</h3>
+
+<p>Suppose you have two urns that are indistinguishable from the outside.
+One of the urns contains 3 one-dollar coins and 7 ten-dollar coins.
+The other urn contains 5 one-dollar coins and 5 ten-dollar coins.
+Suppose you choose an urn at random and draw a coin from it at random.<br />
+You find that it is a $10 coin.  Now you are given the option to draw 
+again (without replacing the first coin) from either the same urn or 
+the other urn.  Should you draw from the same urn or switch?</p>
+
+<p><strong>Solution</strong></p>
+
+<p>The problem is uninteresting if we assume the draws are made with replacement.
+Clearly we should not switch urns in this case.  Assume the second draw is made
+without replacing the first coin.</p>
+
+<p>Let $X$ be a random variable denoting the value of the second draw.  We
+compute the expected values $E(X | \text{ stay})$ and $E(X | \text{ switch})$
+and whichever is higher determines our strategy.</p>
+
+<p>Let us call the urn that starts with 7 ten-dollar coins urn $A$,
+and the urn that starts with 5 ten-dollar coins urn $B$.
+Let $A_1$ denote the event that urn $A$ is chosen for the first draw and let
+$B_1$ denote the event that urn $B$ is chosen for the first draw.
+Let $T$ denote the event that the first draw produces a ten-dollar coin.  </p>
+
+<p>The probability that a ten-dollar coin appears on the first draw is</p>
+
+<script type="math/tex; mode=display">
+P(T) = P(T| A_1) P(A_1)+ P(T| B_1) P(B_1) = \frac{7}{10}\frac{1}{2} +\frac{5}{10}\frac{1}{2} = \frac{3}{5}.
+</script>
+
+<p>Given that $T$ occurred, the probability we were drawing from $A$ is, by Bayes’ Theorem,</p>
+
+<script type="math/tex; mode=display">
+P(A_1 | T) = \frac{P(T|A_1) P(A_1)}{P(T)} = \frac{(7/10)(1/2)}{3/5} = \frac{7}{12}.
+</script>
+
+<p>Similarly the probability we were drawing from $B$, given $T$, is</p>
+
+<script type="math/tex; mode=display">
+P(B_1 | T) = \frac{P(T|B_1) P(B_1)}{P(T)} = \frac{(5/10)(1/2)}{3/5} = \frac{5}{12}.
+</script>
+
+<p>Now, if we decide to draw again from the same urn and that urn happens to be
+$A$, there will be 6 ten-dollar coins remaining, so our expected value of
+drawing again from $A$ is</p>
+
+<script type="math/tex; mode=display">
+E(X | A_1, \text{ same}) = 10\cdot \frac{6}{9} + 1 \cdot \frac{3}{9} =
+\frac{21}{3} = 7.
+</script>
+
+<p>If we decide to draw from the same urn and it happens to be $B$,
+there will be 4 ten-dollar coins remaining, so </p>
+
+<script type="math/tex; mode=display">
+E(X | B_1, \text{ same}) = 10\cdot \frac{4}{9} + 1 \cdot \frac{5}{9} =
+\frac{45}{9} = 5.
+</script>
+
+<p>So, if we don’t switch urns, the expected value of the second draw is</p>
+
+<script type="math/tex; mode=display">
+E(X | \text{ same}) 
+= E(X | A_1, \text{ same}) P(A_1)
++ E(X | B_1, \text{ same}) P(B_1) = \frac{7\cdot 7}{12} +
+\frac{5 \cdot 5}{12} =  6.16.
+</script>
+
+<p>Suppose instead we decided to switch urns. In the event $A_1$ that the
+first draw was from urn $A$, then urn $B$ will contain its original contents:
+5 ten-dollar coins and 5 one-dollar coins. Therefore,</p>
+
+<script type="math/tex; mode=display">
+E(X | A_1, \text{ switch}) = 10\cdot \frac{5}{10} + 1 \cdot \frac{5}{10} = 6.5.
+</script>
+
+<p>If we switch in the event $B_1$, then we choose from a
+pristine urn $A$ having 7 ten-dollar coins and 3 one-dollar coins. Thus,</p>
+
+<script type="math/tex; mode=display">
+E(X | B_1, \text{ switch}) = 10\cdot \frac{7}{10} + 1 \cdot \frac{3}{10} =
+7.3.
+</script>
+
+<p>Therefore,</p>
+
+<script type="math/tex; mode=display">
+E(X | \text{ switch}) 
+= E(X | A\_1, \text{ switch}) P(A\_1)+ E(X | B\_1, \text{ switch}) P(B\_1) = 6.5 \frac{7}{12} + 7.3 \frac{5}{12}.
+</script>
+
+<p>So, the expected value of the second draw if we switch urns is a little more
+than 6.83.</p>
+
+<p><strong>Conclusion:</strong> The best strategy is to switch urns before drawing the second coin.</p>
 
 ]]></content>
   </entry>

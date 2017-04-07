@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Universal Algebra | William DeMeo]]></title>
+  <link href="http://williamdemeo.github.io/blog/categories/universal-algebra/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2017-04-06T22:04:39-10:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Conferences in Algebra]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
+    <updated>2017-04-06T21:44:46-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
+try to keep up with the vast number of meetings in these areas and help make 
+summer travel plans accordingly.</p>
+
+<p>The <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> repository is simply a list of links to the conferences 
+listed.</p>
+
+<!-- more -->
+
+<p>Here are some other more general conference listings that may be updated more frequently than mine:</p>
+
+<ul>
+  <li><a href="http://www.wikicfp.com/cfp/">WikiCFP</a> A wiki for calls for papers.  </li>
+  <li><a href="http://spot.colorado.edu/~kearnes/conf.html">General Algebra Conferences</a></li>
+  <li><a href="http://www.conference-service.com/conferences/algebra.html">COMS: Algebra</a></li>
+  <li><a href="http://www.conference-service.com/conferences/logic.html">COMS: Mathematical Logic</a></li>
+  <li><a href="http://www2.informatik.hu-berlin.de/~lics/logic-confs/index.html">Logic Related Conferences</a></li>
+  <li><a href="http://cstheory.stackexchange.com/questions/7900/list-of-tcs-conferences-and-workshops">A list of conferences in theoretical computer science</a>  </li>
+  <li><a href="https://googledrive.com/host/0BxA1GnxVACojZWEtY0NCMzhSbjg/noteworthy.html">Peter Jipsen’s List</a></li>
+  <li><a href="http://portal.core.edu.au/conf-ranks/">Conference rankings</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Congruences of Partial Algebras]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras/"/>
+    <updated>2017-04-06T21:08:13-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras</id>
+    <content type="html"><![CDATA[<p>The repository <a href="https://github.com/UniversalAlgebra/par-alg-rep">par-alg-rep</a>
+contains some notes describing a few results that we worked out in the 
+fall of 2016, while I was a postdoc at University of 
+Hawaii, although the main result—a straight-forward proof of the fact 
+that every finite lattice is the congruence lattice of a 
+finite partial algebra—was discovered during a
+visit to Chapman University in October 2016.</p>
+
+<!-- more  -->
+
+<p>Bill Lampe pointed out that the main result here has been known for 
+a long time. However, our proof seems new and simpler to us.</p>
+
+<p>The note also describes closure operators and reviews some useful 
+facts about them. Finally, we recall a theorem from Berman’s 
+thesis that relates congruence lattices of partial algebras 
+with those of total algebras.</p>
+
+<p>The main purpose of the note is to describe some tools 
+that we plan to exploit in our quest to represent every finite 
+lattice as the congruence lattice of a finite algebra.</p>
+]]></content>
+  </entry>
+  
+</feed>

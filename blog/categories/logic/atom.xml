@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Logic | William DeMeo]]></title>
+  <link href="http://williamdemeo.github.io/blog/categories/logic/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2017-04-06T22:04:39-10:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Conferences in Algebra]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
+    <updated>2017-04-06T21:44:46-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
+try to keep up with the vast number of meetings in these areas and help make 
+summer travel plans accordingly.</p>
+
+<p>The <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> repository is simply a list of links to the conferences 
+listed.</p>
+
+<!-- more -->
+
+<p>Here are some other more general conference listings that may be updated more frequently than mine:</p>
+
+<ul>
+  <li><a href="http://www.wikicfp.com/cfp/">WikiCFP</a> A wiki for calls for papers.  </li>
+  <li><a href="http://spot.colorado.edu/~kearnes/conf.html">General Algebra Conferences</a></li>
+  <li><a href="http://www.conference-service.com/conferences/algebra.html">COMS: Algebra</a></li>
+  <li><a href="http://www.conference-service.com/conferences/logic.html">COMS: Mathematical Logic</a></li>
+  <li><a href="http://www2.informatik.hu-berlin.de/~lics/logic-confs/index.html">Logic Related Conferences</a></li>
+  <li><a href="http://cstheory.stackexchange.com/questions/7900/list-of-tcs-conferences-and-workshops">A list of conferences in theoretical computer science</a>  </li>
+  <li><a href="https://googledrive.com/host/0BxA1GnxVACojZWEtY0NCMzhSbjg/noteworthy.html">Peter Jipsen’s List</a></li>
+  <li><a href="http://portal.core.edu.au/conf-ranks/">Conference rankings</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

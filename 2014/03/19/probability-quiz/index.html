@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Jane Street Probability Questions - William DeMeo</title>
+  <meta name="author" content="William DeMeo">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="The following four questions appeared on an online test administered by Jane Street Capital Management to assess whether a person is worthy of a &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://williamdemeo.github.io/2014/03/19/probability-quiz/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="William DeMeo" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="William DeMeo" />
+  <meta name="og:title" content="Jane Street Probability Questions" />
+  <meta name="og:description" content="The following four questions appeared on an online test administered by Jane Street Capital Management to assess whether a person is worthy of a &hellip;" />
+  <meta name="og:url" content="http://williamdemeo.github.io/2014/03/19/probability-quiz/"/>
+  <meta name="url" content="http://williamdemeo.github.io/2014/03/19/probability-quiz/">
+  
+  <meta name="subject" content="FinanceInterview QuestionsProbability"/>
+  <meta name="category" content="FinanceInterview QuestionsProbability"/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/foundation.min.js"></script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+  TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="/javascripts/AMSmath.js" type="text/javascript"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44974674-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">William DeMeo</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/archives">Archives</a></li>
+<!--      <li><a href="/pages">Pages</a></li>-->
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:williamdemeo.github.io" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title">Jane Street Probability Questions</h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">William DeMeo</span></a></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-19T14:27:46-10:00" pubdate data-updated="true">Mar 19<span>th</span>, 2014</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/finance/'>Finance</a>, <a class='category' href='/blog/categories/interview-questions/'>Interview Questions</a>, <a class='category' href='/blog/categories/probability/'>Probability</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The following four questions appeared on an online test administered by 
+Jane Street Capital Management to assess whether a person is worthy of 
+a phone interview.</p>
+
+<h3 id="question-1">Question 1</h3>
+<p>Suppose we choose four numbers at random without replacement from the first
+20 prime numbers. What is the probability that the sum of these four numbers is odd?</p>
+
+<!-- more -->
+
+<p><strong>Solution</strong> By definition, an <em>even</em> number is an integer multiple of 2; that
+is, even numbers have the form $2n$, for some integer $n$. An <em>odd</em> number is
+one more than an even number; that is, odd numbers have the form $2n+1$ for
+some integer $n$. </p>
+
+<p>If all four numbers are odd, then the sum is even.  This follows
+from the fact that the sum of two odd numbers is even: $(2n+1) + (2k+1) =
+2(n+k) + 2 = 2(n+k+1)$.  And the sum of two even numbers is again even: $2n+2k =
+2(n+k)$.  Therefore, in order for the sum of the four primes chosen to
+be odd, the only even prime number, 2, must be among the four numbers we
+selected.</p>
+
+<p>Here are two ways to compute the probability that 2 is one of the four numbers selected:
+First, consider the probability of <em>not</em> selecting 2:
+$$
+P(\text{2 is not among the chosen primes}) = 
+\frac{19}{20}
+\frac{18}{19}
+\frac{17}{18}
+\frac{16}{17}
+=
+\frac{16}{20}
+=
+\frac{4}{5}.
+$$</p>
+
+<p>Then the probability that 2 is among the four chosen prime numbers is 
+$1 - \frac{4}{5}$, or $\frac{1}{5}$.</p>
+
+<p>Alternatively, we could count the number of four-tuples that have a 2.  This is
+the same as taking 4 times the number of ways to choose the other three numbers: 
+$19\cdot 18\cdot 17$. (The factor of 4 appears since we could put the 2 in any of four
+positions).  Now divide this by the total number of four-tuples, 
+$20 \cdot 19\cdot 18\cdot 17$, to arrive at the same answer as above:</p>
+
+<script type="math/tex; mode=display">
+\frac{4\cdot 19\cdot 18\cdot 17}
+{20 \cdot 19\cdot 18\cdot 17} = 
+\frac{4}{20} = \frac{1}{5}.
+</script>
+
+<h3 id="question-2">Question 2</h3>
+<p>Suppose you have an 8 sided die with sides labeled 1 to 8.  You roll the die
+once and observe the number $f$ showing on the first roll.  Then you have the
+option of rolling a second time.  If you decline the option to roll again, you win
+$f$ dollars. If instead you exercise the option to roll a second time, 
+and if $s$ shows on the second roll, then you win $f + s$ dollars if $f+s &lt; 10$ 
+and 0 dollars if $f+s \geq 10$.  What is the best strategy?</p>
+
+<p><strong>Solution</strong> </p>
+
+<p>A strategy is given by specifying what to do in response to 
+each possible first roll, $f$. The best strategy will maximize the expected winnings.</p>
+
+<p>The expected winnings if we roll just once is simply the number that appears, $f$.</p>
+
+<p>Let $S$ be the random variable representing the value showing on the second
+roll. This is uniformly distributed with $P(S=s) = 1/8$.
+Therefore, if we observe $f$ and then decide to roll twice, the expected
+winnings are</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+  E(W | f, \mathrm{roll\ twice}) = \sum_{s=1}^8 (f+s)\chi_{\{f+s < 10\}} P(S=s)
+  = \frac{1}{8}\sum_{s=1}^8 (f+s)\chi_{\{f+s < 10\}}
+ %]]></script>
+
+<p>where $\chi$ denotes the characteristic function, that is,
+$\chi_{\mathrm{True}}=1$ and $\chi_{\mathrm{False}}=0$.</p>
+
+<p>If we let $N= \min{8, 10 - f -1}$, then the expected value of rolling twice is</p>
+
+<script type="math/tex; mode=display">
+E(W | f, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{N} (f+s)
+</script>
+
+<p>If we observe $f=1$ on the first roll, then </p>
+
+<script type="math/tex; mode=display">
+E(W | f=1, \mathrm{roll\ twice})  = \frac{1}{8} \sum_{s=1}^8 (1+s)= \frac{11}{2}.
+</script>
+
+<p>Since this is greater than 1, we should certainly exercise the option to roll
+twice if 1 shows up on the first roll.</p>
+
+<p>Continuing this way, we have</p>
+
+<script type="math/tex; mode=display">
+E(W | f=2, \mathrm{roll\ twice}) =  \frac{1}{8}\sum_{s=1}^{7} (2+s)
+=  \frac{1}{8}(2\cdot7 + 1 + 2+ 3+ \cdots + 7)
+= 6.
+</script>
+
+<script type="math/tex; mode=display">
+E(W | f=3, \mathrm{roll\ twice}) =\frac{1}{8}\sum_{s=1}^{6} (3+s)
+= \frac{1}{8}(3\cdot 6 +1 + 2+ 3+ \cdots + 6)
+= \frac{39}{8}.
+</script>
+
+<script type="math/tex; mode=display">
+E(W | f=4, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{5} (4+s)
+= \frac{1}{8}(4\cdot 5+1 + 2+ 3+ \cdots + 5)
+= \frac{35}{8}.
+</script>
+
+<p>Since this is larger than 4, we should roll twice when observing 4 on the first roll.</p>
+
+<p>However, if $f = 5$, then </p>
+
+<script type="math/tex; mode=display">
+E(W | f=5, \mathrm{roll\ twice}) = \frac{1}{8}\sum_{s=1}^{4} (5+s)
+= \frac{1}{8}((5)(4)+1 + 2+ 3+ \cdots + 4)
+= \frac{30}{8}.
+</script>
+
+<p>Since this is <em>less</em> than 5, we should <em>not</em> roll a second time when a 5 is observed
+on the first roll.</p>
+
+<p><strong>General strategy:</strong> Exercise the option to roll a second time if the first
+results in 1, 2, 3, or 4.  Otherwise, decline the second roll and take the value
+shown on the first roll. </p>
+
+<hr />
+
+<h3 id="question-3">Question 3</h3>
+
+<p>(The original question was for 3 coins, with respective probabilities 0.5, 0.3, and
+0.2 of coming up heads.  This version is a generalization to $n$ coins with
+arbitrary probabilities that sum to 1.)</p>
+
+<p>Suppose you have a bag with $n$ coins, $C_1, C_2, \dots, C_n$,  and coin
+$C_i$ has probability $p_i$ of coming up heads when flipped.  Assume 
+$p_1 + p_2 + \cdots p_n = 1$.  Suppose you draw a coin from the bag at random
+and flip it and it comes up heads.  If you flip
+the same coin it again, what is the probability it comes up heads?</p>
+
+<p>Denote by $H_i$ the event that heads turns up on the $i$-th flip, and by a
+slight abuse of notation, let $C_i$ denote the event that we are flipping coin $C_i$.
+Then </p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = \sum_{i=1}^n P(H_2| C_i, H_1) P(C_i|H_1)
+= \sum_{i=1}^n p_i P(C_i|H_1)
+</script>
+
+<p>Applying Bayes’ Theorem,</p>
+
+<script type="math/tex; mode=display">
+P(C_i|H_1) = \frac{P(C_i,H_1)}{P(H_1)} = 
+\frac{P(H_1|C_i) P(C_i)}{P(H_1)}.
+</script>
+
+<p>Assuming all coins are equally likely to have been drawn from the bag,
+$P(C_i)=\frac{1}{n}$. Therefore,</p>
+
+<script type="math/tex; mode=display">
+P(H_1) = \sum_{i=1}^n P(H_1| C_i) P(C_i) = \frac{1}{n}\sum_{i=1}^n p_i =
+\frac{1}{n},
+</script>
+
+<p>whence,</p>
+
+<script type="math/tex; mode=display">
+P(C_i|H_1) = \frac{P(H_1|C_i) P(C_i)}{P(H_1)} = p_i \frac{1/n}{1/n} = p_i.
+</script>
+
+<p>Therefore,</p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = \sum_{i=1}^n p_i^2.
+</script>
+
+<p>For the special case given in the original problem, we have</p>
+
+<script type="math/tex; mode=display">
+P(H_2 | H_1) = (0.5)^2 + (0.3)^2 + (0.2)^2 = 0.25 + 0.09 + 0.04 = 0.38.
+</script>
+
+<hr />
+
+<h3 id="question-4">Question 4</h3>
+
+<p>Suppose you have two urns that are indistinguishable from the outside.
+One of the urns contains 3 one-dollar coins and 7 ten-dollar coins.
+The other urn contains 5 one-dollar coins and 5 ten-dollar coins.
+Suppose you choose an urn at random and draw a coin from it at random.<br />
+You find that it is a $10 coin.  Now you are given the option to draw 
+again (without replacing the first coin) from either the same urn or 
+the other urn.  Should you draw from the same urn or switch?</p>
+
+<p><strong>Solution</strong></p>
+
+<p>The problem is uninteresting if we assume the draws are made with replacement.
+Clearly we should not switch urns in this case.  Assume the second draw is made
+without replacing the first coin.</p>
+
+<p>Let $X$ be a random variable denoting the value of the second draw.  We
+compute the expected values $E(X | \text{ stay})$ and $E(X | \text{ switch})$
+and whichever is higher determines our strategy.</p>
+
+<p>Let us call the urn that starts with 7 ten-dollar coins urn $A$,
+and the urn that starts with 5 ten-dollar coins urn $B$.
+Let $A_1$ denote the event that urn $A$ is chosen for the first draw and let
+$B_1$ denote the event that urn $B$ is chosen for the first draw.
+Let $T$ denote the event that the first draw produces a ten-dollar coin.  </p>
+
+<p>The probability that a ten-dollar coin appears on the first draw is</p>
+
+<script type="math/tex; mode=display">
+P(T) = P(T| A_1) P(A_1)+ P(T| B_1) P(B_1) = \frac{7}{10}\frac{1}{2} +\frac{5}{10}\frac{1}{2} = \frac{3}{5}.
+</script>
+
+<p>Given that $T$ occurred, the probability we were drawing from $A$ is, by Bayes’ Theorem,</p>
+
+<script type="math/tex; mode=display">
+P(A_1 | T) = \frac{P(T|A_1) P(A_1)}{P(T)} = \frac{(7/10)(1/2)}{3/5} = \frac{7}{12}.
+</script>
+
+<p>Similarly the probability we were drawing from $B$, given $T$, is</p>
+
+<script type="math/tex; mode=display">
+P(B_1 | T) = \frac{P(T|B_1) P(B_1)}{P(T)} = \frac{(5/10)(1/2)}{3/5} = \frac{5}{12}.
+</script>
+
+<p>Now, if we decide to draw again from the same urn and that urn happens to be
+$A$, there will be 6 ten-dollar coins remaining, so our expected value of
+drawing again from $A$ is</p>
+
+<script type="math/tex; mode=display">
+E(X | A_1, \text{ same}) = 10\cdot \frac{6}{9} + 1 \cdot \frac{3}{9} =
+\frac{21}{3} = 7.
+</script>
+
+<p>If we decide to draw from the same urn and it happens to be $B$,
+there will be 4 ten-dollar coins remaining, so </p>
+
+<script type="math/tex; mode=display">
+E(X | B_1, \text{ same}) = 10\cdot \frac{4}{9} + 1 \cdot \frac{5}{9} =
+\frac{45}{9} = 5.
+</script>
+
+<p>So, if we don’t switch urns, the expected value of the second draw is</p>
+
+<script type="math/tex; mode=display">
+E(X | \text{ same}) 
+= E(X | A_1, \text{ same}) P(A_1)
++ E(X | B_1, \text{ same}) P(B_1) = \frac{7\cdot 7}{12} +
+\frac{5 \cdot 5}{12} =  6.16.
+</script>
+
+<p>Suppose instead we decided to switch urns. In the event $A_1$ that the
+first draw was from urn $A$, then urn $B$ will contain its original contents:
+5 ten-dollar coins and 5 one-dollar coins. Therefore,</p>
+
+<script type="math/tex; mode=display">
+E(X | A_1, \text{ switch}) = 10\cdot \frac{5}{10} + 1 \cdot \frac{5}{10} = 6.5.
+</script>
+
+<p>If we switch in the event $B_1$, then we choose from a
+pristine urn $A$ having 7 ten-dollar coins and 3 one-dollar coins. Thus,</p>
+
+<script type="math/tex; mode=display">
+E(X | B_1, \text{ switch}) = 10\cdot \frac{7}{10} + 1 \cdot \frac{3}{10} =
+7.3.
+</script>
+
+<p>Therefore,</p>
+
+<script type="math/tex; mode=display">
+E(X | \text{ switch}) 
+= E(X | A\_1, \text{ switch}) P(A\_1)+ E(X | B\_1, \text{ switch}) P(B\_1) = 6.5 \frac{7}{12} + 7.3 \frac{5}{12}.
+</script>
+
+<p>So, the expected value of the second draw if we switch urns is a little more
+than 6.83.</p>
+
+<p><strong>Conclusion:</strong> The best strategy is to switch urns before drawing the second coin.</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+  
+    <span class="byline author vcard">by <a href="https://plus.google.com/u/0/+williamdemeo?rel=author"><span class="fn">William DeMeo</span></a></span>
+  
+
+ - 
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-19T14:27:46-10:00" pubdate data-updated="true">Mar 19<span>th</span>, 2014</time> - 
+      
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/finance/'>Finance</a>, <a class='category' href='/blog/categories/interview-questions/'>Interview Questions</a>, <a class='category' href='/blog/categories/probability/'>Probability</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="small"></div>
+  
+  
+</div>
+
+    
+    
+      <a class="pull-left" href="/2014/02/27/learn-you-an-agda/" title="Previous Post: Learn You an Agda">&laquo; Learn You an Agda</a>
+    
+    
+      <a class="pull-right" href="/2015/01/11/three-sat-and-partition-lattices/" title="Next Post: 3-SAT and partition lattices">3-SAT and partition lattices &raquo;</a>
+    
+  </footer>
+
+</div>
+
+        
+      </article>
+    </div>
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>recent posts</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/2017/04/06/conferences-in-algebra/">Conferences in Algebra</a>
+        </li>
+      
+        <li>
+          <a href="/2017/04/06/congruences-of-partial-algebras/">Congruences of Partial Algebras</a>
+        </li>
+      
+        <li>
+          <a href="/2015/01/11/three-sat-and-partition-lattices/">3-SAT and partition lattices</a>
+        </li>
+      
+        <li>
+          <a href="/2014/03/19/probability-quiz/">Jane Street Probability Questions</a>
+        </li>
+      
+        <li>
+          <a href="/2014/02/27/learn-you-an-agda/">Learn You an Agda</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/archives">archives</a></h2>
+  </div>
+  <!-- <div class="span3"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span7">
+    
+<h2>recent git activity</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="williamdemeo" data-github-repo-count="5" data-github-skip-forks="true">
+  <dd class="loading">updating...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
+
+  </div>
+  <!-- <div class="span4"> -->
+  <!--   
+ -->
+  <!-- </div> -->
+  <div class="span2">
+    <h2>found on</h2>
+
+<a href="https://github.com/williamdemeo/" rel="tooltip" title="GitHub"><img class="social_icon" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+
+
+<a href="https://plus.google.com/u/0/+williamdemeo?rel=author" rel="tooltip" title="Google Plus"><img class="social_icon" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
+
+
+
+
+
+<a href="http://mathoverflow.net/users/9124/william-demeo/" rel="tooltip" title="MathOverflow"><img class="social_icon" alt="math overflow icon" src="/images/mathoverflow.ico"></a>
+
+
+
+<a href="http://math.stackexchange.com/users/10915/william-demeo/" rel="tooltip" title="Math SE"><img class="social_icon" alt="math overflow icon" src="/images/mathstackexchange.ico"></a>
+
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">William DeMeo</a>
+  - Copyright &copy; 2017 - William DeMeo
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+</body>
+</html>
