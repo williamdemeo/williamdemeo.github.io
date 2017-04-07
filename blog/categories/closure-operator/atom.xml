@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Closure Operator | William DeMeo]]></title>
+  <link href="http://williamdemeo.github.io/blog/categories/closure-operator/atom.xml" rel="self"/>
+  <link href="http://williamdemeo.github.io/"/>
+  <updated>2017-04-07T00:50:45-10:00</updated>
+  <id>http://williamdemeo.github.io/</id>
+  <author>
+    <name><![CDATA[William DeMeo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Commutator as a Least Fixed Point]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/07/the-commutator-as-a-least-fixed-point/"/>
+    <updated>2017-04-07T00:45:45-10:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/the-commutator-as-a-least-fixed-point</id>
+    <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/alt-comm">alt-comm repository</a>
+contains a note giving an alternate decription of the (non-modular) commutator that yields
+a polynomial time algorithm for computing it. This is inspired by 
+the alternate description of the commutator given 
+by Kearnes in <a href="http://dx.doi.org/10.1006/jabr.1995.1334">[1]</a>.</p>
+
+<!-- more -->
+
+<p>[1] Keith Kearnes.
+<a href="http://dx.doi.org/10.1006/jabr.1995.1334">Varieties with a difference term</a>.
+<em>J. Algebra</em>, 177(3):926–960, 1995.</p>
+
+<p>[[1]]: http://dx.doi.org/10.1006/jabr.1995.1334</p>
+
+]]></content>
+  </entry>
+  
+</feed>
