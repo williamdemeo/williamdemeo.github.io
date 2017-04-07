@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-07T00:50:45-10:00</updated>
+  <updated>2017-04-07T00:55:55-10:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[The Commutator as a Least Fixed Point]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/07/the-commutator-as-a-least-fixed-point/"/>
+    <title type="html"><![CDATA[Commutator as Least Fixed Point]]></title>
+    <link href="http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point/"/>
     <updated>2017-04-07T00:45:45-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/07/the-commutator-as-a-least-fixed-point</id>
+    <id>http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/alt-comm">alt-comm repository</a>
 contains a note giving an alternate decription of the (non-modular) commutator that yields
 a polynomial time algorithm for computing it. This is inspired by 
