@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-12-06T21:12:04-07:00</updated>
+  <updated>2017-12-06T21:19:29-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -59,9 +59,10 @@ for example, download a file with a name like <code>jdk-9.0.1_linux-x64_bin.tar.
 </code></pre>
   </li>
   <li>
-    <p>Move your newly unpacked jdk directory to <code>/usr/lib/jvm</code> and rename it <code>jdk1.9.0</code>:</p>
+    <p>Move your newly unpacked jdk directory to <code>/usr/lib/jvm</code> then give it the alias <code>jdk1.9.0</code>:</p>
 
-    <pre><code> sudo mv ~/opt/Java/jdk-9.0.1 /usr/lib/jvm/jdk1.9.0
+    <pre><code> sudo mv ~/opt/Java/jdk-9.0.1 /usr/lib/jvm/
+ sudo ln -s /usr/lib/jvm/jdk{-9.0.1,1.9.0}
 </code></pre>
   </li>
 </ol>

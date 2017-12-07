@@ -191,9 +191,10 @@ for example, download a file with a name like <code>jdk-9.0.1_linux-x64_bin.tar.
 </code></pre>
   </li>
   <li>
-    <p>Move your newly unpacked jdk directory to <code>/usr/lib/jvm</code> and rename it <code>jdk1.9.0</code>:</p>
+    <p>Move your newly unpacked jdk directory to <code>/usr/lib/jvm</code> then give it the alias <code>jdk1.9.0</code>:</p>
 
-    <pre><code> sudo mv ~/opt/Java/jdk-9.0.1 /usr/lib/jvm/jdk1.9.0
+    <pre><code> sudo mv ~/opt/Java/jdk-9.0.1 /usr/lib/jvm/
+ sudo ln -s /usr/lib/jvm/jdk{-9.0.1,1.9.0}
 </code></pre>
   </li>
 </ol>
