@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Computer Science | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/computer-science/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-07T00:55:55-10:00</updated>
+  <updated>2017-12-06T21:03:54-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Conferences in Algebra]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
-    <updated>2017-04-06T21:44:46-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <link href="http://williamdemeo.github.io/2017/04/07/conferences-in-algebra/"/>
+    <updated>2017-04-07T01:44:46-06:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/conferences-in-algebra</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
 keep up with the vast number of meetings in these areas and help make 
 summer travel plans accordingly.</p>

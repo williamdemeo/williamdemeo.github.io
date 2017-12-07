@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Universal Algebra | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/universal-algebra/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-07T00:55:55-10:00</updated>
+  <updated>2017-12-06T21:03:54-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Commutator as Least Fixed Point]]></title>
     <link href="http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point/"/>
-    <updated>2017-04-07T00:45:45-10:00</updated>
+    <updated>2017-04-07T04:45:45-06:00</updated>
     <id>http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/alt-comm">alt-comm repository</a>
 contains a note giving an alternate decription of the (non-modular) commutator that yields
@@ -37,9 +37,9 @@ by Kearnes in <a href="http://dx.doi.org/10.1006/jabr.1995.1334">[1]</a>.</p>
   
   <entry>
     <title type="html"><![CDATA[Conferences in Algebra]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
-    <updated>2017-04-06T21:44:46-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <link href="http://williamdemeo.github.io/2017/04/07/conferences-in-algebra/"/>
+    <updated>2017-04-07T01:44:46-06:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/conferences-in-algebra</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
 keep up with the vast number of meetings in these areas and help make 
 summer travel plans accordingly.</p>
@@ -67,9 +67,9 @@ listed.</p>
   
   <entry>
     <title type="html"><![CDATA[Congruences of Partial Algebras]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras/"/>
-    <updated>2017-04-06T21:08:13-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras</id>
+    <link href="http://williamdemeo.github.io/2017/04/07/congruences-of-partial-algebras/"/>
+    <updated>2017-04-07T01:08:13-06:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/congruences-of-partial-algebras</id>
     <content type="html"><![CDATA[<p>The repository <a href="https://github.com/UniversalAlgebra/par-alg-rep">par-alg-rep</a>
 contains some notes describing a few results that we worked out in the 
 fall of 2016, while I was a postdoc at University of 

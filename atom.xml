@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-07T00:55:55-10:00</updated>
+  <updated>2017-12-06T21:03:54-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -14,9 +14,101 @@
 
   
   <entry>
+    <title type="html"><![CDATA[java on linux]]></title>
+    <link href="http://williamdemeo.github.io/2017/12/06/java-on-linux/"/>
+    <updated>2017-12-06T20:41:09-07:00</updated>
+    <id>http://williamdemeo.github.io/2017/12/06/java-on-linux</id>
+    <content type="html"><![CDATA[<p>This post details the steps I use to update or install
+the latest version of the Java Development Kit (JDK) on 
+my Linux systems.</p>
+
+<!-- more -->
+
+<p>(These notes are mainly for my own reference, but also
+come in handy when I need to something to point to when
+a colleague or student needs to know how to do this.)</p>
+
+<h3 id="download-the-latest-jdk-from-oracle">Download the latest JDK from Oracle</h3>
+
+<p>http://www.oracle.com/technetwork/java/javase/downloads/index.html</p>
+
+<p>I’ll assume we’re using Linux on an x64 machine, so we would,
+for example, download a file with a name like</p>
+
+<p><code>jdk-9.0.1_linux-x64_bin.tar.gz</code></p>
+
+<p>(As of Dec 6, 2018, the direct link to this file is <a href="http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz">here</a>)</p>
+
+<h3 id="unpack-the-targz-file-downloaded-in-step-1">Unpack the tar.gz file downloaded in step 1</h3>
+
+<p>I’ll assume we downloaded the tar.gz file into the directory <code>~/opt/Java</code></p>
+
+<pre><code>tar xvzf jdk-9.0.1_linux-x64_bin.tar.gz
+</code></pre>
+
+<h3 id="set-up-the-usrlibjvm-directory">Set up the <code>/usr/lib/jvm</code> directory</h3>
+
+<ol>
+  <li>
+    <p>create the directory <code>/usr/lib/jvm</code></p>
+
+    <pre><code> sudo mkdir -p /usr/lib/jvm
+</code></pre>
+  </li>
+  <li>
+    <p>If you already have directory named <code>/usr/lib/jvm/jdk-9.0.1</code>, move it out of the way:</p>
+
+    <pre><code> sudo mv /usr/lib/jvm/jdk-9.0.1{,.orig}
+</code></pre>
+  </li>
+  <li>
+    <p>Move your newly unpacked jdk directory to <code>/usr/lib/jvm</code> and rename it <code>jdk1.9.0</code>:</p>
+
+    <pre><code> sudo mv ~/opt/Java/jdk-9.0.1 /usr/lib/jvm/jdk1.9.0
+</code></pre>
+  </li>
+</ol>
+
+<h3 id="make-jdk190-the-default-java-on-your-system">Make jdk1.9.0 the default Java on your system</h3>
+
+<p>Use the <code>update-alternatives</code> program for this (see also: <a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">notes on configuring JDK 1.7 on Ubuntu</a>):</p>
+
+<p>This first block of 9 commands can be copy-and-pasted to the command line all at once:</p>
+
+<pre><code>    sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.9.0/bin/java" 1;
+    sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.9.0/bin/javac" 1;
+    sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.9.0/bin/javaws" 1;
+		sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.9.0/bin/jcontrol" 1;
+    sudo chmod a+x /usr/bin/java;
+    sudo chmod a+x /usr/bin/javac;
+    sudo chmod a+x /usr/bin/javaws;
+    sudo chmod a+x /usr/bin/jcontrol;
+    sudo chown -R root:root /usr/lib/jvm/jdk1.9.0;
+</code></pre>
+
+<p>The following commands are interactive and should be invoked individually:</p>
+
+<pre><code>    sudo update-alternatives --config java
+  
+    sudo update-alternatives --config javac
+  
+    sudo update-alternatives --config javaws
+  
+    sudo update-alternatives --config jcontrol
+</code></pre>
+
+<p>Check which version of Java your system is currently using with the command <code>java -version</code>.</p>
+
+<p>Finally, if you have other versions of Java installed on your system, you should make them
+available using the <code>update-alternatives</code> program by following the same steps as we did above
+for jdk version 9.0.1.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Commutator as Least Fixed Point]]></title>
     <link href="http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point/"/>
-    <updated>2017-04-07T00:45:45-10:00</updated>
+    <updated>2017-04-07T04:45:45-06:00</updated>
     <id>http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/alt-comm">alt-comm repository</a>
 contains a note giving an alternate decription of the (non-modular) commutator that yields
@@ -37,9 +129,9 @@ by Kearnes in <a href="http://dx.doi.org/10.1006/jabr.1995.1334">[1]</a>.</p>
   
   <entry>
     <title type="html"><![CDATA[Conferences in Algebra]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/06/conferences-in-algebra/"/>
-    <updated>2017-04-06T21:44:46-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/06/conferences-in-algebra</id>
+    <link href="http://williamdemeo.github.io/2017/04/07/conferences-in-algebra/"/>
+    <updated>2017-04-07T01:44:46-06:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/conferences-in-algebra</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called <a href="https://github.com/UniversalAlgebra/Conferences">UniversalAlgebra/Conferences</a> in an effort to 
 keep up with the vast number of meetings in these areas and help make 
 summer travel plans accordingly.</p>
@@ -67,9 +159,9 @@ listed.</p>
   
   <entry>
     <title type="html"><![CDATA[Congruences of Partial Algebras]]></title>
-    <link href="http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras/"/>
-    <updated>2017-04-06T21:08:13-10:00</updated>
-    <id>http://williamdemeo.github.io/2017/04/06/congruences-of-partial-algebras</id>
+    <link href="http://williamdemeo.github.io/2017/04/07/congruences-of-partial-algebras/"/>
+    <updated>2017-04-07T01:08:13-06:00</updated>
+    <id>http://williamdemeo.github.io/2017/04/07/congruences-of-partial-algebras</id>
     <content type="html"><![CDATA[<p>The repository <a href="https://github.com/UniversalAlgebra/par-alg-rep">par-alg-rep</a>
 contains some notes describing a few results that we worked out in the 
 fall of 2016, while I was a postdoc at University of 
@@ -97,7 +189,7 @@ lattice as the congruence lattice of a finite algebra.</p>
   <entry>
     <title type="html"><![CDATA[3-SAT and partition lattices]]></title>
     <link href="http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices/"/>
-    <updated>2015-01-11T17:53:17-10:00</updated>
+    <updated>2015-01-11T20:53:17-07:00</updated>
     <id>http://williamdemeo.github.io/2015/01/11/three-sat-and-partition-lattices</id>
     <content type="html"><![CDATA[<p>It is not hard to see that <a href="https://en.wikipedia.org/wiki/3sat">3-SAT</a>
 reduces to the problem of deciding whether all coatoms in a certain partition
@@ -202,7 +294,7 @@ would answer the P versus NP question.</p>
   <entry>
     <title type="html"><![CDATA[Jane Street Test]]></title>
     <link href="http://williamdemeo.github.io/2014/03/19/probability-quiz/"/>
-    <updated>2014-03-19T14:27:46-10:00</updated>
+    <updated>2014-03-19T18:27:46-06:00</updated>
     <id>http://williamdemeo.github.io/2014/03/19/probability-quiz</id>
     <content type="html"><![CDATA[<p>The questions below appeared on an online test administered by 
 Jane Street Capital Management to assess whether a person is worthy of 
@@ -498,7 +590,7 @@ than 6.83.</p>
   <entry>
     <title type="html"><![CDATA[Learn You an Agda]]></title>
     <link href="http://williamdemeo.github.io/2014/02/27/learn-you-an-agda/"/>
-    <updated>2014-02-27T00:00:00-10:00</updated>
+    <updated>2014-02-27T00:00:00-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/27/learn-you-an-agda</id>
     <content type="html"><![CDATA[<p>This is a markdown version of the tutorial
 <a href="http://learnyouanagda.liamoc.net/">Learn You an Agda and Achieve Enlightenment!</a>
@@ -2042,7 +2134,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <entry>
     <title type="html"><![CDATA[Isotopy]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/isotopy/"/>
-    <updated>2014-02-13T16:21:00-10:00</updated>
+    <updated>2014-02-13T19:21:00-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/isotopy</id>
     <content type="html"><![CDATA[<p><em>Equivalence of algebraic structures</em></p>
 
@@ -2213,7 +2305,7 @@ different in size.</p>
   <entry>
     <title type="html"><![CDATA[A problem of P&aacute;lfy and Saxl]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl/"/>
-    <updated>2014-02-13T04:41:27-10:00</updated>
+    <updated>2014-02-13T07:41:27-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/a-problem-of-palfy-and-saxl</id>
     <content type="html"><![CDATA[<p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
 
@@ -2275,7 +2367,7 @@ contains the following:</p>
   <entry>
     <title type="html"><![CDATA[TypeFunc]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/typefunc/"/>
-    <updated>2014-02-13T04:23:58-10:00</updated>
+    <updated>2014-02-13T07:23:58-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/typefunc</id>
     <content type="html"><![CDATA[<p>I started a GitHub repository called TypeFunc in an effort to get my head around
 the massive amount of online resources for learning about type theory, functional
@@ -2294,7 +2386,7 @@ software resources that I have found helpful.</p>
   <entry>
     <title type="html"><![CDATA[Overalgebras]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/overalgebras/"/>
-    <updated>2014-02-13T03:42:53-10:00</updated>
+    <updated>2014-02-13T06:42:53-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/overalgebras</id>
     <content type="html"><![CDATA[<p>In the <a href="https://github.com/williamdemeo/Overalgebras">Overalgebras GitHub repo</a>
 resides the article
@@ -2324,7 +2416,7 @@ See <a href="http://universalalgebra.wordpress.org/documentation/gap/gap-and-uac
   <entry>
     <title type="html"><![CDATA[IEProps]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/ieprops/"/>
-    <updated>2014-02-13T03:42:42-10:00</updated>
+    <updated>2014-02-13T06:42:42-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/ieprops</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/IEProps">IEPost GitHub repository</a> contains a draft of the article
 <a href="https://github.com/williamdemeo/IEProps/blob/master/CommAlg/DeMeo-IEProps-rev1.pdf">Interval enforceable properties of finite groups</a>, to appear in <em>Communications in Algebra</em>.</p>
@@ -2346,7 +2438,7 @@ The original submission is available in the file <a href="https://github.com/wil
   <entry>
     <title type="html"><![CDATA[GroupSound]]></title>
     <link href="http://williamdemeo.github.io/2014/02/13/groupsound/"/>
-    <updated>2014-02-13T01:23:41-10:00</updated>
+    <updated>2014-02-13T04:23:41-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/13/groupsound</id>
     <content type="html"><![CDATA[<p><em>What does a nonabelian group sound like?</em></p>
 
@@ -2379,7 +2471,7 @@ more details. </p>
   <entry>
     <title type="html"><![CDATA[Cloning an Octopress repo]]></title>
     <link href="http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo/"/>
-    <updated>2014-02-07T15:46:19-10:00</updated>
+    <updated>2014-02-07T18:46:19-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/07/cloning-an-octopress-repo</id>
     <content type="html"><![CDATA[<p>When attempting to clone my Octopress repository on a new machine, I had the
 same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
@@ -2489,7 +2581,7 @@ git push origin source
   <entry>
     <title type="html"><![CDATA[Diaconescu's Theorem]]></title>
     <link href="http://williamdemeo.github.io/2014/02/05/diaconescus-theorem/"/>
-    <updated>2014-02-05T17:52:59-10:00</updated>
+    <updated>2014-02-05T20:52:59-07:00</updated>
     <id>http://williamdemeo.github.io/2014/02/05/diaconescus-theorem</id>
     <content type="html"><![CDATA[<p>I learned about
 <a href="http://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu’s Theorem</a>

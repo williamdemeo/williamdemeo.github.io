@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-04-07T00:55:55-10:00</updated>
+  <updated>2017-12-06T21:03:54-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Commutator as Least Fixed Point]]></title>
     <link href="http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point/"/>
-    <updated>2017-04-07T00:45:45-10:00</updated>
+    <updated>2017-04-07T04:45:45-06:00</updated>
     <id>http://williamdemeo.github.io/2017/04/07/commutator-as-least-fixed-point</id>
     <content type="html"><![CDATA[<p>The <a href="https://github.com/williamdemeo/alt-comm">alt-comm repository</a>
 contains a note giving an alternate decription of the (non-modular) commutator that yields
