@@ -4,7 +4,7 @@
   <title><![CDATA[William DeMeo]]></title>
   <link href="http://williamdemeo.github.io/atom.xml" rel="self"/>
   <link href="http://williamdemeo.github.io/"/>
-  <updated>2017-12-06T21:03:54-07:00</updated>
+  <updated>2017-12-06T21:12:04-07:00</updated>
   <id>http://williamdemeo.github.io/</id>
   <author>
     <name><![CDATA[William DeMeo]]></name>
@@ -18,9 +18,9 @@
     <link href="http://williamdemeo.github.io/2017/12/06/java-on-linux/"/>
     <updated>2017-12-06T20:41:09-07:00</updated>
     <id>http://williamdemeo.github.io/2017/12/06/java-on-linux</id>
-    <content type="html"><![CDATA[<p>This post details the steps I use to update or install
-the latest version of the Java Development Kit (JDK) on 
-my Linux systems.</p>
+    <content type="html"><![CDATA[<p>This post describes the steps I use to update or install
+multiple versions of the Java Development Kit (JDK) on 
+Linux machines.</p>
 
 <!-- more -->
 
@@ -30,23 +30,20 @@ a colleague or student needs to know how to do this.)</p>
 
 <h3 id="download-the-latest-jdk-from-oracle">Download the latest JDK from Oracle</h3>
 
-<p>http://www.oracle.com/technetwork/java/javase/downloads/index.html</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
 
 <p>I’ll assume we’re using Linux on an x64 machine, so we would,
-for example, download a file with a name like</p>
+for example, download a file with a name like <code>jdk-9.0.1_linux-x64_bin.tar.gz</code>.
+(As of Dec 6, 2018, the direct link to this file is <a href="http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz">here</a>.)</p>
 
-<p><code>jdk-9.0.1_linux-x64_bin.tar.gz</code></p>
-
-<p>(As of Dec 6, 2018, the direct link to this file is <a href="http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz">here</a>)</p>
-
-<h3 id="unpack-the-targz-file-downloaded-in-step-1">Unpack the tar.gz file downloaded in step 1</h3>
+<h3 id="unpack-the-targz-file-downloaded-in-the-previous-step">Unpack the tar.gz file downloaded in the previous step</h3>
 
 <p>I’ll assume we downloaded the tar.gz file into the directory <code>~/opt/Java</code></p>
 
 <pre><code>tar xvzf jdk-9.0.1_linux-x64_bin.tar.gz
 </code></pre>
 
-<h3 id="set-up-the-usrlibjvm-directory">Set up the <code>/usr/lib/jvm</code> directory</h3>
+<h3 id="set-up-the-usrlibjvm-directory">Set up the /usr/lib/jvm directory</h3>
 
 <ol>
   <li>
@@ -71,14 +68,15 @@ for example, download a file with a name like</p>
 
 <h3 id="make-jdk190-the-default-java-on-your-system">Make jdk1.9.0 the default Java on your system</h3>
 
-<p>Use the <code>update-alternatives</code> program for this (see also: <a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">notes on configuring JDK 1.7 on Ubuntu</a>):</p>
+<p>Use the <code>update-alternatives</code> program to configure multiple versions of Java
+on the same machine. (For more details see: <a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">notes on configuring JDK 1.7 on Ubuntu</a>):</p>
 
 <p>This first block of 9 commands can be copy-and-pasted to the command line all at once:</p>
 
 <pre><code>    sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.9.0/bin/java" 1;
     sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.9.0/bin/javac" 1;
     sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.9.0/bin/javaws" 1;
-		sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.9.0/bin/jcontrol" 1;
+    sudo update-alternatives --install "/usr/bin/jcontrol" "jcontrol" "/usr/lib/jvm/jdk1.9.0/bin/jcontrol" 1;
     sudo chmod a+x /usr/bin/java;
     sudo chmod a+x /usr/bin/javac;
     sudo chmod a+x /usr/bin/javaws;
@@ -102,6 +100,7 @@ for example, download a file with a name like</p>
 <p>Finally, if you have other versions of Java installed on your system, you should make them
 available using the <code>update-alternatives</code> program by following the same steps as we did above
 for jdk version 9.0.1.</p>
+
 ]]></content>
   </entry>
   
