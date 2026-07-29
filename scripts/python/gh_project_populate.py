@@ -268,8 +268,14 @@ def _parse_issues(text: str) -> list[Issue]:
         # gh_project_render.py has for identifying planning issues, and the
         # only key this script's own idempotency guard compares on.  Without
         # it render drops every issue and a second populate run duplicates
-        # them all.  Tolerate a prefix already written into the heading.
-        gh_title = title if title.startswith(f"[{issue_id}]") else f"[{issue_id}] {title}"
+        # them all.
+        #
+        # Strip any prefix already written into the heading and re-apply it,
+        # rather than passing an existing one through: ISSUE_ID_PATTERN wants
+        # `\s+` after the bracket, so a heading reading `[M1-1]Title` would
+        # survive a startswith() check and still be unparseable.
+        bare = re.sub(rf"^\[{re.escape(issue_id)}\]\s*", "", title).strip()
+        gh_title = f"[{issue_id}] {bare}"
 
         issues.append(Issue(
             id=issue_id,
