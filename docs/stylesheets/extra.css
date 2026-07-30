@@ -14,8 +14,7 @@
   --md-code-font: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
 }
 
-/* Slightly tighter measure than the Material default.  Long-form prose and
-   mathematics both read better under ~70 characters per line. */
+/* Slightly smaller base font size than the Material default. */
 .md-typeset {
   font-size: 0.8rem;
 }
