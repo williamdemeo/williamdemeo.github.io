@@ -1,0 +1,51 @@
+# Licence for site content
+
+Copyright (c) 2014-2026 William DeMeo
+
+The prose in this repository -- blog posts, pages, research writing, and the
+architecture decision records under `docs/adr/` -- is licensed under the
+
+    Creative Commons Attribution 4.0 International Licence (CC BY 4.0)
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the licence, and
+indicate whether changes were made.
+
+  Summary:    https://creativecommons.org/licenses/by/4.0/
+  Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Source code in this repository -- build configuration, `Makefile`, the
+scripts under `scripts/`, and CSS -- is licensed separately under the MIT
+Licence; see `LICENSE`.
+
+
+## Material that is NOT covered by either licence
+
+Some files in this repository were not written by the copyright holder above
+and are not his to relicense.  Neither the MIT nor the CC BY grant applies to
+any of the following.
+
+### `csp/*.pdf`
+
+Six published research papers by other authors, retained because the research
+pages link to them.  Copyright rests with their authors and publishers.  Only
+`BartoKozik-AbsorbingSubalgebras-LMCS-2012.pdf` is open access (Logical Methods
+in Computer Science, CC BY); the remaining five appeared in the International
+Journal of Algebra and Computation, Theoretical Computer Science, and Algebra
+Universalis, and are included here under no explicit grant.
+
+Whether to continue hosting them is an open question tracked in issue #12.
+
+### `archive/octopress/posts/2014-02-27-learn-you-an-agda.html`
+
+"Learn You an Agda" was written by **Liam O'Connor-Davis**.  What is preserved
+here is a Markdown conversion with minor corrections and small additions, made
+and reposted with the original author's permission.  It is retained for
+archival completeness only and is not published on the site.  Copyright remains
+with its author; the permission granted was for the original reposting and
+should not be assumed to extend to further redistribution.
+
+### Third-party assets
+
+Any vendored fonts, icons, or libraries added in future carry their own
+licences, which travel with them.
