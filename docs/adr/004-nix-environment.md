@@ -139,7 +139,7 @@ A sandboxed `nix build` has no network, so enabling the plugin as-is will fail. 
 | `nix flake check` wired to the strict build | Done |
 | `.envrc` with `use flake` | Done |
 | `Makefile` targets working identically inside and outside the dev shell | Done |
-| CI workflows switched to the flake, with a binary cache | Done |
+| CI workflows switched to the flake, with a binary cache | Written; parked in `.github/workflows-pending/` |
 | Social-card *native* dependencies verified in CI | Done, via `checks.native-deps` |
 | Social-card *generation* verified in CI | Deferred to M3-5; see above |
 | `requirements.txt` kept and documented as the non-Nix path | Done |
@@ -148,5 +148,7 @@ A sandboxed `nix build` has no network, so enabling the plugin as-is will fail. 
 ## Notes
 
 M1-4's optional `flake.nix` sub-task is superseded by this decision.
+
+The two Nix workflows are parked in `.github/workflows-pending/` rather than replacing the pip-based ones, because GitHub rejects a push touching `.github/workflows/` from a credential without the `workflow` scope — the same wall M1-4 hit, with the same two-line `git mv` to clear it, documented in that directory's README. The pip workflows stay live until then, so CI is not broken in the meantime; it is simply not yet running the flake. Everything in [What was verified](#what-was-verified) was run locally and holds regardless, but neither workflow file has executed on a GitHub runner.
 
 `nix flake update` advances `nixpkgs` to the current `nixos-25.05` channel build; moving to a later NixOS release is an edit to `flake.nix`. Either will fail `checks.requirements-pins` if it moves Material off 9.5.49, which is the intended behaviour rather than an inconvenience.
