@@ -187,6 +187,17 @@ def _collect_labels_from_issues(text: str) -> list[Label]:
     return list(seen.values())
 
 
+# Render's BEGIN/END region markers sit between issue headings in the plan
+# file, so the span-based body extraction below sweeps the closing marker of
+# each milestone into that milestone's final issue.  Left in place it would be
+# pushed to GitHub and then read back by render into the middle of a generated
+# region, closing the region early on the next round-trip.
+GENERATED_MARKER_LINE = re.compile(
+    r"^[ \t]*<!--\s*(?:BEGIN|END) GENERATED:[^>]*-->[ \t]*$\n?",
+    re.MULTILINE,
+)
+
+
 def _parse_issues(text: str) -> list[Issue]:
     """Extract issues from the ## Issues / ## Milestone N sections."""
     issues = []
@@ -250,9 +261,25 @@ def _parse_issues(text: str) -> list[Issue]:
         # Clean up leading blank lines
         body = re.sub(r"^\n+", "", body)
 
+        # Drop any render region marker swept in from the surrounding file.
+        body = GENERATED_MARKER_LINE.sub("", body).strip()
+
+        # Titles carry the `[MN-k]` prefix on GitHub: it is the only handle
+        # gh_project_render.py has for identifying planning issues, and the
+        # only key this script's own idempotency guard compares on.  Without
+        # it render drops every issue and a second populate run duplicates
+        # them all.
+        #
+        # Strip any prefix already written into the heading and re-apply it,
+        # rather than passing an existing one through: ISSUE_ID_PATTERN wants
+        # `\s+` after the bracket, so a heading reading `[M1-1]Title` would
+        # survive a startswith() check and still be unparseable.
+        bare = re.sub(rf"^\[{re.escape(issue_id)}\]\s*", "", title).strip()
+        gh_title = f"[{issue_id}] {bare}"
+
         issues.append(Issue(
             id=issue_id,
-            title=title,
+            title=gh_title,
             body=body,
             labels=labels,
             milestone_idx=ms_idx,
