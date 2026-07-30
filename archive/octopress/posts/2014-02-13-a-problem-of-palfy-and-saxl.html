@@ -1,0 +1,60 @@
+<!--
+title:  A problem of P&aacute;lfy and Saxl
+date:   2014-02-13
+url:    /2014/02/13/a-problem-of-palfy-and-saxl/
+source: 2014/02/13/a-problem-of-palfy-and-saxl/index.html
+-->
+<p>Suppose the lattice shown below is a congruence lattice of an algebra.</p>
+
+<p><img src="/images/PSM4.png" /></p>
+
+<p><strong>Claim:</strong>
+If the three $\alpha_i$’s pairwise permute, then all pairs in the lattice permute. 
+<!-- more --></p>
+
+<p>Whether or not this claim is true is a simplified version of a question left open by
+Pálfy and Saxl at the end of
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">their 1990 paper</a>. Below
+is a more formal statement of the problem, and a link to my notes describing
+a proposed method of solution.  There remains one gap in the proof, that I’m
+not yet sure how to fill, but I am hopeful that the overall strategy will work.</p>
+
+<hr />
+
+<h3 id="graphical-composition">Graphical composition</h3>
+<p>In an attempt to prove the claim above and its generalization, I apply
+an idea described in
+<a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Heinrich Werner’s paper</a>
+called <em>graphical composition</em>.</p>
+
+<hr />
+
+<h3 id="the-problem">The Problem</h3>
+
+<p>Before giving a more precise statement of the problem, let us recall a couple of
+basic definitions.  Given two equivalence relations $\alpha$ and $\beta$ on a
+set $X$, the relation </p>
+
+<script type="math/tex; mode=display">\alpha \circ \beta = \{(x,y) \in X^2: (\exists z)(x \; \alpha \; z \; \beta \; y)\}</script>
+
+<p>is called the <em>composition</em> of $\alpha$ and $\beta$, and if 
+$\alpha \circ \beta = \beta \circ \alpha$ then $\alpha$ and $\beta$ are said to
+<em>permute</em>.</p>
+
+<p><strong>Problem.</strong>
+$\def\bA{\bf A} \def\bB{\bf B}$
+Let $\bA$ be a finite algebra with $\operatorname{Con} \bA$ isomorphic to
+$M_n$, for some $n\geq 4$.  If three nontrivial congruences of $\bA$ pairwise
+permute, does it follow that every pair of congruences of $\bA$ permute?</p>
+
+<hr />
+
+<h2 id="github-repository">GitHub repository</h2>
+<p>My <a href="https://github.com/williamdemeo/PalfySaxlProblem">GitHub repository</a>
+contains the following:</p>
+
+<ul>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxlProblem.pdf">my notes</a>  </li>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/PalfySaxl-ConLatAndFactGroups.pdf">Pálfy and Saxl’s paper</a>  </li>
+  <li><a href="https://github.com/williamdemeo/PalfySaxlProblem/raw/master/Werner-PartLatConLat.pdf">Werner’s paper</a>.</li>
+</ul>
