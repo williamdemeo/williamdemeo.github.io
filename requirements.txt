@@ -1,13 +1,22 @@
 # Pinned build dependencies for the MkDocs site.
 #
+# This is the supported path for a machine without Nix (ADR-004).  It is not
+# the primary one: `nix develop` and `nix build` are, and CI uses the flake.
+# But `make serve` works from this file alone, and that is deliberate -- the
+# project should not be hostile to a checkout on a machine that has never
+# heard of Nix.
+#
 # Exact pins on direct dependencies: the Zola site this replaces is stuck on
 # Zola v0.5.0 from 2018 and cannot be built with any current release, which is
 # precisely the failure mode pinning avoids.
 #
-# These pin the direct dependencies only, not the full transitive closure.
-# M1-9 (#55) adopts Nix, whose lock file pins the whole environment --
-# including Python itself, and the Cairo/Pango libraries the social-card
-# plugin needs in M3-5, neither of which pip can pin.
+# These pin the direct dependencies only, not the full transitive closure, and
+# not Python itself or the Cairo/Pango libraries the social-card plugin needs
+# in M3-5 -- none of which pip can pin.  flake.lock pins all of them, which is
+# why the flake is the primary path.
+#
+# Keep in step with flake.nix: `nix flake check` runs checks.requirements-pins,
+# which fails the build if a version here does not match the Nix environment.
 
 mkdocs==1.6.1
 mkdocs-material==9.5.49

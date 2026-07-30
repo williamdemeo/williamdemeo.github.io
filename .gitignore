@@ -3,3 +3,8 @@ __pycache__/
 .venv/
 site/
 .DS_Store
+
+# Nix: `nix build` output symlinks and the direnv shell cache.
+result
+result-*
+.direnv/
