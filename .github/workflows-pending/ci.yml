@@ -1,0 +1,37 @@
+name: build
+
+# Pull requests only.  Pushes to main are covered by the deploy workflow,
+# which runs the same strict build before publishing, so running this here
+# too would just duplicate the work.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: mkdocs build --strict
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt
+
+      # --strict turns warnings into errors, so a broken internal link or a
+      # reference to a missing page fails the pull request rather than
+      # shipping quietly.
+      - name: Build
+        run: mkdocs build --strict
