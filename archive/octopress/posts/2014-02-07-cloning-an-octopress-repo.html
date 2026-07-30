@@ -1,0 +1,108 @@
+<!--
+title:  Cloning an Octopress repo
+date:   2014-02-07
+url:    /2014/02/07/cloning-an-octopress-repo/
+source: 2014/02/07/cloning-an-octopress-repo/index.html
+-->
+<p>When attempting to clone my Octopress repository on a new machine, I had the
+same  <code>Updates were rejected</code> problem that is described on <a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">this page</a>.
+Based on the information provided on that page, combined with a few other
+commands required for Ubuntu machines, this post provides instructions for
+cloning an Octopress repository.<br />
+<!-- more --></p>
+
+<p>(This works on Ubuntu 13.10 and probably other variants.)</p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>Make sure ruby1.9.1-dev and gem are installd:</p>
+
+    <pre><code>sudo apt-get install ruby1.9.1-dev gem
+gem install bundler
+rbenv rehash
+</code></pre>
+  </li>
+  <li>
+    <p>Get the source and initialize empty _deploy directory:</p>
+
+    <pre><code>git clone git@github.com:williamdemeo/williamdemeo.github.io.git
+cd williamdemeo.github.io/
+git checkout source
+mkdir _deploy
+cd _deploy
+git init
+git remote add -t master -f origin git@github.com:williamdemeo/williamdemeo.github.io.git
+cd ..
+</code></pre>
+  </li>
+  <li>
+    <p>Use bundler to check that all the dependencies in GemFile are met:</p>
+
+    <pre><code>bundle install
+</code></pre>
+  </li>
+  <li>
+    <p>Generate the pages and deploy:</p>
+
+    <pre><code>rake generate
+rake deploy
+</code></pre>
+  </li>
+</ol>
+
+<p><strong>Troubleshooting.</strong> 
+If <code>rake generate</code> produces “invalid byte sequence in US-ASCII” then try the following: </p>
+
+<pre><code>    # from the command line
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+    bundle
+</code></pre>
+
+<hr />
+
+<h2 id="workflow">Workflow</h2>
+
+<ol>
+  <li>
+    <p>Make some changes, e.g., create a new post:</p>
+
+    <pre><code>rake new_post["title"]
+</code></pre>
+  </li>
+  <li>
+    <p>Posts live in <code>source/_posts</code>.  Edit one and push the changes to source
+branch either directly with Magit or with</p>
+
+    <pre><code>git add .
+git commit -am "explanation of changes" 
+git push origin source
+</code></pre>
+  </li>
+  <li>
+    <p>Now preview the changes: <code>rake preview</code> and load <code>http://localhost:4000</code> in browser.</p>
+  </li>
+  <li>
+    <p>When satisfied, <code>rake deploy</code>.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="other-resources">Other Resources</h2>
+
+<ul>
+  <li><a href="http://stackoverflow.com/questions/14245822/cannot-install-redcloth">Get RedCloth installed properly on Ubuntu</a>   </li>
+  <li><a href="http://paulsturgess.co.uk/blog/2013/04/24/hello-octopress-and-github-pages/">Setup Octopress, pick a theme, maintain with rake</a>  </li>
+  <li><a href="http://weishi.github.io/blog/2013/07/24/setup-an-existing-octopress-repository-after-git-clone/">Setup an existing Octopress repo</a>  </li>
+  <li><a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">Maintain Octopress repo on multiple machines</a>  </li>
+  <li><a href="http://www.lucypark.kr/blog/2013/02/25/mathjax-kramdown-and-octopress/">Get MathJax working (one way)</a></li>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Get MathJax working (another)</a>  </li>
+  <li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Select a nice theme</a>  </li>
+  <li><a href="http://stackoverflow.com/questions/17031651/invalid-byte-sequence-in-us-ascii-argument-error-when-i-run-rake-dbseed-inra">Troubleshoot UTF-8 locale</a>  </li>
+  <li><a href="http://blog.bigdinosaur.org/changing-octopresss-header/">Changing fonts and colors</a></li>
+  <li>Carl Boettiger has an awesome <a href="http://carlboettiger.info/index.html">open notebook</a>.</li>
+</ul>
