@@ -32,17 +32,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: DeterminateSystems/nix-installer-action@v22
+
+      # The write side of the cache the build workflow reads.  Only pushes to
+      # main land here, and only caches on the default branch are visible to
+      # pull requests, so this is the one place saving is worth the upload.
+      #
+      # gc-max-store-size bounds what gets uploaded: the dev shell closure is
+      # about 450 MiB, and trimming to 2 GiB keeps the whole store (Nix
+      # itself, the nixpkgs source, the build closure) comfortably under
+      # GitHub's 10 GB per-repository cache limit.  Stale entries are left to
+      # GitHub's own eviction rather than purged here, which would need
+      # `actions: write` and fails on forks.
+      - uses: nix-community/cache-nix-action@v7
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements.txt
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          gc-max-store-size-linux: 2G
 
-      - name: Install pinned dependencies
-        run: pip install -r requirements.txt
-
+      # The same derivation a contributor gets from `nix build`, and the same
+      # one `nix flake check` builds on every pull request -- so what deploys
+      # is bit-for-bit what was reviewed, not a rebuild that happens to agree.
       - name: Build
-        run: mkdocs build --strict
+        run: nix build --print-build-logs
+
+      # upload-pages-artifact wants a real directory it can read: `result` is
+      # a symlink into the store, and store paths are read-only.
+      - name: Stage the built site
+        run: |
+          rm -rf site
+          cp -rL --no-preserve=mode,ownership result site
 
       - uses: actions/configure-pages@v5
 
