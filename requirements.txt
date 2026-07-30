@@ -1,0 +1,13 @@
+# Pinned build dependencies for the MkDocs site.
+#
+# Exact pins on direct dependencies: the Zola site this replaces is stuck on
+# Zola v0.5.0 from 2018 and cannot be built with any current release, which is
+# precisely the failure mode pinning avoids.
+#
+# These pin the direct dependencies only, not the full transitive closure.
+# M1-9 (#55) adopts Nix, whose lock file pins the whole environment --
+# including Python itself, and the Cairo/Pango libraries the social-card
+# plugin needs in M3-5, neither of which pip can pin.
+
+mkdocs==1.6.1
+mkdocs-material==9.5.49

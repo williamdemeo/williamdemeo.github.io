@@ -1,0 +1,116 @@
+# MkDocs configuration for williamdemeo.github.io
+#
+# Kept deliberately small at this stage.  Plugin choices that matter later --
+# blog (M6-1), redirects (M2-6), social cards (M3-5), RSS -- are added by the
+# issues that need them, so a broken plugin is always attributable to the
+# change that introduced it.
+
+site_name: William DeMeo
+site_description: >-
+  Mathematician and formal verification engineer.  Interactive theorem proving
+  in Agda, universal algebra, and AI tooling for proof assistants.
+site_author: William DeMeo
+
+# Until the williamdemeo.org cutover (M8-1) the canonical URL is the GitHub
+# Pages user site.  Changing this also changes the generated sitemap, so it
+# moves as part of that issue rather than early.
+site_url: https://williamdemeo.github.io/
+
+repo_url: https://github.com/williamdemeo/williamdemeo.github.io
+repo_name: williamdemeo/williamdemeo.github.io
+edit_uri: edit/main/docs/
+
+copyright: >-
+  Content CC BY 4.0, code MIT.  Built with MkDocs Material.
+
+# `docs/` predates this site as the home of project documentation.  Rather
+# than move those files and break links from the issue tracker, exclude them
+# from the build.  Publishing the ADRs is worth revisiting once there is a
+# design system to render them into (M3-3); GITHUB_PROJECT.md is machine-
+# maintained project state and is not site content in any case.
+exclude_docs: |
+  GITHUB_PROJECT.md
+  adr/
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  # Placeholder palette.  M3-1 replaces this with the real visual system;
+  # the light/dark toggle structure is what matters here.
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Follow system theme
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Link to this section
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  # Generic mode emits KaTeX-compatible markup.  M3-4 wires the renderer and
+  # the custom macros the legacy posts rely on (`\bA` and friends).
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/williamdemeo
+      name: GitHub
+    - icon: fontawesome/solid/graduation-cap
+      link: https://scholar.google.com/citations?user=y1OQ07QAAAAJ
+      name: Google Scholar

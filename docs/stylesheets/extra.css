@@ -1,0 +1,20 @@
+/* Custom styles for williamdemeo.github.io
+ *
+ * Single entry point for site CSS.  Intentionally near-empty at this stage:
+ * M3-1 defines the real visual system (palette, typographic scale, spacing)
+ * as custom properties here, and M3-3 builds the component classes on top.
+ * Keeping the file present and wired up means later issues change one file
+ * rather than also editing mkdocs.yml.
+ */
+
+:root {
+  /* Material reads these; overriding them is the supported way to restyle
+     the theme without forking its templates. */
+  --md-text-font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --md-code-font: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+/* Slightly smaller base font size than the Material default. */
+.md-typeset {
+  font-size: 0.8rem;
+}
