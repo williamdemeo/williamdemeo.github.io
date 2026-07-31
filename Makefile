@@ -91,7 +91,7 @@ endif
 RENDER := python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
             --repo $(REPO) $(RENDER_FLAGS)
 
-.PHONY: project-plan project-plan-check
+.PHONY: project-plan project-plan-check project-plan-report
 
 ## Regenerate the issue listings in docs/GITHUB_PROJECT.md from GitHub
 project-plan: guard-gh
@@ -100,6 +100,10 @@ project-plan: guard-gh
 ## Report whether docs/GITHUB_PROJECT.md is stale; never rewrites it
 project-plan-check: guard-gh
 	@$(RENDER) --check
+
+## Run the CI drift report locally, exactly as the scheduled job does
+project-plan-report: guard-gh
+	@NO_ENV_PREFIX=$(if $(NO_ENV_PREFIX),1,) scripts/ci/project-plan-check.sh
 
 guard-gh:
 	@command -v gh >/dev/null || { \
