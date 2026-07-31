@@ -1,0 +1,213 @@
+[
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/Y8CGS8JY",
+		"type": "article-journal",
+		"title": "Universal Algebraic Methods for Constraint Satisfaction Problems",
+		"container-title": "arXiv:1611.02867 [cs]",
+		"source": "arXiv.org",
+		"abstract": "After substantial progress over the last 15 years, the \"algebraic CSP-dichotomy conjecture\" reduces to the following: every local constraint satisfaction problem (CSP) associated with a finite idempotent algebra is tractable if and only if the algebra has a Taylor term operation. Despite the tremendous achievements in this area, there remain examples of small algebras with just a single binary operation whose CSP resists classification as either tractable or NP-complete using known methods. In this paper we present some new methods for approaching this problem, with particular focus on those techniques that help us attack the class of finite algebras known as \"commutative idempotent binars\" (CIBs). We demonstrate the utility of these methods by using them to prove that every CIB of cardinality at most 4 yields a tractable CSP.",
+		"URL": "http://arxiv.org/abs/1611.02867",
+		"note": "arXiv: 1611.02867",
+		"author": [
+			{
+				"family": "Bergman",
+				"given": "Clifford"
+			},
+			{
+				"family": "DeMeo",
+				"given": "William"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2016",
+					11,
+					9
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/VW85L2P9",
+		"type": "article-journal",
+		"title": "Isotopic algebras with non-isomorphic congruence lattices",
+		"container-title": "arXiv:1301.7481 [math]",
+		"source": "arXiv.org",
+		"abstract": "We give examples of pairs of isotopic algebras with non-isomorphic congruence lattices. This answers the question of whether all isotopic algebras have isomorphic congruence lattices.",
+		"URL": "http://arxiv.org/abs/1301.7481",
+		"note": "arXiv: 1301.7481",
+		"author": [
+			{
+				"family": "DeMeo",
+				"given": "William"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2013",
+					1,
+					30
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/EDNSQF3T",
+		"type": "article-journal",
+		"title": "Dedekind's Transposition Principle for lattices of equivalence relations",
+		"container-title": "arXiv:1301.6788 [math]",
+		"source": "arXiv.org",
+		"abstract": "We prove a version of Dedekind's Transposition Principle that holds in lattices of equivalence relations.",
+		"URL": "http://arxiv.org/abs/1301.6788",
+		"note": "arXiv: 1301.6788",
+		"author": [
+			{
+				"family": "DeMeo",
+				"given": "William"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2013",
+					1,
+					28
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/ZGZ5W6A7",
+		"type": "article-journal",
+		"title": "Expansions of finite algebras and their congruence lattices",
+		"container-title": "Algebra universalis",
+		"page": "257-278",
+		"volume": "69",
+		"issue": "3",
+		"source": "arXiv.org",
+		"abstract": "We present a novel approach to the construction of new finite algebras and describe the congruence lattices of these algebras. Given a finite algebra $(B_0, \\dots)$, let $B_1, B_2, \\dots, B_K$ be sets that either intersect $B_0$ or intersect each other at certain points. We construct an \\emph{overalgebra} $(A, F_A)$, by which we mean an expansion of $(B_0, \\dots)$ with universe $A = B_0 \\cup B_1 \\cup \\cdots \\cup B_K$, and a certain set $F_A$ of unary operations that includes mappings $e_i$ satisfying $e_i^2 = e_i$ and $e_i(A) = B_i$, for $0\\leq i \\leq K$. We explore two such constructions and prove results about the shape of the new congruence lattices $Con(A, F_A)$ that result. Thus, descriptions of some new classes of finitely representable lattices is one contribution of this paper. Another, perhaps more significant contribution is the announcement of a novel approach to the discovery of new classes of representable lattices, the full potential of which we have only begun to explore.",
+		"URL": "http://arxiv.org/abs/1205.1106",
+		"ISSN": "0002-5240, 1420-8911",
+		"note": "arXiv: 1205.1106",
+		"author": [
+			{
+				"family": "DeMeo",
+				"given": "William"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2013",
+					5
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/QDLJMABA",
+		"type": "article-journal",
+		"title": "Congruence lattices of finite algebras",
+		"container-title": "arXiv:1204.4305 [math]",
+		"source": "arXiv.org",
+		"abstract": "An important and long-standing open problem in universal algebra asks whether every finite lattice is isomorphic to the congruence lattice of a finite algebra. Until this problem is resolved, our understanding of finite algebras is incomplete, since, given an arbitrary finite algebra, we cannot say whether there are any restrictions on the shape of its congruence lattice. By a well known result of Palfy and Pudlak, the problem would be solved if we could prove the existence of a finite lattice that is not an interval in the lattice of subgroups of a finite group. Thus the problem of characterizing congruence lattices of finite algebras is closely related to the problem of characterizing intervals in subgroup lattices. In this work, we review a number of methods for finding a finite algebra with a given congruence lattice, including searching for intervals in subgroup lattices. We also consider methods for proving that algebras with a given congruence lattice exist without actually constructing them. By combining these well known methods with a new method we have developed, and with much help from computer software like the UACalc and GAP, we prove that with one possible exception every lattice with at most seven elements is isomorphic to the congruence lattice of a finite algebra. As such, we have identified the unique smallest lattice for which there is no known representation. We examine this exceptional lattice in detail, and prove results that characterize the class of algebras that could possibly represent this lattice. We conclude with what we feel are the most interesting open questions surrounding this problem and discuss possibilities for future work.",
+		"URL": "http://arxiv.org/abs/1204.4305",
+		"note": "arXiv: 1204.4305",
+		"author": [
+			{
+				"family": "DeMeo",
+				"given": "William J."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2012",
+					4,
+					19
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/local/h7Viubqx/items/J9C77IKX",
+		"type": "article-journal",
+		"title": "Interval enforceable properties of finite groups",
+		"container-title": "arXiv:1205.1927 [math]",
+		"source": "arXiv.org",
+		"abstract": "We propose a classification of group properties according to whether they can be deduced from the assumption that a group's subgroup lattice contains an interval isomorphic to some lattice. We are able to classify a few group properties as being \"interval enforceable\" in this sense, and we establish that other properties satisfy a weaker notion of \"core-free interval enforceable.\" We also show that if there exists a group property and its negation that are both core-free interval enforceable, this would settle an important open question in universal algebra.",
+		"URL": "http://arxiv.org/abs/1205.1927",
+		"note": "arXiv: 1205.1927",
+		"author": [
+			{
+				"family": "DeMeo",
+				"given": "William"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2012",
+					5,
+					9
+				]
+			]
+		},
+		"accessed": {
+			"date-parts": [
+				[
+					"2019",
+					1,
+					13
+				]
+			]
+		}
+	}
+]
