@@ -110,11 +110,27 @@ guard-gh:
 	  echo "error: the GitHub CLI (gh) is required for this target."; \
 	  echo "       install it, then run: gh auth login"; exit 1; }
 
+# ── Math rendering audit ────────────────────────────────────────────────────
+#
+# Renders every expression in a content tree with the KaTeX bundle the site
+# actually ships, using the site's own macro table, so the audit cannot drift
+# from what visitors get.  Needs node; nothing from npm.  Exits non-zero on any
+# failure, so it works as a gate once the mathematical content reaches docs/.
+
+MATH_SRC ?= import/zola-converted
+
+.PHONY: math-audit
+
+## Render every math expression headlessly and report failures
+math-audit:
+	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
+	@node scripts/js/audit_math.mjs $(MATH_SRC)
+
 ## Show this help
 help:
 	@echo "Targets:"
 	@awk '/^## /{doc=substr($$0,4); next} \
-	      /^[a-zA-Z_-]+:/{if(doc!=""){split($$1,t,":"); printf "  \033[36m%-19s\033[0m %s\n", t[1], doc; doc=""}}' \
+	      /^[a-zA-Z_-]+:/{if(doc!=""){split($$1,t,":"); printf "  \033[36m%-20s\033[0m %s\n", t[1], doc; doc=""}}' \
 	      $(MAKEFILE_LIST)
 	@echo
 	@echo "MkDocs comes from:"

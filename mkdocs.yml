@@ -32,6 +32,12 @@ exclude_docs: |
   GITHUB_PROJECT.md
   adr/
 
+# Reachable by URL but deliberately absent from the nav.  Declaring it here
+# rather than leaving it undeclared keeps `--strict` output clean, so a page
+# that is *accidentally* orphaned still stands out.
+not_in_nav: |
+  design/rendering.md
+
 theme:
   name: material
   language: en
@@ -71,6 +77,17 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  # Self-hosted KaTeX.  The Zola site loaded it from a CDN alongside a second
+  # copy of MathJax; this ships one renderer, from this origin, with the
+  # woff/ttf fallbacks stripped from the stylesheet since only woff2 is
+  # shipped.  See ADR/#20.
+  - assets/katex/katex.min.css
+
+extra_javascript:
+  - javascripts/katex-macros.js
+  - assets/katex/katex.min.js
+  - assets/katex/auto-render.min.js
+  - javascripts/katex-init.js
 
 markdown_extensions:
   - abbr
