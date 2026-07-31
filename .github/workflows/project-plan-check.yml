@@ -2,10 +2,11 @@ name: project-plan-check
 
 # Reports whether docs/GITHUB_PROJECT.md has drifted from live GitHub state.
 #
-# Deliberately advisory.  The plan going stale is worth surfacing -- that is
-# the whole failure mode this project exists to avoid -- but it is not a
-# reason to block a merge, so the job summarises the drift and exits green.
-# `continue-on-error` on the check step is what makes that explicit.
+# All of the logic lives in scripts/ci/project-plan-check.sh, which is
+# runnable and tested locally.  Shell inside a `run:` block is none of those
+# things, and editing it needs the `workflow` scope to push -- so this file
+# holds only the parts that genuinely have to be here: when it runs, what it
+# may access, and what it calls.
 
 on:
   schedule:
@@ -27,61 +28,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      # --no-env-prefix is required here: the scripts strip GH_TOKEN and
-      # GITHUB_TOKEN by default, which is exactly how Actions authenticates.
-      # Without it every gh call exits 4 with a message pointing at
-      # `gh auth login`, i.e. away from the real cause.
-      #
-      # The exit code is captured rather than left to fail the step, so the
-      # summary can tell drift from a check that never ran.  Reporting "the
-      # plan has drifted" when the real problem was an expired token would
-      # send you to fix the wrong thing.
-      - name: Check for drift
-        id: check
+      - name: Report drift
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set +e
-          out="$(python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
-                   --repo "${{ github.repository }}" --check --no-env-prefix 2>&1)"
-          code=$?
-          set -e
-          printf '%s\n' "$out"
-          echo "code=$code" >> "$GITHUB_OUTPUT"
-          {
-            echo 'output<<RENDER_EOF'
-            printf '%s\n' "$out"
-            echo 'RENDER_EOF'
-          } >> "$GITHUB_OUTPUT"
-
-      # gh_project_render.py follows diff(1): 0 current, 1 differs, 2 failed.
-      - name: Summarise
-        env:
-          CODE: ${{ steps.check.outputs.code }}
-          OUTPUT: ${{ steps.check.outputs.output }}
-        run: |
-          case "$CODE" in
-            0)
-              echo 'docs/GITHUB_PROJECT.md is current.' >> "$GITHUB_STEP_SUMMARY"
-              ;;
-            1)
-              {
-                echo '### docs/GITHUB_PROJECT.md has drifted'
-                echo
-                echo 'Run `make project-plan` locally and commit the result.'
-              } >> "$GITHUB_STEP_SUMMARY"
-              ;;
-            *)
-              {
-                echo '### The staleness check could not run'
-                echo
-                echo "This is **not** drift: the check itself failed with exit"
-                echo "code $CODE, so whether the plan is current is unknown."
-                echo 'Usually authentication or a GitHub API error.'
-                echo
-                echo '```'
-                printf '%s\n' "$OUTPUT"
-                echo '```'
-              } >> "$GITHUB_STEP_SUMMARY"
-              ;;
-          esac
+          # Required here.  The render script strips GH_TOKEN and
+          # GITHUB_TOKEN by default, which is exactly how Actions
+          # authenticates; without this every gh call exits 4 with a message
+          # pointing at `gh auth login`, i.e. away from the real cause.
+          NO_ENV_PREFIX: "1"
+        run: scripts/ci/project-plan-check.sh
