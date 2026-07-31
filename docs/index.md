@@ -39,7 +39,7 @@ most domains.
 **[agda-algebras](https://github.com/ualib/agda-algebras)**.  A library of universal
 algebra in Agda, containing what is the first constructive, machine-checked proof of
 Birkhoff's HSP theorem in Martin-Löf type theory, joint with Jacques Carette.
-Documentation at [agda-algebras.universalalgebra.org](https://agda-algebras.universalalgebra.org). 
+Documentation at [agda-algebras.universalalgebra.org](https://agda-algebras.universalalgebra.org).
 
 *Last updated: July 2026.*
 
