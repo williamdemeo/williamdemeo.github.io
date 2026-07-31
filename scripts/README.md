@@ -25,28 +25,28 @@ label/project/issue descriptions is `docs/GITHUB_PROJECT.md`.
 +  Dry run — see what would be created (from the main project directory).
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --dry-run
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --dry-run
    ```
 
 +  Create everything (will prompt for confirmation).
 
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io
    ```
 
 +  Or create in stages.
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --labels-only
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --milestones-only
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --issues-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --labels-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --milestones-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --issues-only
    ```
 
 +  Resume if interrupted (e.g., start from issue M1-3).
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --issues-only --start-from M1-3
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --issues-only --start-from M1-3
    ```
 
 ---
@@ -76,14 +76,34 @@ Render preserves manual segments byte-for-byte and rebuilds each generated regio
 +  Or run the script directly:
 
    ```zsh
-   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras
+   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io
    ```
 
-+  Verify staleness without rewriting (intended for CI):
++  Verify staleness without rewriting:
 
    ```zsh
-   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --check
+   make project-plan-check
    ```
+
+   Exits 0 when the file matches live GitHub state and 1 when it does not.
+   A scheduled CI job runs this weekly and reports drift without failing the
+   build: a stale plan is worth knowing about, but it is not a reason to
+   block a merge.
+
+**Requirements**.
+
+Both targets need an authenticated `gh` on `PATH`; the `Makefile` guards for
+it and prints an actionable message rather than a stack trace when it is
+missing.  Override the target repository with `make project-plan REPO=owner/name`.
+
+**A note on `--no-env-prefix`**.
+
+By default the scripts prepend `env -u GH_TOKEN -u GITHUB_TOKEN` to every `gh`
+invocation, working around a `gh` quirk where those variables override the
+keychain-stored token.  In an environment that authenticates *through* those
+variables — some CI runners and sandboxes do — stripping them leaves `gh` with
+no credentials at all, and every call fails with exit code 4.  Pass
+`--no-env-prefix` there.
 
 **The populate / render symmetry**.
 

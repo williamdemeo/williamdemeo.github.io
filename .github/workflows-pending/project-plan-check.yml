@@ -1,0 +1,49 @@
+name: project-plan-check
+
+# Reports whether docs/GITHUB_PROJECT.md has drifted from live GitHub state.
+#
+# Deliberately advisory.  The plan going stale is worth surfacing -- that is
+# the whole failure mode this project exists to avoid -- but it is not a
+# reason to block a merge, so the job summarises the drift and exits green.
+# `continue-on-error` on the check step is what makes that explicit.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # Mondays, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  check:
+    name: Is the plan current?
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check for drift
+        id: drift
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
+            --repo "${{ github.repository }}" --check --no-env-prefix
+
+      - name: Summarise
+        run: |
+          if [ "${{ steps.drift.outcome }}" = "success" ]; then
+            echo "docs/GITHUB_PROJECT.md is current." >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "### docs/GITHUB_PROJECT.md has drifted"
+              echo
+              echo 'Run \`make project-plan\` locally and commit the result.'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
