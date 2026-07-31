@@ -27,23 +27,61 @@ jobs:
         with:
           python-version: "3.12"
 
+      # --no-env-prefix is required here: the scripts strip GH_TOKEN and
+      # GITHUB_TOKEN by default, which is exactly how Actions authenticates.
+      # Without it every gh call exits 4 with a message pointing at
+      # `gh auth login`, i.e. away from the real cause.
+      #
+      # The exit code is captured rather than left to fail the step, so the
+      # summary can tell drift from a check that never ran.  Reporting "the
+      # plan has drifted" when the real problem was an expired token would
+      # send you to fix the wrong thing.
       - name: Check for drift
-        id: drift
-        continue-on-error: true
+        id: check
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
-            --repo "${{ github.repository }}" --check --no-env-prefix
+          set +e
+          out="$(python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
+                   --repo "${{ github.repository }}" --check --no-env-prefix 2>&1)"
+          code=$?
+          set -e
+          printf '%s\n' "$out"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          {
+            echo 'output<<RENDER_EOF'
+            printf '%s\n' "$out"
+            echo 'RENDER_EOF'
+          } >> "$GITHUB_OUTPUT"
 
+      # gh_project_render.py follows diff(1): 0 current, 1 differs, 2 failed.
       - name: Summarise
+        env:
+          CODE: ${{ steps.check.outputs.code }}
+          OUTPUT: ${{ steps.check.outputs.output }}
         run: |
-          if [ "${{ steps.drift.outcome }}" = "success" ]; then
-            echo "docs/GITHUB_PROJECT.md is current." >> "$GITHUB_STEP_SUMMARY"
-          else
-            {
-              echo "### docs/GITHUB_PROJECT.md has drifted"
-              echo
-              echo 'Run \`make project-plan\` locally and commit the result.'
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
+          case "$CODE" in
+            0)
+              echo 'docs/GITHUB_PROJECT.md is current.' >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            1)
+              {
+                echo '### docs/GITHUB_PROJECT.md has drifted'
+                echo
+                echo 'Run `make project-plan` locally and commit the result.'
+              } >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            *)
+              {
+                echo '### The staleness check could not run'
+                echo
+                echo "This is **not** drift: the check itself failed with exit"
+                echo "code $CODE, so whether the plan is current is unknown."
+                echo 'Usually authentication or a GitHub API error.'
+                echo
+                echo '```'
+                printf '%s\n' "$OUTPUT"
+                echo '```'
+              } >> "$GITHUB_STEP_SUMMARY"
+              ;;
+          esac
