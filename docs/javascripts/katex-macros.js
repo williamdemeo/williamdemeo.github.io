@@ -72,6 +72,37 @@ window.KATEX_MACROS = {
   "\\vphi": "\\varphi",
   "\\bphi": "\\boldsymbol{\\varphi}",
 
+  // ── Algebra posts and the agda-ualib notes ──────────────────────────────
+  //
+  // Unlike everything above, these are NOT inferred.  Those pages carry their
+  // own preamble -- a math block containing nothing but definitions, e.g.
+  //
+  //     $\newcommand\FGrp{\mathbf{F}_{\mathbf{Grp}}} \newcommand\inj{\mathrm{in}}$
+  //     $\def\bA{\bf A} \def\bB{\bf B}$
+  //
+  // and the definitions below are copied verbatim from them.
+  //
+  // That preamble worked under MathJax, which keeps \newcommand for the rest
+  // of the page, and does not work under KaTeX, which scopes \def and
+  // \newcommand to the single expression they appear in.  (Only \gdef
+  // persists, and only when one macros object is shared across the page.)
+  // So these pages rendered correctly on the old site and would silently
+  // break on the new one -- the opposite of the exam solutions, which were
+  // never defined anywhere and have been broken all along.
+  //
+  // Hoisting them here rather than rewriting the preambles to \gdef makes the
+  // definitions greppable in one place and removes any dependence on the
+  // preamble block appearing before its first use.  The preamble expressions
+  // themselves are now redundant; they render as an empty span and can be
+  // deleted when those pages are triaged.
+  "\\FGrp": "\\mathbf{F}_{\\mathbf{Grp}}",
+  "\\inj": "\\mathrm{in}",
+  "\\inji": "\\mathrm{in}_i",
+  // Source writes `\bf A`; `\mathbf{A}` is the modern spelling of the same
+  // thing and does not leak a font switch into the surrounding expression.
+  "\\bA": "\\mathbf{A}",
+  "\\bB": "\\mathbf{B}",
+
   // ── LaTeX-only commands with no KaTeX equivalent ─────────────────────────
   // \ensuremath is a no-op here: KaTeX is always in math mode, so the wrapper
   // is redundant and the argument passes straight through.

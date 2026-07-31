@@ -124,3 +124,21 @@ than a rendering bug.
 `\\{` where they mean `\{`. Arithmatex passes the sequence through unchanged and
 KaTeX reads `\\` as a line break. The fix is mechanical and belongs with the
 exam-page migration.
+
+**Redundant macro preambles.** Four imported pages open with a math block
+containing nothing but definitions:
+
+```
+$\newcommand\FGrp{\mathbf{F}_{\mathbf{Grp}}} \newcommand\inj{\mathrm{in}}$
+$\def\bA{\bf A} \def\bB{\bf B}$
+```
+
+Those definitions now live in `katex-macros.js`, which makes the preambles
+redundant — and, for the `\newcommand` ones, harmful: KaTeX raises
+*"attempting to redefine \FGrp; use \renewcommand"* rather than ignoring them.
+
+The blocks should be deleted when those pages are triaged. Nothing published
+is affected today, since the pages are still staged under `import/`; the
+collision shows up only in `make math-audit`.
+`agda-ualib/f-algebras.md`, `agda-ualib/elementary-facts.md`,
+`agda-ualib/birkhoff-hsp.md`, and `2014-02-13-a-problem-of-palfy-and-saxl.md`.

@@ -34,9 +34,14 @@ function* walk(d) {
   }
 }
 
-// Fenced and inline code are stripped first so that `$PATH` in a shell example
-// is not mistaken for an expression.
-const strip = s => s.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
+// Stripped before scanning, so the audit sees what MkDocs will actually
+// render: fenced and inline code (`$PATH` in a shell example is not
+// mathematics) and HTML comments (commented-out prose is not published, and
+// flagging expressions inside it reports failures no visitor can ever see).
+const strip = s => s
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/`[^`\n]*`/g, '');
 
 const fails = new Map();
 let nExpr = 0, nPages = 0;
