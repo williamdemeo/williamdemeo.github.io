@@ -53,11 +53,6 @@ proving** — infrastructure that lets language models work inside a proof
 assistant, and the question of what a typechecker's verifiable feedback makes
 possible that unverifiable domains do not.
 
-<!-- TODO(wjd): The through-line above is my reading of your trajectory from the
-     CV and the old research page.  It is the paragraph a hiring reader is most
-     likely to weigh, so it is worth making sure it is *your* account rather
-     than mine.  M5-5 (#33) expands this into a full research narrative. -->
-
 ## Academic appointments
 
 | Years | Position | Institution |

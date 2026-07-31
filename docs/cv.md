@@ -26,13 +26,6 @@ formal methods for production systems; AI tooling for proof assistants and
 machine reasoning over verifiable domains; universal algebra, lattice theory,
 and the algebraic approach to computational complexity.
 
-<!-- TODO(wjd): Your current CV reads "Computational complexity, type theory,
-     artificial intelligence (dsLLM, RAG, Scala/Spark, PyTorch). Computer-aided
-     mathematics (ITP in Agda and Lean); formal methods for blockchain
-     research."  I rewrote it because the parenthetical tool names date it and
-     it reads as a list of things touched rather than a research identity.
-     Please check this reflects what you actually want to be hired to do. -->
-
 ## Education
 
 **PhD, Mathematics** — University of Hawaii, 2012
