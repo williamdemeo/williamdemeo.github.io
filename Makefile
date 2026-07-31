@@ -72,18 +72,34 @@ distclean: clean
 #
 # Both need an authenticated `gh`.  The check is deliberately advisory: a stale
 # plan is worth knowing about, but it is not a reason to block a merge.
+#
+# By default the scripts strip GH_TOKEN and GITHUB_TOKEN before calling gh, to
+# stop those variables overriding a keychain-stored token.  Wherever
+# authentication comes *through* them instead -- GitHub Actions, and some
+# sandboxes -- that leaves gh with no credentials and every call fails.  Set
+# NO_ENV_PREFIX=1 there:
+#
+#     make project-plan-check NO_ENV_PREFIX=1
 
 REPO ?= williamdemeo/williamdemeo.github.io
+
+RENDER_FLAGS :=
+ifdef NO_ENV_PREFIX
+RENDER_FLAGS += --no-env-prefix
+endif
+
+RENDER := python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
+            --repo $(REPO) $(RENDER_FLAGS)
 
 .PHONY: project-plan project-plan-check
 
 ## Regenerate the issue listings in docs/GITHUB_PROJECT.md from GitHub
 project-plan: guard-gh
-	python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo $(REPO)
+	$(RENDER)
 
 ## Report whether docs/GITHUB_PROJECT.md is stale; never rewrites it
 project-plan-check: guard-gh
-	@python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo $(REPO) --check
+	@$(RENDER) --check
 
 guard-gh:
 	@command -v gh >/dev/null || { \

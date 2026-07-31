@@ -85,16 +85,32 @@ Render preserves manual segments byte-for-byte and rebuilds each generated regio
    make project-plan-check
    ```
 
-   Exits 0 when the file matches live GitHub state and 1 when it does not.
+   Exit codes follow `diff(1)`, so a caller can tell a stale plan from a
+   check that never ran:
+
+   | Code | Meaning |
+   | --- | --- |
+   | 0 | the file is current |
+   | 1 | the file differs from live GitHub state |
+   | 2 | the run failed — authentication, API error, bad markers |
+
    A scheduled CI job runs this weekly and reports drift without failing the
    build: a stale plan is worth knowing about, but it is not a reason to
-   block a merge.
+   block a merge.  It distinguishes 1 from 2, so a broken check is not
+   reported as drift.
 
 **Requirements**.
 
 Both targets need an authenticated `gh` on `PATH`; the `Makefile` guards for
 it and prints an actionable message rather than a stack trace when it is
 missing.  Override the target repository with `make project-plan REPO=owner/name`.
+
+Where authentication comes through `GH_TOKEN` or `GITHUB_TOKEN` rather than a
+keychain — GitHub Actions, and some sandboxes — pass `NO_ENV_PREFIX=1`:
+
+```zsh
+make project-plan-check NO_ENV_PREFIX=1
+```
 
 **A note on `--no-env-prefix`**.
 
