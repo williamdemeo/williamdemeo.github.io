@@ -255,9 +255,9 @@ Below, each issue is tagged with its milestone (**M1**, **M2**, etc.), suggested
 
 <!-- BEGIN GENERATED: milestone-1 -->
 
-### Issue M1-1: Decide and execute the repository consolidation strategy
+### Issue M1-1: Decide and execute the repository consolidation strategy (#2, closed)
 
-**Labels:** `milestone-1-foundation`, `decision`, `infrastructure`
+**Labels**: `milestone-1-foundation`, `infrastructure`, `decision`
 
 ## Description
 
@@ -287,9 +287,9 @@ Two repositories hold two abandoned personal sites.  This issue settles which on
 
 ---
 
-### Issue M1-2: Retire the Octopress output without losing it or breaking its URLs
+### Issue M1-2: Retire the Octopress output without losing it or breaking its URLs (#3, closed)
 
-**Labels:** `milestone-1-foundation`, `infrastructure`, `content`
+**Labels**: `milestone-1-foundation`, `infrastructure`, `content`
 
 ## Description
 
@@ -317,9 +317,9 @@ The approach is to tag the current tip, then clear the working tree.  Git keeps 
 
 ---
 
-### Issue M1-3: Stand up the MkDocs Material skeleton
+### Issue M1-3: Stand up the MkDocs Material skeleton (#4, closed)
 
-**Labels:** `milestone-1-foundation`, `infrastructure`
+**Labels**: `milestone-1-foundation`, `infrastructure`
 
 ## Description
 
@@ -345,15 +345,15 @@ Keep the initial configuration small.  Plugin choices that matter later — blog
 
 ---
 
-### Issue M1-4: Local development workflow with pinned dependencies
+### Issue M1-4: Local development workflow with pinned dependencies (#5, closed)
 
-**Labels:** `milestone-1-foundation`, `infrastructure`, `automation`
+**Labels**: `milestone-1-foundation`, `infrastructure`, `automation`
 
 ## Description
 
-Make the edit-preview loop instant and reproducible from a clean checkout.  This is infrastructure in service of M6: a preview loop that requires thought is a preview loop that stops getting used, and the blog dies again.
+Make the edit-preview loop instant and reproducible from a clean checkout. This is infrastructure in service of M6: a preview loop that requires thought is a preview loop that stops getting used, and the blog dies again.
 
-Dependencies must be pinned.  The Zola site is a cautionary tale — it is stuck on Zola v0.5.0 from 2018 and cannot be built with any current release without a migration nobody is going to do.  A lockfile means the site still builds in 2031.
+Dependencies must be pinned. The Zola site is a cautionary tale — it is stuck on Zola v0.5.0 from 2018 and cannot be built with any current release without a migration nobody is going to do. A lockfile means the site still builds in 2031.
 
 ## Tasks
 
@@ -361,8 +361,8 @@ Dependencies must be pinned.  The Zola site is a cautionary tale — it is stuck
 - [ ] Add a `Makefile` with at least `install`, `serve`, `build`, `clean`, and `check`.
 - [ ] Make `make serve` work from a clean checkout in one command, creating the virtualenv if absent.
 - [ ] Add `.gitignore` covering `site/`, `.venv/`, `__pycache__/`, and OS cruft.
-- [ ] Optionally add a `flake.nix` for a `nix develop` shell, consistent with the author's other projects.
 - [ ] Document the loop in `README.md`: clone, `make serve`, edit, see it live.
+- [ ] Ensure the `Makefile` targets work unchanged inside a Nix dev shell, so M1-9 layers on cleanly.
 
 ## Acceptance criteria
 
@@ -372,9 +372,13 @@ Dependencies must be pinned.  The Zola site is a cautionary tale — it is stuck
 
 ---
 
-### Issue M1-5: GitHub Actions for strict builds and Pages deployment
+*Revised 2026-07-30: the optional `flake.nix` sub-task is superseded by M1-9 (#55), which adopts Nix as a decision in its own right rather than an afterthought. This issue keeps the pip/venv path, which M1-9 retains as the documented non-Nix fallback.*
 
-**Labels:** `milestone-1-foundation`, `ci`, `infrastructure`
+---
+
+### Issue M1-5: GitHub Actions for strict builds and Pages deployment (#6, closed)
+
+**Labels**: `milestone-1-foundation`, `infrastructure`, `ci`
 
 ## Description
 
@@ -400,9 +404,9 @@ Use the modern Pages deployment path (`actions/configure-pages`, `actions/upload
 
 ---
 
-### Issue M1-6: Repository hygiene and licensing
+### Issue M1-6: Repository hygiene and licensing (#7, closed)
 
-**Labels:** `milestone-1-foundation`, `documentation`, `good first issue`
+**Labels**: `good first issue`, `milestone-1-foundation`, `documentation`
 
 ## Description
 
@@ -426,9 +430,9 @@ Licensing deserves a moment of thought rather than a reflexive MIT: a personal s
 
 ---
 
-### Issue M1-7: Ship a minimal but presentable v0
+### Issue M1-7: Ship a minimal but presentable v0 (#8, closed)
 
-**Labels:** `milestone-1-foundation`, `content`, `writing`, `career`
+**Labels**: `milestone-1-foundation`, `content`, `writing`, `career`
 
 ## Description
 
@@ -454,9 +458,9 @@ The home page at this stage should say who the author is and what he is working 
 
 ---
 
-### Issue M1-8: Wire the project plan into the build
+### Issue M1-8: Wire the project plan into the build (#9)
 
-**Labels:** `milestone-1-foundation`, `automation`, `ci`
+**Labels**: `milestone-1-foundation`, `ci`, `automation`
 
 ## Description
 
@@ -478,6 +482,62 @@ Note that two fixes to `gh_project_populate.py` landed with this plan: issue tit
 - [ ] `make project-plan-check` exits zero on a freshly rendered file.
 - [ ] A populate run followed immediately by a second populate run creates zero duplicate issues.
 
+---
+
+### Issue M1-9: Adopt Nix for the development environment and CI (#55, closed)
+
+**Labels**: `milestone-1-foundation`, `infrastructure`, `decision`
+
+## Description
+
+M1-4 lists "optionally add a `flake.nix`" as a throwaway sub-task. It deserves a decision of its own, and the recommendation is **yes, adopt Nix** — for one consistency reason and one concrete technical reason.
+
+## Why
+
+**Consistency with the projects next door.** `agda-algebras` and `agda-native-air` are both Nix projects. One mental model across all three means `nix develop` is the answer everywhere, and no context-switch cost when moving between them on the same evening. For a site whose entire premise is removing friction from the publishing loop (M6-2), that matters more than it would on a project touched daily.
+
+**Native dependencies, which is where pip-based CI actually breaks.** The Material `social` plugin (M3-5) generates Open Graph card images through Pillow and CairoSVG, which need Cairo, Pango, and system fonts present at build time. That is the classic works-locally-fails-in-CI failure, and every workaround on the pip side involves `apt-get install` incantations in the workflow that drift from whatever the developer has installed. Nix makes those dependencies declarative and identical in both places. This is a real, specific problem this project will hit, not a hypothetical.
+
+**The rot argument.** The Zola site is pinned to v0.5.0 from 2018 and cannot be built with any current release. A `requirements.txt` pins Python packages but not Python, not Cairo, not the fonts. A flake with a locked nixpkgs pins the whole environment, which is the difference between a site that still builds in 2031 and one that does not.
+
+## Proposal
+
+A `flake.nix` providing:
+
+- a `devShell` with `python3.withPackages` (mkdocs, mkdocs-material, plugins), plus `cairo`, `pango`, `libffi`, and the fonts the social cards need;
+- a `packages.default` that builds the site, so `nix build` produces `result/` and CI runs the same derivation the developer does;
+- `nix flake check` wired to the strict build.
+
+Keep `requirements.txt` as a documented non-Nix fallback so the project is not hostile to a machine without Nix, and so the GitHub Actions runner has an escape hatch if the Nix cold-start cost turns out to hurt. If maintaining both starts to chafe, `uv2nix` or `poetry2nix` can derive the Nix env from the Python lockfile and restore a single source of truth — worth doing then, not now.
+
+For CI, use `DeterminateSystems/nix-installer-action` with `magic-nix-cache-action`, or Cachix if the cache misses become slow.
+
+## Tasks
+
+- [ ] Write `flake.nix` with a devShell covering Python, MkDocs, and the social-card native dependencies.
+- [ ] Add `packages.default` building the site with `mkdocs build --strict`.
+- [ ] Wire `nix flake check`.
+- [ ] Add `.envrc` with `use flake` for direnv users.
+- [ ] Make the `Makefile` targets work identically inside and outside the dev shell.
+- [ ] Switch the CI workflows (M1-5) to the flake, with a binary cache.
+- [ ] Verify social-card generation works in CI, since that is the dependency this is meant to solve.
+- [ ] Keep and document `requirements.txt` as the non-Nix path.
+- [ ] Record the decision in `docs/adr/004-nix-environment.md`.
+
+## Acceptance criteria
+
+- [ ] `nix develop` gives a shell where `make serve` works with no further setup.
+- [ ] `nix build` produces the site, and CI builds the same derivation.
+- [ ] Social-card generation succeeds in CI.
+- [ ] A contributor without Nix can still build via `requirements.txt`.
+- [ ] The ADR explains the choice and the cost.
+
+## Notes
+
+Depends on M1-4 (#5) for the Makefile and dependency set, and feeds M1-5 (#6) for CI and M3-5 for social cards. M1-4's optional `flake.nix` sub-task is superseded by this issue.
+
+Numbered `M1-9` so it renders into `docs/GITHUB_PROJECT.md` alongside the rest of Milestone 1; the prose section for M1 will need a matching paragraph on the next hand-edit.
+
 <!-- END GENERATED: milestone-1 -->
 
 ---
@@ -487,9 +547,9 @@ Note that two fixes to `gh_project_populate.py` landed with this plan: issue tit
 
 <!-- BEGIN GENERATED: milestone-2 -->
 
-### Issue M2-1: Import the GitLab Zola repository
+### Issue M2-1: Import the GitLab Zola repository (#10, closed)
 
-**Labels:** `milestone-2-migration`, `content`, `infrastructure`
+**Labels**: `milestone-2-migration`, `infrastructure`, `content`
 
 ## Description
 
@@ -516,9 +576,9 @@ On history: the recommendation is a single import commit that records the source
 
 ---
 
-### Issue M2-2: Convert Zola content to MkDocs Markdown
+### Issue M2-2: Convert Zola content to MkDocs Markdown (#11, closed)
 
-**Labels:** `milestone-2-migration`, `content`, `automation`
+**Labels**: `milestone-2-migration`, `content`, `automation`
 
 ## Description
 
@@ -545,24 +605,39 @@ Write this as a script rather than doing it by hand.  There are roughly 130 file
 
 ---
 
-### Issue M2-3: Triage every legacy page and record the disposition
+### Issue M2-3: Triage every legacy page and record the disposition (#12)
 
-**Labels:** `milestone-2-migration`, `content`, `decision`
+**Labels**: `milestone-2-migration`, `content`, `decision`
 
 ## Description
 
-This is the substance of the milestone.  Roughly 145 legacy pages exist across the two sites, and most of them should not appear on a portfolio site aimed at research roles.  Deciding that page by page, in writing, prevents both the failure mode of dumping everything into the new site and the failure mode of quietly losing things.
+This is the substance of the milestone. Roughly 145 legacy pages exist across the two sites, and not all of them belong on the new site. Deciding page by page, in writing, prevents both the failure mode of dumping everything in and the failure mode of quietly losing things.
 
-Four dispositions: **promote** (rewrite and feature), **keep** (migrate as-is into the main site), **archive** (migrate into a de-emphasized `archive/` area that stays out of the nav but keeps URLs alive), and **drop** (delete, with a redirect to the nearest relevant page).
+Four dispositions: **promote** (rewrite and feature), **keep** (migrate into the main site), **archive** (migrate into a de-emphasized area that stays out of the primary nav but keeps URLs alive), and **drop** (delete, with a redirect to the nearest relevant page).
 
-Some calls are easy.  The ~44 graduate qualifying-exam pages across complex analysis, groups, real analysis, and rings are genuinely useful to other people and genuinely not what this site is for: archive.  The `computing` section — Eclipse setup notes, `update-alternatives`, a 2017 post about getting Java working on Linux — is dead weight: drop, with redirects.  The `agda-ualib` notes are early formalization work now superseded by ualib.org: archive, with a pointer forward.  The Sage/Python teaching labs belong with the teaching record: archive.
+## The qualifying-exam solutions are promoted, not archived
+
+An earlier version of this issue proposed archiving the ~44 graduate qualifying-exam pages on the grounds that they are useful to others but off-message for a research portfolio. **That was wrong on the facts and is reversed here.**
+
+The exam *problems* are from the University of Hawaii qualifying exams. The *solutions* are the site owner's original work, written over several years, and the collection is a genuinely popular resource that draws steady traffic — making it one of the few parts of the legacy site with a real, existing audience. Burying it in an archive would discard that for no gain.
+
+It is also less off-message than it first appears. There is a planned near-term project to formalize many of these solutions in Agda, with the group-theory and ring-theory solutions in particular sitting naturally alongside `agda-algebras` and supplying a large body of new material to exercise that library against. Under that plan the exam collection is not a relic — it is the source corpus for a formalization project, and the site should present it as live work with a stated direction.
+
+Practical consequences: the section keeps a top-level home and a nav entry, its URLs are preserved exactly (traffic implies inbound links, so breaking them is a real cost — see M2-6), attribution distinguishes problems from solutions, and the structure must accommodate incremental growth, since more handwritten solutions are to be digitized over time. Build-out is tracked in M2-8.
+
+## Other dispositions
+
+- The `computing` section — Eclipse setup notes, `update-alternatives`, a 2017 post on getting Java working on Linux — is dead weight: **drop**, with redirects.
+- The `agda-ualib` notes are early formalization work superseded by ualib.org: **archive**, with a pointer forward.
+- The Sage/Python teaching labs belong with the teaching record: **archive**.
+- Posts are triaged in M2-4.
 
 ## Tasks
 
 - [ ] Create `docs/adr/002-content-triage.md` with a table of every legacy page and its disposition.
-- [ ] Triage the fourteen Zola posts and the fifteen Octopress posts (M2-4 handles the conversion of those kept).
+- [ ] Triage the fourteen Zola posts and the fifteen Octopress posts (M2-4 handles conversion of those kept).
 - [ ] Triage the section pages: `about`, `cv`, `research`, `talks`, `teaching`, `books`, `computing`, `agda-ualib`, `agda`, `python`, `exams`, `scala`.
-- [ ] Confirm the exam pages go to `archive/exams/` and remain indexed and linkable.
+- [ ] Record the exam solutions as **promote**, with the reasoning above and the link to M2-8.
 - [ ] Confirm the `computing` section is dropped with redirects to the archive index.
 - [ ] For each `promote`, open or reference the issue that does the rewriting.
 
@@ -570,28 +645,47 @@ Some calls are easy.  The ~44 graduate qualifying-exam pages across complex anal
 
 - [ ] Every legacy page appears exactly once in the triage table with a disposition.
 - [ ] No page is silently lost: every `drop` has a redirect target.
+- [ ] The exam solutions are promoted with their URLs preserved, not archived.
 - [ ] The archive area is reachable but absent from the primary nav.
 
 ---
 
-### Issue M2-4: Rescue the Octopress posts worth keeping
+*Revised 2026-07-30: reversed the disposition of the qualifying-exam solutions from archive to promote. The original assessment mistook original solution work for third-party problem sets and overlooked both the existing traffic and the planned Agda formalization project.*
 
-**Labels:** `milestone-2-migration`, `content`, `writing`
+---
+
+### Issue M2-4: Rescue the Octopress posts worth keeping (#13)
+
+**Labels**: `milestone-2-migration`, `content`, `writing`
 
 ## Description
 
-The fifteen Octopress posts exist only as generated HTML; the Markdown is gone.  Nine of them also exist in the Zola repository as Markdown, which makes those nine easy — take the Zola copy.  The remainder must be converted back from HTML or abandoned.
+The fifteen Octopress posts exist in this repository only as generated HTML; the Markdown sources are gone from here. The picture in the GitLab repository is better than originally assessed, and was verified rather than estimated:
 
-The standout is **Learn You an Agda** (2014, ~8,000 words), by a wide margin the longest thing either site ever published and directly on the topic the new site is about.  It exists in the Zola repository both as a post and as Agda source under `content/agda/LearnYouAn.agda` and `LearnYouAn2.agda`.  It is over a decade old and will not typecheck against a current Agda, but as a piece of writing it is worth rescuing — either restored with a dated preface, or mined for a modern rewrite.  That judgment call is part of this issue.
+| Where the Markdown lives | Count | Notes |
+| --- | --- | --- |
+| GitLab working tree | 12 | take these directly |
+| GitLab history only | 1 | `2014-02-27-learn-you-an-agda.md`, deleted in `b001a4d` |
+| Nowhere — HTML only | 2 | `cloning-an-octopress-repo`, `commutator-as-least-fixed-point` |
 
-Posts present only in the Octopress site: `cloning-an-octopress-repo` (drop — it documents a workflow that no longer exists), `learn-you-an-agda`, and `commutator-as-least-fixed-point`.
+So only two posts need HTML-to-Markdown conversion, not six.
+
+## Decision recorded: *Learn You an Agda* will not be republished
+
+The post's front matter records its author as **Liam O'Connor-Davis**, with only minor corrections, a Markdown conversion, and small additions by the repository owner. It is third-party material rather than original work, and it will not be featured on the site.
+
+This closes the question the earlier version of this issue left open. The Markdown source stays recoverable from GitLab history — which is one of the reasons ADR-001 keeps that repository public — but recovery here is archival, not editorial. The Agda sources `content/agda/LearnYouAn.agda` and `LearnYouAn2.agda` are likewise not site material.
+
+`cloning-an-octopress-repo` is also dropped: it documents a workflow that no longer exists.
+
+That leaves `commutator-as-least-fixed-point` as the only post genuinely needing conversion from HTML.
 
 ## Tasks
 
-- [ ] For the nine posts present in both sites, take the Zola Markdown.
-- [ ] Convert the Octopress-only posts from HTML to Markdown with `pandoc` and hand-correct.
-- [ ] Decide the fate of *Learn You an Agda*: restore with a dated preface, or hold for a modern rewrite in M6.
-- [ ] Check whether `LearnYouAn.agda` still typechecks under a current Agda and note the result in the post.
+- [ ] For the twelve posts present in the GitLab working tree, take the Zola Markdown.
+- [ ] Convert `commutator-as-least-fixed-point` from HTML to Markdown with `pandoc` and hand-correct.
+- [ ] Drop `cloning-an-octopress-repo`, with a redirect per M2-6.
+- [ ] Do not migrate *Learn You an Agda*; add a redirect from its old URL to the blog index so the link does not 404.
 - [ ] Normalize front matter, slugs, and dates across all rescued posts.
 - [ ] Add a dated-content notice to every post older than 2022.
 
@@ -599,14 +693,19 @@ Posts present only in the Octopress site: `cloning-an-octopress-repo` (drop — 
 
 - [ ] Every post kept per the M2-3 triage exists as clean Markdown and renders correctly.
 - [ ] Mathematics and code blocks survived conversion — spot-checked on `isotopy` and `three-sat-and-partition-lattices`, the two most notation-heavy posts.
-- [ ] A decision on *Learn You an Agda* is recorded.
+- [ ] No third-party writing is published under the site owner's byline.
+- [ ] Old post URLs resolve or redirect; none 404.
 - [ ] Old posts carry a visible date context notice.
 
 ---
 
-### Issue M2-5: Consolidate and prune media assets
+*Revised 2026-07-30: corrected the post-source counts, which were estimated rather than verified in the original plan, and recorded the decision not to republish* Learn You an Agda *after its authorship was confirmed from front matter.*
 
-**Labels:** `milestone-2-migration`, `content`, `good first issue`
+---
+
+### Issue M2-5: Consolidate and prune media assets (#14)
+
+**Labels**: `good first issue`, `milestone-2-migration`, `content`
 
 ## Description
 
@@ -632,9 +731,9 @@ Import only images actually referenced by content that survived M2-3 triage, and
 
 ---
 
-### Issue M2-6: Build and verify the redirect map
+### Issue M2-6: Build and verify the redirect map (#15)
 
-**Labels:** `milestone-2-migration`, `seo`, `infrastructure`
+**Labels**: `milestone-2-migration`, `infrastructure`, `seo`
 
 ## Description
 
@@ -661,9 +760,9 @@ Two URL spaces need covering: the Octopress paths under `williamdemeo.github.io`
 
 ---
 
-### Issue M2-7: Establish a single source of truth for CV data
+### Issue M2-7: Establish a single source of truth for CV data (#16)
 
-**Labels:** `milestone-2-migration`, `content`, `decision`
+**Labels**: `milestone-2-migration`, `content`, `decision`
 
 ## Description
 
@@ -694,6 +793,58 @@ The recommendation is to vendor the `williamdemeo/cv` content into this reposito
 - [ ] ADR-003 records the format decision.
 - [ ] The old CV repository points here.
 
+---
+
+### Issue M2-8: Build the qualifying-exam solutions into a first-class section (#56)
+
+**Labels**: `milestone-2-migration`, `content`, `seo`
+
+## Description
+
+The graduate qualifying-exam solutions are promoted to a first-class section of the site rather than archived. See M2-3 (#12) for the reversal and its reasoning; this issue is the build-out.
+
+Roughly 43 solution sets across four subjects, plus index pages:
+
+| Subject | Papers |
+| --- | --- |
+| Complex analysis | 12 |
+| Rings | 13 |
+| Groups | 11 |
+| Real analysis | 7 |
+
+Three things make this worth real effort rather than a bulk migration.
+
+**The solutions are original work.** The problems come from the University of Hawaii qualifying exams; the worked solutions are the site owner's, written over several years. The section must make that distinction explicit, both because it is accurate and because it is the part that represents actual effort.
+
+**It has an existing audience.** This is one of the few parts of the legacy site with real, ongoing traffic. That makes URL preservation a hard requirement rather than a nicety — traffic implies inbound links, and every broken one is a permanent loss. It also makes the section worth presenting well: it is likely the most-visited thing on the site on day one.
+
+**It is the source corpus for a planned formalization project.** Many of these solutions are to be formalized in Agda, with the group-theory and ring-theory material sitting naturally alongside `agda-algebras` and providing a large body of new material to exercise that library against. That reframes the collection from a relic into live work, and the section should say so — a short statement of direction turns a static archive into a visible research thread.
+
+The collection is also explicitly incomplete and expected to grow, since further handwritten solutions are to be digitized over time. The structure has to make adding one solution a small, obvious operation, or it will not happen.
+
+## Tasks
+
+- [ ] Give the section a top-level home with a nav entry; do not bury it under `archive/`.
+- [ ] Write an index explaining the collection: what the problems are, whose the solutions are, and that it is a work in progress.
+- [ ] Preserve every existing URL exactly, or redirect it; coordinate with M2-6 (#15).
+- [ ] Per-subject index pages with a completeness indicator, so gaps read as "not yet" rather than "missing".
+- [ ] Verify KaTeX renders every solution correctly — these are the most notation-dense pages on the site, and M3-4 should treat them as the hardest test case.
+- [ ] Add a short section on the planned Agda formalization, with a forward link once that project has a public home.
+- [ ] Document the workflow for adding a newly digitized solution, in the spirit of M6-2.
+- [ ] Consider a stable citation form, since a resource with traffic gets linked from elsewhere.
+
+## Acceptance criteria
+
+- [ ] The section is reachable from the primary nav and reads as a maintained resource, not an archive.
+- [ ] Attribution distinguishes problems from solutions unambiguously.
+- [ ] Every legacy exam URL resolves or redirects; none 404.
+- [ ] All mathematics renders correctly.
+- [ ] Adding one new solution is a documented, single-file operation.
+
+## Notes
+
+Depends on M2-2 (#11) for the Zola-to-Markdown conversion and M3-4 for math rendering. The Agda formalization project itself belongs in its own repository, not this one; this issue only covers presenting the corpus and pointing at that work.
+
 <!-- END GENERATED: milestone-2 -->
 
 ---
@@ -703,9 +854,9 @@ The recommendation is to vendor the `williamdemeo/cv` content into this reposito
 
 <!-- BEGIN GENERATED: milestone-3 -->
 
-### Issue M3-1: Choose the visual system
+### Issue M3-1: Choose the visual system (#17)
 
-**Labels:** `milestone-3-design`, `design`, `decision`
+**Labels**: `milestone-3-design`, `design`, `decision`
 
 ## Description
 
@@ -733,9 +884,9 @@ Ship the fonts.  The Zola site loads Fira Code from `cdn.rawgit.com`, which shut
 
 ---
 
-### Issue M3-2: Design the home page
+### Issue M3-2: Design the home page (#18)
 
-**Labels:** `milestone-3-design`, `design`, `career`, `writing`
+**Labels**: `milestone-3-design`, `writing`, `design`, `career`
 
 ## Description
 
@@ -763,9 +914,9 @@ Avoid the two common failure modes: a wall of publications above the fold, which
 
 ---
 
-### Issue M3-3: Build the reusable component set
+### Issue M3-3: Build the reusable component set (#19)
 
-**Labels:** `milestone-3-design`, `design`
+**Labels**: `milestone-3-design`, `design`
 
 ## Description
 
@@ -790,9 +941,9 @@ Build them once as documented CSS classes or Markdown snippets rather than hand-
 
 ---
 
-### Issue M3-4: Mathematics and code rendering
+### Issue M3-4: Mathematics and code rendering (#20)
 
-**Labels:** `milestone-3-design`, `design`, `infrastructure`
+**Labels**: `milestone-3-design`, `infrastructure`, `design`
 
 ## Description
 
@@ -819,9 +970,9 @@ KaTeX is the right target — it renders synchronously and much faster than Math
 
 ---
 
-### Issue M3-5: Social cards, favicon, and metadata
+### Issue M3-5: Social cards, favicon, and metadata (#21)
 
-**Labels:** `milestone-3-design`, `design`, `seo`
+**Labels**: `milestone-3-design`, `design`, `seo`
 
 ## Description
 
@@ -844,9 +995,9 @@ Every link to this site shared in Slack, on Mastodon, or in a message should ren
 
 ---
 
-### Issue M3-6: Accessibility and performance audit
+### Issue M3-6: Accessibility and performance audit (#22)
 
-**Labels:** `milestone-3-design`, `accessibility`, `design`
+**Labels**: `milestone-3-design`, `design`, `accessibility`
 
 ## Description
 
@@ -879,9 +1030,9 @@ Audit and fix, rather than assume.  Material for MkDocs gives a good baseline, b
 
 <!-- BEGIN GENERATED: milestone-4 -->
 
-### Issue M4-1: Portfolio index and project page template
+### Issue M4-1: Portfolio index and project page template (#23)
 
-**Labels:** `milestone-4-portfolio`, `design`, `content`, `career`
+**Labels**: `milestone-4-portfolio`, `content`, `design`, `career`
 
 ## Description
 
@@ -907,9 +1058,9 @@ The index ordering is a deliberate editorial decision and should be by relevance
 
 ---
 
-### Issue M4-2: agda-algebras project page
+### Issue M4-2: agda-algebras project page (#24)
 
-**Labels:** `milestone-4-portfolio`, `content`, `writing`, `career`
+**Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
 ## Description
 
@@ -936,9 +1087,9 @@ Write this page for a reader who knows type theory but not universal algebra.  T
 
 ---
 
-### Issue M4-3: AI for formal verification — agda-mcp, Claude Skills, agent workflows
+### Issue M4-3: AI for formal verification — agda-mcp, Claude Skills, agent workflows (#25)
 
-**Labels:** `milestone-4-portfolio`, `content`, `writing`, `career`
+**Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
 ## Description
 
@@ -967,9 +1118,9 @@ That last theme — formal verification as a source of dense, automatically-chec
 
 ---
 
-### Issue M4-4: agda-native-air project page
+### Issue M4-4: agda-native-air project page (#26)
 
-**Labels:** `milestone-4-portfolio`, `content`, `writing`
+**Labels**: `milestone-4-portfolio`, `content`, `writing`
 
 ## Description
 
@@ -993,9 +1144,9 @@ The page should establish what the project is, what problem motivated it, how it
 
 ---
 
-### Issue M4-5: Formal verification at IO — the Cardano ledger specification
+### Issue M4-5: Formal verification at IO — the Cardano ledger specification (#27)
 
-**Labels:** `milestone-4-portfolio`, `content`, `writing`, `career`
+**Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
 ## Description
 
@@ -1023,9 +1174,9 @@ Take care with scope: describe public, published work only, link to public repos
 
 ---
 
-### Issue M4-6: Secondary projects index
+### Issue M4-6: Secondary projects index (#28)
 
-**Labels:** `milestone-4-portfolio`, `content`, `good first issue`
+**Labels**: `good first issue`, `milestone-4-portfolio`, `content`
 
 ## Description
 
@@ -1056,9 +1207,9 @@ A compact list with a one-line description and a link each is the right weight. 
 
 <!-- BEGIN GENERATED: milestone-5 -->
 
-### Issue M5-1: Single-source bibliography and generator
+### Issue M5-1: Single-source bibliography and generator (#29)
 
-**Labels:** `milestone-5-research`, `automation`, `content`
+**Labels**: `milestone-5-research`, `content`, `automation`
 
 ## Description
 
@@ -1085,9 +1236,9 @@ The generator should be a script in `scripts/python/`, run in CI, emitting Markd
 
 ---
 
-### Issue M5-2: Publications page
+### Issue M5-2: Publications page (#30)
 
-**Labels:** `milestone-5-research`, `content`, `career`
+**Labels**: `milestone-5-research`, `content`, `career`
 
 ## Description
 
@@ -1115,9 +1266,9 @@ The FMBC 2024 ledger paper and the TYPES 2021 Birkhoff paper are the two most re
 
 ---
 
-### Issue M5-3: Talks page
+### Issue M5-3: Talks page (#31)
 
-**Labels:** `milestone-5-research`, `content`
+**Labels**: `milestone-5-research`, `content`
 
 ## Description
 
@@ -1143,9 +1294,9 @@ The talks are a strong record — plenary lectures, AMS special sessions, BLAST,
 
 ---
 
-### Issue M5-4: Teaching page
+### Issue M5-4: Teaching page (#32)
 
-**Labels:** `milestone-5-research`, `content`
+**Labels**: `milestone-5-research`, `content`
 
 ## Description
 
@@ -1170,9 +1321,9 @@ Prioritize what is distinctive.  Introducing Lean into an undergraduate discrete
 
 ---
 
-### Issue M5-5: Research narrative page
+### Issue M5-5: Research narrative page (#33)
 
-**Labels:** `milestone-5-research`, `writing`, `career`
+**Labels**: `milestone-5-research`, `writing`, `career`
 
 ## Description
 
@@ -1200,9 +1351,9 @@ The page should end by saying what the author wants to work on next.  For the au
 
 ---
 
-### Issue M5-6: Scholarly identity and canonical links
+### Issue M5-6: Scholarly identity and canonical links (#34)
 
-**Labels:** `milestone-5-research`, `seo`, `good first issue`
+**Labels**: `good first issue`, `milestone-5-research`, `seo`
 
 ## Description
 
@@ -1234,9 +1385,9 @@ The Zola about page links Google Scholar and Microsoft Academic; the latter shut
 
 <!-- BEGIN GENERATED: milestone-6 -->
 
-### Issue M6-1: Enable the blog engine
+### Issue M6-1: Enable the blog engine (#35)
 
-**Labels:** `milestone-6-blog`, `infrastructure`
+**Labels**: `milestone-6-blog`, `infrastructure`
 
 ## Description
 
@@ -1263,9 +1414,9 @@ One decision to settle here is the permalink format.  Both legacy sites used dat
 
 ---
 
-### Issue M6-2: Remove the friction — one-command authoring workflow
+### Issue M6-2: Remove the friction — one-command authoring workflow (#36)
 
-**Labels:** `milestone-6-blog`, `automation`, `infrastructure`
+**Labels**: `milestone-6-blog`, `infrastructure`, `automation`
 
 ## Description
 
@@ -1297,9 +1448,9 @@ The draft mechanism matters more than it looks.  The fear of publishing somethin
 
 ---
 
-### Issue M6-3: Editorial backlog
+### Issue M6-3: Editorial backlog (#37)
 
-**Labels:** `milestone-6-blog`, `writing`, `career`
+**Labels**: `milestone-6-blog`, `writing`, `career`
 
 ## Description
 
@@ -1325,9 +1476,9 @@ Bias the mix toward the second vein.  It is the most relevant to the roles being
 
 ---
 
-### Issue M6-4: Write and ship the first three posts
+### Issue M6-4: Write and ship the first three posts (#38)
 
-**Labels:** `milestone-6-blog`, `writing`, `career`
+**Labels**: `milestone-6-blog`, `writing`, `career`
 
 ## Description
 
@@ -1355,9 +1506,9 @@ Write for a reader who is technically strong but not a specialist in the specifi
 
 ---
 
-### Issue M6-5: Establish a publishing cadence
+### Issue M6-5: Establish a publishing cadence (#39)
 
-**Labels:** `milestone-6-blog`, `writing`
+**Labels**: `milestone-6-blog`, `writing`
 
 ## Description
 
@@ -1381,9 +1532,9 @@ Monthly is the right target: frequent enough that the site looks alive, infreque
 
 ---
 
-### Issue M6-6: Syndication and discussion
+### Issue M6-6: Syndication and discussion (#40)
 
-**Labels:** `milestone-6-blog`, `seo`
+**Labels**: `milestone-6-blog`, `seo`
 
 ## Description
 
@@ -1415,9 +1566,9 @@ Be selective.  A comment system on a low-traffic personal blog is usually a mode
 
 <!-- BEGIN GENERATED: milestone-7 -->
 
-### Issue M7-1: Single-source CV rendering to web and PDF
+### Issue M7-1: Single-source CV rendering to web and PDF (#41)
 
-**Labels:** `milestone-7-cv`, `automation`, `career`
+**Labels**: `milestone-7-cv`, `career`, `automation`
 
 ## Description
 
@@ -1446,9 +1597,9 @@ Pandoc with a LaTeX template is the natural toolchain given the author's LaTeX b
 
 ---
 
-### Issue M7-2: Bring the CV content up to date
+### Issue M7-2: Bring the CV content up to date (#42)
 
-**Labels:** `milestone-7-cv`, `content`, `career`
+**Labels**: `milestone-7-cv`, `content`, `career`
 
 ## Description
 
@@ -1476,9 +1627,9 @@ The "Research Interests" line also needs rewriting.  It currently reads "Computa
 
 ---
 
-### Issue M7-3: Research statement
+### Issue M7-3: Research statement (#43)
 
-**Labels:** `milestone-7-cv`, `writing`, `career`
+**Labels**: `milestone-7-cv`, `writing`, `career`
 
 ## Description
 
@@ -1507,9 +1658,9 @@ Write it as a document that stands alone, published on the site and available as
 
 ---
 
-### Issue M7-4: Industry-facing résumé variant
+### Issue M7-4: Industry-facing résumé variant (#44)
 
-**Labels:** `milestone-7-cv`, `career`
+**Labels**: `milestone-7-cv`, `career`
 
 ## Description
 
@@ -1534,9 +1685,9 @@ Generate a condensed variant from the same source: employment with concrete acco
 
 ---
 
-### Issue M7-5: Application materials index
+### Issue M7-5: Application materials index (#45)
 
-**Labels:** `milestone-7-cv`, `career`
+**Labels**: `milestone-7-cv`, `career`
 
 ## Description
 
@@ -1568,9 +1719,9 @@ Keep this page unlisted rather than in the primary nav.  A visible "job applicat
 
 <!-- BEGIN GENERATED: milestone-8 -->
 
-### Issue M8-1: Cut williamdemeo.org over to GitHub Pages
+### Issue M8-1: Cut williamdemeo.org over to GitHub Pages (#46)
 
-**Labels:** `milestone-8-launch`, `infrastructure`, `decision`
+**Labels**: `milestone-8-launch`, `infrastructure`, `decision`
 
 ## Description
 
@@ -1600,9 +1751,9 @@ For an apex domain, GitHub Pages requires `A`/`AAAA` records pointing at its pub
 
 ---
 
-### Issue M8-2: Verify redirects and link integrity against the live site
+### Issue M8-2: Verify redirects and link integrity against the live site (#47)
 
-**Labels:** `milestone-8-launch`, `seo`, `ci`
+**Labels**: `milestone-8-launch`, `ci`, `seo`
 
 ## Description
 
@@ -1627,39 +1778,47 @@ Check outbound links too.  Both legacy sites accumulated a decade of link rot �
 
 ---
 
-### Issue M8-3: Search, sitemap, and structured data
+### Issue M8-3: Search, sitemap, and structured data (#48)
 
-**Labels:** `milestone-8-launch`, `seo`
+**Labels**: `milestone-8-launch`, `seo`
 
 ## Description
 
-Make the site findable, both by its own visitors and by search engines.  Material's built-in search is client-side and good; it needs configuring rather than building.
+Make the site findable, both by its own visitors and by search engines. Material's built-in search is client-side and good; it needs configuring rather than building.
 
 Structured data is worth doing properly here because the content is academic: a `Person` record with the M5-6 identifiers, and `ScholarlyArticle` records for publications, materially improve how search engines and academic indexers understand the site.
 
+The qualifying-exam solutions (M2-8, #56) deserve specific attention in this issue. They are the section most likely to be found through search rather than through the site's own navigation, they carry existing traffic, and they are dense with mathematics — which means both that search indexing needs checking against KaTeX output and that their URLs must already be correct by the time this issue runs.
+
 ## Tasks
 
-- [ ] Configure and test Material's search, including on the archived exam pages.
+- [ ] Configure and test Material's search, verifying it works on the exam solutions, which are the hardest case (heavy mathematics, many near-identical page titles).
 - [ ] Exclude the style page and the M7-5 application index from indexing.
-- [ ] Verify the generated `sitemap.xml` covers everything intended and nothing excluded.
+- [ ] Verify the generated `sitemap.xml` covers everything intended and nothing excluded, with the exam pages present.
 - [ ] Add `robots.txt`.
 - [ ] Add JSON-LD `Person` structured data with ORCID, affiliation, and profile links.
 - [ ] Add JSON-LD `ScholarlyArticle` to publication entries.
 - [ ] Validate the structured data with a validator.
 - [ ] Submit the sitemap to Google Search Console and confirm indexing.
+- [ ] Check that existing search rankings for the exam solutions survive the migration; regressions here are a real loss, not a cosmetic one.
 
 ## Acceptance criteria
 
-- [ ] Site search returns sensible results across all content types.
+- [ ] Site search returns sensible results across all content types, including the exam solutions.
 - [ ] The sitemap is correct and excluded pages are genuinely excluded.
 - [ ] Structured data validates without errors.
 - [ ] Searching the author's name surfaces the site.
+- [ ] The exam solutions remain findable through search after the migration.
 
 ---
 
-### Issue M8-4: Privacy-respecting analytics
+*Revised 2026-07-30: the exam pages are no longer archived (see #12, #56), so this issue treats them as a primary search surface rather than an afterthought.*
 
-**Labels:** `milestone-8-launch`, `seo`
+---
+
+### Issue M8-4: Privacy-respecting analytics (#49)
+
+**Labels**: `milestone-8-launch`, `seo`
 
 ## Description
 
@@ -1684,9 +1843,9 @@ Use a privacy-preserving analytics service that sets no cookies and collects no 
 
 ---
 
-### Issue M8-5: Quality gates in CI
+### Issue M8-5: Quality gates in CI (#50)
 
-**Labels:** `milestone-8-launch`, `ci`, `automation`
+**Labels**: `milestone-8-launch`, `ci`, `automation`
 
 ## Description
 
@@ -1712,9 +1871,9 @@ Make rot visible automatically, because a personal site is exactly the kind of p
 
 ---
 
-### Issue M8-6: Decommission the GitLab site
+### Issue M8-6: Decommission the GitLab site (#51)
 
-**Labels:** `milestone-8-launch`, `infrastructure`
+**Labels**: `milestone-8-launch`, `infrastructure`
 
 ## Description
 
@@ -1740,9 +1899,9 @@ Note that the Zola `Makefile` also has a `deploy` target that rsyncs to a server
 
 ---
 
-### Issue M8-7: Launch and establish the maintenance ritual
+### Issue M8-7: Launch and establish the maintenance ritual (#52)
 
-**Labels:** `milestone-8-launch`, `writing`, `career`
+**Labels**: `milestone-8-launch`, `writing`, `career`
 
 ## Description
 

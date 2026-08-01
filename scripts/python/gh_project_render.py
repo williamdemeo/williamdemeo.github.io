@@ -31,9 +31,18 @@ Usage:
   python3 gh_project_render.py PATH --repo OWNER/NAME [--check]
 
   --check          Verify that PATH already matches the rendered output;
-                   do not write.  Exits 0 if matches, 1 if differs.
-                   Intended for the future CI staleness check (M1-2).
+                   do not write.
+
+Exit codes follow diff(1), so a caller can tell "the plan is stale" from
+"the check itself did not run":
+
+  0  the file is current (or, without --check, was written successfully)
+  1  --check only: the file differs from live GitHub state
+  2  the run failed -- authentication, API error, unreadable file, bad markers
   --no-env-prefix  Don't prefix `gh` with `env -u GH_TOKEN -u GITHUB_TOKEN`.
+                   Needed wherever authentication comes *through* those
+                   variables, GitHub Actions included: stripping them there
+                   leaves gh with no credentials at all.
 """
 from __future__ import annotations
 
@@ -246,7 +255,7 @@ def main() -> int:
     result = run(args)
     if result.is_err:
         print(f"render failed: {result.unwrap_err()}", file=sys.stderr)
-        return 1
+        return 2
     rendered = result.unwrap()
 
     if args.check:
@@ -261,7 +270,7 @@ def main() -> int:
     write_result = write_text(args.markdown, rendered)
     if write_result.is_err:
         print(f"write failed: {write_result.unwrap_err()}", file=sys.stderr)
-        return 1
+        return 2
     print(f"wrote {args.markdown}")
     return 0
 

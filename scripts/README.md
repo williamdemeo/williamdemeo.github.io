@@ -25,29 +25,54 @@ label/project/issue descriptions is `docs/GITHUB_PROJECT.md`.
 +  Dry run — see what would be created (from the main project directory).
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --dry-run
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --dry-run
    ```
 
 +  Create everything (will prompt for confirmation).
 
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io
    ```
 
 +  Or create in stages.
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --labels-only
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --milestones-only
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --issues-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --labels-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --milestones-only
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --issues-only
    ```
 
 +  Resume if interrupted (e.g., start from issue M1-3).
 
    ```zsh
-   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --issues-only --start-from M1-3
+   python3 scripts/python/gh_project_populate.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io --issues-only --start-from M1-3
    ```
+
+---
+
+### `ci/project-plan-check.sh`: the drift report CI runs
+
+`scripts/ci/project-plan-check.sh` is what the weekly workflow executes.  It
+runs the staleness check, classifies the result, and writes a report to
+`$GITHUB_STEP_SUMMARY` — or to stdout when that is unset, so running it
+locally shows exactly what CI would say:
+
+```zsh
+make project-plan-report
+```
+
+It is advisory and always exits 0.  Use `make project-plan-check` when you
+want the raw exit code.
+
+It lives here rather than in a workflow `run:` block because shell in YAML
+cannot be run locally, cannot be linted, and cannot be tested — and because
+editing it requires the `workflow` scope to push.  The workflow is now
+structure only: when it runs, what it may access, and what it calls.
+
+`scripts/ci/test_project_plan_check.sh` covers all three reporting branches
+plus an unexpected exit code, using the `RENDER` seam to stand in for the
+render script so no GitHub API access is needed.
 
 ---
 
@@ -76,14 +101,50 @@ Render preserves manual segments byte-for-byte and rebuilds each generated regio
 +  Or run the script directly:
 
    ```zsh
-   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras
+   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo williamdemeo/williamdemeo.github.io
    ```
 
-+  Verify staleness without rewriting (intended for CI):
++  Verify staleness without rewriting:
 
    ```zsh
-   python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md --repo ualib/agda-algebras --check
+   make project-plan-check
    ```
+
+   Exit codes follow `diff(1)`, so a caller can tell a stale plan from a
+   check that never ran:
+
+   | Code | Meaning |
+   | --- | --- |
+   | 0 | the file is current |
+   | 1 | the file differs from live GitHub state |
+   | 2 | the run failed — authentication, API error, bad markers |
+
+   A scheduled CI job runs this weekly and reports drift without failing the
+   build: a stale plan is worth knowing about, but it is not a reason to
+   block a merge.  It distinguishes 1 from 2, so a broken check is not
+   reported as drift.
+
+**Requirements**.
+
+Both targets need an authenticated `gh` on `PATH`; the `Makefile` guards for
+it and prints an actionable message rather than a stack trace when it is
+missing.  Override the target repository with `make project-plan REPO=owner/name`.
+
+Where authentication comes through `GH_TOKEN` or `GITHUB_TOKEN` rather than a
+keychain — GitHub Actions, and some sandboxes — pass `NO_ENV_PREFIX=1`:
+
+```zsh
+make project-plan-check NO_ENV_PREFIX=1
+```
+
+**A note on `--no-env-prefix`**.
+
+By default the scripts prepend `env -u GH_TOKEN -u GITHUB_TOKEN` to every `gh`
+invocation, working around a `gh` quirk where those variables override the
+keychain-stored token.  In an environment that authenticates *through* those
+variables — some CI runners and sandboxes do — stripping them leaves `gh` with
+no credentials at all, and every call fails with exit code 4.  Pass
+`--no-env-prefix` there.
 
 **The populate / render symmetry**.
 

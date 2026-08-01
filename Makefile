@@ -25,7 +25,7 @@ MKDOCS_DEP := $(VENV)/.stamp
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: help install serve build check clean distclean
+.PHONY: help install serve build check clean distclean guard-gh
 
 ## Create the virtualenv and install pinned dependencies (no-op under Nix)
 install: $(MKDOCS_DEP)
@@ -63,11 +63,58 @@ clean:
 distclean: clean
 	@rm -rf $(VENV)
 
+# ── Project plan ────────────────────────────────────────────────────────────
+#
+# docs/GITHUB_PROJECT.md is half hand-written prose and half generated from
+# live GitHub state.  gh_project_render.py rewrites only the regions between
+# the BEGIN/END GENERATED markers and preserves everything else byte for byte,
+# so these targets are safe to run against a file with unsaved prose edits.
+#
+# Both need an authenticated `gh`.  The check is deliberately advisory: a stale
+# plan is worth knowing about, but it is not a reason to block a merge.
+#
+# By default the scripts strip GH_TOKEN and GITHUB_TOKEN before calling gh, to
+# stop those variables overriding a keychain-stored token.  Wherever
+# authentication comes *through* them instead -- GitHub Actions, and some
+# sandboxes -- that leaves gh with no credentials and every call fails.  Set
+# NO_ENV_PREFIX=1 there:
+#
+#     make project-plan-check NO_ENV_PREFIX=1
+
+REPO ?= williamdemeo/williamdemeo.github.io
+
+RENDER_FLAGS :=
+ifdef NO_ENV_PREFIX
+RENDER_FLAGS += --no-env-prefix
+endif
+
+RENDER := python3 scripts/python/gh_project_render.py docs/GITHUB_PROJECT.md \
+            --repo $(REPO) $(RENDER_FLAGS)
+
+.PHONY: project-plan project-plan-check project-plan-report
+
+## Regenerate the issue listings in docs/GITHUB_PROJECT.md from GitHub
+project-plan: guard-gh
+	$(RENDER)
+
+## Report whether docs/GITHUB_PROJECT.md is stale; never rewrites it
+project-plan-check: guard-gh
+	@$(RENDER) --check
+
+## Run the CI drift report locally, exactly as the scheduled job does
+project-plan-report: guard-gh
+	@NO_ENV_PREFIX=$(if $(NO_ENV_PREFIX),1,) scripts/ci/project-plan-check.sh
+
+guard-gh:
+	@command -v gh >/dev/null || { \
+	  echo "error: the GitHub CLI (gh) is required for this target."; \
+	  echo "       install it, then run: gh auth login"; exit 1; }
+
 ## Show this help
 help:
 	@echo "Targets:"
 	@awk '/^## /{doc=substr($$0,4); next} \
-	      /^[a-zA-Z_-]+:/{if(doc!=""){split($$1,t,":"); printf "  \033[36m%-10s\033[0m %s\n", t[1], doc; doc=""}}' \
+	      /^[a-zA-Z_-]+:/{if(doc!=""){split($$1,t,":"); printf "  \033[36m%-19s\033[0m %s\n", t[1], doc; doc=""}}' \
 	      $(MAKEFILE_LIST)
 	@echo
 	@echo "MkDocs comes from:"
