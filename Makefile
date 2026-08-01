@@ -19,9 +19,13 @@ PORT    ?= 8000
 ifdef SITE_NIX_SHELL
 MKDOCS  := mkdocs
 MKDOCS_DEP :=
+PYTHON  := python3
 else
 MKDOCS  := $(VENV)/bin/mkdocs
 MKDOCS_DEP := $(VENV)/.stamp
+# The venv interpreter, not the system one: the redirect scripts import yaml,
+# which arrives as a dependency of MkDocs rather than on its own.
+PYTHON  := $(VENV)/bin/python
 endif
 
 .DEFAULT_GOAL := help
@@ -125,6 +129,22 @@ MATH_SRC ?= import/zola-converted
 math-audit:
 	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
 	@node scripts/js/audit_math.mjs $(MATH_SRC)
+
+# ── Legacy-URL redirects ────────────────────────────────────────────────────
+#
+# redirects.yml maps every URL the Octopress and Zola sites served to where it
+# goes now.  The checker proves the map has no gaps and that what it claims
+# resolves really does; the tests cover the rule-matching itself.  See #15.
+
+.PHONY: redirect-check redirect-test
+
+## Check the redirect map against the built site (runs `build` first)
+redirect-check: build
+	@$(PYTHON) scripts/python/check_redirects.py --verify-inventory --site site
+
+## Unit-test the redirect map's rule matching and config validation
+redirect-test: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/test_redirects.py
 
 ## Show this help
 help:

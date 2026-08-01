@@ -39,9 +39,32 @@
         fileset = lib.fileset.unions [
           ./mkdocs.yml
           ./docs
-          # Where the mkdocs hooks and page generators live; mkdocs.yml grows
-          # a `hooks:` key in a later milestone.
+          # Where the mkdocs hooks and page generators live.  mkdocs.yml's
+          # `hooks:` key points at scripts/python/redirects_hook.py.
           ./scripts/python
+          # Read by that hook to emit the legacy-URL redirect stubs (#15).
+          ./redirects.yml
+        ];
+      };
+
+      # check-redirect-map needs more than the site build does: the two legacy
+      # URL inventories, and the imported Zola trees it re-derives the Zola one
+      # from.  Kept separate so those 7 MB stay out of the site build's inputs,
+      # where a change to them would invalidate a build that cannot read them.
+      redirectSource = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./redirects.yml
+          ./scripts/python
+          ./import/legacy-urls
+          ./import/zola-content
+          ./import/zola-converted
+          ./archive/octopress/urls.txt
+          # The checker resolves internal redirect targets against docs/.
+          # Every target is external today, so leaving this out would go
+          # unnoticed until the first internal one -- which would then be
+          # reported as missing rather than checked.
+          ./docs
         ];
       };
 
@@ -239,6 +262,33 @@
             }
             ''
               python3 ${./nix/requirements-pins-check.py} ${./requirements.txt}
+              touch "$out"
+            '';
+
+          # Every URL the two legacy sites served is accounted for exactly
+          # once in redirects.yml, the Zola inventory still corresponds 1:1
+          # with the imported page tree, and every URL the map claims resolves
+          # does resolve in the built site.  Depends on `site` so it checks the
+          # real output rather than a rebuild of it.
+          redirect-map = pkgs.runCommandLocal "check-redirect-map"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${redirectSource}/scripts/python/check_redirects.py \
+                --verify-inventory --site ${this.site}
+              touch "$out"
+            '';
+
+          # The redirect map's own matching rules: exact-beats-prefix,
+          # longest-prefix-wins, and the config validation that makes a
+          # malformed rule fail loudly instead of silently covering nothing.
+          redirect-map-tests = pkgs.runCommandLocal "check-redirect-map-tests"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${redirectSource}/scripts/python/test_redirects.py
               touch "$out"
             '';
         }

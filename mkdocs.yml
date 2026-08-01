@@ -125,6 +125,18 @@ markdown_extensions:
 plugins:
   - search
 
+# Legacy-URL redirects.  The map lives in redirects.yml, where each entry
+# carries its reasoning and its blocking issue; this hook emits the stubs.
+#
+# Deliberately not the mkdocs-redirects plugin: as of 1.2.3 it takes a hard
+# dependency on `properdocs`, an entire alternative site generator that
+# installs itself and advertises for a replacement on every build.  That is a
+# large supply-chain surface, and two more packages to pin in flake.nix, for
+# about forty lines of "write a meta-refresh file at a computed path".  See
+# #15 and the module docstring.
+hooks:
+  - scripts/python/redirects_hook.py
+
 nav:
   - Home: index.md
   - About: about.md
