@@ -43,6 +43,12 @@ Documentation at [agda-algebras.universalalgebra.org](https://agda-algebras.univ
 
 *Last updated: July 2026.*
 
+## Recent writing
+
+<!-- recent-posts -->
+
+More in the [blog](blog/index.md).
+
 ## Elsewhere
 
 Before moving into industry I held research and teaching appointments at

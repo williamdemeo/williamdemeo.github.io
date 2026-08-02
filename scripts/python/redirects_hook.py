@@ -32,6 +32,8 @@ import pathlib
 import posixpath
 import sys
 
+from mkdocs.plugins import event_priority
+
 log = logging.getLogger("mkdocs.plugins.redirects")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -54,16 +56,32 @@ STUB = """<!doctype html>
 </html>
 """
 
-#: Populated in on_files, consumed in on_post_build.
+#: Populated in on_nav, consumed in on_post_build.
 _pages: dict[str, str] = {}
 
 
-def on_files(files, config):
+# `on_nav`, not `on_files`, and last of all -- both parts matter, and both were
+# learned by getting them wrong.
+#
+# The blog plugin *rewrites* each post's `File.url` during its own `on_files`:
+# a post whose source is `blog/posts/2014-02-05-diaconescus-theorem.md` is
+# served at `/blog/diaconescus-theorem/`.  Recording the map any earlier stores
+# the pre-rewrite URL, and every redirect aimed at a post then points at a path
+# nothing serves -- silently, because the stub is still written and the target
+# file really does exist.
+#
+# But the same plugin also marks posts EXCLUDED for the duration of `on_files`
+# and only restores them in `on_nav`, so a map built at the end of `on_files`
+# omits every post entirely.  `on_nav` at -100 is the first point where
+# inclusion is final, which also means drafts are absent from the map and a
+# redirect aimed at one fails loudly instead of pointing at an unbuilt page.
+@event_priority(-100)
+def on_nav(nav, config, files):
     """Record where every source page ended up, to resolve internal targets."""
     _pages.clear()
     for f in files.documentation_pages():
         _pages[f.src_path.replace("\\", "/")] = f.url
-    return files
+    return nav
 
 
 def on_post_build(config, **kwargs):
