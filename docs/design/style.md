@@ -16,8 +16,9 @@ not a matter of taste. Every value lives in
 own. Settled in [#17](https://github.com/williamdemeo/williamdemeo.github.io/issues/17)
 and recorded in ADR-005.
 
-From M3-3 this page also carries a live example of every reusable component,
-so a component that breaks breaks visibly, on one page.
+It also carries a live example of every reusable
+[component](#components), including the cases where the optional parts are
+missing, so a component that breaks breaks visibly, on one page.
 
 The system is **Constellation**: the palette and Space Grotesk display face of
 the [agda-algebras documentation site](https://agda-algebras.universalalgebra.org/),
@@ -179,6 +180,308 @@ from a strict baseline grid, which is not worth the cost on a page that mixes
 Shape is deliberately understated: `--radius-sm` 2px, `--radius-md` 4px,
 one-pixel borders, and no drop shadows anywhere. Material's `--md-shadow-z1..3`
 are redefined as flat one-pixel rings, so depth reads the same in both themes.
+
+## Components
+
+Four components carry most of the site, and they are defined once in
+`extra.css` rather than hand-styled per occurrence
+([#19](https://github.com/williamdemeo/williamdemeo.github.io/issues/19)). The
+consistency is what makes the site read as designed rather than assembled, and
+it is what makes M4 and M5 fast to write: a page should need content, not CSS.
+
+Everything below is real content — projects from the home page, publications
+from `bibliography.json`, appointments from the CV, talks from the Zola site's
+talks page — because a component that only ever meets tidy placeholder text has
+not been tested. The one exception is the empty project card, which is a
+deliberate floor case and says so.
+
+Three conventions hold across all four.
+
+**Markdown, not HTML.** The authoring form is a wrapper
+`<div class="…" markdown>` around ordinary Markdown, with `{.class}` from
+`attr_list` where a particular line needs naming. There is no component whose
+source is a block of hand-written HTML.
+
+**Every optional part is optional.** A publication with no DOI, a talk with no
+slides, a position with no end date, a card with no links: each is shown below
+in its degraded form as well as its full one. Nothing collapses, and nothing
+leaves an empty separator behind.
+
+**No component wraps itself in a link.** Making a whole card clickable means
+nesting the title and the action links inside an enclosing anchor, which is
+invalid HTML, does not survive keyboard navigation, and breaks text selection.
+A card is a plain `<div>`; the title and the actions are ordinary sibling
+links, each picking up the site-wide `:focus-visible` ring. No component sets
+`overflow: hidden`, so that ring is never clipped by its own container.
+
+### Project card
+
+Title, one-line summary, technology tags, and links to source and
+documentation. Used by the portfolio index
+([#23](https://github.com/williamdemeo/williamdemeo.github.io/issues/23)) and
+by the home page's featured projects.
+
+The cards below are three real projects and one deliberate floor case. The
+third has no documentation site, so it carries one action link rather than two;
+the fourth has no tags, no links, and no linked title, which is as far down as
+the component degrades.
+
+<div class="project-grid" markdown>
+
+<div class="project-card" markdown>
+**[agda-algebras](https://github.com/ualib/agda-algebras)**
+
+A library of universal algebra in Agda, containing the first constructive,
+machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory.
+
+`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag}
+
+[Source](https://github.com/ualib/agda-algebras) ·
+[Docs](https://agda-algebras.universalalgebra.org)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**[formal-ledger-specifications](https://github.com/IntersectMBO/formal-ledger-specifications)**
+
+Machine-checked specification of the Cardano blockchain ledger in Agda, written
+with the Formal Methods team at IO.
+
+`Agda`{.tag} `formal methods`{.tag}
+
+[Source](https://github.com/IntersectMBO/formal-ledger-specifications) ·
+[Paper](https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**[agda-native-air](https://github.com/formalverification/agda-native-air)**
+
+AI tooling for proof assistants: a semantic training-data extractor, an MCP
+server exposing Agda's interaction protocol to language models, and the agent
+loops built on them.
+
+`Agda`{.tag} `MCP`{.tag} `AI tooling`{.tag}
+
+[Source](https://github.com/formalverification/agda-native-air)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**A card with nothing optional**
+
+Title and summary only — no linked title, no tags, no actions. This is the
+floor, and it is what a project with nothing public to point at looks like.
+</div>
+
+</div>
+
+??? example "Source"
+
+    ```markdown
+    <div class="project-grid" markdown>
+
+    <div class="project-card" markdown>
+    **[agda-algebras](https://github.com/ualib/agda-algebras)**
+
+    A library of universal algebra in Agda, containing the first constructive,
+    machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory.
+
+    `Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag}
+
+    [Source](https://github.com/ualib/agda-algebras) ·
+    [Docs](https://agda-algebras.universalalgebra.org)
+    {.project-links}
+    </div>
+
+    <div class="project-card" markdown>
+    **A card with nothing optional**
+
+    Title and summary only — no linked title, no tags, no actions.
+    </div>
+
+    </div>
+    ```
+
+The first paragraph is the title and needs no class. `.project-links` is the
+one part that does, because it is pinned to the bottom of the card so that a
+row of cards of unequal length still lines its actions up. Track width is
+`calc(var(--measure) / 2)`: half a text column is the point below which a card
+stops being a card and becomes a paragraph with a border.
+
+Hover moves the border to `--c-line-strong` and keyboard focus anywhere inside
+the card moves it to `--c-accent`, so "the pointer is over this" and "the
+keyboard is in this" do not look the same.
+
+### Tag
+
+`Agda`{.tag} `type theory`{.tag} `invited`{.tag} `dormant`{.tag}
+
+Written `` `Agda`{.tag} ``. It is a code span because `attr_list` attaches to
+elements Markdown actually produces, and a bare `[text]{.tag}` is not one of
+them — it renders literally, brackets and all. `em` and `strong` were the other
+candidates and both already carry meaning in these components (venue,
+emphasised author), so the neutral host is the right one. It is restyled out of
+the code face entirely: these are labels, not code.
+
+### Publication entry
+
+Authors with the author emphasised, venue, year, and links to DOI, arXiv, and
+PDF. Reverse-chronological grouping by year belongs to the publications page
+([#30](https://github.com/williamdemeo/williamdemeo.github.io/issues/30)); this
+is one entry.
+
+The entries below are copied verbatim from what
+`scripts/python/gen_publications.py` emits from `bibliography.json`
+([#29](https://github.com/williamdemeo/williamdemeo.github.io/issues/29)). That
+is the point of the component: the generator emits plain Markdown and knows
+nothing about these classes, so the publications page wraps its output and adds
+nothing. The last two show the degradation — an edited volume with no venue and
+no identifiers at all, and a conference paper with a venue but no links.
+
+<div class="publications" markdown>
+
+- **Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda**  
+  Andre Knispel and **William DeMeo**, et al.  *5th International Workshop on Formal Methods for Blockchains (FMBC 2024)*, 2024.  
+  [DOI](https://doi.org/10.4230/OASIcs.FMBC.2024.2)
+
+- **Bounded homomorphisms and finitely generated fiber products of lattices**  
+  **William DeMeo**, Peter Mayr, and Nik Ruškuc.  *International Journal of Algebra and Computation*, **30**:693-710, 2020.  
+  [DOI](https://doi.org/10.1142/S0218196720500174) · [arXiv:1907.08046](https://arxiv.org/abs/1907.08046)
+
+- **Proceedings of Algebras and Lattices in Hawaii 2018** *(editor)*  
+  Kira Adaricheva, **William DeMeo**, and Jennifer Hyndman, 2018.
+
+- **Characterizing musical signals with Wigner-Ville interferences**  
+  **William DeMeo**.  *Proceedings of the International Computer Music Conference (ICMC 2002), Gothenburg, Sweden*, 2002.
+
+</div>
+
+??? example "Source"
+
+    ```markdown
+    <div class="publications" markdown>
+
+    - **Bounded homomorphisms and finitely generated fiber products of lattices**
+      **William DeMeo**, Peter Mayr, and Nik Ruškuc.  *International Journal of Algebra and Computation*, **30**:693-710, 2020.
+      [DOI](https://doi.org/10.1142/S0218196720500174) · [arXiv:1907.08046](https://arxiv.org/abs/1907.08046)
+
+    - **Proceedings of Algebras and Lattices in Hawaii 2018** *(editor)*
+      Kira Adaricheva, **William DeMeo**, and Jennifer Hyndman, 2018.
+
+    </div>
+    ```
+
+    Each line of an entry ends with two trailing spaces, which is what keeps the
+    three lines one paragraph. On the publications page the body of the wrapper
+    is the generated snippet rather than literal entries.
+
+An entry needs no classes at all — the wrapper carries the whole component. The
+title is the first `**bold**`; the emphasised author steps forward out of the
+muted metadata, and so does the volume number, which is marked up the same way
+and is the one place that shows. Entries hang-indent, the way a reference list
+has always been set, and that works whether or not the source has blank lines
+between items: `text-indent` is inherited, so it reaches the paragraph that a
+loose list wraps each entry in.
+
+### Talk entry
+
+Title, venue, location, year, and slides. Same grammar as a publication entry,
+deliberately: a title, a line of attribution, and optional links. The slides
+link goes on the title rather than in a row of its own, so a talk with no
+slides is simply a title that is not a link — which is the third entry below.
+The talks page ([#31](https://github.com/williamdemeo/williamdemeo.github.io/issues/31))
+groups these by year and reconciles the record; these four are from the Zola
+site's talks page.
+
+<div class="talks" markdown>
+
+- **[The Rectangularity Theorem of Barto and Kozik](https://github.com/williamdemeo/Talks/tree/master/Boulder/slides)**  
+  Algebras and Algorithms: Structure and Complexity Theory, University of Colorado Boulder, 2016
+
+- **[Algebraic CSP and Tractability of Commutative Idempotent Binars](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2015)**  
+  BLAST Conference, University of North Texas, 2015
+
+- **What Does a Nonabelian Group Sound Like?**  
+  MAA Special Session: At the Intersection of Mathematics and the Arts, 2014
+
+- **[Congruence Lattices of Finite Algebras](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2013)**  
+  BLAST Conference, Chapman University, 2013 · `plenary`{.tag}
+
+</div>
+
+??? example "Source"
+
+    ```markdown
+    <div class="talks" markdown>
+
+    - **[The Rectangularity Theorem of Barto and Kozik](https://github.com/williamdemeo/Talks/tree/master/Boulder/slides)**
+      Algebras and Algorithms: Structure and Complexity Theory, University of Colorado Boulder, 2016
+
+    - **What Does a Nonabelian Group Sound Like?**
+      MAA Special Session: At the Intersection of Mathematics and the Arts, 2014
+
+    - **[Congruence Lattices of Finite Algebras](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2013)**
+      BLAST Conference, Chapman University, 2013 · `plenary`{.tag}
+    </div>
+    ```
+
+`invited` and `plenary` are tags rather than a separate field, which is what
+M5-3 needs to distinguish them. The venue line takes whatever of venue,
+location and year the record actually has; a talk whose location was never
+written down is one line shorter, not one line with a gap in it.
+
+### Timeline entry
+
+Positions and education, in one component, because they are the same shape: a
+date, and what happened then. It is a definition list — `def_list` is already
+enabled, the source reads as the thing it describes, and the CV's education and
+grants sections are already written this way, so adopting it there is a wrapper
+and nothing else.
+
+The first entry below is open-ended, which is the missing-optional-field case
+that matters here: `2023–` with nothing after the dash. The last is a single
+year rather than a range, and an education entry rather than a position.
+
+<div class="timeline" markdown>
+
+2023–
+:   **Formal Verification Engineer**, Formal Methods — [IO](https://iohk.io/)  
+    Machine-checked specification of the Cardano blockchain ledger in Agda.
+
+2022–2023
+:   **Senior University Lecturer**, Computer Science — [NJIT](https://cs.njit.edu/)
+
+2019–2021
+:   **Postdoctoral Research Fellow**, Algebra — [Charles University, Prague](https://ka.karlin.mff.cuni.cz/)  
+    NSF-funded work on the algebraic approach to constraint satisfaction.
+
+2012
+:   **PhD, Mathematics** — [University of Hawaii](https://math.hawaii.edu/)  
+    Thesis: [Congruence lattices of finite algebras](https://arxiv.org/abs/1204.4305).
+    Advisor: [Ralph Freese](http://math.hawaii.edu/~ralph/).
+
+</div>
+
+??? example "Source"
+
+    ```markdown
+    <div class="timeline" markdown>
+
+    2023–
+    :   **Formal Verification Engineer**, Formal Methods — [IO](https://iohk.io/)
+        Machine-checked specification of the Cardano blockchain ledger in Agda.
+
+    2022–2023
+    :   **Senior University Lecturer**, Computer Science — [NJIT](https://cs.njit.edu/)
+
+    </div>
+    ```
+
+The dates sit in a right-aligned gutter in tabular figures, so the ranges line
+up on the dash whatever their width. Below Material's mobile breakpoint the
+gutter costs more width than it earns and the entry stacks under its date,
+keeping the rule and the node.
 
 ## Fonts
 
