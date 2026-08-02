@@ -285,6 +285,33 @@
               touch "$out"
             '';
 
+          # Math source that arithmatex and KaTeX will silently mis-render:
+          # `\\{` where `\{` was meant, `\_` where a subscript was meant, and
+          # `$ x $`, which smart_dollar declines so the LaTeX ships as prose.
+          # None of these raise, so `mkdocs build --strict` and the KaTeX
+          # render audit both pass while the page is wrong on screen -- which
+          # is exactly why it is worth a check of its own.
+          math-source = pkgs.runCommandLocal "check-math-source"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${siteSource}/scripts/python/check_math_source.py \
+                ${siteSource}/docs
+              touch "$out"
+            '';
+
+          # Its own rules: which backslash runs are defects and which are
+          # correct LaTeX, and what counts as being inside a math span.
+          math-source-tests = pkgs.runCommandLocal "check-math-source-tests"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${siteSource}/scripts/python/test_math_source.py
+              touch "$out"
+            '';
+
           # The redirect map's own matching rules: exact-beats-prefix,
           # longest-prefix-wins, and the config validation that makes a
           # malformed rule fail loudly instead of silently covering nothing.

@@ -121,10 +121,30 @@ solutions use XY-pic, which KaTeX has no equivalent for. They need converting to
 Mermaid, KaTeX's `{CD}` environment, or images. Tracked as content work rather
 than a rendering bug.
 
-**Over-escaped braces.** Ninety expressions in the imported exam solutions write
-`\\{` where they mean `\{`. Arithmatex passes the sequence through unchanged and
-KaTeX reads `\\` as a line break. The fix is mechanical and belongs with the
-exam-page migration.
+**Over-escaped braces, and three defects like them.** The imported content came
+through a Markdown engine that escaped its way past this one, leaving four
+patterns that build cleanly, raise nothing, and are wrong on the page — which is
+exactly the class `make math-audit` cannot see, because it only reports what
+KaTeX throws on:
+
+| in the source | what a reader gets |
+| --- | --- |
+| `\\{`, `\\}` | KaTeX reads `\\` as a line break, so the braces vanish and the expression grows two stray breaks |
+| `\_` | a literal underscore: `A_1` where `A₁` was meant |
+| `$ x $` | arithmatex's `smart_dollar` declines a padded delimiter, so the LaTeX is published as prose |
+| a `$$` block that does not start its Markdown block | the inline processor takes the inner `$…$` and leaves a literal `$` on each side |
+
+`make math-source` reports all four and `make math-fix` rewrites the first
+three; `scripts/python/check_math_source.py` imports arithmatex's own delimiter
+patterns so it cannot disagree with the build. `docs/` is clean of the first
+three and CI keeps it that way.
+
+Still outstanding: forty-one stranded `$$` blocks across the imported archive
+pages, which `make math-source` names on every run and `--strict` promotes to
+failures. Each needs a blank line, a re-indent, or a paragraph split depending
+on why it was missed, so it is content work rather than a rewrite. Point
+`make math-fix MATH_ROOT=import/zola-converted` at the exam corpus before
+migrating it and the mechanical half never reaches `docs/` at all.
 
 **Redundant macro preambles.** Four imported pages open with a math block
 containing nothing but definitions:
