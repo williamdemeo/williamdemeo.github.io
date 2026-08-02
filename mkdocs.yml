@@ -298,11 +298,11 @@ nav:
   # the one part of this site where a reader benefits from seeing the whole set
   # without going back to the index first.
   #
-  # This list is ordered, and its order is ADR-006's.  It is the second place
-  # that order is written down -- the index cards are the first -- so the two
-  # have to be changed together.  That is the cost of the nav listing; it is
-  # accepted because both are explicit lists in files under review, and a
-  # disagreement between them is visible on one screen.
+  # This list is ordered, and as project pages land its order should mirror ADR-006's.
+  # It is a second place the ordering can drift from the index cards in
+  # docs/projects/index.md, so update the two together when you add or reorder pages.
+  # (For now, only pages that exist are listed.)
+  #
   - Projects:
       - projects/index.md
       - projects/agda-algebras.md
