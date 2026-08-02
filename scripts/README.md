@@ -172,6 +172,86 @@ The two scripts cover disjoint phases of the project's life cycle: populate is t
 
 ---
 
+### `check_redirects`: the legacy-URL redirect map
+
+Two dead sites' URLs land on this one: the Octopress paths from
+`williamdemeo.github.io`, which is where this site deploys today, and the Zola
+paths from `williamdemeo.org`, which M8-1 points here.  147 URLs between them,
+with inbound links from published papers, talk slides and `ualib.org`.
+
+`redirects.yml` at the repo root is the only copy of that map.  Each entry
+carries one of four dispositions and, where it matters, the reasoning:
+
+| | |
+| --- | --- |
+| `to:` | redirect here — a `docs/`-relative markdown path or an `http(s)` URL |
+| `keep:` | the new site serves this URL itself; no stub, but the page is verified to exist |
+| `pending:` | target known, not built yet; the value says what blocks it |
+| `none:` | deliberately not redirected; the value says why |
+
+`from` is a URL path, and a trailing `/**` matches everything under a prefix.
+Exact matches beat prefix matches and longer prefixes beat shorter ones, so a
+specific rule can carve an exception out of a section-wide one.
+
+**A prefix rule cannot carry `to:`,** and the loader rejects it rather than
+letting it look like it worked.  `to:` emits exactly one stub, at the prefix
+itself, so `/exams/** → …` would redirect `/exams/` and leave the other 47
+URLs 404ing with the build reporting success.  Switching a prefix rule on
+means either listing its URLs individually, or — for a host move, where each
+URL should map onto the matching path under the new host — teaching the hook
+prefix rewriting first.  `keep:`, `pending:` and `none:` are fine on a prefix
+rule, since none of them emits anything.
+
+**`redirects_hook.py`** emits the stubs at build time, wired in through
+mkdocs.yml's `hooks:`.  Only `to:` rules produce output; an active rule whose
+target does not resolve aborts the build rather than shipping a stub that
+404s.  This deliberately does *not* use the `mkdocs-redirects` plugin, which
+as of 1.2.3 hard-depends on `properdocs` — an entire alternative site
+generator that installs itself and advertises for a replacement on every
+build.  That is a large supply-chain surface, and two more packages to pin in
+`flake.nix`, for about forty lines of "write a meta-refresh file".
+
+**`check_redirects.py`** proves the map is trustworthy, in three parts:
+
+```console
+$ make redirect-check          # builds the site, then checks against it
+  zola        103 urls
+  octopress    46 urls
+  union       147 urls
+  rules: 64
+    to         2 rules     2 urls
+    keep       3 rules     3 urls
+    pending   55 rules   138 urls
+    none       4 rules     4 urls
+OK -- every legacy URL is accounted for exactly once.
+```
+
+- **coverage** — every URL in both inventories is governed by a rule, and every
+  rule governs at least one URL.  Several rules may *match* one URL — a
+  carve-out inside a prefix rule is exactly that — but precedence picks a
+  unique winner, and the tests check that uniqueness exhaustively against the
+  real inventories.  A legacy URL nobody thought about is the failure this
+  exists to prevent, and it is invisible without the check.
+- **`--site DIR`** — what the map claims resolves does resolve: `keep` URLs
+  have a real page, active redirects emitted a stub.  Claiming a URL is
+  preserved and then not serving it is worse than an honest redirect.
+- **`--verify-inventory`** — the Zola URL list still corresponds 1:1 with the
+  imported page tree, re-derived rather than taken on trust.  This is what
+  turned up that Zola slugifies to lowercase, so `exams/real/1991Nov21.md` is
+  served at `/exams/real/1991nov21/` — 43 of the highest-traffic URLs differ
+  from their filenames by case alone.
+
+Exit codes follow `diff(1)`: 0 current, 1 a check failed, 2 could not run.
+`make redirect-test` runs the rule-matching unit tests.  Both run in CI as
+`nix flake check` derivations.
+
+The pending count is printed on every run, grouped by what blocks each group,
+so the remainder stays visible instead of being quietly forgotten.  Switching
+a redirect on when its target lands is changing `pending:` to `to:` — one
+line, one file.
+
+---
+
 ### Notes
 
 - The script uses `env -u GH_TOKEN -u GITHUB_TOKEN` by default to work around

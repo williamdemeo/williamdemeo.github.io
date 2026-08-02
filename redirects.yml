@@ -1,0 +1,274 @@
+# Where every URL the two legacy sites served ends up.
+#
+# Both legacy URL spaces land on this one site.  The Octopress paths were
+# served from williamdemeo.github.io, which is where this site is deployed
+# today; the Zola paths from williamdemeo.org, which M8-1 (#48) points here.
+# So both are live concerns, not just the second.
+#
+# ── How this file is used ──────────────────────────────────────────────────
+#
+# scripts/python/redirects_hook.py reads it at build time and emits a stub for
+# each `to:` rule.  Nothing else needs editing: for an exact rule, turning a
+# redirect on is changing `pending:` to `to:` here, in one place.
+#
+# A *prefix* rule is not one line, and the loader rejects `to:` on one rather
+# than letting it look like it worked.  `to:` emits a single stub, at the
+# prefix itself, so `/exams/** -> ...` would redirect `/exams/` and leave the
+# other 47 URLs 404ing with the build reporting success.  Switching a prefix
+# rule on means either listing its URLs individually, or -- for a host move,
+# where each URL should map onto the matching path under the new host --
+# teaching the hook prefix rewriting first.
+#
+# scripts/python/check_redirects.py enforces the two properties that make the
+# file trustworthy:
+#
+#   1. every URL in the inventories is governed by a rule, and every rule
+#      governs at least one URL.  Several rules may *match* one URL -- an
+#      exact carve-out inside a prefix rule is exactly that -- but precedence
+#      picks a unique winner.  A legacy URL nobody thought about is the
+#      failure this is designed to make impossible;
+#   2. every `to:` target actually resolves in the built site.
+#
+# ── Why so much is still pending ───────────────────────────────────────────
+#
+# Most targets do not exist yet: the research, talks, teaching, blog and
+# archive areas are M5 and M6 work.  A `to:` rule whose target does not resolve
+# fails the build, so those rules cannot be switched on early even if we
+# wanted to -- a redirect that silently points nowhere is worse than none,
+# because it looks handled.
+#
+# That is the point of `pending:` -- it records the intended target and what
+# blocks it, so the redirect is a one-line change when the page lands rather
+# than something to rediscover.  The checker prints the pending count on every
+# run, so the remainder stays visible instead of being quietly forgotten.
+#
+# ── Rule forms ─────────────────────────────────────────────────────────────
+#
+#   to:      redirect here.  A docs/-relative markdown path, or an absolute
+#            http(s) URL.  Active: emitted, and the target is verified.
+#   keep:    the new site serves this URL itself; no redirect.  The checker
+#            verifies the page really is there, so a "preserved" URL cannot
+#            silently 404.
+#   pending: the target is known but not built.  Value is the reason.
+#   none:    deliberately not redirected.  Value is the reason.
+#
+# `from` is a URL path.  A trailing `/**` matches that prefix and everything
+# under it.  Exact matches win over prefix matches, and a longer prefix wins
+# over a shorter one, so a specific rule can carve an exception out of a
+# section-wide one.
+
+inventories:
+  zola: import/legacy-urls/zola.txt
+  octopress: archive/octopress/urls.txt
+
+rules:
+
+  # ── Served by both legacy sites ──────────────────────────────────────────
+
+  - from: /
+    keep: true
+
+  # A single line pointing at Liam O'Connor's Agda tutorial on both sites.
+  # The reposted copy is third-party and is not being republished (#13,
+  # ADR-002), so this goes to the original rather than to anything of ours.
+  - from: /agda/
+    to: https://liamoc.net/posts/2013-11-13-installation.html
+
+  # ── williamdemeo.org (Zola) ──────────────────────────────────────────────
+
+  - from: /about/
+    keep: true
+  - from: /cv/
+    keep: true
+
+  # The exam corpus: 48 URLs, a third of the entire legacy surface and the
+  # part with the most inbound traffic.  #56 has to settle whether this site
+  # hosts the corpus or points at formalverification.io before these can be
+  # written -- and pointing them at a copy that turns out to be less complete
+  # would lose content permanently.  Blocking is the correct behaviour here.
+  - from: /exams/**
+    pending: "#56 -- corpus home undecided; see ADR-002"
+
+  # Promoted, but the pages that replace them are M5 work.
+  - from: /research/
+    pending: "#33 (M5-5) -- research page"
+  - from: /talks/
+    pending: "#31 (M5-3) -- talks page"
+  - from: /teaching/
+    pending: "#32 (M5-4) -- teaching page"
+
+  # Empty or stub pages under a promoted section: they fold into the section
+  # page rather than getting one of their own.
+  - from: /research/formal/
+    pending: "#33 (M5-5) -- folds into the research page"
+  - from: /research/research/
+    pending: "#33 (M5-5) -- folds into the research page"
+
+  # `books/index.md` splits (ADR-002): the two analysis collections are the
+  # same work as the exam corpus, the category theory course is a separate
+  # coauthored project and becomes an M4 portfolio entry.  One legacy URL,
+  # two successors -- which is exactly why it needs a decision, not a guess.
+  - from: /books/
+    pending: "#56 and M4 -- the page splits; successor not yet chosen"
+
+  # Archived: kept and linkable, out of the primary nav.  The archive area
+  # itself is M2-9 (#67) -- ADR-002 promises the area but nothing built it,
+  # which is why that issue exists.
+  - from: /research/csp/**
+    pending: "#67 (M2-9) -- archive area not built"
+  - from: /python/**
+    pending: "#67 (M2-9) -- archive area not built"
+  - from: /agda-ualib/**
+    pending: "#67 (M2-9) -- archive area not built; #24 cross-links these"
+  - from: /talks/vols/
+    pending: "#67 (M2-9) -- archive area not built"
+
+  # Dropped with redirects.  `/archive/` is `computing/archive.md`, which
+  # carries a Zola `path` override and so is served at the root rather than
+  # under /computing/.
+  - from: /computing/**
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /archive/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+
+  # Zola's section index for the blog.  The new blog is M6-1 (#35).
+  - from: /posts/
+    pending: "#35 (M6-1) -- blog index"
+
+  # The fourteen root-level posts.  Zola strips the date prefix from the slug,
+  # so these are served at `/isotopy/`, not `/posts/2014-02-13-isotopy/`.
+  # Whether the new blog reproduces that scheme is M6-1's call; either way
+  # these fourteen URLs have to keep resolving.
+  - from: /diaconescus-theorem/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /a-problem-of-palfy-and-saxl/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /groupsound/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /isotopy/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /three-sat-and-partition-lattices/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /congruences-of-partial-algebras/
+    pending: "#13/#35 -- keep; blog not built"
+
+  - from: /ieprops/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /overalgebras/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /typefunc/
+    pending: "#67 (M2-9) -- archive area not built"
+  - from: /touchpad-forensics/
+    pending: "#67 (M2-9) -- archive area not built"
+  # Archived rather than kept, per ADR-002: good, but an interview puzzle from
+  # a quant shop is a tonal outlier.  The URL still has to resolve.
+  - from: /probability-quiz/
+    pending: "#67 (M2-9) -- archive area not built"
+
+  - from: /conferences-in-algebra/
+    pending: "#35 -- dropped; redirect to the blog index"
+  - from: /java-on-linux/
+    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
+  - from: /nobody-told-me/
+    pending: "#35 -- dropped; redirect to the blog index"
+
+  # ── williamdemeo.github.io (Octopress) ───────────────────────────────────
+
+  # Dated post paths.  Twelve of the fifteen also exist as Zola pages and are
+  # covered above under their Zola slugs; these are the Octopress URLs for the
+  # same posts, and both have to resolve.
+  - from: /2014/02/05/diaconescus-theorem/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2014/02/13/a-problem-of-palfy-and-saxl/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2014/02/13/groupsound/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2014/02/13/isotopy/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2015/01/11/three-sat-and-partition-lattices/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2017/04/07/congruences-of-partial-algebras/
+    pending: "#13/#35 -- keep; blog not built"
+
+  - from: /2014/02/13/ieprops/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2014/02/13/overalgebras/
+    pending: "#13/#35 -- keep; blog not built"
+  - from: /2014/02/13/typefunc/
+    pending: "#67 (M2-9) -- archive area not built"
+  - from: /2014/03/19/probability-quiz/
+    pending: "#67 (M2-9) -- archive area not built"
+
+  - from: /2017/04/07/conferences-in-algebra/
+    pending: "#35 -- dropped; redirect to the blog index"
+  - from: /2017/12/06/java-on-linux/
+    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
+
+  # Third-party (Liam O'Connor), reposted with permission, not republished.
+  # Sends readers to the original rather than 404ing or to our home page.
+  - from: /2014/02/27/learn-you-an-agda/
+    to: https://liamoc.net/posts/2013-11-13-installation.html
+
+  # Documents an Octopress workflow that no longer exists anywhere.
+  - from: /2014/02/07/cloning-an-octopress-repo/
+    pending: "#35 -- dropped; redirect to the blog index"
+
+  # Archived rather than converted: Ralph Freese found an error in the proof
+  # (ADR-002), which removes the reason to bring it forward.  The URLs still
+  # have to resolve -- archiving keeps them working without republishing the
+  # mathematics.  Octopress served it at two paths.
+  - from: /2017/04/07/commutator-as-least-fixed-point/
+    pending: "#67 (M2-9) -- archive area not built"
+  - from: /the-commutator-as-a-least-fixed-point/
+    pending: "#67 (M2-9) -- archive area not built"
+
+  # Octopress section pages.  The Zola site moved this material under
+  # /computing/; ADR-002 drops it and redirects to the archive index.
+  - from: /coq/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /csp/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /eclipse/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /jst/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /linux/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /scala/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /uacalc/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+  - from: /pages/
+    pending: "#67 (M2-9) -- redirect to the archive index"
+
+  # Blog machinery: the archive listing, pagination, and the twelve category
+  # pages Octopress generated from post tags.
+  - from: /archives/
+    pending: "#35 (M6-1) -- blog archive listing"
+  - from: /blog/page/**
+    pending: "#35 (M6-1) -- blog pagination"
+  - from: /blog/categories/**
+    pending: "#35 (M6-1) -- blog tag pages"
+
+  # ── Not redirected, deliberately ─────────────────────────────────────────
+
+  # A meta-refresh stub is an HTML page, which is meaningless to a feed reader:
+  # it would hand XML clients something they cannot parse.  The old feed path
+  # needs a real feed at the same URL, which is M6-1's RSS plugin.
+  - from: /atom.xml
+    pending: "#35 (M6-1) -- needs a real feed, not an HTML stub"
+
+  # MkDocs generates its own sitemap.xml and robots.txt at these exact paths,
+  # so they keep working without a redirect -- and redirecting them would
+  # replace a machine-readable file with an HTML stub.
+  - from: /sitemap.xml
+    none: MkDocs generates this at the same path
+  - from: /robots.txt
+    none: MkDocs generates this at the same path
+  - from: /humans.txt
+    none: Octopress boilerplate; never had content worth preserving
+
+  # Bootstrap's own documentation, vendored into the Octopress theme and
+  # crawled by accident.  Never ours, never linked from anything of ours.
+  - from: /assets/**
+    none: vendored Bootstrap docs, indexed by accident
