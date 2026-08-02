@@ -901,7 +901,7 @@ The Agda formalization project belongs in its own repository, not this one. This
 
 ---
 
-### Issue M2-9: Build the archive area (#67)
+### Issue M2-9: Build the archive area (#67, closed)
 
 **Labels**: `milestone-2-migration`, `infrastructure`, `content`
 
@@ -966,7 +966,7 @@ Not a design issue: the archive should inherit whatever M3-1 (#17) settles rathe
 
 <!-- BEGIN GENERATED: milestone-3 -->
 
-### Issue M3-1: Choose the visual system (#17)
+### Issue M3-1: Choose the visual system (#17, closed)
 
 **Labels**: `milestone-3-design`, `design`, `decision`
 
@@ -1170,25 +1170,94 @@ The index ordering is a deliberate editorial decision and should be by relevance
 
 ---
 
+### Issue M4-2: Port the agda-algebras docs site's Agda-HTML styling and hover tooltips (#71)
+
+**Labels**: `milestone-4-portfolio`, `infrastructure`, `design`
+
+Blocks/feeds #24 (M4-2). Raised out of #17, where the agda-algebras documentation site turned out to be worth mining rather than merely admiring.
+
+## Why
+
+The new agda-algebras documentation site — repo [UniversalAlgebra/agda-algebras](https://github.com/UniversalAlgebra/agda-algebras), hosted at <https://agda-algebras.universalalgebra.org/> — is **also MkDocs Material**, so its solutions port over rather than needing reinvention. Its central design problem is the one M4-2 will hit: pages that are mostly Agda, rendered from `agda --html` output rather than from fenced code blocks that Pygments highlights.
+
+Confirmed by reading its `stylesheets/custom.css` (41 KB) and page source:
+
+- `--md-code-font: "JuliaMono", "JetBrains Mono", "Fira Code", …` — it reached the same monospace conclusion #17 did, independently. Corroboration, and a reason the two sites will look consistent side by side.
+- Body face is Inter on both sites, also independently.
+
+## What to port
+
+**1. The `.Agda*` token classes.** `agda --html` emits 21 of them, and none are Pygments classes, so none of this site's syntax highlighting applies to them:
+
+```
+.AgdaKeyword .AgdaComment .AgdaString .AgdaNumber .AgdaSymbol .AgdaArgument
+.AgdaMarkup .AgdaPrimitiveType .AgdaPrimitive .AgdaBound .AgdaGeneralizable
+.AgdaInductiveConstructor .AgdaCoinductiveConstructor .AgdaDatatype .AgdaField
+.AgdaFunction .AgdaMacro .AgdaModule .AgdaPostulate .AgdaRecord
+```
+
+Their site styles each one, with `pre.Agda .Keyword` aliases for the older class naming.
+
+**Do not copy the colours as-is.** They are Agda's Emacs defaults — `#0000cd` for functions and datatypes, `#b22222` for comments and strings, `#cd6600` for keywords, `#ee1289` for fields, `#a020f0` for modules — chosen for a white Emacs buffer. On this site they have to clear WCAG AA on `--c-bg-raised` in *both* themes, which several will not. Derive them from `tokens.css` and check with `make contrast-audit`, which already walks every text element in both schemes; if the Agda pages are in the build, they are already covered.
+
+**2. Identifier cross-linking.** `agda --html` makes every token a link to its definition — click a `record`, a constructor, a function and jump to where it is defined. That is the single most valuable property of their site and it comes free with the generator; the work is pipeline (getting the HTML into `docs/`) rather than CSS.
+
+**3. Hover tooltips.** `assets/js/agda-hover.js` plus `.agda-tooltip`, `.agda-tooltip-inner`, `.agda-tip-head`, `.agda-tip-snippet`, `.agda-tip-loading`, `.agda-tip-empty` — type information on hover, fetched lazily. Nice, and the most work of the three. Judge it against #22 (M3-6): it adds script weight and needs a keyboard-accessible equivalent, since hover-only affordances fail WCAG 2.1 SC 1.4.13.
+
+**4. `agda-copy.js` and `agda-toggle.js`.** Copy-a-block and show/hide. Material already provides `content.code.copy` for fenced blocks, but not for `pre.Agda`, so something equivalent is needed.
+
+## Worth telling them
+
+Their site loads JuliaMono from `cdn.jsdelivr.net` and Inter/Roboto Mono from Google Fonts, while self-hosting Space Grotesk, Inter, Geist and Sora under `assets/fonts/`. So it is half-migrated to self-hosting already. `scripts/python/build_fonts.py` from #17 subsets and pins by SHA-256 and would port over nearly unchanged — worth offering upstream, given the Fira-Code-from-`cdn.rawgit.com` precedent that motivated #17 in the first place.
+
+## Tasks
+
+- [ ] Get `agda --html` output into the build for at least one page, and decide where it comes from (checked in, generated in CI, or fetched).
+- [ ] Style the 21 `.Agda*` classes from `tokens.css`, both themes.
+- [ ] Confirm `make contrast-audit` covers those pages and passes.
+- [ ] Confirm `make font-audit` reports no substitution on a real Agda-HTML page.
+- [ ] Decide on hover tooltips, with a keyboard-accessible path or not at all.
+- [ ] Copy-to-clipboard for `pre.Agda`.
+
+## Acceptance criteria
+
+- [ ] An `agda --html` page renders in the site's visual system, in both themes, with no bespoke colours outside `tokens.css`.
+- [ ] Identifier links resolve.
+- [ ] `make design-audit` stays green with those pages in the build.
+
+---
+
 ### Issue M4-2: agda-algebras project page (#24)
 
 **Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
 ## Description
 
-`agda-algebras` is the strongest single piece of evidence on this site for sustained, large-scale formalization: a library of universal algebra in Agda, containing what is, to the author's knowledge, the first machine-checked proof of Birkhoff's HSP theorem in dependent type theory, published at TYPES 2021 with a co-authored paper and archived on Zenodo with a DOI.  It has documentation at ualib.org and an ongoing 3.0 modernization program.
+`agda-algebras` is the strongest single piece of evidence on this site for sustained, large-scale formalization: a library of universal algebra in Agda, containing what is, to the author's knowledge, the first machine-checked proof of Birkhoff's HSP theorem in dependent type theory, published at TYPES 2021 with a co-authored paper and archived on Zenodo with a DOI. It has documentation and an ongoing 3.0 modernization program.
 
-Write this page for a reader who knows type theory but not universal algebra.  The interesting content is not "here is a library" — it is what was genuinely hard: representing algebraic structures over arbitrary signatures in a dependently typed setting, the setoid-versus-quotient design tension and why the setoid formulation was ultimately chosen, and what a machine-checked Birkhoff proof actually requires that a textbook proof leaves implicit.  That last point is the most interesting thing on the page and deserves the most space.
+Write this page for a reader who knows type theory but not universal algebra. The interesting content is not "here is a library" — it is what was genuinely hard: representing algebraic structures over arbitrary signatures in a dependently typed setting, the setoid-versus-quotient design tension and why the setoid formulation was ultimately chosen, and what a machine-checked Birkhoff proof actually requires that a textbook proof leaves implicit. That last point is the most interesting thing on the page and deserves the most space.
+
+## Which URLs are current
+
+Earlier versions of this issue said "documentation at ualib.org", which points at the **pre-3.0** library. That site is still online and now carries its own notice saying so, but it is not where this page should send readers. The current locations:
+
+| | |
+| --- | --- |
+| The library | <https://github.com/ualib/agda-algebras> |
+| Documentation site (source) | <https://github.com/UniversalAlgebra/agda-algebras> |
+| Documentation (published) | <https://agda-algebras.universalalgebra.org/> |
+
+`ualib.org` and the GitLab repositories belong to the archived 2020-era pages, where they are historical record and carry a forward pointer (see #67).
 
 ## Tasks
 
 - [ ] Write the summary paragraph and the technical substance section.
 - [ ] Include the Birkhoff HSP theorem statement as it appears in Agda, with a plain-language gloss.
 - [ ] Explain the setoid design decision and its consequences.
-- [ ] Link source, ualib.org documentation, the TYPES 2021 paper, and the Zenodo DOI.
+- [ ] Link the library, the documentation site, the TYPES 2021 paper, and the Zenodo DOI — using the URLs above, not the pre-3.0 ones.
 - [ ] State the library's scale from a figure the reader can verify, not an estimate.
 - [ ] Describe the 3.0 modernization program and its current status.
-- [ ] Cross-link the early `agda-ualib` notes archived in M2-3 as historical context.
+- [ ] Cross-link the early `agda-ualib` notes, archived in #67, as historical context — and check the forward pointer there still names the right successor.
 
 ## Acceptance criteria
 
@@ -1196,6 +1265,11 @@ Write this page for a reader who knows type theory but not universal algebra.  T
 - [ ] A type theorist unfamiliar with universal algebra can follow it.
 - [ ] Every quantitative claim is checkable from a linked artifact.
 - [ ] Agda code renders correctly per M3-4.
+- [ ] Every outbound link resolves, and none presents the pre-3.0 library as current.
+
+---
+
+*Revised 2026-08-02: recorded the current library and documentation URLs. An earlier revision of this note claimed `ualib.org` was dead; that was wrong — it is online and self-describes as the archived pre-3.0 site. The point that stands is that this page should link the 3.0 homes, not the pre-3.0 ones.*
 
 ---
 
@@ -1471,7 +1545,9 @@ The page should end by saying what the author wants to work on next.  For the au
 
 Consolidate the scholarly identifiers so that the site is the canonical hub linking to all of them, and so that structured data in M8-3 has real identifiers to emit.
 
-The Zola about page links Google Scholar and Microsoft Academic; the latter shut down at the end of 2022 and must go.  ORCID, DBLP, arXiv, Zenodo, and Semantic Scholar should be present and verified.
+The Zola about page links Google Scholar and Microsoft Academic; the latter shut down at the end of 2022 and must go. ORCID, DBLP, arXiv, Zenodo, and Semantic Scholar should be present and verified.
+
+`ualib.org` is a different case and should not be treated as dead: it is online, but serves the **pre-3.0** library and now carries its own notice saying so. Anywhere this site points a reader at the library as current work, the target is <https://agda-algebras.universalalgebra.org/> and <https://github.com/ualib/agda-algebras>. See #24.
 
 ## Tasks
 
@@ -1480,13 +1556,18 @@ The Zola about page links Google Scholar and Microsoft Academic; the latter shut
 - [ ] Add the identifiers to a single data file for reuse across the site, the CV, and structured data.
 - [ ] Render them consistently in the footer and on the about page.
 - [ ] Confirm each profile is current, particularly ORCID, which is commonly stale.
-- [ ] Check whether ualib.org and the agda-algebras Zenodo record link back here, and fix if not.
+- [ ] Check whether the **agda-algebras documentation site** and the agda-algebras Zenodo record link back here, and fix if not. (Previously this said `ualib.org`, which is the pre-3.0 site.)
 
 ## Acceptance criteria
 
 - [ ] Every identifier is verified and resolves to a current profile.
 - [ ] No dead academic-profile links remain anywhere on the site.
 - [ ] Identifiers live in one data file consumed by every page that shows them.
+- [ ] Verification is by fetching each URL *and reading what comes back*, not by status code alone — a 200 can be a deprecation notice, and a failure can be a sandbox network policy rather than a dead host.
+
+---
+
+*Revised 2026-08-02: an earlier revision claimed `ualib.org` was dead. It is not — it is the archived pre-3.0 site and says so itself. What matters here is that current-work links point at the 3.0 homes.*
 
 <!-- END GENERATED: milestone-5 -->
 
@@ -1869,9 +1950,18 @@ For an apex domain, GitHub Pages requires `A`/`AAAA` records pointing at its pub
 
 ## Description
 
-The M2-6 redirect map was built and tested against a local build.  Verify it against the live domain after cutover, because that is where the URLs people actually hold will be requested, and because client-side redirect stubs behave differently in a browser than in a build directory.
+The M2-6 redirect map was built and tested against a local build. Verify it against the live domain after cutover, because that is where the URLs people actually hold will be requested, and because client-side redirect stubs behave differently in a browser than in a build directory.
 
-Check outbound links too.  Both legacy sites accumulated a decade of link rot — GitPitch is gone, `cdn.rawgit.com` is gone, Microsoft Academic is gone, and several university course pages have moved — and migrated content carries all of it forward.
+Check outbound links too. Both legacy sites accumulated a decade of link rot — GitPitch is gone, `cdn.rawgit.com` is gone, Microsoft Academic is gone — and migrated content carries all of it forward.
+
+## Two failure modes the checker has to tell apart
+
+Both were hit while building this map, and mistaking one for the other produces confidently wrong results:
+
+- **A 200 is not "fine".** `ualib.org` resolves and looks healthy, but serves the pre-3.0 library behind its own deprecation notice. A status-code-only check calls that a working link.
+- **A failure is not necessarily "dead".** A sandboxed run can be blocked by network policy rather than by the host being gone. That produced a wrong "ualib.org is dead" conclusion in an earlier revision of this issue, from a connection failure that was actually a proxy `CONNECT` denial for a *different* domain.
+
+So the checker should report *what came back*, and should distinguish transport failures from HTTP errors, or its output cannot be acted on without re-checking by hand.
 
 ## Tasks
 
@@ -1879,14 +1969,19 @@ Check outbound links too.  Both legacy sites accumulated a decade of link rot �
 - [ ] Run a full outbound link check across the site and triage every broken link.
 - [ ] Replace dead links with archived or current equivalents; remove those with neither.
 - [ ] Verify the old feed URLs reach the new feed.
-- [ ] Check that the most-linked legacy URLs specifically — the ualib.org references and the CV's links — resolve.
+- [ ] Check the most-linked legacy URLs specifically — the CV's links, and the `ualib.org` references. The latter resolve; what matters is that nothing presents the pre-3.0 library as current. The archived pages in #67 keep those URLs deliberately, with a forward pointer, and that is not a defect to "fix".
 - [ ] Add the link checker to CI on a weekly schedule so rot is reported as it appears.
+- [ ] Make the checker distinguish transport failure from HTTP status, so a sandbox network policy is never reported as a dead host.
 
 ## Acceptance criteria
 
 - [ ] Every URL in the redirect map resolves correctly from the live domain.
-- [ ] No broken outbound links remain.
-- [ ] The scheduled link check runs and reports failures.
+- [ ] No broken outbound links remain, except where an archived page deliberately preserves a superseded URL alongside a working forward pointer.
+- [ ] The scheduled link check runs and reports failures, and its output says what came back rather than only whether something did.
+
+---
+
+*Revised 2026-08-02: an earlier revision recorded `ualib.org` as dead. It is not. Replaced with the two failure modes that produced that error, since both are things this checker has to handle.*
 
 ---
 
