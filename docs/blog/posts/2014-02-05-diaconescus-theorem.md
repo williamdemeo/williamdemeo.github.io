@@ -59,7 +59,7 @@ for a nice discussion of this topic.
 
   $$f : \\{A, B\\} \rightarrow A \cup B, \text{ and note that } A\cup B = \\{0, 1\\}.$$
 
-  Now, because equality on $\mathbb{N}$ *is* decidabile (which can be proved
+  Now, because equality on $\mathbb{N}$ *is* decidable (which can be proved
   by induction on $\mathbb{N}$), we can consider cases:
 
   If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.
