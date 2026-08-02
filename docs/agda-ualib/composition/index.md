@@ -12,11 +12,11 @@ Shown above is a general formulation of composition of operations in dependent t
 
 If $n$ is a natural number, we write $n \colon \mathbb N$ and say "$n$ has type $\mathbb N$." (For the reader unfamiliar with type theory, it's safe in the beginning to think of this as meaning $n\in \mathbb N$.)  
 
-For $n \colon \mathbb N$, we denote and define $\underline{n} = \\{0, 1, \dots, n-1\\}$.
+For $n \colon \mathbb N$, we denote and define $\underline{n} = \{0, 1, \dots, n-1\}$.
 
 For $m \colon \mathbb N$, denote and define the $\mathrm{mtuple}$ functor on Set as follows:
 
-+ <ins>on objects</ins>: if $A$ is a Set, then $\mathrm{mtuple} A = \\{(a_{0}, \dots, a_{m-1}) \mid a_{i} \colon A\\}$
++ <ins>on objects</ins>: if $A$ is a Set, then $\mathrm{mtuple} A = \{(a_{0}, \dots, a_{m-1}) \mid a_{i} \colon A\}$
 
 + <ins>on arrows</ins>: if $f \colon A \to B$ is a function from the set $A$ to the set $B$, then $\mathrm{mtuple} f \colon \mathrm{mtuple}A \to \mathrm{mtuple}B$ is defined for each $(a_{0}, \dots, a_{m-1})$ of type $\mathrm{mtuple}A$ as follows: $$\mathrm{mtuple}f (a_0, \dots, a_{m-1}) = (f a_0, \dots, f a_{m-1}),$$ which inhabits the type $\mathrm{mtuple} A$.
 
@@ -24,7 +24,7 @@ Notice that $\mathbf a$ has type $\mathrm{mtuple} A$ iff we can represent $\math
 
 Let $\mathbf m = (m_0, \dots, m_{n-1}) \colon  \mathrm{ntuple} \mathbb N$.  Define the $\mathbf{mtuple}$ functor as follows: 
 
-+ <ins>on objects</ins>: if $A$ is a Set, then $$\mathbf{mtuple} A = \\{((a_{00}, \dots, a_{0(m_1-1)}), \dots, (a_{(n-1)0}, \dots, a_{(n-1)(m_n-1)})) \mid a_{ij} \colon A\\}$$ (We may write $\mathbf a_i$ in place of $(a_{i0}, \dots, a_{i(k-1)})$, if $k$ is clear from context.)
++ <ins>on objects</ins>: if $A$ is a Set, then $$\mathbf{mtuple} A = \{((a_{00}, \dots, a_{0(m_1-1)}), \dots, (a_{(n-1)0}, \dots, a_{(n-1)(m_n-1)})) \mid a_{ij} \colon A\}$$ (We may write $\mathbf a_i$ in place of $(a_{i0}, \dots, a_{i(k-1)})$, if $k$ is clear from context.)
 
 + <ins>on arrows</ins>: if $f$ is a function from the set $A$ to the set $B$, then $\mathbf{mtuple} f \colon \mathbf{mtuple}A \to \mathbf{mtuple}B$ is defined for each $(\mathbf a_1, \dots, \mathbf a_n)$ in $\mathbf{mtuple}A$ as follows: \begin{align*}\mathbf{mtuple} f (\mathbf a_1, \dots, \mathbf a_n) &= (\mathrm{m_1tuple}f \mathbf a_1, \dots, \mathrm{m_ntuple}f \mathbf a_n)\\ &= ((f a_{11}, \dots, f a_{1m_1}), \dots, (f a_{n1}, \dots, f a_{nm_n})).\end{align*}
 

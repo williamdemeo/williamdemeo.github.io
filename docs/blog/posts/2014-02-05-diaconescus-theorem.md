@@ -37,40 +37,40 @@ for a nice discussion of this topic.
 
 + **Diaconescu's Theorem:** AC $\rightarrow$ LEM.
 
-  **Proof:**  Assume AC.  Let $P$ be any proposition.  We will prove
-  $P \bigvee \neg P$.
+    **Proof:**  Assume AC.  Let $P$ be any proposition.  We will prove
+    $P \bigvee \neg P$.
 
-  Define the set $\mathbf{2} = \\{0, 1\\} = \\{x \mid x = 0 \bigvee x= 1\\}$.
+    Define the set $\mathbf{2} = \{0, 1\} = \{x \mid x = 0 \bigvee x= 1\}$.
 
-  Define the following sets:
+    Define the following sets:
 
-  $A = \\{x \mid (x = 0) \bigvee P\\}$
+    $A = \{x \mid (x = 0) \bigvee P\}$
 
-  $B = \\{y \mid (y = 1) \bigvee P\\}$
+    $B = \{y \mid (y = 1) \bigvee P\}$
 
-  Note that $P \Rightarrow A = B = \mathbf{2}$. Therefore,
-  $A \neq B \Rightarrow \neg P$.
+    Note that $P \Rightarrow A = B = \mathbf{2}$. Therefore,
+    $A \neq B \Rightarrow \neg P$.
 
-  Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$.
+    Both of the sets $A$ and $B$ are nonempty, since 0 belongs to $A$ and 1 belongs to $B$.
 
-  Therefore, $\\{A, B\\}$ is a set of nonempty sets, so by AC we have a choice function,
-  <!-- Note that the set $\\{A, B\\}$ is defined as $\\{A, B\\} = \\{X \in
-  \mathbf{Set} | X = A \bigvee X = B\\}$ (by pairing axiom).-->
+    Therefore, $\{A, B\}$ is a set of nonempty sets, so by AC we have a choice function,
+    <!-- Note that the set $\\{A, B\\}$ is defined as $\\{A, B\\} = \\{X \in
+    \mathbf{Set} | X = A \bigvee X = B\\}$ (by pairing axiom).-->
 
-  $$f : \\{A, B\\} \rightarrow A \cup B, \text{ and note that } A\cup B = \\{0, 1\\}.$$
+    $$f : \{A, B\} \rightarrow A \cup B, \text{ and note that } A\cup B = \{0, 1\}.$$
 
-  Now, because equality on $\mathbb{N}$ *is* decidable (which can be proved
-  by induction on $\mathbb{N}$), we can consider cases:
+    Now, because equality on $\mathbb{N}$ *is* decidable (which can be proved
+    by induction on $\mathbb{N}$), we can consider cases:
 
-  If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.
+    If $f(A) = 0 = f(B)$, then $0 \in B$, so $P$.
 
-  If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.
+    If $f(A) = 1 = f(B)$, then $1 \in A$, so $P$.
 
-  If $f(A) \neq f(B)$, then $A \neq B$ so $P$ cannot hold.
-  (Recall, $P \Rightarrow A = B = \mathbf{2}$.)
+    If $f(A) \neq f(B)$, then $A \neq B$ so $P$ cannot hold.
+    (Recall, $P \Rightarrow A = B = \mathbf{2}$.)
 
-  We have covered all cases and found that $P \bigvee \neg P$ holds.
-  <span style="float:right">&#x220E;</span>
+    We have covered all cases and found that $P \bigvee \neg P$ holds.
+    <span style="float:right">&#x220E;</span>
 
 -------------------------------------------------------
 

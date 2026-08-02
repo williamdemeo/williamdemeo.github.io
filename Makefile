@@ -123,12 +123,34 @@ guard-gh:
 
 MATH_SRC ?= import/zola-converted
 
-.PHONY: math-audit
+.PHONY: math-audit math-source math-fix
 
 ## Render every math expression headlessly and report failures
 math-audit:
 	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
 	@node scripts/js/audit_math.mjs $(MATH_SRC)
+
+# The audit above renders; the two below read.  They catch disjoint sets of
+# defects, which is why both exist: an over-escaped `\{` or a `$ x $` renders
+# without raising and so is invisible to the audit, while being wrong on the
+# page.
+#
+# The default root differs for the same reason the two targets differ.  The
+# audit still points at import/, where the un-migrated exam corpus lives; the
+# source check points at docs/, because that is what ships and what CI gates
+# on.  Run `make math-fix MATH_ROOT=import/zola-converted` before migrating a
+# batch and the escaping is repaired once, at the source, rather than page by
+# page afterwards.
+
+MATH_ROOT ?= docs
+
+## Report math source that arithmatex and KaTeX will silently mis-render
+math-source:
+	@$(PYTHON) scripts/python/check_math_source.py $(MATH_ROOT)
+
+## Rewrite the mechanical half of what math-source reports, in place
+math-fix:
+	@$(PYTHON) scripts/python/check_math_source.py --fix $(MATH_ROOT)
 
 # ── Legacy-URL redirects ────────────────────────────────────────────────────
 #

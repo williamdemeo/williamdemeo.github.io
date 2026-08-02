@@ -181,20 +181,20 @@ rules:
   - from: /diaconescus-theorem/
     to: blog/posts/2014-02-05-diaconescus-theorem.md
   - from: /a-problem-of-palfy-and-saxl/
-    pending: "#13 -- post not converted yet; goes to /blog/a-problem-of-palfy-and-saxl/"
+    to: blog/posts/2014-02-13-a-problem-of-palfy-and-saxl.md
   - from: /groupsound/
-    pending: "#13 -- post not converted yet; goes to /blog/groupsound/"
+    to: blog/posts/2014-02-13-groupsound.md
   - from: /isotopy/
-    pending: "#13 -- post not converted yet; goes to /blog/isotopy/"
+    to: blog/posts/2014-02-13-isotopy.md
   - from: /three-sat-and-partition-lattices/
-    pending: "#13 -- post not converted yet; goes to /blog/three-sat-and-partition-lattices/"
+    to: blog/posts/2015-01-11-three-sat-and-partition-lattices.md
   - from: /congruences-of-partial-algebras/
     to: blog/posts/2017-04-06-congruences-of-partial-algebras.md
 
   - from: /ieprops/
-    pending: "#13 -- post not converted yet; goes to /blog/ieprops/"
+    to: blog/posts/2014-02-13-ieprops.md
   - from: /overalgebras/
-    pending: "#13 -- post not converted yet; goes to /blog/overalgebras/"
+    to: blog/posts/2014-02-13-overalgebras.md
   - from: /typefunc/
     keep: true
   - from: /touchpad-forensics/
@@ -226,20 +226,20 @@ rules:
   - from: /2014/02/05/diaconescus-theorem/
     to: blog/posts/2014-02-05-diaconescus-theorem.md
   - from: /2014/02/13/a-problem-of-palfy-and-saxl/
-    pending: "#13 -- post not converted yet; goes to /blog/a-problem-of-palfy-and-saxl/"
+    to: blog/posts/2014-02-13-a-problem-of-palfy-and-saxl.md
   - from: /2014/02/13/groupsound/
-    pending: "#13 -- post not converted yet; goes to /blog/groupsound/"
+    to: blog/posts/2014-02-13-groupsound.md
   - from: /2014/02/13/isotopy/
-    pending: "#13 -- post not converted yet; goes to /blog/isotopy/"
+    to: blog/posts/2014-02-13-isotopy.md
   - from: /2015/01/11/three-sat-and-partition-lattices/
-    pending: "#13 -- post not converted yet; goes to /blog/three-sat-and-partition-lattices/"
+    to: blog/posts/2015-01-11-three-sat-and-partition-lattices.md
   - from: /2017/04/07/congruences-of-partial-algebras/
     to: blog/posts/2017-04-06-congruences-of-partial-algebras.md
 
   - from: /2014/02/13/ieprops/
-    pending: "#13 -- post not converted yet; goes to /blog/ieprops/"
+    to: blog/posts/2014-02-13-ieprops.md
   - from: /2014/02/13/overalgebras/
-    pending: "#13 -- post not converted yet; goes to /blog/overalgebras/"
+    to: blog/posts/2014-02-13-overalgebras.md
   - from: /2014/02/13/typefunc/
     to: typefunc/index.md
   - from: /2014/03/19/probability-quiz/
@@ -297,15 +297,15 @@ rules:
   - from: /archives/
     to: blog/index.md
 
-  # /blog/page/2/ is the one URL here, and the new blog puts its own second
-  # page of posts at exactly that path.  It is not a page yet only because two
-  # posts do not fill one page: `pagination_per_page` is 5, so the eight posts
-  # #13 is converting produce it.  Held as pending rather than redirected to
-  # the index deliberately -- a `to:` rule here would start overwriting a real
-  # page the moment #13 lands, and the hook would (correctly) refuse to build.
-  # When it lands this becomes `keep: true`, which a prefix rule may carry.
+  # /blog/page/2/ is the one URL here, and the new blog serves its own second
+  # page of posts at exactly that path: `pagination_per_page` is 5 and #13
+  # brought the total to eight.  So this is preserved, not redirected.
+  #
+  # A `to:` rule here would be refused anyway -- the hook will not write a stub
+  # over a page the site builds -- and a prefix rule cannot carry `to:` at all.
+  # `keep:` is legal on a prefix rule because it emits nothing.
   - from: /blog/page/**
-    pending: "#13 -- /blog/page/2/ is a real page once there is a second page of posts"
+    keep: true
 
   # Thirteen category pages over fifteen posts is not a taxonomy, and the new
   # blog does not reproduce it: it has three categories, at
