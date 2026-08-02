@@ -78,29 +78,30 @@ theme:
   # docs/assets/fonts/fonts.css declares the self-hosted faces instead, and
   # tokens.css sets --md-text-font and --md-code-font to name them.  See #17.
   font: false
-  # The system preference is the default and comes first, so a visitor who has
-  # expressed one gets it without touching anything; the other two entries are
-  # the manual override.  `custom` on primary and accent means "no built-in
-  # Material colour" -- the values come from tokens.css.
+  # Dark first, and no `media:` on either entry.  Material selects the first
+  # palette when nothing is stored, and a `media` key would hand that decision
+  # back to the operating system -- which is the behaviour this replaces.  The
+  # cost is real and is the reason it is written down: a visitor who has set a
+  # light-mode preference system-wide now gets a dark page until they click the
+  # toggle once, after which their choice is remembered in local storage.  A
+  # dark default is the deliberate look of the site; a mathematics page read at
+  # night is the common case.
+  #
+  # `custom` on primary and accent means "no built-in Material colour" -- the
+  # values come from tokens.css.
   palette:
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Follow system theme
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: custom
-      accent: custom
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+    - scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   icon:
     repo: fontawesome/brands/github
 

@@ -19,12 +19,29 @@ and recorded in ADR-005.
 From M3-3 this page also carries a live example of every reusable component,
 so a component that breaks breaks visibly, on one page.
 
-The system is **Meridian**, chosen from three candidates rendered side by side
-on the same content. The other two — *Graphite*, Inter throughout with a blue
-accent, and *Manuscript*, Source Serif 4 on warm paper with a brick accent —
-were removed with the decision, along with the page that compared them.
-Reverting the commit that removed them brings all three back if the choice is
-ever reopened.
+The active system is **Meridian**, chosen from three candidates rendered side
+by side on the same content. Two of those three — *Graphite* and *Manuscript* —
+were removed with the decision.
+
+A fourth, **Constellation**, is defined alongside it and kept live: it is the
+palette and display face of the
+[agda-algebras documentation site](https://agda-algebras.universalalgebra.org/),
+which is also MkDocs Material. The two sites will link to each other
+constantly, so matching them is a defensible thing to want, and the choice is
+worth keeping open. [/design/options/](options/index.html) renders both, dark
+and light. Switching the site is two lines in `tokens.css`, described in the
+comment at the top of that file.
+
+| | Display | Body | Accent (dark / light) |
+| --- | --- | --- | --- |
+| **Meridian** *(active)* | Newsreader 500 | Inter | `#5eead4` / `#0f766e` |
+| Constellation | Space Grotesk 600 | Inter | `#8b88ff` / `#5b54e6`, coral hover |
+
+Constellation's values are agda-algebras' own, read out of its
+`stylesheets/custom.css`, with three adjusted because they do not clear AA as
+text: `--c-fg-faint` in both themes, and the coral hover colour in light, which
+is 2.86:1 on paper as published. The reasoning and the before/after ratios are
+in `tokens.css`.
 
 ## Type
 
@@ -130,10 +147,17 @@ text threshold: 1.28:1 and 1.61:1 in light, 1.29:1 and 1.71:1 in dark.
 
 ### Theme selection
 
-The palette in `mkdocs.yml` has three entries. The first has
-`media: "(prefers-color-scheme)"` and no scheme, so the operating-system
-preference wins by default; the other two are the manual override, reachable
-from the icon in the header and remembered in local storage.
+**Dark is the default.** The palette in `mkdocs.yml` has two entries, `slate`
+first, and neither carries a `media` key — Material selects the first palette
+when nothing is stored, and a `media` key would hand that decision back to the
+operating system. One click on the header icon switches to light, and the
+choice is remembered in local storage from then on.
+
+The cost is worth stating: a visitor who has set a light-mode preference
+system-wide gets a dark page until they click once. Verified in a browser with
+`prefers-color-scheme` emulated at `light`, `dark` and `no-preference` — all
+three land on `slate`, one click yields `default`, and the choice survives
+navigation.
 
 ## Spacing
 
@@ -161,9 +185,12 @@ with `make fonts`. Nothing is fetched at page load.
 | `inter-600.woff2` | 510 | 39 KB |
 | `inter-400-italic.woff2` | 510 | 41 KB |
 | `newsreader-500.woff2` | 341 | 31 KB |
+| `spacegrotesk-600.woff2` | 358 | 19 KB |
 
-Total: 612 KB across seven files, of which 56 KB is fetched by a page with no
-notation on it at all.
+Total: 631 KB across eight files, of which 56 KB is fetched by a page with no
+notation on it at all. Space Grotesk is Constellation's display face and no
+rule names it while Meridian is active, so it costs 19 KB in the repository and
+nothing at page load.
 
 JuliaMono is split three ways by `unicode-range` under one family name, so a
 page pays only for the notation it shows: a page whose code is ASCII downloads

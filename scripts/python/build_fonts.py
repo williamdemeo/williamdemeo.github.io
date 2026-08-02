@@ -180,12 +180,21 @@ FACES = [
          f"{GF}/newsreader/Newsreader%5Bopsz%2Cwght%5D.ttf",
          "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
          weight=500, axes={"wght": 500, "opsz": 36}),
+    # Constellation's display face.  Kept in the build while that system is a
+    # live alternative (see tokens.css); it costs 27 KB in the repository and
+    # nothing at page load, because no rule names it unless the system is
+    # switched on.
+    Face("spacegrotesk-600.woff2", "Space Grotesk",
+         f"{GF}/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf",
+         "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+         weight=600, axes={"wght": 600}),
 ]
 
 LICENSES = [
     ("OFL-JuliaMono.txt", f"{JM}/LICENSE"),
     ("OFL-Inter.txt", f"{GF}/inter/OFL.txt"),
     ("OFL-Newsreader.txt", f"{GF}/newsreader/OFL.txt"),
+    ("OFL-SpaceGrotesk.txt", f"{GF}/spacegrotesk/OFL.txt"),
 ]
 
 
