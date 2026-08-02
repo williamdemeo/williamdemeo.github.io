@@ -142,9 +142,9 @@ rules:
     pending: "#13/#35 -- keep; blog not built"
 
   - from: /ieprops/
-    pending: "#14 -- archive area not built"
+    pending: "#13/#35 -- keep; blog not built"
   - from: /overalgebras/
-    pending: "#14 -- archive area not built"
+    pending: "#13/#35 -- keep; blog not built"
   - from: /typefunc/
     pending: "#14 -- archive area not built"
   - from: /touchpad-forensics/
@@ -180,9 +180,9 @@ rules:
     pending: "#13/#35 -- keep; blog not built"
 
   - from: /2014/02/13/ieprops/
-    pending: "#14 -- archive area not built"
+    pending: "#13/#35 -- keep; blog not built"
   - from: /2014/02/13/overalgebras/
-    pending: "#14 -- archive area not built"
+    pending: "#13/#35 -- keep; blog not built"
   - from: /2014/02/13/typefunc/
     pending: "#14 -- archive area not built"
   - from: /2014/03/19/probability-quiz/
@@ -202,12 +202,14 @@ rules:
   - from: /2014/02/07/cloning-an-octopress-repo/
     pending: "#35 -- dropped; redirect to the blog index"
 
-  # The one post that exists only as generated HTML and needs converting
-  # (#13).  Octopress served it at two paths.
+  # Archived rather than converted: Ralph Freese found an error in the proof
+  # (ADR-002), which removes the reason to bring it forward.  The URLs still
+  # have to resolve -- archiving keeps them working without republishing the
+  # mathematics.  Octopress served it at two paths.
   - from: /2017/04/07/commutator-as-least-fixed-point/
-    pending: "#13 -- HTML->Markdown conversion outstanding"
+    pending: "#14 -- archive area not built"
   - from: /the-commutator-as-a-least-fixed-point/
-    pending: "#13 -- HTML->Markdown conversion outstanding"
+    pending: "#14 -- archive area not built"
 
   # Octopress section pages.  The Zola site moved this material under
   # /computing/; ADR-002 drops it and redirects to the archive index.
