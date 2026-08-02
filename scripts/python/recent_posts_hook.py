@@ -29,6 +29,26 @@ Drafts are excluded for free: the plugin sets their inclusion to EXCLUDED
 during `on_files`, and `Files.documentation_pages()` filters on inclusion.  So
 a draft is absent from this list on a build and present on `mkdocs serve`,
 which is what `draft_on_serve` promises everywhere else.
+
+## On babel, which is imported here but pinned nowhere
+
+`babel` appears in neither requirements.txt nor flake.nix, and that is correct
+rather than an oversight.  It is a *declared* dependency of mkdocs-material
+(`babel~=2.10`), and `material/plugins/blog/plugin.py` imports it at module
+scope to format post dates.  Pinning it separately would oblige flake.nix to
+match a version under ADR-004's `checks.requirements-pins`, for a package the
+theme already pins for us.
+
+Nor does importing it here widen the failure surface.  With babel made
+unimportable, the build aborts during config validation on the *blog plugin's*
+import, at the same point and with the same message, whether or not this hook
+is enabled -- so a fallback formatter here would mask this line while the
+build still failed on that one.  It would also be a fallback that can never
+run, and that formats dates differently: `format_date` follows
+`theme.language`, exactly as the blog plugin does, and `strftime` does not.
+
+The date on the home page and the date on the post therefore come from the
+same formatter, in the same locale, and cannot drift apart.
 """
 
 from __future__ import annotations
