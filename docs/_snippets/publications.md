@@ -14,8 +14,8 @@
   [DOI](https://doi.org/10.4230/LIPIcs.TYPES.2021.4) · [arXiv:2101.10166](https://arxiv.org/abs/2101.10166)
 
 - **Constraint satisfaction problems over finite structures**  
-  Libor Barto, **William DeMeo**, and Antoine Mottet.  *36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)*, 2021.  
-  [arXiv:2010.04958](https://arxiv.org/abs/2010.04958)
+  Libor Barto, **William DeMeo**, and Antoine Mottet.  *36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)*, pp. 1-13, 2021.  
+  [DOI](https://doi.org/10.1109/LICS52264.2021.9470670) · [arXiv:2010.04958](https://arxiv.org/abs/2010.04958)
 
 - **Bounded homomorphisms and finitely generated fiber products of lattices**  
   **William DeMeo**, Peter Mayr, and Nik Ruškuc.  *International Journal of Algebra and Computation*, **30**:693-710, 2020.  

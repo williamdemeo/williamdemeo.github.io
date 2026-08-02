@@ -85,6 +85,16 @@ Eleven of the fifteen entries carry a DOI or an arXiv identifier and are now
 checked. The other four have neither, and the verifier lists them as
 unverifiable rather than passing over them in silence.
 
+Two fields are compared for information rather than for agreement, because the
+publisher's value and a bibliography's are different things by design: the
+`container-title` of a proceedings article, where Crossref and DataCite hold
+the registered title of the proceedings volume — *2021 36th Annual ACM/IEEE
+Symposium on Logic in Computer Science (LICS)* — and not the name a
+bibliography gives the conference; and arXiv's free-text `journal_ref`, which
+is checked by containment and printed in full rather than parsed into fields it
+does not really have. For a journal article `container-title` *is* the journal,
+and a difference there is still a difference.
+
 ### What it is built not to do
 
 **Report a clean run it did not earn.** Any request that fails to reach a
@@ -115,21 +125,21 @@ reported for information.
 
 ## Consequences
 
-- **Four entries still carry `_needs_review`**, printed on every run of
-  `make publications`. All four are decisions for a person, and each note now
+- **Three entries still carry `_needs_review`**, printed on every run of
+  `make publications`. All three are decisions for a person, and each note now
   records what the publishers do say:
   - `demeo2022birkhoff` — one entry or two. DataCite's record for the TYPES
     proceedings paper names arXiv:2101.10166 as a version of it, so the
     publisher treats them as one work; the research page treats the preprint as
     a separate, longer work under a different title.
-  - `barto2021csp` — the research page says "submitted to LICS 2021", the CV
-    says it is a LICS 2021 paper. Crossref has the proceedings article, which
-    favours the CV.
   - `demeo2002icmc` — the CiteSeerX link needs replacing, and neither service
     holds this paper.
   - `demeo1998eigenvalues` — one item or two, alongside the MS thesis.
-- **The other four `_needs_review` notes are gone**, settled by the publishers
+- **The other five `_needs_review` notes are gone**, settled by the publishers
   rather than by choosing:
+  - the LICS 2021 paper did appear in the proceedings — Crossref registers it
+    as a proceedings article, pages 1–13 — so the CV was right and the research
+    page's "submitted to" was stale.
   - the 2020 IJAC title *does* include "finitely generated" (World Scientific).
   - *nonisomorphic* is unhyphenated in *Algebra universalis*; Zotero was
     carrying the preprint's title.

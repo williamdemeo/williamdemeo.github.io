@@ -427,6 +427,24 @@ def test_et_al_over_a_wrong_prefix_is_a_difference():
     assert level == vb.DIFFERS, level
 
 
+def test_a_proceedings_volume_title_is_not_the_venue_name():
+    """IEEE registers the volume; a bibliography names the conference."""
+    item = {"container-title": "36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)"}
+    volume_title = "2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)"
+    proceedings = vb.check_crossref(
+        item, {"type": "proceedings-article", "container-title": [volume_title]}
+    )
+    assert [d[0] for d in proceedings] == [vb.NOTE], proceedings
+    assert proceedings[0][3] == volume_title, proceedings
+
+    # A journal's container-title *is* the journal, so a difference there stays
+    # a difference.
+    journal = vb.check_crossref(
+        item, {"type": "journal-article", "container-title": ["Some Other Journal"]}
+    )
+    assert [d[0] for d in journal] == [vb.DIFFERS], journal
+
+
 def test_preprint_differences_defer_to_the_publisher():
     """arXiv holds the preprint; the journal holds the version of record."""
     item = dict(ENTRY, title="Isotopic algebras with nonisomorphic congruence lattices")

@@ -166,10 +166,12 @@ def render(items: list[dict]) -> str:
         venue = it.get("container-title")
         if venue:
             vol = f", **{it['volume']}**" if it.get("volume") else ""
-            # LIPIcs and OASIcs number pages within an article -- "2:1-2:18" --
-            # so the usual "volume:pages" colon would disappear into the range.
-            separator = ", pp. " if ":" in str(it.get("page") or "") else ":"
-            pages = f"{separator}{it['page']}" if it.get("page") else ""
+            # The bare colon means "volume:pages", so it needs a volume to
+            # attach to.  It is also wrong for LIPIcs and OASIcs, which number
+            # pages within an article -- "2:1-2:18" -- where a second colon
+            # would disappear into the range.
+            compact = it.get("volume") and ":" not in str(it.get("page") or "")
+            pages = f"{':' if compact else ', pp. '}{it['page']}" if it.get("page") else ""
             second += f".  *{venue}*{vol}{pages}"
         elif it.get("genre"):
             second += f".  {it['genre']}"

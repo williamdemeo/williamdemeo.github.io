@@ -287,6 +287,15 @@ against what the file claims, and each difference is marked:
 Only `!` fails the run. Exit codes follow `diff(1)`: 0 everything checked
 agrees, 1 a difference wants a human, 2 could not run.
 
+Two fields are `i` by design, because the publisher's value and a
+bibliography's are different things: the `container-title` of a *proceedings*
+article, where the publisher holds the registered title of the volume (*2021
+36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)*) rather
+than the name of the conference; and arXiv's free-text `journal_ref`, checked
+by containment and printed in full rather than parsed into fields it does not
+really have. For a *journal* article `container-title` is the journal, and a
+difference there still fails.
+
 **Two things it is built not to do**, both of which this repository has been
 caught by:
 

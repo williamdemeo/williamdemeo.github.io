@@ -13,10 +13,10 @@
     "its years looked wrong against the other two lists.",
     "",
     "`_needs_review` marks a field the three sources disagree on and that could",
-    "not be settled from them.  Four remain, and all four are decisions for a",
+    "not be settled from them.  Three remain, and all three are decisions for a",
     "person rather than facts to look up: whether to split an entry in two,",
-    "whether to trust the CV over the research page about a venue, which",
-    "replacement link to use.  Each note records what the publishers do say.",
+    "which replacement link to use, whether two items are really one.  Each note",
+    "records what the publishers do say.",
     "",
     "Every entry carrying a DOI or an arXiv identifier has been checked against",
     "the publisher's own record -- Crossref, DataCite or the arXiv API -- by",
@@ -95,12 +95,14 @@
         {"family": "Mottet", "given": "Antoine"}
       ],
       "container-title": "36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)",
+      "page": "1-13",
       "issued": {"date-parts": [[2021]]},
       "_preprint": {"arxiv-year": 2020},
       "_arxiv": "2010.04958",
+      "DOI": "10.1109/LICS52264.2021.9470670",
       "URL": "https://arxiv.org/abs/2010.04958",
       "_source": ["cv", "research"],
-      "_needs_review": "The research page says 'submitted to LICS 2021'; the CV lists it as a LICS 2021 paper. The evidence favours the CV -- Crossref has 10.1109/LICS52264.2021.9470670, 'Constraint Satisfaction Problems over Finite Structures' in '2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)', pages 1-13, by Barto, DeMeo and Mottet, and arXiv 2010.04958 carries that same DOI with journal_ref 'LICS 2021 pages 1--13'. Adding the DOI and pages is left for William to confirm."
+      "_comment": "It did appear in the proceedings, so the CV was right and the research page's 'submitted to LICS 2021' was stale. DOI and pages from Crossref, which registers it as a proceedings-article in '2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)'; arXiv 2010.04958 carries the same DOI. The venue is named here the way the file names its other conferences, not the way IEEE registered the proceedings volume."
     },
     {
       "id": "demeo2020bounded",

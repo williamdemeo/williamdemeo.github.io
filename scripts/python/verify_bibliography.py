@@ -431,6 +431,19 @@ def check_crossref(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
     if subtitle and loose(subtitle) not in loose(title):
         title = f"{title}: {subtitle}"
 
+    venue = compare(
+        "container-title",
+        item.get("container-title"),
+        (record.get("container-title") or [None])[0],
+    )
+    # For a conference paper the publisher's container-title is the registered
+    # title of the proceedings volume -- "2021 36th Annual ACM/IEEE Symposium on
+    # Logic in Computer Science (LICS)" -- and not the name a bibliography calls
+    # the venue.  Same distinction DataCite's `container` draws for a series,
+    # and handled the same way: shown in full, not reported as something wrong.
+    if venue and venue[0] == DIFFERS and record.get("type") == "proceedings-article":
+        venue = (NOTE, "proceedings", venue[2], venue[3])
+
     for difference in (
         compare("title", item.get("title"), title),
         compare_authors(
@@ -440,11 +453,7 @@ def check_crossref(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
                 for a in record.get("author") or []
             ],
         ),
-        compare(
-            "container-title",
-            item.get("container-title"),
-            (record.get("container-title") or [None])[0],
-        ),
+        venue,
         compare_volume(item.get("volume"), record.get("volume")),
         compare_pages(item.get("page"), record.get("page")),
     ):
