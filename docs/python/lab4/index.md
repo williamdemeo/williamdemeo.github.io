@@ -104,7 +104,7 @@ Use Sage to find the matrix representation of $T$ by following these steps.
 
   (Remember, you can get help with the `matrix` function by entering `T.matrix?`.)
 
-+ **c.** In this part, we will use Sage to find the matrix representation $[T]_{\mathcal B}$ of $T$ with respect to the basis $$\mathcal{B} = \left\\{ \begin{bmatrix} 1\\\ 0 \\\ -1 \end{bmatrix}, \begin{bmatrix} 0\\\2\\\3 \end{bmatrix}, \begin{bmatrix} 1\\\1\\\1 \end{bmatrix} \right\\}.$$
++ **c.** In this part, we will use Sage to find the matrix representation $[T]_{\mathcal B}$ of $T$ with respect to the basis $$\mathcal{B} = \left\{ \begin{bmatrix} 1\\\ 0 \\\ -1 \end{bmatrix}, \begin{bmatrix} 0\\\2\\\3 \end{bmatrix}, \begin{bmatrix} 1\\\1\\\1 \end{bmatrix} \right\}.$$
 
   We will do this in two different ways and then check that both methods yield the same result.
 
@@ -222,7 +222,7 @@ Use the steps below as a guide. Later, come back and do the same $B$. What goes 
 To experiment more with change-of-basis, see if you can come up with an example of the more general version of the change-of-basis theorem---Theorem 4.2, page 231 of our textbook---and
 try it out in Sage. 
 
-That is, given a linear transformation $T: V \to W$, and two bases $\mathcal V$, $\mathcal V'$ for $V$, and two bases $\mathcal W$, $\mathcal W'$ for $W$, use the formula $$[T]\_{\mathcal V', \mathcal W'} = Q^{-1}[T]_{\mathcal V,\mathcal W} P$$ to compute the $(\mathcal V',\mathcal W')$-basis representation of $T$.
+That is, given a linear transformation $T: V \to W$, and two bases $\mathcal V$, $\mathcal V'$ for $V$, and two bases $\mathcal W$, $\mathcal W'$ for $W$, use the formula $$[T]_{\mathcal V', \mathcal W'} = Q^{-1}[T]_{\mathcal V,\mathcal W} P$$ to compute the $(\mathcal V',\mathcal W')$-basis representation of $T$.
 
 You will have to generalize one of the two methods described in Exercise **2.c.** above, but by now it should be clear how to do this. 
 

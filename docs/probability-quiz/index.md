@@ -92,7 +92,7 @@ $$
 $$
 
 where $\chi$ denotes the characteristic function, that is,
-$\chi\_{\mathrm{True}}=1$ and $\chi\_{\mathrm{False}}=0$.
+$\chi_{\mathrm{True}}=1$ and $\chi_{\mathrm{False}}=0$.
 
 If we let $N= \min\{8, 10 - f -1\}$, then the expected value of rolling twice is
 
@@ -155,14 +155,14 @@ shown on the first roll.
 0.2 of coming up heads.  This version is a generalization to $n$ coins with
 arbitrary probabilities that sum to 1.)
 
-Suppose you have a bag with $n$ coins, $C\_1, C\_2, \dots, C\_n$,  and coin
-$C\_i$ has probability $p\_i$ of coming up heads when flipped.  Assume 
-$p\_1 + p\_2 + \cdots p\_n = 1$.  Suppose you draw a coin from the bag at random
+Suppose you have a bag with $n$ coins, $C_1, C_2, \dots, C_n$,  and coin
+$C_i$ has probability $p_i$ of coming up heads when flipped.  Assume 
+$p_1 + p_2 + \cdots p_n = 1$.  Suppose you draw a coin from the bag at random
 and flip it and it comes up heads.  If you flip
 the same coin it again, what is the probability it comes up heads?
 
-Denote by $H\_i$ the event that heads turns up on the $i$-th flip, and by a
-slight abuse of notation, let $C\_i$ denote the event that we are flipping coin $C_i$.
+Denote by $H_i$ the event that heads turns up on the $i$-th flip, and by a
+slight abuse of notation, let $C_i$ denote the event that we are flipping coin $C_i$.
 Then 
 
 $$
@@ -297,7 +297,7 @@ Therefore,
 
 $$
 E(X | \text{ switch}) 
-= E(X | A\_1, \text{ switch}) P(A\_1)+ E(X | B\_1, \text{ switch}) P(B\_1) = 6.5 \frac{7}{12} + 7.3 \frac{5}{12}.
+= E(X | A_1, \text{ switch}) P(A_1)+ E(X | B_1, \text{ switch}) P(B_1) = 6.5 \frac{7}{12} + 7.3 \frac{5}{12}.
 $$
 
 So, the expected value of the second draw if we switch urns is a little more
