@@ -44,9 +44,9 @@ all: the GitLab repository stays public as the archive of its own history
 | Disposition | Pages |
 | --- | --- |
 | promote | 52 |
-| archive | 23 |
+| archive | 21 |
 | drop | 22 |
-| keep | 6 |
+| keep | 8 |
 | **Total** | **103** Zola pages (+ 15 Octopress, below) |
 
 ## Sections
@@ -66,9 +66,9 @@ all: the GitLab repository stays public as the archive of its own history
 | `2014-02-05-diaconescus-theorem.md` | **keep** | Constructive mathematics, on-topic. |
 | `2014-02-13-a-problem-of-palfy-and-saxl.md` | **keep** | Research note; connects to the PhD work. |
 | `2014-02-13-groupsound.md` | **keep** | The GroupSound project; ties to the Magellan grant. |
-| `2014-02-13-ieprops.md` | **archive** | 112 words announcing a project page. |
+| `2014-02-13-ieprops.md` | **keep** | 112 words announcing a project page. |
 | `2014-02-13-isotopy.md` | **keep** | 964 words of real mathematics; the most notation-heavy post. |
-| `2014-02-13-overalgebras.md` | **archive** | 141 words announcing a preprint. |
+| `2014-02-13-overalgebras.md` | **keep** | 141 words announcing a preprint. |
 | `2014-02-13-typefunc.md` | **archive** | 81 words announcing a reading group. |
 | `2014-03-19-probability-quiz.md` | **archive** | 1,621 words, self-contained probability, and genuinely good — but an interview puzzle from a quant shop reads as a tonal outlier here. Decided below. |
 | `2015-01-11-three-sat-and-partition-lattices.md` | **keep** | 808 words; complexity and lattice theory. |
@@ -97,7 +97,7 @@ three that do not:
 
 | Page | Disposition | Rationale |
 | --- | --- | --- |
-| `commutator-as-least-fixed-point` | **keep** | Exists only as generated HTML. The one post genuinely needing HTML→Markdown conversion. |
+| `commutator-as-least-fixed-point` | **archive** | Ralph Freese found an error in the proof. Exists only as generated HTML; not worth converting, and not worth republishing. |
 | `cloning-an-octopress-repo` | **drop** | Documents a workflow that no longer exists. |
 | `learn-you-an-agda` | **drop** | Written by Liam O'Connor-Davis, reposted with permission. Third-party; archival only, never republished. See #13. |
 
@@ -131,8 +131,8 @@ hosting rather than disposition: the exam corpus is now also served at
 `formalverification.io/exams/`, so #56 has to decide whether this site hosts
 the corpus, mirrors it, or describes and links it. See the consequences below.
 
-**The six `keep` posts are a judgment about the blog's opening lineup.** They
-are all 2014–2017. Publishing six decade-old posts as the entire blog on launch
+**The `keep` posts are a judgment about the blog's opening lineup.** They are
+all 2014–2017. Publishing eight decade-old posts as the entire blog on launch
 day says something — possibly "this person has been quiet for ten years". The
 alternative is to hold most of them in `archive/` and let the blog open with the
 new writing from M6-4 (#38).
@@ -146,12 +146,36 @@ genuinely good, but an interview puzzle from a quant shop is a tonal outlier on
 a site aimed at research labs.
 
 **Decision: archive.** It keeps its URL and stays linkable; it just does not
-sit in the blog's opening lineup. This is the one disposition changed after the
-table was first generated, which is why `keep` is 6 and `archive` is 23.
+sit in the blog's opening lineup.
+
+## Changed on review
+
+Three dispositions moved after the generated table was first produced, which is
+why the summary reads 52/21/22/8 rather than the originally generated
+52/22/22/7:
+
+| Page | | Why |
+| --- | --- | --- |
+| `2014-03-19-probability-quiz.md` | keep → **archive** | The Jane Street outlier, above. |
+| `2014-02-13-ieprops.md` | archive → **keep** | Kept on review. |
+| `2014-02-13-overalgebras.md` | archive → **keep** | Kept on review. |
+
+The last two are both short announcement posts — 112 and 141 words — which is
+why the word-count rule put them in `archive`. That rule cannot tell an
+announcement worth keeping from a stub, so the call is the author's. Both
+announce things that still exist, and if they are on the site they should say
+what became of them; that is M2-4's business, not this ADR's.
+
+Separately, in the Octopress table, `commutator-as-least-fixed-point` moves
+from **keep** to **archive**: Ralph Freese found an error in the proof. That
+also removes the only reason to convert it, so #13's HTML→Markdown work no
+longer has a subject.
 
 ## Consequences
 
-- M2-4 (#13) converts the `keep` posts and the one Octopress-only post.
+- M2-4 (#13) converts the `keep` posts. Its other half is gone: the one
+  Octopress-only post worth converting was the commutator one, and it is now
+  archived as generated HTML instead.
 - M2-5 (#14) relocates assets for pages that survive, and the `csp/*.pdf`
   licensing question is still open there.
 - M2-6 (#15) builds redirects; every **drop** above needs a target, and the
@@ -188,8 +212,8 @@ sections listed : 5  -> 77 pages
 singles listed  : 26 pages
 total accounted : 103
 actual on disk  : 103
-claimed counts  : {archive: 23, drop: 22, keep: 6, promote: 52}
-summary table   : {archive: 23, drop: 22, keep: 6, promote: 52}
+claimed counts  : {archive: 21, drop: 22, keep: 8, promote: 52}
+summary table   : {archive: 21, drop: 22, keep: 8, promote: 52}
 pages not covered by any row: none
 pages covered by >1 row     : none
 CONSISTENT
