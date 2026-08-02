@@ -458,7 +458,7 @@ The home page at this stage should say who the author is and what he is working 
 
 ---
 
-### Issue M1-8: Wire the project plan into the build (#9)
+### Issue M1-8: Wire the project plan into the build (#9, closed)
 
 **Labels**: `milestone-1-foundation`, `ci`, `automation`
 
@@ -605,7 +605,7 @@ Write this as a script rather than doing it by hand.  There are roughly 130 file
 
 ---
 
-### Issue M2-3: Triage every legacy page and record the disposition (#12)
+### Issue M2-3: Triage every legacy page and record the disposition (#12, closed)
 
 **Labels**: `milestone-2-migration`, `content`, `decision`
 
@@ -668,31 +668,45 @@ The fifteen Octopress posts exist in this repository only as generated HTML; the
 | GitLab history only | 1 | `2014-02-27-learn-you-an-agda.md`, deleted in `b001a4d` |
 | Nowhere — HTML only | 2 | `cloning-an-octopress-repo`, `commutator-as-least-fixed-point` |
 
-So only two posts need HTML-to-Markdown conversion, not six.
+**No HTML-to-Markdown conversion is needed after all.** Both HTML-only posts are now dropped or archived, for reasons unrelated to their format — see below. This issue is now entirely about the twelve posts that already exist as Zola Markdown.
 
-## Decision recorded: *Learn You an Agda* will not be republished
+## Three decisions recorded
 
-The post's front matter records its author as **Liam O'Connor-Davis**, with only minor corrections, a Markdown conversion, and small additions by the repository owner. It is third-party material rather than original work, and it will not be featured on the site.
+**No conversion work remains.** `commutator-as-least-fixed-point` was the last post genuinely needing HTML→Markdown, and ADR-002 archives it instead: **Ralph Freese found an error in the proof.** That is not a presentation call like the others here — a post with a known error in its proof should not be republished, and archiving keeps its two URLs resolving without asserting the mathematics. It goes to the archive area (#67) as generated HTML.
 
-This closes the question the earlier version of this issue left open. The Markdown source stays recoverable from GitLab history — which is one of the reasons ADR-001 keeps that repository public — but recovery here is archival, not editorial. The Agda sources `content/agda/LearnYouAn.agda` and `LearnYouAn2.agda` are likewise not site material.
+`cloning-an-octopress-repo` is dropped: it documents a workflow that no longer exists.
 
-`cloning-an-octopress-repo` is also dropped: it documents a workflow that no longer exists.
+***Learn You an Agda* will not be republished.** The post's front matter records its author as **Liam O'Connor-Davis**, with only minor corrections, a Markdown conversion, and small additions by the repository owner. It is third-party material rather than original work.
 
-That leaves `commutator-as-least-fixed-point` as the only post genuinely needing conversion from HTML.
+The Markdown source stays recoverable from GitLab history — one of the reasons ADR-001 keeps that repository public — but recovery is archival, not editorial. The Agda sources `content/agda/LearnYouAn.agda` and `LearnYouAn2.agda` are likewise not site material. M2-6 (#15) redirects its old URLs to O'Connor's original rather than to our blog index, so a reader looking for that tutorial finds the tutorial.
+
+## Which posts this issue actually covers
+
+ADR-002 marks eight posts **keep**, and they are what needs converting:
+
+`diaconescus-theorem`, `a-problem-of-palfy-and-saxl`, `groupsound`, `isotopy`, `three-sat-and-partition-lattices`, `congruences-of-partial-algebras`, `ieprops`, `overalgebras`
+
+The last two were moved from `archive` to `keep` on review of #12. They are short — 112 and 141 words — because each announces something (a project page, a preprint) rather than arguing anything. If they are on the site they should say what became of the thing they announce; that rewrite belongs here.
+
+## Sequencing
+
+These posts need somewhere to live, which is M6-1 (#35). Converting them before the blog engine exists means guessing at the directory layout and front-matter schema the plugin expects, then redoing it. Either land #35 first, or accept that this issue's output is staged and rewired later.
+
+The eight `keep` URLs — plus their six Octopress dated equivalents — are held in `redirects.yml` under this issue and #35 for exactly that reason.
 
 ## Tasks
 
-- [ ] For the twelve posts present in the GitLab working tree, take the Zola Markdown.
-- [ ] Convert `commutator-as-least-fixed-point` from HTML to Markdown with `pandoc` and hand-correct.
-- [ ] Drop `cloning-an-octopress-repo`, with a redirect per M2-6.
-- [ ] Do not migrate *Learn You an Agda*; add a redirect from its old URL to the blog index so the link does not 404.
-- [ ] Normalize front matter, slugs, and dates across all rescued posts.
-- [ ] Add a dated-content notice to every post older than 2022.
+- [ ] For the eight `keep` posts, take the Zola Markdown from `import/zola-converted/`.
+- [ ] Rewrite `ieprops` and `overalgebras` to say what became of what they announce.
+- [ ] Normalize front matter, slugs, and dates across all eight.
+- [ ] Add a dated-content notice to every post older than 2022. **Share one mechanism with the archive area (#67)**, which needs the same thing, rather than inventing two.
+- [ ] Verify mathematics survives: `make math-audit MATH_SRC=docs` should be clean on the converted posts.
+- [ ] Switch the corresponding `pending:` entries in `redirects.yml` to `to:`, and confirm `make redirect-check` stays green.
 
 ## Acceptance criteria
 
-- [ ] Every post kept per the M2-3 triage exists as clean Markdown and renders correctly.
-- [ ] Mathematics and code blocks survived conversion — spot-checked on `isotopy` and `three-sat-and-partition-lattices`, the two most notation-heavy posts.
+- [ ] All eight `keep` posts exist as clean Markdown and render correctly.
+- [ ] Mathematics and code blocks survived — spot-checked on `isotopy` and `three-sat-and-partition-lattices`, the two most notation-heavy, and confirmed by the math audit rather than by eye.
 - [ ] No third-party writing is published under the site owner's byline.
 - [ ] Old post URLs resolve or redirect; none 404.
 - [ ] Old posts carry a visible date context notice.
@@ -700,6 +714,8 @@ That leaves `commutator-as-least-fixed-point` as the only post genuinely needing
 ---
 
 *Revised 2026-07-30: corrected the post-source counts, which were estimated rather than verified in the original plan, and recorded the decision not to republish* Learn You an Agda *after its authorship was confirmed from front matter.*
+
+*Revised 2026-08-02: the HTML→Markdown conversion is cancelled — ADR-002 archives `commutator-as-least-fixed-point` because Ralph Freese found an error in the proof, which was the only remaining reason to convert anything. Scope narrowed to the eight `keep` posts, which now include `ieprops` and `overalgebras`.*
 
 ---
 
@@ -731,7 +747,7 @@ Import only images actually referenced by content that survived M2-3 triage, and
 
 ---
 
-### Issue M2-6: Build and verify the redirect map (#15)
+### Issue M2-6: Build and verify the redirect map (#15, closed)
 
 **Labels**: `milestone-2-migration`, `infrastructure`, `seo`
 
@@ -799,9 +815,29 @@ The recommendation is to vendor the `williamdemeo/cv` content into this reposito
 
 **Labels**: `milestone-2-migration`, `content`, `seo`
 
+## Prerequisite: decide where the corpus lives, before anything else here
+
+The corpus is now also served at `formalverification.io/exams/`, from `github.com/formalverification/formalverification.io`. Nothing else in this issue can be scoped until that is resolved, so it is resolved first.
+
+**Two copies of 48 math-heavy pages is the condition under which one of them silently rots — and this corpus has already demonstrated exactly that.** Its LaTeX macros were undefined on the live site for years (#20). Maintaining two copies means every macro fix, every `\\{` normalisation, every XY-pic diagram conversion has to happen twice or one copy falls behind.
+
+**Recommendation: neither host it here nor merely link it.** Give the corpus its own repository, serve it at `formalverification.io/exams/`, and build a first-class *portfolio page* here that describes the project and links out.
+
+- The planned Agda formalization decides this. Once solutions are literate Agda, the source of truth is a type-checked project with CI, not a folder of Markdown inside a personal website. A site containing Agda is the wrong shape; a repo that renders to a site is the right one — the shape `agda-algebras` → `agda-algebras.universalalgebra.org` already uses.
+- Hosting 48 solution pages inside the personal site works against what that site is for. One page saying "a corpus of worked solutions in real and complex analysis and algebra, now being formalized in Agda — here is the corpus, here is the formalization, here is one solution end to end from prose to machine-checked proof" is a stronger artifact than the 48 pages, and makes the point the pages themselves do not.
+- It turns the weakest legacy content into the strongest thread: not ten-year-old pages with broken math, but an ongoing formalization project bridging the mathematics and the formal-methods work.
+
+**The cost, stated plainly:** redirecting `williamdemeo.org/exams/*` off-site hands accumulated traffic and search authority to a domain that does not carry the owner's name. Softened by `formalverification.io` being his own org rather than a third party, and by the portfolio page here carrying the name — but it is a real cost, not a wash.
+
+**Hard gate before any redirect is written:** confirm the copy at `formalverification.io/exams/` is at least as complete as the 48 pages in `import/zola-converted/exams/`. Redirecting to a thinner copy loses content permanently. This has not been verified — the check needs a session that can reach that host.
+
+This decision **gates #15**, which has to know whether `/exams/*` takes internal or external redirect targets. See ADR-002 and #12.
+
+---
+
 ## Description
 
-The graduate qualifying-exam solutions are promoted to a first-class section of the site rather than archived. See M2-3 (#12) for the reversal and its reasoning; this issue is the build-out.
+The graduate qualifying-exam solutions are promoted to a first-class part of the site rather than archived. See M2-3 (#12) for the reversal and its reasoning; this issue is the build-out.
 
 Roughly 43 solution sets across four subjects, plus index pages:
 
@@ -812,38 +848,114 @@ Roughly 43 solution sets across four subjects, plus index pages:
 | Groups | 11 |
 | Real analysis | 7 |
 
+ADR-002 adds one thing the original triage missed: the "books" page advertised [Exercises in Real Variables](https://realanalysis.gitlab.io) and [Exercises in a Complex Variable](https://complexanalysis.gitlab.io) as separate projects, but **they are the same body of work as this corpus.** They merge in here rather than being promoted alongside it — one body of work must not be advertised twice. (The third book on that page, the category theory course, is genuinely separate original work coauthored with Venanzio Capretta and Charlotte Aten; it becomes an M4 portfolio entry, not part of this.)
+
 Three things make this worth real effort rather than a bulk migration.
 
-**The solutions are original work.** The problems come from the University of Hawaii qualifying exams; the worked solutions are the site owner's, written over several years. The section must make that distinction explicit, both because it is accurate and because it is the part that represents actual effort.
+**The solutions are original work.** The problems come from the University of Hawaii qualifying exams; the worked solutions are the site owner's, written over several years. The presentation must make that distinction explicit, both because it is accurate and because it is the part that represents actual effort.
 
-**It has an existing audience.** This is one of the few parts of the legacy site with real, ongoing traffic. That makes URL preservation a hard requirement rather than a nicety — traffic implies inbound links, and every broken one is a permanent loss. It also makes the section worth presenting well: it is likely the most-visited thing on the site on day one.
+**It has an existing audience.** This is one of the few parts of the legacy site with real, ongoing traffic. That makes URL preservation a hard requirement rather than a nicety — traffic implies inbound links, and every broken one is a permanent loss.
 
-**It is the source corpus for a planned formalization project.** Many of these solutions are to be formalized in Agda, with the group-theory and ring-theory material sitting naturally alongside `agda-algebras` and providing a large body of new material to exercise that library against. That reframes the collection from a relic into live work, and the section should say so — a short statement of direction turns a static archive into a visible research thread.
+**It is the source corpus for a planned formalization project.** Many of these solutions are to be formalized in Agda, with the group-theory and ring-theory material sitting naturally alongside `agda-algebras` and providing a large body of new material to exercise that library against. That reframes the collection from a relic into live work.
 
-The collection is also explicitly incomplete and expected to grow, since further handwritten solutions are to be digitized over time. The structure has to make adding one solution a small, obvious operation, or it will not happen.
+The collection is also explicitly incomplete and expected to grow, since further handwritten solutions are to be digitized over time. Whatever structure it gets has to make adding one solution a small, obvious operation, or it will not happen.
 
 ## Tasks
 
-- [ ] Give the section a top-level home with a nav entry; do not bury it under `archive/`.
-- [ ] Write an index explaining the collection: what the problems are, whose the solutions are, and that it is a work in progress.
-- [ ] Preserve every existing URL exactly, or redirect it; coordinate with M2-6 (#15).
-- [ ] Per-subject index pages with a completeness indicator, so gaps read as "not yet" rather than "missing".
-- [ ] Verify KaTeX renders every solution correctly — these are the most notation-dense pages on the site, and M3-4 should treat them as the hardest test case.
-- [ ] Add a short section on the planned Agda formalization, with a forward link once that project has a public home.
-- [ ] Document the workflow for adding a newly digitized solution, in the spirit of M6-2.
+**First, and blocking:**
+
+- [ ] Verify the completeness of `formalverification.io/exams/` against the 48 imported pages.
+- [ ] Decide the corpus's home. Record it as an ADR, since #15 and any future formalization project both depend on it.
+
+**Then, under the recommended split** (revise if the decision goes the other way):
+
+- [ ] Build the portfolio page here: what the problems are, whose the solutions are, that it is a work in progress, and where the corpus lives.
+- [ ] Attribute problems and solutions unambiguously on that page.
+- [ ] Give the planned Agda formalization a short section with a forward link once it has a public home.
+- [ ] Fold the real/complex analysis "books" into that page rather than listing them separately.
+- [ ] Coordinate `/exams/*` redirect targets with M2-6 (#15).
 - [ ] Consider a stable citation form, since a resource with traffic gets linked from elsewhere.
+
+**Carried to the corpus's own repository, wherever it ends up** — recorded here so they are not lost:
+
+- [ ] Per-subject indexes with a completeness indicator, so gaps read as "not yet" rather than "missing".
+- [ ] Normalise the 9 over-escaped `\\{` expressions (diagnosed in #20; mechanical, but a content change).
+- [ ] Convert the 5 XY-pic commutative diagrams, which KaTeX cannot render, to Mermaid, KaTeX `{CD}`, or images.
+- [ ] Fix the 3 genuine LaTeX errors in the source: an unbalanced `\footnote`, an unclosed `\left`.
+- [ ] Document the workflow for adding a newly digitized solution.
 
 ## Acceptance criteria
 
-- [ ] The section is reachable from the primary nav and reads as a maintained resource, not an archive.
+- [ ] The corpus has exactly one maintained home, recorded in an ADR.
+- [ ] The site presents it as a live project rather than an archive, and links to it.
 - [ ] Attribution distinguishes problems from solutions unambiguously.
 - [ ] Every legacy exam URL resolves or redirects; none 404.
-- [ ] All mathematics renders correctly.
+- [ ] Wherever the pages are served, `make math-audit` passes against them.
 - [ ] Adding one new solution is a documented, single-file operation.
 
 ## Notes
 
-Depends on M2-2 (#11) for the Zola-to-Markdown conversion and M3-4 for math rendering. The Agda formalization project itself belongs in its own repository, not this one; this issue only covers presenting the corpus and pointing at that work.
+Depends on M2-2 (#11) for the Zola-to-Markdown conversion and M3-4 (#20) for math rendering; #20 supplies the macro table these pages need, wherever they are served.
+
+The Agda formalization project belongs in its own repository, not this one. This issue covers deciding the corpus's home and presenting it here — not building the formalization.
+
+---
+
+### Issue M2-9: Build the archive area (#67)
+
+**Labels**: `milestone-2-migration`, `infrastructure`, `content`
+
+## Description
+
+ADR-002 gives 21 pages the disposition **archive** — "migrate into a de-emphasised area: out of the primary nav, indexed and linkable, URLs preserved" — and sends a further 22 **drop** pages to an archive index by redirect. Nothing builds that area.
+
+It fell through a seam. The only place it was ever written down as a deliverable is M2-3's acceptance criterion "the archive area is reachable but absent from the primary nav" (#12), and #12's actual deliverable was the triage ADR, not a build. #12 is now closed. M2-5 (#14) is images only. So the area is unowned, and it is load-bearing for more of the plan than its size suggests.
+
+**47 of the 138 pending entries in the redirect map are blocked on this** — a third of the entire legacy URL surface:
+
+| Waiting on | URLs |
+| --- | --- |
+| archived pages needing a home | 19 |
+| dropped pages redirecting to an archive index | 20 |
+| `agda-ualib/**`, archived with a forward pointer | 6 |
+| dropped pages redirecting to the archive index | 2 |
+
+Those redirects cannot be switched on until there is somewhere for them to point, and `redirects.yml` cites this issue as the blocker for every one of them.
+
+## What "archive" has to mean here
+
+The dispositions promise three things, and the area has to deliver all three or the ADR is not satisfied:
+
+- **URLs preserved.** An archived page keeps the URL it had. This is not a redirect target problem, it is a routing one — `/python/lab1/` has to serve `/python/lab1/`.
+- **Indexed and linkable.** An archive index that lists what is there, so an archived page is reachable by browsing and not only by an old inbound link.
+- **Out of the primary nav.** It should not compete with the portfolio for attention. `not_in_nav` already has precedent in `mkdocs.yml`.
+
+A visible marker on archived pages is worth considering — these are 2014–2021 pages on a site whose job is to represent current work, and an undated ten-year-old page reads as neglect rather than as history. M2-4 (#13) has the same requirement for old posts, so the two should share one mechanism rather than inventing two.
+
+## Tasks
+
+- [ ] Decide the archive's URL scheme, and reconcile it with "URLs preserved" — the archived pages already have URLs, so this is about where the *index* lives, not about relocating them.
+- [ ] Build the archive index: what is here, why it is here rather than in the main site, and how to find things.
+- [ ] Move the 21 archived pages in, preserving their URLs exactly.
+- [ ] Keep the area out of the primary nav without letting `--strict` flag the pages as orphaned (`not_in_nav`).
+- [ ] Add the dated-content notice, sharing one mechanism with M2-4 (#13).
+- [ ] Give `agda-ualib/**` its forward pointer to agda-algebras; M4-2 (#24) cross-links back.
+- [ ] Switch on the 47 blocked entries in `redirects.yml` and re-point their `pending:` reasons.
+- [ ] Confirm `make redirect-check` is green with those entries active.
+
+## Acceptance criteria
+
+- [ ] Every page ADR-002 marks **archive** is reachable at its original URL.
+- [ ] The archive index lists all of them and is reachable from the site, but not from the primary nav.
+- [ ] Every **drop** page that ADR-002 sends to the archive index has a working target.
+- [ ] `make redirect-check` passes with no entry still blocked on this issue.
+- [ ] `mkdocs build --strict` is clean — no orphaned-page warnings.
+
+## Notes
+
+Depends on M2-3 (#12, ADR-002) for the dispositions and M2-6 (#15) for the redirect machinery. Blocks the 47 redirect entries above.
+
+Not a design issue: the archive should inherit whatever M3-1 (#17) settles rather than getting a look of its own. If it needs custom styling to feel sufficiently de-emphasised, that belongs in M3-3 (#19).
 
 <!-- END GENERATED: milestone-2 -->
 
@@ -941,7 +1053,7 @@ Build them once as documented CSS classes or Markdown snippets rather than hand-
 
 ---
 
-### Issue M3-4: Mathematics and code rendering (#20)
+### Issue M3-4: Mathematics and code rendering (#20, closed)
 
 **Labels**: `milestone-3-design`, `infrastructure`, `design`
 
