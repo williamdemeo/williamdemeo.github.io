@@ -59,7 +59,9 @@
       "DOI": "10.4230/OASIcs.FMBC.2024.2",
       "URL": "https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2",
       "_source": ["cv"],
-      "_comment": "Authors, series, volume, pages and date from DataCite, which registers Dagstuhl's OASIcs; Crossref does not index this DOI. The CV's 'with Knispel et al.' stood in for seven authors. No preprint: arXiv has none, and the Dagstuhl record links only the formal-ledger-specifications repository."
+      "_comment": "Authors, series, volume, pages and date from DataCite, which registers Dagstuhl's OASIcs; Crossref does not index this DOI. The CV's 'with Knispel et al.' stood in for seven authors. No preprint: arXiv has none, and the Dagstuhl record links only the formal-ledger-specifications repository.",
+      "_abstract-source": "datacite",
+      "abstract": "Blockchain systems comprise critical software that handle substantial monetary funds, rendering them excellent candidates for formal verification. One of their core components is the underlying ledger that does all the accounting: keeping track of transactions and their validity, etc. Unfortunately, previous theoretical studies are typically confined to an idealized setting, while specifications for real implementations are scarce; either the functionality is directly implemented without a proper specification, or at best an informal specification is written on paper. The present work expands beyond prior meta-theoretical investigations of the EUTxO model to encompass the full scale of the Cardano blockchain: our formal specification describes a hierarchy of modular transitions that covers all the intricacies of a realistic blockchain, such as fully expressive smart contracts and decentralized governance. It is mechanized in a proof assistant, thus enjoys a higher standard of rigor: type-checking prevents minor oversights that were frequent in previous informal approaches; key meta-theoretical properties can now be formally proven; it is an executable specification against which the implementation in production is being tested for conformance; and it provides firm foundations for smart contract verification. Apart from a safety net to keep us in check, the formalization also provides a guideline for the ledger design: one informs the other in a symbiotic way, especially in the case of state-of-the-art features like decentralized governance, which is an emerging sub-field of blockchain research that however mandates a more exploratory approach. All the results presented in this paper have been mechanized in the Agda proof assistant and are publicly available. In fact, this document is itself a literate Agda script and all rendered code has been successfully type-checked."
     },
     {
       "id": "demeo2022birkhoff",
@@ -80,7 +82,9 @@
       "URL": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.TYPES.2021.4",
       "_preprint": {"arxiv-year": 2021},
       "_arxiv": "2101.10166",
-      "_source": ["cv", "research"]
+      "_source": ["cv", "research"],
+      "_abstract-source": "datacite",
+      "abstract": "The Agda Universal Algebra Library is a project aimed at formalizing the foundations of universal algebra, equational logic and model theory in dependent type theory using Agda. In this paper we draw from many components of the library to present a self-contained, formal, constructive proof of Birkhoff’s HSP theorem in Martin-Löf dependent type theory. This achieves one of the project’s initial goals: to demonstrate the expressive power of inductive and dependent types for representing and reasoning about general algebraic and relational structures by using them to formalize a significant theorem in the field."
     },
     {
       "id": "demeo2021birkhoff",
@@ -96,7 +100,9 @@
       "_version-of": "demeo2022birkhoff",
       "_note": "Unabridged 35-page version",
       "_source": ["research"],
-      "_comment": "Split from the proceedings entry on William's instruction. arXiv v2 carried the research page's title, 'The Agda Universal Algebra Library and Birkhoff's Theorem in Dependent Type Theory'; v3 renamed it to match the published paper, which is why the two entries now share a title and are told apart by length and venue."
+      "_comment": "Split from the proceedings entry on William's instruction. arXiv v2 carried the research page's title, 'The Agda Universal Algebra Library and Birkhoff's Theorem in Dependent Type Theory'; v3 renamed it to match the published paper, which is why the two entries now share a title and are told apart by length and venue.",
+      "_abstract-source": "arxiv",
+      "abstract": "The Agda Universal Algebra Library (agda-algebras) is a library of types and programs (theorems and proofs) we developed to formalize the foundations of universal algebra in dependent type theory using the Agda programming language and proof assistant. In this paper we draw on and explain many components of the agda-algebras library, which we extract into a single Agda module in order to present a self-contained formal and constructive proof of Birkhoff's HSP theorem in Martin-Löf dependent type theory. In the course of our presentation, we highlight some of the more challenging aspects of formalizing the basic definitions and theorems of universal algebra in type theory. Nonetheless, we hope this paper and the agda-algebras library serve as further evidence in support of the claim that dependent type theory and the Agda language, despite the technical demands they place on the user, are accessible to working mathematicians (such as ourselves) who possess sufficient patience and resolve to formally verify their results with a proof assistant. Indeed, the agda-algebras library now includes a substantial collection of definitions, theorems, and proofs from universal algebra, illustrating the expressive power of inductive and dependent types for representing and reasoning about general algebraic and relational structures."
     },
     {
       "id": "bergman2022universal",
@@ -117,7 +123,9 @@
       "_preprint": {"arxiv-year": 2016},
       "_arxiv": "1611.02867",
       "_source": ["cv", "research", "zotero"],
-      "_comment": "The DOI resolves to lmcs.episciences.org/2568, which is also the id in arXiv's journal_ref (lmcs:2568); the URL here came from the three-way reconciliation and points at 8975. episciences.org is outside this environment's egress allowlist, so which of the two is canonical was not checkable here."
+      "_comment": "The DOI resolves to lmcs.episciences.org/2568, which is also the id in arXiv's journal_ref (lmcs:2568); the URL here came from the three-way reconciliation and points at 8975. episciences.org is outside this environment's egress allowlist, so which of the two is canonical was not checkable here.",
+      "_abstract-source": "arxiv",
+      "abstract": "After substantial progress over the last 15 years, the \"algebraic CSP-dichotomy conjecture\" reduces to the following: every local constraint satisfaction problem (CSP) associated with a finite idempotent algebra is tractable if and only if the algebra has a Taylor term operation. Despite the tremendous achievements in this area (including recently announce proofs of the general conjecture), there remain examples of small algebras with just a single binary operation whose CSP resists direct classification as either tractable or NP-complete using known methods. In this paper we present some new methods for approaching such problems, with particular focus on those techniques that help us attack the class of finite algebras known as \"commutative idempotent binars\" (CIBs). We demonstrate the utility of these methods by using them to prove that every CIB of cardinality at most 4 yields a tractable CSP."
     },
     {
       "id": "barto2021csp",
@@ -138,7 +146,9 @@
       "_preprint": {"arxiv-year": 2020},
       "_arxiv": "2010.04958",
       "_source": ["cv", "research"],
-      "_comment": "It did appear in the proceedings, so the CV was right and the research page's 'submitted to LICS 2021' was stale. DOI, pages, date and location from Crossref, which registers it as a proceedings-article in '2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)'; arXiv 2010.04958 carries the same DOI. The venue is named here the way the file names its other conferences, not the way IEEE registered the proceedings volume."
+      "_comment": "It did appear in the proceedings, so the CV was right and the research page's 'submitted to LICS 2021' was stale. DOI, pages, date and location from Crossref, which registers it as a proceedings-article in '2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)'; arXiv 2010.04958 carries the same DOI. The venue is named here the way the file names its other conferences, not the way IEEE registered the proceedings volume.",
+      "_abstract-source": "arxiv",
+      "abstract": "We initiate a systematic study of the computational complexity of the Constraint Satisfaction Problem (CSP) over finite structures that may contain both relations and operations. We show the close connection between this problem and a natural algebraic question: which finite algebras admit only polynomially many homomorphisms into them? We give some sufficient and some necessary conditions for a finite algebra to have this property. In particular, we show that every finite equationally nontrivial algebra has this property which gives us, as a simple consequence, a complete complexity classification of CSPs over two-element structures, thus extending the classification for two-element relational structures by Schaefer (STOC'78). We also present examples of two-element structures that have bounded width but do not have relational width (2,3), thus demonstrating that, from a descriptive complexity perspective, allowing operations leads to a richer theory."
     },
     {
       "id": "demeo2020bounded",
@@ -160,7 +170,9 @@
       "_preprint": {"arxiv-year": 2019},
       "_arxiv": "1907.08046",
       "_source": ["cv", "research"],
-      "_comment": "Dated by the print issue (June 2020); World Scientific published it online on 28 January 2020."
+      "_comment": "Dated by the print issue (June 2020); World Scientific published it online on 28 January 2020.",
+      "_abstract-source": "arxiv",
+      "abstract": "We investigate when fiber products of lattices are finitely generated and obtain a new characterization of bounded lattice homomorphisms onto lattices satisfying a property we call Dean's condition (D) which arises from Dean's solution to the word problem for finitely presented lattices. In particular, all finitely presented lattices and those satisfying Whitman's condition satisfy (D). For lattice epimorphisms $g\\colon A\\to D$, $h\\colon B\\to D$, where $A$, $B$ are finitely generated and $D$ satisfies (D), we show the following: If $g$ and $h$ are bounded, then their fiber product (pullback) $C=\\{(a,b)\\in A\\times B\\ |\\ g(a)=h(b)\\}$ is finitely generated. While the converse is not true in general, it does hold when $A$ and $B$ are free. As a consequence we obtain an (exponential time) algorithm to decide boundedness for finitely presented lattices and their finitely generated sublattices satisfying (D). This generalizes an unpublished result of Freese and Nation."
     },
     {
       "id": "demeo2019difference",
@@ -181,7 +193,9 @@
       "DOI": "10.1142/S021819671950036X",
       "_arxiv": "2011.07879",
       "_source": ["cv", "research"],
-      "_comment": "The arXiv posting does postdate publication: 2011.07879 went up in November 2020 for a paper published in 2019. It is the right identifier -- arXiv's own record for it carries this DOI and the journal reference. No `_preprint.arxiv-year`, because that field means 'the preprint came first' and here it did not. Dated by the print issue (September 2019); published online on 26 August 2019."
+      "_comment": "The arXiv posting does postdate publication: 2011.07879 went up in November 2020 for a paper published in 2019. It is the right identifier -- arXiv's own record for it carries this DOI and the journal reference. No `_preprint.arxiv-year`, because that field means 'the preprint came first' and here it did not. Dated by the print issue (September 2019); published online on 26 August 2019.",
+      "_abstract-source": "arxiv",
+      "abstract": "We consider the following practical question: given a finite algebra A in a finite language, can we efficiently decide whether the variety generated by A has a difference term? We answer this question (positively) in the idempotent case and then describe algorithms for constructing difference term operations."
     },
     {
       "id": "adaricheva2018alh",
@@ -211,7 +225,9 @@
       "_preprint": {"arxiv-year": 2013},
       "_arxiv": "1301.7481",
       "_source": ["research", "zotero"],
-      "_comment": "Springer's record has 'nonisomorphic' unhyphenated, so Zotero's 'non-isomorphic' was the preprint's title, which arXiv still carries. Dated by the print issue (November 2014); published online on 31 July 2014."
+      "_comment": "Springer's record has 'nonisomorphic' unhyphenated, so Zotero's 'non-isomorphic' was the preprint's title, which arXiv still carries. Dated by the print issue (November 2014); published online on 31 July 2014.",
+      "_abstract-source": "arxiv",
+      "abstract": "We give examples of pairs of isotopic algebras with non-isomorphic congruence lattices. This answers the question of whether all isotopic algebras have isomorphic congruence lattices."
     },
     {
       "id": "demeo2013expansions",
@@ -227,7 +243,9 @@
       "_preprint": {"arxiv-year": 2012},
       "_arxiv": "1205.1106",
       "_source": ["research", "zotero"],
-      "_comment": "Dated by the print issue (May 2013); published online on 2 April 2013."
+      "_comment": "Dated by the print issue (May 2013); published online on 2 April 2013.",
+      "_abstract-source": "arxiv",
+      "abstract": "We present a novel approach to the construction of new finite algebras and describe the congruence lattices of these algebras. Given a finite algebra $(B_0, \\dots)$, let $B_1, B_2, \\dots, B_K$ be sets that either intersect $B_0$ or intersect each other at certain points. We construct an \\emph{overalgebra} $(A, F_A)$, by which we mean an expansion of $(B_0, \\dots)$ with universe $A = B_0 \\cup B_1 \\cup \\cdots \\cup B_K$, and a certain set $F_A$ of unary operations that includes mappings $e_i$ satisfying $e_i^2 = e_i$ and $e_i(A) = B_i$, for $0\\leq i \\leq K$. We explore two such constructions and prove results about the shape of the new congruence lattices $Con(A, F_A)$ that result. Thus, descriptions of some new classes of finitely representable lattices is one contribution of this paper. Another, perhaps more significant contribution is the announcement of a novel approach to the discovery of new classes of representable lattices, the full potential of which we have only begun to explore."
     },
     {
       "id": "demeo2013dedekind",
@@ -238,7 +256,9 @@
       "_arxiv": "1301.6788",
       "URL": "https://arxiv.org/abs/1301.6788",
       "_source": ["zotero"],
-      "_comment": "Unpublished; dated by the arXiv posting. No journal version to link."
+      "_comment": "Unpublished; dated by the arXiv posting. No journal version to link.",
+      "_abstract-source": "arxiv",
+      "abstract": "We prove a version of Dedekind's Transposition Principle that holds in lattices of equivalence relations."
     },
     {
       "id": "demeo2012thesis",
@@ -251,7 +271,9 @@
       "_arxiv": "1204.4305",
       "URL": "https://arxiv.org/abs/1204.4305",
       "_source": ["cv", "zotero"],
-      "_comment": "Year only: the arXiv posting (19 April 2012) is not the thesis date and nothing checked here gives one. A ScholarSpace or ProQuest record for the deposited thesis would be the publisher link; neither service this checks against holds one."
+      "_comment": "Year only: the arXiv posting (19 April 2012) is not the thesis date and nothing checked here gives one. A ScholarSpace or ProQuest record for the deposited thesis would be the publisher link; neither service this checks against holds one.",
+      "_abstract-source": "arxiv",
+      "abstract": "An important and long-standing open problem in universal algebra asks whether every finite lattice is isomorphic to the congruence lattice of a finite algebra. Until this problem is resolved, our understanding of finite algebras is incomplete, since, given an arbitrary finite algebra, we cannot say whether there are any restrictions on the shape of its congruence lattice. By a well known result of Palfy and Pudlak, the problem would be solved if we could prove the existence of a finite lattice that is not an interval in the lattice of subgroups of a finite group. Thus the problem of characterizing congruence lattices of finite algebras is closely related to the problem of characterizing intervals in subgroup lattices. In this work, we review a number of methods for finding a finite algebra with a given congruence lattice, including searching for intervals in subgroup lattices. We also consider methods for proving that algebras with a given congruence lattice exist without actually constructing them. By combining these well known methods with a new method we have developed, and with much help from computer software like the UACalc and GAP, we prove that with one possible exception every lattice with at most seven elements is isomorphic to the congruence lattice of a finite algebra. As such, we have identified the unique smallest lattice for which there is no known representation. We examine this exceptional lattice in detail, and prove results that characterize the class of algebras that could possibly represent this lattice. We conclude with what we feel are the most interesting open questions surrounding this problem and discuss possibilities for future work."
     },
     {
       "id": "demeo2012interval",
@@ -262,7 +284,9 @@
       "_arxiv": "1205.1927",
       "URL": "https://arxiv.org/abs/1205.1927",
       "_source": ["zotero"],
-      "_comment": "Unpublished; dated by the arXiv posting. No journal version to link."
+      "_comment": "Unpublished; dated by the arXiv posting. No journal version to link.",
+      "_abstract-source": "arxiv",
+      "abstract": "We propose a classification of group properties according to whether they can be deduced from the assumption that a group's subgroup lattice contains an interval isomorphic to some lattice. We are able to classify a few group properties as being \"interval enforceable\" in this sense, and we establish that other properties satisfy a weaker notion of \"core-free interval enforceable.\" We also show that if there exists a group property and its negation that are both core-free interval enforceable, this would settle an important open question in universal algebra."
     },
     {
       "id": "demeo2004isma",

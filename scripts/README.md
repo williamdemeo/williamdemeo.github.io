@@ -258,14 +258,30 @@ line, one file.
 `make publications` renders it into two committed snippets, and pages include
 them rather than holding a copy:
 
-| snippet | entries | included by |
+| output | entries | consumed by |
 | --- | --- | --- |
-| `docs/_snippets/publications.md` | all of them | the publications page (#30, not built yet) |
+| `docs/_snippets/publications-page.md` | all of them | `docs/publications.md` |
 | `docs/_snippets/publications-cv.md` | those marked `_cv` | `docs/cv.md`, *Selected publications* |
+| `docs/publications.bib` | all of them | anyone citing this work |
 
 Each entry renders as title, authors, imprint, and a row putting **the version
 of record and the preprint side by side**. The CV's is the same, a little
 tighter: the year rather than the full date, and no DOI.
+
+The page groups entries by **where the work appeared** — journal, conference,
+preprint, thesis, edited volume — rather than by whether it was refereed, which
+nothing in `bibliography.json` records. A reader still tells a journal paper
+from a preprint at a glance, and no heading claims something no source backs.
+An entry whose type matches no group fails validation: a publications page that
+silently drops a publication is the worst bug available to it.
+
+Abstracts render collapsed, from arXiv or DataCite, with `_abstract-source`
+recording which. The verifier checks the stored text against that service, so a
+truncated or hand-edited abstract fails.
+
+The BibTeX needs no dependency — the mapping from CSL-JSON is mechanical.
+Titles are double-braced: they were checked against the publishers, and a `.bst`
+case-folding *Agda* or *Birkhoff* would undo that.
 
 `make publications-check` validates the file *and* reports whether either
 snippet has drifted from it — a hand-edit to a generated file survives every

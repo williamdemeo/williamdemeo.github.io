@@ -180,6 +180,7 @@ hooks:
 nav:
   - Home: index.md
   - About: about.md
+  - Publications: publications.md
   - CV: cv.md
   - Contact: contact.md
 

@@ -72,16 +72,18 @@
         ];
       };
 
-      # gen_publications.py --check compares the committed snippets against a
-      # fresh render, so it needs the bibliography and the snippets as well as
+      # gen_publications.py --check compares every committed output against a
+      # fresh render, so it needs the bibliography and those outputs as well as
       # the scripts -- and it needs them laid out as they are in the repository,
-      # because the script finds them relative to its own location.
+      # because the script finds them relative to its own location.  A generated
+      # file missing from this list is not checked, and nothing would say so.
       bibliographySource = lib.fileset.toSource {
         root = ./.;
         fileset = lib.fileset.unions [
           ./bibliography.json
           ./scripts/python
           ./docs/_snippets
+          ./docs/publications.bib
         ];
       };
 
