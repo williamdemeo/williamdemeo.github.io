@@ -456,10 +456,331 @@
   background-color: var(--c-accent);
 }
 
+/* ── components ─────────────────────────────────────────────────────────────
+ *
+ * Four components carry most of the site: a project card, a publication entry,
+ * a timeline entry, and a talk entry (#19).  They are defined once here so
+ * that M4 and M5 assemble pages from decided parts rather than hand-styling
+ * each occurrence, which is what makes a site read as designed rather than
+ * assembled.  docs/design/style.md renders a live example of every one,
+ * including the degraded cases, so a component that breaks breaks visibly on
+ * one page.
+ *
+ * Authoring form is Markdown plus `attr_list` and `md_in_html`, never a raw
+ * HTML block: a wrapper `<div class="…" markdown>` around ordinary Markdown,
+ * and `{.class}` where a specific line needs naming.  What that means in
+ * practice, per component, is on the style page.
+ *
+ * Two conventions used throughout, stated once:
+ *
+ * 1.  The type tokens are `em`-relative to the typeset base, so they compose:
+ *     an entry set at --type-small (0.8125em) whose title is --type-h3
+ *     (1.1875em) puts the title at 0.965em -- just under body size -- against
+ *     14px metadata.  That compounding is deliberate and is the only way to
+ *     get a size hierarchy inside a component without inventing a token.
+ *
+ * 2.  No component wraps itself in a link.  A card whose whole surface is
+ *     clickable has to nest the title and action links inside that link, which
+ *     is invalid, unreachable by keyboard in the way it looks, and destroys
+ *     text selection.  Cards are <div>s; the title and the action links are
+ *     ordinary sibling links, and each gets the global :focus-visible ring.
+ *     Nothing here sets `overflow: hidden`, so that ring is never clipped.
+ */
+
+/* ── project card ─────────────────────────────────────────────────────────
+ *
+ *   <div class="project-grid" markdown>
+ *   <div class="project-card" markdown>
+ *   **[title](url)**
+ *
+ *   One-line summary.
+ *
+ *   `Agda`{.tag} `Nix`{.tag}
+ *
+ *   [Source](url) · [Docs](url)
+ *   {.project-links}
+ *   </div>
+ *   </div>
+ *
+ * Every part after the title is optional.  The title is the first paragraph,
+ * so it needs no class of its own; the links row needs one because it is
+ * pinned to the bottom of the card, which is what keeps a row of cards of
+ * different lengths aligned along their actions.
+ */
+
+.md-typeset .project-grid {
+  display: grid;
+  /* Half a text column is the point at which a card stops being a card and
+     starts being a paragraph with a border, so that is the track minimum.
+     `min(100%, …)` keeps a single card from overflowing a narrow viewport. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--measure) / 2)), 1fr));
+  gap: var(--space-4);
+  margin: var(--space-8) 0;
+}
+
+.md-typeset .project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--c-bg-raised);
+  border: var(--border-width) solid var(--c-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: var(--type-small);
+  color: var(--c-fg-muted);
+  transition: border-color 120ms;
+}
+
+/* Hover and keyboard focus are deliberately different colours: hover is a
+   passing pointer, focus is where the keyboard actually is. */
+.md-typeset .project-card:hover {
+  border-color: var(--c-line-strong);
+}
+
+.md-typeset .project-card:focus-within {
+  border-color: var(--c-accent);
+}
+
+/* The flex `gap` owns the vertical rhythm inside a card; Material's paragraph
+   margins would otherwise be added to it. */
+.md-typeset .project-card > * {
+  margin: 0;
+}
+
+.md-typeset .project-card > p:first-child {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-size: var(--type-h3);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-heading);
+  color: var(--c-fg);
+}
+
+/* A title that links somewhere reads as a link; one that does not is still a
+   title.  The bottom rule under body links is noise at this size. */
+.md-typeset .project-card > p:first-child a {
+  border-bottom: none;
+}
+
+.md-typeset .project-links {
+  /* Pushed to the bottom, so cards in a row line their actions up. */
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+/* ── tag ──────────────────────────────────────────────────────────────────
+ *
+ *   `Agda`{.tag}   `invited`{.tag}   `dormant`{.tag}
+ *
+ * A code span, because `attr_list` attaches to elements Markdown produces and
+ * a bare `[text]{.tag}` is not one of them -- it renders literally.  `em` and
+ * `strong` were the alternatives and both already carry meaning here (venue,
+ * emphasised author), so the neutral one is the right host.  It is restyled
+ * out of the code face: these are labels, not code.
+ */
+
+.md-typeset .tag {
+  display: inline-block;
+  /* An inline-block is a block container, so it inherits the hanging indent
+     the publication and talk entries set and applies it to its own first
+     line -- which slides the label out of its own border box.  Caught by
+     looking at a rendered talk entry with a tag on it, not by reading this. */
+  text-indent: 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--type-small);
+  font-weight: 400;
+  line-height: var(--leading-heading);
+  color: var(--c-fg-muted);
+  background-color: transparent;
+  border: var(--border-width) solid var(--c-line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+}
+
+/* ── publication entry, and talk entry ────────────────────────────────────
+ *
+ *   <div class="publications" markdown>
+ *   - **Title**
+ *     Authors, with **William DeMeo** emphasised.  *Venue*, **volume**:pages, year.
+ *     [DOI](url) · [arXiv:id](url) · [PDF](url)
+ *   </div>
+ *
+ * (each entry line ends with two spaces, so the lines stay one paragraph)
+ *
+ * A talk entry is the same grammar with a different second line -- venue,
+ * location, year -- and the slides link on the title rather than in a row of
+ * their own.  They share these rules rather than being copies of each other,
+ * because they are the same shape: a title, a line of attribution, and an
+ * optional line of links.  Where they differ, the rules are separated below.
+ *
+ * The publication list is written by `gen_publications.py` from
+ * `bibliography.json` (M5-1, #29): the generator emits exactly this Markdown
+ * and knows nothing about these classes, so the page wraps its output and adds
+ * nothing.  Every optional part is optional in the generator too -- an entry
+ * with no DOI, no arXiv identifier and no venue simply has fewer lines.
+ */
+
+.md-typeset .publications ul,
+.md-typeset .talks ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  max-width: var(--measure);
+}
+
+.md-typeset .publications li,
+.md-typeset .talks li {
+  margin: 0 0 var(--space-6);
+  /* A hanging indent, the way a reference list has always been set.
+     `text-indent` applies to the first line of the block only, and it is
+     inherited, so it reaches the <p> that a loose list wraps each item in --
+     which is why this works whether or not the source has blank lines between
+     entries.  The lines after each <br> keep the padding. */
+  padding-left: var(--space-6);
+  text-indent: calc(-1 * var(--space-6));
+  font-size: var(--type-small);
+  color: var(--c-fg-muted);
+}
+
+.md-typeset .publications li:last-child,
+.md-typeset .talks li:last-child {
+  margin-bottom: 0;
+}
+
+/* Material gives a list item inside a loose list its own paragraph margins. */
+.md-typeset .publications li > p,
+.md-typeset .talks li > p {
+  margin: 0;
+}
+
+/* The emphasised author -- and the volume number, which is marked up the same
+   way -- steps forward out of the muted metadata. */
+.md-typeset .publications li strong,
+.md-typeset .talks li strong {
+  color: var(--c-fg);
+}
+
+.md-typeset .publications li > strong:first-child,
+.md-typeset .publications li > p:first-child > strong:first-child,
+.md-typeset .talks li > strong:first-child,
+.md-typeset .talks li > p:first-child > strong:first-child {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-size: var(--type-h3);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--tracking-display);
+}
+
+/* A linked title is the artifact itself -- the slides, for a talk -- so it
+   carries the accent.  A talk with no slides is a title in plain text, and
+   that is the whole of the degradation. */
+.md-typeset .publications li > strong:first-child a,
+.md-typeset .publications li > p:first-child > strong:first-child a,
+.md-typeset .talks li > strong:first-child a,
+.md-typeset .talks li > p:first-child > strong:first-child a {
+  border-bottom: none;
+}
+
+/* ── timeline entry ───────────────────────────────────────────────────────
+ *
+ *   <div class="timeline" markdown>
+ *   2023–
+ *   :   **Formal Verification Engineer**, Formal Methods — [IO](url)
+ *       What the position actually was.
+ *   </div>
+ *
+ * A definition list, because that is what a timeline is: a date, and what
+ * happened then.  `def_list` is already enabled, the source reads as the thing
+ * it describes, and the CV's education and grants sections are written this
+ * way already -- wrapping them is the whole migration.
+ *
+ * An open-ended range is `2023–` with nothing after the dash, which needs no
+ * support here beyond not assuming two dates.
+ */
+
+.md-typeset .timeline dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--space-6);
+  /* No row gap: the rule down the left of the second column is continuous
+     only if the rows touch, so the spacing between entries is padding on the
+     rows themselves. */
+  row-gap: 0;
+  max-width: var(--measure-heading);
+  margin: var(--space-8) 0;
+}
+
+.md-typeset .timeline dt {
+  grid-column: 1;
+  margin: 0;
+  padding-bottom: var(--space-6);
+  text-align: right;
+  font-size: var(--type-small);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-fg-muted);
+}
+
+.md-typeset .timeline dd {
+  position: relative;
+  grid-column: 2;
+  margin: 0;
+  padding-left: var(--space-4);
+  padding-bottom: var(--space-6);
+  border-left: var(--border-width) solid var(--c-line);
+  font-size: var(--type-small);
+  color: var(--c-fg-muted);
+}
+
+.md-typeset .timeline dd:last-of-type {
+  padding-bottom: 0;
+}
+
+/* The node on the line.  Centred on the rule, and set against the first line
+   of the entry rather than its middle, so entries of different heights line
+   their dots up with their dates. */
+.md-typeset .timeline dd::before {
+  content: "";
+  position: absolute;
+  top: var(--space-2);
+  left: calc(-0.5 * (var(--space-1) + var(--border-width)));
+  width: var(--space-1);
+  height: var(--space-1);
+  border-radius: 50%;
+  background-color: var(--c-accent);
+}
+
+.md-typeset .timeline dd strong {
+  color: var(--c-fg);
+}
+
+/* Material's mobile breakpoint.  Below it the date gutter costs more width
+   than it earns, so the entry stacks under its date and keeps the rule. */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .timeline dl {
+    display: block;
+  }
+
+  .md-typeset .timeline dt {
+    text-align: left;
+    padding-bottom: var(--space-1);
+  }
+}
+
 @media print {
   .md-typeset > p,
   .md-typeset > ul,
   .md-typeset > ol {
     max-width: none;
+  }
+
+  /* A card grid prints as a list; two narrow columns on paper are worse than
+     one full-width one. */
+  .md-typeset .project-grid {
+    display: block;
+  }
+
+  .md-typeset .project-card {
+    margin-bottom: var(--space-4);
   }
 }
