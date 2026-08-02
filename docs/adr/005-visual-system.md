@@ -46,36 +46,47 @@ gate all three constraints on audits that measure a rendered page.**
 is restyled through its own custom properties rather than by overriding its
 rules, which is the supported route and survives a theme upgrade.
 
-**The system is Meridian**: Newsreader 500 for display, Inter for body and
-interface, JuliaMono for code, over a near-achromatic neutral ramp with a
-single teal accent (`#0f766e` light, `#5eead4` dark).
+**The system is Constellation**: Space Grotesk 600 for display, Inter for body
+and interface, JuliaMono for code, indigo accent (`#8b88ff` dark, `#5b54e6`
+light) with coral for hover, over the agda-algebras documentation site's
+blue-tinted neutral ramp.
 
-It was chosen from three candidates rendered side by side on the same content —
+Getting there took two rounds, and both are worth recording because the second
+would not have happened without the first.
+
+Round one offered three candidates rendered side by side on the same content —
 a heading, a paragraph with inline mathematics, a display equation, a block of
-Agda — rather than described in prose. The other two were *Graphite* (Inter
-throughout, blue accent, cool neutrals) and *Manuscript* (Source Serif 4
-throughout, warm paper, brick accent). All three cleared AA in both themes, so
-the choice was unconstrained and aesthetic, which is why it was the owner's to
-make. The rejected two and their font files were removed once the decision was
-recorded; reverting that commit restores all three.
+Agda — rather than described in prose: *Meridian* (Newsreader over Inter,
+near-achromatic, teal), *Graphite* (Inter throughout, blue) and *Manuscript*
+(Source Serif 4 on warm paper, brick). All three cleared AA in both themes, so
+the choice was unconstrained and aesthetic, and it went to Meridian.
 
-**A fourth system, Constellation, is kept live as an alternative.** It is the
-palette and Space Grotesk display face of the agda-algebras documentation site,
-which is also MkDocs Material. The two sites will link to each other
-constantly, so matching them is a defensible thing to want and the choice is
-worth leaving open rather than closed. `/design/options/` renders both, and
-switching is three adjacent edits in `tokens.css`: the three bare selectors
-that carry the active system move from one block to the other. Both directions
-were exercised and verified in a browser rather than reasoned about — the
-first attempt produced `[data-md-color-scheme="default"]:root`, which matches
-nothing, and the page came back with an empty `--c-accent` and a transparent
-background.
+Round two came from noticing that the new agda-algebras documentation site is
+also MkDocs Material, which makes its design portable rather than merely
+admirable. Constellation is that site's palette and display face, added as a
+switchable alternative and then chosen: the two sites link to each other
+constantly, and looking like siblings is worth more than each having a separate
+voice. It is also quiet corroboration on the part of #17 that was not a matter
+of taste — that site's `--md-code-font` puts JuliaMono first, reached
+independently.
+
+Meridian stays as the alternative, because the comparison is the point and
+`/design/options/` is how the decision was made both times. Graphite and
+Manuscript were removed after round one; reverting that commit restores them.
+Switching systems is three adjacent edits in `tokens.css`: the three bare
+selectors that carry the active system move from one block to the other. Both
+directions were exercised and verified in a browser rather than reasoned about
+— an attempt that moved two of the three produced
+`[data-md-color-scheme="default"]:root`, which matches nothing, and the page
+came back with an empty `--c-accent` and a transparent background.
 
 Three of agda-algebras' published values do not clear AA as text and are
-adjusted rather than adopted broken, which is worth reporting upstream:
-`--c-fg-faint` at 3.29:1 on paper and 3.70:1 on the dark raised surface, and
-the coral hover colour `#fb6a00` at 2.86:1 on paper. The coral is fine in dark
-(7.34:1); it is only on paper that a saturated orange cannot carry text.
+adjusted rather than adopted broken. These are the only places the two sites
+deliberately differ, and the difference is reported upstream rather than
+hidden: `--c-fg-faint` at 3.29:1 on paper and 3.70:1 on the dark raised
+surface, and the coral hover colour `#fb6a00` at 2.86:1 on paper. The coral is
+fine in dark (7.34:1); it is only on paper that a saturated orange cannot carry
+text.
 
 **Dark is the default.** The palette in `mkdocs.yml` is two entries, `slate`
 first, with no `media` key on either — Material selects the first palette when
@@ -119,7 +130,7 @@ the font the Zola site meant to use — covers 24 of the 44.
 reports which faces Chromium actually rasterised text with. Before this change,
 on the existing site, an Agda block on `/design/rendering/` was rendered by
 three fonts at once: DejaVu Sans Mono for 103 glyphs, FreeSerif for 9, FreeSans
-for 1. After: 11,707 text-bearing elements across the 27 real pages, every face
+for 1. After: 11,755 text-bearing elements across the 27 real pages, every face
 reported a downloaded webfont, and 44/44 probe characters in JuliaMono.
 
 **The enumerated subset was wrong, and the audit is what caught it.** Taking
@@ -136,7 +147,7 @@ coverage. The subset is now defined by Unicode block.
 `api.github.com/repos/…` twice. After: 667 requests across the 27 pages, with
 all 28 `@font-face` declarations forced to load, and every one same-origin.
 
-**Contrast.** 11,602 text elements per theme, measured from computed style with
+**Contrast.** 11,650 text elements per theme, measured from computed style with
 the background resolved by compositing up the ancestor chain, and element
 opacity folded into the foreground alpha. Real failures found and fixed:
 `.md-button` rendered white on white in light mode (Material builds it from
@@ -147,9 +158,9 @@ one more: KaTeX writes a failed expression in `errorColor`, whose default
 `#cc0000` is 3.29:1 on the dark page, so a broken formula was the least legible
 thing on the page. That is now `var(--c-error)` — KaTeX passes the string
 straight into an inline `style`, so one token covers both themes. Now 0 below
-AA in both themes, lowest 4.83:1 — and because `/design/options/` pins both
-schemes on one page, Constellation's palette is measured by the same run rather
-than only by arithmetic.
+AA in both themes — and because `/design/options/` pins both schemes and both
+systems on one page, the alternative is measured by the same run rather than
+only by arithmetic.
 
 Two measurement errors are worth recording. Material animates colour on a
 scheme change, and reading `getComputedStyle` during that animation returns an
@@ -328,7 +339,7 @@ The script names what to install if the imports fail.
 | No external font, script or stylesheet requested | Verified, `make offline-audit` |
 | Tokens in one place, used by the custom CSS | Done |
 | Audits running in CI | Deferred to M3-6; needs a Chromium in the flake |
-| Which system ships | **Meridian**; Constellation kept as a live alternative |
+| Which system ships | **Constellation**; Meridian kept as a live alternative |
 | Default theme | Dark, with a one-click light override |
 
 ## Notes
