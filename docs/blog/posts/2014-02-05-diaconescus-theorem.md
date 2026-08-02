@@ -93,4 +93,4 @@ for a nice discussion of this topic.
 
 ## References
 
-+ Diaconescu, "Axiom of choice and complementation," *Proc. AMS* 51 (1975), 176--178. [doi:10.1090/S0002-9939-1975-0373893-X](http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X)
++ Diaconescu, "Axiom of choice and complementation," *Proc. AMS* 51 (1975), 176–178. [doi:10.1090/S0002-9939-1975-0373893-X](http://dx.doi.org/10.1090/S0002-9939-1975-0373893-X)

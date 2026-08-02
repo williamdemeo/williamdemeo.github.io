@@ -13,9 +13,9 @@ description: I don't always use recursion; but when I do, I don't always use rec
 The repository [par-alg-rep](https://github.com/UniversalAlgebra/par-alg-rep)
 contains some notes describing a few results that we worked out in the
 fall of 2016, while I was a postdoc at University of
-Hawaii, although the main result---a straight-forward proof of the fact
+Hawaii, although the main result—a straight-forward proof of the fact
 that every finite lattice is the congruence lattice of a
-finite partial algebra---was discovered during a
+finite partial algebra—was discovered during a
 visit to Chapman University in October 2016.
 
 <!-- more -->
