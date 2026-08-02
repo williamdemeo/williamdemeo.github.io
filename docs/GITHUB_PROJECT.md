@@ -670,9 +670,15 @@ The fifteen Octopress posts exist in this repository only as generated HTML; the
 
 **No HTML-to-Markdown conversion is needed after all.** Both HTML-only posts are now dropped or archived, for reasons unrelated to their format — see below. This issue is now entirely about the twelve posts that already exist as Zola Markdown.
 
+## Blocked on M6-1 (#35), and that ordering is deliberate
+
+**Do not start this before the blog engine exists.** Material's blog plugin determines where a post file lives and what front matter it carries, and #35 must additionally pick a post URL format that satisfies the redirect map — the legacy URLs are root-level slugs (`/isotopy/`) plus Octopress dated paths (`/2014/02/13/isotopy/`), while the plugin's default is `/blog/YYYY/MM/DD/slug/`.
+
+Until that is settled, every one of these eight posts has an undetermined destination path *and* an undetermined front-matter schema. Converting first means converting twice.
+
 ## Three decisions recorded
 
-**No conversion work remains.** `commutator-as-least-fixed-point` was the last post genuinely needing HTML→Markdown, and ADR-002 archives it instead: **Ralph Freese found an error in the proof.** That is not a presentation call like the others here — a post with a known error in its proof should not be republished, and archiving keeps its two URLs resolving without asserting the mathematics. It goes to the archive area (#67) as generated HTML.
+**No conversion work remains.** `commutator-as-least-fixed-point` was the last post genuinely needing HTML→Markdown, and ADR-002 archives it instead: **Ralph Freese found an error in the proof.** That is not a presentation call like the others here — a post with a known error in its proof should not be republished, and archiving keeps its two URLs resolving without asserting the mathematics. It is archived as generated HTML in #67.
 
 `cloning-an-octopress-repo` is dropped: it documents a workflow that no longer exists.
 
@@ -680,33 +686,40 @@ The fifteen Octopress posts exist in this repository only as generated HTML; the
 
 The Markdown source stays recoverable from GitLab history — one of the reasons ADR-001 keeps that repository public — but recovery is archival, not editorial. The Agda sources `content/agda/LearnYouAn.agda` and `LearnYouAn2.agda` are likewise not site material. M2-6 (#15) redirects its old URLs to O'Connor's original rather than to our blog index, so a reader looking for that tutorial finds the tutorial.
 
-## Which posts this issue actually covers
+## Which posts this issue covers
 
-ADR-002 marks eight posts **keep**, and they are what needs converting:
+ADR-002 marks eight posts **keep**:
 
 `diaconescus-theorem`, `a-problem-of-palfy-and-saxl`, `groupsound`, `isotopy`, `three-sat-and-partition-lattices`, `congruences-of-partial-algebras`, `ieprops`, `overalgebras`
 
-The last two were moved from `archive` to `keep` on review of #12. They are short — 112 and 141 words — because each announces something (a project page, a preprint) rather than arguing anything. If they are on the site they should say what became of the thing they announce; that rewrite belongs here.
+All eight are in `import/zola-converted/`; none is in `docs/` yet.
 
-## Sequencing
+### The two announcement posts, and what became of them
 
-These posts need somewhere to live, which is M6-1 (#35). Converting them before the blog engine exists means guessing at the directory layout and front-matter schema the plugin expects, then redoing it. Either land #35 first, or accept that this issue's output is staged and rewired later.
+`ieprops` and `overalgebras` were moved from `archive` to `keep` on review of #12. They are short — 112 and 141 words — because each announces something rather than arguing anything, and if they are on the site they should say what became of the thing they announce.
 
-The eight `keep` URLs — plus their six Octopress dated equivalents — are held in `redirects.yml` under this issue and #35 for exactly that reason.
+**That is now a lookup rather than research**, because ADR-006's `bibliography.json` (#29) carries both outcomes:
+
+| Post | Announces | Became |
+| --- | --- | --- |
+| `ieprops` | a draft in `github.com/williamdemeo/IEProps` | *Interval enforceable properties of finite groups* — `demeo2012interval`, arXiv 1205.1927 |
+| `overalgebras` | a draft plus GAP software in `github.com/williamdemeo/Overalgebras` | *Expansions of finite algebras and their congruence lattices*, Algebra Universalis **69**:257–278 — `demeo2013expansions`, arXiv 1205.1106, DOI 10.1007/s00012-013-0226-3 |
+
+The `overalgebras` post already states the Algebra Universalis reference, so that one mostly needs the link updated to a resolvable DOI. `ieprops` links only a PDF in a GitHub repository and does not mention the arXiv posting at all.
 
 ## Tasks
 
 - [ ] For the eight `keep` posts, take the Zola Markdown from `import/zola-converted/`.
-- [ ] Rewrite `ieprops` and `overalgebras` to say what became of what they announce.
-- [ ] Normalize front matter, slugs, and dates across all eight.
-- [ ] Add a dated-content notice to every post older than 2022. **Share one mechanism with the archive area (#67)**, which needs the same thing, rather than inventing two.
-- [ ] Verify mathematics survives: `make math-audit MATH_SRC=docs` should be clean on the converted posts.
-- [ ] Switch the corresponding `pending:` entries in `redirects.yml` to `to:`, and confirm `make redirect-check` stays green.
+- [ ] Place them at whatever path #35's URL scheme requires, and switch the corresponding `pending:` entries in `redirects.yml` to `to:` (or `keep:` if the scheme preserves the legacy URL directly). `make redirect-check` must stay green.
+- [ ] Rewrite `ieprops` and `overalgebras` to say what became of what they announce, using the table above.
+- [ ] Normalize front matter, slugs, and dates across all eight, to whatever schema the blog plugin expects.
+- [ ] Add a dated-content notice to every post older than 2022. **`docs/_snippets/archived.md` already exists as this mechanism** for the archive (#67) — reuse or generalise it rather than inventing a second one.
+- [ ] Verify mathematics survives: `make math-audit MATH_SRC=docs` should not regress. `isotopy` and `three-sat-and-partition-lattices` are the notation-heavy ones.
 
 ## Acceptance criteria
 
 - [ ] All eight `keep` posts exist as clean Markdown and render correctly.
-- [ ] Mathematics and code blocks survived — spot-checked on `isotopy` and `three-sat-and-partition-lattices`, the two most notation-heavy, and confirmed by the math audit rather than by eye.
+- [ ] Mathematics and code blocks survived — confirmed by the math audit rather than by eye, and compared against the same audit run over the pre-migration sources so a pre-existing failure is not mistaken for a regression.
 - [ ] No third-party writing is published under the site owner's byline.
 - [ ] Old post URLs resolve or redirect; none 404.
 - [ ] Old posts carry a visible date context notice.
@@ -715,7 +728,7 @@ The eight `keep` URLs — plus their six Octopress dated equivalents — are hel
 
 *Revised 2026-07-30: corrected the post-source counts, which were estimated rather than verified in the original plan, and recorded the decision not to republish* Learn You an Agda *after its authorship was confirmed from front matter.*
 
-*Revised 2026-08-02: the HTML→Markdown conversion is cancelled — ADR-002 archives `commutator-as-least-fixed-point` because Ralph Freese found an error in the proof, which was the only remaining reason to convert anything. Scope narrowed to the eight `keep` posts, which now include `ieprops` and `overalgebras`.*
+*Revised 2026-08-02: the HTML→Markdown conversion is cancelled — ADR-002 archives `commutator-as-least-fixed-point` because Ralph Freese found an error in the proof, which was the only remaining reason to convert anything. Scope narrowed to the eight `keep` posts, which now include `ieprops` and `overalgebras`; the blocking relationship to #35 is stated explicitly; and the two announcement posts' outcomes are recorded from `bibliography.json`.*
 
 ---
 
@@ -1026,7 +1039,7 @@ Avoid the two common failure modes: a wall of publications above the fold, which
 
 ---
 
-### Issue M3-3: Build the reusable component set (#19)
+### Issue M3-3: Build the reusable component set (#19, closed)
 
 **Labels**: `milestone-3-design`, `design`
 
@@ -1578,7 +1591,7 @@ The Zola about page links Google Scholar and Microsoft Academic; the latter shut
 
 <!-- BEGIN GENERATED: milestone-6 -->
 
-### Issue M6-1: Enable the blog engine (#35)
+### Issue M6-1: Enable the blog engine (#35, closed)
 
 **Labels**: `milestone-6-blog`, `infrastructure`
 
