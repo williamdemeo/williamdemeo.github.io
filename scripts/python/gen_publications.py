@@ -12,10 +12,13 @@ Two modes:
 
 Validation is deliberately about *internal* soundness -- ids unique, years
 present and sane, arXiv identifiers well formed, every author naming a family
-or a literal.  It does not resolve DOIs or arXiv identifiers, because the
-sandbox this was written in cannot reach either, and a checker that silently
-passes when the network is blocked is worse than one that never claims to
-check.  M8-2 (#47) owns real resolution.
+or a literal.  It resolves nothing, and needs no network to say what it says.
+
+Whether the entries are *true* is a different question, and asking it means
+asking the publishers: verify_bibliography.py does that, and exits non-zero
+rather than reporting a pass when it cannot reach them.  Keeping the two apart
+is the point -- this one can run anywhere, and neither is mistaken for the
+other.
 
 Exit codes follow diff(1): 0 fine, 1 a check failed, 2 could not run.
 """
@@ -163,7 +166,10 @@ def render(items: list[dict]) -> str:
         venue = it.get("container-title")
         if venue:
             vol = f", **{it['volume']}**" if it.get("volume") else ""
-            pages = f":{it['page']}" if it.get("page") else ""
+            # LIPIcs and OASIcs number pages within an article -- "2:1-2:18" --
+            # so the usual "volume:pages" colon would disappear into the range.
+            separator = ", pp. " if ":" in str(it.get("page") or "") else ":"
+            pages = f"{separator}{it['page']}" if it.get("page") else ""
             second += f".  *{venue}*{vol}{pages}"
         elif it.get("genre"):
             second += f".  {it['genre']}"

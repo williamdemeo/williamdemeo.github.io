@@ -65,26 +65,87 @@ by CSL processors, so the file stays valid CSL-JSON. The same convention carries
 `_arxiv`, `_role`, `_note`, `_source` (which lists the copies an entry came
 from) and `_needs_review`.
 
+## Verification against the publishers
+
+Reconciling three copies makes them agree with each other. It does not make
+them right, and four of the eight `_needs_review` notes were asking a question
+only a publisher could answer. `scripts/python/verify_bibliography.py` asks:
+
+```
+https://api.crossref.org/works/{DOI}
+https://api.datacite.org/dois/{DOI}              where Crossref does not index it
+http://export.arxiv.org/api/query?id_list={id}
+```
+
+It compares title, authors, container-title, volume, page and year against what
+the file claims and reports every difference. `make publications-verify` runs
+it; `make publications-test` runs its unit tests, which need no network.
+
+Eleven of the fifteen entries carry a DOI or an arXiv identifier and are now
+checked. The other four have neither, and the verifier lists them as
+unverifiable rather than passing over them in silence.
+
+### What it is built not to do
+
+**Report a clean run it did not earn.** Any request that fails to reach a
+service — a refused CONNECT, a timeout, a 429 or 503 surviving three attempts —
+exits 2, and so does a partial run. "Twelve of fifteen checked" is a failure,
+not a pass. This is not hypothetical: the first version of this file was
+written in a sandbox where `export.arxiv.org` and `doi.org` were both outside
+the egress allowlist, and a checker that had gone green there would have
+certified fifteen unverified entries.
+
+**Trust a status code.** Crossref must answer `status: ok` carrying the DOI
+that was asked for; arXiv must return a feed with one entry whose id is the one
+that was asked for. A 200 holding a proxy error page fails as a transport
+error, because it means we never reached the publisher. arXiv reports an
+unknown identifier as a 200 whose entry points at its error vocabulary, which
+is the plainest available demonstration of why.
+
+**Mistake a limit for a defect.** Crossref 404s a DataCite DOI exactly as it
+404s a DOI that does not exist. On a 404 the registration-agency endpoint says
+who owns it, and a DataCite DOI is followed to DataCite. A DOI that *no* agency
+claims is a defect in the file, and is reported as one.
+
+Where an entry has both a publisher record and an arXiv posting, the publisher
+holds the version of record: the preprint of the 2014 *Algebra universalis*
+paper is titled *…with non-isomorphic…* and the journal's own record is
+*…nonisomorphic…*. That is a fact about two documents, not an error, so it is
+reported for information.
+
 ## Consequences
 
-- **Eight entries carry `_needs_review`** and are printed on every run of
-  `make publications`. They are conflicts the three sources could not settle
-  between them, not defects in the tooling. Two matter:
-  - the CV titles a 2020 IJAC paper *Bounded homomorphisms and fiber products
-    of lattices*; the research page says *…and finitely generated fiber
-    products*. Same arXiv id. One is wrong.
-  - arXiv 2101.10166 appears under two entirely different titles — *A
-    machine-checked proof of Birkhoff's variety theorem in Martin-Löf type
-    theory* (CV) and *The Agda Universal Algebra Library and Birkhoff's Theorem
-    in Dependent Type Theory* (research page, describing it as the unabridged
-    version of the TYPES submission). If those are separate works this should be
-    two entries.
-- **Nothing here was verified against a publisher.** `export.arxiv.org` and
-  `doi.org` are both blocked from the environment this was built in. The entries
-  are *reconciled* claims, not *checked* ones. `gen_publications.py` validates
-  internal soundness only — unique ids, plausible years, well-formed arXiv ids —
-  and deliberately does not pretend to resolve anything. Real resolution belongs
-  to #47, which now records the two failure modes that make it necessary.
+- **Four entries still carry `_needs_review`**, printed on every run of
+  `make publications`. All four are decisions for a person, and each note now
+  records what the publishers do say:
+  - `demeo2022birkhoff` — one entry or two. DataCite's record for the TYPES
+    proceedings paper names arXiv:2101.10166 as a version of it, so the
+    publisher treats them as one work; the research page treats the preprint as
+    a separate, longer work under a different title.
+  - `barto2021csp` — the research page says "submitted to LICS 2021", the CV
+    says it is a LICS 2021 paper. Crossref has the proceedings article, which
+    favours the CV.
+  - `demeo2002icmc` — the CiteSeerX link needs replacing, and neither service
+    holds this paper.
+  - `demeo1998eigenvalues` — one item or two, alongside the MS thesis.
+- **The other four `_needs_review` notes are gone**, settled by the publishers
+  rather than by choosing:
+  - the 2020 IJAC title *does* include "finitely generated" (World Scientific).
+  - *nonisomorphic* is unhyphenated in *Algebra universalis*; Zotero was
+    carrying the preprint's title.
+  - arXiv 2011.07879 is the right identifier for the 2019 IJAC paper despite
+    being posted in November 2020 — its own record carries that DOI.
+  - the Cardano paper has seven authors, not "Knispel et al.".
+- `gen_publications.py` still validates internal soundness only — unique ids,
+  plausible years, well-formed arXiv ids — and still does not resolve anything.
+  The two checks answer different questions and neither substitutes for the
+  other, so they stay separate targets.
+- **`publications-verify` is not a build gate.** CI has no network by design
+  (ADR-004), and a check that fails there for reasons unrelated to the change
+  would train everyone to ignore it. `checks.bibliography-verifier` runs the
+  verifier's *tests* under `nix flake check`, which is the part that can be
+  checked hermetically. Run `make publications-verify` when the bibliography
+  changes.
 - The three legacy copies stay until #30 and #41 render from the generated
   Markdown; the CV's "Selected publications" section becomes an include.
   `import/legacy-bib-pubs.json` preserves the Zotero export as provenance.

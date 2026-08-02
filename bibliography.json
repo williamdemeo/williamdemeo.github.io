@@ -13,9 +13,17 @@
     "its years looked wrong against the other two lists.",
     "",
     "`_needs_review` marks a field the three sources disagree on and that could",
-    "not be settled from them.  arXiv and DOI resolution are blocked from the",
-    "sandbox this was built in, so nothing here was verified against the",
-    "publishers; these are reconciled claims, not checked ones."
+    "not be settled from them.  Four remain, and all four are decisions for a",
+    "person rather than facts to look up: whether to split an entry in two,",
+    "whether to trust the CV over the research page about a venue, which",
+    "replacement link to use.  Each note records what the publishers do say.",
+    "",
+    "Every entry carrying a DOI or an arXiv identifier has been checked against",
+    "the publisher's own record -- Crossref, DataCite or the arXiv API -- by",
+    "scripts/python/verify_bibliography.py.  `make publications-verify` repeats",
+    "the comparison and reports every difference.  The four entries with neither",
+    "identifier are reconciled claims still, and the verifier lists them as",
+    "unverifiable rather than passing over them."
   ],
 
   "items": [
@@ -25,30 +33,40 @@
       "title": "Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda",
       "author": [
         {"family": "Knispel", "given": "Andre"},
+        {"family": "Melkonian", "given": "Orestis"},
+        {"family": "Chapman", "given": "James"},
+        {"family": "Hill", "given": "Alasdair"},
+        {"family": "Jääger", "given": "Joosep"},
         {"family": "DeMeo", "given": "William"},
-        {"literal": "et al."}
+        {"family": "Norell", "given": "Ulf"}
       ],
       "container-title": "5th International Workshop on Formal Methods for Blockchains (FMBC 2024)",
+      "volume": "118",
+      "page": "2:1-2:18",
       "issued": {"date-parts": [[2024]]},
       "DOI": "10.4230/OASIcs.FMBC.2024.2",
       "URL": "https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2",
       "_source": ["cv"],
-      "_needs_review": "Author list is 'with Knispel et al.' in the CV; the full author list should be taken from the published paper."
+      "_comment": "Authors, volume and pages from DataCite, which registers Dagstuhl's OASIcs; Crossref does not index this DOI. The CV's 'with Knispel et al.' stood in for seven authors."
     },
     {
       "id": "demeo2022birkhoff",
       "type": "paper-conference",
       "title": "A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory",
       "author": [
-        {"family": "Carette", "given": "Jacques"},
-        {"family": "DeMeo", "given": "William"}
+        {"family": "DeMeo", "given": "William"},
+        {"family": "Carette", "given": "Jacques"}
       ],
       "container-title": "27th International Conference on Types for Proofs and Programs (TYPES 2021)",
+      "volume": "239",
+      "page": "4:1-4:21",
       "issued": {"date-parts": [[2022]]},
+      "_preprint": {"arxiv-year": 2021},
       "_arxiv": "2101.10166",
+      "DOI": "10.4230/LIPIcs.TYPES.2021.4",
       "URL": "https://arxiv.org/abs/2101.10166",
       "_source": ["cv", "research"],
-      "_needs_review": "The CV and the research page give completely different titles for this arXiv id. The research page calls it 'The Agda Universal Algebra Library and Birkhoff's Theorem in Dependent Type Theory' and describes 2101.10166 as the unabridged version of the TYPES submission. If the proceedings paper and the unabridged preprint are separate works, this should be two entries."
+      "_needs_review": "One entry or two? The proceedings paper is DataCite 10.4230/LIPIcs.TYPES.2021.4 -- LIPIcs vol. 239, pp. 4:1-4:21, 2022, by DeMeo and Carette -- and its record names arXiv:2101.10166 as a version of it (relationType IsVersionOf), so the publisher treats them as one work. The research page disagrees, calling 2101.10166 the unabridged 35-page version of the TYPES submission under a different title, 'The Agda Universal Algebra Library and Birkhoff's Theorem in Dependent Type Theory', and arXiv's own abstract page says the same. If they are separate works this should be two entries; the DOI, volume and pages here belong to the proceedings paper either way. Author order and title are settled: arXiv and DataCite both give DeMeo before Carette."
     },
     {
       "id": "bergman2022universal",
@@ -59,9 +77,11 @@
         {"family": "DeMeo", "given": "William"}
       ],
       "container-title": "Logical Methods in Computer Science",
+      "volume": "18",
       "issued": {"date-parts": [[2022]]},
       "_preprint": {"arxiv-year": 2016},
       "_arxiv": "1611.02867",
+      "DOI": "10.46298/lmcs-18(1:12)2022",
       "URL": "https://lmcs.episciences.org/8975",
       "_source": ["cv", "research", "zotero"]
     },
@@ -76,10 +96,11 @@
       ],
       "container-title": "36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)",
       "issued": {"date-parts": [[2021]]},
+      "_preprint": {"arxiv-year": 2020},
       "_arxiv": "2010.04958",
       "URL": "https://arxiv.org/abs/2010.04958",
       "_source": ["cv", "research"],
-      "_needs_review": "The research page says 'submitted to LICS 2021'; the CV lists it as a LICS 2021 paper. Confirm whether it appeared in the proceedings."
+      "_needs_review": "The research page says 'submitted to LICS 2021'; the CV lists it as a LICS 2021 paper. The evidence favours the CV -- Crossref has 10.1109/LICS52264.2021.9470670, 'Constraint Satisfaction Problems over Finite Structures' in '2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)', pages 1-13, by Barto, DeMeo and Mottet, and arXiv 2010.04958 carries that same DOI with journal_ref 'LICS 2021 pages 1--13'. Adding the DOI and pages is left for William to confirm."
     },
     {
       "id": "demeo2020bounded",
@@ -97,8 +118,7 @@
       "_preprint": {"arxiv-year": 2019},
       "_arxiv": "1907.08046",
       "DOI": "10.1142/S0218196720500174",
-      "_source": ["cv", "research"],
-      "_needs_review": "The CV drops 'finitely generated' from the title. The research page's longer form is used here as the more likely published title; confirm against the journal."
+      "_source": ["cv", "research"]
     },
     {
       "id": "demeo2019difference",
@@ -116,7 +136,7 @@
       "_arxiv": "2011.07879",
       "DOI": "10.1142/S021819671950036X",
       "_source": ["cv", "research"],
-      "_needs_review": "arXiv 2011.07879 was posted in November 2020, after a 2019 journal publication. Plausible, but confirm the identifier is right."
+      "_comment": "The arXiv posting does postdate publication: 2011.07879 went up in November 2020 for a paper published in 2019. It is the right identifier -- arXiv's own record for it carries this DOI and the journal reference. No `_preprint.arxiv-year`, because that field means 'the preprint came first' and here it did not."
     },
     {
       "id": "adaricheva2018alh",
@@ -136,7 +156,7 @@
       "type": "article-journal",
       "title": "Isotopic algebras with nonisomorphic congruence lattices",
       "author": [{"family": "DeMeo", "given": "William"}],
-      "container-title": "Algebra Universalis",
+      "container-title": "Algebra universalis",
       "volume": "72",
       "page": "295-298",
       "issued": {"date-parts": [[2014]]},
@@ -144,17 +164,18 @@
       "_arxiv": "1301.7481",
       "DOI": "10.1007/s00012-014-0301-4",
       "_source": ["research", "zotero"],
-      "_needs_review": "Zotero hyphenates 'non-isomorphic'; the research page does not. Confirm against the journal."
+      "_comment": "Springer's record has 'nonisomorphic' unhyphenated, so Zotero's 'non-isomorphic' was the preprint's title, which arXiv still carries."
     },
     {
       "id": "demeo2013expansions",
       "type": "article-journal",
       "title": "Expansions of finite algebras and their congruence lattices",
       "author": [{"family": "DeMeo", "given": "William"}],
-      "container-title": "Algebra Universalis",
+      "container-title": "Algebra universalis",
       "volume": "69",
       "page": "257-278",
       "issued": {"date-parts": [[2013]]},
+      "_preprint": {"arxiv-year": 2012},
       "_arxiv": "1205.1106",
       "DOI": "10.1007/s00012-013-0226-3",
       "_source": ["research", "zotero"]

@@ -252,6 +252,71 @@ line, one file.
 
 ---
 
+### `verify_bibliography`: checking the publication list against the publishers
+
+`bibliography.json` was built by reconciling three hand-maintained lists
+(ADR-006). Reconciling makes copies agree with each other; it does not make
+them right. This asks the publishers:
+
+```console
+$ make publications-verify
+verifying 15 entries against api.crossref.org, api.datacite.org and export.arxiv.org
+...
+17 record(s) fetched and compared
+  ! 0 difference(s) needing a decision
+  ~/+/i 19 of spelling, of a field only the publisher carries, or for information
+
+not verifiable against either service (4):
+  adaricheva2018alh: no DOI and no arXiv id
+  ...
+```
+
+Every entry with a DOI is looked up at Crossref; where Crossref does not index
+it, the registration-agency endpoint says who does and a DataCite DOI is
+followed to DataCite. Every entry with an arXiv identifier is looked up at the
+arXiv API. Title, authors, container-title, volume, page and year are compared
+against what the file claims, and each difference is marked:
+
+| | |
+| --- | --- |
+| `!` | the values genuinely differ — someone has to decide |
+| `~` | the same value spelled differently: case, accents, `Vol. 30` against `30` |
+| `+` | a field the publisher carries and the file does not |
+| `i` | context rather than a difference — the raw `journal_ref`, a posting date |
+
+Only `!` fails the run. Exit codes follow `diff(1)`: 0 everything checked
+agrees, 1 a difference wants a human, 2 could not run.
+
+**Two things it is built not to do**, both of which this repository has been
+caught by:
+
+- **Report a clean run it did not earn.** Any request that never reaches a
+  service — a refused `CONNECT`, a timeout, a 429 or 503 surviving three
+  attempts — exits 2, and so does a *partial* run. A checker that passes
+  because the network is blocked is worse than no checker. A failure to connect
+  also never means "the resource is dead": a sandbox that denies `CONNECT` for
+  a host outside its egress allowlist looks exactly like a host that is gone,
+  and the message says so.
+- **Trust a status code.** Crossref must answer `status: ok` carrying the DOI
+  that was asked for; arXiv must return a feed with one entry whose id is the
+  one that was asked for. A 200 holding a proxy error page is treated as a
+  transport failure, because it means the publisher was never reached — and
+  arXiv answers an unknown identifier with a 200 whose entry points at its
+  error vocabulary, which is exactly why the body has to be read.
+
+It needs the network, so it is not a build gate: CI has none by design
+(ADR-004). `make publications-test` runs the unit tests, which use fixtures and
+need nothing, and `nix flake check` runs them as `checks.bibliography-verifier`.
+The tests that matter are the ones proving the two behaviours above, since
+"it fails loudly" is exactly the kind of claim that should not be taken on
+trust.
+
+Nothing from PyPI: `urllib`, `json` and `xml.etree` are all in the standard
+library, so there is no new pin in `requirements.txt` for `flake.nix` to match
+under ADR-004's `requirements-pins` check.
+
+---
+
 ### Notes
 
 - The script uses `env -u GH_TOKEN -u GITHUB_TOKEN` by default to work around

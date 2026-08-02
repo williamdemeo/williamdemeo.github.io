@@ -295,6 +295,21 @@
               python3 ${redirectSource}/scripts/python/test_redirects.py
               touch "$out"
             '';
+
+          # The bibliography verifier's own behaviour, which is worth a check
+          # here precisely because the verifier itself cannot run here: it
+          # needs the publishers, and this sandbox has no network.  These
+          # tests use fixtures instead, and the ones that matter prove the
+          # verifier exits non-zero when it cannot reach a service rather than
+          # reporting the clean run it did not earn.
+          bibliography-verifier = pkgs.runCommandLocal "check-bibliography-verifier"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${./scripts/python}/test_verify_bibliography.py
+              touch "$out"
+            '';
         }
       );
 

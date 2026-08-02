@@ -199,8 +199,20 @@ design-audit: font-audit offline-audit contrast-audit
 # bibliography.json is the only authoritative publication list (ADR-006).  The
 # generator renders it into docs/_snippets/publications.md, which the
 # publications page and the CV include, so neither holds a second copy.
+#
+# `publications-check` and `publications-verify` ask different questions and
+# neither answers the other's.  The first is offline and asks whether the file
+# is internally sound; the second asks the publishers whether it is true, and
+# needs api.crossref.org, api.datacite.org and export.arxiv.org.  It exits 2
+# rather than 0 when it cannot reach them, so it is not a build gate: CI has no
+# network by design (ADR-004), and a check that fails there for a reason
+# unrelated to the change would train everyone to ignore it.  Run it when the
+# bibliography changes.
+#
+# Both are stdlib-only -- no dependency in requirements.txt, and so none for
+# flake.nix to match under ADR-004's requirements-pins check.
 
-.PHONY: publications publications-check
+.PHONY: publications publications-check publications-verify publications-test
 
 ## Regenerate docs/_snippets/publications.md from bibliography.json
 publications: $(MKDOCS_DEP)
@@ -209,6 +221,14 @@ publications: $(MKDOCS_DEP)
 ## Validate bibliography.json without rewriting anything
 publications-check: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/gen_publications.py --check
+
+## Check bibliography.json against Crossref, DataCite and arXiv (needs network)
+publications-verify: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/verify_bibliography.py
+
+## Unit-test the verifier's comparisons and its failure handling (no network)
+publications-test: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/test_verify_bibliography.py
 
 ## Show this help
 help:

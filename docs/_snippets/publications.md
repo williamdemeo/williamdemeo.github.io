@@ -2,16 +2,16 @@
      Do not edit: `make publications` regenerates it. See ADR-006. -->
 
 - **Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda**  
-  Andre Knispel and **William DeMeo**, et al.  *5th International Workshop on Formal Methods for Blockchains (FMBC 2024)*, 2024.  
+  Andre Knispel, Orestis Melkonian, James Chapman, Alasdair Hill, Joosep Jääger, **William DeMeo**, and Ulf Norell.  *5th International Workshop on Formal Methods for Blockchains (FMBC 2024)*, **118**, pp. 2:1-2:18, 2024.  
   [DOI](https://doi.org/10.4230/OASIcs.FMBC.2024.2)
 
 - **Universal algebraic methods for constraint satisfaction problems**  
-  Clifford Bergman and **William DeMeo**.  *Logical Methods in Computer Science*, 2022.  
-  [arXiv:1611.02867](https://arxiv.org/abs/1611.02867) · [Link](https://lmcs.episciences.org/8975)
+  Clifford Bergman and **William DeMeo**.  *Logical Methods in Computer Science*, **18**, 2022.  
+  [DOI](https://doi.org/10.46298/lmcs-18(1:12)2022) · [arXiv:1611.02867](https://arxiv.org/abs/1611.02867) · [Link](https://lmcs.episciences.org/8975)
 
 - **A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory**  
-  Jacques Carette and **William DeMeo**.  *27th International Conference on Types for Proofs and Programs (TYPES 2021)*, 2022.  
-  [arXiv:2101.10166](https://arxiv.org/abs/2101.10166)
+  **William DeMeo** and Jacques Carette.  *27th International Conference on Types for Proofs and Programs (TYPES 2021)*, **239**, pp. 4:1-4:21, 2022.  
+  [DOI](https://doi.org/10.4230/LIPIcs.TYPES.2021.4) · [arXiv:2101.10166](https://arxiv.org/abs/2101.10166)
 
 - **Constraint satisfaction problems over finite structures**  
   Libor Barto, **William DeMeo**, and Antoine Mottet.  *36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)*, 2021.  
@@ -29,7 +29,7 @@
   Kira Adaricheva, **William DeMeo**, and Jennifer Hyndman, 2018.  
 
 - **Isotopic algebras with nonisomorphic congruence lattices**  
-  **William DeMeo**.  *Algebra Universalis*, **72**:295-298, 2014.  
+  **William DeMeo**.  *Algebra universalis*, **72**:295-298, 2014.  
   [DOI](https://doi.org/10.1007/s00012-014-0301-4) · [arXiv:1301.7481](https://arxiv.org/abs/1301.7481)
 
 - **Dedekind's Transposition Principle for lattices of equivalence relations**  
@@ -37,7 +37,7 @@
   [arXiv:1301.6788](https://arxiv.org/abs/1301.6788)
 
 - **Expansions of finite algebras and their congruence lattices**  
-  **William DeMeo**.  *Algebra Universalis*, **69**:257-278, 2013.  
+  **William DeMeo**.  *Algebra universalis*, **69**:257-278, 2013.  
   [DOI](https://doi.org/10.1007/s00012-013-0226-3) · [arXiv:1205.1106](https://arxiv.org/abs/1205.1106)
 
 - **Interval enforceable properties of finite groups**  
