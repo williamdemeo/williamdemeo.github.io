@@ -320,6 +320,35 @@ def test_bibtex_uses_en_dash_page_ranges():
     assert field(gp.bibtex_entry(PAPER), "pages") == "{4:1--4:21}"
 
 
+def test_bibtex_omits_a_url_that_only_restates_the_eprint():
+    """`eprint` already is that link; repeating it as `url` is noise."""
+    assert not field(gp.bibtex_entry(PREPRINT), "url"), gp.bibtex_entry(PREPRINT)
+    assert field(gp.bibtex_entry(PREPRINT), "eprint") == "{2101.10166}"
+
+
+def test_bibtex_omits_a_url_that_only_restates_the_doi():
+    item = {"id": "x", "type": "article-journal", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2020]]},
+            "DOI": "10.1/abc", "URL": "https://doi.org/10.1/abc"}
+    assert not field(gp.bibtex_entry(item), "url"), gp.bibtex_entry(item)
+
+
+def test_bibtex_keeps_a_url_that_is_the_only_link():
+    item = {"id": "x", "type": "paper-conference", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2004]]},
+            "URL": "https://example.org/paper.pdf"}
+    assert field(gp.bibtex_entry(item), "url") == "{https://example.org/paper.pdf}"
+
+
+def test_bibtex_keeps_a_url_pointing_somewhere_the_identifiers_do_not():
+    """LMCS has an article page that is neither the DOI nor the arXiv abstract."""
+    item = {"id": "x", "type": "article-journal", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2022]]},
+            "DOI": "10.46298/lmcs-18(1:12)2022", "_arxiv": "1611.02867",
+            "URL": "https://lmcs.episciences.org/8975"}
+    assert field(gp.bibtex_entry(item), "url") == "{https://lmcs.episciences.org/8975}"
+
+
 def test_bibtex_carries_the_arxiv_eprint():
     entry = gp.bibtex_entry(PAPER)
     assert field(entry, "eprint") == "{2101.10166}"

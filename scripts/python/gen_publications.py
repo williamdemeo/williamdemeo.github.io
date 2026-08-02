@@ -499,14 +499,14 @@ def bibtex_entry(item: dict) -> str:
     if item.get("_arxiv"):
         put("eprint", item["_arxiv"])
         put("archivePrefix", "arXiv")
-    # A URL that only restates the DOI or the eprint is noise in a .bib.
+    # A URL that only restates the DOI or the eprint is noise in a .bib.  An
+    # entry whose URL restates neither is the only case that needs it, and that
+    # includes an entry with no DOI and no eprint, whose URL is its only link.
     url = item.get("URL")
     if url and not (
         (item.get("DOI") and item["DOI"] in url)
         or (item.get("_arxiv") and item["_arxiv"] in url)
     ):
-        put("url", url)
-    elif url and not item.get("DOI"):
         put("url", url)
     put("note", bibtex_escape(item.get("_note") or ""))
 

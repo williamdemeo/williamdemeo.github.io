@@ -6,7 +6,9 @@ generated from one file, checked against the publishers that hold the records;
 [ADR-006](https://github.com/williamdemeo/williamdemeo.github.io/blob/main/docs/adr/006-bibliography-source.md)
 says how.
 
-Each entry links the version of record and the arXiv preprint side by side.
+Each entry links whatever exists for it: the version of record, the arXiv
+preprint, or — for most — both, side by side. A few have neither, and say so by
+carrying no link rather than by pointing somewhere that does not answer.
 The whole list is also available as [BibTeX](publications.bib).
 
 <!-- The record below is the include on the next line, not text in this file.
