@@ -15,8 +15,9 @@ page rather than as a silent one across 44 exam solutions.
 
 Not in the navigation, excluded from search. Reachable only by URL.
 
-The authoritative check is `node scripts/python/audit_math.mjs`, which renders
-every expression in a content tree headlessly and exits non-zero on failure.
+The authoritative check is `make math-audit` (`scripts/js/audit_math.mjs`),
+which renders every expression in a content tree headlessly and exits non-zero
+on failure.
 This page is the visual counterpart.
 
 ## Mathematics

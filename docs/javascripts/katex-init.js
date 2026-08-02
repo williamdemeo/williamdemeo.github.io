@@ -10,8 +10,18 @@
  * The subscription to `document$` rather than a DOMContentLoaded listener is
  * required: `navigation.instant` swaps page content without a reload, and a
  * one-shot listener would leave every subsequently-visited page unrendered.
+ *
+ * `document$` comes from Material's bundle, though, so it is not ours to
+ * assume.  Referencing an undefined global throws a ReferenceError, which
+ * would abort this script and every later one on the page -- turning "the
+ * theme's JS did not load" into "nothing on the page works".  Falling back to
+ * DOMContentLoaded degrades instead: math renders once, and instant
+ * navigation stops re-rendering it, which is the correct trade when the
+ * bundle providing instant navigation is the thing that is missing.  It also
+ * makes a page opened straight from disk render, which is otherwise a
+ * confusing way to lose an afternoon.
  */
-document$.subscribe(() => {
+function renderMath() {
   renderMathInElement(document.body, {
     delimiters: [
       { left: "\\(", right: "\\)", display: false },
@@ -28,4 +38,10 @@ document$.subscribe(() => {
     strict: false,
     trust: false,
   });
-});
+}
+
+if (typeof document$ !== "undefined") {
+  document$.subscribe(renderMath);
+} else {
+  document.addEventListener("DOMContentLoaded", renderMath);
+}

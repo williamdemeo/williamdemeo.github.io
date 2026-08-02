@@ -6,7 +6,7 @@
  * across 44 pages have been rendering as errors on williamdemeo.org for years.
  * This table is what fixes them.
  *
- * Single source of truth: `scripts/python/audit_math.mjs` evaluates this same
+ * Single source of truth: `scripts/js/audit_math.mjs` evaluates this same
  * file, so the audit and the site can never disagree about what is defined.
  *
  * Definitions marked INFERRED were reconstructed from usage context rather
@@ -14,6 +14,16 @@
  * either repository.  They render plausibly; whether each glyph is what the
  * author originally intended is a content question, not a rendering one.
  */
+
+// Expands to nothing, but consumes one argument first.  KaTeX has no string
+// form for this: arity comes from the highest `#n` in the body, so any body
+// that expands to nothing necessarily takes no arguments.  A macro value may
+// also be a function of the expander, which can consume arguments explicitly.
+const gobbleOne = (context) => {
+  context.consumeArgs(1);
+  return "";
+};
+
 window.KATEX_MACROS = {
   // ── Number systems and standard sets ────────────────────────────────────
   "\\C": "\\mathbb{C}",
@@ -108,9 +118,13 @@ window.KATEX_MACROS = {
   // is redundant and the argument passes straight through.
   "\\ensuremath": "#1",
   "\\mbox": "\\text{#1}",
-  // Cross-referencing and footnotes are document-level LaTeX.  Swallow the
-  // argument and render nothing, so their presence does not break the
-  // surrounding expression.
-  "\\label": "",
-  "\\footnote": "",
+  // Cross-referencing and footnotes are document-level LaTeX with no meaning
+  // in a standalone expression.  Both have to *swallow* their argument, which
+  // an empty string does not do: KaTeX infers a macro's arity from the highest
+  // `#n` in its body, so `"\\label": ""` is a zero-argument macro and the
+  // following group is left behind as ordinary math -- `y \label{eq:main}`
+  // renders as "y eq:main".  A function macro consumes the argument properly.
+  // (`\@gobble` is a LaTeX kernel command KaTeX does not define.)
+  "\\label": gobbleOne,
+  "\\footnote": gobbleOne,
 };

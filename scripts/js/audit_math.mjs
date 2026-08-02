@@ -4,7 +4,8 @@
  * source of truth: this script evaluates that file rather than keeping its own
  * copy, so the audit and the published site can never disagree.
  *
- * Usage:  node scripts/python/audit_math.mjs <content-dir> [katex-dir]
+ * Usage:  node scripts/js/audit_math.mjs [content-dir]     (default: import/zola-converted)
+ *         make math-audit [MATH_SRC=<content-dir>]
  */
 import fs from 'fs';
 import path from 'path';
