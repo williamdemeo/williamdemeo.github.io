@@ -76,6 +76,26 @@ render script so no GitHub API access is needed.
 
 ---
 
+### `audit_math.mjs`: checking that every expression renders
+
+`scripts/js/audit_math.mjs` renders every `$...$` and `$$...$$` expression in a
+content tree with KaTeX and reports what fails.  It loads the bundle the site
+ships (`docs/assets/katex/katex.min.js`) and the site's macro table
+(`docs/javascripts/katex-macros.js`), so the audit cannot drift from what
+visitors actually get, and it needs nothing from npm.
+
+```zsh
+make math-audit                         # defaults to import/zola-converted
+make math-audit MATH_SRC=docs           # or any other tree
+```
+
+Exits non-zero when anything fails to render, so it works as a CI gate once the
+mathematical content has moved into `docs/`.
+
+Fenced and inline code are stripped before scanning, so `$PATH` in a shell
+example is not mistaken for mathematics.
+---
+
 ### `gh_project_render`: regenerating GITHUB_PROJECT.md from GitHub
 
 Once the project is bootstrapped, GitHub becomes the source of truth for issue state.  This script pulls live GitHub state and regenerates the issue listings inside `docs/GITHUB_PROJECT.md`, leaving hand-edited prose (milestone descriptions, exit criteria, mermaid graphs) untouched.
