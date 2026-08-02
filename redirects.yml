@@ -162,31 +162,39 @@ rules:
   - from: /archive/
     keep: true
 
-  # Zola's section index for the blog.  The new blog is M6-1 (#35).
+  # Zola's section index for the blog.  The blog is at /blog/ now (M6-1, #35).
   - from: /posts/
-    pending: "#35 (M6-1) -- blog index"
+    to: blog/index.md
 
   # The fourteen root-level posts.  Zola strips the date prefix from the slug,
   # so these are served at `/isotopy/`, not `/posts/2014-02-13-isotopy/`.
-  # Whether the new blog reproduces that scheme is M6-1's call; either way
-  # these fourteen URLs have to keep resolving.
+  #
+  # ADR-007 settles where they go: /blog/<slug>/, keeping the Zola slug, with
+  # no date in the path.  So each of these is a one-hop redirect that never
+  # has to change again, and the matching Octopress dated URL below points at
+  # the same place.  Neither legacy scheme could have been reproduced: the
+  # blog plugin serves posts under `blog_dir`, and root-level slugs are
+  # already spoken for by the archive area (/typefunc/, /probability-quiz/).
+  #
+  # The target is the post's *source* path; the hook resolves it to the built
+  # URL, so a slug change cannot leave these pointing at nothing.
   - from: /diaconescus-theorem/
-    pending: "#13/#35 -- keep; blog not built"
+    to: blog/posts/2014-02-05-diaconescus-theorem.md
   - from: /a-problem-of-palfy-and-saxl/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/a-problem-of-palfy-and-saxl/"
   - from: /groupsound/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/groupsound/"
   - from: /isotopy/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/isotopy/"
   - from: /three-sat-and-partition-lattices/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/three-sat-and-partition-lattices/"
   - from: /congruences-of-partial-algebras/
-    pending: "#13/#35 -- keep; blog not built"
+    to: blog/posts/2017-04-06-congruences-of-partial-algebras.md
 
   - from: /ieprops/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/ieprops/"
   - from: /overalgebras/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/overalgebras/"
   - from: /typefunc/
     keep: true
   - from: /touchpad-forensics/
@@ -197,41 +205,48 @@ rules:
     keep: true
 
   - from: /conferences-in-algebra/
-    pending: "#35 -- dropped; redirect to the blog index"
+    to: blog/index.md
   - from: /java-on-linux/
     to: archive/index.md
   - from: /nobody-told-me/
-    pending: "#35 -- dropped; redirect to the blog index"
+    to: blog/index.md
 
   # ── williamdemeo.github.io (Octopress) ───────────────────────────────────
 
   # Dated post paths.  Twelve of the fifteen also exist as Zola pages and are
   # covered above under their Zola slugs; these are the Octopress URLs for the
   # same posts, and both have to resolve.
+  #
+  # Note the dates: Octopress served `congruences-of-partial-algebras` at
+  # /2017/04/07/ and Zola derived 2017-04-06 from the same post's front
+  # matter, an hours-offset disagreement about the same publication.  That is
+  # the concrete reason ADR-007 keeps the date out of the new URL: a date in a
+  # path is a claim the path has to go on being right about, and here the two
+  # legacy sites could not even agree on it.
   - from: /2014/02/05/diaconescus-theorem/
-    pending: "#13/#35 -- keep; blog not built"
+    to: blog/posts/2014-02-05-diaconescus-theorem.md
   - from: /2014/02/13/a-problem-of-palfy-and-saxl/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/a-problem-of-palfy-and-saxl/"
   - from: /2014/02/13/groupsound/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/groupsound/"
   - from: /2014/02/13/isotopy/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/isotopy/"
   - from: /2015/01/11/three-sat-and-partition-lattices/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/three-sat-and-partition-lattices/"
   - from: /2017/04/07/congruences-of-partial-algebras/
-    pending: "#13/#35 -- keep; blog not built"
+    to: blog/posts/2017-04-06-congruences-of-partial-algebras.md
 
   - from: /2014/02/13/ieprops/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/ieprops/"
   - from: /2014/02/13/overalgebras/
-    pending: "#13/#35 -- keep; blog not built"
+    pending: "#13 -- post not converted yet; goes to /blog/overalgebras/"
   - from: /2014/02/13/typefunc/
     to: typefunc/index.md
   - from: /2014/03/19/probability-quiz/
     to: probability-quiz/index.md
 
   - from: /2017/04/07/conferences-in-algebra/
-    pending: "#35 -- dropped; redirect to the blog index"
+    to: blog/index.md
   - from: /2017/12/06/java-on-linux/
     to: archive/index.md
 
@@ -242,7 +257,7 @@ rules:
 
   # Documents an Octopress workflow that no longer exists anywhere.
   - from: /2014/02/07/cloning-an-octopress-repo/
-    pending: "#35 -- dropped; redirect to the blog index"
+    to: blog/index.md
 
   # Archived rather than converted: Ralph Freese found an error in the proof
   # (ADR-002), which removes the reason to bring it forward.  The URLs still
@@ -272,22 +287,83 @@ rules:
   - from: /pages/
     to: archive/index.md
 
-  # Blog machinery: the archive listing, pagination, and the twelve category
+  # Blog machinery: the archive listing, pagination, and the thirteen category
   # pages Octopress generated from post tags.
+
+  # Octopress's every-post-by-date listing.  The new blog's archive is per
+  # year (/blog/archive/2014/ and so on) with no single index above it, so the
+  # blog index -- which lists every post, newest first -- is the closest thing
+  # that exists and the only target that stays correct as years are added.
   - from: /archives/
-    pending: "#35 (M6-1) -- blog archive listing"
+    to: blog/index.md
+
+  # /blog/page/2/ is the one URL here, and the new blog puts its own second
+  # page of posts at exactly that path.  It is not a page yet only because two
+  # posts do not fill one page: `pagination_per_page` is 5, so the eight posts
+  # #13 is converting produce it.  Held as pending rather than redirected to
+  # the index deliberately -- a `to:` rule here would start overwriting a real
+  # page the moment #13 lands, and the hook would (correctly) refuse to build.
+  # When it lands this becomes `keep: true`, which a prefix rule may carry.
   - from: /blog/page/**
-    pending: "#35 (M6-1) -- blog pagination"
-  - from: /blog/categories/**
-    pending: "#35 (M6-1) -- blog tag pages"
+    pending: "#13 -- /blog/page/2/ is a real page once there is a second page of posts"
+
+  # Thirteen category pages over fifteen posts is not a taxonomy, and the new
+  # blog does not reproduce it: it has three categories, at
+  # /blog/category/<slug>/, and none of these thirteen slugs is one of them.
+  # So all thirteen go to the blog index rather than to a guessed successor.
+  #
+  # Expanded from `/blog/categories/**`, because a prefix rule cannot carry
+  # `to:` -- one stub for the whole prefix would leave twelve of the thirteen
+  # 404ing while the build reported success.  Same expansion as `/computing/**`
+  # above.
+  #
+  # Sharpening one of these later is a one-line change, but only to another
+  # *source file*: the checker requires a `to:` target to exist under docs/,
+  # and the generated category views live in the plugin's temporary directory,
+  # not in docs/.
+  - from: /blog/categories/algorithm/
+    to: blog/index.md
+  - from: /blog/categories/articles/
+    to: blog/index.md
+  - from: /blog/categories/closure-operator/
+    to: blog/index.md
+  - from: /blog/categories/computer-science/
+    to: blog/index.md
+  - from: /blog/categories/finance/
+    to: blog/index.md
+  - from: /blog/categories/interview-questions/
+    to: blog/index.md
+  - from: /blog/categories/lattice-theory/
+    to: blog/index.md
+  - from: /blog/categories/logic/
+    to: blog/index.md
+  - from: /blog/categories/notes/
+    to: blog/index.md
+  - from: /blog/categories/partial-algebras/
+    to: blog/index.md
+  - from: /blog/categories/probability/
+    to: blog/index.md
+  - from: /blog/categories/resources/
+    to: blog/index.md
+  - from: /blog/categories/universal-algebra/
+    to: blog/index.md
 
   # ── Not redirected, deliberately ─────────────────────────────────────────
 
   # A meta-refresh stub is an HTML page, which is meaningless to a feed reader:
   # it would hand XML clients something they cannot parse.  The old feed path
-  # needs a real feed at the same URL, which is M6-1's RSS plugin.
+  # needs a real feed at the same URL, and the checker enforces that -- an
+  # active rule on a non-HTML URL is a hard error.
+  #
+  # This one did not come unblocked with the rest of #35, and the reason is
+  # worth stating rather than leaving as "pending": mkdocs-material 9.5.49 has
+  # no feed generator.  RSS in the community edition means either the
+  # third-party mkdocs-rss-plugin -- a dependency, and so a version to keep in
+  # step in flake.nix under ADR-004's checks.requirements-pins -- or a hook
+  # like the two this repository already runs.  That is a call to make on
+  # purpose, not a detail to settle inside another issue.  See ADR-007.
   - from: /atom.xml
-    pending: "#35 (M6-1) -- needs a real feed, not an HTML stub"
+    pending: "#35 -- no feed generator in mkdocs-material 9.5.49; see ADR-007"
 
   # MkDocs generates its own sitemap.xml and robots.txt at these exact paths,
   # so they keep working without a redirect -- and redirecting them would
