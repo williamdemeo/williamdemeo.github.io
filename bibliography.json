@@ -1,0 +1,227 @@
+{
+  "_comment": [
+    "Authoritative publication list.  CSL-JSON, so a reference manager can read",
+    "it and Python needs no dependency to parse it.  See docs/adr/006.",
+    "",
+    "Built by reconciling the three lists that previously disagreed: docs/cv.md,",
+    "the Zola research page, and the Zotero export at src/pubs.json in the Zola",
+    "repository.  scripts/python/reconcile_bibliography.py reproduces that",
+    "comparison; docs/adr/006 records what it found.",
+    "",
+    "`issued` is the publication year.  `_preprint` carries the arXiv posting",
+    "year where it differs -- Zotero recorded those as `issued`, which is why",
+    "its years looked wrong against the other two lists.",
+    "",
+    "`_needs_review` marks a field the three sources disagree on and that could",
+    "not be settled from them.  arXiv and DOI resolution are blocked from the",
+    "sandbox this was built in, so nothing here was verified against the",
+    "publishers; these are reconciled claims, not checked ones."
+  ],
+
+  "items": [
+    {
+      "id": "demeo2024cardano",
+      "type": "paper-conference",
+      "title": "Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda",
+      "author": [
+        {"family": "Knispel", "given": "Andre"},
+        {"family": "DeMeo", "given": "William"},
+        {"literal": "et al."}
+      ],
+      "container-title": "5th International Workshop on Formal Methods for Blockchains (FMBC 2024)",
+      "issued": {"date-parts": [[2024]]},
+      "DOI": "10.4230/OASIcs.FMBC.2024.2",
+      "URL": "https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2",
+      "_source": ["cv"],
+      "_needs_review": "Author list is 'with Knispel et al.' in the CV; the full author list should be taken from the published paper."
+    },
+    {
+      "id": "demeo2022birkhoff",
+      "type": "paper-conference",
+      "title": "A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory",
+      "author": [
+        {"family": "Carette", "given": "Jacques"},
+        {"family": "DeMeo", "given": "William"}
+      ],
+      "container-title": "27th International Conference on Types for Proofs and Programs (TYPES 2021)",
+      "issued": {"date-parts": [[2022]]},
+      "_arxiv": "2101.10166",
+      "URL": "https://arxiv.org/abs/2101.10166",
+      "_source": ["cv", "research"],
+      "_needs_review": "The CV and the research page give completely different titles for this arXiv id. The research page calls it 'The Agda Universal Algebra Library and Birkhoff's Theorem in Dependent Type Theory' and describes 2101.10166 as the unabridged version of the TYPES submission. If the proceedings paper and the unabridged preprint are separate works, this should be two entries."
+    },
+    {
+      "id": "bergman2022universal",
+      "type": "article-journal",
+      "title": "Universal algebraic methods for constraint satisfaction problems",
+      "author": [
+        {"family": "Bergman", "given": "Clifford"},
+        {"family": "DeMeo", "given": "William"}
+      ],
+      "container-title": "Logical Methods in Computer Science",
+      "issued": {"date-parts": [[2022]]},
+      "_preprint": {"arxiv-year": 2016},
+      "_arxiv": "1611.02867",
+      "URL": "https://lmcs.episciences.org/8975",
+      "_source": ["cv", "research", "zotero"]
+    },
+    {
+      "id": "barto2021csp",
+      "type": "paper-conference",
+      "title": "Constraint satisfaction problems over finite structures",
+      "author": [
+        {"family": "Barto", "given": "Libor"},
+        {"family": "DeMeo", "given": "William"},
+        {"family": "Mottet", "given": "Antoine"}
+      ],
+      "container-title": "36th ACM/IEEE Symposium on Logic in Computer Science (LICS 2021)",
+      "issued": {"date-parts": [[2021]]},
+      "_arxiv": "2010.04958",
+      "URL": "https://arxiv.org/abs/2010.04958",
+      "_source": ["cv", "research"],
+      "_needs_review": "The research page says 'submitted to LICS 2021'; the CV lists it as a LICS 2021 paper. Confirm whether it appeared in the proceedings."
+    },
+    {
+      "id": "demeo2020bounded",
+      "type": "article-journal",
+      "title": "Bounded homomorphisms and finitely generated fiber products of lattices",
+      "author": [
+        {"family": "DeMeo", "given": "William"},
+        {"family": "Mayr", "given": "Peter"},
+        {"family": "Ruškuc", "given": "Nik"}
+      ],
+      "container-title": "International Journal of Algebra and Computation",
+      "volume": "30",
+      "page": "693-710",
+      "issued": {"date-parts": [[2020]]},
+      "_preprint": {"arxiv-year": 2019},
+      "_arxiv": "1907.08046",
+      "DOI": "10.1142/S0218196720500174",
+      "_source": ["cv", "research"],
+      "_needs_review": "The CV drops 'finitely generated' from the title. The research page's longer form is used here as the more likely published title; confirm against the journal."
+    },
+    {
+      "id": "demeo2019difference",
+      "type": "article-journal",
+      "title": "Polynomial-time tests for difference terms in idempotent varieties",
+      "author": [
+        {"family": "DeMeo", "given": "William"},
+        {"family": "Freese", "given": "Ralph"},
+        {"family": "Valeriote", "given": "Matthew"}
+      ],
+      "container-title": "International Journal of Algebra and Computation",
+      "volume": "29",
+      "page": "927-949",
+      "issued": {"date-parts": [[2019]]},
+      "_arxiv": "2011.07879",
+      "DOI": "10.1142/S021819671950036X",
+      "_source": ["cv", "research"],
+      "_needs_review": "arXiv 2011.07879 was posted in November 2020, after a 2019 journal publication. Plausible, but confirm the identifier is right."
+    },
+    {
+      "id": "adaricheva2018alh",
+      "type": "book",
+      "title": "Proceedings of Algebras and Lattices in Hawaii 2018",
+      "author": [
+        {"family": "Adaricheva", "given": "Kira"},
+        {"family": "DeMeo", "given": "William"},
+        {"family": "Hyndman", "given": "Jennifer"}
+      ],
+      "issued": {"date-parts": [[2018]]},
+      "_role": "editor",
+      "_source": ["research"]
+    },
+    {
+      "id": "demeo2014isotopic",
+      "type": "article-journal",
+      "title": "Isotopic algebras with nonisomorphic congruence lattices",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "container-title": "Algebra Universalis",
+      "volume": "72",
+      "page": "295-298",
+      "issued": {"date-parts": [[2014]]},
+      "_preprint": {"arxiv-year": 2013},
+      "_arxiv": "1301.7481",
+      "DOI": "10.1007/s00012-014-0301-4",
+      "_source": ["research", "zotero"],
+      "_needs_review": "Zotero hyphenates 'non-isomorphic'; the research page does not. Confirm against the journal."
+    },
+    {
+      "id": "demeo2013expansions",
+      "type": "article-journal",
+      "title": "Expansions of finite algebras and their congruence lattices",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "container-title": "Algebra Universalis",
+      "volume": "69",
+      "page": "257-278",
+      "issued": {"date-parts": [[2013]]},
+      "_arxiv": "1205.1106",
+      "DOI": "10.1007/s00012-013-0226-3",
+      "_source": ["research", "zotero"]
+    },
+    {
+      "id": "demeo2013dedekind",
+      "type": "manuscript",
+      "title": "Dedekind's Transposition Principle for lattices of equivalence relations",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "issued": {"date-parts": [[2013]]},
+      "_arxiv": "1301.6788",
+      "URL": "https://arxiv.org/abs/1301.6788",
+      "_source": ["zotero"]
+    },
+    {
+      "id": "demeo2012thesis",
+      "type": "thesis",
+      "title": "Congruence lattices of finite algebras",
+      "author": [{"family": "DeMeo", "given": "William J."}],
+      "genre": "PhD thesis",
+      "publisher": "University of Hawaii at Manoa",
+      "issued": {"date-parts": [[2012]]},
+      "_arxiv": "1204.4305",
+      "URL": "https://arxiv.org/abs/1204.4305",
+      "_source": ["cv", "zotero"]
+    },
+    {
+      "id": "demeo2012interval",
+      "type": "manuscript",
+      "title": "Interval enforceable properties of finite groups",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "issued": {"date-parts": [[2012]]},
+      "_arxiv": "1205.1927",
+      "URL": "https://arxiv.org/abs/1205.1927",
+      "_source": ["zotero"]
+    },
+    {
+      "id": "demeo2004isma",
+      "type": "paper-conference",
+      "title": "Topics in nonabelian harmonic analysis and DSP applications",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "container-title": "Proceedings of the International Symposium on Musical Acoustics (ISMA 2004), Nara, Japan",
+      "issued": {"date-parts": [[2004]]},
+      "URL": "https://github.com/williamdemeo/ISMA2004/raw/master/DeMeo-ISMA2004-FinalPaper.pdf",
+      "_note": "Best paper award",
+      "_source": ["research"]
+    },
+    {
+      "id": "demeo2002icmc",
+      "type": "paper-conference",
+      "title": "Characterizing musical signals with Wigner-Ville interferences",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "container-title": "Proceedings of the International Computer Music Conference (ICMC 2002), Gothenburg, Sweden",
+      "issued": {"date-parts": [[2002]]},
+      "_source": ["research"],
+      "_needs_review": "The research page's link is a CiteSeerX URL that is likely dead; find a stable one."
+    },
+    {
+      "id": "demeo1998eigenvalues",
+      "type": "paper-conference",
+      "title": "Approximating eigenvalues of large stochastic matrices",
+      "author": [{"family": "DeMeo", "given": "William"}],
+      "container-title": "Proceedings of the 8th Copper Mountain Conference on Iterative Methods, Colorado",
+      "issued": {"date-parts": [[1998]]},
+      "URL": "https://williamdemeo.github.io/MSThesis",
+      "_source": ["research"],
+      "_needs_review": "Related to the MS thesis, which #29 asks to include as its own entry. Confirm whether these are one item or two."
+    }
+  ]
+}

@@ -194,6 +194,22 @@ contrast-audit: build
 ## Run all three visual-system audits
 design-audit: font-audit offline-audit contrast-audit
 
+# ── Publications ────────────────────────────────────────────────────────────
+#
+# bibliography.json is the only authoritative publication list (ADR-006).  The
+# generator renders it into docs/_snippets/publications.md, which the
+# publications page and the CV include, so neither holds a second copy.
+
+.PHONY: publications publications-check
+
+## Regenerate docs/_snippets/publications.md from bibliography.json
+publications: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_publications.py
+
+## Validate bibliography.json without rewriting anything
+publications-check: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_publications.py --check
+
 ## Show this help
 help:
 	@echo "Targets:"
