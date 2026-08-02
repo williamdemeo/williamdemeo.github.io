@@ -51,7 +51,8 @@ apply, but the worksheets themselves still work in any Sage installation.
 
 ## Posts
 
-Older posts kept outside the blog's main line.
+Older posts kept outside the blog's main line. The blog itself is at
+[/blog/](../blog/index.md).
 
 - [Type theory and functional programming](../typefunc/index.md) (2014) — a
   reading group announcement

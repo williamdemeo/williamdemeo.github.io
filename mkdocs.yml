@@ -66,6 +66,13 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.top
+    # The blog's nav entry has to be a *section*, because that is where the
+    # blog plugin attaches its generated Archive and Categories views (it
+    # reads `blog/index.md`'s parent to decide where they go, and a plain
+    # top-level link has no parent).  Without this feature the section and its
+    # index page would then appear as two entries, "Blog" containing "Blog".
+    # It changes nothing else: Blog is the only section in the nav.
+    - navigation.indexes
     - navigation.footer
     - content.code.copy
     - content.action.edit
@@ -145,10 +152,14 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  # The archived-page notice lives in docs/_snippets/archived.md and every
-  # archived page includes it, so its wording changes in one place.  M2-4 (#13)
-  # needs the same thing for dated posts and should reuse it rather than
-  # inventing a second one.
+  # Standing notices live in docs/_snippets/ and every page that needs one
+  # includes it, so the wording changes in one place.  There are two, and they
+  # are two because they make different claims, not because a second mechanism
+  # was invented: `archived.md` says a page is out of the current site and
+  # unmaintained; `dated.md` says a post is still part of the site and still
+  # stands, and was written a long time ago.  A post that is genuinely retired
+  # gets the archived notice and moves to the archive area (M2-9).  M2-4 (#13)
+  # uses `dated.md` on the posts it converts.
   - pymdownx.snippets:
       base_path: [docs/_snippets]
       check_paths: true
@@ -165,6 +176,82 @@ markdown_extensions:
 plugins:
   - search
 
+  # The blog engine (M6-1, #35).  It ships *inside* mkdocs-material 9.5.49,
+  # which requirements.txt already pins, so enabling it costs no dependency.
+  #
+  # The URL scheme below is not a free choice.  redirects.yml records what the
+  # Octopress and Zola sites served and what still has to resolve; 37 of its
+  # pending entries were blocked on this plugin.  ADR-007 records the decision
+  # and the constraints that forced it.  In one line: posts are served at
+  # /blog/<slug>/ with no date in the path, and every legacy URL -- Zola's
+  # root-level /isotopy/ and Octopress's dated /2014/02/13/isotopy/ alike --
+  # redirects there.
+  - blog:
+      blog_dir: blog
+      post_dir: "{blog}/posts"
+
+      # No date in the post URL.  Both legacy sites disagreed about the date
+      # of the same post (Zola 2017-04-06, Octopress /2017/04/07/), which is
+      # the whole argument in miniature: a date in a path is a fact about
+      # publication that the path then has to keep being right about.  The
+      # date is displayed, and it is in the archive; it is not in the URL.
+      post_url_format: "{slug}"
+      post_date_format: long
+      post_readtime: true
+
+      # `required`, not the default `optional`.  Without a separator the
+      # plugin treats the *entire* post as its own excerpt and the blog index
+      # becomes a wall of complete articles.  Requiring it makes a missing
+      # `<!-- more -->` a build error instead of a silently ugly index page.
+      post_excerpt: required
+
+      # One author.  A byline repeated under every post on a personal site is
+      # noise, and `.authors.yml` is a file to keep in step for no reader
+      # benefit.  Turning this off is also what stops an `authors:` key in
+      # front matter from failing the build against a file that is not there.
+      authors: false
+
+      # Categories are the blog's sections and generate real pages, at
+      # /blog/category/<slug>/.  The allow-list makes an unlisted category a
+      # build error: Octopress generated thirteen category pages for fifteen
+      # posts, which is not a taxonomy, and the way that happens is one typo
+      # or one improvised name at a time.  Growing this list is expected and
+      # is one line; growing it by accident is not possible.
+      categories_allowed:
+        - Formal verification
+        - Mathematics
+        - Tooling
+
+      # Archive views are per year, at /blog/archive/<yyyy>/.  Deliberately
+      # not /archive/, which the site's own archive area (M2-9) already
+      # serves and which redirects.yml pins as `keep`.
+      archive: true
+      archive_date_format: yyyy
+      archive_url_date_format: yyyy
+
+      # Five, not the default ten, so that /blog/page/2/ -- a real Octopress
+      # URL in the inventory -- becomes a real page again once M2-4 (#13)
+      # lands the remaining converted posts.  See redirects.yml.
+      pagination: true
+      pagination_per_page: 5
+
+      # Drafts build locally and never deploy.  M6-2 (#36) owns the rest of
+      # the authoring workflow, including `make post` and verifying the
+      # exclusion against a real deploy; this is just the switch.
+      draft: false
+      draft_on_serve: true
+
+  # Also bundled with mkdocs-material.  In the community edition this renders
+  # one tags index -- a heading and a page list per tag, at /blog/tags/ --
+  # rather than a page per tag, which is an Insiders feature.  Verified by
+  # reading material/plugins/tags/plugin.py, not assumed.
+  #
+  # Tags and categories are not two names for one thing here: a category is
+  # one of the three subjects above and gets its own page, a tag is a free
+  # keyword and gets an anchor on the index.  ADR-007 records the division.
+  - tags:
+      tags_file: blog/tags.md
+
 # Legacy-URL redirects.  The map lives in redirects.yml, where each entry
 # carries its reasoning and its blocking issue; this hook emits the stubs.
 #
@@ -176,9 +263,20 @@ plugins:
 # #15 and the module docstring.
 hooks:
   - scripts/python/redirects_hook.py
+  # Expands `<!-- recent-posts -->` into the most recent posts, so the home
+  # page's writing list cannot go stale.  Same reasoning as the redirect hook:
+  # about sixty lines against a dependency to pin in two places.  See #35.
+  - scripts/python/recent_posts_hook.py
 
 nav:
   - Home: index.md
+  # A section rather than a plain link, and the reason is in `features` above:
+  # the blog plugin attaches Archive and Categories under `blog/index.md`'s
+  # parent, and a top-level link has none.  `navigation.indexes` then makes
+  # the section header itself the link to /blog/.
+  - Blog:
+      - blog/index.md
+      - blog/tags.md
   - About: about.md
   - CV: cv.md
   - Contact: contact.md

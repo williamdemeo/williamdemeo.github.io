@@ -44,7 +44,8 @@
           # Nix build and `make build` this fileset exists to prevent.
           ./overrides
           # Where the mkdocs hooks and page generators live.  mkdocs.yml's
-          # `hooks:` key points at scripts/python/redirects_hook.py.
+          # `hooks:` key points at scripts/python/redirects_hook.py and
+          # scripts/python/recent_posts_hook.py.
           ./scripts/python
           # Read by that hook to emit the legacy-URL redirect stubs (#15).
           ./redirects.yml

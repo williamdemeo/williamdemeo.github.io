@@ -34,6 +34,7 @@ run. Nothing else to set up. Run `make` on its own to list every target.
 | Path | Contents |
 | --- | --- |
 | `docs/` | Site content. Everything here is published except the exclusions in `mkdocs.yml`. |
+| `docs/blog/posts/` | Blog posts, one file per post. URL scheme and front matter: `docs/adr/007-blog-url-scheme.md`. |
 | `docs/adr/` | Architecture decision records. Not published. |
 | `docs/GITHUB_PROJECT.md` | Project roadmap, partly generated from GitHub. Not published. |
 | `archive/` | Preserved content from the retired Octopress site. Not published. |
