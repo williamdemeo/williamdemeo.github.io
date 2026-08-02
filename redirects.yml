@@ -112,23 +112,24 @@ rules:
     pending: "#56 and M4 -- the page splits; successor not yet chosen"
 
   # Archived: kept and linkable, out of the primary nav.  The archive area
-  # itself is M2-5 (#14).
+  # itself is M2-9 (#67) -- ADR-002 promises the area but nothing built it,
+  # which is why that issue exists.
   - from: /research/csp/**
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   - from: /python/**
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   - from: /agda-ualib/**
-    pending: "#14 -- archive area not built; #24 cross-links these"
+    pending: "#67 (M2-9) -- archive area not built; #24 cross-links these"
   - from: /talks/vols/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
 
   # Dropped with redirects.  `/archive/` is `computing/archive.md`, which
   # carries a Zola `path` override and so is served at the root rather than
   # under /computing/.
   - from: /computing/**
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /archive/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
 
   # Zola's section index for the blog.  The new blog is M6-1 (#35).
   - from: /posts/
@@ -156,18 +157,18 @@ rules:
   - from: /overalgebras/
     pending: "#13/#35 -- keep; blog not built"
   - from: /typefunc/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   - from: /touchpad-forensics/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   # Archived rather than kept, per ADR-002: good, but an interview puzzle from
   # a quant shop is a tonal outlier.  The URL still has to resolve.
   - from: /probability-quiz/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
 
   - from: /conferences-in-algebra/
     pending: "#35 -- dropped; redirect to the blog index"
   - from: /java-on-linux/
-    pending: "#14 -- dropped; redirect to the archive index"
+    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
   - from: /nobody-told-me/
     pending: "#35 -- dropped; redirect to the blog index"
 
@@ -194,14 +195,14 @@ rules:
   - from: /2014/02/13/overalgebras/
     pending: "#13/#35 -- keep; blog not built"
   - from: /2014/02/13/typefunc/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   - from: /2014/03/19/probability-quiz/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
 
   - from: /2017/04/07/conferences-in-algebra/
     pending: "#35 -- dropped; redirect to the blog index"
   - from: /2017/12/06/java-on-linux/
-    pending: "#14 -- dropped; redirect to the archive index"
+    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
 
   # Third-party (Liam O'Connor), reposted with permission, not republished.
   # Sends readers to the original rather than 404ing or to our home page.
@@ -217,28 +218,28 @@ rules:
   # have to resolve -- archiving keeps them working without republishing the
   # mathematics.  Octopress served it at two paths.
   - from: /2017/04/07/commutator-as-least-fixed-point/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
   - from: /the-commutator-as-a-least-fixed-point/
-    pending: "#14 -- archive area not built"
+    pending: "#67 (M2-9) -- archive area not built"
 
   # Octopress section pages.  The Zola site moved this material under
   # /computing/; ADR-002 drops it and redirects to the archive index.
   - from: /coq/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /csp/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /eclipse/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /jst/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /linux/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /scala/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /uacalc/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
   - from: /pages/
-    pending: "#14 -- redirect to the archive index"
+    pending: "#67 (M2-9) -- redirect to the archive index"
 
   # Blog machinery: the archive listing, pagination, and the twelve category
   # pages Octopress generated from post tags.
