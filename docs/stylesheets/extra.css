@@ -556,6 +556,17 @@
   color: var(--c-fg);
 }
 
+/* The title is authored as `**…**`, so the paragraph's weight is not the one
+   that lands: `.md-typeset strong` sets its own, and it wins over inheritance.
+   Under Constellation both tokens are 600 and nothing shows; under Meridian
+   --display-weight is 500, and the card title would be the one component title
+   that ignored it.  Measured, not assumed: forcing --display-weight to 500
+   moves the publication title, the talk title and every heading to 500 and
+   leaves this one at 600 without this rule. */
+.md-typeset .project-card > p:first-child > strong {
+  font-weight: var(--display-weight);
+}
+
 /* A title that links somewhere reads as a link; one that does not is still a
    title.  The bottom rule under body links is noise at this size. */
 .md-typeset .project-card > p:first-child a {
@@ -710,10 +721,15 @@
   margin: var(--space-8) 0;
 }
 
+/* No bottom padding here, deliberately.  A grid row is as tall as its tallest
+   item, so padding on the date would set the row height whenever it exceeded
+   the entry's -- which is exactly the last row, where the entry's padding is
+   removed.  The stretched entry's rule would then hang below its own last line
+   by the height of that padding.  The spacing between rows is the entry's job
+   alone; the date is one line and never the taller of the two. */
 .md-typeset .timeline dt {
   grid-column: 1;
   margin: 0;
-  padding-bottom: var(--space-6);
   text-align: right;
   font-size: var(--type-small);
   font-weight: 400;
