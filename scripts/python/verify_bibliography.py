@@ -291,6 +291,7 @@ def arxiv(identifier: str) -> dict | None:
         ],
         "published": text(f"{ATOM}published"),
         "updated": text(f"{ATOM}updated"),
+        "summary": text(f"{ATOM}summary"),
         "doi": text(f"{ARXIV_NS}doi"),
         "journal_ref": text(f"{ARXIV_NS}journal_ref"),
         "version": entry_id.rsplit("/abs/", 1)[-1],
@@ -510,6 +511,30 @@ def check_crossref(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
     return found
 
 
+def compare_abstract(item: dict, source: str, theirs: str | None):
+    """The stored abstract against the service it says it came from.
+
+    Reported as a marker rather than as two walls of text: a difference here is
+    a truncation or a hand-edit, and seeing 1,900 characters twice helps nobody
+    find it.  Only the service named by `_abstract-source` is checked -- the
+    published abstract and the preprint's summary differ legitimately, which is
+    the whole reason the field records where it came from.
+    """
+    ours = item.get("abstract")
+    if item.get("_abstract-source") != source:
+        return None
+    if not theirs:
+        return (DIFFERS, "abstract", f"{len(ours or '')} chars, from {source}",
+                f"{source} has none")
+    if not ours:
+        return (ABSENT, "abstract", "—", f"{len(theirs)} chars available")
+    if key(ours) == key(theirs):
+        return None
+    level = STYLE if loose(ours) == loose(theirs) else DIFFERS
+    return (level, "abstract", f"{len(ours)} chars: {ours[:60]}…",
+            f"{len(theirs)} chars: {theirs[:60]}…")
+
+
 def datacite_dates(record: dict) -> dict[str, tuple[int, ...]]:
     """Publication dates from DataCite, which writes them as ISO strings.
 
@@ -563,6 +588,15 @@ def check_datacite(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
     if container.get("title"):
         found.append((NOTE, "series", str(item.get("container-title") or "—"),
                       container["title"]))
+
+    descriptions = [
+        " ".join(str(d.get("description", "")).split())
+        for d in record.get("descriptions") or []
+        if d.get("descriptionType") in (None, "Abstract")
+    ]
+    abstract = compare_abstract(item, "datacite", descriptions[0] if descriptions else None)
+    if abstract:
+        found.append(abstract)
     return found
 
 
@@ -592,6 +626,10 @@ def check_arxiv(
         # No _preprint claim to check, but the posting year is not the
         # publication year, and a reader comparing the two should see why.
         found.append((NOTE, "arXiv posted", str(our_year(item)) + " (issued)", posted))
+
+    abstract = compare_abstract(item, "arxiv", record.get("summary"))
+    if abstract:
+        found.append(abstract)
 
     if record.get("doi"):
         if not item.get("DOI"):
