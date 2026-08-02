@@ -1,0 +1,206 @@
+/* Design tokens for williamdemeo.github.io -- the one place colour, type and
+ * spacing are decided.  extra.css consumes these and defines no raw values of
+ * its own, so a change here moves the whole site and nothing else has to know.
+ *
+ * Three complete systems are defined below because #17 is a decision issue and
+ * the choice is easier to make by looking than by reading.  Exactly one is
+ * active: the `:root, [data-system="..."]` selector names it.  /design/options/
+ * shows all three side by side; switching the site is a two-line edit.
+ *
+ * Units: Material sets `html { font-size: 125% }`, so 1rem is 20px, and
+ * `.md-typeset` sizes in em relative to its own base.  The scale below follows
+ * that convention rather than fighting it.
+ */
+
+/* ══ scale, spacing and shape ══════════════════════════════════════════════
+ *
+ * System-independent.  A 1.25 modular scale, tightened at the display sizes
+ * where a straight geometric progression gets shouty, and a 4px spacing grid.
+ */
+
+:root {
+  /* Type scale, em-relative to the typeset base.  h1 lands at 38px, body 17px. */
+  --type-base: 0.85rem;      /* 17px */
+  --type-h1: 2.25em;
+  --type-h2: 1.5em;
+  --type-h3: 1.1875em;
+  --type-h4: 1em;
+  --type-small: 0.8125em;
+  --type-code: 0.875em;
+  /* Interface chrome sizes in rem, not em: the nav and the table of contents
+     are outside .md-typeset, so an em there resolves against the root and
+     compounds down the tree. */
+  --type-ui: 0.7rem;
+  --type-ui-small: 0.62rem;
+
+  --leading-body: 1.7;
+  --leading-heading: 1.25;
+  --tracking-display: -0.02em;   /* large type needs to be pulled in */
+  --tracking-body: 0;
+  --tracking-caps: 0.06em;
+
+  /* Line length.  Prose is capped; code blocks, tables and figures are not,
+     because an 80-column Agda block that wraps is worse than a wide one. */
+  --measure: 33rem;              /* ~74 characters at the body size */
+  --measure-heading: 38rem;
+
+  /* 4px grid at a 20px root. */
+  --space-1: 0.2rem;
+  --space-2: 0.4rem;
+  --space-3: 0.6rem;
+  --space-4: 0.8rem;
+  --space-6: 1.2rem;
+  --space-8: 1.6rem;
+  --space-12: 2.4rem;
+  --space-16: 3.2rem;
+  --space-24: 4.8rem;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --border-width: 1px;
+}
+
+/* ══ system: meridian ══════════════════════════════════════════════════════
+ *
+ * A neutral sans for reading, a serif for display, and one cool accent.  The
+ * greys carry a trace of blue so that pure-black code on pure-white paper --
+ * the combination that makes long reading tiring -- never occurs.
+ */
+
+:root,
+[data-system="meridian"] {
+  --font-body: "Inter";
+  --font-display: "Newsreader";
+  --font-mono: "JuliaMono";
+
+  /* Inline mathematics is set in KaTeX_Main, whose x-height is 0.431 em
+     against Inter's 0.546.  KaTeX ships 1.21em to compensate; 0.546/0.431 is
+     1.267, so this is the value that actually equalises the two x-heights.
+     Derived in the same way for each system below. */
+  --math-scale: 1.27em;
+  --display-weight: 500;
+  --strong-weight: 600;
+}
+
+[data-md-color-scheme="default"],
+[data-md-color-scheme="default"][data-system="meridian"] {
+  --c-bg: #ffffff;
+  --c-bg-raised: #f4f5f5;
+  --c-bg-sunken: #eceeee;
+  --c-fg: #14181a;
+  --c-fg-muted: #596265;
+  --c-fg-faint: #626b6e;
+  --c-line: #e1e4e4;
+  --c-line-strong: #c8cdcd;
+  --c-accent: #0f766e;
+  --c-accent-hover: #0b544e;
+  --c-accent-wash: #e6f2f0;
+  --c-on-accent: #ffffff;
+}
+
+[data-md-color-scheme="slate"],
+[data-md-color-scheme="slate"][data-system="meridian"] {
+  --c-bg: #0b0e0f;
+  --c-bg-raised: #13181a;
+  --c-bg-sunken: #080a0b;
+  --c-fg: #e3e7e8;
+  --c-fg-muted: #94a0a3;
+  --c-fg-faint: #7d888b;
+  --c-line: #212829;
+  --c-line-strong: #333c3e;
+  --c-accent: #5eead4;
+  --c-accent-hover: #99f6e4;
+  --c-accent-wash: #10211f;
+  --c-on-accent: #06201d;
+}
+
+/* ══ system: graphite ══════════════════════════════════════════════════════
+ *
+ * One face throughout, cool neutrals, a blue accent.  The most conventional of
+ * the three, and the one that disappears fastest behind the content.
+ */
+
+[data-system="graphite"] {
+  --font-body: "Inter";
+  --font-display: "Inter";
+  --font-mono: "JuliaMono";
+  --math-scale: 1.27em;
+  --display-weight: 600;
+  --strong-weight: 600;
+}
+
+[data-md-color-scheme="default"][data-system="graphite"] {
+  --c-bg: #ffffff;
+  --c-bg-raised: #f5f6f8;
+  --c-bg-sunken: #eceef2;
+  --c-fg: #12151a;
+  --c-fg-muted: #565e6c;
+  --c-fg-faint: #626974;
+  --c-line: #e2e5ea;
+  --c-line-strong: #c9cfd8;
+  --c-accent: #1a56db;
+  --c-accent-hover: #1443ad;
+  --c-accent-wash: #e8eefc;
+  --c-on-accent: #ffffff;
+}
+
+[data-md-color-scheme="slate"][data-system="graphite"] {
+  --c-bg: #0d1014;
+  --c-bg-raised: #151a20;
+  --c-bg-sunken: #090c0f;
+  --c-fg: #e4e7ec;
+  --c-fg-muted: #98a2b3;
+  --c-fg-faint: #838d9d;
+  --c-line: #232a33;
+  --c-line-strong: #363f4b;
+  --c-accent: #85aeff;
+  --c-accent-hover: #adc8ff;
+  --c-accent-wash: #131b2b;
+  --c-on-accent: #0a1220;
+}
+
+/* ══ system: manuscript ════════════════════════════════════════════════════
+ *
+ * Serif body on warm paper, with the sans kept for interface chrome.  The
+ * closest match in texture to KaTeX's Computer Modern, and the only one of the
+ * three where prose and mathematics are set in related shapes.
+ */
+
+[data-system="manuscript"] {
+  --font-body: "Source Serif 4";
+  --font-display: "Source Serif 4";
+  --font-mono: "JuliaMono";
+  --math-scale: 1.16em;         /* 0.4998 / 0.4310 */
+  --display-weight: 600;
+  --strong-weight: 600;
+}
+
+[data-md-color-scheme="default"][data-system="manuscript"] {
+  --c-bg: #fcfaf6;
+  --c-bg-raised: #f3efe7;
+  --c-bg-sunken: #ebe6da;
+  --c-fg: #1a1815;
+  --c-fg-muted: #5d574c;
+  --c-fg-faint: #686154;
+  --c-line: #e5dfd3;
+  --c-line-strong: #ccc4b3;
+  --c-accent: #9a3412;
+  --c-accent-hover: #77280e;
+  --c-accent-wash: #f6e9e2;
+  --c-on-accent: #ffffff;
+}
+
+[data-md-color-scheme="slate"][data-system="manuscript"] {
+  --c-bg: #121110;
+  --c-bg-raised: #1b1917;
+  --c-bg-sunken: #0d0c0b;
+  --c-fg: #eae6de;
+  --c-fg-muted: #a8a196;
+  --c-fg-faint: #928b80;
+  --c-line: #2a2724;
+  --c-line-strong: #3d3933;
+  --c-accent: #e8956b;
+  --c-accent-hover: #f2b394;
+  --c-accent-wash: #241a14;
+  --c-on-accent: #241208;
+}

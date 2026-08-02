@@ -146,6 +146,54 @@ redirect-check: build
 redirect-test: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/test_redirects.py
 
+# ── Visual system ───────────────────────────────────────────────────────────
+#
+# `fonts` regenerates docs/assets/fonts/ from upstream sources pinned by
+# SHA-256.  Its outputs are committed, so neither an ordinary build nor CI
+# needs it, or the network.  Run it when the character repertoire changes.
+#
+# It deliberately uses the system python rather than $(PYTHON): fonttools and
+# brotli are not in requirements.txt, because adding them would oblige
+# flake.nix to match their versions (ADR-004's checks.requirements-pins) for a
+# generator that runs by hand a few times a year and whose output is committed.
+# `pip install 'fonttools[woff]' brotli` is all it needs; the script says so if
+# they are missing.  Override with FONT_PYTHON= if they live somewhere else.
+#
+# The three audits answer the acceptance criteria in #17, and each answers it
+# by measuring a rendered page rather than by reading the CSS.  All three need
+# node and a Chromium; nothing from npm.  Set CHROME=/path/to/chrome if one is
+# not found automatically.  See #17.
+
+.PHONY: fonts fonts-check font-audit offline-audit contrast-audit design-audit
+
+FONT_PYTHON ?= python3
+
+## Rebuild the subsetted WOFF2 fonts from their pinned sources (needs network)
+fonts:
+	@$(FONT_PYTHON) scripts/python/build_fonts.py
+
+## Report whether docs/assets/fonts/ is stale; writes nothing
+fonts-check:
+	@$(FONT_PYTHON) scripts/python/build_fonts.py --check
+
+## Report every font the browser actually rendered with; fails on a fallback
+font-audit: build
+	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
+	@node scripts/js/audit_fonts.mjs site
+
+## Fail if any page requests anything from another origin
+offline-audit: build
+	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
+	@node scripts/js/audit_offline.mjs site
+
+## Measure WCAG contrast on every text element, in both themes
+contrast-audit: build
+	@command -v node >/dev/null || { echo "error: node is required for this target"; exit 1; }
+	@node scripts/js/audit_contrast.mjs site
+
+## Run all three visual-system audits
+design-audit: font-audit offline-audit contrast-audit
+
 ## Show this help
 help:
 	@echo "Targets:"

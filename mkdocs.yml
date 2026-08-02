@@ -46,6 +46,7 @@ exclude_docs: |
 # reading.
 not_in_nav: |
   design/rendering.md
+  design/style.md
   archive/index.md
   agda-ualib/**
   python/**
@@ -57,6 +58,10 @@ not_in_nav: |
 theme:
   name: material
   language: en
+  # One partial only: partials/source.html, which drops the attribute that
+  # makes Material fetch repository facts from api.github.com on every page
+  # load.  See the file for the reasoning.
+  custom_dir: overrides
   features:
     - navigation.instant
     - navigation.tracking
@@ -67,8 +72,16 @@ theme:
     - search.suggest
     - search.highlight
     - toc.follow
-  # Placeholder palette.  M3-1 replaces this with the real visual system;
-  # the light/dark toggle structure is what matters here.
+  # No Google Fonts.  Setting this to false is what removes the
+  # <link rel=preconnect> to fonts.gstatic.com and the stylesheet from
+  # fonts.googleapis.com that Material's base template emits otherwise;
+  # docs/assets/fonts/fonts.css declares the self-hosted faces instead, and
+  # tokens.css sets --md-text-font and --md-code-font to name them.  See #17.
+  font: false
+  # The system preference is the default and comes first, so a visitor who has
+  # expressed one gets it without touching anything; the other two entries are
+  # the manual override.  `custom` on primary and accent means "no built-in
+  # Material colour" -- the values come from tokens.css.
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -76,15 +89,15 @@ theme:
         name: Follow system theme
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: black
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -92,6 +105,10 @@ theme:
     repo: fontawesome/brands/github
 
 extra_css:
+  # Order matters: the faces have to be declared before the tokens that name
+  # them, and the tokens before the rules that use them.
+  - assets/fonts/fonts.css
+  - stylesheets/tokens.css
   - stylesheets/extra.css
   # Self-hosted KaTeX.  The Zola site loaded it from a CDN alongside a second
   # copy of MathJax; this ships one renderer, from this origin, with the

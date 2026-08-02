@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Visual system: three options — #17</title>
+
+<!--
+  Decision scaffolding for issue #17, not part of the site.
+
+  It exists because a palette and a type pairing are easier to choose by
+  looking than by reading a description of them, and because the three
+  candidates have to be compared on the same content -- a paragraph with inline
+  mathematics in it, and a block of Agda -- rather than on lorem ipsum.
+
+  Deliberately not a Markdown page: it needs three independent colour scopes on
+  one screen, which Material's single body-level scheme attribute cannot do.
+  It loads the same fonts.css and tokens.css the site loads, so what is shown
+  here is what shipping the corresponding system would actually give.
+
+  Delete this directory when #17 is decided, together with the two rejected
+  systems in tokens.css and their faces in docs/assets/fonts/.
+-->
+
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../../stylesheets/tokens.css">
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #16181c;
+    color: #e6e8ec;
+    font-size: 15px;
+  }
+  .page { max-width: 1680px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1.title { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 6px; }
+  p.lede { color: #9aa1ae; max-width: 62ch; margin: 0 0 28px; line-height: 1.6; }
+  p.lede code { font-family: "JuliaMono", monospace; font-size: 0.9em; }
+
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .rowgap { height: 28px; }
+  @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+
+  .col > h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.09em;
+    color: #9aa1ae; font-weight: 600; margin: 0 0 10px;
+  }
+  .col > h2 .faces { text-transform: none; letter-spacing: 0; color: #9aa1ae; font-weight: 400; }
+
+  /* Each specimen is a real scope: the tokens resolve inside it exactly as
+     they would on the site with that system active. */
+  .specimen {
+    background: var(--c-bg);
+    color: var(--c-fg);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 6px;
+    padding: 26px 26px 30px;
+    margin-bottom: 20px;
+    font-family: var(--font-body), var(--font-mono), sans-serif;
+    font-size: 16px;
+    line-height: var(--leading-body);
+  }
+  .specimen h3 {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    font-weight: var(--display-weight);
+    font-size: 32px;
+    letter-spacing: var(--tracking-display);
+    line-height: 1.2;
+    margin: 0 0 4px;
+  }
+  .specimen h4 {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    font-weight: var(--strong-weight);
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin: 26px 0 8px;
+  }
+  .specimen .kicker {
+    color: var(--c-fg-muted); font-size: 13px; letter-spacing: 0.04em;
+    text-transform: uppercase; margin: 0 0 18px;
+  }
+  .specimen p { margin: 0 0 14px; }
+  .specimen a { color: var(--c-accent); text-decoration: none;
+                border-bottom: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent); }
+  .specimen .muted { color: var(--c-fg-muted); font-size: 14px; }
+  .specimen .katex { font-size: var(--math-scale); }
+  .specimen pre {
+    background: var(--c-bg-raised);
+    border: 1px solid var(--c-line);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin: 14px 0 0;
+    overflow-x: auto;
+    font-family: var(--font-mono), monospace;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .specimen code { font-family: var(--font-mono), monospace; }
+  .specimen p code {
+    background: var(--c-bg-raised); border-radius: 2px;
+    padding: 0.1em 0.3em; font-size: 0.86em;
+  }
+  .k  { color: var(--hl-keyword); }
+  .fn { color: var(--hl-function); }
+  .cm { color: var(--c-fg-faint); }
+  .op { color: var(--c-fg-muted); }
+  .specimen a.btn {
+    display: inline-block; margin-top: 18px; padding: 7px 14px;
+    background: var(--c-accent); color: var(--c-on-accent);
+    border-radius: 4px; font-size: 14px; font-weight: var(--strong-weight);
+    text-decoration: none; border: none;
+  }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; }
+  .swatch {
+    flex: 1 1 84px; border-radius: 3px; padding: 7px 8px 8px;
+    border: 1px solid var(--c-line);
+    font-family: "JuliaMono", monospace; font-size: 11px; line-height: 1.5;
+  }
+  .swatch b { display: block; font-weight: 400; }
+  .rule { height: 1px; background: var(--c-line); margin: 22px 0 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<h1 class="title">Visual system — three candidates for #17</h1>
+<p class="lede">
+  The same content in each: a heading, a paragraph with inline mathematics in
+  it, a display equation, and a block of Agda. Every colour, size and face
+  comes from <code>docs/stylesheets/tokens.css</code>, so what is below is
+  what the site would look like, not an impression of it. Contrast ratios
+  under each swatch are computed against that specimen's own background.
+</p>
+
+<div class="grid" id="grid-light"></div>
+<div class="rowgap"></div>
+<div class="grid" id="grid-dark"></div>
+
+</div>
+
+<script src="../../assets/katex/katex.min.js"></script>
+<script src="../../assets/katex/auto-render.min.js"></script>
+<script src="../../javascripts/katex-macros.js"></script>
+<script>
+const SYSTEMS = [
+  { id: 'meridian',   name: 'Meridian',   faces: 'Newsreader display / Inter body / JuliaMono' },
+  { id: 'graphite',   name: 'Graphite',   faces: 'Inter throughout / JuliaMono' },
+  { id: 'manuscript', name: 'Manuscript', faces: 'Source Serif 4 throughout / JuliaMono' },
+];
+
+const AGDA = `<span class="k">record</span> <span class="fn">Algebra</span> (𝓤 : Level) (𝑆 : Signature 𝓞 𝓥) : Set (𝓞 ⊔ 𝓥 ⊔ lsuc 𝓤) <span class="k">where</span>
+  <span class="k">field</span>  Domain : Setoid 𝓤 𝓤
+         Interp : ⟨ 𝑆 ⟩ (Carrier Domain) → Carrier Domain
+
+<span class="fn">_∘_</span> : {A B C : Set} <span class="op">→</span> (B → C) <span class="op">→</span> (A → B) <span class="op">→</span> (A → C)
+(g ∘ f) x = g (f x)
+<span class="cm">-- ⨅ ≅ ∀ ⊑ ⊎ ∅ ℓ Π Σ 𝔸 𝕏 ⟦⟧ xᵢ x₀ x₁ x₂</span>`;
+
+const BODY = `<h3>Birkhoff's HSP theorem, mechanised</h3>
+<p class="kicker">Universal algebra · Agda · formalisation</p>
+<p>
+  A class of algebras <span class="m">$\\mathcal{K}$</span> is a variety exactly
+  when it is closed under homomorphic images, subalgebras and products — so
+  <span class="m">$\\mathbb{V}(\\mathcal{K}) = \\mathbb{HSP}(\\mathcal{K})$</span>.
+  The proof was <a href="#">formalised in Agda</a> in 2021, and the
+  <code>agda-algebras</code> development follows it closely.
+</p>
+<div class="m-display">$$\\operatorname{Free}_{\\mathcal{K}}(X) \\;\\cong\\; \\mathbf{T}(X)/\\!\\!\\sim_{\\mathcal{K}}
+  \\qquad \\text{where} \\qquad \\theta = \\bigsqcup_{i \\in I} \\theta_i$$</div>
+<p class="muted">
+  Secondary text sits here: venue, year, and the links that go with an entry.
+</p>
+<a class="btn" href="#">Read the paper</a>
+<h4>Code, at the size it will be read</h4>
+<pre><code>${AGDA}</code></pre>`;
+
+const TOKENS = ['--c-bg', '--c-bg-raised', '--c-fg', '--c-fg-muted', '--c-fg-faint', '--c-accent', '--c-line'];
+
+const lin = v => (v /= 255) <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+// Token values are authored as hex; getComputedStyle hands back the custom
+// property verbatim rather than normalising it the way it would a real colour.
+const rgb = s => {
+  s = s.trim();
+  if (s.startsWith('#')) {
+    const h = s.length === 4 ? [...s.slice(1)].map(c => c + c).join('') : s.slice(1);
+    return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16));
+  }
+  return s.match(/\d+/g).slice(0, 3).map(Number);
+};
+const ratio = (a, b) => {
+  const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
+  return ((hi + 0.05) / (lo + 0.05)).toFixed(2);
+};
+const hex = c => '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
+
+// Light in one row and dark in another, so the three systems line up with each
+// other rather than with their own other half.
+for (const [scheme, label, target] of [['default', 'light', 'grid-light'], ['slate', 'dark', 'grid-dark']]) {
+  const grid = document.getElementById(target);
+  for (const sys of SYSTEMS) {
+    const col = document.createElement('div');
+    col.className = 'col';
+    col.innerHTML = `<h2>${sys.name} · ${label} <span class="faces">— ${sys.faces}</span></h2>`;
+    const box = document.createElement('div');
+    box.className = 'specimen';
+    box.setAttribute('data-system', sys.id);
+    box.setAttribute('data-md-color-scheme', scheme);
+    box.innerHTML = BODY + `<div class="rule"></div><div class="swatches"></div>`;
+    col.appendChild(box);
+    grid.appendChild(col);
+  }
+}
+
+// Syntax colours are the site's, read from the same place Material reads them.
+for (const box of document.querySelectorAll('.specimen')) {
+  const dark = box.getAttribute('data-md-color-scheme') === 'slate';
+  box.style.setProperty('--hl-keyword', dark ? '#c4b5fd' : '#7c3aed');
+  box.style.setProperty('--hl-function', dark ? '#93c5fd' : '#1d4ed8');
+}
+
+renderMathInElement(document.body, {
+  delimiters: [
+    { left: '$$', right: '$$', display: true },
+    { left: '$', right: '$', display: false },
+  ],
+  macros: window.KATEX_MACROS || {},
+  throwOnError: false,
+});
+
+// Swatches last, so the computed values are the ones after layout.
+for (const box of document.querySelectorAll('.specimen')) {
+  const cs = getComputedStyle(box);
+  const bg = rgb(cs.getPropertyValue('--c-bg'));
+  const strip = box.querySelector('.swatches');
+  for (const t of TOKENS) {
+    const v = cs.getPropertyValue(t).trim();
+    const c = rgb(v);
+    const isBg = t.includes('-bg');
+    const el = document.createElement('div');
+    el.className = 'swatch';
+    el.style.background = v;
+    // Whichever of black and white the swatch itself contrasts with better.
+    // The crossover is around L = 0.18, where both sit at about 4.58:1, so
+    // taking the maximum keeps the labels above AA on every swatch -- which
+    // matters because this page is measured by `make contrast-audit` too.
+    const L = lum(c);
+    el.style.color = (L + 0.05) / 0.05 >= 1.05 / (L + 0.05) ? '#000' : '#fff';
+    el.innerHTML = `<b>${t.replace('--c-', '')}</b>${hex(c)}` +
+                   (isBg ? '' : `<br>${ratio(c, bg)}:1`);
+    strip.appendChild(el);
+  }
+}
+</script>
+</body>
+</html>
