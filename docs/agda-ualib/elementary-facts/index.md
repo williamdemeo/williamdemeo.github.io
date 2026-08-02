@@ -39,13 +39,17 @@ Define the **equalizer** of $g$ and $h$ as follows: $E(g,h) = \{ a : A \mid g(a)
 
 **Fact 1.** $E(g,h)$ is a subuniverse of $(A, f^A)$.
 
-**Proof.** Fix arbitrary $0\leq i< m$ and $a : \underline{k_i} \to E(g,h)$. We wish to show that $g (f^A (\inji a)) = h (f^A (\inji a))$, as this will show that $E(g,h)$ is closed under the $i$-th operation of $(A, f^A)$. But this is trivial since, by definition of an $F$-algebra homomorphism, we have $$(g \circ f^A)(\inji a) = (f^B \circ F g)(\inji a) = (f^B \circ F h)(\inji a) = (h \circ f^A)(\inji a).$$
+**Proof.** Fix arbitrary $0\leq i< m$ and $a : \underline{k_i} \to E(g,h)$. We wish to show that $g (f^A (\inji a)) = h (f^A (\inji a))$, as this will show that $E(g,h)$ is closed under the $i$-th operation of $(A, f^A)$. But this is trivial since, by definition of an $F$-algebra homomorphism, we have
+
+$$(g \circ f^A)(\inji a) = (f^B \circ F g)(\inji a) = (f^B \circ F h)(\inji a) = (h \circ f^A)(\inji a).$$
 
 **Fact 2.** If $X \subseteq A$ and $X$ generates $(A, f^A)$ and $g|_X= h|_X$, then $g = h$.
 
 **Proof.** Suppose the subset $X \subseteq A$ generates $(A, f^A)$ and suppose $g|_X = h|_X$. Fix an arbitrary $a : A$. We show $g(a) = h(a)$. 
 
-Since $X$ generates $(A, f^A)$, there exists a term $t$ and a tuple $x : \rho t \to X$ of generators such that $a = t^A x$. Therefore, since $F g = F h$ on $X$, we have $$g(a) = g(t^A x) = (t^B \circ F g)(x) = (t^B \circ F h)(x) = h(t^A x) = h(a).$$
+Since $X$ generates $(A, f^A)$, there exists a term $t$ and a tuple $x : \rho t \to X$ of generators such that $a = t^A x$. Therefore, since $F g = F h$ on $X$, we have
+
+$$g(a) = g(t^A x) = (t^B \circ F g)(x) = (t^B \circ F h)(x) = h(t^A x) = h(a).$$
 
 **Fact 3.** If $A$ and $B$ are finite sets and $X$ generates $(A, f^A)$, then $|\mathrm{Hom}((A, f^A),(B, f^B))| \leq |B|^{|X|}$.
 
@@ -61,5 +65,7 @@ Now it's easy to see that $k g = h$ by construction.  Indeed, for each $a \in A$
 
 To see that $k$ is a homomorphism, let there be $m$ operation symbols and let $0\leq i< m$ be arbitrary. Fix $b \colon \underline{k_i} \to B$. Since $g$ is surjective, for each $i \colon \underline{k_i}$, the subset $g^{-1}\{b(i)\}\subseteq A$ is nonempty and is mapped by $h$ to a single point of $C$ (since $\ker g \subseteq \ker h$). Label this point $c_i$ and define $c \colon \underline{k_i} \to C$ by $c(i) = c_i$.
 
-We want to show $(f^C \circ F k) (b) = (k \circ f^B)(b).$  The left hand side is $f^C c$, which is equal to $(h \circ f^A)(a)$ for some $a\colon \underline{k_i} \to A$, since $h$ is a homomorphism.  Therefore, $$(f^C \circ F k) (b) = (h \circ f^A) (a) = (k \circ g \circ f^A)(a) = (k \circ f^B \circ F g)(a) = (k \circ f^B)(b).$$
+We want to show $(f^C \circ F k) (b) = (k \circ f^B)(b).$  The left hand side is $f^C c$, which is equal to $(h \circ f^A)(a)$ for some $a\colon \underline{k_i} \to A$, since $h$ is a homomorphism.  Therefore,
+
+$$(f^C \circ F k) (b) = (h \circ f^A) (a) = (k \circ g \circ f^A)(a) = (k \circ f^B \circ F g)(a) = (k \circ f^B)(b).$$
 

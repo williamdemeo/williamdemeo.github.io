@@ -35,7 +35,9 @@ For example, in [Lean](https://leanprover.github.io/) the implementation would l
 
 Let $(A, f)$ and $(B, g)$ be two groups (i.e., $\FGrp$-algebras).  
 
-A **homomorphism** from $(A, f)$ to $(B, g)$, denoted by $h\colon (A, f)\to (B, g)$, is a function from $A$ to $B$ that satisfies the identity $$h \circ f = g \circ \FGrp h$$
+A **homomorphism** from $(A, f)$ to $(B, g)$, denoted by $h\colon (A, f)\to (B, g)$, is a function from $A$ to $B$ that satisfies the identity
+
+$$h \circ f = g \circ \FGrp h$$
 
 To make sense of this identity, we must know how the functor $\FGrp$ acts on arrows (i.e., homomorphisms, like $h$).  It does so as follows:
 
