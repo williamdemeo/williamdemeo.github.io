@@ -1,6 +1,6 @@
 # ADR-005: The visual system, and how its constraints are checked
 
-**Status**: Proposed — the aesthetic half awaits a decision on [#17](https://github.com/williamdemeo/williamdemeo.github.io/issues/17)
+**Status**: Accepted
 
 **Date**: 2026-08-02
 
@@ -46,11 +46,19 @@ gate all three constraints on audits that measure a rendered page.**
 is restyled through its own custom properties rather than by overriding its
 rules, which is the supported route and survives a theme upgrade.
 
-Three complete candidate systems are defined in `tokens.css` while #17 is open,
-selected by a `data-system` attribute; `/design/options/` renders all three
-side by side on the same content. The aesthetic choice is the owner's, and it
-is easier to make by looking than by reading. Two of the three come out when it
-is made.
+**The system is Meridian**: Newsreader 500 for display, Inter for body and
+interface, JuliaMono for code, over a near-achromatic neutral ramp with a
+single teal accent (`#0f766e` light, `#5eead4` dark).
+
+It was chosen from three candidates rendered side by side on the same content —
+a heading, a paragraph with inline mathematics, a display equation, a block of
+Agda — rather than described in prose. The other two were *Graphite* (Inter
+throughout, blue accent, cool neutrals) and *Manuscript* (Source Serif 4
+throughout, warm paper, brick accent). All three cleared AA in both themes, so
+the choice was unconstrained and aesthetic, which is why it was the owner's to
+make. The rejected two, their font files, and the comparison page at
+`/design/options/` were removed once the decision was recorded; reverting that
+commit restores all three.
 
 ## What was verified
 
@@ -84,8 +92,8 @@ the font the Zola site meant to use — covers 24 of the 44.
 reports which faces Chromium actually rasterised text with. Before this change,
 on the existing site, an Agda block on `/design/rendering/` was rendered by
 three fonts at once: DejaVu Sans Mono for 103 glyphs, FreeSerif for 9, FreeSans
-for 1. After: 1,513 text-bearing elements across the eight real pages, every
-face reported a downloaded webfont, and 44/44 probe characters in JuliaMono.
+for 1. After: 11,408 text-bearing elements across the 26 real pages, every face
+reported a downloaded webfont, and 44/44 probe characters in JuliaMono.
 
 **The enumerated subset was wrong, and the audit is what caught it.** Taking
 the repertoire from `agda-input-translations` looks authoritative and is not:
@@ -98,24 +106,30 @@ coverage. The subset is now defined by Unicode block.
 **No external requests.** Before: every page emitted
 `<link rel=preconnect href="https://fonts.gstatic.com">` and a stylesheet from
 `fonts.googleapis.com` for Roboto and Roboto Mono, and fetched
-`api.github.com/repos/…` twice. After: 230 requests across the eight pages,
-with all 30 `@font-face` declarations forced to load, and every one
-same-origin.
+`api.github.com/repos/…` twice. After: 646 requests across the 26 pages, with
+all 27 `@font-face` declarations forced to load, and every one same-origin.
 
-**Contrast.** 1,480 text elements per theme, measured from computed style with
+**Contrast.** 11,303 text elements per theme, measured from computed style with
 the background resolved by compositing up the ancestor chain, and element
 opacity folded into the foreground alpha. Real failures found and fixed:
 `.md-button` rendered white on white in light mode (Material builds it from
 `--md-primary-fg-color`, which here is the paper colour); the footer's "Made
 with" line at 4.00:1; and the three faint-grey tokens, which cleared AA on the
-page but not on the sunken footer band. Now 0 below AA in both themes, lowest
-4.89:1 in light and 4.91:1 in dark.
+page but not on the sunken footer band. The archive pages M2-9 brought in added
+one more: KaTeX writes a failed expression in `errorColor`, whose default
+`#cc0000` is 3.29:1 on the dark page, so a broken formula was the least legible
+thing on the page. That is now `var(--c-error)` — KaTeX passes the string
+straight into an inline `style`, so one token covers both themes. Now 0 below
+AA in both themes, lowest 4.89:1 in light and 5.32:1 in dark.
 
-One measurement error is worth recording, because it moved four ratios by more
-than a point: Material animates colour on a scheme change, and reading
-`getComputedStyle` during that animation returns an interpolated value
-belonging to neither theme. The audit now disables transitions before
-switching.
+Two measurement errors are worth recording. Material animates colour on a
+scheme change, and reading `getComputedStyle` during that animation returns an
+interpolated value belonging to neither theme; the audit disables transitions
+before switching, which moved four ratios by more than a point. And the
+imported lab sheets use `\phantom{XXX}` to draw a fill-in-the-blank rule,
+which is text with a transparent foreground — invisible on purpose, not badly
+contrasted. Fully transparent foregrounds are skipped, as `visibility: hidden`
+and `opacity: 0` already were.
 
 **A real gap in the body-face subset.** The CV page contains `š`, in a
 co-author's name, and it rendered in Liberation Sans while the rest of the
@@ -248,10 +262,10 @@ The script names what to install if the imports fail.
   it silently reverts to upstream behaviour if the file is deleted rather than
   failing loudly. `make offline-audit` is what catches that.
 - **Iosevka untested.** Stated above rather than glossed.
-- **Three systems in `tokens.css` and nine font files, while #17 is open.**
-  Roughly 200 KB of faces for two systems that will not ship, and a page under
-  `docs/design/options/` that publishes with the site. Removed with the
-  decision.
+- **The comparison page and the two rejected systems are gone.** Reopening the
+  choice means reverting a commit rather than editing a live switch. That is
+  the right trade for not publishing 100 KB of unused faces and a scaffolding
+  page, but it is a trade.
 
 ### Neutral
 
@@ -285,7 +299,7 @@ The script names what to install if the imports fail.
 | No external font, script or stylesheet requested | Verified, `make offline-audit` |
 | Tokens in one place, used by the custom CSS | Done |
 | Audits running in CI | Deferred to M3-6; needs a Chromium in the flake |
-| Which of the three systems ships | **Open — #17** |
+| Which of the three systems ships | **Meridian** |
 
 ## Notes
 

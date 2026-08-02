@@ -32,7 +32,11 @@ function renderMath() {
     // page cannot blank the rest of it.  The audit script is where errors are
     // meant to be caught; this is the runtime safety net.
     throwOnError: false,
-    errorColor: "#cc0000",
+    // A token, not a constant: KaTeX writes this straight into an inline
+    // `style="color:..."`, and custom properties resolve there, so one value
+    // covers both themes.  Its default #cc0000 is legible on paper and 3.0:1
+    // on the dark page.  See tokens.css.
+    errorColor: "var(--c-error)",
     // The imported content predates any house style and uses constructs KaTeX
     // warns about; the warnings are noise in the browser console.
     strict: false,

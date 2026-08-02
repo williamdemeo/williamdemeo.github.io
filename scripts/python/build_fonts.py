@@ -175,21 +175,7 @@ FACES = [
          "acd98e64795781b2058f07b18475e0ecee2a0fe2b42a49e2f9e37d0d6bf66ce6",
          weight=400, style="italic", axes={"wght": 400, "opsz": 16}),
 
-    # ── the alternate systems' faces ────────────────────────────────────────
-    # Shipped so that /design/options/ can show all three candidates live while
-    # #17 is open.  Two of the three come out when the choice is recorded.
-    Face("sourceserif4-400.woff2", "Source Serif 4",
-         f"{GF}/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
-         "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b",
-         weight=400, axes={"wght": 400, "opsz": 11}),
-    Face("sourceserif4-600.woff2", "Source Serif 4",
-         f"{GF}/sourceserif4/SourceSerif4%5Bopsz%2Cwght%5D.ttf",
-         "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b",
-         weight=600, axes={"wght": 600, "opsz": 20}),
-    Face("sourceserif4-400-italic.woff2", "Source Serif 4",
-         f"{GF}/sourceserif4/SourceSerif4-Italic%5Bopsz%2Cwght%5D.ttf",
-         "15fbc7e4679489a501998c3669272637a6646388ef7e4bd77eebb5bf967a1f42",
-         weight=400, style="italic", axes={"wght": 400, "opsz": 11}),
+    # ── display ─────────────────────────────────────────────────────────────
     Face("newsreader-500.woff2", "Newsreader",
          f"{GF}/newsreader/Newsreader%5Bopsz%2Cwght%5D.ttf",
          "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
@@ -199,7 +185,6 @@ FACES = [
 LICENSES = [
     ("OFL-JuliaMono.txt", f"{JM}/LICENSE"),
     ("OFL-Inter.txt", f"{GF}/inter/OFL.txt"),
-    ("OFL-SourceSerif4.txt", f"{GF}/sourceserif4/OFL.txt"),
     ("OFL-Newsreader.txt", f"{GF}/newsreader/OFL.txt"),
 ]
 

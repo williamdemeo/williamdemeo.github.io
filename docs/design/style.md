@@ -19,13 +19,12 @@ and recorded in ADR-005.
 From M3-3 this page also carries a live example of every reusable component,
 so a component that breaks breaks visibly, on one page.
 
-!!! note "While #17 is open"
-
-    Three candidate systems are defined in `tokens.css`, not one, and
-    [/design/options/](options/index.html) shows them side by side. The active
-    one is whichever the `:root, [data-system="…"]` selector names. When the
-    choice is made, the other two come out, along with their font files and
-    that page.
+The system is **Meridian**, chosen from three candidates rendered side by side
+on the same content. The other two — *Graphite*, Inter throughout with a blue
+accent, and *Manuscript*, Source Serif 4 on warm paper with a brick accent —
+were removed with the decision, along with the page that compared them.
+Reverting the commit that removed them brings all three back if the choice is
+ever reopened.
 
 ## Type
 
@@ -124,6 +123,11 @@ computed from the token values; the authoritative check is
 `--c-line` and `--c-line-strong` are borders, not text, and are not held to a
 text threshold: 1.28:1 and 1.61:1 in light, 1.29:1 and 1.71:1 in dark.
 
+`--c-error` is `#b3261e` in light (6.54:1 on paper) and `#ff8a80` in dark
+(8.49:1). It is a token rather than a constant because KaTeX writes its
+`errorColor` into an inline `style="color:…"`, and its default `#cc0000` is
+3.29:1 on the dark page — a broken expression should be legible enough to fix.
+
 ### Theme selection
 
 The palette in `mkdocs.yml` has three entries. The first has
@@ -157,6 +161,9 @@ with `make fonts`. Nothing is fetched at page load.
 | `inter-600.woff2` | 510 | 39 KB |
 | `inter-400-italic.woff2` | 510 | 41 KB |
 | `newsreader-500.woff2` | 341 | 31 KB |
+
+Total: 612 KB across seven files, of which 56 KB is fetched by a page with no
+notation on it at all.
 
 JuliaMono is split three ways by `unicode-range` under one family name, so a
 page pays only for the notation it shows: a page whose code is ASCII downloads

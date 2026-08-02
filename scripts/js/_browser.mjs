@@ -38,11 +38,14 @@ export function serve(root) {
   const server = http.createServer((req, res) => {
     let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     if (p.endsWith('/')) p += 'index.html';
-    const file = path.join(root, p);
+    const file = path.resolve(root, '.' + p);
     // Refuse to serve outside the root even though this only ever faces a
     // browser we launched: a traversal bug here would be a real one if the
-    // script were ever pointed at a wider directory.
-    if (!path.resolve(file).startsWith(path.resolve(root))) {
+    // script were ever pointed at a wider directory.  The trailing separator
+    // matters -- without it a sibling directory whose name merely starts with
+    // the root's, `site-scratch` next to `site`, passes the prefix test.
+    const base = path.resolve(root) + path.sep;
+    if (file !== path.resolve(root) && !file.startsWith(base)) {
       res.writeHead(403).end();
       return;
     }

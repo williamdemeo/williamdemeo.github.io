@@ -77,6 +77,11 @@ const MEASURE = () => {
     // Element opacity dims the text exactly as an alpha channel would, and
     // ignoring it reports a better ratio than the reader gets.
     fg.a *= Number.isFinite(+cs.opacity) ? +cs.opacity : 1;
+    // Fully transparent text is invisible on purpose, not badly contrasted:
+    // KaTeX's \phantom, which the imported lab sheets use to draw a
+    // fill-in-the-blank rule, is exactly this.  Reporting it as a 1:1 failure
+    // would be reporting that an intentionally blank space is hard to read.
+    if (fg.a === 0) continue;
     const bg = background(el);
     const composited = fg.a < 1 ? over(fg, bg) : fg;
     const [hi, lo] = [lum(composited), lum(bg)].sort((a, b) => b - a);
