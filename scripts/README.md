@@ -274,8 +274,8 @@ not verifiable against either service (4):
 Every entry with a DOI is looked up at Crossref; where Crossref does not index
 it, the registration-agency endpoint says who does and a DataCite DOI is
 followed to DataCite. Every entry with an arXiv identifier is looked up at the
-arXiv API. Title, authors, container-title, volume, page and year are compared
-against what the file claims, and each difference is marked:
+arXiv API. Title, authors, container-title, volume, issue, page and date are
+compared against what the file claims, and each difference is marked:
 
 | | |
 | --- | --- |
@@ -315,10 +315,16 @@ caught by:
 
 It needs the network, so it is not a build gate: CI has none by design
 (ADR-004). `make publications-test` runs the unit tests, which use fixtures and
-need nothing, and `nix flake check` runs them as `checks.bibliography-verifier`.
+need nothing, and `nix flake check` runs them as `checks.bibliography-tooling`.
 The tests that matter are the ones proving the two behaviours above, since
 "it fails loudly" is exactly the kind of claim that should not be taken on
 trust.
+
+Dates are compared to the precision the file states: an entry saying "June
+2020" agrees with a record saying 2020-06-15, and fails only when it matches
+none of the dates the publisher offers. Publishers routinely offer several — a
+print issue and its online-first appearance are different dates, and both are
+real.
 
 Nothing from PyPI: `urllib`, `json` and `xml.etree` are all in the standard
 library, so there is no new pin in `requirements.txt` for `flake.nix` to match

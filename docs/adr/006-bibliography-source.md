@@ -62,13 +62,32 @@ and 2022 in the CV — the arXiv posting and the LMCS publication, both correct.
 CSL-JSON has no standard field for that distinction, so entries carry
 `_preprint.arxiv-year` alongside `issued`. Underscore-prefixed keys are ignored
 by CSL processors, so the file stays valid CSL-JSON. The same convention carries
-`_arxiv`, `_role`, `_note`, `_source` (which lists the copies an entry came
-from) and `_needs_review`.
+`_arxiv`, `_role`, `_note`, `_comment`, `_source` (which lists the copies an
+entry came from), `_needs_review`, and `_version-of`.
+
+### Preprints are entries, not fields
+
+A preprint and the paper it became are two documents. They can differ in title,
+in length, and in author order, and citing one is not citing the other. Where
+both matter, the file carries both, and the preprint names the published work
+with `_version-of`.
+
+That is the only reason one arXiv identifier may appear on two entries, and the
+validator enforces exactly that: a shared id is fine when one entry declares
+`_version-of` the other, and a defect otherwise. Relaxing a check is easier to
+get wrong than writing one, so `test_gen_publications.py` covers both
+directions.
+
+`issued` is the date of the version of record — the print date where a journal
+has one, the online date where it does not — carried to whatever precision the
+publisher gives and no further. "June 2020" is what the record supports for
+IJAC 30(4); inventing a day to make the entries look uniform would be inventing
+data.
 
 ## Verification against the publishers
 
 Reconciling three copies makes them agree with each other. It does not make
-them right, and four of the eight `_needs_review` notes were asking a question
+them right, and five of the eight `_needs_review` notes were asking a question
 only a publisher could answer. `scripts/python/verify_bibliography.py` asks:
 
 ```
@@ -77,11 +96,18 @@ https://api.datacite.org/dois/{DOI}              where Crossref does not index i
 http://export.arxiv.org/api/query?id_list={id}
 ```
 
-It compares title, authors, container-title, volume, page and year against what
-the file claims and reports every difference. `make publications-verify` runs
-it; `make publications-test` runs its unit tests, which need no network.
+It compares title, authors, container-title, volume, issue, page and date
+against what the file claims and reports every difference.
+`make publications-verify` runs it; `make publications-test` runs the unit
+tests, which need no network.
 
-Eleven of the fifteen entries carry a DOI or an arXiv identifier and are now
+Dates are compared to the precision the file states. An entry saying "June
+2020" agrees with a record saying 2020-06-15: it says less, which is not the
+same as saying something false. It fails only when it matches none of the dates
+the publisher offers — and publishers routinely offer several, since a print
+issue and its online-first appearance are different dates and both are real.
+
+Twelve of the sixteen entries carry a DOI or an arXiv identifier and are now
 checked. The other four have neither, and the verifier lists them as
 unverifiable rather than passing over them in silence.
 
@@ -123,20 +149,34 @@ paper is titled *…with non-isomorphic…* and the journal's own record is
 *…nonisomorphic…*. That is a fact about two documents, not an error, so it is
 reported for information.
 
+## What an entry renders as
+
+Each entry is three lines: the title, the authors, and the imprint — venue,
+series and volume, issue, date, pages, DOI — followed by a row of links that
+puts **the version of record and the preprint next to each other**, in that
+order. A reader who wants the citable version and a reader who wants the free
+one both find what they came for without opening anything.
+
+Two rules keep the rendering honest:
+
+- **Say only what the record supports.** An entry with no issue number says
+  nothing about issues. A date is shown to the precision the publisher gave.
+- **Label a link by what vouches for it.** A DOI is a publisher asserting "this
+  is the record of that work", so the entry's type may name it — *Journal*,
+  *Proceedings*. A bare URL is not: the ISMA 2004 link is the author's own copy
+  of the PDF, and calling that *Proceedings* would be claiming something no one
+  asserted. Those render as *PDF* or *Link*.
+
 ## Consequences
 
-- **Three entries still carry `_needs_review`**, printed on every run of
-  `make publications`. All three are decisions for a person, and each note now
-  records what the publishers do say:
-  - `demeo2022birkhoff` — one entry or two. DataCite's record for the TYPES
-    proceedings paper names arXiv:2101.10166 as a version of it, so the
-    publisher treats them as one work; the research page treats the preprint as
-    a separate, longer work under a different title.
-  - `demeo2002icmc` — the CiteSeerX link needs replacing, and neither service
-    holds this paper.
+- **Two entries still carry `_needs_review`**, printed on every run of
+  `make publications`. Both are decisions for a person, and neither service
+  holds the paper in question, so nothing external settles them:
+  - `demeo2002icmc` — the CiteSeerX link needs replacing and there is no other.
   - `demeo1998eigenvalues` — one item or two, alongside the MS thesis.
-- **The other five `_needs_review` notes are gone**, settled by the publishers
-  rather than by choosing:
+- **The other six `_needs_review` notes are gone.** Five were settled by the
+  publishers rather than by choosing, and the sixth — whether the Birkhoff
+  entry was one work or two — was settled by William, who split it:
   - the LICS 2021 paper did appear in the proceedings — Crossref registers it
     as a proceedings article, pages 1–13 — so the CV was right and the research
     page's "submitted to" was stale.
@@ -152,8 +192,8 @@ reported for information.
   other, so they stay separate targets.
 - **`publications-verify` is not a build gate.** CI has no network by design
   (ADR-004), and a check that fails there for reasons unrelated to the change
-  would train everyone to ignore it. `checks.bibliography-verifier` runs the
-  verifier's *tests* under `nix flake check`, which is the part that can be
+  would train everyone to ignore it. `checks.bibliography-tooling` runs the
+  tooling's *tests* under `nix flake check`, which is the part that can be
   checked hermetically. Run `make publications-verify` when the bibliography
   changes.
 - The three legacy copies stay until #30 and #41 render from the generated

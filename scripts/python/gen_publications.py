@@ -45,18 +45,48 @@ def load() -> list[dict]:
     return data["items"]
 
 
-def year(item: dict):
+MONTHS = ("January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December")
+
+
+def date_parts(item: dict) -> list:
     try:
-        return item["issued"]["date-parts"][0][0]
+        parts = item["issued"]["date-parts"][0]
     except (KeyError, IndexError, TypeError):
-        return None
+        return []
+    return [p for p in parts if isinstance(p, int)]
+
+
+def year(item: dict):
+    parts = date_parts(item)
+    return parts[0] if parts else None
+
+
+def issued_text(item: dict) -> str:
+    """"June 2020", "January 19, 2022", or bare "2004" -- to whatever precision
+    the publisher gave, never inventing a day the record does not have."""
+    parts = date_parts(item)
+    if not parts:
+        return ""
+    if len(parts) == 1 or not 1 <= parts[1] <= 12:
+        return str(parts[0])
+    month = MONTHS[parts[1] - 1]
+    if len(parts) == 2:
+        return f"{month} {parts[0]}"
+    return f"{month} {parts[2]}, {parts[0]}"
 
 
 def validate(items: list[dict]) -> list[str]:
     problems = []
     seen_ids, seen_arxiv = {}, {}
+    ids = {it.get("id") for it in items}
 
     for i, it in enumerate(items):
+        # An entry may name the published work it is a preprint of.  That is
+        # what lets one arXiv id sit on two entries without being a mistake.
+        version_of = it.get("_version-of")
+        if version_of is not None and version_of not in ids:
+            problems.append(f"{it.get('id', i)}: _version-of names no entry: {version_of!r}")
         where = it.get("id") or f"item {i}"
 
         if not it.get("id"):
@@ -91,10 +121,15 @@ def validate(items: list[dict]) -> list[str]:
         if ax is not None:
             if not ARXIV_ID.match(ax):
                 problems.append(f"{where}: malformed arXiv id {ax!r}")
-            elif ax in seen_arxiv:
-                problems.append(f"{where}: arXiv id {ax} also on {seen_arxiv[ax]}")
+            elif ax in seen_arxiv and version_of != seen_arxiv[ax]:
+                # Sharing an id is fine between a preprint and the paper it
+                # became, and a mistake between any other two entries.
+                problems.append(
+                    f"{where}: arXiv id {ax} also on {seen_arxiv[ax]}, "
+                    f"and neither declares _version-of the other"
+                )
             else:
-                seen_arxiv[ax] = it.get("id", where)
+                seen_arxiv.setdefault(ax, it.get("id", where))
 
         doi = it.get("DOI")
         if doi is not None and not doi.startswith("10."):
@@ -129,23 +164,106 @@ def authors_md(item: dict) -> str:
     return joined + tail
 
 
-def links_md(item: dict) -> list[str]:
+#: How to label the link to the version of record, by CSL type.  A reader
+#: scanning the list should be able to tell a refereed journal paper from a
+#: conference paper without opening either.
+PUBLISHED_LABEL = {
+    "article-journal": "Journal",
+    "paper-conference": "Proceedings",
+    "chapter": "Chapter",
+    "book": "Book",
+    "thesis": "Thesis",
+}
+
+
+def published_link(item: dict) -> tuple[str, str] | None:
+    """(label, url) for the version of record, or None if there isn't one.
+
+    The label says only what the evidence supports.  A DOI is a publisher
+    asserting "this is the record of that work", so the entry's type may name
+    it -- Journal, Proceedings.  A bare URL is not: it may be the author's own
+    copy of the PDF, as the ISMA 2004 one is, so it is called what it is.
+    """
+    url, doi = item.get("URL"), item.get("DOI")
+    # An arXiv abstract page is not a version of record even when it sits in
+    # `URL`, because those entries *are* the preprint.
+    if url and "arxiv.org" in url:
+        url = None
+    if doi:
+        return PUBLISHED_LABEL.get(item.get("type"), "Published version"), url or f"https://doi.org/{doi}"
+    if url:
+        return ("PDF" if url.lower().endswith(".pdf") else "Link"), url
+    return None
+
+
+def links_md(item: dict, by_id: dict[str, dict]) -> list[str]:
+    """The published version and the preprint, side by side, in that order."""
     out = []
-    if item.get("DOI"):
-        out.append(f"[DOI](https://doi.org/{item['DOI']})")
+
+    # An entry that is itself a preprint borrows the published link from the
+    # work it names, so the pair reads the same way from either entry.
+    published = by_id.get(item.get("_version-of") or "")
+    if published is not None:
+        link = published_link(published)
+        if link:
+            out.append(f"[Published version]({link[1]})")
+    else:
+        link = published_link(item)
+        if link:
+            out.append(f"[{link[0]}]({link[1]})")
+
     if item.get("_arxiv"):
-        out.append(f"[arXiv:{item['_arxiv']}](https://arxiv.org/abs/{item['_arxiv']})")
-    url = item.get("URL")
-    # Skip a URL that only restates a link already emitted -- the arXiv abstract
-    # page, or a publisher page reached through the DOI.  Guard on `url` first:
-    # most entries have no URL at all, and `x in None` raises.
-    redundant = bool(url) and (
-        (item.get("_arxiv") and item["_arxiv"] in url)
-        or (item.get("DOI") and item["DOI"] in url)
-    )
-    if url and not redundant:
-        out.append(f"[Link]({url})")
+        out.append(f"[arXiv preprint](https://arxiv.org/abs/{item['_arxiv']})")
     return out
+
+
+def imprint_md(item: dict) -> str:
+    """Venue, date, volume, issue and pages -- everything the record supports.
+
+    Deliberately in the order a citation is read aloud, and deliberately
+    omitting whatever the publisher did not give: an entry with no issue number
+    should say nothing about issues rather than guess one.
+    """
+    bits = []
+    venue = item.get("container-title")
+    if venue:
+        short = item.get("container-title-short")
+        bits.append(f"*{venue}*" + (f" ({short})" if short else ""))
+    elif item.get("genre"):
+        thesis = item["genre"]
+        if item.get("publisher"):
+            thesis += f", {item['publisher']}"
+        bits.append(thesis)
+    elif item.get("_arxiv"):
+        # Nowhere else to say what this is.  "arXiv preprint arXiv:1234.56789"
+        # is redundant read aloud and is how the things are actually cited.
+        bits.append(f"arXiv preprint arXiv:{item['_arxiv']}")
+
+    if item.get("event-place"):
+        bits.append(item["event-place"])
+
+    series = item.get("collection-title")
+    if series and item.get("volume"):
+        bits.append(f"{series} Volume {item['volume']}")
+    elif item.get("volume"):
+        bits.append(f"Volume {item['volume']}")
+    if item.get("issue"):
+        bits.append(f"Issue {item['issue']}")
+
+    date = issued_text(item)
+    if date:
+        bits.append(date)
+    if item.get("page"):
+        bits.append(f"pages {item['page']}")
+
+    line = ", ".join(bits)
+    if line:
+        line += "."
+    # The DOI belongs in the citation, not in the row of links: it is what a
+    # reader copies to cite the work, and it is what makes the entry checkable.
+    if item.get("DOI"):
+        line += f"  [doi:{item['DOI']}](https://doi.org/{item['DOI']})"
+    return line
 
 
 def render(items: list[dict]) -> str:
@@ -154,38 +272,25 @@ def render(items: list[dict]) -> str:
         "     Do not edit: `make publications` regenerates it. See ADR-006. -->",
         "",
     ]
+    by_id = {it["id"]: it for it in items if it.get("id")}
     for it in sorted(items, key=lambda i: (-(year(i) or 0), i.get("id", ""))):
-        y = year(it)
-        bits = [f"**{it['title']}**"]
+        title = f"**{it['title']}**"
         if it.get("_role") == "editor":
-            bits[0] += " *(editor)*"
-        line = f"- {bits[0]}  "
-        lines.append(line)
+            title += " *(editor)*"
+        lines.append(f"- {title}  ")
 
-        second = authors_md(it).rstrip(".")
-        venue = it.get("container-title")
-        if venue:
-            vol = f", **{it['volume']}**" if it.get("volume") else ""
-            # The bare colon means "volume:pages", so it needs a volume to
-            # attach to.  It is also wrong for LIPIcs and OASIcs, which number
-            # pages within an article -- "2:1-2:18" -- where a second colon
-            # would disappear into the range.
-            compact = it.get("volume") and ":" not in str(it.get("page") or "")
-            pages = f"{':' if compact else ', pp. '}{it['page']}" if it.get("page") else ""
-            second += f".  *{venue}*{vol}{pages}"
-        elif it.get("genre"):
-            second += f".  {it['genre']}"
-            if it.get("publisher"):
-                second += f", {it['publisher']}"
-        if y:
-            second += f", {y}"
-        lines.append(f"  {second.rstrip('.')}.  ")
-
-        extras = links_md(it)
+        byline = authors_md(it).rstrip(".")
         if it.get("_note"):
-            extras.insert(0, f"*{it['_note']}*")
-        if extras:
-            lines.append(f"  {' · '.join(extras)}")
+            byline += f".  *{it['_note']}*"
+        lines.append(f"  {byline.rstrip('.')}.  ")
+
+        imprint = imprint_md(it)
+        if imprint:
+            lines.append(f"  {imprint}  ")
+
+        links = links_md(it, by_id)
+        if links:
+            lines.append(f"  {' · '.join(links)}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 

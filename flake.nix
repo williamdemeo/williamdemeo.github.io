@@ -296,17 +296,19 @@
               touch "$out"
             '';
 
-          # The bibliography verifier's own behaviour, which is worth a check
-          # here precisely because the verifier itself cannot run here: it
-          # needs the publishers, and this sandbox has no network.  These
-          # tests use fixtures instead, and the ones that matter prove the
-          # verifier exits non-zero when it cannot reach a service rather than
-          # reporting the clean run it did not earn.
-          bibliography-verifier = pkgs.runCommandLocal "check-bibliography-verifier"
+          # The bibliography tooling's own behaviour.  The verifier is worth a
+          # check here precisely because it cannot run here: it needs the
+          # publishers, and this sandbox has no network.  These tests use
+          # fixtures instead, and the ones that matter prove the verifier exits
+          # non-zero when it cannot reach a service rather than reporting the
+          # clean run it did not earn, and that the renderer's relaxed
+          # duplicate-arXiv rule still catches a real duplicate.
+          bibliography-tooling = pkgs.runCommandLocal "check-bibliography-tooling"
             {
               nativeBuildInputs = [ this.pythonEnv ];
             }
             ''
+              python3 ${./scripts/python}/test_gen_publications.py
               python3 ${./scripts/python}/test_verify_bibliography.py
               touch "$out"
             '';

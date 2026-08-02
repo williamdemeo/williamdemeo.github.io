@@ -226,8 +226,9 @@ publications-check: $(MKDOCS_DEP)
 publications-verify: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/verify_bibliography.py
 
-## Unit-test the verifier's comparisons and its failure handling (no network)
+## Unit-test the renderer and the verifier's failure handling (no network)
 publications-test: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/test_gen_publications.py
 	@$(PYTHON) scripts/python/test_verify_bibliography.py
 
 ## Show this help

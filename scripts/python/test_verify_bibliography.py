@@ -396,6 +396,51 @@ def test_page_dashes_normalise():
     assert vb.compare_pages("693-710", "693-711")[0] == vb.DIFFERS
 
 
+def test_a_zero_padded_issue_is_style():
+    assert vb.compare_issue("4", "04")[0] == vb.STYLE
+    assert vb.compare_issue("4", "5")[0] == vb.DIFFERS
+
+
+def test_a_less_precise_date_agrees_with_a_more_precise_one():
+    """"June 2020" says less than 2020-06-15; it does not say something else."""
+    assert vb.compare_date((2020, 6), {"published-print": (2020, 6, 15)}) is None
+    assert vb.compare_date((2020, 6, 15), {"published-print": (2020, 6, 15)}) is None
+
+
+def test_a_date_matching_none_of_the_publisher_dates_is_a_difference():
+    level, *_ = vb.compare_date(
+        (2020, 7), {"published-print": (2020, 6), "published-online": (2020, 1, 28)}
+    )
+    assert level == vb.DIFFERS, level
+
+
+def test_a_date_matching_any_publisher_date_is_accepted():
+    """Print and online dates differ legitimately; either one is right."""
+    dates = {"published-print": (2020, 6), "published-online": (2020, 1, 28)}
+    assert vb.compare_date((2020, 6), dates) is None
+    assert vb.compare_date((2020, 1, 28), dates) is None
+
+
+def test_a_year_where_the_publisher_has_a_full_date_is_worth_noting():
+    level, *_ = vb.compare_date((2013,), {"issued": (2013, 4, 2)})
+    assert level == vb.NOTE, level
+
+
+def test_datacite_dates_ignore_record_dates():
+    """Created and Copyrighted describe the record, not the publication."""
+    dates = vb.datacite_dates({
+        "publicationYear": 2024,
+        "dates": [
+            {"date": "2024", "dateType": "Issued"},
+            {"date": "2024-05-21", "dateType": "Available"},
+            {"date": "2024-05-21", "dateType": "Created"},
+        ],
+    })
+    assert dates == {"publicationYear": (2024,), "Issued": (2024,),
+                     "Available": (2024, 5, 21)}, dates
+    assert vb.compare_date((2024, 5, 21), dates) is None
+
+
 def test_author_order_is_substantive():
     item = {"author": [{"family": "Carette", "given": "Jacques"},
                        {"family": "DeMeo", "given": "William"}]}

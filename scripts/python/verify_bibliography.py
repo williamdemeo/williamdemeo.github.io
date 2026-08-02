@@ -360,6 +360,18 @@ def compare_volume(ours, theirs):
     return difference
 
 
+def compare_issue(ours, theirs):
+    """Issues, which publishers zero-pad ("04") and bibliographies do not."""
+    difference = compare("issue", ours, theirs)
+    if difference and difference[0] == DIFFERS:
+        try:
+            if int(str(ours)) == int(str(theirs)):
+                return (STYLE, "issue", str(ours), str(theirs))
+        except (TypeError, ValueError):
+            pass
+    return difference
+
+
 def our_authors(item: dict) -> tuple[list[str], bool]:
     """Author display names, and whether the list ends in an 'et al.'."""
     names, abbreviated = [], False
@@ -403,22 +415,56 @@ def compare_authors(item: dict, theirs: list[str]):
     return (DIFFERS, "author", ", ".join(ours), ", ".join(theirs))
 
 
-def our_year(item: dict):
+def our_date(item: dict) -> tuple[int, ...]:
+    """`issued` as a tuple, to whatever precision the file gives."""
     try:
-        return item["issued"]["date-parts"][0][0]
+        parts = item["issued"]["date-parts"][0]
     except (KeyError, IndexError, TypeError):
-        return None
+        return ()
+    return tuple(p for p in parts if isinstance(p, int))
 
 
-def crossref_years(record: dict) -> dict[str, int]:
-    """Every year Crossref offers, keyed by which date it came from."""
-    years = {}
+def our_year(item: dict):
+    parts = our_date(item)
+    return parts[0] if parts else None
+
+
+def crossref_dates(record: dict) -> dict[str, tuple[int, ...]]:
+    """Every publication date Crossref offers, keyed by which field it is."""
+    dates = {}
     for field in ("issued", "published-print", "published-online", "published"):
         try:
-            years[field] = record[field]["date-parts"][0][0]
+            parts = record[field]["date-parts"][0]
         except (KeyError, IndexError, TypeError):
             continue
-    return {k: v for k, v in years.items() if isinstance(v, int)}
+        clean = tuple(p for p in parts if isinstance(p, int))
+        if clean:
+            dates[field] = clean
+    return dates
+
+
+def show_dates(dates: dict[str, tuple[int, ...]]) -> str:
+    return ", ".join(
+        "-".join(str(p) for p in v) + f" ({k})" for k, v in sorted(dates.items())
+    )
+
+
+def compare_date(ours: tuple[int, ...], theirs: dict[str, tuple[int, ...]]):
+    """Our `issued` against every date the publisher offers.
+
+    A date is right if it agrees with any of them as far as we state it: a file
+    saying "June 2020" agrees with a record saying 2020-06-15, and says less,
+    which is not the same as saying something false.  It is wrong only when it
+    matches none of them.
+    """
+    if not ours or not theirs:
+        return None
+    if any(candidate[: len(ours)] == ours for candidate in theirs.values()):
+        # Agreeing on the year while disagreeing on the month is worth seeing.
+        if len(ours) == 1 and any(len(c) > 1 for c in theirs.values()):
+            return (NOTE, "issued", "-".join(map(str, ours)), show_dates(theirs))
+        return None
+    return (DIFFERS, "issued", "-".join(map(str, ours)), show_dates(theirs))
 
 
 # ── the checks ──────────────────────────────────────────────────────────────
@@ -455,32 +501,34 @@ def check_crossref(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
         ),
         venue,
         compare_volume(item.get("volume"), record.get("volume")),
+        compare_issue(item.get("issue"), record.get("issue")),
         compare_pages(item.get("page"), record.get("page")),
+        compare_date(our_date(item), crossref_dates(record)),
     ):
         if difference:
             found.append(difference)
-
-    years = crossref_years(record)
-    ours = our_year(item)
-    if years and ours is not None and ours not in years.values():
-        found.append(
-            (
-                DIFFERS,
-                "year",
-                str(ours),
-                ", ".join(f"{v} ({k})" for k, v in sorted(years.items())),
-            )
-        )
-    elif len(set(years.values())) > 1:
-        found.append(
-            (
-                NOTE,
-                "year",
-                str(ours),
-                ", ".join(f"{v} ({k})" for k, v in sorted(years.items())),
-            )
-        )
     return found
+
+
+def datacite_dates(record: dict) -> dict[str, tuple[int, ...]]:
+    """Publication dates from DataCite, which writes them as ISO strings.
+
+    `publicationYear` is the year; `dates[]` carries the precise ones, of which
+    Issued and Available are the two that mean "published".  Created and
+    Copyrighted are about the record, not the work, and are ignored.
+    """
+    dates = {}
+    year = record.get("publicationYear")
+    if isinstance(year, int):
+        dates["publicationYear"] = (year,)
+    for entry in record.get("dates") or []:
+        kind = entry.get("dateType")
+        if kind not in ("Issued", "Available"):
+            continue
+        parts = tuple(int(p) for p in re.findall(r"\d+", str(entry.get("date", "")))[:3])
+        if parts:
+            dates[kind] = parts
+    return dates
 
 
 def check_datacite(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
@@ -501,8 +549,9 @@ def check_datacite(item: dict, record: dict) -> list[tuple[str, str, str, str]]:
             ],
         ),
         compare_volume(item.get("volume"), container.get("volume")),
+        compare_issue(item.get("issue"), container.get("issue")),
         compare_pages(item.get("page"), pages),
-        compare("year", our_year(item), record.get("publicationYear")),
+        compare_date(our_date(item), datacite_dates(record)),
     ):
         if difference:
             found.append(difference)
