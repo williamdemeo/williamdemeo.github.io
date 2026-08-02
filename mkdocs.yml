@@ -32,10 +32,25 @@ copyright: >-
 # from the build.  Publishing the ADRs is worth revisiting once there is a
 # design system to render them into (M3-3); GITHUB_PROJECT.md is machine-
 # maintained project state and is not site content in any case.
+#
+# `projects/_template.md` is the last entry and the one that is easy to get
+# wrong: MkDocs does **not** skip underscore-prefixed files, so without this
+# line the M4 project-page skeleton builds and ships as a page at
+# `/projects/_template/`.  Verified both ways -- removing this line puts
+# `site/projects/_template/index.html` back.
+#
+# `not_in_nav` is the trap, not the fix.  Without either entry the strict build
+# does fail, but it fails with "not included in the nav", and silencing *that*
+# by adding the file to `not_in_nav` leaves a green `--strict` build that
+# publishes the template anyway.  Also checked, not assumed.  See ADR-006.
+#
+# Nothing in the built site may link to it: an excluded file is not a link
+# target, and `--strict` says so.
 exclude_docs: |
   GITHUB_PROJECT.md
   adr/
   _snippets/
+  projects/_template.md
 
 # Reachable by URL but deliberately absent from the nav.  Declaring it here
 # rather than leaving it undeclared keeps `--strict` output clean, so a page
@@ -270,6 +285,14 @@ hooks:
 
 nav:
   - Home: index.md
+  # Second, ahead of the blog, because M4 is the part of the site that does the
+  # actual work of representing the author professionally and the blog opens
+  # with decade-old posts (ADR-002).  Labelled "Projects" rather than
+  # "Portfolio" so that the nav entry, the URL segment and the page's own H1 are
+  # all the same word; a label that differs from its URL is small, permanent
+  # friction.  The ordering *within* the page is a separate decision and is
+  # argued in ADR-006.
+  - Projects: projects/index.md
   # A section rather than a plain link, and the reason is in `features` above:
   # the blog plugin attaches Archive and Categories under `blog/index.md`'s
   # parent, and a top-level link has none.  `navigation.indexes` then makes
