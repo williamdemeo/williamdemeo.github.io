@@ -33,8 +33,7 @@ for a nice discussion of this topic.
   sets, then there is a choice function $f$ that can be used to select an element
   from each set in $\mathcal{S}$.
 
-+ **Law of the Excluded Middle** (LEM) states that $P$ is a proposition, then
-  $P \bigvee \neg P$.
++ **Law of the Excluded Middle** (LEM) asserts the following: if $P$ is a proposition, then $P \bigvee \neg P$.
 
 + **Diaconescu's Theorem:** AC $\rightarrow$ LEM.
 
