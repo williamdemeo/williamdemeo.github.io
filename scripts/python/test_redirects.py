@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Tests for the redirect-map library.
 
-Dependency-free: run directly with ``python3 scripts/python/test_redirects.py``
-(prints ``OK`` and exits 0 on success) or under ``pytest`` if it is installed.
+Needs PyYAML, which arrives as a MkDocs dependency rather than on its own, so
+``make redirect-test`` runs these against the virtualenv (or the Nix dev shell)
+rather than the system interpreter.  Nothing else is required: run directly
+with ``python3 scripts/python/test_redirects.py`` for ``OK`` and exit 0, or
+under ``pytest`` if it happens to be installed.
 
 The rule-matching tests are the ones that matter.  `check_redirects.py` proves
 every legacy URL is covered by *some* rule, but "covered" is only meaningful if
@@ -145,6 +148,52 @@ def test_read_inventory_skips_comments():
         assert rl.read_inventory(path) == ["/a/", "/b/"]
     finally:
         path.unlink()
+
+
+def test_load_rejects_prefix_with_to():
+    """`to:` emits one stub; a prefix rule names many URLs.
+
+    Verified before this guard existed: `/exams/** -> https://…` wrote a single
+    stub, at `/exams/`, and the build reported success -- leaving 47 of the
+    site's highest-traffic URLs 404ing.
+    """
+    try:
+        load_text("rules:\n  - from: /exams/**\n    to: https://example.com/exams/\n")
+    except rl.ConfigError as exc:
+        assert "prefix rule with `to:`" in str(exc)
+    else:
+        raise AssertionError("a prefix rule with `to:` should not load")
+
+
+def test_load_allows_prefix_with_non_emitting_forms():
+    """`keep`, `pending` and `none` emit nothing, so a prefix is fine."""
+    for form, value in (("keep", "true"), ("pending", "later"), ("none", "never")):
+        rs, _ = load_text(f"rules:\n  - from: /exams/**\n    {form}: {value}\n")
+        assert rs[0].prefix and rs[0].form == form
+
+
+def test_winner_is_unique_for_every_real_url():
+    """No URL in either inventory has two rules tied for most specific.
+
+    Coverage is only meaningful if the rule that wins is the one a reader would
+    predict.  The uniqueness argument is short -- exact outranks prefix, at most
+    one exact rule can equal a URL, and two equal-length prefixes matching the
+    same URL would be identical and rejected as duplicates -- but an argument is
+    not a check, so this runs it over every URL the two legacy sites served.
+    """
+    rules, inventories = rl.load()
+    urls = set()
+    for path in inventories.values():
+        urls |= set(rl.read_inventory(path))
+    assert urls, "no URLs read from the inventories"
+
+    for url in sorted(urls):
+        hits = [r for r in rules if r.matches(url)]
+        assert hits, f"{url} is matched by no rule"
+        best = max(h.specificity for h in hits)
+        tied = [h for h in hits if h.specificity == best]
+        assert len(tied) == 1, f"{url} has {len(tied)} rules tied at specificity {best}"
+        assert rl.match(url, rules) is tied[0]
 
 
 def test_real_config_loads_and_covers_its_inventories():

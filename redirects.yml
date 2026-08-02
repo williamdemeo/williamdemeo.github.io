@@ -8,15 +8,25 @@
 # ── How this file is used ──────────────────────────────────────────────────
 #
 # scripts/python/redirects_hook.py reads it at build time and emits a stub for
-# each `to:` rule.  Nothing else needs editing: turning a redirect on is
-# changing `pending:` to `to:` here, in one place.
+# each `to:` rule.  Nothing else needs editing: for an exact rule, turning a
+# redirect on is changing `pending:` to `to:` here, in one place.
+#
+# A *prefix* rule is not one line, and the loader rejects `to:` on one rather
+# than letting it look like it worked.  `to:` emits a single stub, at the
+# prefix itself, so `/exams/** -> ...` would redirect `/exams/` and leave the
+# other 47 URLs 404ing with the build reporting success.  Switching a prefix
+# rule on means either listing its URLs individually, or -- for a host move,
+# where each URL should map onto the matching path under the new host --
+# teaching the hook prefix rewriting first.
 #
 # scripts/python/check_redirects.py enforces the two properties that make the
 # file trustworthy:
 #
-#   1. every URL in the inventories matches exactly one rule -- no gaps, no
-#      overlaps.  A legacy URL nobody thought about is the failure this is
-#      designed to make impossible;
+#   1. every URL in the inventories is governed by a rule, and every rule
+#      governs at least one URL.  Several rules may *match* one URL -- an
+#      exact carve-out inside a prefix rule is exactly that -- but precedence
+#      picks a unique winner.  A legacy URL nobody thought about is the
+#      failure this is designed to make impossible;
 #   2. every `to:` target actually resolves in the built site.
 #
 # ── Why so much is still pending ───────────────────────────────────────────

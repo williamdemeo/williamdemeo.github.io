@@ -49,6 +49,15 @@ class Rule:
         Without this a section-wide rule would swallow the exceptions carved
         out of it, silently -- the URL would still be "covered", just by the
         wrong rule, which is the failure mode hardest to notice.
+
+        Several rules matching one URL is normal and intended: that is what a
+        carve-out *is*.  What matters is that the winner is never ambiguous,
+        and it cannot be.  An exact rule outranks every prefix rule; at most
+        one exact rule can equal a given URL; and two prefix rules of equal
+        length that both match a URL are both prefixes of it of the same
+        length, hence identical, which `load` rejects as duplicates.  So the
+        maximum is unique.  `test_redirects.py` checks this exhaustively
+        against the real inventories rather than leaving it as an argument.
         """
         return 10_000 if not self.prefix else len(self.frm)
 
@@ -76,6 +85,22 @@ def load(path: pathlib.Path = CONFIG) -> tuple[list[Rule], dict[str, pathlib.Pat
         prefix = frm.endswith("/**")
         if prefix:
             frm = frm[: -len("**")]
+        # A prefix rule names a set of URLs, but `to:` emits exactly one stub,
+        # at the prefix itself.  `/exams/** -> …` would redirect `/exams/` and
+        # leave the other 47 URLs 404ing, with the build reporting success.
+        # Rejecting here is the difference between a loud failure and a silent
+        # one, and this is the rule most likely to be switched on first.
+        if prefix and forms[0] == "to":
+            raise ConfigError(
+                f"{path}: rule {i} ({frm}**) is a prefix rule with `to:`, which "
+                f"would emit one stub for the whole prefix.\n"
+                f"  Either list the URLs individually, or -- if they should map "
+                f"onto a matching path\n"
+                f"  under the target, which is what a host move needs -- teach "
+                f"the hook prefix\n"
+                f"  rewriting first.  `keep:`, `pending:` and `none:` are fine "
+                f"on a prefix rule."
+            )
         if frm in seen:
             raise ConfigError(f"{path}: duplicate rule for {frm!r}")
         seen.add(frm)

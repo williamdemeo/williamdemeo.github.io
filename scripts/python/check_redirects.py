@@ -3,9 +3,13 @@
 
 Three independent checks, each of which can be run on its own:
 
-  coverage    every URL both legacy sites served matches exactly one rule in
-              redirects.yml.  A legacy URL nobody thought about is the failure
-              this exists to prevent, and it is invisible without this check.
+  coverage    every URL both legacy sites served is governed by a rule in
+              redirects.yml, and every rule governs at least one URL.  Several
+              rules may *match* one URL -- an exact carve-out inside a prefix
+              rule is the point -- but precedence picks a unique winner, and
+              that winner is what is reported.  A legacy URL nobody thought
+              about is the failure this exists to prevent, and it is invisible
+              without this check.
 
   --site DIR  every URL the map claims resolves actually resolves in the built
               site: `keep` URLs have a real page, and active redirects emitted
@@ -228,7 +232,7 @@ def main() -> int:
 
     pending = [r for r in rules if r.form == "pending"]
     n = sum(len(r.matched) for r in pending)
-    print(f"OK -- every legacy URL is accounted for exactly once.")
+    print("OK -- every legacy URL is governed by exactly one rule.")
     if pending:
         print(f"{n} url(s) across {len(pending)} rule(s) are still pending a target:")
         blockers = {}

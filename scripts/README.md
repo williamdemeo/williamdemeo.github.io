@@ -193,6 +193,15 @@ carries one of four dispositions and, where it matters, the reasoning:
 Exact matches beat prefix matches and longer prefixes beat shorter ones, so a
 specific rule can carve an exception out of a section-wide one.
 
+**A prefix rule cannot carry `to:`,** and the loader rejects it rather than
+letting it look like it worked.  `to:` emits exactly one stub, at the prefix
+itself, so `/exams/** → …` would redirect `/exams/` and leave the other 47
+URLs 404ing with the build reporting success.  Switching a prefix rule on
+means either listing its URLs individually, or — for a host move, where each
+URL should map onto the matching path under the new host — teaching the hook
+prefix rewriting first.  `keep:`, `pending:` and `none:` are fine on a prefix
+rule, since none of them emits anything.
+
 **`redirects_hook.py`** emits the stubs at build time, wired in through
 mkdocs.yml's `hooks:`.  Only `to:` rules produce output; an active rule whose
 target does not resolve aborts the build rather than shipping a stub that
@@ -217,9 +226,12 @@ $ make redirect-check          # builds the site, then checks against it
 OK -- every legacy URL is accounted for exactly once.
 ```
 
-- **coverage** — every URL in both inventories matches exactly one rule, and
-  every rule matches at least one URL.  A legacy URL nobody thought about is
-  the failure this exists to prevent, and it is invisible without the check.
+- **coverage** — every URL in both inventories is governed by a rule, and every
+  rule governs at least one URL.  Several rules may *match* one URL — a
+  carve-out inside a prefix rule is exactly that — but precedence picks a
+  unique winner, and the tests check that uniqueness exhaustively against the
+  real inventories.  A legacy URL nobody thought about is the failure this
+  exists to prevent, and it is invisible without the check.
 - **`--site DIR`** — what the map claims resolves does resolve: `keep` URLs
   have a real page, active redirects emitted a stub.  Claiming a URL is
   preserved and then not serving it is worse than an honest redirect.
