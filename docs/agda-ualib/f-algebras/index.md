@@ -7,7 +7,6 @@ date: '2019-02-09'
 <!-- zola-banner: falgebras -->
 
 Let $\mathrm{F}$ be an endofunctor on the category Set. We define an **F-algebra** to be a pair $(A, f)$ where $f \colon \mathbf{F} A \to A$.  
-$\newcommand\FGrp{\mathbf{F}_{\mathbf{Grp}}} \newcommand\inj{\mathrm{in}}$
 ## Example: Group
 A **group** is an $\FGrp$-algebra where $\FGrp A = 1 + A + A \times A$.  
 

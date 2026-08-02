@@ -11,7 +11,7 @@ In this lab we will learn how to create a linear transformation in Sage, and try
 numbers, as this gives us better insight into the theory we have been studying.[^1]
 
 Let $V = \mathbb{Q}^3$ and $W = \mathbb{Q}^4$, and consider the linear transformation $T: V \to W$ defined as follows: 
-$$T(\mathbf{x}) = T \begin{bmatrix}x_1\\\\x_2\\\\x_3\end{bmatrix} =\begin{bmatrix}-x_1 + 2x_3\\\\x_1 + 3x_2 + 7x_3\\\\x_1 + x_2 + x_3\\\\2x_1 + 3x_2 + 5x_3\end{bmatrix} \qquad\qquad (\mathrm{eq1})$$ To create this linear transformation in Sage, we will create a "symbolic" function. But this requires some symbolic variables, which we will name `x1`, `x2` and `x3`. 
+$$T(\mathbf{x}) = T \begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix} =\begin{bmatrix}-x_1 + 2x_3\\x_1 + 3x_2 + 7x_3\\x_1 + x_2 + x_3\\2x_1 + 3x_2 + 5x_3\end{bmatrix} \qquad\qquad (\mathrm{eq1})$$ To create this linear transformation in Sage, we will create a "symbolic" function. But this requires some symbolic variables, which we will name `x1`, `x2` and `x3`. 
 
 This is done as follows:
 
@@ -72,7 +72,7 @@ We will use the `linear_transformation()` constructor, which requires us to care
 V= QQ^3 W = QQ^4 T = linear_transformation(V, W, Tsymb)
 ```
 
-Now, we can try out our newly constructed linear transformation `T` by evaluating it on some input vector, say, ${{\mathbf{x= (3,-1,2)$,
+Now, we can try out our newly constructed linear transformation `T` by evaluating it on some input vector, say, $\mathbf{x} = (3,-1,2)$,
 
 ```python
 x = vector(QQ, [3, -1, 2]) T(x)
@@ -84,7 +84,7 @@ Enter these commands in a Sage worksheet cell and make sure you get the answer `
 
 ### Representations of Linear Transformations
 
-Recall the linear transformation from Homework Exercise 4.3.7, $$T(\mathbf{x} = T\begin{bmatrix} x_1\\\x_2\\\x_3 \end{bmatrix} =\begin{bmatrix}-x_1 + 2x_2 + x_3\\\x_2 + 3x_3\\\x_1 - x_2 + x_3\end{bmatrix}.$$
+Recall the linear transformation from Homework Exercise 4.3.7, $$T(\mathbf{x} = T\begin{bmatrix} x_1\\x_2\\x_3 \end{bmatrix} =\begin{bmatrix}-x_1 + 2x_2 + x_3\\x_2 + 3x_3\\x_1 - x_2 + x_3\end{bmatrix}.$$
 
 Use Sage to find the matrix representation of $T$ by following these steps.
 
@@ -104,7 +104,7 @@ Use Sage to find the matrix representation of $T$ by following these steps.
 
   (Remember, you can get help with the `matrix` function by entering `T.matrix?`.)
 
-+ **c.** In this part, we will use Sage to find the matrix representation $[T]_{\mathcal B}$ of $T$ with respect to the basis $$\mathcal{B} = \left\{ \begin{bmatrix} 1\\\ 0 \\\ -1 \end{bmatrix}, \begin{bmatrix} 0\\\2\\\3 \end{bmatrix}, \begin{bmatrix} 1\\\1\\\1 \end{bmatrix} \right\}.$$
++ **c.** In this part, we will use Sage to find the matrix representation $[T]_{\mathcal B}$ of $T$ with respect to the basis $$\mathcal{B} = \left\{ \begin{bmatrix} 1\\ 0 \\ -1 \end{bmatrix}, \begin{bmatrix} 0\\2\\3 \end{bmatrix}, \begin{bmatrix} 1\\1\\1 \end{bmatrix} \right\}.$$
 
   We will do this in two different ways and then check that both methods yield the same result.
 
@@ -158,7 +158,7 @@ We can interpret this in a few equivalent ways:
 
 These statements all say the same thing. Importantly, when these conditions hold, the basis $\mathcal B$ consists of eigenvectors of $A$, and $D$ has the eigenvalues of $A$ along the main diagonal.
 
-Example 5 on Page 273 of our textbook involves two matrices, $$A =\begin{bmatrix}-1&4&2 \\\ -1&3 &1 \\\ -1&2 &2 \end{bmatrix} \qquad \text{ and } \qquad B =\begin{bmatrix} 0&3&1 \\\ -1&3 &1 \\\ 0&1 &1 \end{bmatrix}.$$
+Example 5 on Page 273 of our textbook involves two matrices, $$A =\begin{bmatrix}-1&4&2 \\ -1&3 &1 \\ -1&2 &2 \end{bmatrix} \qquad \text{ and } \qquad B =\begin{bmatrix} 0&3&1 \\ -1&3 &1 \\ 0&1 &1 \end{bmatrix}.$$
 
 Use Sage to compute the characteristic polynomial and the eigenvalues/vectors of $A$.
 

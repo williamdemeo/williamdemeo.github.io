@@ -168,7 +168,7 @@ the membership question easily for both of these vectors as well. In fact, from 
 
 If possible, use Sage to write `y` as a linear combination of the vectors `v1` and `v2`. Do the same for `u`. That is, find the coefficients $c_1, c_2, d_1, d_2$, so that $\mathbf{y}= c_1\mathbf{v}_1 +c_2 \mathbf{v}_2$ and $\mathbf{u}= d_1\mathbf{v}_1 +d_2 \mathbf{v}_2$. Write these coefficients in the blanks spaces provided below. If it's not possible, explain why not.
 
-$$\mathbf{y}= \begin{bmatrix} 3 \\\\ -1 \\\\ 2 \\\\ 2\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2, \qquad \qquad \mathbf{u}= \begin{bmatrix} 3 \\\\ -1 \\\\ 2 \\\\ 5\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2.$$
+$$\mathbf{y}= \begin{bmatrix} 3 \\ -1 \\ 2 \\ 2\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2, \qquad \qquad \mathbf{u}= \begin{bmatrix} 3 \\ -1 \\ 2 \\ 5\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2.$$
 
 ---
 

@@ -88,7 +88,7 @@ make Sage do all the tedious work, but it will be up to us to interpret Sage's o
     \
     Instructor signature: (1/2 point)
 
-3. Next, we want to construct the augmented matrix $$[A|{{\mathbf{b}}}] = \left[\begin{array}{@{}*{3}{r}|rr@{}} 1 &0&2&3\\ 0&1&1&0\\-1&2&1&-2 \end{array}\right].$$ Using a search engine (e.g., Google) search for the phrase "sage augmented matrix." The first result will probably be to the Sage Reference Manual page matrices/sage/matrix/matrix1.html.
+3. Next, we want to construct the augmented matrix $$[A|{{\mathbf{b}}}] = \left[\begin{array}{rrr|r} 1 &0&2&3\\ 0&1&1&0\\-1&2&1&-2 \end{array}\right].$$ Using a search engine (e.g., Google) search for the phrase "sage augmented matrix." The first result will probably be to the Sage Reference Manual page matrices/sage/matrix/matrix1.html.
 
    Read a bit of this page and see if you can figure out how to use the `augment()` function (or *method*) of the matrix object `A`. You will use `b` as the input to the `augment()` method.
 

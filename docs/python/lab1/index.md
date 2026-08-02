@@ -71,7 +71,7 @@ When you have finished working or it is 2pm (whichever comes first):
 
 In this part we will use Sage to help solve the following exercise from the textbook:
 
-By solving a system of equations, write the vector $\mathbf b = \begin{bmatrix} 3 \\\\ 0 \\\\ -2 \end{bmatrix}$ as a linear combination of the vectors $$\mathbf v_1 = \begin{bmatrix} 1 \\\\ 0 \\\\ -1 \end{bmatrix}, \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\\\ 1 \\\\ 2 \end{bmatrix}, \quad \text{ and } \quad \mathbf v_3 = \begin{bmatrix} 2 \\\\ 1 \\\\ 1 \end{bmatrix}.$$
+By solving a system of equations, write the vector $\mathbf b = \begin{bmatrix} 3 \\ 0 \\ -2 \end{bmatrix}$ as a linear combination of the vectors $$\mathbf v_1 = \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}, \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 1 \\ 2 \end{bmatrix}, \quad \text{ and } \quad \mathbf v_3 = \begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix}.$$
 
 To write the vector $\mathbf{b}$ as a linear combination of the vectors $\mathbf{v}_1$, $\mathbf{v}_2$, and $\mathbf{v}_3$, we must find coefficients $x_1, x_2, x_3$ such that
 $\mathbf{b}= x_1 \mathbf{v}_1 +  x_2 \mathbf{v}_2 + x_3 \mathbf{v}_3$. As we discussed in lecture, this is equivalent to finding a vector $\mathbf{x}= (x_1, x_2, x_3)$ such that
@@ -80,7 +80,7 @@ $A\mathbf{x}= \mathbf{b}$, where $A$ is the matrix whose columns are the vectors
 In Sage, we will construct the matrix $A$ and then augment this matrix with the vector $\mathbf{b}$. Finally we will solve for $\mathbf{x}$ by putting the augmented matrix in echelon form. We'll
 make Sage do all the tedious work, but it will be up to us to interpret Sage's output and write down a correct solution.
 
-1. First, we need to learn how to enter the matrix $$A = \begin{bmatrix} 1 &0&2\\\\ 0&1&1\\\\-1&2&1\end{bmatrix}$$ in Sage. In your Lab1 Sage worksheet, click the **Help** link at the top right. A help window should appear (possibly in a pop-up window). On the Help page, navigate through the following links:
+1. First, we need to learn how to enter the matrix $$A = \begin{bmatrix} 1 &0&2\\ 0&1&1\\-1&2&1\end{bmatrix}$$ in Sage. In your Lab1 Sage worksheet, click the **Help** link at the top right. A help window should appear (possibly in a pop-up window). On the Help page, navigate through the following links:
 
    **Reference Manual** $\rightarrow$ **modules** $\rightarrow$ **m** $\rightarrow$ **sage.matrix.constructor**
 
@@ -95,7 +95,7 @@ make Sage do all the tedious work, but it will be up to us to interpret Sage's o
     \
     Instructor signature: (1/2 point)
 
-3. Next, we want to construct the augmented matrix $$[A|\mathbf{b}] = \left[\begin{array}{rrr|r} 1&0&2&3\\\\ 0&1&1&0\\\\-1&2&1&-2\end{array}\right].$$ Using a search engine (e.g., Google) search for the phrase "sage augmented matrix." The first result will probably be to the Sage Reference Manual page matrices/sage/matrix/matrix1.html.
+3. Next, we want to construct the augmented matrix $$[A|\mathbf{b}] = \left[\begin{array}{rrr|r} 1&0&2&3\\ 0&1&1&0\\-1&2&1&-2\end{array}\right].$$ Using a search engine (e.g., Google) search for the phrase "sage augmented matrix." The first result will probably be to the Sage Reference Manual page matrices/sage/matrix/matrix1.html.
 
    Read a bit of this page and see if you can figure out how to use the `augment()` function (or "method") of the matrix object `A`. You will use `b` as the input to the `augment()` method.
 

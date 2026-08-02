@@ -89,7 +89,7 @@ In this first part of this lab assignment, we will simply re-solve the above pro
 
    You should now see two pivots (both equal to 1). Let the free variable $x_3 = s$ and write the vector $\mathbf{b}$ as a linear combination of the vectors $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$ involving $s$.
 
-   $$\mathbf{b}= \begin{bmatrix} 1 \\\\ -1 \\\\ 1 \\\\ -1\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2+ \underline{\phantom{XXX}} \mathbf{v}_3.$$ 
+   $$\mathbf{b}= \begin{bmatrix} 1 \\ -1 \\ 1 \\ -1\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2+ \underline{\phantom{XXX}} \mathbf{v}_3.$$ 
    
    If you want to stop here, ask the instructor to check your work and sign below then save and quit. Otherwise, move on to Part 2\
    \

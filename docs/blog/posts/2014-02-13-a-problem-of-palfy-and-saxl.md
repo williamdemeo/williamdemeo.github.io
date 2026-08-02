@@ -51,7 +51,6 @@ $\alpha \circ \beta = \beta \circ \alpha$ then $\alpha$ and $\beta$ are said to
 *permute*.
 
 **Problem.**
-$\def\bA{\bf A} \def\bB{\bf B}$
 Let $\bA$ be a finite algebra with $\operatorname{Con} \bA$ isomorphic to
 $M_n$, for some $n\geq 4$.  If three nontrivial congruences of $\bA$ pairwise
 permute, does it follow that every pair of congruences of $\bA$ permute?
