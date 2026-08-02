@@ -157,9 +157,9 @@ arbitrary probabilities that sum to 1.)
 
 Suppose you have a bag with $n$ coins, $C_1, C_2, \dots, C_n$,  and coin
 $C_i$ has probability $p_i$ of coming up heads when flipped.  Assume 
-$p_1 + p_2 + \cdots p_n = 1$.  Suppose you draw a coin from the bag at random
+$p_1 + p_2 + \cdots + p_n = 1$.  Suppose you draw a coin from the bag at random
 and flip it and it comes up heads.  If you flip
-the same coin it again, what is the probability it comes up heads?
+the same coin again, what is the probability it comes up heads?
 
 Denote by $H_i$ the event that heads turns up on the $i$-th flip, and by a
 slight abuse of notation, let $C_i$ denote the event that we are flipping coin $C_i$.

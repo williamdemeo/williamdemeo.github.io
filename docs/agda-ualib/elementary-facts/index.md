@@ -59,7 +59,7 @@ Fix $b\colon B$.  Since $g$ is surjective, the set $g^{-1}\{b\} \subseteq A$ is 
 
 Now it's easy to see that $k g = h$ by construction.  Indeed, for each $a \in A$, we have $a \in g^{-1}\{g(a)\}$, so $k(g(a)) = h(a)$ by definition.
 
-To see that $k$ is a homomorphism, let there be $m$ operation symbols and let $0\leq i< m$ be arbitrary. Fix $b \colon \underline{k_i} \to B$. Since $g$ is surjective, for each $i \colon \underline{k_i}$, the subset $g^{-1}\{b(i)\}\subseteq A$ is nonempty and is mapped by $h$ to a single point of $C$ (since $\ker g \subseteq \ker h$. Label this point $c_i$ and define $c \colon \underline{k_i} \to C$ by $c(i) = c_i$.
+To see that $k$ is a homomorphism, let there be $m$ operation symbols and let $0\leq i< m$ be arbitrary. Fix $b \colon \underline{k_i} \to B$. Since $g$ is surjective, for each $i \colon \underline{k_i}$, the subset $g^{-1}\{b(i)\}\subseteq A$ is nonempty and is mapped by $h$ to a single point of $C$ (since $\ker g \subseteq \ker h$). Label this point $c_i$ and define $c \colon \underline{k_i} \to C$ by $c(i) = c_i$.
 
 We want to show $(f^C \circ F k) (b) = (k \circ f^B)(b).$  The left hand side is $f^C c$, which is equal to $(h \circ f^A)(a)$ for some $a\colon \underline{k_i} \to A$, since $h$ is a homomorphism.  Therefore, $$(f^C \circ F k) (b) = (h \circ f^A) (a) = (k \circ g \circ f^A)(a) = (k \circ f^B \circ F g)(a) = (k \circ f^B)(b).$$
 

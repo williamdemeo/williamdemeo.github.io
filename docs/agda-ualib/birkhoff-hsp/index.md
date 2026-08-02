@@ -65,7 +65,7 @@ Let $F$ be an endofunctor on Set and let $(A, f^A)$ and $(B, f^B)$ be $F$-algebr
 
    **Clones**
 
-3. Let $A$ be a set and $S = (F, \rho)$ a signature and suppose each $f\in F$ is a $(\rho f)$-ary operation on $A$. Define $$\begin{aligned} F_0 &= \operatorname{Proj}}}(A);\\ F_{n+1} &= F_n \cup \{ f g \mid f \in F, g \colon \rho f \to (F_n \cap (\rho g \to A)) \}, \text{ for } n < \omega. \end{aligned}$$ Then $\operatorname{Clo}}}^A(F) =  \bigcup_n F_n$.
+3. Let $A$ be a set and $S = (F, \rho)$ a signature and suppose each $f\in F$ is a $(\rho f)$-ary operation on $A$. Define $$\begin{aligned} F_0 &= \operatorname{Proj}(A);\\ F_{n+1} &= F_n \cup \{ f g \mid f \in F, g \colon \rho f \to (F_n \cap (\rho g \to A)) \}, \text{ for } n < \omega. \end{aligned}$$ Then $\operatorname{Clo}^A(F) =  \bigcup_n F_n$.
 
    **Terms and Free Algebras** <!-- \[thm:4.21\]  -->
 
@@ -75,9 +75,9 @@ Let $F$ be an endofunctor on Set and let $(A, f^A)$ and $(B, f^B)$ be $F$-algebr
 
     b. For every algebra $(A, f^A)$ of type $\rho$ and every function $h\colon X \to A$ there is a unique homomorphism $g\colon \mathbf{T}_\rho(X) \to (A, f^A)$ such that ${{  \left.\kern-\nulldelimiterspace   g   \vphantom{\big|}   \right|_{X}   }} = h$.
 
-    *Proof.** The definition of $\mathbf{T}_\rho(X)$ exactly parallels the construction in Theorem 1.14 (Bergman 2012). That accounts for (1). For (2), define $g(t)$ by induction on $|t|$. Suppose $|t| = 0$. Then $t \in X \cup {\mathcal{F}}}_0$. If $t \in X$ then define $g(t) = h(t)$. For $t \in {\mathcal{F}}}_0$, $g(t) = t^{(A, f^A)}$. Note that since $(A, f^A)$ is an algebra of type $\rho$ and $t$ is a nullary operation symbol, $t^{(A, f^A)}$ is defined.
+    *Proof.** The definition of $\mathbf{T}_\rho(X)$ exactly parallels the construction in Theorem 1.14 (Bergman 2012). That accounts for (1). For (2), define $g(t)$ by induction on $|t|$. Suppose $|t| = 0$. Then $t \in X \cup {\mathcal{F}}_0$. If $t \in X$ then define $g(t) = h(t)$. For $t \in {\mathcal{F}}_0$, $g(t) = t^{(A, f^A)}$. Note that since $(A, f^A)$ is an algebra of type $\rho$ and $t$ is a nullary operation symbol, $t^{(A, f^A)}$ is defined.
 
-    For the inductive step, let $|t| = n + 1$. Then $t = f(s_1, \dots, s_k)$ for some $f \in {\mathcal{F}}}_k$ and $s_1, \dots, s_k$ each of height at most $n$. We define $g(t) = f^{(A, f^A)}(g(s_1), \dots, g(s_k))$.
+    For the inductive step, let $|t| = n + 1$. Then $t = f(s_1, \dots, s_k)$ for some $f \in {\mathcal{F}}_k$ and $s_1, \dots, s_k$ each of height at most $n$. We define $g(t) = f^{(A, f^A)}(g(s_1), \dots, g(s_k))$.
 
     By its very definition, $g$ is a homomorphism. Finally, the uniqueness of $g$ follows from Exercise 1.16.6 in Bergman (2012).
 
@@ -85,9 +85,9 @@ Let $F$ be an endofunctor on Set and let $(A, f^A)$ and $(B, f^B)$ be $F$-algebr
 
     a. For every $n$-ary term $t$ and homomorphism $g\colon (A, f^A) \to (B, f^B)$, $g(t^{(A, f^A)}(a_1,\dots, a_n)) = t^{(B, f^B)}(g(a_1),\dots, g(a_n))$.
 
-    b. For every term $t \in T_\rho(X_\omega)$ and every $\theta \in \operatorname{Con}((A, f^A))}}$, $(A, f^A)\equiv_\theta (B, f^B)\implies t^{(A, f^A)}((A, f^A)) \equiv_\theta t^{(A, f^A)}((B, f^B))$.
+    b. For every term $t \in T_\rho(X_\omega)$ and every $\theta \in \operatorname{Con}((A, f^A))$, $(A, f^A)\equiv_\theta (B, f^B)\implies t^{(A, f^A)}((A, f^A)) \equiv_\theta t^{(A, f^A)}((B, f^B))$.
 
-    c. For every subset $Y$ of $A$, $$\operatorname{Sg}^{(A, f^A)}(Y)}} = \{ t^{(A, f^A)}(a_1,\dots, a_n) : t \in T(X_n), a_i \in Y, i \leq n < \omega\}.$$
+    c. For every subset $Y$ of $A$, $$\operatorname{Sg}^{(A, f^A)}(Y) = \{ t^{(A, f^A)}(a_1,\dots, a_n) : t \in T(X_n), a_i \in Y, i \leq n < \omega\}.$$
 
     **Proof.** The first statement is an easy induction on $|t|$. The second statement follows from the first by taking $(B, f^B) = (A, f^A)/\theta$ and $g$ the canonical homomorphism. For the third statement, again by induction on the height of $t$, every subalgebra must be closed under the action of $t^{(A, f^A)}$. Thus the right-hand side is contained in the left. On the other hand, the right-hand side is clearly a subalgebra containing the elements of $Y$ (take $t = x_1$) from which the reverse inclusion follows.
 
@@ -103,7 +103,7 @@ $\operatorname{Mod}(\Sigma) = \{ (A, f^A) : (A, f^A) \models \Sigma \}$. Classes
 
     (exercise)
 
-2. $\mathcal{K} \models p \approx q$ if and only if for every $(A, f^A) \in \mathcal{K}$ and every $h\in \operatorname{Hom}(\mathbf{T}(X_\omega),(A, f^A))}}$, we have $h(p)  =  h(q)$.  <!-- \[lem:4.37\]  -->
+2. $\mathcal{K} \models p \approx q$ if and only if for every $(A, f^A) \in \mathcal{K}$ and every $h\in \operatorname{Hom}(\mathbf{T}(X_\omega),(A, f^A))$, we have $h(p)  =  h(q)$.  <!-- \[lem:4.37\]  -->
 
     **Proof.** First assume that $\mathcal{K} \models p\approx  q$. Pick $(A, f^A)$ and $h$ as in the theorem. Then $(A, f^A) \models p\approx q \implies p^{(A, f^A)} = q^{(A, f^A)} \implies p^{(A, f^A)}(h(x_1), \dots, h(x_n)) = q^{(A, f^A)}(h(x_1), \dots, h(x_n))$. Since $h$ is a homomorphism, we get $h(p^{(A, f^A)}(x_1, \dots, x_n)) = h(q^{(A, f^A)}(x_1, \dots, x_n))$, i.e., $h(p) = h(q)$.
 
@@ -123,7 +123,7 @@ $\operatorname{Mod}(\Sigma) = \{ (A, f^A) : (A, f^A) \models \Sigma \}$. Classes
 
     From (c), $p^{\mathbf{F}}(\bar{x}_1,\dots, \bar{x}_n) = q^{\mathbf{F}}(\bar{x}_1,\dots, \bar{x}_n)$ where $\bar{x}_i = x_i/\lambda$. From the definition of $\mathbf{F}$, $p^{\mathbf{T}}(x_1,\dots, x_n) \equiv_\lambda q^{\mathbf{T}}(x_1,\dots, x_n)$ from which (b) follows since $p = p^{\mathbf{T}}(x_1,\dots, x_n)$ and $q = q^{\mathbf{T}}(x_1,\dots, x_n)$.
 
-    Finally assume (b). We wish to apply Lemma 4.37. Let $(A, f^A) \in \mathcal{K}$ and $h \in \operatorname{Hom}(\mathbf{T},(A, f^A))}}$. Then $\mathbf{T}/\ker h \in \mathbf{S}((A, f^A)) \subseteq \mathbf{S}(\mathcal{K})$ so $\ker h \supseteq \lambda$. Then (b) implies that $h(p) = h(q)$ hence (a) holds, completing the proof.
+    Finally assume (b). We wish to apply Lemma 4.37. Let $(A, f^A) \in \mathcal{K}$ and $h \in \operatorname{Hom}(\mathbf{T},(A, f^A))$. Then $\mathbf{T}/\ker h \in \mathbf{S}((A, f^A)) \subseteq \mathbf{S}(\mathcal{K})$ so $\ker h \supseteq \lambda$. Then (b) implies that $h(p) = h(q)$ hence (a) holds, completing the proof.
 
     **Remark.** The last result tells us that we can determine whether an identity is true in a variety by consulting a particular algebra, namely $\mathbf{F}(X_\omega)$. Sometimes it is convenient to work with algebras free on other generating sets besides $X_\omega$. The following corollary takes care of that for us.
 
@@ -139,7 +139,7 @@ $\operatorname{Mod}(\Sigma) = \{ (A, f^A) : (A, f^A) \models \Sigma \}$. Classes
 
 Let $(A, f^A) \in \overline{\mathcal{W}}$ and $Y$ a set of cardinality $\max(|A|, |\omega|)$. Choose a surjection $h_0\colon Y \to A$. By Theorem \[thm:4.21\], $h_0$ extends to a (surjective) homomorphism $h \colon \mathbf{T}(Y) \to (A, f^A)$. Furthermore, since $\mathbf{F}_{\mathcal{W}}(Y) = \mathbf{T}(Y)/\Theta_{\mathcal{W}}$, there is a surjective homomorphism $g \colon \mathbf{T}(Y) \to \mathbf{F}_{\mathcal{W}}$.
 
-We claim that $\ker g \subseteq \ker h$. If the claim is true then by Lemma \[ex:1.26.8\] there is a map $f\colon \mathbf{F}_{\mathcal{W}}(Y) \to (A, f^A)$ such that $f {\circ}}g = h$. Since $h$ is surjective, so is $f$. Hence
+We claim that $\ker g \subseteq \ker h$. If the claim is true then by Lemma \[ex:1.26.8\] there is a map $f\colon \mathbf{F}_{\mathcal{W}}(Y) \to (A, f^A)$ such that $f {\circ}g = h$. Since $h$ is surjective, so is $f$. Hence
 $(A, f^A) \in \mathbf{H}(\mathbf{F}_{\mathcal{W}}(Y)) \subseteq \mathcal{W}$ completing the proof.
 
 Let $u,v \in T(Y)$ and assume that $g(u) = g(v)$. Since $\mathbf{T}(Y)$ is generated by $Y$, by Theorem \[thm:4.21\], there is an integer $n$, terms $p, q \in T(X_n)$, and $y_1$, $\dots$, $y_n \in Y$ such that $u = p^{\mathbf{T}(Y)}(y_1,\dots, y_n)$ and $v = q^{\mathbf{T}(Y)}(y_1,\dots, y_n)$, by Theorem \[thm:4.32\]. Applying the homomorphism $g$, $$p^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n) = g(u) = g(v) = q^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n).$$ Then by Result 4 above (Corollary 4.39, Bergman, 2012), $\mathcal{W} \models p \approx q$, hence $(p \approx q) \in \Sigma$. Since $(A, f^A) \in \overline{\mathcal{W}} = \operatorname{Mod}(\Sigma)$, we get $(A, f^A) \models p \approx q$. Therefore, $$h(u) = p^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = q^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = h(v),$$ as desired.
