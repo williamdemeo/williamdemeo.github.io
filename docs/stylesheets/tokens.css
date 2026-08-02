@@ -9,10 +9,17 @@
  * documentation site, so the two sites could be made to match if that turns
  * out to be worth more than each having its own voice.
  *
- * Switching is two lines: move `:root` from the Meridian block to the
- * Constellation one, and change the two `[data-md-color-scheme="…"]` selectors
- * that carry Meridian's colours to name the other system.  /design/options/
- * renders both, so the choice can be made by looking.
+ * Switching the whole site is three edits, all in this file, and they are the
+ * three bare selectors below -- the ones with no `[data-system]` on them.
+ * Move each from the Meridian block to the Constellation one:
+ *
+ *     :root,                              (before the font block)
+ *     [data-md-color-scheme="default"],   (before the light colour block)
+ *     [data-md-color-scheme="slate"],     (before the dark colour block)
+ *
+ * Nothing else changes; the `[data-system="…"]` selectors stay where they are,
+ * because /design/options/ uses them to render both systems on one page.  That
+ * page is also how the choice is meant to be made -- by looking.
  *
  * Units: Material sets `html { font-size: 125% }`, so 1rem is 20px, and
  * `.md-typeset` sizes in em relative to its own base.  The scale below follows

@@ -64,7 +64,12 @@ palette and Space Grotesk display face of the agda-algebras documentation site,
 which is also MkDocs Material. The two sites will link to each other
 constantly, so matching them is a defensible thing to want and the choice is
 worth leaving open rather than closed. `/design/options/` renders both, and
-switching is two lines in `tokens.css`.
+switching is three adjacent edits in `tokens.css`: the three bare selectors
+that carry the active system move from one block to the other. Both directions
+were exercised and verified in a browser rather than reasoned about — the
+first attempt produced `[data-md-color-scheme="default"]:root`, which matches
+nothing, and the page came back with an empty `--c-accent` and a transparent
+background.
 
 Three of agda-algebras' published values do not clear AA as text and are
 adjusted rather than adopted broken, which is worth reporting upstream:

@@ -29,8 +29,11 @@ palette and display face of the
 which is also MkDocs Material. The two sites will link to each other
 constantly, so matching them is a defensible thing to want, and the choice is
 worth keeping open. [/design/options/](options/index.html) renders both, dark
-and light. Switching the site is two lines in `tokens.css`, described in the
-comment at the top of that file.
+and light. Switching the site is three edits, all in `tokens.css` and all
+adjacent — move the three bare selectors (`:root,`,
+`[data-md-color-scheme="default"],`, `[data-md-color-scheme="slate"],`) from
+the Meridian block to the Constellation one. The comment at the top of that
+file spells it out.
 
 | | Display | Body | Accent (dark / light) |
 | --- | --- | --- | --- |
