@@ -252,6 +252,44 @@ line, one file.
 
 ---
 
+### `gen_publications`: rendering the bibliography
+
+`bibliography.json` is the only authoritative publication list (ADR-006).
+`make publications` renders it into two committed snippets, and pages include
+them rather than holding a copy:
+
+| snippet | entries | included by |
+| --- | --- | --- |
+| `docs/_snippets/publications.md` | all of them | the publications page (#30, not built yet) |
+| `docs/_snippets/publications-cv.md` | those marked `_cv` | `docs/cv.md`, *Selected publications* |
+
+Each entry renders as title, authors, imprint, and a row putting **the version
+of record and the preprint side by side**. The CV's is the same, a little
+tighter: the year rather than the full date, and no DOI.
+
+`make publications-check` validates the file *and* reports whether either
+snippet has drifted from it — a hand-edit to a generated file survives every
+other check in this repository. Exit codes follow `diff(1)`: 0 current, 1 stale
+or invalid, 2 could not run.
+
+Two rules keep the rendering honest, and both are tested:
+
+- **Say only what the record supports.** An entry with no issue number says
+  nothing about issues; a date shows to the precision the publisher gave. The
+  thesis keeps a bare year, because its arXiv posting date is not its
+  completion date.
+- **Label a link by what vouches for it.** A DOI is a publisher asserting "this
+  is the record of that work", so the entry's type may name it — *Journal*,
+  *Proceedings*. A bare URL is not: the ISMA 2004 link is the author's own copy
+  of the PDF, so it renders as *PDF*, not as *Proceedings*.
+
+One arXiv identifier may sit on two entries when one declares `_version-of` the
+other — a preprint and the paper it became are two documents. That is a
+*relaxation* of a check, which is easier to get wrong than a check, so
+`test_gen_publications.py` covers both directions.
+
+---
+
 ### `verify_bibliography`: checking the publication list against the publishers
 
 `bibliography.json` was built by reconciling three hand-maintained lists
@@ -314,7 +352,7 @@ caught by:
   error vocabulary, which is exactly why the body has to be read.
 
 It needs the network, so it is not a build gate: CI has none by design
-(ADR-004). `make publications-test` runs the unit tests, which use fixtures and
+(ADR-004). `make publications-test` runs both tools' unit tests, which use fixtures and
 need nothing, and `nix flake check` runs them as `checks.bibliography-tooling`.
 The tests that matter are the ones proving the two behaviours above, since
 "it fails loudly" is exactly the kind of claim that should not be taken on

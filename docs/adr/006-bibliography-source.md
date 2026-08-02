@@ -35,9 +35,29 @@ both; the research page carried the pre-2005 signal-processing papers alone.
 ## Decision
 
 **`bibliography.json` at the repository root is the only authoritative list**,
-in CSL-JSON. `scripts/python/gen_publications.py` renders it to
-`docs/_snippets/publications.md`, which the publications page (#30) and the CV
-(#41) include. Neither holds a second copy.
+in CSL-JSON. `scripts/python/gen_publications.py` renders it to two snippets
+under `docs/_snippets/`, and pages include them rather than holding a copy:
+
+| snippet | entries | included by |
+| --- | --- | --- |
+| `publications.md` | all 16 | the publications page — still #30 |
+| `publications-cv.md` | the 6 marked `_cv` | `docs/cv.md`, *Selected publications* |
+
+The CV list was the last hand-maintained copy of this data, and it had drifted:
+it dropped "finitely generated" from the 2020 IJAC title, credited the Cardano
+paper to "Knispel et al.", and had no DOI for the LICS paper. It is now
+generated, which is the "pull publications from the M5 data" task of #41; the
+PDF toolchain remains #41's.
+
+The CV's rendering is the same three lines a little tighter — the year rather
+than the full date, and no DOI, since the link beside it goes there and a CV is
+read down a page rather than cited from. `_cv` is a curation, not a ranking: the
+six marked are the six the hand-written CV already listed.
+
+Both snippets are committed, so `make publications-check` asks whether they
+still match the bibliography as well as whether the bibliography is sound. That
+check previously only claimed to keep them honest; a hand-edit to a generated
+file survives every other gate in this repository.
 
 ### Why CSL-JSON over BibTeX
 
@@ -196,11 +216,12 @@ Two rules keep the rendering honest:
   tooling's *tests* under `nix flake check`, which is the part that can be
   checked hermetically. Run `make publications-verify` when the bibliography
   changes.
-- The three legacy copies stay until #30 and #41 render from the generated
-  Markdown; the CV's "Selected publications" section becomes an include.
-  `import/legacy-bib-pubs.json` preserves the Zotero export as provenance.
-- Adding a publication is one edit to `bibliography.json` plus
-  `make publications`.
+- **The CV's "Selected publications" section is now an include**, so the last
+  hand-maintained copy of this data is gone. The Zola research page stays until
+  #30's publications page replaces it; `import/legacy-bib-pubs.json` preserves
+  the Zotero export as provenance.
+- Adding a publication, or moving one on or off the CV, is one edit to
+  `bibliography.json` plus `make publications`.
 
 ## Alternatives considered
 

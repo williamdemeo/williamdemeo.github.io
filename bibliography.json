@@ -18,6 +18,11 @@
     "rendered side by side.  An entry that is itself a preprint of another names",
     "it with `_version-of`, which is why one arXiv id may appear on two entries.",
     "",
+    "`_cv` marks the entries the CV's 'Selected publications' section carries.",
+    "It is a curation, not a ranking: the six here are the six the CV listed",
+    "before it was generated from this file.  Adding or removing one is a",
+    "one-line edit followed by `make publications`.",
+    "",
     "`_needs_review` marks a field the three sources disagree on and that could",
     "not be settled from them.  Two remain, and both are decisions for a person",
     "rather than facts to look up.  Each note records what the publishers say.",
@@ -33,6 +38,7 @@
   "items": [
     {
       "id": "demeo2024cardano",
+      "_cv": true,
       "type": "paper-conference",
       "title": "Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda",
       "author": [
@@ -57,6 +63,7 @@
     },
     {
       "id": "demeo2022birkhoff",
+      "_cv": true,
       "type": "paper-conference",
       "title": "A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory",
       "author": [
@@ -93,6 +100,7 @@
     },
     {
       "id": "bergman2022universal",
+      "_cv": true,
       "type": "article-journal",
       "title": "Universal algebraic methods for constraint satisfaction problems",
       "author": [
@@ -113,6 +121,7 @@
     },
     {
       "id": "barto2021csp",
+      "_cv": true,
       "type": "paper-conference",
       "title": "Constraint satisfaction problems over finite structures",
       "author": [
@@ -133,6 +142,7 @@
     },
     {
       "id": "demeo2020bounded",
+      "_cv": true,
       "type": "article-journal",
       "title": "Bounded homomorphisms and finitely generated fiber products of lattices",
       "author": [
@@ -154,6 +164,7 @@
     },
     {
       "id": "demeo2019difference",
+      "_cv": true,
       "type": "article-journal",
       "title": "Polynomial-time tests for difference terms in idempotent varieties",
       "author": [

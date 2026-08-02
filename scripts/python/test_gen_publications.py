@@ -171,6 +171,48 @@ def test_an_entry_with_nothing_to_link_gets_no_links():
     assert gp.links_md({"type": "book", "title": "x"}, {}) == []
 
 
+# ── the CV rendering ─────────────────────────────────────────────────────────
+
+
+def test_the_cv_carries_only_the_entries_marked_for_it():
+    items = [dict(PAPER, _cv=True), PREPRINT]
+    assert [i["id"] for i in gp.selected(items, "cv")] == ["demeo2022birkhoff"]
+    assert len(gp.selected(items, "full")) == 2
+
+
+def test_both_renderings_are_newest_first():
+    older = dict(PAPER, id="older", issued={"date-parts": [[2019]]}, _cv=True)
+    order = [i["id"] for i in gp.selected([older, dict(PAPER, _cv=True)], "cv")]
+    assert order == ["demeo2022birkhoff", "older"], order
+
+
+def test_the_cv_abridges_the_date_and_drops_the_doi():
+    full = gp.imprint_md(PAPER)
+    cv = gp.imprint_md(PAPER, compact=True)
+    assert "August 4, 2022" in full and "doi:" in full
+    assert "2022" in cv and "August" not in cv and "doi:" not in cv
+    # Everything else a citation needs survives the abridgement.
+    for kept in ("*TYPES 2021*", "LIPIcs Volume 239", "pages 4:1-4:21"):
+        assert kept in cv, (kept, cv)
+
+
+def test_the_cv_keeps_both_links():
+    """The whole point of the CV list is the pair, same as the full one."""
+    body = gp.render([dict(PAPER, _cv=True)], "cv")
+    assert "[Proceedings](" in body and "[arXiv preprint](" in body, body
+
+
+def test_the_cv_is_numbered_and_the_full_list_is_not():
+    assert gp.render([dict(PAPER, _cv=True)], "cv").splitlines()[3].startswith("1. ")
+    assert gp.render([PAPER], "full").splitlines()[3].startswith("- ")
+
+
+def test_a_cv_entry_may_borrow_a_link_from_an_entry_the_cv_omits():
+    """`_version-of` resolves against the whole file, not the rendered subset."""
+    body = gp.render([PAPER, dict(PREPRINT, _cv=True)], "cv")
+    assert "[Published version](https://drops.dagstuhl.de/" in body, body
+
+
 def main() -> int:
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     failed = 0

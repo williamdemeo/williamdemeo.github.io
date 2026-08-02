@@ -33,7 +33,15 @@ import sys
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE = REPO_ROOT / "bibliography.json"
-OUTPUT = REPO_ROOT / "docs" / "_snippets" / "publications.md"
+
+#: Two renderings of one list.  The full one is every entry with everything the
+#: publisher records; the CV one is the entries marked `_cv`, a little tighter.
+#: Both are snippets rather than pages, so a page includes what it wants and no
+#: page holds a second copy of the data.
+OUTPUTS = {
+    "full": REPO_ROOT / "docs" / "_snippets" / "publications.md",
+    "cv": REPO_ROOT / "docs" / "_snippets" / "publications-cv.md",
+}
 
 #: `2101.10166`, or the pre-2007 form `math/0512345`.
 ARXIV_ID = re.compile(r"^(\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Z]{2})?/\d{7})$")
@@ -217,12 +225,16 @@ def links_md(item: dict, by_id: dict[str, dict]) -> list[str]:
     return out
 
 
-def imprint_md(item: dict) -> str:
+def imprint_md(item: dict, *, compact: bool = False) -> str:
     """Venue, date, volume, issue and pages -- everything the record supports.
 
     Deliberately in the order a citation is read aloud, and deliberately
     omitting whatever the publisher did not give: an entry with no issue number
     should say nothing about issues rather than guess one.
+
+    `compact` is the CV's rendering: the year instead of the full date, and no
+    DOI, since the link beside it already goes there and a CV is read down a
+    page rather than cited from.
     """
     bits = []
     venue = item.get("container-title")
@@ -250,7 +262,7 @@ def imprint_md(item: dict) -> str:
     if item.get("issue"):
         bits.append(f"Issue {item['issue']}")
 
-    date = issued_text(item)
+    date = str(year(item) or "") if compact else issued_text(item)
     if date:
         bits.append(date)
     if item.get("page"):
@@ -261,36 +273,49 @@ def imprint_md(item: dict) -> str:
         line += "."
     # The DOI belongs in the citation, not in the row of links: it is what a
     # reader copies to cite the work, and it is what makes the entry checkable.
-    if item.get("DOI"):
+    if item.get("DOI") and not compact:
         line += f"  [doi:{item['DOI']}](https://doi.org/{item['DOI']})"
     return line
 
 
-def render(items: list[dict]) -> str:
+def selected(items: list[dict], style: str) -> list[dict]:
+    """The entries a rendering covers, newest first."""
+    chosen = [i for i in items if i.get("_cv")] if style == "cv" else items
+    return sorted(chosen, key=lambda i: (-(year(i) or 0), i.get("id", "")))
+
+
+def render(items: list[dict], style: str = "full") -> str:
+    compact = style == "cv"
     lines = [
         "<!-- Generated from bibliography.json by scripts/python/gen_publications.py.",
         "     Do not edit: `make publications` regenerates it. See ADR-006. -->",
         "",
     ]
+    # Resolving `_version-of` needs every entry, not just the rendered ones: the
+    # CV may carry a proceedings paper whose preprint it does not list.
     by_id = {it["id"]: it for it in items if it.get("id")}
-    for it in sorted(items, key=lambda i: (-(year(i) or 0), i.get("id", ""))):
+    # The CV's list is numbered, as a CV's is; the publications snippet is a
+    # bulleted list, because a bare number implies a ranking it does not have.
+    bullet, indent = ("1.", "   ") if compact else ("-", "  ")
+
+    for it in selected(items, style):
         title = f"**{it['title']}**"
         if it.get("_role") == "editor":
             title += " *(editor)*"
-        lines.append(f"- {title}  ")
+        lines.append(f"{bullet} {title}  ")
 
         byline = authors_md(it).rstrip(".")
         if it.get("_note"):
             byline += f".  *{it['_note']}*"
-        lines.append(f"  {byline.rstrip('.')}.  ")
+        lines.append(f"{indent}{byline.rstrip('.')}.  ")
 
-        imprint = imprint_md(it)
+        imprint = imprint_md(it, compact=compact)
         if imprint:
-            lines.append(f"  {imprint}  ")
+            lines.append(f"{indent}{imprint}  ")
 
         links = links_md(it, by_id)
         if links:
-            lines.append(f"  {' · '.join(links)}")
+            lines.append(f"{indent}{' · '.join(links)}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
@@ -326,10 +351,35 @@ def main() -> int:
         for it in review:
             print(f"  {it['id']}: {it['_needs_review']}")
 
-    if not args.check:
-        OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-        OUTPUT.write_text(render(items))
-        print(f"\nwrote {OUTPUT.relative_to(REPO_ROOT)}")
+    print()
+    stale = []
+    for style, path in OUTPUTS.items():
+        wanted = render(items, style)
+        count = len(selected(items, style))
+        if args.check:
+            # The generated files are committed, so "is the file current?" is a
+            # real question with a real answer -- and one that was previously
+            # claimed rather than asked.  A hand-edit to a generated snippet
+            # survives every other check in this repository.
+            current = path.read_text() if path.exists() else None
+            if current == wanted:
+                print(f"  {path.relative_to(REPO_ROOT)}: current ({count} entries)")
+            else:
+                stale.append(path)
+                where = "missing" if current is None else "stale"
+                print(f"  {path.relative_to(REPO_ROOT)}: {where}")
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(wanted)
+            print(f"  wrote {path.relative_to(REPO_ROOT)} ({count} entries)")
+
+    if stale:
+        print(
+            f"\n{len(stale)} generated file(s) do not match bibliography.json.\n"
+            "Run `make publications` and commit the result.",
+            file=sys.stderr,
+        )
+        return 1
     return 0
 
 

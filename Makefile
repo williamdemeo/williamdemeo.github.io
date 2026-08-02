@@ -197,8 +197,12 @@ design-audit: font-audit offline-audit contrast-audit
 # ── Publications ────────────────────────────────────────────────────────────
 #
 # bibliography.json is the only authoritative publication list (ADR-006).  The
-# generator renders it into docs/_snippets/publications.md, which the
-# publications page and the CV include, so neither holds a second copy.
+# generator renders it into two snippets under docs/_snippets/ -- the full list
+# and the CV's selection -- which pages include, so no page holds a second copy.
+#
+# Both are committed, so `publications-check` asks whether they still match the
+# bibliography as well as whether the bibliography is sound.  A hand-edit to a
+# generated snippet survives every other check in this repository.
 #
 # `publications-check` and `publications-verify` ask different questions and
 # neither answers the other's.  The first is offline and asks whether the file
@@ -214,11 +218,11 @@ design-audit: font-audit offline-audit contrast-audit
 
 .PHONY: publications publications-check publications-verify publications-test
 
-## Regenerate docs/_snippets/publications.md from bibliography.json
+## Regenerate the publications snippets from bibliography.json
 publications: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/gen_publications.py
 
-## Validate bibliography.json without rewriting anything
+## Validate bibliography.json and report stale snippets; writes nothing
 publications-check: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/gen_publications.py --check
 
