@@ -129,6 +129,16 @@ check("nor is a display block with no blank line before it",
 check("nor one with prose ahead of it on the line",
       kinds("we have $$x = y$$ and so on.\n"), ["stranded display"])
 
+# A block ends at a blank line as surely as it starts after one.  Missed at
+# first, and the page said so: the delimiter opened a block it did not own, so
+# python-markdown handed the whole thing to the inline processor and published
+# a literal `$` on each side.
+check("nor one the paragraph below runs into",
+      kinds("text\n\n$$x = y$$\nand so on.\n"), ["stranded display"])
+
+check("...which is not the same as a block at the end of the file",
+      kinds("text\n\n$$x = y$$\n"), [])
+
 check("the closing delimiter is not reported as a second finding",
       kinds("text\n\n$$\nx = y\n$$\n\ntext"), [])
 
