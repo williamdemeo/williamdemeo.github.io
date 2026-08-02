@@ -297,17 +297,14 @@ rules:
   - from: /archives/
     to: blog/index.md
 
-  # /blog/page/2/ is the one URL here, and the new blog puts its own second
-  # page of posts at exactly that path.  It is not a page yet only because two
-  # posts do not fill one page: `pagination_per_page` is 5, so the eight posts
-  # #13 is converting produce it.  Held as pending rather than redirected to
-  # the index deliberately -- a `to:` rule here would start overwriting a real
-  # page the moment #13 lands, and the hook would (correctly) refuse to build.
-  # When it lands this becomes `keep: true`, which a prefix rule may carry.
+  # /blog/page/2/ is the one URL here, and the new blog serves its own second
+  # page of posts at exactly that path: `pagination_per_page` is 5 and #13
+  # brought the total to eight.  So this is preserved, not redirected.
+  #
+  # A `to:` rule here would be refused anyway -- the hook will not write a stub
+  # over a page the site builds -- and a prefix rule cannot carry `to:` at all.
+  # `keep:` is legal on a prefix rule because it emits nothing.
   - from: /blog/page/**
-    # Eight posts at five per page: the new blog serves this URL itself, so it
-    # is preserved rather than redirected.  A `to:` here would be refused --
-    # the hook will not overwrite a page the site builds.
     keep: true
 
   # Thirteen category pages over fifteen posts is not a taxonomy, and the new
