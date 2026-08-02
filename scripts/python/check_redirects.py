@@ -84,6 +84,23 @@ def check_coverage(rules, inventories) -> list[str]:
                 f"{rule.frm}: an HTML stub is the wrong response for a non-HTML URL"
             )
 
+    # A `to:` rule whose *source* URL is also a real page is always a bug: the
+    # hook writes stubs after the build, so the stub replaces the page -- and
+    # when the rule points at that same page, the result is a stub redirecting
+    # to itself.  The hook refuses to do it; this reports it before the build
+    # runs, and names the fix.
+    for rule in rules:
+        if not rule.active:
+            continue
+        stripped = rule.frm.strip("/")
+        for candidate in (f"{stripped}/index.md", f"{stripped}.md") if stripped else ("index.md",):
+            if (DOCS / candidate).exists():
+                problems.append(
+                    f"{rule.frm}: the site serves this URL itself "
+                    f"(docs/{candidate}); use `keep: true`, not `to:`"
+                )
+                break
+
     # An internal target must exist as a source file, or the hook aborts the
     # build.  Catching it here reports every bad target at once, rather than
     # one per build.

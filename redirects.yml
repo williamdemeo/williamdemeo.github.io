@@ -155,8 +155,12 @@ rules:
     to: archive/index.md
   - from: /computing/uacalc/command-line-examples/
     to: archive/index.md
+  # The new site serves /archive/ itself -- this is the archive index (M2-9).
+  # It must NOT be a redirect: the hook writes stubs after the build, so a
+  # `to:` rule here overwrites the generated page with a stub pointing at
+  # itself.  That is not hypothetical; it is what this rule did until #69.
   - from: /archive/
-    to: archive/index.md
+    keep: true
 
   # Zola's section index for the blog.  The new blog is M6-1 (#35).
   - from: /posts/

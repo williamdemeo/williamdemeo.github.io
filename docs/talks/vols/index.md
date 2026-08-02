@@ -44,12 +44,5 @@ Notes for a talk at the 2nd CSP World Congress in Völs am Schlern, Italy on 25 
 
     The Agda source code is available from [gitlab.com/ualib/ualib.gitlab.io](https://gitlab.com/ualib/ualib.gitlab.io)
 
-<section>
-  <ul class="posts">
-  <li src = "{{ macros::gitlabualib(repo="agda-ualib", blurb="Agda universal algebra library", thumb="alonzo") }}" />
-  </ul>
-</section>
-
-
 [Linux]: https://ubuntu.com/#download
 

@@ -73,7 +73,7 @@ In this first part of this lab assignment, we will simply re-solve the above pro
 
     Can you decipher the syntax we used to input this matrix $A \in \mathbb{R}^{4\times 3}$? If so, move on to number 4.
 
-    If not, think a litter harder and/or discuss it with your neighbor.
+    If not, think a little harder and/or discuss it with your neighbor.
 
 4. Next, have Sage augment the matrix $A$ with the vector $b$ by entering the following into the next worksheet cell:
 

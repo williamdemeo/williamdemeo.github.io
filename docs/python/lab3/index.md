@@ -13,7 +13,7 @@ When you have finished working or it is 2pm (whichever comes first):
 
 2. **Save your worksheet and name it Lab03.sws.**
 
-3. **Submit your Lab04.sws file on Blackboard**
+3. **Submit your Lab03.sws file on Blackboard**
 
 4. **Stop your Sage worksheet (Action $\rightarrow$ Save and quit worksheet; or use Stop button).**
 
