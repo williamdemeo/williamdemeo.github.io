@@ -38,16 +38,16 @@ Notes for a talk at the 2nd CSP World Congress in Völs am Schlern, Italy on 25 
 
   - **[Lazy Universal Algebra Utilities](https://gitlab.com/scalaspark/lazy-universal-algebra-utilities)**
 
-  - **Agda Universal Algebra Library**
+  - **[Agda Universal Algebra Library](https://ualib.gitlab.io/)**
 
-    The documentation is available from ualib.org
+    The documentation is available from [ualib.org](https://ualib.gitlab.io/)
 
     The Agda source code is available from [gitlab.com/ualib/ualib.gitlab.io](https://gitlab.com/ualib/ualib.gitlab.io)
 
     !!! note "Since this talk"
 
-        `ualib.org` no longer resolves, and the GitLab repository above is the
-        superseded version. This work continues as **agda-algebras**:
+        These point at the pre-3.0 library, which is still online and carries
+        its own notice to that effect. The current home is **agda-algebras**:
         [the library](https://github.com/ualib/agda-algebras) and
         [its documentation](https://agda-algebras.universalalgebra.org/).
 
