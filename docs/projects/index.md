@@ -80,9 +80,7 @@ algebraic approach to constraint satisfaction.
 <div class="project-card" markdown>
 **[Category theory: a concise course](https://categorytheory.gitlab.io)**
 
-An online course in category theory, coauthored with Venanzio Capretta with help
-from Charlotte Aten, built out from Capretta's notes for a short course at the
-Midlands Graduate School.
+An online course in category theory, coauthored with Venanzio Capretta and Charlotte Aten, built out from Capretta's notes for a short course at the Midlands Graduate School.
 
 `category theory`{.tag} `exposition`{.tag}
 
