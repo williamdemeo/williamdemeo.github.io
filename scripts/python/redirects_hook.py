@@ -95,6 +95,21 @@ def on_post_build(config, **kwargs):
             )
 
         dest = site_dir / output_path(rule.frm)
+
+        # MkDocs cleans site_dir before building, so anything already here was
+        # written by this build: a real page.  Overwriting it would delete the
+        # page and, when the rule points at that same page, leave a stub
+        # redirecting to itself.  That is not hypothetical -- it is what
+        # `/archive/ -> archive/index.md` did to the archive index, and no
+        # check caught it, because a stub *is* a file at the expected URL.
+        if dest.exists():
+            raise SystemExit(
+                f"redirects.yml: {rule.frm} would overwrite a page the site "
+                f"already builds at that URL.\n"
+                f"  The site serves {rule.frm} itself, so this should be "
+                f"`keep: true`, not a redirect."
+            )
+
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(STUB.format(url=url), encoding="utf-8")
         log.debug("redirect %s -> %s", rule.frm, url)

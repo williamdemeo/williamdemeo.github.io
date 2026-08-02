@@ -114,22 +114,53 @@ rules:
   # Archived: kept and linkable, out of the primary nav.  The archive area
   # itself is M2-9 (#67) -- ADR-002 promises the area but nothing built it,
   # which is why that issue exists.
+  # The archive area exists now; these three are held back for a different
+  # reason.  They link five third-party published papers whose redistribution
+  # has not been settled, so archiving them today means either dead links or
+  # shipping someone else's PDFs.  See #67 and #14.
   - from: /research/csp/**
-    pending: "#67 (M2-9) -- archive area not built"
+    pending: "#67 -- csp paper PDFs: redistribution unsettled"
   - from: /python/**
-    pending: "#67 (M2-9) -- archive area not built"
+    keep: true
   - from: /agda-ualib/**
-    pending: "#67 (M2-9) -- archive area not built; #24 cross-links these"
+    keep: true
   - from: /talks/vols/
-    pending: "#67 (M2-9) -- archive area not built"
+    keep: true
 
   # Dropped with redirects.  `/archive/` is `computing/archive.md`, which
   # carries a Zola `path` override and so is served at the root rather than
   # under /computing/.
-  - from: /computing/**
-    pending: "#67 (M2-9) -- redirect to the archive index"
+  # Expanded from `/computing/**`: a prefix rule cannot carry `to:`, since
+  # that would emit one stub for the whole prefix.  All eleven go to the
+  # same place, so listing them is the right expansion here.
+  - from: /computing/
+    to: archive/index.md
+  - from: /computing/coq/
+    to: archive/index.md
+  - from: /computing/eclipse/
+    to: archive/index.md
+  - from: /computing/linux/
+    to: archive/index.md
+  - from: /computing/linux/ubuntuonlenovo/
+    to: archive/index.md
+  - from: /computing/linux/update-alternatives/
+    to: archive/index.md
+  - from: /computing/scala/
+    to: archive/index.md
+  - from: /computing/scala/progfun/
+    to: archive/index.md
+  - from: /computing/scala/reactive/
+    to: archive/index.md
+  - from: /computing/uacalc/
+    to: archive/index.md
+  - from: /computing/uacalc/command-line-examples/
+    to: archive/index.md
+  # The new site serves /archive/ itself -- this is the archive index (M2-9).
+  # It must NOT be a redirect: the hook writes stubs after the build, so a
+  # `to:` rule here overwrites the generated page with a stub pointing at
+  # itself.  That is not hypothetical; it is what this rule did until #69.
   - from: /archive/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    keep: true
 
   # Zola's section index for the blog.  The new blog is M6-1 (#35).
   - from: /posts/
@@ -157,18 +188,18 @@ rules:
   - from: /overalgebras/
     pending: "#13/#35 -- keep; blog not built"
   - from: /typefunc/
-    pending: "#67 (M2-9) -- archive area not built"
+    keep: true
   - from: /touchpad-forensics/
-    pending: "#67 (M2-9) -- archive area not built"
+    keep: true
   # Archived rather than kept, per ADR-002: good, but an interview puzzle from
   # a quant shop is a tonal outlier.  The URL still has to resolve.
   - from: /probability-quiz/
-    pending: "#67 (M2-9) -- archive area not built"
+    keep: true
 
   - from: /conferences-in-algebra/
     pending: "#35 -- dropped; redirect to the blog index"
   - from: /java-on-linux/
-    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
+    to: archive/index.md
   - from: /nobody-told-me/
     pending: "#35 -- dropped; redirect to the blog index"
 
@@ -195,14 +226,14 @@ rules:
   - from: /2014/02/13/overalgebras/
     pending: "#13/#35 -- keep; blog not built"
   - from: /2014/02/13/typefunc/
-    pending: "#67 (M2-9) -- archive area not built"
+    to: typefunc/index.md
   - from: /2014/03/19/probability-quiz/
-    pending: "#67 (M2-9) -- archive area not built"
+    to: probability-quiz/index.md
 
   - from: /2017/04/07/conferences-in-algebra/
     pending: "#35 -- dropped; redirect to the blog index"
   - from: /2017/12/06/java-on-linux/
-    pending: "#67 (M2-9) -- dropped; redirect to the archive index"
+    to: archive/index.md
 
   # Third-party (Liam O'Connor), reposted with permission, not republished.
   # Sends readers to the original rather than 404ing or to our home page.
@@ -218,28 +249,28 @@ rules:
   # have to resolve -- archiving keeps them working without republishing the
   # mathematics.  Octopress served it at two paths.
   - from: /2017/04/07/commutator-as-least-fixed-point/
-    pending: "#67 (M2-9) -- archive area not built"
+    to: archive/index.md
   - from: /the-commutator-as-a-least-fixed-point/
-    pending: "#67 (M2-9) -- archive area not built"
+    to: archive/index.md
 
   # Octopress section pages.  The Zola site moved this material under
   # /computing/; ADR-002 drops it and redirects to the archive index.
   - from: /coq/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /csp/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /eclipse/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /jst/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /linux/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /scala/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /uacalc/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
   - from: /pages/
-    pending: "#67 (M2-9) -- redirect to the archive index"
+    to: archive/index.md
 
   # Blog machinery: the archive listing, pagination, and the twelve category
   # pages Octopress generated from post tags.
