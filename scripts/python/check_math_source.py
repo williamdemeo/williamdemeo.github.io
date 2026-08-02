@@ -42,11 +42,11 @@ on why the block was missed -- and choosing wrong silently moves prose out of a
 list item.  Those are reported with the reason so a human can pick.
 
 That difference is also why only the first three fail the build by default.
-The imported archive (M2-9) carries about forty stranded blocks, on pages that
+The imported archive (M2-9) carries forty-one stranded blocks, on pages that
 already ship with a "not maintained" notice and their own KaTeX errors; making
 them a hard gate would block every unrelated change on content work nobody has
-scheduled.  They are counted and named on every run, and `--strict` promotes
-them to failures for whoever does schedule it.
+scheduled.  They are counted and named on every run, M2-10 (#78) schedules the
+repair, and `--strict` promotes them to failures for whoever does it.
 
 Agreement with the renderer is not approximated here: the delimiter patterns
 are imported from `pymdownx.arithmatex`, the same objects the build registers,
@@ -327,7 +327,7 @@ def main(argv=None) -> int:
         for path, n in sorted(per_file.items()):
             print(f"  {n:3}  {path}")
         print("Each publishes a literal `$` on either side of its expression.\n"
-              "`--strict` lists them and makes them failures.")
+              "Tracked as M2-10 (#78); `--strict` lists them and fails on them.")
     return 0
 
 

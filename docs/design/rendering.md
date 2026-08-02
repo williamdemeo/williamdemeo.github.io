@@ -140,9 +140,11 @@ patterns so it cannot disagree with the build. `docs/` is clean of the first
 three and CI keeps it that way.
 
 Still outstanding: forty-one stranded `$$` blocks across the imported archive
-pages, which `make math-source` names on every run and `--strict` promotes to
-failures. Each needs a blank line, a re-indent, or a paragraph split depending
-on why it was missed, so it is content work rather than a rewrite. Point
+pages, tracked as M2-10 and named by `make math-source` on every run, which
+`--strict` promotes to failures. Each needs a blank line, a re-indent, or a
+paragraph split depending on why it was missed, so it is content work rather
+than a rewrite — and two of them sit in list items whose three-space
+indentation has already put the whole item outside its list. Point
 `make math-fix MATH_ROOT=import/zola-converted` at the exam corpus before
 migrating it and the mechanical half never reaches `docs/` at all.
 
