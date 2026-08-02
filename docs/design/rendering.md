@@ -116,10 +116,16 @@ Copy the Agda block and paste it somewhere: the round trip must preserve
 
 ## Known limitations
 
+`docs/` renders **zero KaTeX failures across 1182 expressions**, and
+`nix flake check` now holds it there — that is what `checks.math-audit` is. So
+everything below is either about content still staged under `import/`, or about
+a defect class the audit cannot see by construction.
+
 **`\xymatrix` does not render.** Five commutative diagrams in the ring-theory
 solutions use XY-pic, which KaTeX has no equivalent for. They need converting to
-Mermaid, KaTeX's `{CD}` environment, or images. Tracked as content work rather
-than a rendering bug.
+Mermaid, KaTeX's `{CD}` environment, or images. Content work rather than a
+rendering bug — and confined to `import/zola-converted/exams/rings/`, so it
+blocks the exam migration (#56) and nothing that ships today.
 
 **Over-escaped braces, and three defects like them.** The imported content came
 through a Markdown engine that escaped its way past this one, leaving four
@@ -138,6 +144,14 @@ KaTeX throws on:
 three; `scripts/python/check_math_source.py` imports arithmatex's own delimiter
 patterns so it cannot disagree with the build. `docs/` is clean of the first
 three and CI keeps it that way.
+
+A fifth, closely related, that neither checker can see: the conversion also
+**doubled the row separator** inside matrices, writing `\\\\` where the source
+`.tex` writes `\\`. KaTeX reads that as two line breaks and renders a matrix
+with blank rows between its entries — a four-entry vector came out seven rows
+tall. It raises nothing and it is legal LaTeX, so it can only be found by
+counting rows. Forty were repaired across the Sage labs; the source `.tex`
+files under `import/zola-content/python/` are the authority if more turn up.
 
 Still outstanding: forty-one stranded `$$` blocks across the imported archive
 pages, tracked as M2-10 and named by `make math-source` on every run, which
@@ -159,9 +173,10 @@ $\def\bA{\bf A} \def\bB{\bf B}$
 Those definitions now live in `katex-macros.js`, which makes the preambles
 redundant — and, for the `\newcommand` ones, harmful: KaTeX raises
 *"attempting to redefine \FGrp; use \renewcommand"* rather than ignoring them.
+The `\def` ones do not raise; they render as an empty span, which is a stray
+blank in the middle of a sentence rather than an error.
 
-The blocks should be deleted when those pages are triaged. Nothing published
-is affected today, since the pages are still staged under `import/`; the
-collision shows up only in `make math-audit`.
-`agda-ualib/f-algebras.md`, `agda-ualib/elementary-facts.md`,
-`agda-ualib/birkhoff-hsp.md`, and `2014-02-13-a-problem-of-palfy-and-saxl.md`.
+Both blocks that had reached `docs/` are now deleted — `agda-ualib/f-algebras`
+and the Pálfy–Saxl post — and `\FGrp`, `\inj`, `\bA` and `\bB` resolve from the
+macro table exactly as before. What remains is in `import/zola-converted/`, and
+deleting each one is part of migrating the page that carries it.

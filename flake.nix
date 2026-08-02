@@ -52,6 +52,20 @@
         ];
       };
 
+      # The math audit needs scripts/js, which the site build never reads.
+      # Kept out of siteSource for the same reason as below: adding it there
+      # would make editing the audit script invalidate a site build that
+      # cannot depend on it.  docs/ is here for all three of its roles at once
+      # -- the pages to audit, the KaTeX bundle to render them with, and the
+      # macro table both of those share.
+      mathSource = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./docs
+          ./scripts/js
+        ];
+      };
+
       # check-redirect-map needs more than the site build does: the two legacy
       # URL inventories, and the imported Zola trees it re-derives the Zola one
       # from.  Kept separate so those 7 MB stay out of the site build's inputs,
@@ -297,6 +311,28 @@
             ''
               python3 ${redirectSource}/scripts/python/check_redirects.py \
                 --verify-inventory --site ${this.site}
+              touch "$out"
+            '';
+
+          # Every expression in docs/ rendered through the KaTeX bundle the
+          # site ships, with the site's own macro table.  This is the other
+          # half of the pair below: that one reads source and catches what
+          # renders without error and without meaning, this one renders and
+          # catches what KaTeX refuses.  Neither sees the other's defects.
+          #
+          # node is here and nowhere else in the flake.  It is the audit's only
+          # requirement -- the KaTeX bundle comes from docs/assets, not npm --
+          # and it buys a guarantee that no imported LaTeX construct reaches a
+          # reader as red error text.
+          math-audit = pkgs.runCommandLocal "check-math-audit"
+            {
+              nativeBuildInputs = [ pkgs.nodejs ];
+            }
+            ''
+              # audit_math.mjs resolves the KaTeX bundle and the macro table
+              # relative to the working directory, so run it from the source.
+              cd ${mathSource}
+              node scripts/js/audit_math.mjs docs
               touch "$out"
             '';
 
