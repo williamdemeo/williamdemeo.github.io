@@ -252,6 +252,135 @@ line, one file.
 
 ---
 
+### `gen_publications`: rendering the bibliography
+
+`bibliography.json` is the only authoritative publication list (ADR-006).
+`make publications` renders it into two committed snippets, and pages include
+them rather than holding a copy:
+
+| snippet | entries | included by |
+| --- | --- | --- |
+| `docs/_snippets/publications.md` | all of them | the publications page (#30, not built yet) |
+| `docs/_snippets/publications-cv.md` | those marked `_cv` | `docs/cv.md`, *Selected publications* |
+
+Each entry renders as title, authors, imprint, and a row putting **the version
+of record and the preprint side by side**. The CV's is the same, a little
+tighter: the year rather than the full date, and no DOI.
+
+`make publications-check` validates the file *and* reports whether either
+snippet has drifted from it — a hand-edit to a generated file survives every
+other check in this repository. Exit codes follow `diff(1)`: 0 current, 1 stale
+or invalid, 2 could not run. `nix flake check` runs it as part of
+`checks.bibliography-tooling`, so drift fails CI; it needs no network, unlike
+`publications-verify`.
+
+It guards the *snippets*, not the pages that include them. Deleting an
+`--8<--` line, or adding entries by hand beneath one, is not something any
+check here would notice.
+
+Two rules keep the rendering honest, and both are tested:
+
+- **Say only what the record supports.** An entry with no issue number says
+  nothing about issues; a date shows to the precision the publisher gave. The
+  thesis keeps a bare year, because its arXiv posting date is not its
+  completion date.
+- **Label a link by what vouches for it.** A DOI is a publisher asserting "this
+  is the record of that work", so the entry's type may name it — *Journal*,
+  *Proceedings*. A bare URL is not: the ISMA 2004 link is the author's own copy
+  of the PDF, so it renders as *PDF*, not as *Proceedings*.
+
+One arXiv identifier may sit on two entries when one declares `_version-of` the
+other — a preprint and the paper it became are two documents. That is a
+*relaxation* of a check, which is easier to get wrong than a check, so
+`test_gen_publications.py` covers both directions.
+
+---
+
+### `verify_bibliography`: checking the publication list against the publishers
+
+`bibliography.json` was built by reconciling three hand-maintained lists
+(ADR-006). Reconciling makes copies agree with each other; it does not make
+them right. This asks the publishers:
+
+```console
+$ make publications-verify
+verifying 16 entries against api.crossref.org, api.datacite.org and export.arxiv.org
+...
+19 record(s) fetched and compared
+  ! 0 difference(s) needing a decision
+  ~/+/i 23 of spelling, of a field only the publisher carries, or for information
+
+not verifiable against either service (4):
+  adaricheva2018alh: no DOI and no arXiv id
+  demeo2004isma: no DOI and no arXiv id
+  demeo2002icmc: no DOI and no arXiv id
+  demeo1998eigenvalues: no DOI and no arXiv id
+```
+
+More records than entries: an entry with both a DOI and an arXiv identifier is
+two lookups.
+
+Every entry with a DOI is looked up at Crossref; where Crossref does not index
+it, the registration-agency endpoint says who does and a DataCite DOI is
+followed to DataCite. Every entry with an arXiv identifier is looked up at the
+arXiv API. Title, authors, container-title, volume, issue, page and date are
+compared against what the file claims, and each difference is marked:
+
+| | |
+| --- | --- |
+| `!` | the values genuinely differ — someone has to decide |
+| `~` | the same value spelled differently: case, accents, `Vol. 30` against `30` |
+| `+` | a field the publisher carries and the file does not |
+| `i` | context rather than a difference — the raw `journal_ref`, a posting date |
+
+Only `!` fails the run. Exit codes follow `diff(1)`: 0 everything checked
+agrees, 1 a difference wants a human, 2 could not run.
+
+Two fields are `i` by design, because the publisher's value and a
+bibliography's are different things: the `container-title` of a *proceedings*
+article, where the publisher holds the registered title of the volume (*2021
+36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS)*) rather
+than the name of the conference; and arXiv's free-text `journal_ref`, checked
+by containment and printed in full rather than parsed into fields it does not
+really have. For a *journal* article `container-title` is the journal, and a
+difference there still fails.
+
+**Two things it is built not to do**, both of which this repository has been
+caught by:
+
+- **Report a clean run it did not earn.** Any request that never reaches a
+  service — a refused `CONNECT`, a timeout, a 429 or 503 surviving three
+  attempts — exits 2, and so does a *partial* run. A checker that passes
+  because the network is blocked is worse than no checker. A failure to connect
+  also never means "the resource is dead": a sandbox that denies `CONNECT` for
+  a host outside its egress allowlist looks exactly like a host that is gone,
+  and the message says so.
+- **Trust a status code.** Crossref must answer `status: ok` carrying the DOI
+  that was asked for; arXiv must return a feed with one entry whose id is the
+  one that was asked for. A 200 holding a proxy error page is treated as a
+  transport failure, because it means the publisher was never reached — and
+  arXiv answers an unknown identifier with a 200 whose entry points at its
+  error vocabulary, which is exactly why the body has to be read.
+
+It needs the network, so it is not a build gate: CI has none by design
+(ADR-004). `make publications-test` runs both tools' unit tests, which use fixtures and
+need nothing, and `nix flake check` runs them as `checks.bibliography-tooling`.
+The tests that matter are the ones proving the two behaviours above, since
+"it fails loudly" is exactly the kind of claim that should not be taken on
+trust.
+
+Dates are compared to the precision the file states: an entry saying "June
+2020" agrees with a record saying 2020-06-15, and fails only when it matches
+none of the dates the publisher offers. Publishers routinely offer several — a
+print issue and its online-first appearance are different dates, and both are
+real.
+
+Nothing from PyPI: `urllib`, `json` and `xml.etree` are all in the standard
+library, so there is no new pin in `requirements.txt` for `flake.nix` to match
+under ADR-004's `requirements-pins` check.
+
+---
+
 ### Notes
 
 - The script uses `env -u GH_TOKEN -u GITHUB_TOKEN` by default to work around

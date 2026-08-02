@@ -73,6 +73,19 @@
         ];
       };
 
+      # gen_publications.py --check compares the committed snippets against a
+      # fresh render, so it needs the bibliography and the snippets as well as
+      # the scripts -- and it needs them laid out as they are in the repository,
+      # because the script finds them relative to its own location.
+      bibliographySource = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./bibliography.json
+          ./scripts/python
+          ./docs/_snippets
+        ];
+      };
+
       # A dirty tree is normal during editing, so fall back rather than fail.
       revision = self.shortRev or self.dirtyShortRev or "dirty";
 
@@ -294,6 +307,30 @@
             }
             ''
               python3 ${redirectSource}/scripts/python/test_redirects.py
+              touch "$out"
+            '';
+
+          # The bibliography tooling, and its output.
+          #
+          # `--check` is the part that guards the repository rather than the
+          # scripts: docs/_snippets/ is committed, and a hand-edit to a
+          # generated file passes every other gate here.  It needs no network,
+          # so unlike `make publications-verify` it belongs in a sandbox.
+          #
+          # The tests are worth running here precisely because the verifier
+          # itself cannot: it needs the publishers.  They use fixtures instead,
+          # and the ones that matter prove the verifier exits non-zero when it
+          # cannot reach a service rather than reporting the clean run it did
+          # not earn, and that the renderer's relaxed duplicate-arXiv rule
+          # still catches a real duplicate.
+          bibliography-tooling = pkgs.runCommandLocal "check-bibliography-tooling"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${bibliographySource}/scripts/python/gen_publications.py --check
+              python3 ${bibliographySource}/scripts/python/test_gen_publications.py
+              python3 ${bibliographySource}/scripts/python/test_verify_bibliography.py
               touch "$out"
             '';
         }
