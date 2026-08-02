@@ -202,15 +202,157 @@ def test_the_cv_keeps_both_links():
     assert "[Proceedings](" in body and "[arXiv preprint](" in body, body
 
 
-def test_the_cv_is_numbered_and_the_full_list_is_not():
-    assert gp.render([dict(PAPER, _cv=True)], "cv").splitlines()[3].startswith("1. ")
-    assert gp.render([PAPER], "full").splitlines()[3].startswith("- ")
+def test_the_cv_is_numbered_and_the_page_is_not():
+    cv = [l for l in gp.render([dict(PAPER, _cv=True)], "cv").splitlines() if l.strip()]
+    page = [l for l in gp.render([PAPER], "page").splitlines() if l.strip()]
+    assert any(l.startswith("1. **") for l in cv), cv
+    assert any(l.startswith("- **") for l in page), page
+    assert not any(l.startswith("1. **") for l in page), page
 
 
 def test_a_cv_entry_may_borrow_a_link_from_an_entry_the_cv_omits():
     """`_version-of` resolves against the whole file, not the rendered subset."""
     body = gp.render([PAPER, dict(PREPRINT, _cv=True)], "cv")
     assert "[Published version](https://drops.dagstuhl.de/" in body, body
+
+
+# ── the publications page ────────────────────────────────────────────────────
+
+
+def test_every_csl_type_in_use_lands_in_a_group():
+    """A publications page silently dropping a publication is its worst bug."""
+    for kind in ("article-journal", "paper-conference", "article", "manuscript",
+                 "thesis", "book"):
+        assert gp.group_of({"type": kind}) is not None, kind
+
+
+def test_an_unknown_type_is_a_validation_failure_not_a_silent_drop():
+    assert gp.group_of({"type": "dataset"}) is None
+    stray = dict(PAPER, type="dataset")
+    assert any("belongs to no group" in p for p in gp.validate([stray])), gp.validate([stray])
+
+
+def test_the_page_is_grouped_and_the_selected_list_points_into_it():
+    body = gp.render([dict(PAPER, _cv=True), PREPRINT], "page")
+    assert "## Selected" in body and "## Conference and workshop papers" in body
+    assert "## Preprints and unpublished manuscripts" in body
+    # The selected link and the entry's anchor have to be the same string, or
+    # the page renders a link to nowhere and nothing complains.
+    assert "(#demeo2022birkhoff)" in body, body
+    assert "{ #demeo2022birkhoff }" in body, body
+
+
+def test_the_cv_rendering_carries_no_anchors_or_abstracts():
+    """Two renderings of one entry must not collide on ids in one page."""
+    body = gp.render([dict(PAPER, _cv=True, abstract="x")], "cv")
+    assert "{ #" not in body and "???" not in body, body
+
+
+def test_an_abstract_is_indented_enough_to_stay_inside_its_list_item():
+    """At two spaces Python-Markdown ends the list and renders `???` as text."""
+    body = gp.render([dict(PAPER, abstract="Some abstract.")], "page")
+    assert '\n    ??? quote "Abstract"\n' in body, body
+    assert "\n        Some abstract.\n" in body, body
+
+
+def test_entries_with_nothing_to_open_are_reported():
+    assert gp.artifactless([PAPER]) == []
+    bare = {"id": "nolink", "type": "paper-conference", "title": "t"}
+    assert gp.artifactless([bare]) == ["nolink"]
+    # A preprint entry borrows its link, so it is not artifactless.
+    assert gp.artifactless([PREPRINT]) == []
+
+
+# ── BibTeX ───────────────────────────────────────────────────────────────────
+
+
+def test_bibtex_maps_each_type_to_the_right_entry_kind():
+    kinds = {t: gp.BIBTEX_TYPE[t] for t in gp.BIBTEX_TYPE}
+    assert kinds["article-journal"] == "article"
+    assert kinds["paper-conference"] == "inproceedings"
+    assert kinds["thesis"] == "phdthesis"
+    assert kinds["manuscript"] == "misc"
+
+
+def test_bibtex_puts_the_venue_in_the_field_its_type_expects():
+    assert field(gp.bibtex_entry(PAPER), "booktitle") == "{TYPES 2021}"
+    journal = {"id": "j", "type": "article-journal", "title": "T",
+               "author": [{"family": "DeMeo"}], "container-title": "IJAC",
+               "issued": {"date-parts": [[2020]]}}
+    entry = gp.bibtex_entry(journal)
+    assert field(entry, "journal") == "{IJAC}" and not field(entry, "booktitle"), entry
+
+
+def field(entry: str, name: str) -> str:
+    """One field's value, so tests do not depend on the column alignment."""
+    for line in entry.splitlines():
+        key, _, value = line.partition(" = ")
+        if key.strip() == name:
+            return value.rstrip(",")
+    return ""
+
+
+def test_bibtex_double_braces_titles():
+    """A .bst case-folding "Agda" would undo titles checked against publishers."""
+    assert field(gp.bibtex_entry(PAPER), "title").startswith("{{"), gp.bibtex_entry(PAPER)
+
+
+def test_bibtex_escapes_characters_that_are_syntax():
+    assert gp.bibtex_escape("a & b") == r"a \& b"
+    assert gp.bibtex_escape("100%") == r"100\%"
+    assert gp.bibtex_escape("a_b") == r"a\_b"
+    # The backslash has to be replaced first or it escapes the new escapes.
+    assert gp.bibtex_escape(r"a\b") == r"a\textbackslash{}b"
+
+
+def test_bibtex_writes_authors_family_first_and_joined_with_and():
+    item = {"author": [{"family": "Bergman", "given": "Clifford"},
+                       {"family": "DeMeo", "given": "William"}]}
+    assert gp.bibtex_authors(item) == "Bergman, Clifford and DeMeo, William"
+
+
+def test_bibtex_braces_a_literal_author_so_it_is_not_split():
+    item = {"author": [{"literal": "The Agda Team"}]}
+    assert gp.bibtex_authors(item) == "{The Agda Team}"
+
+
+def test_bibtex_uses_en_dash_page_ranges():
+    assert field(gp.bibtex_entry(PAPER), "pages") == "{4:1--4:21}"
+
+
+def test_bibtex_omits_a_url_that_only_restates_the_eprint():
+    """`eprint` already is that link; repeating it as `url` is noise."""
+    assert not field(gp.bibtex_entry(PREPRINT), "url"), gp.bibtex_entry(PREPRINT)
+    assert field(gp.bibtex_entry(PREPRINT), "eprint") == "{2101.10166}"
+
+
+def test_bibtex_omits_a_url_that_only_restates_the_doi():
+    item = {"id": "x", "type": "article-journal", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2020]]},
+            "DOI": "10.1/abc", "URL": "https://doi.org/10.1/abc"}
+    assert not field(gp.bibtex_entry(item), "url"), gp.bibtex_entry(item)
+
+
+def test_bibtex_keeps_a_url_that_is_the_only_link():
+    item = {"id": "x", "type": "paper-conference", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2004]]},
+            "URL": "https://example.org/paper.pdf"}
+    assert field(gp.bibtex_entry(item), "url") == "{https://example.org/paper.pdf}"
+
+
+def test_bibtex_keeps_a_url_pointing_somewhere_the_identifiers_do_not():
+    """LMCS has an article page that is neither the DOI nor the arXiv abstract."""
+    item = {"id": "x", "type": "article-journal", "title": "T",
+            "author": [{"family": "DeMeo"}], "issued": {"date-parts": [[2022]]},
+            "DOI": "10.46298/lmcs-18(1:12)2022", "_arxiv": "1611.02867",
+            "URL": "https://lmcs.episciences.org/8975"}
+    assert field(gp.bibtex_entry(item), "url") == "{https://lmcs.episciences.org/8975}"
+
+
+def test_bibtex_carries_the_arxiv_eprint():
+    entry = gp.bibtex_entry(PAPER)
+    assert field(entry, "eprint") == "{2101.10166}"
+    assert field(entry, "archivePrefix") == "{arXiv}"
 
 
 def main() -> int:

@@ -38,13 +38,14 @@ both; the research page carried the pre-2005 signal-processing papers alone.
 ## Decision
 
 **`bibliography.json` at the repository root is the only authoritative list**,
-in CSL-JSON. `scripts/python/gen_publications.py` renders it to two snippets
-under `docs/_snippets/`, and pages include them rather than holding a copy:
+in CSL-JSON. `scripts/python/gen_publications.py` renders it three ways, and
+pages include the snippets rather than holding a copy:
 
-| snippet | entries | included by |
+| output | entries | consumed by |
 | --- | --- | --- |
-| `publications.md` | all 16 | the publications page — still #30 |
-| `publications-cv.md` | the 6 marked `_cv` | `docs/cv.md`, *Selected publications* |
+| `_snippets/publications-page.md` | all 16 | `docs/publications.md` |
+| `_snippets/publications-cv.md` | the 6 marked `_cv` | `docs/cv.md`, *Selected publications* |
+| `docs/publications.bib` | all 16 | anyone citing this work |
 
 The CV list was the last hand-maintained copy of this data, and it had drifted:
 it dropped "finitely generated" from the 2020 IJAC title, credited the Cardano
@@ -178,6 +179,46 @@ holds the version of record: the preprint of the 2014 *Algebra universalis*
 paper is titled *…with non-isomorphic…* and the journal's own record is
 *…nonisomorphic…*. That is a fact about two documents, not an error, so it is
 reported for information.
+
+## The publications page (#30)
+
+The page is `docs/publications.md`: a title, two sentences, and the include. Its
+body is generated, so nothing about the record is maintained twice.
+
+**Grouped by where the work appeared** — journal articles, conference and
+workshop papers, preprints and unpublished manuscripts, theses, edited volumes —
+rather than by whether it was refereed. #30 asked for peer-reviewed work to be
+distinguishable from preprints at a glance, and this achieves that, but the
+headings name something the publishers record and this repository checks. Nothing
+in `bibliography.json` records refereeing status, so no heading claims it. An
+entry whose type matches no group is a validation failure: a publications page
+that silently drops a publication is the worst bug available to it.
+
+**Reverse-chronological within each group**, not with year headings. Sixteen
+entries across twenty-six years would give thirteen headings of one entry each.
+
+**A "Selected" list at the top links into the record rather than repeating it.**
+Six full entries reprinted above sixteen would be a third of the page duplicated.
+It reuses `_cv`, so the CV and the page highlight the same work, and the links
+point at anchors `attr_list` attaches to each entry's title.
+
+**Abstracts are collapsed**, via `pymdownx.details`, because the page is for
+scanning. Twelve of sixteen entries have one; they come from arXiv, or from
+DataCite where the publisher's own abstract describes the published paper rather
+than the preprint. `_abstract-source` records which, and the verifier checks the
+stored text against that service — a truncated or hand-edited abstract fails.
+The four entries without one are the four with no identifier.
+
+**BibTeX** is generated to `docs/publications.bib` from the same source, with no
+new dependency: the mapping from CSL-JSON is mechanical, as this ADR said. Titles
+are double-braced, because they were checked against the publishers and a `.bst`
+case-folding *Agda* or *Birkhoff* would undo that.
+
+#30 also asks that every entry link to at least one resolvable artifact. Two do
+not — `adaricheva2018alh` and `demeo2002icmc` — and `make publications` names
+them on every run. That is reported rather than enforced: both fail because the
+work is genuinely hard to find online, and deleting an entry to make a check
+pass would be the wrong repair.
 
 ## What an entry renders as
 

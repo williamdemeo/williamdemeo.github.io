@@ -301,6 +301,7 @@ nav:
       - blog/index.md
       - blog/tags.md
   - About: about.md
+  - Publications: publications.md
   - CV: cv.md
   - Contact: contact.md
 
