@@ -4,6 +4,12 @@
 #29's premise is that they disagree.  This finds out where, rather than
 assuming, so the authoritative file is built from evidence and the places a
 human has to adjudicate are named instead of quietly picked.
+
+All three inputs are snapshots under `import/`, and have to be: the live pages
+have since been replaced by the bibliography this script justified.  `docs/cv.md`
+now includes the generated snippet, so reading it would find nothing and this
+script would report "cv 0 entries" -- silently contradicting the counts ADR-006
+quotes from it, which is the failure this whole area of the repository is about.
 """
 import json
 import pathlib
@@ -11,7 +17,7 @@ import re
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-CV = ROOT / "docs/cv.md"
+CV = ROOT / "import/legacy-cv-pubs.md"
 RESEARCH = ROOT / "import/zola-converted/research/index.md"
 ZOTERO = ROOT / "import/legacy-bib-pubs.json"
 
@@ -49,9 +55,9 @@ def norm(t):
 
 def from_cv():
     out = []
-    body = CV.read_text()
-    sec = body.split("## Selected publications", 1)[1].split("\nThe complete list", 1)[0]
-    for block in re.split(r"\n(?=\d+\.\s)", sec):
+    # The snapshot is the section on its own, so there is no surrounding page to
+    # slice out of -- and no heading whose wording this could break on.
+    for block in re.split(r"\n(?=\d+\.\s)", CV.read_text()):
         if not block.strip():
             continue
         m = re.search(r"\*\*(.+?)\*\*", block, re.S)

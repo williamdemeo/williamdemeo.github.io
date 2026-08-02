@@ -49,10 +49,14 @@ in Agda.
 
 ## Selected publications
 
-<!-- Generated from bibliography.json, the only authoritative publication list
-     (ADR-006).  Editing the list below means editing that file and running
-     `make publications`; `make publications-check` fails if this page and the
-     bibliography disagree.  Which entries appear here is the `_cv` flag. -->
+<!-- The list below is the include on the next line, not text in this file.
+     Change it by editing bibliography.json and running `make publications`;
+     which entries appear is the `_cv` flag there.  See ADR-006.
+
+     `make publications-check` guards the snippet, not this page: it fails when
+     publications-cv.md no longer matches the bibliography.  Nothing checks the
+     include directive itself, so deleting the line below, or adding entries by
+     hand underneath it, would go unnoticed. -->
 
 --8<-- "publications-cv.md"
 

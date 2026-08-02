@@ -17,7 +17,10 @@
 ## Context
 
 The publication list existed in three hand-maintained copies, and they
-disagreed. `scripts/python/reconcile_bibliography.py` compares them:
+disagreed. `scripts/python/reconcile_bibliography.py` compares them, from
+snapshots under `import/` rather than from the live pages — this decision has
+since replaced two of the three, and a reconciliation that silently found
+nothing would be worse than none:
 
 ```
 cv        6 entries
@@ -57,7 +60,14 @@ six marked are the six the hand-written CV already listed.
 Both snippets are committed, so `make publications-check` asks whether they
 still match the bibliography as well as whether the bibliography is sound. That
 check previously only claimed to keep them honest; a hand-edit to a generated
-file survives every other gate in this repository.
+file survives every other gate in this repository. `nix flake check` runs it,
+so drift fails CI — it needs no network, which is what makes it a gate where
+`publications-verify` cannot be one.
+
+It guards the snippets, not the pages including them: deleting an `--8<--`
+line, or adding entries by hand beneath one, would go unnoticed. The three
+legacy copies existed because that was easy to do, so it is worth naming rather
+than implying the loop is closed.
 
 ### Why CSL-JSON over BibTeX
 

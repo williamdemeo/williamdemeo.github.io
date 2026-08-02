@@ -270,7 +270,13 @@ tighter: the year rather than the full date, and no DOI.
 `make publications-check` validates the file *and* reports whether either
 snippet has drifted from it — a hand-edit to a generated file survives every
 other check in this repository. Exit codes follow `diff(1)`: 0 current, 1 stale
-or invalid, 2 could not run.
+or invalid, 2 could not run. `nix flake check` runs it as part of
+`checks.bibliography-tooling`, so drift fails CI; it needs no network, unlike
+`publications-verify`.
+
+It guards the *snippets*, not the pages that include them. Deleting an
+`--8<--` line, or adding entries by hand beneath one, is not something any
+check here would notice.
 
 Two rules keep the rendering honest, and both are tested:
 
@@ -298,16 +304,21 @@ them right. This asks the publishers:
 
 ```console
 $ make publications-verify
-verifying 15 entries against api.crossref.org, api.datacite.org and export.arxiv.org
+verifying 16 entries against api.crossref.org, api.datacite.org and export.arxiv.org
 ...
-17 record(s) fetched and compared
+19 record(s) fetched and compared
   ! 0 difference(s) needing a decision
-  ~/+/i 19 of spelling, of a field only the publisher carries, or for information
+  ~/+/i 23 of spelling, of a field only the publisher carries, or for information
 
 not verifiable against either service (4):
   adaricheva2018alh: no DOI and no arXiv id
-  ...
+  demeo2004isma: no DOI and no arXiv id
+  demeo2002icmc: no DOI and no arXiv id
+  demeo1998eigenvalues: no DOI and no arXiv id
 ```
+
+More records than entries: an entry with both a DOI and an arXiv identifier is
+two lookups.
 
 Every entry with a DOI is looked up at Crossref; where Crossref does not index
 it, the registration-agency endpoint says who does and a DataCite DOI is
