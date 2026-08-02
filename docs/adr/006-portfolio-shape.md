@@ -171,8 +171,8 @@ existing.
 
 It is fifth because it is the one expository entry and the least directly
 relevant to the target reader — not because it is slight. **It is coauthored
-with Venanzio Capretta, with help from Charlotte Aten, and must carry that
-attribution wherever it appears.** ADR-002 calls that a correctness requirement
+with Venanzio Capretta and Charlotte Aten, and must carry that attribution
+wherever it appears.** ADR-002 calls that a correctness requirement
 rather than a courtesy, and it is repeated here because a card is exactly the
 kind of compressed form where attribution gets dropped.
 

@@ -114,8 +114,8 @@ projects:
 The guess that the latter two overlap the qualifying-exam solutions was right,
 and stronger than guessed: they are **the same body of work** as the corpus
 being promoted in #56. The category theory course is not — it is original
-work, coauthored with Venanzio Capretta with help from Charlotte Aten, built on
-course notes Capretta wrote for a short course at the Midlands Graduate School.
+work, coauthored with Venanzio Capretta and Charlotte Aten, built on course
+notes Capretta wrote for a short course at the Midlands Graduate School.
 
 So the page does not survive as a page. It splits:
 
@@ -159,6 +159,12 @@ why the summary reads 52/21/22/8 rather than the originally generated
 | `2014-03-19-probability-quiz.md` | keep → **archive** | The Jane Street outlier, above. |
 | `2014-02-13-ieprops.md` | archive → **keep** | Kept on review. |
 | `2014-02-13-overalgebras.md` | archive → **keep** | Kept on review. |
+
+**Corrected 2026-08-02.** This ADR first described the category theory course as
+"coauthored with Venanzio Capretta with help from Charlotte Aten". Both are
+coauthors, and the qualifier is dropped above and in ADR-006. Recorded rather
+than silently edited because this ADR is the thing that makes the attribution a
+correctness requirement, so its own wording of it has to be right.
 
 The last two are both short announcement posts — 112 and 141 words — which is
 why the word-count rule put them in `archive`. That rule cannot tell an
