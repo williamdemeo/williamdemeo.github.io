@@ -39,6 +39,10 @@
         fileset = lib.fileset.unions [
           ./mkdocs.yml
           ./docs
+          # theme.custom_dir.  Leaving it out builds a site that silently
+          # loses the override, which is the sort of difference between the
+          # Nix build and `make build` this fileset exists to prevent.
+          ./overrides
           # Where the mkdocs hooks and page generators live.  mkdocs.yml's
           # `hooks:` key points at scripts/python/redirects_hook.py.
           ./scripts/python

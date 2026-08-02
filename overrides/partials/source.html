@@ -1,0 +1,27 @@
+{#-
+  Overrides material/templates/partials/source.html.
+
+  The only change is that `data-md-component="source"` is gone.  Material's
+  bundle looks for that attribute and, finding it, fetches
+  api.github.com/repos/<owner>/<repo> on every page load to put a star and fork
+  count in the header.  That is a third-party request on every page, made
+  before the visitor has clicked anything, for two numbers that are not what
+  this site is arguing.
+
+  #17 asks that no external font, script or stylesheet be requested.  This is
+  an XHR rather than any of those three, so it is outside the letter of that
+  criterion and squarely inside its point; `make offline-audit` fails on any
+  cross-origin request rather than keeping a list of blessed exceptions.
+
+  Keep in step with the upstream partial when Material is upgraded: it is four
+  lines of markup, and the CSS class names are Material's.
+-#}
+<a href="{{ config.repo_url }}" title="{{ lang.t('source') }}" class="md-source">
+  <div class="md-source__icon md-icon">
+    {% set icon = config.theme.icon.repo or "fontawesome/brands/git-alt" %}
+    {% include ".icons/" ~ icon ~ ".svg" %}
+  </div>
+  <div class="md-source__repository">
+    {{ config.repo_name }}
+  </div>
+</a>

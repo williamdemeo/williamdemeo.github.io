@@ -9,3 +9,6 @@ result
 result-*
 .direnv/
 node_modules/
+
+# Upstream font sources, fetched by `make fonts` and content-addressed.
+.fonts-cache/

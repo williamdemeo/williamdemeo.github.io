@@ -1,0 +1,206 @@
+/* Design tokens for williamdemeo.github.io -- the one place colour, type and
+ * spacing are decided.  extra.css consumes these and defines no raw values of
+ * its own, so a change here moves the whole site and nothing else has to know.
+ *
+ * The active system is Constellation: the palette and Space Grotesk display
+ * face of the agda-algebras documentation site.  The two sites link to each
+ * other constantly and now look like siblings, which is worth more here than
+ * each having a separate voice.
+ *
+ * Meridian, below, is the alternative, and is what #17 first settled on -- a
+ * near-achromatic neutral ramp with a teal accent, Newsreader for display.  It
+ * is kept because the comparison is the point: /design/options/ renders both,
+ * and the choice was made by looking rather than by reading.
+ *
+ * Switching the whole site is three edits, all in this file, and they are the
+ * three bare selectors below -- the ones with no `[data-system]` on them.
+ * Move each from the active block to the other one:
+ *
+ *     :root,                              (before the font block)
+ *     [data-md-color-scheme="default"],   (before the light colour block)
+ *     [data-md-color-scheme="slate"],     (before the dark colour block)
+ *
+ * Nothing else changes; the `[data-system="…"]` selectors stay where they are,
+ * because /design/options/ uses them to render both systems on one page.  Do
+ * move all three -- moving two produces a selector like
+ * `[data-md-color-scheme="default"]:root`, which matches nothing, and the page
+ * comes back with no colours at all.
+ *
+ * Units: Material sets `html { font-size: 125% }`, so 1rem is 20px, and
+ * `.md-typeset` sizes in em relative to its own base.  The scale below follows
+ * that convention rather than fighting it.
+ */
+
+/* ══ scale, spacing and shape ══════════════════════════════════════════════
+ *
+ * System-independent.  A 1.25 modular scale, tightened at the display sizes
+ * where a straight geometric progression gets shouty, and a 4px spacing grid.
+ */
+
+:root {
+  /* Type scale, em-relative to the typeset base.  h1 lands at 38px, body 17px. */
+  --type-base: 0.85rem;      /* 17px */
+  --type-h1: 2.25em;
+  --type-h2: 1.5em;
+  --type-h3: 1.1875em;
+  --type-h4: 1em;
+  --type-small: 0.8125em;
+  --type-code: 0.875em;
+  /* Interface chrome sizes in rem, not em: the nav and the table of contents
+     are outside .md-typeset, so an em there resolves against the root and
+     compounds down the tree. */
+  --type-ui: 0.7rem;
+  --type-ui-small: 0.62rem;
+
+  --leading-body: 1.7;
+  --leading-heading: 1.25;
+  --tracking-display: -0.02em;   /* large type needs to be pulled in */
+  --tracking-body: 0;
+  --tracking-caps: 0.06em;
+
+  /* Line length.  Prose is capped; code blocks, tables and figures are not,
+     because an 80-column Agda block that wraps is worse than a wide one. */
+  --measure: 33rem;              /* ~74 characters at the body size */
+  --measure-heading: 38rem;
+
+  /* 4px grid at a 20px root. */
+  --space-1: 0.2rem;
+  --space-2: 0.4rem;
+  --space-3: 0.6rem;
+  --space-4: 0.8rem;
+  --space-6: 1.2rem;
+  --space-8: 1.6rem;
+  --space-12: 2.4rem;
+  --space-16: 3.2rem;
+  --space-24: 4.8rem;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --border-width: 1px;
+}
+
+/* ══ Meridian -- alternative ═══════════════════════════════════════════════
+ *
+ * A neutral sans for reading, a serif for display, and one cool accent.  The
+ * greys carry a trace of blue so that pure-black code on pure-white paper --
+ * the combination that makes long reading tiring -- never occurs.
+ */
+
+[data-system="meridian"] {
+  --font-body: "Inter";
+  --font-display: "Newsreader";
+  --font-mono: "JuliaMono";
+
+  /* Both systems read in Inter, so both carry the same measured ratio; see the
+     Constellation block for where 1.27 comes from. */
+  --math-scale: 1.27em;
+  --display-weight: 500;
+  --strong-weight: 600;
+}
+
+[data-md-color-scheme="default"][data-system="meridian"] {
+  --c-bg: #ffffff;
+  --c-bg-raised: #f4f5f5;
+  --c-bg-sunken: #eceeee;
+  --c-fg: #14181a;
+  --c-fg-muted: #596265;
+  --c-fg-faint: #626b6e;
+  --c-line: #e1e4e4;
+  --c-line-strong: #c8cdcd;
+  --c-accent: #0f766e;
+  --c-accent-hover: #0b544e;
+  --c-accent-wash: #e6f2f0;
+  --c-on-accent: #ffffff;
+  --c-error: #b3261e;
+}
+
+[data-md-color-scheme="slate"][data-system="meridian"] {
+  --c-bg: #0b0e0f;
+  --c-bg-raised: #13181a;
+  --c-bg-sunken: #080a0b;
+  --c-fg: #e3e7e8;
+  --c-fg-muted: #94a0a3;
+  --c-fg-faint: #7d888b;
+  --c-line: #212829;
+  --c-line-strong: #333c3e;
+  --c-accent: #5eead4;
+  --c-accent-hover: #99f6e4;
+  --c-accent-wash: #10211f;
+  --c-on-accent: #06201d;
+  --c-error: #ff8a80;
+}
+
+
+/* ══ Constellation -- active ═══════════════════════════════════════════════
+ *
+ * The visual system of the agda-algebras documentation site
+ * (agda-algebras.universalalgebra.org), which is also MkDocs Material: indigo
+ * primary, coral accent, Space Grotesk for display over Inter for body.  It
+ * ships here because the two sites link to each other constantly, and looking
+ * like siblings is worth more than each having a separate voice.
+ *
+ * The values are that site's own, read out of its `stylesheets/custom.css`,
+ * with three exceptions.  Measured against `make contrast-audit`'s thresholds
+ * they fail as text, so they are adjusted here rather than adopted broken.
+ * These three are the only places the two sites deliberately differ, and the
+ * difference is reported upstream rather than hidden:
+ *
+ *   --c-fg-faint  light   #818bab -> #626b88   3.29:1 -> 5.15:1 on paper
+ *   --c-fg-faint  dark    #6a7197 -> #8189af   3.70:1 -> 5.14:1 on the raised surface
+ *   --c-accent-hover light #fb6a00 -> #b34b00  2.86:1 -> 5.22:1 on paper
+ *
+ * The coral survives unchanged in dark, where it is 7.34:1; it is only on
+ * paper that a saturated orange cannot carry text.
+ */
+
+:root,
+[data-system="constellation"] {
+  --font-body: "Inter";
+  --font-display: "Space Grotesk";
+  --font-mono: "JuliaMono";
+  /* Inline mathematics is set in KaTeX_Main, whose x-height is 0.431 em
+     against Inter's 0.546.  KaTeX ships 1.21em to compensate; 0.546/0.431 is
+     1.267, so this is the value that actually equalises the two x-heights.
+     Meridian reads in Inter too, so it carries the same number. */
+  --math-scale: 1.27em;
+  --display-weight: 600;
+  --strong-weight: 600;
+}
+
+[data-md-color-scheme="default"],
+[data-md-color-scheme="default"][data-system="constellation"] {
+  --c-bg: #fbfcff;
+  --c-bg-raised: #f2f5fb;
+  --c-bg-sunken: #eef0fc;
+  --c-fg: #181c2c;
+  --c-fg-muted: #535d75;
+  --c-fg-faint: #626b88;
+  --c-line: #e2e4f6;
+  --c-line-strong: #ccd0ec;
+  --c-accent: #5b54e6;
+  --c-accent-hover: #b34b00;
+  --c-accent-wash: #ecebfd;
+  --c-on-accent: #ffffff;
+  /* KaTeX renders a failed expression in errorColor, inline.  Its default
+     #cc0000 is legible on paper and 3.29:1 on the dark page, so it is a token
+     rather than a constant; katex-init.js passes `var(--c-error)` straight
+     through into the inline style. */
+  --c-error: #b3261e;
+}
+
+[data-md-color-scheme="slate"],
+[data-md-color-scheme="slate"][data-system="constellation"] {
+  --c-bg: #0c0e1d;
+  --c-bg-raised: #15172e;
+  --c-bg-sunken: #08091a;
+  --c-fg: #c3c8de;
+  --c-fg-muted: #9197b6;
+  --c-fg-faint: #8189af;
+  --c-line: #22253f;
+  --c-line-strong: #333757;
+  --c-accent: #8b88ff;
+  --c-accent-hover: #ff7a1a;
+  --c-accent-wash: #16183a;
+  --c-on-accent: #0c0e1d;
+  --c-error: #ff8a80;
+}
