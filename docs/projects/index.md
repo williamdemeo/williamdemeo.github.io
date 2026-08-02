@@ -35,13 +35,13 @@ Skills encoding Agda workflow knowledge, and the agent loops built on them.
 </div>
 
 <div class="project-card" markdown>
-**[agda-algebras](https://github.com/ualib/agda-algebras)**
+**[agda-algebras](agda-algebras.md)**
 
 A library of universal algebra in Agda, containing the first constructive,
 machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory, joint
 with Jacques Carette.
 
-`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag}
+`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag} `setoids`{.tag}
 
 [Source](https://github.com/ualib/agda-algebras) ·
 [Docs](https://agda-algebras.universalalgebra.org)

@@ -292,7 +292,20 @@ nav:
   # all the same word; a label that differs from its URL is small, permanent
   # friction.  The ordering *within* the page is a separate decision and is
   # argued in ADR-006.
-  - Projects: projects/index.md
+  # A section rather than a plain link, for the same mechanical reason as Blog
+  # below: `navigation.indexes` makes the section header itself the link to
+  # /projects/, and the project pages then list underneath it.  A portfolio is
+  # the one part of this site where a reader benefits from seeing the whole set
+  # without going back to the index first.
+  #
+  # This list is ordered, and its order is ADR-006's.  It is the second place
+  # that order is written down -- the index cards are the first -- so the two
+  # have to be changed together.  That is the cost of the nav listing; it is
+  # accepted because both are explicit lists in files under review, and a
+  # disagreement between them is visible on one screen.
+  - Projects:
+      - projects/index.md
+      - projects/agda-algebras.md
   # A section rather than a plain link, and the reason is in `features` above:
   # the blog plugin attaches Archive and Categories under `blog/index.md`'s
   # parent, and a top-level link has none.  `navigation.indexes` then makes
