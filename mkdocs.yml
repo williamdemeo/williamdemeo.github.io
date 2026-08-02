@@ -20,8 +20,12 @@ repo_url: https://github.com/williamdemeo/williamdemeo.github.io
 repo_name: williamdemeo/williamdemeo.github.io
 edit_uri: edit/main/docs/
 
+# HTML is allowed here, and the footer is the right home for the archive link:
+# reachable from every page, findable by a human, and not competing with the
+# primary nav.  M2-9 (#67) requires exactly that combination.
 copyright: >-
   Content CC BY 4.0, code MIT.  Built with MkDocs Material.
+  &middot; <a href="/archive/">Archive</a>
 
 # `docs/` predates this site as the home of project documentation.  Rather
 # than move those files and break links from the issue tracker, exclude them
@@ -31,12 +35,24 @@ copyright: >-
 exclude_docs: |
   GITHUB_PROJECT.md
   adr/
+  _snippets/
 
 # Reachable by URL but deliberately absent from the nav.  Declaring it here
 # rather than leaving it undeclared keeps `--strict` output clean, so a page
 # that is *accidentally* orphaned still stands out.
+# The archive (M2-9, #67) is the bulk of this: those pages are reachable at
+# the URLs they have always had and are listed on the archive index, but they
+# are deliberately absent from the primary nav -- kept for reference, not for
+# reading.
 not_in_nav: |
   design/rendering.md
+  archive/index.md
+  agda-ualib/**
+  python/**
+  talks/**
+  typefunc/**
+  probability-quiz/**
+  touchpad-forensics/**
 
 theme:
   name: material
@@ -111,7 +127,13 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  # The archived-page notice lives in docs/_snippets/archived.md and every
+  # archived page includes it, so its wording changes in one place.  M2-4 (#13)
+  # needs the same thing for dated posts and should reuse it rather than
+  # inventing a second one.
+  - pymdownx.snippets:
+      base_path: [docs/_snippets]
+      check_paths: true
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
