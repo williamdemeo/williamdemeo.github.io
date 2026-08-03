@@ -11,10 +11,17 @@
 #    Promoting this to an h2 reintroduces that unless the hero grows to about
 #    nine lines or the portrait shrinks to about 100px.  See #18.
 #
-# 2. The portrait's width is a percentage, not a pixel count, and it is what
-#    keeps the float from squeezing the prose to fifteen characters a line at
-#    360px.  Both are why the first `h2` on the page is "Featured projects",
-#    which starts below the float.
+# 2. The portrait is `align=right` *and* a `style` width, and the split is
+#    deliberate.  `align=right` is Material's documented way to float an image,
+#    and it is what selects `img[align=right]`, the rule that gives the float
+#    its gutter -- writing the float in the `style` instead drops that, and the
+#    prose then runs to within 4px of the photograph (measured at 1440px).  The
+#    width has to be a percentage, or the float squeezes the prose to about
+#    fifteen characters a line at 360px, and a percentage is not a conforming
+#    value for the `width` *attribute* -- so it goes in the `style`, where it
+#    is ordinary CSS.  Both are why the first `h2` on the page is "Featured
+#    projects", which starts below the float.  #88 would replace all of this
+#    with a component.
 #
 # The card order is a subset of ADR-006's, in ADR-006's relative order, and the
 # tags are copied from docs/projects/index.md.  Neither is a per-page call.
@@ -27,7 +34,7 @@ description: >-
 
 # William DeMeo
 
-![William DeMeo](assets/images/william-demeo.jpg){ style="float: right; width: 30%;" }
+![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=right style="width: 34%" }
 
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked
