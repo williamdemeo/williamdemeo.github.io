@@ -74,7 +74,7 @@ algebraic approach to constraint satisfaction.
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 
 [Thesis](https://arxiv.org/abs/1204.4305) ·
-[Papers](https://scholar.google.com/citations?user=y1OQ07QAAAAJ)
+[Papers](../publications.md)
 {.project-links}
 </div>
 
