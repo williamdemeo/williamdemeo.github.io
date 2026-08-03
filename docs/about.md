@@ -9,7 +9,7 @@ description: >-
 
 <figure markdown="span">
   ![William DeMeo in Nara, Japan](assets/images/william-demeo.jpg){ width="280" }
-  <figcaption>Nara, Japan</figcaption>
+  <figcaption>Nara, Japan 2004</figcaption>
 </figure>
 
 I am a mathematician working as a formal verification engineer on the Formal
