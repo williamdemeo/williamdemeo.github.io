@@ -23,6 +23,11 @@ four questions no single git command answers, and which is what makes `clean`
 safe to run without reading it first — and it can change the shell's working
 directory, which a git alias cannot.
 
+Nothing in it is specific to this repository — it reads the layout out of
+whichever one it runs in — so one installed copy serves every project on the
+machine. With `GIT_WT_PROJECTS` set, `wt <project> <branch>` starts work in any
+of them from anywhere and `wt clean --all` sweeps all of them at once.
+
 Installing is two lines in `~/.zshrc`; `make wt-list` and `make wt-clean` work
 without them. See [`git/README.md`](git/README.md) for the states, the
 configuration, and the plain git commands underneath. `make wt-test` runs

@@ -41,16 +41,17 @@ other git subcommand — in any repository, and inside scripts. The second
 defines the `wt` shell function, which runs the same tool and then `cd`s where
 it says.
 
-A third line is worth adding if one project is where you usually are:
+A third line is worth adding once more than one project is in play:
 
 ```zsh
-export GIT_WT_HOME="$HOME/git/williamdemeo/MKDOCS/williamdemeo.github.io/main"
+export GIT_WT_PROJECTS="$HOME/git/williamdemeo:$HOME/git/work"
 ```
 
 With it, `wt 82-m4-7-mathematics` works from a fresh terminal in `$HOME` —
-which is the `cd` that used to come before the other five commands. Inside any
-repository the surrounding one still wins, so this changes nothing about
-working elsewhere.
+which is the `cd` that used to come before the other five commands — and so do
+`wt agda-algebras 24-m4-2-agda-algebras` and `wt clean --all`. See [More than
+one project](#more-than-one-project). Inside a repository the surrounding one
+always wins, so this changes nothing about working where you already are.
 
 Both exist because **a process cannot change its parent's working directory**.
 `git wt 82-m4-7-mathematics` can create the worktree but cannot put you in it;
@@ -164,6 +165,54 @@ Without `--force` it refuses a worktree with uncommitted changes, and keeps the
 branch when the branch has commits of its own, so the work stays reachable by
 name after the directory is gone. It will not remove the main worktree.
 
+## More than one project
+
+Nothing in the tool is specific to a repository — it reads the layout out of
+whichever one it runs in — so the only thing four projects need is a way to
+name them. `GIT_WT_PROJECTS` is a `PATH`-style list of the directories that
+*contain* projects:
+
+```zsh
+export GIT_WT_PROJECTS="$HOME/git/williamdemeo:$HOME/git/work"
+```
+
+A project is a directory on that path holding either `<project>/main` — this
+layout — or a plain clone. Nothing is registered anywhere and nothing is
+installed per project: the name is the directory's name.
+
+```zsh
+wt agda-algebras 24-m4-2-agda-algebras   # start work there, from anywhere
+wt agda-algebras                         # go to that project's main worktree
+wt agda-algebras list                    # any subcommand, over there
+wt agda-algebras clean --yes
+wt clean --all                           # every project on the path at once
+wt list --all
+```
+
+**Two arguments always mean project-then-something. One argument means a branch
+in the repository you are standing in** — the surrounding project always wins,
+so `wt <name>` can never quietly send you somewhere else — unless you are not
+standing in one, and then it is a project name. `GIT_WT_HOME` still covers what
+is left: a single default project, for a one-argument call from `$HOME` that
+names no project.
+
+`--all` is the half worth having. Forgetting to clean up is per-project, so
+four projects would be four things to remember; `wt clean --all` is one dry run
+across all of them and `wt clean --all --yes` acts on it. Each project is
+fetched, judged and reported separately under its own heading, and `--all` does
+not need you to be inside a repository at all — a fresh terminal in `$HOME` is
+where you would run it.
+
+Per-project differences do not belong in your shell config either. `wt.root`,
+`wt.remote` and `wt.base` are git config keys, so each repository carries its
+own answer in `.git/config`, `git config --global` sets the default for the
+rest, and git's conditional includes cover a whole family at once:
+
+```gitconfig
+[includeIf "gitdir:~/git/work/**"]
+    path = ~/.config/git/work.conf     # wt.base = develop, for everything under work/
+```
+
 ## Configuration
 
 Each is an environment variable, falling back to a git config key, falling back
@@ -176,7 +225,8 @@ worktree; every worktree of a repository shares one config.
 | `GIT_WT_REMOTE` | `wt.remote` | `origin` |
 | `GIT_WT_BASE` | `wt.base` | what `refs/remotes/origin/HEAD` points at, then `main`, then `master` |
 | `GIT_WT_DIRENV` | — | on; `0` never runs `direnv allow` |
-| `GIT_WT_HOME` | — | unset; the repository to act on when the working directory is not inside one |
+| `GIT_WT_PROJECTS` | — | unset; `PATH`-style list of directories that contain projects |
+| `GIT_WT_HOME` | — | unset; the repository to act on when the working directory is not inside one and the argument names no project |
 | `GIT_WT_CD_FILE` | — | unset; the wrapper sets it |
 
 The default root is what this project already does: a main worktree at

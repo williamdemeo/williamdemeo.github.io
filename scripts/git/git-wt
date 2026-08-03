@@ -42,10 +42,14 @@
 #                              refs/remotes/<remote>/HEAD points at, then
 #                              main, then master.
 #   GIT_WT_DIRENV              0 to never run `direnv allow`
+#   GIT_WT_PROJECTS            a PATH-style list of directories that contain
+#                              projects.  Makes `wt <project> <branch>` and
+#                              `wt clean --all` work.  See "Projects" below.
 #   GIT_WT_HOME                a repository to work on when the working
-#                              directory is not inside one.  Set it to the
-#                              main worktree of the project you are usually
-#                              in, and `wt <branch>` works from $HOME.
+#                              directory is not inside one and the argument
+#                              names no project.  Set it to the main worktree
+#                              of the project you are usually in, and `wt
+#                              <branch>` works from $HOME.
 #   GIT_WT_CD_FILE             if set, the destination directory is written
 #                              here for a shell wrapper to cd to
 #
@@ -61,6 +65,151 @@ prog='git wt'
 say()  { printf '%s\n' "$*" >&2; }
 warn() { printf '%s: %s\n' "$prog" "$*" >&2; }
 die()  { warn "$*"; exit 1; }
+
+tilde() { # abbreviate $HOME, for output only
+  case $1 in
+    "${HOME:-/nonexistent}"/*) printf '~%s\n' "${1#"${HOME:-}"}" ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
+# ── Projects ────────────────────────────────────────────────────────────────
+#
+# One tool, several projects.  GIT_WT_PROJECTS is a PATH-style list of the
+# directories that *contain* projects:
+#
+#     export GIT_WT_PROJECTS=$HOME/git/williamdemeo:$HOME/git/work
+#
+# With it, `wt agda-algebras 24-m4-2-agda-algebras` works from anywhere, `wt
+# agda-algebras` on its own goes to that project's main worktree, and `wt
+# clean --all` sweeps every project at once -- which is the whole point, since
+# forgetting to clean up is per-project and four projects is four things to
+# remember.
+#
+# Nothing about a project is registered anywhere: its name is a directory
+# name, and everything else is read out of the repository once we are in it.
+
+# Resolved before anything can cd, because both the project selector and
+# --all re-exec this script.
+self=$0
+case $self in
+  */*) self=$(cd "$(dirname "$self")" 2>/dev/null && pwd)/${self##*/} ;;
+  *) self=$(command -v "$self" 2>/dev/null) || self=git-wt ;;
+esac
+
+main_worktree_of() { # a directory -> the main worktree of the repo holding it
+  git -C "$1" rev-parse --git-dir >/dev/null 2>&1 || return 1
+  git -C "$1" worktree list --porcelain | awk '/^worktree /{print substr($0,10); exit}'
+}
+
+# <project>/main first, because that is the layout worktrees imply -- the base
+# branch in `main`, beside a `worktrees` directory.  A plain clone works too.
+# Either way what comes back is the main worktree, never a linked one.
+project_at() {
+  [ -d "$1" ] || return 1
+  main_worktree_of "$1/main" || main_worktree_of "$1"
+}
+
+resolve_project() { # a name on the search path, or a path -> its main worktree
+  local dir
+  [ -n "${1:-}" ] || return 1
+  [ -d "$1" ] && project_at "$1" && return 0
+  [ -n "${GIT_WT_PROJECTS:-}" ] || return 1
+  local IFS=:
+  for dir in $GIT_WT_PROJECTS; do
+    [ -n "$dir" ] && project_at "$dir/$1" && return 0
+  done
+  return 1
+}
+
+discover_projects() { # every project on the search path, one per line
+  local dir entry p seen=''
+  [ -n "${GIT_WT_PROJECTS:-}" ] || return 1
+  local IFS=:
+  for dir in $GIT_WT_PROJECTS; do
+    [ -d "$dir" ] || continue
+    for entry in "$dir"/*; do
+      [ -d "$entry" ] || continue
+      p=$(project_at "$entry") || continue
+      case $seen in *"|$p|"*) continue ;; esac
+      seen="$seen|$p|"
+      printf '%s\n' "$p"
+    done
+  done
+}
+
+# `--all` runs a subcommand in every project on the search path, and the
+# project selector below runs one in a named project.  Both re-exec rather
+# than cd, because the layout is read once at startup: the honest way to work
+# on another repository is to start again inside it.  The environment survives
+# an exec, GIT_WT_CD_FILE included, so a selected project can still move the
+# shell -- while a sweep clears it, having no single destination to offer.
+sweep() { # subcommand, then its arguments
+  local sub=$1 projects project rc=0
+  shift
+  projects=$(discover_projects) ||
+    die 'GIT_WT_PROJECTS is not set, so there are no other projects to sweep'
+  [ -n "$projects" ] || die "no projects found on GIT_WT_PROJECTS=$GIT_WT_PROJECTS"
+  while IFS= read -r project; do
+    printf '\n=== %s ===\n' "$(tilde "$project")"
+    # GIT_WT_SWEEP so the dry run tells you to re-run the command you actually
+    # typed -- `clean --all --yes`, not the `clean --yes` each project sees.
+    (cd "$project" && GIT_WT_CD_FILE='' GIT_WT_SWEEP=1 "$self" "$sub" "$@") || rc=1
+  done <<EOF
+$projects
+EOF
+  return $rc
+}
+
+# Two arguments always mean project-then-something, so every subcommand works
+# on another project: `wt agda-algebras list`, `wt agda-algebras clean --yes`.
+# One argument means a branch in the repository you are standing in -- the
+# surrounding project always wins, so this can never quietly send you
+# somewhere else -- unless you are not standing in one, and then it is a
+# project name.
+case ${1:-} in
+  '' | -* | new | add | list | ls | clean | prune | rm | remove | path | main | help) ;;
+  *)
+    if [ $# -ge 2 ] || ! git rev-parse --git-dir >/dev/null 2>&1; then
+      if project=$(resolve_project "$1"); then
+        cd "$project" || die "cannot enter $project"
+        shift
+        exec "$self" "$@"
+      fi
+    fi
+    ;;
+esac
+
+has_option() { # an option, then the arguments to look for it in
+  local want=$1 arg
+  shift
+  for arg in ${@+"$@"}; do [ "$arg" = "$want" ] && return 0; done
+  return 1
+}
+
+# --all is read here rather than inside `list` and `clean` because sweeping
+# every project does not need -- and must not require -- standing in one of
+# them: `wt clean --all` from a fresh terminal in $HOME is the point of it.
+# Everything else on the line is forwarded to each project's own run.
+case ${1:-} in
+  list | ls | clean | prune)
+    if has_option --all "$@" || has_option -a "$@"; then
+      sub=$1
+      case $sub in ls) sub=list ;; prune) sub=clean ;; esac
+      shift
+      nfwd=0
+      fwd=()
+      for arg in ${@+"$@"}; do
+        case $arg in
+          -a | --all) ;;
+          *) fwd[$nfwd]=$arg; nfwd=$((nfwd + 1)) ;;
+        esac
+      done
+      sweep "$sub" ${fwd[@]+"${fwd[@]}"}
+      exit $?
+    fi
+    ;;
+esac
 
 # ── The repository ──────────────────────────────────────────────────────────
 #
@@ -132,19 +281,24 @@ usage: $prog <branch>               create or reuse <branch>'s worktree, and cd 
        $prog path <branch>          print where <branch>'s worktree is, or would be
        $prog main                   cd to the main worktree
 
+       $prog <project> <anything>   any of the above, in another project on
+                                    GIT_WT_PROJECTS -- \`$prog site clean --yes\`
+
   -n, --no-fetch    (new, list, clean) do not fetch first; judge by the refs
                     already here.  \`new\` also skips fast-forwarding $base.
       --no-direnv   (new) do not run \`direnv allow\` in the new worktree
   -y, --yes         (clean) actually remove them; without it this is a dry run
+  -a, --all         (list, clean) every project on GIT_WT_PROJECTS at once
   -f, --force       (rm) remove a worktree with uncommitted changes, and delete
                     its branch even when its commits are not merged
 
 main worktree  $main_wt
 worktree root  $wt_root
 base branch    $remote/$base
+projects       ${GIT_WT_PROJECTS:-(GIT_WT_PROJECTS is unset)}
 
-Those three come from wt.root, wt.remote and wt.base in git config, or from
-GIT_WT_ROOT, GIT_WT_REMOTE and GIT_WT_BASE.  See scripts/git/README.md.
+The first three come from wt.root, wt.remote and wt.base in git config, or
+from GIT_WT_ROOT, GIT_WT_REMOTE and GIT_WT_BASE.  See scripts/git/README.md.
 EOF
 }
 
@@ -157,13 +311,6 @@ EOF
 emit_cd() {
   [ -n "${GIT_WT_CD_FILE:-}" ] && printf '%s\n' "$1" >"$GIT_WT_CD_FILE"
   return 0
-}
-
-tilde() { # abbreviate $HOME, for output only
-  case $1 in
-    "${HOME:-/nonexistent}"/*) printf '~%s\n' "${1#"${HOME:-}"}" ;;
-    *) printf '%s\n' "$1" ;;
-  esac
 }
 
 # ── Reading the worktree list ───────────────────────────────────────────────
@@ -512,8 +659,10 @@ cmd_clean() {
   done
 
   if [ "$apply" -eq 0 ]; then
-    printf '\nnothing was removed.  Re-run as `%s clean --yes` to remove the %d above.\n' \
-      "$prog" "$n"
+    local retry='clean --yes'
+    [ -n "${GIT_WT_SWEEP:-}" ] && retry='clean --all --yes'
+    printf '\nnothing was removed.  Re-run as `%s %s` to remove the %d above.\n' \
+      "$prog" "$retry" "$n"
     return 0
   fi
 

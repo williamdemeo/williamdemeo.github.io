@@ -75,5 +75,10 @@ elif [ -n "${BASH_VERSION:-}" ]; then
   _wt_complete() {
     COMPREPLY=($(compgen -W "$(_wt_candidates)" -- "${COMP_WORDS[COMP_CWORD]}"))
   }
-  complete -F _wt_complete wt
+  # Programmable completion is a compile-time option, and a bash built without
+  # it is rare but real -- nixpkgs' non-interactive build is one.  Sourcing
+  # this file must not fail there over a convenience.
+  if type complete >/dev/null 2>&1; then
+    complete -F _wt_complete wt
+  fi
 fi

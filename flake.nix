@@ -391,12 +391,22 @@
           # the tool existed, and both failures are silent.  The test builds
           # its own remote and clones in $TMPDIR, so it needs git and nothing
           # else.
+          #
+          # The copy and patchShebangs are not ceremony either: the sandbox has
+          # no /usr/bin/env, so a `#!/usr/bin/env bash` script is unrunnable
+          # there -- the kernel reports it as "required file not found", which
+          # reads like a missing script rather than a missing interpreter.  The
+          # test executes git-wt the way a shell does rather than passing it to
+          # bash, because that is how it is used, so the shebang has to work.
           worktree-tooling = pkgs.runCommandLocal "check-worktree-tooling"
             {
               nativeBuildInputs = [ pkgs.git ];
             }
             ''
-              bash ${worktreeSource}/scripts/git/test_git_wt.sh
+              cp -r ${worktreeSource}/scripts/git ./git-tools
+              chmod -R u+w ./git-tools
+              patchShebangs ./git-tools
+              bash ./git-tools/test_git_wt.sh
               touch "$out"
             '';
 

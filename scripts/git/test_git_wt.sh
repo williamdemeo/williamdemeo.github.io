@@ -21,6 +21,19 @@ set -uo pipefail
 script=$(cd "$(dirname "$0")" && pwd)/git-wt
 [ -x "$script" ] || { echo "not executable: $script" >&2; exit 2; }
 
+# The script is executed the way a shell executes it, not handed to bash, so
+# its shebang has to resolve.  Where it does not -- a sandbox with no
+# /usr/bin/env, which is every Nix builder -- the kernel's ENOENT arrives as
+# exit 127 on every single check, and "required file not found" reads like a
+# missing script rather than a missing interpreter.  One check up front says
+# so once instead of sixty times.
+"$script" --help >/dev/null 2>&1
+if [ $? -eq 127 ]; then
+  printf '%s cannot be executed: its interpreter is missing.\n' "$script" >&2
+  printf 'A sandbox with no /usr/bin/env needs patchShebangs first.\n' >&2
+  exit 2
+fi
+
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
@@ -311,6 +324,62 @@ GIT_WT_HOME="$main" run "$tmp" path remote-only
 is "$out" "$roots/remote-only" 'GIT_WT_HOME: works on that repository from outside any'
 GIT_WT_HOME="$tmp/not-a-repo" run "$tmp" list
 is "$rc" 1 'GIT_WT_HOME: a path that is not a repository fails'
+
+# ── Several projects ────────────────────────────────────────────────────────
+#
+# GIT_WT_PROJECTS lists directories that *contain* projects, so this is a
+# container holding three of them, each laid out as <project>/main.  One is
+# named after a branch that exists in the first repository, which is the
+# collision the precedence rule has to survive.
+
+hub="$tmp/hub"
+git clone --quiet "$origin" "$hub/alpha/main"
+git clone --quiet "$origin" "$hub/beta/main"
+git clone --quiet "$origin" "$hub/remote-only/main"
+
+# From outside any repository, one argument is a project name.
+GIT_WT_PROJECTS="$hub" run "$tmp" alpha
+is "$dest" "$hub/alpha/main" 'projects: a name on the search path is a project'
+
+# Two arguments are always project-then-something, even standing in another
+# repository -- and the destination survives the re-exec into it.
+GIT_WT_PROJECTS="$hub" run "$main" alpha merged-work
+is "$dest" "$hub/alpha/worktrees/merged-work" 'projects: <project> <branch> works from another repository'
+exists "$hub/alpha/worktrees/merged-work" 'projects: and really makes the worktree there'
+
+GIT_WT_PROJECTS="$hub" run "$main" beta list
+has "$out" "hub/beta/main" 'projects: <project> <command> runs the command over there'
+
+GIT_WT_PROJECTS="$hub" run "$tmp" "$hub/alpha" path some-branch
+is "$out" "$hub/alpha/worktrees/some-branch" 'projects: a path names a project too'
+
+# The repository you are standing in always wins for a single argument, even
+# when a project has the same name as the branch.
+GIT_WT_PROJECTS="$hub" run "$main" remote-only
+is "$dest" "$roots/remote-only" 'projects: one argument is a branch here, not a project elsewhere'
+
+GIT_WT_PROJECTS="$hub" run "$tmp" no-such-project
+is "$rc" 1 'projects: an unknown name outside a repository fails'
+
+# ── clean --all ─────────────────────────────────────────────────────────────
+
+GIT_WT_PROJECTS="$hub" run "$tmp" clean --all
+is "$rc" 0 'clean --all: exits 0'
+has "$out" "hub/alpha/main" 'clean --all: reaches the first project'
+has "$out" "hub/beta/main" 'clean --all: reaches the second'
+exists "$hub/alpha/worktrees/merged-work" 'clean --all: is still a dry run'
+
+GIT_WT_PROJECTS="$hub" run "$tmp" clean --all --yes
+absent "$hub/alpha/worktrees/merged-work" 'clean --all --yes: removes across projects'
+is "$(git -C "$hub/alpha/main" branch --list merged-work)" '' 'clean --all --yes: and their branches'
+exists "$main" 'clean --all --yes: leaves main worktrees alone'
+
+GIT_WT_PROJECTS="$hub" run "$tmp" list --all
+has "$out" "hub/beta/main" 'list --all: reports every project'
+
+run "$main" clean --all
+is "$rc" 1 'clean --all: fails when GIT_WT_PROJECTS is not set'
+has "$out" 'GIT_WT_PROJECTS' 'clean --all: says what is missing'
 
 # ── ─────────────────────────────────────────────────────────────────────────
 
