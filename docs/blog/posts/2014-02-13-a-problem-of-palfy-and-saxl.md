@@ -13,7 +13,7 @@ description: >-
 ---
 Suppose the lattice shown below is a congruence lattice of an algebra.
 
-![](../../assets/images/PSM4.png)
+![](../../assets/images/PSM4.png){ width="293" height="253" }
 
 **Conjecture:**
 If the three $\alpha_i$'s pairwise permute, then all pairs in the lattice permute. 

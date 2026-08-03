@@ -8,7 +8,7 @@ description: >-
 # About
 
 <figure markdown="span">
-  ![William DeMeo in Nara, Japan](assets/images/william-demeo.jpg){ width="280" }
+  ![William DeMeo in Nara, Japan](assets/images/william-demeo.jpg){ width="280" height="373" }
   <figcaption>Nara, Japan 2004</figcaption>
 </figure>
 

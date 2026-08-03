@@ -37,7 +37,7 @@ date: '2019-02-01'
 
     You should arrive at a page that looks like this:
 
-    ![image](../../../assets/images/Sage-login.png)
+    ![image](../../../assets/images/Sage-login.png){ width="902" height="511" }
 
 2. Using your Iowa State username and a password supplied by your instructor, login to your Sage account.
 
@@ -45,7 +45,7 @@ date: '2019-02-01'
 
     If all went well, you will now see a page that looks like this:
 
-    ![image](../../../assets/images/Lab1-screen.png)\
+    ![image](../../../assets/images/Lab1-screen.png){ width="958" height="378" }
 
 4. Click somewhere inside the wide rectangular box (or “cell”) and type the expression 2\*2. Then type Shift+Enter (hold down the Shift key and press Enter; or simply click ‘evaluate‘).
 
