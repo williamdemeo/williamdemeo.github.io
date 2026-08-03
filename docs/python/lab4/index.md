@@ -89,7 +89,7 @@ Enter these commands in a Sage worksheet cell and make sure you get the answer `
 
 Recall the linear transformation from Homework Exercise 4.3.7,
 
-$$T(\mathbf{x} = T\begin{bmatrix} x_1\\x_2\\x_3 \end{bmatrix} =\begin{bmatrix}-x_1 + 2x_2 + x_3\\x_2 + 3x_3\\x_1 - x_2 + x_3\end{bmatrix}.$$
+$$T(\mathbf{x}) = T\begin{bmatrix} x_1\\x_2\\x_3 \end{bmatrix} =\begin{bmatrix}-x_1 + 2x_2 + x_3\\x_2 + 3x_3\\x_1 - x_2 + x_3\end{bmatrix}.$$
 
 Use Sage to find the matrix representation of $T$ by following these steps.
 
