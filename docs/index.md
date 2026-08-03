@@ -11,9 +11,9 @@
 #    Promoting this to an h2 reintroduces that unless the hero grows to about
 #    nine lines or the portrait shrinks to about 100px.  See #18.
 #
-# 2. The portrait is `align=right` *and* a `style` width, and the split is
-#    deliberate.  `align=right` is Material's documented way to float an image,
-#    and it is what selects `img[align=right]`, the rule that gives the float
+# 2. The portrait is `align=left` *and* a `style` width, and the split is
+#    deliberate.  `align=left` is Material's documented way to float an image,
+#    and it is what selects `img[align=left]`, the rule that gives the float
 #    its gutter -- writing the float in the `style` instead drops that, and the
 #    prose then runs to within 4px of the photograph (measured at 1440px).  The
 #    width has to be a percentage, or the float squeezes the prose to about
@@ -34,7 +34,7 @@ description: >-
 
 # William DeMeo
 
-![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=right style="width: 34%" }
+![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=left style="width: 26%" }
 
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked
