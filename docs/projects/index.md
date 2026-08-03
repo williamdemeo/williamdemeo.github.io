@@ -1,6 +1,6 @@
 ---
 # Adding a card, or filling one in when its page lands: docs/projects/_template.md.
-# The order is argued in ADR-006 and is not a per-page call.
+# The order is argued in ADR-008 and is not a per-page call.
 #
 # A YAML comment rather than an HTML one, because an HTML comment in the body
 # survives into the rendered page -- verified by grepping site/projects/index.html
