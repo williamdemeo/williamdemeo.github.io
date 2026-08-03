@@ -1,7 +1,8 @@
 ---
 title: agda-algebras
 description: >-
-  A formalization of universal algebra in Agda, containing a fully constructive
+  A formalization of universal algebra in Agda, built as a substrate for
+  research in the subject; its flagship result is a fully constructive
   machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory.
 ---
 
@@ -145,6 +146,12 @@ Version 3.0 is a reconstruction rather than a release, and it is not finished.
    universal-algebra foundation, each with a Σ-typed core and a record-typed bundle
    view for standard-library interoperability.
 +  A **cubical** development is the long-term target for 4.0, and is currently a stub.
++  The `FLRP/` tree is the first attempt to use the library the way it was meant to be
+   used: as a substrate for *new* research rather than a record of settled results.  It
+   carries a research program on the [finite lattice representation
+   problem](universal-algebra.md), open since the 1960s, with the problem stated as a
+   type, two of the methods from my thesis machine-checked, and 27 small-lattice
+   representation certificates that the type-checker re-verifies rather than trusts.
 
 The honest statement of the library's condition is the one its own ADR makes: the
 setoid tree was declared canonical before it was self-sufficient, and several of

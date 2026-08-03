@@ -39,9 +39,11 @@ CSPs over finite and infinite structures.
 
 Wanting those arguments to be checkable rather than merely careful took me into
 **formalization of mathematics in dependent type theory**, and to
-[agda-algebras](https://github.com/ualib/agda-algebras) — a library of universal
-algebra in Agda, which contains a machine-checked proof of Birkhoff's HSP
-theorem in Martin-Löf type theory, joint with Jacques Carette.
+[agda-algebras](https://github.com/ualib/agda-algebras) — a formalization of
+universal algebra in Agda, built to be a working substrate for research in the
+subject rather than a proof of any one theorem, though its flagship result is a
+machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory, joint
+with Jacques Carette.
 
 That in turn led to **formal methods in industry**: specifying a production
 blockchain ledger in Agda is a different discipline from formalizing a

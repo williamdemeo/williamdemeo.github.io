@@ -23,8 +23,11 @@
 #    projects", which starts below the float.  #88 would replace all of this
 #    with a component.
 #
-# The card order is a subset of ADR-006's, in ADR-006's relative order, and the
+# The card order is a subset of ADR-008's, in ADR-008's relative order, and the
 # tags are copied from docs/projects/index.md.  Neither is a per-page call.
+# (ADR-008 is the portfolio-shape decision.  It was numbered 006 until #86 gave
+# it its own number; ADR-006 is the bibliography decision and is a different
+# document.)
 title: William DeMeo
 description: >-
   Mathematician and formal verification engineer working on machine-checked
@@ -68,8 +71,9 @@ agent loops built on it.
 <div class="project-card" markdown>
 **[agda-algebras](projects/agda-algebras.md)**
 
-The first constructive, machine-checked proof of Birkhoff's HSP theorem in
-Martin-Löf type theory.
+A formalization of universal algebra in Agda, and a substrate for research in
+it; the flagship result is a constructive, machine-checked proof of Birkhoff's
+HSP theorem in Martin-Löf type theory.
 
 `Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag} `setoids`{.tag}
 
@@ -92,7 +96,7 @@ system under active development.
 </div>
 
 <div class="project-card" markdown>
-**[Universal algebra and lattice theory](https://arxiv.org/abs/1204.4305)**
+**[Universal algebra and lattice theory](projects/universal-algebra.md)**
 
 Congruence lattices of finite algebras, and the algebraic approach to
 determining the complexity of constraint satisfaction problems.
