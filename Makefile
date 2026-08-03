@@ -291,6 +291,50 @@ publications-test: $(MKDOCS_DEP)
 	@$(PYTHON) scripts/python/test_gen_publications.py
 	@$(PYTHON) scripts/python/test_verify_bibliography.py
 
+# ── CV ──────────────────────────────────────────────────────────────────────
+#
+# cv.yml is the only authoritative CV source (ADR-003).  It was merged from
+# four copies that disagreed, three of which are snapshotted under
+# import/legacy-cv/ so the check needs no network and can gate in CI.
+#
+# `cv-check` is the whole point of the exercise: it reads all four copies and
+# fails unless every entry in every one of them is either carried in cv.yml or
+# named in its `omissions:` list with a reason.  "Nothing was silently lost" is
+# a claim about 767 entries, and prose cannot make it.
+#
+# `cv-inventory` regenerates the extracted entry list that check reads.  It is
+# committed, so what the checker sees is reviewable in a diff -- and so an
+# extractor that breaks and finds nothing fails `cv-check` instead of reporting
+# a clean run over an empty list.  Regenerate it only when a copy or an
+# extractor changes, and read the diff.
+#
+# Publications are deliberately not in cv.yml: bibliography.json is the only
+# authoritative list (ADR-006), and `cv-check` resolves the publication entries
+# in the legacy copies against *that* file, which is what keeps the boundary
+# between the two checkable rather than merely asserted.
+#
+# Stdlib plus yaml, which arrives with MkDocs exactly as it does for the
+# redirect scripts.  Nothing new in requirements.txt, so nothing for flake.nix
+# to match under ADR-004's requirements-pins check.
+
+.PHONY: cv-check cv-inventory cv-explain cv-test
+
+## Fail if any entry in any legacy CV copy is neither carried nor declared
+cv-check: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/check_cv_sources.py
+
+## Regenerate import/legacy-cv/inventory.tsv from the snapshots
+cv-inventory: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/check_cv_sources.py --write
+
+## Print what covers each source entry, or why it is being dropped
+cv-explain: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/check_cv_sources.py --explain
+
+## Unit-test the extractors and the coverage rule
+cv-test: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/test_cv_sources.py
+
 ## Show this help
 help:
 	@echo "Targets:"

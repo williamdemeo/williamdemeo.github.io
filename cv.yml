@@ -1,0 +1,977 @@
+# The CV, as data.  The only authoritative copy.  See ADR-003.
+#
+# Four copies of the CV existed and they disagreed: the `williamdemeo/cv`
+# README (January 2025), the Zola site's `cv/index.md` (December 2021), the
+# `demeo_cv.pdf` in the GitLab job-app repository (June 2022), and `docs/cv.md`.
+# They are merged here.  The three that are not `docs/cv.md` are snapshotted
+# under `import/legacy-cv/` and nothing edits them.
+#
+# ── What is *not* here ─────────────────────────────────────────────────────
+#
+# **Publications.**  `bibliography.json` is the only authoritative publication
+# list (ADR-006), and `docs/cv.md` includes the snippet
+# `gen_publications.py` renders from it.  The `publications:` block below holds
+# ids, not publications: it exists so `check_cv_sources.py` can prove that
+# every publication in every legacy copy reached that file, and for no other
+# reason.  Adding a paper means editing `bibliography.json`, never this file.
+#
+# ── The checker ────────────────────────────────────────────────────────────
+#
+#     make cv-check
+#
+# reads all four copies and fails unless every entry in every one of them is
+# either covered by an entry here or named in `omissions:` with a reason.  It
+# is not looking for a well-formed file; it is looking for the thing this merge
+# could plausibly have lost.
+#
+# ── Fields ─────────────────────────────────────────────────────────────────
+#
+# `aliases:`   How other copies wrote the same thing.  Not decoration: the
+#              checker asks whether an entry contains every significant word of
+#              a source entry, so an abbreviation only one copy used lives here
+#              rather than being lost or smuggled into the prose.
+#
+# `disputed:`  Two copies assert different facts and the disagreement is
+#              unresolved.  These are William's to settle, not the merge's, and
+#              a field that says so is better than a silent pick.  Every one is
+#              listed in ADR-003.
+#
+# `sources:`   Not used.  Provenance is proved by the checker against the
+#              snapshots rather than asserted per entry -- a hand-maintained
+#              provenance list is another copy that can drift.
+
+meta:
+  title: Curriculum Vitae
+  name: William DeMeo
+  merged: 2026-08-03
+  # #42 (M7-2) brings the content current; #41 (M7-1) renders it to web and
+  # PDF.  This file is the merge, not the rewrite: where the copies disagreed
+  # about wording it keeps what they said.
+
+contact:
+  email: williamdemeo@gmail.com
+  url: https://williamdemeo.org
+  aliases:
+    - williamdemeo.org
+    - url
+    - tel
+    - address
+    - Praha 8, Cech Republic
+    - Charles University in Prague, Sokolovska 49/83, 186 75
+    - Department of Algebra
+  # The street addresses and telephone numbers three copies carried are in
+  # `omissions:`.  A CV on a public website has no use for them.
+
+research_interests:
+  - summary: >-
+      Interactive theorem proving and formalization of mathematics (Agda, Lean);
+      formal methods for production systems; AI tooling for proof assistants and
+      machine reasoning over verifiable domains; universal algebra, lattice
+      theory, and the algebraic approach to computational complexity.
+    theory: >-
+      Universal algebra, logic, lattice theory, proof theory, category theory,
+      type theory, complexity theory, algorithmic complexity, machine learning.
+    practice: >-
+      Proof mechanization in Agda and Lean, computer-aided mathematics, formal
+      verification, functional programming for AI, ML and Big Data in
+      Scala/Spark.
+    # Each copy stated these differently, at four different moments.  The
+    # vocabulary of all four is kept so that none of it is lost before #42
+    # rewrites the section.
+    aliases:
+      - Computational complexity, type theory, artificial intelligence
+      - dsLLM, RAG, Scala/Spark, PyTorch
+      - Computer-aided mathematics (ITP in Agda and Lean)
+      - formal methods for blockchain research
+      - Theory. Practice.
+      - functional programming for Big Data
+
+education:
+  - degree: Doctor of Philosophy in Mathematics
+    aliases: [PhD Mathematics]
+    institution: University of Hawaii
+    place: Honolulu
+    completed: May 2012
+    thesis: Congruence lattices of finite algebras
+    thesis_url: https://arxiv.org/abs/1204.4305
+    advisor: Ralph Freese
+    advisor_url: http://math.hawaii.edu/~ralph/
+    institution_url: https://math.hawaii.edu/wordpress/
+
+  - degree: Master of Science in Mathematics
+    aliases: [MS Mathematics, New York University Courant Institute]
+    institution: Courant Institute of Mathematical Sciences, NYU
+    place: New York
+    thesis: Approximating eigenvalues of large stochastic matrices
+    thesis_url: https://williamdemeo.github.io/MSThesis/
+    advisor: Jonathan Goodman
+    advisor_url: https://www.math.nyu.edu/faculty/goodman/index.html
+    institution_url: https://cims.nyu.edu/
+
+  - degree: Bachelor of Arts in Economics
+    aliases: [BA Economics]
+    institution: University of Virginia
+    place: Charlottesville
+    institution_url: https://www.virginia.edu/
+
+appointments:
+  - role: Formal Verification Engineer
+    kind: industry
+    team: Formal Methods Team
+    institution: IO
+    aliases: [IOHK]
+    place: Boulder
+    start: 2023
+    end: present
+    url: https://iohk.io/
+    note: >-
+      Formal verification of the Cardano blockchain ledger specification in
+      Agda.  2 years.
+    project_url: https://github.com/IntersectMBO/formal-ledger-specifications
+    # The `williamdemeo/cv` README links input-output-hk/formal-ledger-
+    # specifications, which redirects to the IntersectMBO org the repository
+    # moved to.  The current name is used here.
+
+  - role: Senior University Lecturer
+    kind: academic
+    department: Computer Science Dept.
+    aliases: [Computer Sci Dept, Adjunct Instructor, New Jersey Inst of Tech]
+    institution: New Jersey Inst. of Technology
+    place: Newark
+    start: 2022
+    end: 2023
+    url: https://cs.njit.edu/
+    note: >-
+      Taught courses in foundations of computing, big data, and artificial
+      intelligence.  18 months.
+    disputed: >-
+      Title and end date.  The 2022 CV says "Adjunct Instructor" and leaves the
+      appointment open ("2022--"); the 2025 README says "Senior University
+      Lecturer" and "2022--2023".  The README is the more recent statement and
+      is used, but the two were written a year apart about the same job and only
+      William can say which is right.
+
+  - role: Software Engineer
+    kind: industry
+    team: Library Team
+    institution: RelationalAI
+    place: New York
+    start: 2022
+    end: 2023
+    url: https://relational.ai/
+    note: >-
+      Developed the Standard Library of the Rel declarative programming
+      language.  9 months.
+    # Present in the 2025 README and in docs/about.md; in neither the 2021 Zola
+    # copy nor the 2022 PDF, both of which predate or overlap it.
+
+  - role: Postdoctoral Research Fellow
+    kind: academic
+    department: Algebra Dept.
+    aliases: [Postdoctoral Fellow, Postdoctoral Research Associate]
+    institution: Charles University
+    place: Prague
+    start: 2019
+    end: 2021
+    url: https://ka.karlin.mff.cuni.cz/
+
+  - role: Burnett Meyer Instructor
+    kind: academic
+    department: Mathematics Dept.
+    institution: University of Colorado
+    place: Boulder
+    start: 2017
+    end: 2019
+    url: https://www.colorado.edu/math/
+
+  - role: Visiting Assistant Professor
+    kind: academic
+    department: Mathematics Dept.
+    institution: University of Hawaii
+    aliases: [University of Hawai`i]
+    place: Honolulu
+    start: 2016
+    end: 2017
+    url: https://math.hawaii.edu/wordpress/
+
+  - role: Postdoctoral Associate
+    kind: academic
+    department: Mathematics Dept.
+    institution: Iowa State University
+    place: Ames
+    start: 2014
+    end: 2016
+    url: https://math.iastate.edu/
+
+  - role: Visiting Assistant Professor
+    kind: academic
+    department: Mathematics Dept.
+    institution: Univ South Carolina
+    aliases: [University of South Carolina]
+    place: Columbia
+    start: 2012
+    end: 2014
+    url: https://sc.edu/study/colleges_schools/artsandsciences/mathematics/index.php
+
+  - role: Senior Research Scientist
+    kind: industry
+    department: Imaging Research Dept.
+    # The 2025 README writes the same paragraph in the past tense, and the
+    # PDF sets NEO and the lab acronyms in small caps, one per line.
+    aliases: [Research Scientist, Digital Imaging Research, Industry Appointments,
+              NEO, Developed]
+    institution: Textron Systems Corp.
+    place: Maui
+    start: 2001
+    end: 2006
+    url: https://www.textronsystems.com/
+    note: >-
+      Worked full-time on AFOSR contracts developing new algorithms and
+      parallel (smp and mpi) programs for processing images acquired by the
+      Haleakala Observatories, including Multi-frame Blind Deconvolution for
+      removing the distorting effects of Earth's atmosphere from images of
+      satellites and other NEOs; executed our programs on the MHPCC
+      supercomputer.
+    links:
+      - https://www.afrl.af.mil/AFOSR/
+      - https://about.ifa.hawaii.edu/facility/haleakala-observatories/
+      - http://www.mhpcc.hpc.mil/
+
+grants_and_awards:
+  - title: NSF Research Grant
+    number: no. 1500218
+    start: 2015
+    end: 2018
+    project_title: Algebras and algorithms, structure and complexity theory
+    role: >-
+      Postdoctoral research fellow on a team with 6 senior scientists and 3
+      postdocs -- a team of six senior scientists and three postdocs
+    description: >-
+      3-yr collaborative research on algebraic approaches to constraint
+      satisfaction problems
+
+  - title: Magellan Scholar Grant
+    start: 2013
+    end: 2014
+    project_title: What does a nonabelian group sound like?
+    role: Faculty mentor for undergraduate research
+    description: See soundmath.github.io/GroupSound/GroupSound
+    url: http://soundmath.github.io/GroupSound/
+
+  - title: ARCS Sarah Ann Martin Award
+    for: for Outstanding Research in Mathematics
+    place: Honolulu
+    year: 2011
+    aliases: [MathematicsHonolulu]  # the 2025 README drops the space here
+
+  - title: Best Paper Award
+    for: International Symposium on Musical Acoustics
+    place: Nara, Japan
+    year: 2004
+
+# ── Publications ───────────────────────────────────────────────────────────
+#
+# Ids into bibliography.json, and nothing else.  ADR-006 made that file the
+# only authoritative publication list and this issue must not undo it, so no
+# title, venue, year or author appears here.  The list exists so `cv-check` can
+# resolve the publication entries in the four legacy copies against a file that
+# already carries them, and it fails if an id names no entry there.
+#
+# `selected:` is not repeated either: which publications the CV shows is the
+# `_cv` flag in bibliography.json, and `docs/cv.md` includes the rendered
+# snippet.
+
+publications:
+  source: bibliography.json
+  rendered_by: scripts/python/gen_publications.py
+  snippet: docs/_snippets/publications-cv.md
+  carried:
+    - demeo2024cardano
+    - demeo2022birkhoff
+    - demeo2021birkhoff
+    - bergman2022universal
+    - barto2021csp
+    - demeo2020bounded
+    - demeo2019difference
+    - adaricheva2018alh
+    - demeo2014isotopic
+    - demeo2013expansions
+    - demeo2012thesis
+    - demeo2004isma
+    - demeo2002icmc
+    - demeo1998eigenvalues
+
+# The "Books (works in progress)" the 2021 and 2022 copies listed.  These are
+# not publications and are not in bibliography.json; they are project work, and
+# M4 is where they belong.  Kept here so the CV data knows they exist.
+projects:
+  - title: "Category Theory: a concise course"
+    with: [Charlotte Aten, Venanzio Capretta]
+    aliases: [C. Aten and V. Capretta]
+    url: https://categorytheory.gitlab.io
+    status: work in progress
+    note: >-
+      A portfolio entry in its own right under M4, and coauthored, so it must
+      carry attribution to Capretta and Aten wherever it appears (ADR-002,
+      ADR-008).
+
+  - title: The Agda Universal Algebra Library
+    with: [Jacques Carette]
+    url: https://ualib.org
+    aliases: [agda-algebras, ualib.gitlab.io/agda-algebras]
+    status: work in progress
+    disputed: >-
+      Coauthor.  The 2021 Zola copy says "with Jacques Carette"; the 2021
+      LaTeX in the job-app repository says "with Hyeyoung Shin".  Both worked on
+      it and neither copy is obviously the later word.  Carette is used here
+      because the Birkhoff paper the library is built around is joint with him,
+      but this is William's to settle.
+    also_credited: Hyeyoung Shin
+
+  - title: Complex Analysis Exams
+    url: http://complexanalysis.gitlab.io
+    status: work in progress
+    note: >-
+      Merged into the qualifying-exam corpus rather than presented separately
+      (ADR-002); #56 decides where that corpus is hosted.
+
+  - title: Real Analysis Exams
+    url: http://realanalysis.gitlab.io
+    status: work in progress
+    note: >-
+      Merged into the qualifying-exam corpus rather than presented separately
+      (ADR-002); #56 decides where that corpus is hosted.
+
+teaching:
+  - institution: New Jersey Institute of Technology
+    as: Senior University Lecturer
+    aliases: [Adjunct Instructor]
+    courses:
+      - {code: "DS 644", title: "Introduction to Big Data", level: graduate course, term: Spring 2023, url: "https://github.com/williamdemeo/ds644-spring2023"}
+      - {code: "CS 644", title: "Introduction to Big Data", level: graduate course, term: Fall 2022}
+      - {code: "CS 370", title: "Introduction to Artificial Intelligence", term: Fall 2022, url: "https://github.com/williamdemeo/cs370-fall2022"}
+      - {code: "CS 370", title: "Introduction to Artificial Intelligence", term: Spring 2022, url: "https://github.com/williamdemeo/cs370-spring2022"}
+      - {code: "CS 241", title: "Foundations of Computer Science I", term: Spring 2022, url: "https://github.com/williamdemeo/cs241-spring2022"}
+
+  - institution: Charles University in Prague
+    as: Postdoctoral Research Fellow
+    courses:
+      - {code: "NMAG 405", title: "Universal Algebra", term: Winter 2020, url: "https://gitlab.com/universalalgebra/charlesuniversity/nmag405"}
+
+  - institution: University of Colorado, Boulder
+    as: Burnett Meyer Instructor
+    courses:
+      - {code: "Math 2001", title: "Discrete Mathematics", note: "with Lean prover component", term: Spring 2019, url: "https://github.com/williamdemeo/math2001-spring2019"}
+      - {code: "Math 2001", title: "Discrete Mathematics", note: "with Lean prover component", term: Fall 2018}
+      - {code: "Math 3140", title: "Abstract Algebra", term: Fall 2018, url: "https://github.com/williamdemeo/math3140-fall2018"}
+      - {code: "Math 6000", title: "Model Theory", level: graduate course, term: Spring 2018, url: "https://github.com/williamdemeo/math6000-spring2018"}
+      - {code: "Math 2130", title: "Linear Algebra", term: Spring 2018, url: "https://github.com/williamdemeo/math2130-spring2018"}
+      - {code: "Math 2130", title: "Linear Algebra", term: Fall 2017}
+
+  - institution: University of Hawaii
+    as: Visiting Assistant Professor
+    courses:
+      - {code: "Math 215", title: "Applied Calculus", term: Spring 2017}
+      - {code: "Math 480", title: "Senior Seminar", term: Spring 2017}
+      - {code: "Math 244", title: "Calculus IV", term: Fall 2016, url: "https://github.com/williamdemeo/math244-fall2016"}
+      - {code: "Math 321", title: "Introduction to Advanced Math", term: Fall 2016, url: "https://github.com/williamdemeo/math321-fall2016"}
+
+  - institution: Iowa State University
+    as: Postdoctoral Associate
+    courses:
+      - {code: "Math 317", title: "Linear Algebra", term: Spring 2016, url: "https://github.com/williamdemeo/Math317-Spring2016"}
+      - {code: "Math 317", title: "Linear Algebra", term: Fall 2015}
+      - {code: "Math 160", title: "Survey of Calculus", term: Fall 2015, url: "https://github.com/williamdemeo/Math160-Fall2015"}
+      - {code: "Math 207", title: "Elementary Linear Algebra", term: Spring 2015, url: "https://github.com/williamdemeo/Math207-Spring2015"}
+      - {code: "Math 165", title: "Calculus I", term: Spring 2015, url: "https://github.com/williamdemeo/Math165-Spring2015"}
+      - {code: "Math 301", title: "Abstract Algebra", term: Fall 2014}
+      - {code: "Math 165", title: "Calculus I", term: Fall 2014}
+
+  - institution: University of South Carolina
+    as: Visiting Assistant Professor
+    courses:
+      - {code: "Math 700", title: "Linear Algebra", level: graduate course, term: Spring 2014, url: "https://github.com/williamdemeo/Math700Spring2014"}
+      - {code: "Math 141", title: "Calculus I", term: Spring 2014, url: "https://github.com/williamdemeo/Math141Spring2014"}
+      - {code: "Math 374", title: "Discrete Structures", term: Fall 2013}
+      - {code: "Math 122", title: "Calculus for Business and Social Sciences", term: Fall 2013}
+      - {code: "Math 374", title: "Discrete Structures", term: Spring 2013}
+      - {code: "Math 122", title: "Calculus for Business and Social Sciences", term: Spring 2013}
+      - {code: "Math 241", title: "Vector Calculus", term: Fall 2012}
+      - {code: "Math 122", title: "Calculus for Business and Social Sciences", term: Fall 2012}
+
+  - institution: University of Hawaii
+    as: Graduate Student Instructor
+    courses:
+      - {code: "Math 371", title: "Probability Theory", term: Summer 2011}
+      - {code: "Math 100", title: "Mathematical Reasoning", term: Summer 2010}
+      - {code: "Math 215", title: "Applied Calculus I", term: Summer 2009}
+
+talks:
+  - title: Birkhoff's Theorem in Dependent Type Theory
+    venue: TYPES 2021
+    place: Online
+    year: 2021
+    url: https://types21.liacs.nl/timetable/event/proof-assistants-applications/
+    preprint: https://arxiv.org/abs/2101.10166
+
+  - title: Complexity of the Homomorphism Problem for Boolean Models
+    venue: European virtual CSP seminar
+    place: Online
+    year: 2020
+    url: https://csp-seminar.org/talks/william-demeo
+    preprint: https://arxiv.org/abs/2010.04958
+
+  - title: Computational Tools for Universal Algebra Research
+    venue: CSP World Congress 2020
+    place: Vols am Schlern, Italy
+    year: 2020
+    url: https://williamdemeo.gitlab.io/talks/vols/
+
+  - title: Formalizing Universal Algebra with Dependent and Inductive Types
+    venue: "AMS Joint Mathematics Meetings; Special Session: Algebras and Algorithms"
+    place: Denver, CO
+    year: 2020
+    url: https://williamdemeo.gitlab.io/agda-ualib/index.html
+    docs: https://ualib.org
+
+  - title: Computing Difference Term Operations in Polynomial Time
+    venue: BLAST Conference, University of Denver
+    place: Denver, CO
+    year: 2018
+    preprint: https://arxiv.org/abs/2011.07879
+
+  - title: Why Universal Algebra Needs Inductive, Dependent Types
+    venue: Oregon Programming Languages Summer School
+    place: Eugene, OR
+    year: 2018
+
+  - title: A Tutorial Introduction to the Lean Prover
+    venue: University of Colorado Logic Seminar
+    place: Boulder, CO
+    year: 2018
+
+  - title: The Lambda Calculus and Dependent Type Theory
+    venue: University of Colorado Logic Seminar
+    place: Boulder, CO
+    year: 2018
+
+  - title: Representing Finite Lattices as Congruence Lattices
+    venue: Colorado State University Algebra Seminar
+    place: Fort Collins, CO
+    year: 2017
+
+  - title: A Polynomial-time Test for Difference Terms in Idempotent Varieties
+    venue: BLAST Conference, Vanderbilt University
+    place: Nashville, TN
+    year: 2017
+    preprint: https://arxiv.org/abs/2011.07879
+
+  - title: Algebraic approach to complexity of constraint satisfaction
+    venue: University of Hawaii Logic and Analysis Seminar
+    place: Honolulu, HI
+    year: 2017
+    slides: https://github.com/williamdemeo/Talks/blob/master/UH/LogicSeminar/UH-logic-seminar-2016.pdf
+    preprint: https://arxiv.org/abs/1611.02867
+
+  - title: Universal Algebraic Methods for Constraint Satisfaction Problems
+    venue: "AMS Fall Western Sectional Meeting: Special Session in Algebraic Logic"
+    place: Denver, CO
+    year: 2016
+    preprint: https://arxiv.org/abs/1611.02867
+
+  - title: The Rectangularity Theorem of Barto and Kozik
+    venue: "Algebras and Algorithms: Structure and Complexity Theory"
+    aliases: [Conference on Algebras and Algorithms]
+    place: Boulder, CO
+    year: 2016
+    slides: https://github.com/williamdemeo/Talks/tree/master/Boulder/slides
+
+  - title: Constraint Satisfaction Problems and Universal Algebra
+    venue: Midlands Graduate School in the Foundation of Computing Science
+    place: Birmingham, England
+    aliases: [Birmingham, UK]
+    year: 2016
+    slides: https://github.com/williamdemeo/Talks/tree/master/MGS/2016
+
+  - title: Permutability in Diamonds
+    venue: Iowa State Algebra and Combinatorics Seminar
+    place: Ames, IA
+    year: 2016
+    slides: https://github.com/williamdemeo/Talks/tree/master/ISU/AlgComSem
+
+  - title: Which Commutative Idempotent Binars are Tractable?
+    venue: "Vanderbilt Shanks workshop: Open Problems in Universal Algebra"
+    place: Nashville, TN
+    year: 2015
+    slides: http://www.math.vanderbilt.edu/~moorm10/shanks/talks/demeo-slides.pdf
+
+  - title: Some Small Finite Algebras Yielding Tractable CSP Templates
+    venue: Iowa State Algebra and Combinatorics Seminar
+    place: Ames, IA
+    year: 2015
+
+  - title: Algebraic CSP and Tractability of Commutative Idempotent Binars
+    venue: BLAST Conference, University of North Texas
+    place: Denton, TX
+    year: 2015
+    slides: https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2015
+
+  - title: Isotopic Algebras
+    venue: Iowa State Algebra and Combinatorics Seminar
+    place: Ames, IA
+    year: 2015
+
+  - title: What Does a Nonabelian Group Sound Like?
+    venue: "MAA Special Session: At the Intersection of Mathematics and the Arts"
+    place: Baltimore, MD
+    year: 2014
+    abstract_url: https://jointmathematicsmeetings.org/amsmtgs/2160_abstracts/1096-c5-2578.pdf
+
+  - title: Interval Enforceable Properties of Finite Groups
+    venue: AMS Special Session on Finite Universal Algebra
+    place: Louisville, KY
+    year: 2013
+    slides: https://github.com/williamdemeo/Talks/tree/master/AMS/Louisville2013
+
+  - title: "Tutorial: UACalc at the command line and in the cloud"
+    venue: Workshop on Computational Universal Algebra
+    place: Louisville, KY
+    year: 2013
+
+  - title: Approximating Eigenvalues of Large Stochastic Matrices
+    venue: University of South Carolina Combinatorics Seminar
+    place: Columbia, SC
+    year: 2013
+
+  - title: Congruence Lattices of Finite Algebras
+    note: plenary lecture
+    venue: BLAST Conference, Chapman University
+    place: Orange, CA
+    year: 2013
+    slides: https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2013
+
+  - title: Transposition Principles for Subgroups and Equivalence Relations
+    venue: Zassenhaus Group Theory Conference
+    place: Asheville, NC
+    year: 2013
+    slides: https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/WCU-2013
+
+  - title: Isotopic Algebras with Nonisomorphic Congruence Lattices
+    venue: AMS Special Session on Algebras, Lattices, and Varieties
+    place: Boulder, CO
+    year: 2013
+    slides: https://github.com/williamdemeo/Talks/tree/master/AMS/Boulder2013
+
+  - title: Synchronizing Automata and the Cerny Conjecture
+    venue: Graduate Algebra Seminar, University of Colorado
+    place: Boulder, CO
+    year: 2013
+    slides: https://williamdemeo.files.wordpress.com/2012/12/cugradalgebraseminar.pdf
+
+  - title: The Finite Lattice Representation Problem in Four Parts
+    venue: University of South Carolina Algebra and Logic Seminar
+    place: Columbia, SC
+    year: 2012
+
+  - title: Interval Sublattice Enforceable Properties of Finite Groups
+    venue: The 31st Ohio State-Denison Mathematics Conference
+    place: Columbus, OH
+    year: 2012
+    slides: https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/OSU-2012
+
+  - title: Expansions of Finite Algebras and their Congruence Lattices
+    venue: American Mathematical Society sectional meeting
+    place: Honolulu, HI
+    year: 2012
+    slides: https://github.com/williamdemeo/Talks/tree/master/AMS/Honolulu2012
+
+  - title: Intervals in Subgroup Lattices and Permutation Representations
+    venue: Western Carolina University Group Theory Seminar
+    place: Cullowhee, NC
+    year: 2012
+
+  - title: Recent Progress on the Finite Lattice Representation Problem
+    venue: "Achievement Rewards for College Scientists: Scholar Presentations"
+    place: Honolulu, HI
+    year: 2011
+
+  - title: The Finite Lattice Representation Problem
+    venue: First Joint Meeting of the Korean and American Mathematical Societies
+    place: Seoul, KOR
+    aliases: [Seoul, Korea]
+    year: 2009
+
+  - title: Object reconstruction from multiple views
+    venue: Air Force Office of Scientific Research AMOS Program Review
+    place: Maui
+    year: 2004
+    # In the Zola copy only.  The job-app LaTeX has it commented out, and the
+    # 2025 README drops the pre-2009 talks entirely.
+
+  - title: Approximating eigenvalues of large stochastic matrices
+    venue: 8th Copper Mt. Conference on Iterative Methods
+    place: Colorado
+    year: 1998
+    # In the Zola copy only, as above.  Distinct from the 2013 seminar talk of
+    # the same name, and from the paper of the same name in bibliography.json.
+
+service:
+  - role: Organizer
+    what: BLAST 2019 Conference
+    place: Boulder
+    year: 2019
+    url: https://math.colorado.edu/blast/2019/index.html
+
+  - role: Organizer
+    what: Algebras and Lattices in Hawaii Conference
+    note: to honor Freese, Lampe & Nation
+    aliases: ["Algebras and Lattices in Hawaii Conf.", "Conf. to honor Freese, Lampe & Nation", "Hawai`i"]
+    place: Honolulu
+    year: 2018
+    url: https://universalalgebra.github.io/ALH-2018/
+
+  - role: Organizer
+    what: Workshop on Computational Universal Algebra
+    place: Louisville
+    year: 2013
+    url: http://universalalgebra.wordpress.com/meetings/2013-workshop-on-computational-universal-algebra/
+
+  - role: Editor
+    what: Algebra Universalis
+    aliases: [Editor for Journal]
+    start: 2018
+    end: present
+
+  - role: Referee
+    what: "Algebra Universalis, Order, and J. Logic & Analysis"
+    aliases: [Referee for Journals, Journal of Logic & Analysis]
+    start: 2012
+    end: present
+
+  - role: Graduate Student Representative
+    what: Working Group on Graduate Education
+    institution: University of Hawaii
+    description: >-
+      Graduate Student Representative on a committee of deans and department
+      heads; helped draft a resolution for the Committee on Research and
+      Graduate Education.
+
+  - role: Faculty Senate Student Rep., Academic Committee Chair, Math Department Rep.
+    what: Graduate Student Organization
+    institution: University of Hawaii
+
+  - role: Mentor for Undergraduate Research
+    what: Mathematical Biology Program
+    institution: University of Hawaii
+    description: >-
+      Mentored students in math and dsp for classifying marine life audio
+      signals.
+
+advising:
+  - institution: University of Colorado, Boulder
+    what: >-
+      Served on the doctoral candidacy exam committee for the following ph.d.
+      students: Jordan DuBeau, Ali Latfi, Athena Sparks, Michael Wheeler.
+      Served on the dissertation defense committee for Jeffrey Shriner.
+    aliases: [Ali Lotfi, Jeffrey Shriner]
+    # "Latfi" in three copies, "Lotfi" on the exam syllabus filed in the
+    # job-app repository.  Both spellings are kept rather than one guessed at.
+
+  - institution: Iowa State University
+    what: >-
+      REU mentor for Charlotte Aten (mathematics major, University of
+      Rochester); honors thesis advisor for Joshua Thompson (mathematics major,
+      honors program); Putnam Exam mentor at weekly exam practice meetings;
+      Undergraduate Tea cohost of weekly undergraduate student gatherings; Iowa
+      4-H Youth Conference volunteer mentor.
+    url: https://math.iastate.edu/2015/10/28/4-h-dared-to-discover-the-math-of-juggling/
+
+  - institution: University of South Carolina
+    what: >-
+      Honors thesis mentor for Matthew Corley (computer science major, honors
+      program); South Carolina High School Math Contest exam design committee;
+      Faculty mentor for Pi Mu Epsilon (math honors society).
+
+certifications:
+  - title: Smart Contracts
+    provider: SUNY at Buffalo
+    aliases: [SUNY Buffalo]
+    length: 4-week Coursera course
+    grade: "96.4%"
+    earned: 5 Sep 2021
+    certificate: https://www.coursera.org/account/accomplishments/verify/UTGLFVHW79WV
+
+  - title: Blockchain Basics
+    provider: SUNY at Buffalo
+    aliases: [SUNY Buffalo]
+    length: 4-week Coursera course
+    grade: "100%"
+    earned: 6 Aug 2021
+    certificate: https://www.coursera.org/account/accomplishments/verify/4NP2MX787UAG
+
+  - title: Big Data Analysis with Scala and Spark
+    provider: Ecole Polytechnique Federale de Lausanne
+    aliases: [EPFL]
+    length: 4-week Coursera course
+    grade: "93.4%"
+    earned: 24 Nov 2017
+    certificate: https://www.coursera.org/account/accomplishments/records/93DVEX3QH86L
+
+  - title: Functional Programming Principles in Scala
+    provider: Ecole Polytechnique Federale de Lausanne
+    aliases: [EPFL]
+    length: 6-week Coursera course
+    grade: "100%"
+    earned: 17 Nov 2016
+    certificate: https://www.coursera.org/account/accomplishments/records/CKWD8PLCPW4E
+
+  - title: Functional Program Design in Scala
+    aliases: [Functional Programming Design in Scala, EPFL]
+    provider: Ecole Polytechnique Federale de Lausanne
+    length: 4-week Coursera course
+    grade: "100%"
+    earned: 6 Aug 2016
+    certificate: https://www.coursera.org/account/accomplishments/records/2WE2UZSR5AAZ
+
+  - title: Parallel Programming in Scala
+    provider: Ecole Polytechnique Federale de Lausanne
+    aliases: [EPFL]
+    length: 4-week Coursera course
+    grade: "100%"
+    earned: 27 Jun 2016
+    certificate: https://www.coursera.org/account/accomplishments/records/3XV34H6BTTHC
+
+  - title: Startup Engineering
+    provider: Stanford University
+    length: 12-week Coursera course
+    grade: "99.3%"
+    earned: 23 Sep 2013
+    certificate: https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=970374
+
+summer_schools:
+  - title: Agda Implementors' Meeting XXXIX
+    institution: Chalmers University
+    dates: 25--30 Nov 2024
+    url: https://wiki.portal.chalmers.se/agda/Main/AIMXXXIX
+
+  - title: Agda Implementors' Meeting XXXVIII
+    institution: University of Swansea
+    dates: 13--18 May 2024
+    url: https://wiki.portal.chalmers.se/agda/Main/AIMXXXVIII
+
+  - title: Midlands Graduate School in the Foundations of Computing Science
+    url: http://www.cs.nott.ac.uk/MGS/
+    topics: >-
+      lambda calculus, simply typed lambda calculus, domain theory,
+      denotational semantics, type theory, univalent type theory in Agda,
+      homotopy type theory, category theory, proof theory, univalent
+      foundations
+    attended:
+      - {institution: Univ. of Sheffield, note: virtual, dates: April 12--16, 2021, year: 2021, url: "https://staffwww.dcs.shef.ac.uk/people/G.Struth/mgs21.html"}
+      - {institution: Univ. of Birmingham, dates: April 14--18, 2019, year: 2019, url: "http://events.cs.bham.ac.uk/mgs2019/"}
+      - {institution: University of Birmingham, dates: April 11--15, 2016, year: 2016, url: "http://www.cs.bham.ac.uk/~pbl/mgs2016/"}
+      - {institution: University of Nottingham, dates: April 22--26, 2014, year: 2014, url: "http://www.cs.nott.ac.uk/~psztxa/mgs.2014/"}
+
+  - title: Oregon Programming Languages Summer School
+    institution: University of Oregon
+    url: https://www.cs.uoregon.edu/research/summerschool/
+    topics: >-
+      type theory, logic, semantics, verification, parallelism and concurrency,
+      dependent, gradual, substructural type systems
+    attended:
+      - {dates: July 3--21, 2018, year: 2018, url: "https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php"}
+      - {dates: June 26--July 8, 2017, year: 2017, url: "https://www.cs.uoregon.edu/research/summerschool/summer17"}
+      - {dates: June 16--28, 2014, year: 2014, url: "https://www.cs.uoregon.edu/research/summerschool/summer14/curriculum.html"}
+
+  - title: Computer-aided Mathematical Proof
+    institution: Cambridge University
+    dates: July 10--14, 2017
+    year: 2017
+    topics: bringing proof technology into mainstream mathematics
+    aliases: [Topic]  # the 2025 README writes the label in the singular
+    url: https://www.newton.ac.uk/event/bprw01
+
+  - title: LMS/EPSRC Short Course in Computational Group Theory
+    institution: University of St. Andrews
+    aliases: [University of St Andrews]
+    dates: Jul 29--Aug 2, 2013
+    year: 2013
+    topics: permutation & finitely presented groups, constructive recognition
+    url: http://www-circa.mcs.st-and.ac.uk/cgt2013/
+
+  - title: NATO ASI on Computational Noncommutative Algebra
+    place: Il Ciocco, Italy
+    year: 2003
+
+references:
+  - name: Clifford Bergman
+    title: Professor of Mathematics
+    aliases: [cbergman at iastate dot edu]
+    institution: Iowa State University
+    email: cbergman@iastate.edu
+    teaching_reference: true
+
+  - name: Venanzio Capretta
+    title: Assistant Professor of Computer Science
+    aliases: [Venanzio dot Capretta at nottingham dot ac dot uk]
+    institution: University of Nottingham
+    email: Venanzio.Capretta@nottingham.ac.uk
+
+  - name: Ralph Freese
+    title: Professor of Mathematics
+    aliases: [ralph at math dot hawaii dot edu]
+    institution: University of Hawaii
+    email: ralph@math.hawaii.edu
+
+  - name: Peter Jipsen
+    title: Professor of Mathematics
+    aliases: [jipsen at chapman dot edu]
+    institution: Chapman University
+    email: jipsen@chapman.edu
+
+  - name: George McNulty
+    title: Professor of Mathematics
+    aliases: [mcnulty at math dot sc dot edu]
+    institution: University of South Carolina
+    email: mcnulty@math.sc.edu
+
+  - name: Peter Mayr
+    title: Assistant Professor of Mathematics
+    aliases: [peter mayr at colorado dot edu]
+    institution: University of Colorado, Boulder
+    email: peter.mayr@colorado.edu
+    teaching_reference: true
+
+  - name: J.B. Nation
+    title: Emeritus Professor of Mathematics
+    aliases: [jb at math dot hawaii dot edu]
+    institution: University of Hawaii
+    email: jb@math.hawaii.edu
+
+# ── Deliberate omissions ───────────────────────────────────────────────────
+#
+# Every entry in every copy is either above or here.  An id names a row of
+# `import/legacy-cv/inventory.tsv`; `make cv-check` fails on one that names no
+# row, and it also fails on one that *is* covered above, so a declaration can
+# neither outlive the thing it was about nor quietly contradict it.
+#
+# Six kinds, and only the last two are about the CV's content at all.
+
+omissions:
+
+  # ── Other people's contact details ───────────────────────────────────────
+  #
+  # The referees themselves are carried, with title and institution.  Their
+  # office addresses and telephone numbers are not: a CV published on a website
+  # is not a CV mailed to a search committee, and nothing on this site will ever
+  # render them.  They stay in the snapshots, which is where provenance belongs.
+  - {id: "cvrepo:references:396-carver-hall", reason: "referee office address"}
+  - {id: "cvrepo:references:ames-iowa-50011", reason: "referee office address"}
+  - {id: "cvrepo:references:room-b83-computer-science", reason: "referee office address"}
+  - {id: "cvrepo:references:jubilee-campus-wollaton-road", reason: "referee office address"}
+  - {id: "cvrepo:references:nottingham-ng8-1bb-uk", reason: "referee office address"}
+  - {id: "cvrepo:references:2565-mccarthy-mall", reason: "referee office address"}
+  - {id: "cvrepo:references:honolulu-hi-96822", reason: "referee office address"}
+  - {id: "cvrepo:references:545-w-palm-ave", reason: "referee office address"}
+  - {id: "cvrepo:references:orange-ca-92866", reason: "referee office address"}
+  - {id: "cvrepo:references:2300-colorado-avenue", reason: "referee office address"}
+  - {id: "cvrepo:references:boulder-co-80309", reason: "referee office address"}
+  - {id: "jobapp:references:396-carver-hall", reason: "referee office address"}
+  - {id: "jobapp:references:ames-iowa-50011", reason: "referee office address"}
+  - {id: "jobapp:references:room-b83-computer-science", reason: "referee office address"}
+  - {id: "jobapp:references:jubilee-campus-wollaton-road", reason: "referee office address"}
+  - {id: "jobapp:references:nottingham-ng8-1bb-uk", reason: "referee office address"}
+  - {id: "jobapp:references:2565-mccarthy-mall", reason: "referee office address"}
+  - {id: "jobapp:references:honolulu-hi-96822", reason: "referee office address"}
+  - {id: "jobapp:references:545-w-palm-ave", reason: "referee office address"}
+  - {id: "jobapp:references:orange-ca-92866", reason: "referee office address"}
+  - {id: "jobapp:references:1523-greene-street", reason: "referee office address"}
+  - {id: "jobapp:references:columbia-sc-29208", reason: "referee office address"}
+  - {id: "jobapp:references:2300-colorado-avenue", reason: "referee office address"}
+  - {id: "jobapp:references:boulder-co-80309", reason: "referee office address"}
+  - {id: "jobapp:references:phone-515-294-1752", reason: "referee telephone number"}
+  - {id: "jobapp:references:phone-808-956-4680", reason: "referee telephone number"}
+  - {id: "jobapp:references:phone-714-744-7918", reason: "referee telephone number"}
+  - {id: "jobapp:references:phone-803-777-7469", reason: "referee telephone number"}
+  - {id: "jobapp:references:phone-303-492-7754", reason: "referee telephone number"}
+
+  # ── William's own street address and telephone ───────────────────────────
+  #
+  # Same reason, and a stronger one: two of these are a home address.  The
+  # Prague address the 2021 LaTeX carried is in `contact.aliases` because it is
+  # an institutional one; a flat in Manhattan is not.
+  - {id: "zola:contact-information:tel-1-516-912-3162",
+     reason: "personal telephone number; email and the site URL are carried"}
+  - {id: "zola:contact-information:address-570-park-ave-apt-8d-new-york-ny-1006",
+     reason: "home address; email and the site URL are carried"}
+  - {id: "jobapp:contact-information:570-park-ave-apt-8d-williamdemeo-org",
+     reason: "home address; email and the site URL are carried"}
+  - {id: "jobapp:contact-information:new-york-ny-10065-williamdemeo-gmail-com",
+     reason: "home address; email and the site URL are carried"}
+
+  # ── A copy's own furniture ───────────────────────────────────────────────
+  #
+  # Titles, dates of the copy itself, sub-headings inside its lists.  These say
+  # something about the document, not about the career it describes.
+  - {id: "zola:preamble:curriculum-vit-of-william-demeo-5-dec-2021",
+     reason: "the Zola copy's title block and its own date"}
+  - {id: "zola:publications:publications-in-process",
+     reason: "sub-heading inside that copy's publication list"}
+  - {id: "zola:publications:books-these-are-works-in-progress",
+     reason: "sub-heading inside that copy's publication list; the four books beneath it are in `projects:`"}
+
+  # ── Page chrome and cross-references on docs/cv.md ───────────────────────
+  #
+  # The page is a rendering, and these are the parts of it that are about the
+  # site rather than about the CV.  #41 replaces all five when it renders this
+  # file to web and PDF.
+  - {id: "site:curriculum-vitae:material-file-download-download-pdf-assets-d",
+     reason: "the download button; #41 replaces the PDF it points at"}
+  - {id: "site:curriculum-vitae:warning-this-page-is-a-summary-and-the-pdf-i",
+     reason: "an admonition about the page's own staleness"}
+  - {id: "site:curriculum-vitae:the-linked-pdf-predates-the-current-role-and",
+     reason: "the body of that admonition, which describes #41 and #42"}
+  - {id: "site:employment:see-the-about-page-about-md-academic-appoint",
+     reason: "a pointer to docs/about.md; the appointments themselves are in `appointments:`"}
+  - {id: "site:selected-publications:the-complete-list-including-earlier-work-in",
+     reason: "a pointer to arXiv and to #30; the publications are in bibliography.json"}
+  - {id: "site:teaching:a-decade-of-teaching-across-six-institutions",
+     reason: "a prose summary standing in for the record until #32; the record is in `teaching:`"}
+
+  # ── Publication status, as of the copy that recorded it ──────────────────
+  #
+  # "accepted", "submitted", "to appear" describe where a paper stood when
+  # someone wrote it down.  All three works are published, and bibliography.json
+  # records the version of record (ADR-006), so carrying the old status forward
+  # would be carrying something that has since become false.
+  - {id: "zola:publications:accepted-to-appear-in-logical-methods-in-com",
+     reason: "status in December 2021; the LMCS paper appeared in January 2022"}
+  - {id: "zola:publications:submitted-27th-intl-conf-on-types-for-proofs",
+     reason: "status in December 2021; the TYPES paper appeared in August 2022"}
+  - {id: "jobapp:publications:accepted",
+     reason: "status in June 2022, on the TYPES and LMCS entries"}
+
+  # ── Bibliographic detail bibliography.json does not record ───────────────
+  #
+  # These are the only omissions that lose anything a reader might want, and
+  # each is a change to ADR-006's file rather than to this one.  Listed in
+  # ADR-003 so they are decided rather than forgotten.
+  - id: "zola:publications:proceedings-of-algebras-and-lattices-in-hawa"
+    reason: >-
+      Lulu Press as the publisher of the ALH 2018 proceedings.  bibliography.json
+      has no publisher for `adaricheva2018alh`, and its own `_comment` already
+      says publisher, ISBN and a stable URL would have to come from William.
+      Adding it is an edit to that file and to what it renders.
+  - id: "jobapp:publications:12-1-12-37-2022-preprint-link"
+    reason: >-
+      The page range 12:1--12:37 for the LMCS article.  bibliography.json
+      records volume and issue for `bergman2022universal` but no pages, and the
+      DOI carries the article number.  Adding pages is an edit to that file.
+  - id: "cvrepo:publications:proc-27th-intl-conf-types-for-proofs-and-pro"
+    reason: >-
+      The venue written as "Proc. 27th Intl. Conf. …".  bibliography.json names
+      the conference rather than its proceedings volume, which is ADR-006's
+      rule about saying what the publisher records.  The work itself is
+      `demeo2022birkhoff`.
+  - {id: "jobapp:publications:proc-27th-intl-conf-types-for-proofs-and-pro",
+     reason: "as above, in the 2022 PDF"}
