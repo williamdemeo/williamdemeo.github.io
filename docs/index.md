@@ -34,7 +34,7 @@ description: >-
 
 # William DeMeo
 
-![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=left style="width: 26%" }
+![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=left width="440" height="370" style="width: 26%" }
 
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked
