@@ -27,7 +27,7 @@ description: >-
 
 # William DeMeo
 
-![William DeMeo](assets/images/william-demeo.jpg){ align=right width="30%" }
+![William DeMeo](assets/images/william-demeo.jpg){ style="float: right; width: 30%;" }
 
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked
@@ -39,7 +39,7 @@ the Cardano ledger in Agda, with the Formal Methods team at
 [IO](https://iohk.io/), and
 [agda-native-air](https://github.com/formalverification/agda-native-air),
 making Agda's interaction protocol accessible to language models so they can
-interact with the proof assistant they way humans do, rather than merely
+interact with the proof assistant the way humans do, rather than merely
 type-checking complete proofs.
 
 ## Featured projects
