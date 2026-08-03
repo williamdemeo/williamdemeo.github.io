@@ -29,18 +29,18 @@ description: >-
 
 ![William DeMeo](assets/images/william-demeo.jpg){ align=right width="30%" }
 
-Mathematician by training — PhD in universal algebra and lattice theory — and a
-formal verification engineer by trade. I work on **machine-checked
+Mathematician by training with a PhD in universal algebra and lattice theory; 
+formal verification engineer by trade.  I work on **machine-checked
 mathematics**: proofs and production systems in Agda, and tooling that lets
 language models work inside a proof assistant.
 
-**What I'm working on now** (August 2026). The machine-checked specification of
+**What I'm working on now** (2026). The machine-checked specification of
 the Cardano ledger in Agda, with the Formal Methods team at
 [IO](https://iohk.io/), and
-[agda-native-air](https://github.com/formalverification/agda-native-air) —
-putting Agda's interaction protocol in front of a language model, so that a
-typechecker's dense, automatically-checkable feedback becomes something a
-machine can learn from.
+[agda-native-air](https://github.com/formalverification/agda-native-air),
+making Agda's interaction protocol accessible to language models so they can
+interact with the proof assistant they way humans do, rather than merely
+type-checking complete proofs.
 
 ## Featured projects
 
@@ -74,7 +74,7 @@ Martin-Löf type theory.
 <div class="project-card" markdown>
 **[The Cardano ledger specification](projects/cardano-ledger.md)**
 
-Formal methods at production scale: an Agda specification that has to track a
+Formal methods at production scale: an Agda specification that must track a
 system under active development.
 
 `Agda`{.tag} `Haskell`{.tag} `formal methods`{.tag} `production`{.tag}
@@ -88,7 +88,7 @@ system under active development.
 **[Universal algebra and lattice theory](https://arxiv.org/abs/1204.4305)**
 
 Congruence lattices of finite algebras, and the algebraic approach to
-constraint satisfaction.
+determining the complexity of constraint satisfaction problems.
 
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 
@@ -103,8 +103,7 @@ The through-line across all four is an interest in what is *mechanizable*:
 which structures admit effective procedures, and what it takes to make an
 argument checkable by a machine rather than by a referee.
 
-The full set, and the argument for the order it is read in, is in
-[Projects](projects/index.md).
+The full set is in [Projects](projects/index.md).
 
 ## Recent writing
 
@@ -116,7 +115,7 @@ More in the [blog](blog/index.md).
 
 Before moving into industry I held research and teaching appointments at Charles
 University in Prague, the University of Colorado Boulder, the University of
-Hawaii, Iowa State University, and the University of South Carolina. The
+Hawaii, Iowa State University, and the University of South Carolina.  The
 [CV](cv.md) has the full record and [about](about.md) has the longer version.
 
 [Email](mailto:williamdemeo@gmail.com) ·
