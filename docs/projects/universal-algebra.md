@@ -120,8 +120,9 @@ collects the closure results and their attributions: duals (Kurzweil and Netter,
 1986), interval sublattices (a consequence of the same), direct products (Tůma,
 1986), ordinal sums (McKenzie, 1984; Snow, 2000), parallel sums (Snow, 2000), and
 unions of a filter and an ideal of a representable lattice (Snow, 2000).  Every
-finite distributive lattice is representable, and is in fact the normal subgroup
-lattice of a finite solvable group (Silcock; Pálfy).
+finite distributive lattice is representable, which Dilworth knew by the 1930s,
+and is in fact the normal subgroup lattice of a finite solvable group (Silcock;
+Pálfy).
 
 Closure under *sublattices* is open, and cannot be easy.  $\operatorname{Eq}(X)$
 is itself the congruence lattice of the algebra $\langle X, \emptyset \rangle$
