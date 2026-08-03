@@ -35,13 +35,13 @@ Skills encoding Agda workflow knowledge, and the agent loops built on them.
 </div>
 
 <div class="project-card" markdown>
-**[agda-algebras](https://github.com/ualib/agda-algebras)**
+**[agda-algebras](agda-algebras.md)**
 
 A library of universal algebra in Agda, containing the first constructive,
 machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory, joint
 with Jacques Carette.
 
-`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag}
+`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag} `setoids`{.tag}
 
 [Source](https://github.com/ualib/agda-algebras) ·
 [Docs](https://agda-algebras.universalalgebra.org)
@@ -49,14 +49,14 @@ with Jacques Carette.
 </div>
 
 <div class="project-card" markdown>
-**[The Cardano ledger specification](https://github.com/IntersectMBO/formal-ledger-specifications)**
+**[The Cardano ledger specification](cardano-ledger.md)**
 
 Machine-checked specification of the Cardano blockchain ledger in Agda, written
 with the Formal Methods team at IO — a specification that has to track a system
 under active development and produce artifacts the rest of the organization
 consumes.
 
-`Agda`{.tag} `formal methods`{.tag} `production`{.tag}
+`Agda`{.tag} `Haskell`{.tag} `formal methods`{.tag} `production`{.tag}
 
 [Source](https://github.com/IntersectMBO/formal-ledger-specifications) ·
 [Paper](https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2)
