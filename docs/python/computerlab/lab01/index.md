@@ -45,7 +45,7 @@ date: '2019-02-01'
 
     If all went well, you will now see a page that looks like this:
 
-    ![image](../../../assets/images/Lab1-screen.png){ width="958" height="378" }\
+    ![image](../../../assets/images/Lab1-screen.png){ width="958" height="378" }
 
 4. Click somewhere inside the wide rectangular box (or “cell”) and type the expression 2\*2. Then type Shift+Enter (hold down the Shift key and press Enter; or simply click ‘evaluate‘).
 
