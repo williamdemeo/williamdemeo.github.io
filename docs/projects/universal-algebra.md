@@ -171,13 +171,13 @@ I would lead with.  The methods are.
 ## Overalgebras: manufacturing representable lattices
 
 Ralph Freese cracked the triple-winged pentagon with an idea: start from an
-algebra $\mathbf{B}$ whose congruence lattice is $M_4$, the six-element lattice
+algebra $\bB$ whose congruence lattice is $M_4$, the six-element lattice
 of height two with four atoms, enlarge the universe, and choose new operations so
 that the congruence lattice comes back the same shape as before except that one
 atom has been *doubled*.
 
 The thesis takes that single example and turns it into a procedure.  Given a
-finite algebra $\mathbf{B}$ with known congruence lattice, choose sets
+finite algebra $\bB$ with known congruence lattice, choose sets
 $B_1, \dots, B_K$ meeting $B$ at prescribed points, and build an **overalgebra**
 on $A = B \cup B_1 \cup \dots \cup B_K$ whose operations include idempotent maps
 retracting $A$ onto $B$ and onto each $B_i$.  Where the intersection points go,
