@@ -654,7 +654,7 @@ Practical consequences: the section keeps a top-level home and a nav entry, its 
 
 ---
 
-### Issue M2-4: Rescue the Octopress posts worth keeping (#13)
+### Issue M2-4: Rescue the Octopress posts worth keeping (#13, closed)
 
 **Labels**: `milestone-2-migration`, `content`, `writing`
 
@@ -732,7 +732,7 @@ The `overalgebras` post already states the Algebra Universalis reference, so tha
 
 ---
 
-### Issue M2-5: Consolidate and prune media assets (#14)
+### Issue M2-5: Consolidate and prune media assets (#14, closed)
 
 **Labels**: `good first issue`, `milestone-2-migration`, `content`
 
@@ -970,6 +970,72 @@ Depends on M2-3 (#12, ADR-002) for the dispositions and M2-6 (#15) for the redir
 
 Not a design issue: the archive should inherit whatever M3-1 (#17) settles rather than getting a look of its own. If it needs custom styling to feel sufficiently de-emphasised, that belongs in M3-3 (#19).
 
+---
+
+### Issue M2-10: Repair the 41 stranded display-math blocks on the archived pages (#78, closed)
+
+**Labels**: `milestone-2-migration`, `content`
+
+Nine archived pages publish a literal `$` on either side of 41 expressions, because the `$$ … $$` delimiter never begins its own Markdown block. Split out of #75, where the same class of defect was fixed on the three migrated blog posts; `make math-source` names these on every run and `--strict` promotes them to failures.
+
+## Why a `$$` fails to be display math
+
+`pymdownx.arithmatex` registers a `BlockProcessor` whose `test()` calls `self.pattern.match(block)` — `.match`, not `.search`. So the delimiter has to sit at offset 0 of a Markdown *block*. Miss that and the block processor never fires, the **inline** processor picks up the inner `$…$` instead, and one `$` is left on each side as literal text.
+
+Three ways to miss it, and they need three different repairs:
+
+| page | mid-paragraph | no blank line before | 3-space indent | total |
+| --- | --: | --: | --: | --: |
+| `docs/agda-ualib/birkhoff-hsp/index.md` | 6 | 1 | 1 | 8 |
+| `docs/agda-ualib/composition/index.md` | 13 | | | 13 |
+| `docs/agda-ualib/elementary-facts/index.md` | 3 | | | 3 |
+| `docs/agda-ualib/f-algebras/index.md` | 1 | | | 1 |
+| `docs/probability-quiz/index.md` | | 1 | | 1 |
+| `docs/python/computerlab/lab01/index.md` | 6 | | | 6 |
+| `docs/python/lab1/index.md` | 3 | | | 3 |
+| `docs/python/lab2/index.md` | | | 1 | 1 |
+| `docs/python/lab4/index.md` | 4 | 1 | | 5 |
+| **total** | **36** | **3** | **2** | **41** |
+
+`python3 scripts/python/check_math_source.py --strict docs` prints the list with a file, a line and a reason for each.
+
+## Why this is not a `--fix`
+
+`check_math_source.py --fix` already repairs the mechanical half of the imported escaping (`\\{`, `\_`, `$ x $`). These are deliberately excluded from it, because the correct edit depends on which of the three cases it is — and two of them are not local:
+
+- **mid-paragraph (36).** The author wrote `… we have $$x = y.$$` inline. The repair is to split the paragraph, which is a judgement about the prose: whether the sentence continues after the equation, whether the equation is parenthetical, whether it wanted to be inline math in the first place.
+- **no blank line before (3).** A blank line. The only genuinely mechanical case — but three of the forty-one is not worth a code path.
+- **3-space indent (2).** These are the interesting ones. python-markdown wants **four** spaces for a block inside a list item, so a three-space continuation is not inside the item *at all* — the surrounding list is already broken, and the `$$` is only the visible symptom. Confirmed in the built HTML: `lab2` renders `5. Ask Sage to …` as its own single-item `<ol>` with everything after it as top-level siblings, and `birkhoff-hsp`'s item 2 does the same. Fixing the `$$` alone leaves the list broken; fixing the list means re-indenting the whole item, which is the real work.
+
+Automating any of that would silently move prose out of a list item, which is worse than the literal `$` it replaces.
+
+## Scope note — do this with the KaTeX errors, not before them
+
+`make math-audit MATH_SRC=docs` reports 16 failures on 4 pages, and they are the same pages:
+
+| page | KaTeX failures | stranded `$$` |
+| --- | --: | --: |
+| `agda-ualib/birkhoff-hsp` | 5 | 8 |
+| `python/lab4` | 3 | 5 |
+| `python/computerlab/lab01` | 1 | 6 |
+| `agda-ualib/f-algebras` | 1 | 1 |
+
+They are different defects — a stranded `$$` renders fine and reads wrong, a KaTeX error renders red — but they are the same paragraphs, and reading a paragraph twice to fix one thing each time is the waste. `f-algebras`'s single failure is the redundant `\newcommand` preamble already described under **Redundant macro preambles** in `docs/design/rendering.md`; `lab4`'s are `\\\x` and `\\\2` triple-backslash leftovers from the same conversion.
+
+## Acceptance
+
+- [ ] `python3 scripts/python/check_math_source.py --strict docs` exits 0
+- [ ] `make math-audit MATH_SRC=docs` exits 0, or every remaining failure is named in `docs/design/rendering.md` with a reason it cannot be fixed (`\xymatrix` is the known one)
+- [ ] the two three-space list items render as lists again, checked in the built HTML rather than the source
+- [ ] the "Still outstanding" paragraph in `docs/design/rendering.md` is updated or removed
+- [ ] no prose is rewritten — this is punctuation, indentation and paragraph boundaries only
+
+## Context
+
+These pages are the **archive** disposition from ADR-002: out of the primary nav, indexed and linkable, URLs preserved (#67). That they are unmaintained is a reason not to rewrite them; it is not a reason to serve `$` characters where the author wrote an equation. It is also why this is not urgent — nothing in M3–M8 is blocked on it.
+
+Related: #75 (the same repair on the blog posts, and the checker), #56 (the exam corpus, which will arrive with the same defects — run `make math-fix MATH_ROOT=import/zola-converted` first), #67 (the archive area itself).
+
 <!-- END GENERATED: milestone-2 -->
 
 ---
@@ -1009,7 +1075,74 @@ Ship the fonts.  The Zola site loads Fira Code from `cdn.rawgit.com`, which shut
 
 ---
 
-### Issue M3-2: Design the home page (#18)
+### Issue M3-1a: Combining marks break when base and mark land in different JuliaMono subsets (#81)
+
+**Labels**: `milestone-3-design`, `infrastructure`, `design`
+
+Raised out of #24, where `make font-audit` caught it on a real page. It is a bug in the #17 font build, not in that page.
+
+## What happens
+
+`≈̇` — standard Agda notation, produced by `agda-input.el`'s `\~~.`, and the identity relation used throughout `agda-algebras` — renders in **DejaVu Sans Mono** instead of JuliaMono. Any base-plus-combining-mark cluster can hit this.
+
+Both codepoints ship. They just ship in different files:
+
+| codepoint | shipped in |
+| --- | --- |
+| `≈` U+2248 | `juliamono-text.woff2` |
+| combining dot U+0307 | `juliamono-symbols.woff2` |
+
+**Neither file contains both**, and a browser cannot compose a grapheme cluster across two `@font-face` rules — sharing a `font-family` name does not help, because the cluster has to be shaped by a single font. So it falls back to whichever system font has both, which is exactly the substitution `make font-audit` exists to fail on.
+
+## Confirmed in a browser, not inferred
+
+Measured with the repo's own `_browser.mjs` over HTTP, asking Chromium which face it actually rasterised with:
+
+| cluster | base and mark | result |
+| --- | --- | --- |
+| `⊫` U+22AB + U+0307 | both in `symbols` | **JuliaMono** |
+| `⊨` U+22A8 + U+0307 | both in `symbols` | **JuliaMono** |
+| `≈` U+2248 + U+0307 | **split across files** | DejaVu Sans Mono |
+| `≈` alone | text file | JuliaMono |
+| `⊫` alone | symbols file | JuliaMono |
+
+Same-file clusters compose; the split one does not. That isolates the cause to the subset split rather than to a missing glyph or to JuliaMono's repertoire.
+
+A false start worth recording, because it is an easy trap when reproducing this: testing the combining mark "alone" by putting it after a space proves nothing, since space is itself in the text file and space-plus-mark is *also* a split cluster. It looks like a missing glyph and is not.
+
+## Why it happens
+
+`build_fonts.py` splits JuliaMono three ways by Unicode block. `Combining Diacritical Marks` is in `SYMBOL_BLOCKS`, so every combining mark goes to the symbols subset. But some plausible *bases* are in the text subset — `≈` is in the hand-listed `PROSE` core, which exists precisely to put common-in-running-text characters in the always-loaded file. Any base in `PROSE` (or in ASCII, or in `TEXT_BLOCKS`) combined with any mark is therefore unshapeable.
+
+This is a near-relative of the bug ADR-005 already records — the first subset was a character list and silently missed `ℓ`, `Π` and the subscript digits. Same lesson, one level up: a subset can be correct character-by-character and still wrong, because shaping operates on clusters, not codepoints.
+
+## Suggested fix
+
+Ship the combining blocks in **every** JuliaMono subset rather than only in `symbols`. `Combining Diacritical Marks` (U+0300–U+036F) and `Combining Diacritical Marks for Symbols` are small — well under a kilobyte of outlines between them — so duplicating them across the three files costs almost nothing and removes the entire class of failure, in the same spirit as shipping whole blocks rather than character lists.
+
+Worth checking at the same time whether any *base* character can appear in two subsets, which would be the mirror-image problem.
+
+## Tasks
+
+- [ ] Add the combining blocks to all three JuliaMono charsets in `scripts/python/build_fonts.py`.
+- [ ] Regenerate with `make fonts` and commit the rebuilt WOFF2 files.
+- [ ] Confirm `make fonts-check` is clean afterwards.
+- [ ] Add `≈̇` (and one other base+mark cluster with the base in `PROSE`) to the `font-audit` probe set, so a regression fails rather than waits for a content page to trip it.
+- [ ] Restore the `V-id1` signature on `docs/projects/agda-algebras.md`, which #24 rewrote as prose to get around this.
+
+## Acceptance criteria
+
+- [ ] `≈̇` renders in JuliaMono, verified by `make font-audit` rather than by eye.
+- [ ] `make font-audit` covers at least one split-subset cluster in its probe set.
+- [ ] Total shipped font weight does not grow materially.
+
+## Notes
+
+Not urgent for correctness of what is published today: #24 avoids the one cluster it needed, and no other page currently uses a combining sequence — checked across `docs/`. It will bite the next Agda-heavy page, which is #25 and #71 territory.
+
+---
+
+### Issue M3-2: Design the home page (#18, closed)
 
 **Labels**: `milestone-3-design`, `writing`, `design`, `career`
 
@@ -1063,6 +1196,79 @@ Build them once as documented CSS classes or Markdown snippets rather than hand-
 - [ ] All four components are implemented, documented, and rendered on the style page.
 - [ ] Components work in both themes and at all breakpoints.
 - [ ] No page in M4 or M5 needs bespoke CSS.
+
+---
+
+### Issue M3-3a: Headings do not clear floats, so an h2 after a floated image draws its rule behind it (#88)
+
+**Labels**: `milestone-3-design`, `design`
+
+Raised out of #18, where the home page's hero floats a portrait beside the opening prose. It is a gap in the #19 component set, not a bug in that page.
+
+## What happens
+
+`.md-typeset h2` carries a full-width `border-bottom`, and nothing in `extra.css` sets `clear` on any heading. A block box is **not** shortened by a float — only the line boxes inside it are — so an `h2` that begins while a floated image is still in flow lays its *text* out beside the image but draws its *border* across the full content width. The rule vanishes behind the photo and reappears as a stub to the right of it.
+
+## Confirmed in a browser, not inferred
+
+Measured with the repo's own `_browser.mjs` at a 1440×900 viewport over HTTP, on a draft of the new home page:
+
+| element | geometry |
+| --- | --- |
+| content column | 688 px wide |
+| portrait, `align=right width="30%"` | 198 × 264 px, occupying y 179–443 |
+| `## What I'm working on now` | y 387–428 — inside the float's vertical range |
+
+The heading's border box spans the full 688 px while the image sits in the rightmost 198 px of it, so the rule passes underneath. A screenshot of the failure is in #87.
+
+## Why it matters beyond one page
+
+Any page that wants an image beside prose *above* a section heading hits this, which is the natural shape for a project page with a diagram, and for `about.md` if its portrait is ever floated rather than centred.
+
+The workarounds are what make it worth fixing rather than living with. Clearing the float by making the prose taller than the image needs about nine lines of hero copy, which is no longer a compact hero; shrinking the image until an `h2` clears puts the portrait at about 100 px. #18 took the third option and made its "now" block a bold dated paragraph instead of an `## h2` — a content decision forced by a stylesheet gap, and recorded in that page's front matter so it is not tidied back.
+
+## Suggested fix
+
+```css
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  clear: both;
+}
+```
+
+One declaration on the heading rule that already exists. `clear: both` is what the rule means here: a section heading starts a new section, and a section should not begin beside the previous one's illustration.
+
+Worth checking at the same time whether `hr` and `.project-grid` want the same. Both are full-width block boxes whose border and background would sit under a float in exactly the same way, and neither has been tried next to one.
+
+## The thing standing next to it: there is no hero component
+
+#19 ships four components and none of them is "an image beside prose". So the only way to build the hero #18 asks for, without bespoke CSS, is a floated image whose width is a **percentage**:
+
+```markdown
+[…](…){ align=right width="34%" }
+```
+
+A pixel width cannot be responsive — at 360 px a 200 px float leaves about fifteen characters a line — and the percentage is what makes it degrade. It renders correctly in every engine, because the HTML rendering rules parse `width` with the rules for parsing dimension values and those accept percentages. But a percentage is non-conforming for `img@width`, so a validator would flag it. A `.hero` component, or a documented `figure` variant, would put the sizing in CSS and remove both the float collision and the non-conforming attribute.
+
+## Tasks
+
+- [ ] Add `clear: both` to the heading rule in `docs/stylesheets/extra.css`.
+- [ ] Check `hr` and `.project-grid` for the same failure, and clear them if they have it.
+- [ ] Render a heading directly under a floated image on `docs/design/style.md`, so this case is one of the live examples rather than something to rediscover.
+- [ ] Decide whether a hero belongs in the component set. If it does, move `docs/index.md`'s portrait onto it and drop the percentage `width`.
+- [ ] Once either lands, `docs/index.md`'s "now" block can become a real `## h2` again — and the front-matter note explaining why it is not should go with it.
+
+## Acceptance criteria
+
+- [ ] A heading placed immediately after a floated image starts below it, in both themes, verified in a browser rather than by reading the CSS.
+- [ ] `make check` and `make contrast-audit` still pass.
+- [ ] Either the home page uses a hero component, or the reason it does not is written down.
+
+## Notes
+
+Not urgent for what is published today: #18 avoids it and no other page floats an image. It will bite the first M4 or M5 page that puts a figure beside prose.
 
 ---
 
@@ -1155,7 +1361,7 @@ Audit and fix, rather than assume.  Material for MkDocs gives a good baseline, b
 
 <!-- BEGIN GENERATED: milestone-4 -->
 
-### Issue M4-1: Portfolio index and project page template (#23)
+### Issue M4-1: Portfolio index and project page template (#23, closed)
 
 **Labels**: `milestone-4-portfolio`, `content`, `design`, `career`
 
@@ -1240,7 +1446,7 @@ Their site loads JuliaMono from `cdn.jsdelivr.net` and Inter/Roboto Mono from Go
 
 ---
 
-### Issue M4-2: agda-algebras project page (#24)
+### Issue M4-2: agda-algebras project page (#24, closed)
 
 **Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
@@ -1343,7 +1549,7 @@ The page should establish what the project is, what problem motivated it, how it
 
 ---
 
-### Issue M4-5: Formal verification at IO — the Cardano ledger specification (#27)
+### Issue M4-5: Formal verification at IO — the Cardano ledger specification (#27, closed)
 
 **Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
@@ -1397,6 +1603,104 @@ A compact list with a one-line description and a link each is the right weight. 
 - [ ] The section is clearly secondary to the flagship projects.
 - [ ] Dormant projects are labeled as such.
 
+---
+
+### Issue M4-7: Universal algebra and lattice theory — the mathematics research page (#82)
+
+**Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
+
+The portfolio index has carried a card for this since #23, and ADR-008 argues for it at length, but no issue existed to write the page behind it. This is that issue.
+
+> **ADR renumbered.** The portfolio-shape ADR was numbered 006 and collided with #29's bibliography ADR, which had the earlier claim. It is now `docs/adr/008-portfolio-shape.md` (see #86). `ADR-006` means the *bibliography* decision and is a different document.
+
+## Why the entry exists
+
+#23's original list had four entries and all four were formalization or verification work — evidence of what can be **mechanized**. For the roles this site is aimed at, "can find and prove new theorems" and "can mechanize known ones" are different claims that need different evidence. `agda-algebras` mechanizes Birkhoff's theorem, which is Birkhoff's.
+
+This is also the only portfolio entry backed by peer-reviewed journal publication, and the site's own opening paragraph claims the mathematician identity. A portfolio that omits it leaves that claim an assertion, which is the mode M4 exists to end.
+
+It sits fourth on the index. Not first, because the index is ordered by relevance to a reader asking "can this person do our work", not "where did they come from". Not last, because it *explains* the three above it: Birkhoff's HSP theorem is not an arbitrary theorem to have spent years mechanizing, it is the central theorem of the field the author has a doctorate in. See ADR-008 for the full argument; do not re-open the ordering here.
+
+## What the page covers
+
+Congruence lattices of finite algebras and the finite lattice representation problem; the later work on the algebraic approach to constraint satisfaction; and the lattice-theoretic papers with Mayr and Ruškuc.
+
+The interesting content is not a publication list — #30 already renders that from `bibliography.json`, and duplicating it here would advertise one body of work twice. What belongs here is the *problem*: what the finite lattice representation problem asks, why it is hard, what is actually known, and what the author's contribution to it was. A reader should come away understanding one open problem in universal algebra and this person's relationship to it.
+
+Worth stating the connection forward, because it is real and not decorative: the FLRP research track in `agda-algebras` carries machine-checked small-lattice representation certificates. The mathematics and the formalization are the same thread, and this page is where that gets said.
+
+## Tasks
+
+- [ ] Write the summary paragraph and the status line per `docs/projects/_template.md`.
+- [ ] State the finite lattice representation problem so a non-specialist can follow it.
+- [ ] Describe the thesis contribution and the later CSP work, proportionately.
+- [ ] Link the thesis, the journal papers by DOI, and the arXiv preprints.
+- [ ] Cross-link `agda-algebras` (#24), specifically the FLRP certificates.
+- [ ] Point at #30 for the full publication record rather than restating it.
+- [ ] Swap the index card's title link from arXiv to this page, per ADR-008 Decision 4.
+
+## Acceptance criteria
+
+- [ ] The page follows the M4-1 template.
+- [ ] A reader who is not a universal algebraist can state what the open problem is after reading it.
+- [ ] Every claim is backed by a linked, resolving artifact.
+- [ ] It does not duplicate the publications page.
+- [ ] `make check`, `make math-audit`, `make math-source`, `make contrast-audit` and `make font-audit` stay green.
+
+## Notes
+
+The card currently links [arXiv:1204.4305](https://arxiv.org/abs/1204.4305) (the thesis) and a Google Scholar profile. The Scholar link has never been verified from a session that could reach it — worth checking while writing this.
+
+This will be the first *new* page carrying real mathematics since the math gates landed (#80), so `make math-audit` and `make math-source` now apply to it. Watch for #81 as well: a base character and its combining mark that fall in different JuliaMono subsets cannot be composed and fail `make font-audit`.
+
+---
+
+### Issue M4-8: Category theory: a concise course — project page (#83)
+
+**Labels**: `milestone-4-portfolio`, `content`, `writing`
+
+ADR-002 promoted this to "a portfolio entry in its own right" under M4, and no issue was ever filed for it, so the decision has been sitting with nowhere to land since the content triage. #23 gave it a card on the index; this issue writes the page behind it.
+
+> **ADR renumbered.** The portfolio-shape ADR was numbered 006 and collided with #29's bibliography ADR, which had the earlier claim. It is now `docs/adr/008-portfolio-shape.md` (see #86). `ADR-006` means the *bibliography* decision and is a different document.
+
+## Attribution is a correctness requirement
+
+**The course is coauthored with Venanzio Capretta and Charlotte Aten, and must carry that attribution wherever it appears** — card, page, nav, social card, anywhere. ADR-002 calls this a correctness requirement rather than a courtesy, and it is repeated here because a project page is exactly the kind of place where a coauthor quietly becomes a footnote.
+
+It is built out from course notes Capretta wrote for a short course at the Midlands Graduate School. That provenance goes on the page too; it is not the author's course with help, it is a joint work with a clear origin.
+
+## It unblocks a redirect
+
+`redirects.yml` holds `/books/` pending on `"#56 and M4 -- the page splits; successor not yet chosen"`. ADR-002 split the legacy books page three ways: the two analysis collections merge into the exam corpus (#56), and the category theory course becomes this entry. One of those two successors now exists as a card and will exist as a page here, which is half of what `/books/` needs to resolve.
+
+Coordinate the final redirect target with #15 and #56 rather than deciding it unilaterally — one legacy URL, two successors, and #56 still has not settled the corpus's home.
+
+## What the page covers
+
+This is the one expository entry in the portfolio, and it should be honest about being that rather than dressed up as research. What makes it worth a page: it is original teaching material at book length, it is public, and it is evidence of the ability to explain hard mathematics to people who do not already know it — which is a different and independently useful signal from the formalization work.
+
+## Tasks
+
+- [ ] Write the page per `docs/projects/_template.md`.
+- [ ] Attribute Capretta and Aten in the summary paragraph, not only in a footer.
+- [ ] Describe the course's scope, audience, and current state honestly (`active`, `paused`, or `archived` — whichever is true).
+- [ ] State the Midlands Graduate School provenance.
+- [ ] Verify `https://categorytheory.gitlab.io` resolves and is current. **It has never been checked from a session that could reach it** — the host is blocked by the sandbox egress allowlist, and it is the card's only link.
+- [ ] Swap the index card's title link to this page, per ADR-008 Decision 4.
+- [ ] Coordinate the `/books/` redirect target with #15 and #56.
+
+## Acceptance criteria
+
+- [ ] The page follows the M4-1 template.
+- [ ] Capretta and Aten are attributed on the page and on the card.
+- [ ] Every outbound link resolves, checked rather than assumed.
+- [ ] The entry reads as exposition, not as a research claim.
+- [ ] `make check` and `make contrast-audit` stay green.
+
+## Notes
+
+Sixth on the index, not fifth, once #56 resolves — ADR-008 gives the exam corpus the fifth slot ahead of it, because the corpus is the author's own original solutions with an active formalization planned, where this is exposition built on existing notes. That ordering is decided; do not re-open it here.
+
 <!-- END GENERATED: milestone-4 -->
 
 ---
@@ -1406,7 +1710,7 @@ A compact list with a one-line description and a link each is the right weight. 
 
 <!-- BEGIN GENERATED: milestone-5 -->
 
-### Issue M5-1: Single-source bibliography and generator (#29)
+### Issue M5-1: Single-source bibliography and generator (#29, closed)
 
 **Labels**: `milestone-5-research`, `content`, `automation`
 
@@ -1435,7 +1739,7 @@ The generator should be a script in `scripts/python/`, run in CI, emitting Markd
 
 ---
 
-### Issue M5-2: Publications page (#30)
+### Issue M5-2: Publications page (#30, closed)
 
 **Labels**: `milestone-5-research`, `content`, `career`
 
