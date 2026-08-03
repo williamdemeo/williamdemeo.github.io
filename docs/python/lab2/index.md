@@ -47,23 +47,23 @@ In this first part of this lab assignment, we will simply re-solve the above pro
 
 1. Login to any machine in Carver 449, open up a browser (preferably Chrome) and navigate to [https://sage.math.iastate.edu/](https://sage.math.iastate.edu/)
 
-   Login to your account on the Math Department Sage server using the login information you were given for Lab 1. Once you are logged in, create a new worksheet and name it Lab2.
+    Login to your account on the Math Department Sage server using the login information you were given for Lab 1. Once you are logged in, create a new worksheet and name it Lab2.
 
 2. In the Lab2 worksheet, click the first cell and type the following:
 
-   ```python
-   b = vector([1, -1, 1, -1]); print b
-   ```
+    ```python
+    b = vector([1, -1, 1, -1]); print b
+    ```
 
-   Then type `Shift`+`Enter` or click `evaluate`. 
+    Then type `Shift`+`Enter` or click `evaluate`. 
 
-   Did Sage print what you expect? If so, move on to number 3. 
+    Did Sage print what you expect? If so, move on to number 3. 
 
-   If not, try again and/or ask the instructor for help.
+    If not, try again and/or ask the instructor for help.
 
 3. Click somewhere inside the next cell and enter the following expression:
 
-   ```python
+    ```python
     A = matrix(4, 3, [1, 0, 1, 0, -1, -2, 1, 0, 1, -2, 1, 0]) print A
     ```
 
@@ -77,24 +77,24 @@ In this first part of this lab assignment, we will simply re-solve the above pro
 
 4. Next, have Sage augment the matrix $A$ with the vector $b$ by entering the following into the next worksheet cell:
 
-   ```python
-   Ab = A.augment(b, subdivide=True) print Ab
-   ```
+    ```python
+    Ab = A.augment(b, subdivide=True) print Ab
+    ```
 
 5. Ask Sage to put your augmented matrix in reduced-row echelon form:
 
-   ```python
-   Ab.rref()
-   ```
+    ```python
+    Ab.rref()
+    ```
 
-   You should now see two pivots (both equal to 1). Let the free variable $x_3 = s$ and write the vector $\mathbf{b}$ as a linear combination of the vectors $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$ involving $s$.
+    You should now see two pivots (both equal to 1). Let the free variable $x_3 = s$ and write the vector $\mathbf{b}$ as a linear combination of the vectors $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$ involving $s$.
 
-   $$\mathbf{b}= \begin{bmatrix} 1 \\\\ -1 \\\\ 1 \\\\ -1\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2+ \underline{\phantom{XXX}} \mathbf{v}_3.$$ 
-   
-   If you want to stop here, ask the instructor to check your work and sign below then save and quit. Otherwise, move on to Part 2\
-   \
-   \
-   Instructor signature: (1 point)
+    $$\mathbf{b}= \begin{bmatrix} 1 \\ -1 \\ 1 \\ -1\end{bmatrix}= \underline{\phantom{XXX}}\mathbf{v}_1 + \underline{\phantom{XXX}} \mathbf{v}_2+ \underline{\phantom{XXX}} \mathbf{v}_3.$$ 
+
+    If you want to stop here, ask the instructor to check your work and sign below then save and quit. Otherwise, move on to Part 2\
+    \
+    \
+    Instructor signature: (1 point)
 
 
 ## Part 2 Details

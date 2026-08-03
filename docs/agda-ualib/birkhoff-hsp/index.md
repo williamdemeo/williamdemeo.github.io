@@ -48,32 +48,42 @@ Let $F$ be an endofunctor on Set and let $(A, f^A)$ and $(B, f^B)$ be $F$-algebr
     **Proof.** Suppose there are $m$ operation symbols in the similarity type of the two algebras, and assume the $i$-th operation symbol has arity $k_i$. Then $F A : \coprod_{i=0}^{m-1}(\underline{k_i} \to A)$.
 
     a. Fix arbitrary $0\leq i< m$ and $a : \underline{k_i} \to E(g,h)$. We wish to show that $g (f^A (\inji a)) = h (f^A (\inji a))$, as this will show that $E(g,h)$ is closed under the $i$-th operation of $(A, f^A)$. (Since $i$ was arbitrary this will complete the proof.) But this is trivial since, by definition of an $F$-algebra [homomorphism](../f-algebras/index.md), we have
+
     $$(g \circ f^A)(\inji a) = (f^B \circ F g)(\inji a) = (f^B \circ F h)(\inji a) = (h \circ f^A)(\inji a).$$
 
-    b. Suppose the subset $X \subseteq A$ generates $(A, f^A)$ and suppose $g|_X = h|_X$. Fix an arbitrary $a : A$. We show $g(a) = h(a)$. Since $X$ generates $(A, f^A)$, there exists a term $t$ and a tuple $x : \rho t \to X$ of generators such that $a = t^A x$. Therefore, since $F g = F h$ on $X$, we have $$g(a) = g(t^A x) = (t^B \circ F g)(x) = (t^B \circ F h)(x) = h(t^A x) = h(a).$$
+    b. Suppose the subset $X \subseteq A$ generates $(A, f^A)$ and suppose $g|_X = h|_X$. Fix an arbitrary $a : A$. We show $g(a) = h(a)$. Since $X$ generates $(A, f^A)$, there exists a term $t$ and a tuple $x : \rho t \to X$ of generators such that $a = t^A x$. Therefore, since $F g = F h$ on $X$, we have
+
+    $$g(a) = g(t^A x) = (t^B \circ F g)(x) = (t^B \circ F h)(x) = h(t^A x) = h(a).$$
 
     c. By b, a homomorphism is uniquely determined by its restriction to a generating set. If $X$ generates $(A, f^A)$, then, since there are exactly $|B|^{|X|}$ functions from $X$ to $B$, we have $|\mathrm{Hom}((A, f^A),(B, f^B))| \leq |B|^{|X|}$.
 
 2. Suppose $g$ and $h$ are homomorphisms from $(A, f^A)$ to $(B, f^B)$ and from $(A, f^A)$ to $(C,f^C)$, respectively. Assume $g$ is surjective, and $\ker g \subseteq \ker h$. Then there exists a homomorphism $k$ from $(B, f^B)$ to $(C, f^C)$ such that $h = k \circ g$. <!-- \[ex:1.26.8\]  -->
 
-   **Proof.** Define $k\colon B \to C$ as follows: for each $b\in B$, choose (by Axiom of Choice!) $a_0\in g^{-1}\{b\}$ and let $k(b) = h(a_0)$. (Since $g$ is surjective, such an $a_0$ exists for each $b\in B$.) Fix $a \in A$. We show $h(a) = k g(a)$. Let $a_0$ be the element of $g^{-1}\{g(a)\}$ that we chose when defining $k$ at $b = g(a)$. That is, $k(b) = h(a_0)$. Then, $g(a_0) = b = g(a)$, so $(a_0, a) \in \ker g\subseteq \ker h$, so $h(a) = h(a_0) = k(b) = k g(a)$, as desired.
+    **Proof.** Define $k\colon B \to C$ as follows: for each $b\in B$, choose (by Axiom of Choice!) $a_0\in g^{-1}\{b\}$ and let $k(b) = h(a_0)$. (Since $g$ is surjective, such an $a_0$ exists for each $b\in B$.) Fix $a \in A$. We show $h(a) = k g(a)$. Let $a_0$ be the element of $g^{-1}\{g(a)\}$ that we chose when defining $k$ at $b = g(a)$. That is, $k(b) = h(a_0)$. Then, $g(a_0) = b = g(a)$, so $(a_0, a) \in \ker g\subseteq \ker h$, so $h(a) = h(a_0) = k(b) = k g(a)$, as desired.
 
-   To see that $k$ is a homomorphism, let there be $m$ operation symbols and let $0\leq i< m$ be arbitrary. Fix $b : \underline{k_i} \to B$ and $a : \underline{n} \to A$ be the respective representatives of the $g$-kernel classes $g^{-1}\{b(i)\}$ that we chose when defining $k$. Then, $$(f^C \circ F k) (b) = (f^C \circ F k) ((F g) a) = (f^C \circ F h) (a) =  (h \circ f^A)(a) = (k g \circ f^A)(a).$$
-   $$(k \circ (g \circ f^A))(a) = (k \circ (f^B \circ F g))(a) = (k \circ f^B) ((F g)(a)) = (k \circ f^B)(b).$$
+    To see that $k$ is a homomorphism, let there be $m$ operation symbols and let $0\leq i< m$ be arbitrary. Fix $b : \underline{k_i} \to B$ and $a : \underline{n} \to A$ be the respective representatives of the $g$-kernel classes $g^{-1}\{b(i)\}$ that we chose when defining $k$. Then,
 
-   **Subalgebra generation**
+    $$(f^C \circ F k) (b) = (f^C \circ F k) ((F g) a) = (f^C \circ F h) (a) =  (h \circ f^A)(a) = (k g \circ f^A)(a).$$
 
-   **Clones**
+    $$(k \circ (g \circ f^A))(a) = (k \circ (f^B \circ F g))(a) = (k \circ f^B) ((F g)(a)) = (k \circ f^B)(b).$$
 
-3. Let $A$ be a set and $S = (F, \rho)$ a signature and suppose each $f\in F$ is a $(\rho f)$-ary operation on $A$. Define $$\begin{aligned} F_0 &= \operatorname{Proj}(A);\\ F_{n+1} &= F_n \cup \{ f g \mid f \in F, g \colon \rho f \to (F_n \cap (\rho g \to A)) \}, \text{ for } n < \omega. \end{aligned}$$ Then $\operatorname{Clo}^A(F) =  \bigcup_n F_n$.
+    **Subalgebra generation**
 
-   **Terms and Free Algebras** <!-- \[thm:4.21\]  -->
+    **Clones**
+
+3. Let $A$ be a set and $S = (F, \rho)$ a signature and suppose each $f\in F$ is a $(\rho f)$-ary operation on $A$. Define
+
+    $$\begin{aligned} F_0 &= \operatorname{Proj}(A);\\ F_{n+1} &= F_n \cup \{ f g \mid f \in F, g \colon \rho f \to (F_n \cap (\rho g \to A)) \}, \text{ for } n < \omega. \end{aligned}$$
+
+    Then $\operatorname{Clo}^A(F) =  \bigcup_n F_n$.
+
+    **Terms and Free Algebras** <!-- \[thm:4.21\]  -->
 
 4. Let $\rho$ be a similarity type.
 
     a. $\mathbf{T}_\rho(X)$ is generated by $X$.
 
-    b. For every algebra $(A, f^A)$ of type $\rho$ and every function $h\colon X \to A$ there is a unique homomorphism $g\colon \mathbf{T}_\rho(X) \to (A, f^A)$ such that ${{  \left.\kern-\nulldelimiterspace   g   \vphantom{\big|}   \right|_{X}   }} = h$.
+    b. For every algebra $(A, f^A)$ of type $\rho$ and every function $h\colon X \to A$ there is a unique homomorphism $g\colon \mathbf{T}_\rho(X) \to (A, f^A)$ such that ${{  \left.   g   \vphantom{\big|}   \right|_{X}   }} = h$.
 
     *Proof.** The definition of $\mathbf{T}_\rho(X)$ exactly parallels the construction in Theorem 1.14 (Bergman 2012). That accounts for (1). For (2), define $g(t)$ by induction on $|t|$. Suppose $|t| = 0$. Then $t \in X \cup {\mathcal{F}}_0$. If $t \in X$ then define $g(t) = h(t)$. For $t \in {\mathcal{F}}_0$, $g(t) = t^{(A, f^A)}$. Note that since $(A, f^A)$ is an algebra of type $\rho$ and $t$ is a nullary operation symbol, $t^{(A, f^A)}$ is defined.
 
@@ -87,7 +97,9 @@ Let $F$ be an endofunctor on Set and let $(A, f^A)$ and $(B, f^B)$ be $F$-algebr
 
     b. For every term $t \in T_\rho(X_\omega)$ and every $\theta \in \operatorname{Con}((A, f^A))$, $(A, f^A)\equiv_\theta (B, f^B)\implies t^{(A, f^A)}((A, f^A)) \equiv_\theta t^{(A, f^A)}((B, f^B))$.
 
-    c. For every subset $Y$ of $A$, $$\operatorname{Sg}^{(A, f^A)}(Y) = \{ t^{(A, f^A)}(a_1,\dots, a_n) : t \in T(X_n), a_i \in Y, i \leq n < \omega\}.$$
+    c. For every subset $Y$ of $A$,
+
+    $$\operatorname{Sg}^{(A, f^A)}(Y) = \{ t^{(A, f^A)}(a_1,\dots, a_n) : t \in T(X_n), a_i \in Y, i \leq n < \omega\}.$$
 
     **Proof.** The first statement is an easy induction on $|t|$. The second statement follows from the first by taking $(B, f^B) = (A, f^A)/\theta$ and $g$ the canonical homomorphism. For the third statement, again by induction on the height of $t$, every subalgebra must be closed under the action of $t^{(A, f^A)}$. Thus the right-hand side is contained in the left. On the other hand, the right-hand side is clearly a subalgebra containing the elements of $Y$ (take $t = x_1$) from which the reverse inclusion follows.
 
@@ -142,7 +154,15 @@ Let $(A, f^A) \in \overline{\mathcal{W}}$ and $Y$ a set of cardinality $\max(|A|
 We claim that $\ker g \subseteq \ker h$. If the claim is true then by Lemma \[ex:1.26.8\] there is a map $f\colon \mathbf{F}_{\mathcal{W}}(Y) \to (A, f^A)$ such that $f {\circ}g = h$. Since $h$ is surjective, so is $f$. Hence
 $(A, f^A) \in \mathbf{H}(\mathbf{F}_{\mathcal{W}}(Y)) \subseteq \mathcal{W}$ completing the proof.
 
-Let $u,v \in T(Y)$ and assume that $g(u) = g(v)$. Since $\mathbf{T}(Y)$ is generated by $Y$, by Theorem \[thm:4.21\], there is an integer $n$, terms $p, q \in T(X_n)$, and $y_1$, $\dots$, $y_n \in Y$ such that $u = p^{\mathbf{T}(Y)}(y_1,\dots, y_n)$ and $v = q^{\mathbf{T}(Y)}(y_1,\dots, y_n)$, by Theorem \[thm:4.32\]. Applying the homomorphism $g$, $$p^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n) = g(u) = g(v) = q^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n).$$ Then by Result 4 above (Corollary 4.39, Bergman, 2012), $\mathcal{W} \models p \approx q$, hence $(p \approx q) \in \Sigma$. Since $(A, f^A) \in \overline{\mathcal{W}} = \operatorname{Mod}(\Sigma)$, we get $(A, f^A) \models p \approx q$. Therefore, $$h(u) = p^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = q^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = h(v),$$ as desired.
+Let $u,v \in T(Y)$ and assume that $g(u) = g(v)$. Since $\mathbf{T}(Y)$ is generated by $Y$, by Theorem \[thm:4.21\], there is an integer $n$, terms $p, q \in T(X_n)$, and $y_1$, $\dots$, $y_n \in Y$ such that $u = p^{\mathbf{T}(Y)}(y_1,\dots, y_n)$ and $v = q^{\mathbf{T}(Y)}(y_1,\dots, y_n)$, by Theorem \[thm:4.32\]. Applying the homomorphism $g$,
+
+$$p^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n) = g(u) = g(v) = q^{\mathbf{F}_{\mathcal{W}}(Y)}(y_1,\dots, y_n).$$
+
+Then by Result 4 above (Corollary 4.39, Bergman, 2012), $\mathcal{W} \models p \approx q$, hence $(p \approx q) \in \Sigma$. Since $(A, f^A) \in \overline{\mathcal{W}} = \operatorname{Mod}(\Sigma)$, we get $(A, f^A) \models p \approx q$. Therefore,
+
+$$h(u) = p^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = q^{(A, f^A)}(h_0(y_1), \dots, h_0(y_n)) = h(v),$$
+
+as desired.
 
 <!-- [inputs/refs.bib]{} @book [MR2839398, AUTHOR = [Bergman, Clifford]{},
 TITLE = [Universal algebra]{}, SERIES = [Pure and Applied Mathematics

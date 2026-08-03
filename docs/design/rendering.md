@@ -116,10 +116,16 @@ Copy the Agda block and paste it somewhere: the round trip must preserve
 
 ## Known limitations
 
+`docs/` renders **zero KaTeX failures across 1204 expressions**, and
+`nix flake check` now holds it there — that is what `checks.math-audit` is. So
+everything below is either about content still staged under `import/`, or about
+a defect class the audit cannot see by construction.
+
 **`\xymatrix` does not render.** Five commutative diagrams in the ring-theory
 solutions use XY-pic, which KaTeX has no equivalent for. They need converting to
-Mermaid, KaTeX's `{CD}` environment, or images. Tracked as content work rather
-than a rendering bug.
+Mermaid, KaTeX's `{CD}` environment, or images. Content work rather than a
+rendering bug — and confined to `import/zola-converted/exams/rings/`, so it
+blocks the exam migration (#56) and nothing that ships today.
 
 **Over-escaped braces, and three defects like them.** The imported content came
 through a Markdown engine that escaped its way past this one, leaving four
@@ -132,20 +138,43 @@ KaTeX throws on:
 | `\\{`, `\\}` | KaTeX reads `\\` as a line break, so the braces vanish and the expression grows two stray breaks |
 | `\_` | a literal underscore: `A_1` where `A₁` was meant |
 | `$ x $` | arithmatex's `smart_dollar` declines a padded delimiter, so the LaTeX is published as prose |
-| a `$$` block that does not start its Markdown block | the inline processor takes the inner `$…$` and leaves a literal `$` on each side |
+| a `$$` block that does not *own* its Markdown block | the inline processor takes the inner `$…$` and leaves a literal `$` on each side |
 
 `make math-source` reports all four and `make math-fix` rewrites the first
 three; `scripts/python/check_math_source.py` imports arithmatex's own delimiter
-patterns so it cannot disagree with the build. `docs/` is clean of the first
-three and CI keeps it that way.
+patterns so it cannot disagree with the build. `docs/` is clean of all four and
+CI keeps it that way.
 
-Still outstanding: forty-one stranded `$$` blocks across the imported archive
-pages, tracked as M2-10 and named by `make math-source` on every run, which
-`--strict` promotes to failures. Each needs a blank line, a re-indent, or a
-paragraph split depending on why it was missed, so it is content work rather
-than a rewrite — and two of them sit in list items whose three-space
-indentation has already put the whole item outside its list. Point
-`make math-fix MATH_ROOT=import/zola-converted` at the exam corpus before
+"Owns its block" is stricter than it sounds, and each clause was learned from a
+page that broke: arithmatex's `BlockProcessor.test()` calls `.match()`, so the
+delimiter needs a blank line *before* it, a blank line *after* it, an indent
+that is a multiple of four (python-markdown wants four inside a list item, not
+two or three), and nothing else on either line. Miss any one and the whole
+block falls through to the inline processor.
+
+A fifth, closely related, that neither checker can see: the conversion also
+**doubled the row separator** inside matrices, writing `\\\\` where the source
+`.tex` writes `\\`. KaTeX reads that as two line breaks and renders a matrix
+with blank rows between its entries — a four-entry vector came out seven rows
+tall. It raises nothing and it is legal LaTeX, so it can only be found by
+counting rows. Forty were repaired across the Sage labs; the source `.tex`
+files under `import/zola-content/python/` are the authority if more turn up.
+
+And a sixth, which is not about mathematics at all but is what stranded a third
+of those blocks: **python-markdown needs four spaces** to keep a block inside a
+list item, where the engine these pages were written for accepted two or three.
+Every continuation — prose, code fence, image, nested list — fell out of its
+item, so the archived Sage labs were rendering each numbered step as its own
+one-item list restarting at 1. Repairing the display blocks inside those items
+was impossible without repairing the items, so both were done together;
+`docs/python/lab1` went from eight `<ol>` elements to one per section.
+
+Left alone deliberately: `docs/python/lab3`, whose sub-four-space lines are
+`sage:` console *output* rather than list continuations. Same indentation, a
+different construct, and no stranded blocks — so re-indenting it would be a
+guess at intent rather than a repair.
+
+Point `make math-fix MATH_ROOT=import/zola-converted` at the exam corpus before
 migrating it and the mechanical half never reaches `docs/` at all.
 
 **Redundant macro preambles.** Four imported pages open with a math block
@@ -159,9 +188,10 @@ $\def\bA{\bf A} \def\bB{\bf B}$
 Those definitions now live in `katex-macros.js`, which makes the preambles
 redundant — and, for the `\newcommand` ones, harmful: KaTeX raises
 *"attempting to redefine \FGrp; use \renewcommand"* rather than ignoring them.
+The `\def` ones do not raise; they render as an empty span, which is a stray
+blank in the middle of a sentence rather than an error.
 
-The blocks should be deleted when those pages are triaged. Nothing published
-is affected today, since the pages are still staged under `import/`; the
-collision shows up only in `make math-audit`.
-`agda-ualib/f-algebras.md`, `agda-ualib/elementary-facts.md`,
-`agda-ualib/birkhoff-hsp.md`, and `2014-02-13-a-problem-of-palfy-and-saxl.md`.
+Both blocks that had reached `docs/` are now deleted — `agda-ualib/f-algebras`
+and the Pálfy–Saxl post — and `\FGrp`, `\inj`, `\bA` and `\bB` resolve from the
+macro table exactly as before. What remains is in `import/zola-converted/`, and
+deleting each one is part of migrating the page that carries it.

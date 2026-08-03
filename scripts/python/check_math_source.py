@@ -200,6 +200,8 @@ def find_stranded_display(path, text):
     for m in BLOCK.finditer(scan):
         i = scan.count("\n", 0, m.start())
         before = scan[starts[i]:m.start()]
+        j = scan.count("\n", 0, m.end())
+        after = scan[m.end():starts[j] + len(lines[j])]
         if before.strip():
             why = "prose before it on the same line, so it is mid-paragraph"
         elif len(before) % 4:
@@ -207,6 +209,14 @@ def find_stranded_display(path, text):
                    f"needs a multiple of 4")
         elif i and lines[i - 1].strip():
             why = "no blank line before it, so it continues the paragraph above"
+        elif after.strip():
+            why = "prose after it on the same line, so it is mid-paragraph"
+        elif j + 1 < len(lines) and lines[j + 1].strip():
+            # A block ends at a blank line as surely as it starts after one.
+            # Miss this and the delimiter opens a block it does not own: the
+            # prose below joins it, the block processor declines the whole
+            # thing, and the inline processor takes the inner `$...$`.
+            why = "no blank line after it, so the paragraph below continues it"
         else:
             continue
         yield Finding(path, i + 1, "stranded display", why, False)

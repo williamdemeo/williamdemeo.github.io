@@ -118,10 +118,17 @@ guard-gh:
 #
 # Renders every expression in a content tree with the KaTeX bundle the site
 # actually ships, using the site's own macro table, so the audit cannot drift
-# from what visitors get.  Needs node; nothing from npm.  Exits non-zero on any
-# failure, so it works as a gate once the mathematical content reaches docs/.
+# from what visitors get.  Needs node; nothing from npm.
+#
+# It said here for a long time that this "works as a gate once the mathematical
+# content reaches docs/".  The content has, and docs/ is now at zero failures,
+# so it is one: `nix flake check` runs it.  The default root moved with it --
+# auditing the staging tree by default while CI audited docs/ meant a
+# contributor could run this, see the exam corpus's failures, and read them as
+# a broken build.  Pass MATH_SRC=import/zola-converted to audit that tree
+# before migrating it (#56).
 
-MATH_SRC ?= import/zola-converted
+MATH_SRC ?= docs
 
 .PHONY: math-audit math-source math-fix
 
@@ -135,12 +142,11 @@ math-audit:
 # without raising and so is invisible to the audit, while being wrong on the
 # page.
 #
-# The default root differs for the same reason the two targets differ.  The
-# audit still points at import/, where the un-migrated exam corpus lives; the
-# source check points at docs/, because that is what ships and what CI gates
-# on.  Run `make math-fix MATH_ROOT=import/zola-converted` before migrating a
-# batch and the escaping is repaired once, at the source, rather than page by
-# page afterwards.
+# Both default to docs/, which is what ships and what CI gates on.  The
+# separate variable is not redundant: these two want different roots at
+# different moments, and `make math-fix MATH_ROOT=import/zola-converted`
+# before migrating a batch repairs the escaping once, at the source, rather
+# than page by page afterwards.
 
 MATH_ROOT ?= docs
 

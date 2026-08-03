@@ -38,6 +38,7 @@ selected.
 
 Here are two ways to compute the probability that 2 is one of the four numbers selected:
 First, consider the probability of *not* selecting 2:
+
 $$
 P(\text{2 is not among the chosen primes}) = 
 \frac{19}{20}
@@ -213,7 +214,7 @@ Suppose you have two urns that are indistinguishable from the outside.
 One of the urns contains 3 one-dollar coins and 7 ten-dollar coins.
 The other urn contains 5 one-dollar coins and 5 ten-dollar coins.
 Suppose you choose an urn at random and draw a coin from it at random.  
-You find that it is a $10 coin.  Now you are given the option to draw 
+You find that it is a \$10 coin.  Now you are given the option to draw 
 again (without replacing the first coin) from either the same urn or 
 the other urn.  Should you draw from the same urn or switch?
 
@@ -229,8 +230,8 @@ and whichever is higher determines our strategy.
 
 Let us call the urn that starts with 7 ten-dollar coins urn $A$,
 and the urn that starts with 5 ten-dollar coins urn $B$.
-Let $A\_1$ denote the event that urn $A$ is chosen for the first draw and let
-$B\_1$ denote the event that urn $B$ is chosen for the first draw.
+Let $A_1$ denote the event that urn $A$ is chosen for the first draw and let
+$B_1$ denote the event that urn $B$ is chosen for the first draw.
 Let $T$ denote the event that the first draw produces a ten-dollar coin.  
 
 The probability that a ten-dollar coin appears on the first draw is
