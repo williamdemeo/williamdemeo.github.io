@@ -8,34 +8,52 @@ description: >-
 
 # Universal algebra and lattice theory
 
-Two bodies of work, and a third that is live now.  My thesis attacked the finite
-lattice representation problem, open since the 1960s: which finite lattices are
-the congruence lattice of a finite algebra?  It is not really a question about
-lattices, which is what makes it hard; a theorem of Pálfy and Pudlák turns it
-into a question about intervals in the subgroup lattices of finite groups, so it
-sits downstream of the classification of finite simple groups.  The thesis
-settled every lattice with at most seven elements save one, identified that one,
-and contributed two general methods rather than a list of cases: a construction
-that manufactures new representable lattices to order, and a framework for
-proving that a lattice of a given shape forces any group representing it to look
-a certain way.  The decade after the thesis went mostly elsewhere, to the
-algebraic approach to constraint satisfaction, where the same finite algebras
-turn out to control the complexity of computational problems.  All of it is in
-peer-reviewed journals, and the representation-problem half is now being rebuilt
-as machine-checked Agda in
-[`agda-algebras`](https://github.com/ualib/agda-algebras), which is the part I
-find most interesting: it is the first version of this problem that a proof
-assistant can work on directly.
+There are two bodies of work, and a third that is live now.  All of my work has
+appeared in peer-reviewed journals and conference proceedings.
+
++  **The FLRP**  
+   My phd thesis attacks the *finite lattice representation problem* (FLRP), open since the
+   1960s.
+
+    > Which finite lattices are congruence lattices of finite algebras?
+
+    It is not merely a question about lattices.  Indeed, a theorem of Pálfy and Pudlák
+    turns it into a question about intervals in the subgroup lattices of finite groups.
+
+    My thesis settles every lattice with at most seven elements save one, identifies
+    that one, and contributes the following general methods rather than a list of cases:
+
+     +  a construction that manufactures new representable lattices to order, and
+     +  a framework for proving that a lattice of a given shape forces any group
+        representing it to have certain properties.
+
++  **Computational Complexity of CSPs**  
+   The decade following my phd focused on other problem areas in logic and computer
+   science, with most of my attention devoted to the *algebraic approach to constraint
+   satisfaction*, where properties of varieties of algebras tell us about the complexity of
+   computational problems.
+
++  **FLRP reprise**  
+   My colleagues and I recently met to revive the FLRP and I have been actively
+   formalizing a large portion of our lattice representation research as machine-checked
+   Agda in the [`agda-algebras`](https://agda-algebras.universalalgebra.org) library.
+
+   It is an exciting time to return to such seemingly impenetrable problems in
+   mathematics.  Since we have codified the underlying theory in the formal language of
+   type theory, and stated the problem in that language, we can now summon AI agents to
+   work on the problem directly in the formal language.
 
 Sole author, and joint with Barto, Bergman, Freese, Jipsen, Mayr, Mottet, Ruškuc and Valeriote · 2012– · `active`{.tag}  
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 
-## What the problem asks
+## The FLRP
 
-An **algebra** here means the general thing, not the school subject: a set
-together with some operations on it.  Groups, rings, lattices and vector spaces
-are algebras; so is a four-element set carrying two arbitrary unary functions and
-no laws whatsoever.
+### What the problem asks
+
+An **algebra** here means a *general algebraic structure*: a set
+together with some operations on it.  Groups, rings, lattices and vector spaces are
+algebras; so is a four-element set carrying two arbitrary unary functions and no laws
+whatsoever.
 
 A **congruence** of an algebra $\bA$ is an equivalence relation on its elements
 that the operations respect, meaning that if you replace any argument by an
@@ -49,9 +67,9 @@ group they correspond to normal subgroups, for a ring to ideals, for a vector
 space to subspaces.  For an arbitrary algebra there is no such translation and
 the congruences themselves are the object of study.  Ordered by containment they
 form a lattice $\operatorname{Con} \bA$, in which any two congruences have a
-greatest lower bound and a least upper bound.  That lattice is the algebra's
-internal structure seen as a shape; it records how $\bA$ can be taken apart, and
-whether it embeds in a product of simpler algebras.
+greatest lower bound and a least upper bound.  That lattice gives us a shape that
+helps us understand the algebra's internal structure; it records how $\bA$ can be
+taken apart, and whether it embeds in a product of simpler algebras.
 
 So every algebra has a shape attached to it, and the obvious question is which
 shapes occur.
@@ -66,27 +84,38 @@ the answer has been known since 1963, when Grätzer and Schmidt proved that ever
 algebraic lattice, which includes every finite lattice, is the congruence lattice
 of some algebra.  Tůma later proved the same for intervals in subgroup lattices
 of infinite groups.  Insist that the algebra be finite and, sixty years on,
-nobody knows.  A lattice that is $\operatorname{Con} \bA$ for a finite $\bA$ is
-called **representable**, and the problem is to decide whether every finite
-lattice is.
+nobody knows.
 
-## Why it is hard
+We call a lattice **finitely representable** (or just "representable") if it is
+$\operatorname{Con} \bA$ for some finite $\bA$, and the problem is to decide whether
+every finite lattice is finitely representable.
 
-**Embedding is easy; being the whole thing is not**.  The congruences of a
-finite algebra are partitions of its universe, so a representable lattice sits
-inside $\operatorname{Eq}(X)$, the lattice of all equivalence relations on a
-finite set $X$.  Getting a lattice *inside* $\operatorname{Eq}(X)$ is a solved
+### Why it is hard
+
+**Embedding is easy; being the whole thing is not**.  
+The congruences of a finite algebra are partitions of its universe, so a
+representable lattice sits inside $\operatorname{Eq}(X)$, the lattice of all
+equivalence relations on a finite set $X$.
+
+Getting a lattice to sit *inside* $\operatorname{Eq}(X)$ for some $X$ is a solved
 problem: Pudlák and Tůma proved in 1980 that every finite lattice embeds as a
-sublattice of a finite partition lattice.  The representation problem asks for
-more, namely that some copy be *all* of the congruences of one algebra, with
-nothing else accidentally respected by the operations.
+sublattice of a finite partition lattice.
+
+The representation problem asks for more, namely that some copy be *all* of the
+congruences of an algebra, with nothing else accidentally respected by the
+operations.
 
 That gap has an exact description, classical and due to several people
 independently around 1970, and it is the tool much of the thesis is built on.
+
 For a family $L$ of equivalence relations on $X$, let $\lambda(L)$ be the set of
-unary maps on $X$ respecting every relation in $L$, and let $\rho(H)$ be the set
-of equivalence relations respected by every map in $H$.  The pair is a Galois
-correspondence, $\rho\lambda$ is a closure operator, and:
+unary maps on $X$ respecting every relation in $L$.
+
+For a family $H$ of unary maps from $X$ to itself, let $\rho(H)$ be the set
+of equivalence relations respected by every map in $H$.
+
+The pair $(\lambda, \rho)$ is a Galois correspondence and $\rho\lambda$ is a closure
+operator which yields a convenient criterion for representing a lattice.
 
 !!! note "The closure criterion"
 
@@ -94,19 +123,25 @@ correspondence, $\rho\lambda$ is a closure operator, and:
     algebra $\bA$ with universe $X$ if and only if $L$ is closed, that is
     $\rho\lambda(L) = L$.
 
-Finding a copy of your lattice inside $\operatorname{Eq}(X)$ is therefore only
-the start.  You then compute the closure of that copy and find out whether you
-have grown congruences you did not ask for.  Usually you have, and the copy is
-useless even though the lattice may still be representable through a different
-copy.  The thesis names the worst case *superbad*: a copy whose closure is all of
-$\operatorname{Eq}(X)$, and it proves results about when that happens, because
-knowing which copies are hopeless is what makes a computer search feasible.
+So, finding a copy of your lattice inside $\operatorname{Eq}(X)$ is only the start.
+You then compute the closure of that copy and find out whether you have grown
+congruences you did not ask for.  Usually you have, and the copy is useless even
+though the lattice may still be representable, e.g., as a different embedding in
+$\operatorname{Eq}(X)$.
 
-**It is secretly a question about finite groups**.  In 1980 Pálfy and Pudlák
-proved that the following two statements are equivalent: every finite lattice is
-the congruence lattice of a finite algebra; and every finite lattice is
-isomorphic to an interval $[H, G]$ in the subgroup lattice of a finite group,
-where $[H, G]$ is the set of subgroups between $H$ and $G$ ordered by inclusion.
+The thesis names the worst case *superbad*: a copy whose closure is all of
+$\operatorname{Eq}(X)$, and it proves results about when that happens, because
+knowing which copies are hopeless is one of the ways we make computer searches
+feasible.
+
+**It is secretly a question about finite groups**.  
+In 1980 Pálfy and Pudlák proved that the following two statements are equivalent.
+
+1.  Every finite lattice is the congruence lattice of a finite algebra.
+2.  Every finite lattice is isomorphic to an interval $[H, G]$ in the subgroup
+    lattice of a finite group.
+
+In 2, $[H, G]$ denotes the set of subgroups between $H$ and $G$ ordered by inclusion.
 
 So a question about arbitrary finite algebras is really a question about finite
 groups, and to rule out one small lattice you have to rule out every finite group
@@ -119,7 +154,7 @@ lattice-by-lattice correspondence; it does not say that a given representable
 lattice is an interval in some subgroup lattice.  It says the two classes
 coincide exactly when both are everything.
 
-## What is known, and where it stops
+### What is known, and where it stops
 
 The class of representable lattices is closed under a good deal.  The thesis
 collects the closure results and their attributions: duals (Kurzweil and Netter,
@@ -138,7 +173,7 @@ observation explains why the positive direction has resisted: the constructions
 that do work all preserve the property of being the *full* congruence lattice,
 and the one operation that would finish the job does not.
 
-## Closing the small lattices
+### Closing the small lattices
 
 There are 53 lattices with exactly seven elements, up to isomorphism.[^1]  The
 thesis proves that with one possible exception, every lattice with at most seven
@@ -168,7 +203,7 @@ methods:
 The classification is one of 27 new results in the thesis, and it is not the one
 I would lead with.  The methods are.
 
-## Overalgebras: manufacturing representable lattices
+### Overalgebras: manufacturing representable lattices
 
 Ralph Freese cracked the triple-winged pentagon with an idea: start from an
 algebra $\bB$ whose congruence lattice is $M_4$, the six-element lattice
@@ -202,7 +237,7 @@ works by realizing the old congruence lattice as a homomorphic image of the new
 one, so it cannot reach a *simple* lattice at all.  The exceptional
 seven-element lattice is simple.  Overalgebras were never going to get it.
 
-## Parachutes: a strategy for a negative answer
+### Parachutes: a strategy for a negative answer
 
 The other method points the opposite way.  Suppose you want to prove some lattice
 is *not* an interval in any finite subgroup lattice, which by Pálfy and Pudlák
@@ -257,7 +292,7 @@ finite group would have to carry every one of them, each as an interval over a
 core-free subgroup, and so would have that many distinct faithful permutation
 representations.  Nothing rules it out.  It does concentrate the mind.
 
-## The one that got away
+### The one that got away
 
 The lattice the classification could not reach has seven elements: a
 $2 \times 3$ grid, the product of a two-element chain with a three-element
@@ -292,7 +327,7 @@ weakening of isomorphism, does not preserve congruence lattices, and
 relations](https://arxiv.org/abs/1301.6788) proves the version of the
 transposition principle that this line of argument keeps needing.
 
-## Constraint satisfaction, which is where the next decade went
+## Complexity of constraint satisfaction problems
 
 The postdoctoral years were mostly not about congruence lattices.  They were
 about complexity, at Iowa State with Cliff Bergman, at Boulder on an NSF grant
@@ -301,11 +336,13 @@ University in Prague with Libor Barto.
 
 Fix a finite relational structure; the constraint satisfaction problem over it
 asks whether a system of constraints drawn from those relations has a solution.
-Graph 3-colouring and 3-SAT are instances.  The algebraic approach observes that
-the complexity of such a problem is determined by the algebra of *polymorphisms*
-of the structure, so classifying finite algebras by their equational properties
-is simultaneously classifying these problems by their complexity.  It is the same
-subject as the first half of this page, pointed at a different question.
+Graph 3-colouring and 3-SAT are instances.
+
+The algebraic approach observes that the complexity of such a problem is determined
+by the algebra of *polymorphisms* of the structure, so classifying finite algebras by
+their equational properties is simultaneously classifying these problems by their
+complexity.  It is the same subject as the first half of this page, pointed at a
+different question.
 
 Three papers, and all three are about *deciding* something.
 
@@ -356,7 +393,7 @@ time, for finitely presented lattices and for their finitely generated
 sublattices satisfying (D).  That generalizes an unpublished result of Freese
 and Nation.
 
-## Rebuilding the program in Agda
+## Rebuilding research programs in Agda
 
 [`agda-algebras`](agda-algebras.md) is a formalization of universal algebra as a
 subject: algebras, homomorphisms, congruences, terms, varieties, the equational
