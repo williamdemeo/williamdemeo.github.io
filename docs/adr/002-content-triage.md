@@ -162,7 +162,7 @@ why the summary reads 52/21/22/8 rather than the originally generated
 
 **Corrected 2026-08-02.** This ADR first described the category theory course as
 "coauthored with Venanzio Capretta with help from Charlotte Aten". Both are
-coauthors, and the qualifier is dropped above and in ADR-006. Recorded rather
+coauthors, and the qualifier is dropped above and in ADR-008. Recorded rather
 than silently edited because this ADR is the thing that makes the attribution a
 correctness requirement, so its own wording of it has to be right.
 

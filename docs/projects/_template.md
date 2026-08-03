@@ -20,7 +20,7 @@ description: >-
 # PROJECT NAME
 
 <!--
-SLOT 1 — the summary paragraph.  ADR-006.
+SLOT 1 — the summary paragraph.  ADR-008.
 
 One paragraph, and it answers three questions in this order: what it is, why it
 was hard, and what is verifiable about it.
@@ -39,7 +39,7 @@ One paragraph: what it is, why it was hard, what is verifiable about it.
 
 <!--
 SLOT 2 — the status line.  This is the metadata contract from #23, and it is
-visible prose rather than front matter for the reason ADR-006 gives: a YAML key
+visible prose rather than front matter for the reason ADR-008 gives: a YAML key
 nothing renders and no gate checks is a key that goes missing silently.
 
 Two lines, one paragraph — end the first line with two trailing spaces so the
@@ -130,9 +130,9 @@ BEFORE YOU MERGE
 
 - Add the card to docs/projects/index.md.  Same summary line, same tags, and
   change the card title's link from the external artifact to this page — the
-  artifact it pointed at is already in the card's links row.  ADR-006,
+  artifact it pointed at is already in the card's links row.  ADR-008,
   Decision 4.
-- Keep the card's position: the order is argued in ADR-006 and is not a
+- Keep the card's position: the order is argued in ADR-008 and is not a
   per-page decision.
 - `make check` (strict), then `make contrast-audit` — a new page is exactly
   what that audit exists to catch.

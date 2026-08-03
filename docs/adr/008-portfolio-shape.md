@@ -1,4 +1,4 @@
-# ADR-006: The shape of a project page, and the order the portfolio is read in
+# ADR-008: The shape of a project page, and the order the portfolio is read in
 
 **Status**: Accepted
 
