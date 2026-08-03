@@ -1,4 +1,23 @@
 ---
+# Two things here look like they want to be tidied up, and both are load-bearing.
+# (A YAML comment rather than an HTML one, for the reason docs/projects/index.md
+# gives: front matter is parsed and discarded, an HTML comment ships.)
+#
+# 1. The "what I'm working on now" block is a bold, dated lead-in rather than an
+#    `## h2`.  `.md-typeset h2` carries a full-width border-bottom and nothing
+#    sets `clear`, so an h2 that begins while the portrait is still in flow
+#    draws its rule behind the photo and leaves a stub of rule to the right of
+#    it -- a block box is not shortened by a float, only its line boxes are.
+#    Promoting this to an h2 reintroduces that unless the hero grows to about
+#    nine lines or the portrait shrinks to about 100px.  See #18.
+#
+# 2. The portrait's width is a percentage, not a pixel count, and it is what
+#    keeps the float from squeezing the prose to fifteen characters a line at
+#    360px.  Both are why the first `h2` on the page is "Featured projects",
+#    which starts below the float.
+#
+# The card order is a subset of ADR-006's, in ADR-006's relative order, and the
+# tags are copied from docs/projects/index.md.  Neither is a per-page call.
 title: William DeMeo
 description: >-
   Mathematician and formal verification engineer working on machine-checked
@@ -8,40 +27,84 @@ description: >-
 
 # William DeMeo
 
-I work on **machine-checked mathematics**: proving theorems in dependent type
-theory, verifying production systems, and building tools that let language
-models work inside a proof assistant.
+![William DeMeo](assets/images/william-demeo.jpg){ align=right width="30%" }
 
-Mathematician by training (PhD in universal algebra and lattice theory)
-and a formal verification engineer by trade.  The through-line across both is
-an interest in what is *mechanizable*: which mathematical structures admit
-effective procedures, and what it actually takes to make reasoning checkable
-by a machine.
+Mathematician by training — PhD in universal algebra and lattice theory — and a
+formal verification engineer by trade. I work on **machine-checked
+mathematics**: proofs and production systems in Agda, and tooling that lets
+language models work inside a proof assistant.
 
-## What I'm working on now
+**What I'm working on now** (August 2026). The machine-checked specification of
+the Cardano ledger in Agda, with the Formal Methods team at
+[IO](https://iohk.io/), and
+[agda-native-air](https://github.com/formalverification/agda-native-air) —
+putting Agda's interaction protocol in front of a language model, so that a
+typechecker's dense, automatically-checkable feedback becomes something a
+machine can learn from.
 
-**Formal verification at IO**.  Machine-checked specification of the Cardano
-blockchain ledger in Agda, with the Formal Methods team.
+## Featured projects
 
-The work is public in [`formal-ledger-specifications`](https://github.com/IntersectMBO/formal-ledger-specifications),
-and the design is described in our [FMBC 2024 paper](https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2).
+<div class="project-grid" markdown>
 
-**[agda-native-air](https://github.com/formalverification/agda-native-air): AI tooling for proof assistants**.
-A semantic training data extractor, an MCP server exposing Agda's interaction
-protocol to language models, Claude Skills encoding Agda-specific workflow knowledge,
-and the agent loops built on top of them.
+<div class="project-card" markdown>
+**[AI for formal verification](https://github.com/formalverification/agda-native-air)**
 
-This is the newest thread and the one I find most interesting at the moment: a
-typechecker is an unusually good source of dense, automatically-checkable feedback,
-which makes interactive theorem proving a sharper testbed for machine reasoning than
-most domains.
+An MCP server exposing Agda's interaction protocol to language models, and the
+agent loops built on it.
 
-**[agda-algebras](https://github.com/ualib/agda-algebras)**.  A library of universal
-algebra in Agda, containing what is the first constructive, machine-checked proof of
-Birkhoff's HSP theorem in Martin-Löf type theory, joint with Jacques Carette.
-Documentation at [agda-algebras.universalalgebra.org](https://agda-algebras.universalalgebra.org).
+`Agda`{.tag} `MCP`{.tag} `AI tooling`{.tag}
 
-*Last updated: July 2026.*
+[Source](https://github.com/formalverification/agda-native-air)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**[agda-algebras](projects/agda-algebras.md)**
+
+The first constructive, machine-checked proof of Birkhoff's HSP theorem in
+Martin-Löf type theory.
+
+`Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag} `setoids`{.tag}
+
+[Source](https://github.com/ualib/agda-algebras) ·
+[Docs](https://agda-algebras.universalalgebra.org)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**[The Cardano ledger specification](projects/cardano-ledger.md)**
+
+Formal methods at production scale: an Agda specification that has to track a
+system under active development.
+
+`Agda`{.tag} `Haskell`{.tag} `formal methods`{.tag} `production`{.tag}
+
+[Source](https://github.com/IntersectMBO/formal-ledger-specifications) ·
+[Paper](https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2)
+{.project-links}
+</div>
+
+<div class="project-card" markdown>
+**[Universal algebra and lattice theory](https://arxiv.org/abs/1204.4305)**
+
+Congruence lattices of finite algebras, and the algebraic approach to
+constraint satisfaction.
+
+`universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
+
+[Thesis](https://arxiv.org/abs/1204.4305) ·
+[Papers](publications.md)
+{.project-links}
+</div>
+
+</div>
+
+The through-line across all four is an interest in what is *mechanizable*:
+which structures admit effective procedures, and what it takes to make an
+argument checkable by a machine rather than by a referee.
+
+The full set, and the argument for the order it is read in, is in
+[Projects](projects/index.md).
 
 ## Recent writing
 
@@ -51,16 +114,24 @@ More in the [blog](blog/index.md).
 
 ## Elsewhere
 
-Before moving into industry I held research and teaching appointments at
-Charles University in Prague, the University of Colorado Boulder, the
-University of Hawaii, Iowa State University, and the University of South
-Carolina. More in the [CV](cv.md) and [about](about.md) pages.
+Before moving into industry I held research and teaching appointments at Charles
+University in Prague, the University of Colorado Boulder, the University of
+Hawaii, Iowa State University, and the University of South Carolina. The
+[CV](cv.md) has the full record and [about](about.md) has the longer version.
 
-!!! note "This site is being rebuilt"
+[Email](mailto:williamdemeo@gmail.com) ·
+[GitHub](https://github.com/williamdemeo) ·
+[Google Scholar](https://scholar.google.com/citations?user=y1OQ07QAAAAJ) ·
+[ORCID](https://orcid.org/0000-0003-1832-5690) ·
+[arXiv](https://arxiv.org/a/demeo_w_1) ·
+[Publications](publications.md) ·
+[Contact](contact.md)
 
-    Content is migrating from a Zola site at
+!!! note "This site is still being rebuilt"
+
+    Content is migrating here from a Zola site at
     [williamdemeo.org](https://williamdemeo.org) and an older Octopress site.
-    Publications, talks, teaching, the project portfolio, the blog, and the
-    graduate qualifying-exam solutions are still being moved across; progress
-    is tracked in
+    The publications, the projects, and the blog have landed; talks, teaching,
+    a research narrative, and the graduate qualifying-exam solutions have not.
+    Progress is tracked in
     [the issue tracker](https://github.com/williamdemeo/williamdemeo.github.io/issues).
