@@ -36,6 +36,23 @@ Branch names follow the pattern GitHub's "create a branch" button generates from
 an issue: `<issue-number>-<slug>`, e.g. `7-m1-6-repository-hygiene`. Reference
 the issue in the commit message and let the merge close it.
 
+Each branch gets its own worktree, so a running `make serve`, a build in
+`site/`, and a half-finished edit never have to be stashed to look at something
+else:
+
+```zsh
+wt 82-m4-7-mathematics   # fetch, fast-forward main, create the worktree, cd there
+wt clean                 # which worktrees are finished, and why
+wt clean --yes           # remove those
+```
+
+`wt` is `scripts/git/git-wt` plus one `source` line in `~/.zshrc`, and
+[`scripts/git/README.md`](scripts/git/README.md) is the whole story — including
+the plain git commands underneath, for a machine that does not have this
+checkout on it. Cleaning up is a command rather than something to look up
+because that is the half that otherwise never happens: sixteen stale worktrees
+is what forgetting `git worktree prune` looks like after two months.
+
 Issue titles carrying an `[MN-k]` prefix are part of the roadmap. **Do not
 remove that prefix when editing a title** — it is the only handle
 `gh_project_render.py` has for recognising a planning issue, and without it the

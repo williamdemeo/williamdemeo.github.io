@@ -1,0 +1,673 @@
+#!/usr/bin/env bash
+#
+# File: scripts/git/git-wt
+#
+# The worktree lifecycle, one command per step:
+#
+#     git wt <branch>     start work on <branch> in its own worktree
+#     git wt list         what every worktree is, and whether it is finished
+#     git wt clean        remove the finished ones
+#     git wt rm [branch]  remove one, finished or not
+#
+# On PATH as `git-wt` it becomes the git subcommand `git wt`.  Sourcing
+# scripts/git/wt.sh additionally defines a `wt` shell function that runs this
+# and then cd's where it says -- a process cannot change its parent's
+# directory, so the cd has to happen in the shell.  That function is the whole
+# reason this reports its destination through a file rather than on stdout:
+# see GIT_WT_CD_FILE below.
+#
+# What `git wt <branch>` replaces:
+#
+#     cd <main worktree>
+#     git fetch
+#     git pull
+#     git worktree add -b <branch> ../worktrees/<branch> origin/<branch>
+#     cd ../worktrees/<branch>
+#     direnv allow
+#
+# -- from anywhere inside the repository, and whether or not the branch
+# already exists on origin, exists locally, or exists at all.
+#
+# Configuration.  Each is an environment variable, falling back to a git
+# config key, falling back to something read out of the repository:
+#
+#   GIT_WT_ROOT    wt.root     where worktrees live.  Default: a `worktrees`
+#                              directory beside the main worktree, so a main
+#                              worktree at <project>/main puts branches at
+#                              <project>/worktrees/<branch>.  A relative value
+#                              is resolved against the main worktree's parent.
+#   GIT_WT_REMOTE  wt.remote   default: origin
+#   GIT_WT_BASE    wt.base     the branch new branches start from, and the one
+#                              `merged` is judged against.  Default: whatever
+#                              refs/remotes/<remote>/HEAD points at, then
+#                              main, then master.
+#   GIT_WT_DIRENV              0 to never run `direnv allow`
+#   GIT_WT_HOME                a repository to work on when the working
+#                              directory is not inside one.  Set it to the
+#                              main worktree of the project you are usually
+#                              in, and `wt <branch>` works from $HOME.
+#   GIT_WT_CD_FILE             if set, the destination directory is written
+#                              here for a shell wrapper to cd to
+#
+# Nothing here is specific to this repository -- it reads the layout out of
+# whichever repository it runs in.  It lives here because this is where this
+# project's tooling lives, and because a copy in ~/bin is a copy that never
+# gets updated.
+
+set -uo pipefail
+
+prog='git wt'
+
+say()  { printf '%s\n' "$*" >&2; }
+warn() { printf '%s: %s\n' "$prog" "$*" >&2; }
+die()  { warn "$*"; exit 1; }
+
+# ── The repository ──────────────────────────────────────────────────────────
+#
+# Every git command below runs with -C "$main_wt" rather than in the working
+# directory, so the tool behaves the same from anywhere inside the repository
+# -- including from inside a worktree it is about to remove.
+
+# Outside a repository there is one more place to look: GIT_WT_HOME, whose
+# whole purpose is `wt 82-m4-7-mathematics` from a fresh terminal in $HOME,
+# without the cd into the project that used to come first.  The cd here is
+# this process's own; the shell's is still decided by GIT_WT_CD_FILE.
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  [ -n "${GIT_WT_HOME:-}" ] ||
+    die 'not inside a git repository, and GIT_WT_HOME is not set'
+  cd "$GIT_WT_HOME" 2>/dev/null ||
+    die "GIT_WT_HOME is not a directory: $GIT_WT_HOME"
+  git rev-parse --git-dir >/dev/null 2>&1 ||
+    die "GIT_WT_HOME is not a git repository: $GIT_WT_HOME"
+fi
+
+# The first entry of `worktree list` is always the main worktree.  Taking the
+# path from character 10 rather than splitting on whitespace keeps paths
+# containing spaces intact.
+main_wt=$(git worktree list --porcelain | awk '/^worktree /{print substr($0,10); exit}')
+[ -n "$main_wt" ] || die 'cannot find the main worktree'
+
+configured() { # key fallback
+  local value
+  value=$(git -C "$main_wt" config --get "$1" 2>/dev/null)
+  [ -n "$value" ] && { printf '%s\n' "$value"; return; }
+  printf '%s\n' "$2"
+}
+
+remote=${GIT_WT_REMOTE:-$(configured wt.remote origin)}
+
+# refs/remotes/<remote>/HEAD is what `git clone` records as the default
+# branch.  It is absent in a repository created by `git init`, and in clones
+# made before git learned to write it, hence the guesses after it.
+default_base() {
+  local head
+  head=$(git -C "$main_wt" symbolic-ref --quiet --short "refs/remotes/$remote/HEAD" 2>/dev/null)
+  [ -n "$head" ] && { printf '%s\n' "${head#"$remote"/}"; return; }
+  for head in main master; do
+    if git -C "$main_wt" show-ref --quiet --verify "refs/remotes/$remote/$head"; then
+      printf '%s\n' "$head"
+      return
+    fi
+  done
+  git -C "$main_wt" symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'main\n'
+}
+
+base=${GIT_WT_BASE:-$(configured wt.base "$(default_base)")}
+base_ref="refs/remotes/$remote/$base"
+
+wt_root=${GIT_WT_ROOT:-$(configured wt.root '')}
+[ -n "$wt_root" ] || wt_root="$(dirname "$main_wt")/worktrees"
+case $wt_root in
+  /*) ;;
+  *) wt_root="$(dirname "$main_wt")/$wt_root" ;;
+esac
+
+usage() {
+  cat >&2 <<EOF
+usage: $prog <branch>               create or reuse <branch>'s worktree, and cd there
+       $prog new <branch>           the same thing, spelled out
+       $prog list                   every worktree, with what \`clean\` would do to it
+       $prog clean [--yes]          remove the finished worktrees (dry run without --yes)
+       $prog rm [--force] [what...] remove worktrees by branch or path (default: this one)
+       $prog path <branch>          print where <branch>'s worktree is, or would be
+       $prog main                   cd to the main worktree
+
+  -n, --no-fetch    (new, list, clean) do not fetch first; judge by the refs
+                    already here.  \`new\` also skips fast-forwarding $base.
+      --no-direnv   (new) do not run \`direnv allow\` in the new worktree
+  -y, --yes         (clean) actually remove them; without it this is a dry run
+  -f, --force       (rm) remove a worktree with uncommitted changes, and delete
+                    its branch even when its commits are not merged
+
+main worktree  $main_wt
+worktree root  $wt_root
+base branch    $remote/$base
+
+Those three come from wt.root, wt.remote and wt.base in git config, or from
+GIT_WT_ROOT, GIT_WT_REMOTE and GIT_WT_BASE.  See scripts/git/README.md.
+EOF
+}
+
+# ── Reporting the destination ───────────────────────────────────────────────
+#
+# Written to a file rather than to stdout so that git's own output -- fetch
+# progress, `worktree add`'s summary -- reaches the terminal as it happens,
+# instead of being swallowed by a command substitution in the wrapper.
+
+emit_cd() {
+  [ -n "${GIT_WT_CD_FILE:-}" ] && printf '%s\n' "$1" >"$GIT_WT_CD_FILE"
+  return 0
+}
+
+tilde() { # abbreviate $HOME, for output only
+  case $1 in
+    "${HOME:-/nonexistent}"/*) printf '~%s\n' "${1#"${HOME:-}"}" ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
+# ── Reading the worktree list ───────────────────────────────────────────────
+#
+# `worktree list --porcelain` emits a blank-line separated stanza per
+# worktree.  Flattening it to one tab-separated line each keeps the rest of
+# the script out of the parsing business.
+
+# Emits the stanza read so far, if there is one.  Its four variables are
+# scan_worktrees' locals, which this can see and assign because bash scopes
+# them dynamically -- the alternative being four globals or a second parser.
+flush_worktree() {
+  [ -n "$_path" ] && printf '%s\t%s\t%s\t%s\n' "$_path" "$_sha" "$_branch" "$_flags"
+  _path=''; _sha=''; _branch=''; _flags=''
+}
+
+scan_worktrees() { # -> path \t sha \t branch \t flags
+  local line _path='' _sha='' _branch='' _flags=''
+  while IFS= read -r line; do
+    case $line in
+      'worktree '*) flush_worktree; _path=${line#worktree } ;;
+      'HEAD '*) _sha=${line#HEAD } ;;
+      'branch '*) _branch=${line#branch refs/heads/} ;;
+      detached*) _flags="$_flags detached" ;;
+      bare*) _flags="$_flags bare" ;;
+      locked*) _flags="$_flags locked" ;;
+      prunable*) _flags="$_flags prunable" ;;
+    esac
+  done < <(git -C "$main_wt" worktree list --porcelain)
+  flush_worktree
+}
+
+has_flag() { case " $2 " in *" $1 "*) return 0 ;; *) return 1 ;; esac; }
+
+worktree_of_branch() { # branch -> its worktree's path, if it has one
+  local p s b f
+  while IFS=$'\t' read -r p s b f; do
+    [ "$b" = "$1" ] && { printf '%s\n' "$p"; return 0; }
+  done < <(scan_worktrees)
+  return 1
+}
+
+upstream_ref() { # branch -> refs/remotes/... if an upstream is configured
+  local r m
+  r=$(git -C "$main_wt" config --get "branch.$1.remote" 2>/dev/null) || return 0
+  m=$(git -C "$main_wt" config --get "branch.$1.merge" 2>/dev/null) || return 0
+  [ -n "$r" ] && [ -n "$m" ] && printf 'refs/remotes/%s/%s\n' "$r" "${m#refs/heads/}"
+  return 0
+}
+
+# ── What state is a worktree in? ────────────────────────────────────────────
+#
+# The question `clean` has to answer is "is this one finished?", and the facts
+# that answer it are whether the work is safe somewhere else and whether
+# anything here is unsaved.
+#
+# `merged` is the easy case: every commit on the branch is an ancestor of
+# origin/<base>, so removing it loses nothing.  `gone` is the squash-and-merge
+# and rebase-and-merge case, where the branch's commits are ancestors of
+# nothing and the only evidence the pull request landed is that GitHub deleted
+# the branch afterwards -- which a `fetch --prune` turns into a missing
+# remote-tracking ref.  That is why `clean` fetches before it judges: without
+# the prune, every finished branch still looks live.
+#
+# Everything else is kept, and says why it was kept.
+
+status_of() { # path sha branch flags -> status \t why
+  local p=$1 sha=$2 br=$3 flags=$4 up ahead
+
+  has_flag bare "$flags" && { printf 'bare\tbare repository\n'; return; }
+  [ "$p" = "$main_wt" ] && { printf 'main\tthe main worktree\n'; return; }
+  has_flag locked "$flags" && { printf 'locked\tlocked; `git worktree unlock` first\n'; return; }
+  if has_flag prunable "$flags" || [ ! -d "$p" ]; then
+    printf 'missing\tits directory is gone; the record needs pruning\n'
+    return
+  fi
+  has_flag detached "$flags" && { printf 'detached\tdetached HEAD; decide by hand\n'; return; }
+
+  # Ignored files -- site/, .venv/, .direnv/ -- are not changes, so a built
+  # tree does not read as work in progress.  Anything else does.
+  if [ -n "$(git -C "$p" status --porcelain 2>/dev/null)" ]; then
+    printf 'dirty\tuncommitted changes\n'
+    return
+  fi
+
+  up=$(upstream_ref "$br")
+
+  if git -C "$main_wt" show-ref --quiet --verify "$base_ref" &&
+    git -C "$main_wt" merge-base --is-ancestor "$sha" "$base_ref" 2>/dev/null; then
+    # An ancestor of the base branch with no upstream has no commits of its
+    # own and was never pushed: a worktree opened and not yet used, rather
+    # than one whose work has landed.  Removing it would be a surprise.
+    [ -z "$up" ] && { printf 'fresh\tno commits of its own yet\n'; return; }
+    printf 'merged\tevery commit is in %s/%s\n' "$remote" "$base"
+    return
+  fi
+
+  if [ -n "$up" ]; then
+    if ! git -C "$main_wt" show-ref --quiet --verify "$up"; then
+      printf 'gone\t%s was deleted on the remote\n' "${up#refs/remotes/}"
+      return
+    fi
+    ahead=$(git -C "$main_wt" rev-list --count "$up..$sha" 2>/dev/null)
+    if [ "${ahead:-0}" -gt 0 ]; then
+      printf 'unpushed\t%s commit(s) not on %s\n' "$ahead" "${up#refs/remotes/}"
+      return
+    fi
+  fi
+
+  ahead=$(git -C "$main_wt" rev-list --count "$base_ref..$sha" 2>/dev/null)
+  printf 'active\t%s commit(s) not in %s/%s\n' "${ahead:-?}" "$remote" "$base"
+}
+
+# merged, gone and missing are the three `clean` acts on.
+removable() { case $1 in merged | gone | missing) return 0 ;; *) return 1 ;; esac; }
+
+# Every subcommand that judges a worktree fetches first, and --prune is the
+# reason: it is what turns "the pull request merged and GitHub deleted the
+# branch" into a missing remote-tracking ref, which is the only evidence a
+# squash merge leaves behind.  Judging without it reports finished work as
+# live -- and `list` and `clean` disagreeing about the same worktree is worse
+# than either being slow, which is why --no-fetch is a flag and not the
+# default.
+fetch_remote() { # 1 to fetch, anything else to skip; "quiet" to hide progress
+  [ "$1" -eq 1 ] || return 0
+  if [ "${2:-}" = quiet ]; then
+    git -C "$main_wt" fetch --prune "$remote" >/dev/null 2>&1
+  else
+    git -C "$main_wt" fetch --prune "$remote"
+  fi || warn 'fetch failed; judging by the refs already here'
+  return 0
+}
+
+# ── new ─────────────────────────────────────────────────────────────────────
+
+cmd_new() {
+  local do_fetch=1 do_direnv=${GIT_WT_DIRENV:-1} branch='' path='' created=''
+
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -n | --no-fetch) do_fetch=0 ;;
+      --no-direnv) do_direnv=0 ;;
+      -h | --help) usage; return 0 ;;
+      -*) die "unknown option: $1 (try \`$prog --help\`)" ;;
+      *)
+        [ -z "$branch" ] || die "one branch at a time (got '$branch' and '$1')"
+        branch=$1
+        ;;
+    esac
+    shift
+  done
+  [ -n "$branch" ] || { usage; return 2; }
+
+  # Forgive the two ways a branch name arrives from somewhere else: pasted
+  # from `git branch -a` with the remote still attached, or completed from a
+  # path with a trailing slash.
+  branch=${branch#"$remote"/}
+  branch=${branch%/}
+
+  # The base branch normally lives in the main worktree, and a second worktree
+  # for it is not what `wt main` means.  Normally -- so this checks rather than
+  # assumes, and falls through to making one where the main worktree is off on
+  # a branch of its own.
+  if [ "$branch" = "$base" ] &&
+    [ "$(git -C "$main_wt" symbolic-ref --quiet --short HEAD 2>/dev/null)" = "$base" ]; then
+    say "$base lives in the main worktree"
+    cmd_main
+    return
+  fi
+
+  if [ "$do_fetch" -eq 1 ]; then
+    fetch_remote 1
+    ff_base
+  fi
+
+  if path=$(worktree_of_branch "$branch"); then
+    say "$branch is already checked out at $(tilde "$path")"
+    emit_cd "$path"
+    return 0
+  fi
+
+  path="$wt_root/$branch"
+  [ -e "$path" ] && die "$(tilde "$path") already exists but is not a worktree"
+  mkdir -p "$(dirname "$path")" || die "cannot create $(tilde "$(dirname "$path")")"
+
+  if git -C "$main_wt" show-ref --quiet --verify "refs/heads/$branch"; then
+    # The branch is already here and not checked out anywhere; a worktree is
+    # just somewhere to put it.
+    git -C "$main_wt" worktree add "$path" "$branch" || return 1
+  elif git -C "$main_wt" show-ref --quiet --verify "refs/remotes/$remote/$branch"; then
+    git -C "$main_wt" worktree add --track -b "$branch" "$path" "$remote/$branch" || return 1
+  else
+    # --no-track deliberately: tracking origin/<base> from a feature branch
+    # makes `git push` refuse with a complaint about mismatched upstreams and
+    # `git pull` merge the base branch in.  Neither is a surprise worth
+    # inheriting from a helper.
+    git -C "$main_wt" worktree add --no-track -b "$branch" "$path" "$base_ref" || return 1
+    created=1
+  fi
+
+  [ "$do_direnv" != 0 ] && allow_direnv "$path"
+
+  if [ -n "$created" ]; then
+    say ''
+    say "new branch, based on $remote/$base.  Publish it with:"
+    say "    git push -u $remote $branch"
+  fi
+
+  emit_cd "$path"
+}
+
+# Fast-forward the base branch in the main worktree.  --ff-only rather than
+# `pull`: the fetch has already happened, and a base branch that has diverged
+# should say so rather than silently open a merge.
+ff_base() {
+  local head
+  head=$(git -C "$main_wt" symbolic-ref --quiet --short HEAD 2>/dev/null)
+  if [ "$head" != "$base" ]; then
+    say "the main worktree is on ${head:-a detached HEAD}, not $base -- leaving it alone"
+    return
+  fi
+  git -C "$main_wt" merge --ff-only "$base_ref" >/dev/null 2>&1 ||
+    warn "$base did not fast-forward: it has local commits, or the tree is dirty"
+}
+
+# A fresh worktree is a new path to direnv, so its .envrc starts out blocked
+# and every new worktree greets you with an error.  The content is whatever
+# the branch has committed and you are about to run this branch's code
+# anyway, so approving it here costs nothing that checking it out did not
+# already.  --no-direnv, or GIT_WT_DIRENV=0, if you would rather look first.
+allow_direnv() {
+  [ -f "$1/.envrc" ] || return 0
+  command -v direnv >/dev/null 2>&1 || return 0
+  direnv allow "$1" 2>/dev/null && say "direnv allow $(tilde "$1")"
+  return 0
+}
+
+# ── list ────────────────────────────────────────────────────────────────────
+
+cmd_list() {
+  local do_fetch=1 p s b f status why label width=0 n=0 doomed=0 i
+  local st='' lb='' wy=''
+  # Parallel arrays rather than one array of records: bash 3.2 and `set -u`
+  # make an empty array's expansion an error, and three simple lists sidestep
+  # every guard that would otherwise need.
+  local -a sts=() lbs=() whys=()
+
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -n | --no-fetch) do_fetch=0 ;;
+      -h | --help) usage; return 0 ;;
+      *) die "unknown option: $1 (try \`$prog --help\`)" ;;
+    esac
+    shift
+  done
+  fetch_remote "$do_fetch" quiet
+
+  while IFS=$'\t' read -r p s b f; do
+    IFS=$'\t' read -r status why < <(status_of "$p" "$s" "$b" "$f")
+    label=${b:-'(detached)'}
+    # A worktree somewhere other than the canonical place says so, rather
+    # than being listed as though it were where you would look for it.
+    if [ "$p" != "$wt_root/$b" ] && [ "$p" != "$main_wt" ]; then
+      why="$why -- at $(tilde "$p")"
+    fi
+    sts[$n]=$status
+    lbs[$n]=$label
+    whys[$n]=$why
+    [ ${#label} -gt "$width" ] && width=${#label}
+    n=$((n + 1))
+    removable "$status" && doomed=$((doomed + 1))
+  done < <(scan_worktrees)
+
+  printf 'main worktree  %s\n' "$(tilde "$main_wt")"
+  printf 'worktree root  %s\n' "$(tilde "$wt_root")"
+  printf 'base branch    %s/%s\n\n' "$remote" "$base"
+
+  printf '%-9s %-*s %s\n' status "$width" branch why
+  for ((i = 0; i < n; i++)); do
+    st=${sts[$i]}; lb=${lbs[$i]}; wy=${whys[$i]}
+    printf '%-9s %-*s %s\n' "$st" "$width" "$lb" "$wy"
+  done
+
+  printf '\n%d worktree(s); ' "$n"
+  if [ "$doomed" -eq 0 ]; then
+    printf '`%s clean` would remove none of them.\n' "$prog"
+  else
+    printf '`%s clean` would remove %d.\n' "$prog" "$doomed"
+  fi
+}
+
+# ── clean ───────────────────────────────────────────────────────────────────
+
+cmd_clean() {
+  local apply=0 do_fetch=1 p s b f status why here removed=0 n=0 k=0 i width=0
+  local -a paths=() brs=() whys=() keeps=()
+
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -y | --yes | --force) apply=1 ;;
+      --dry-run) apply=0 ;;
+      -n | --no-fetch) do_fetch=0 ;;
+      -h | --help) usage; return 0 ;;
+      *) die "unknown option: $1 (try \`$prog --help\`)" ;;
+    esac
+    shift
+  done
+
+  fetch_remote "$do_fetch" quiet
+
+  here=$(git rev-parse --show-toplevel 2>/dev/null)
+
+  while IFS=$'\t' read -r p s b f; do
+    IFS=$'\t' read -r status why < <(status_of "$p" "$s" "$b" "$f")
+    [ ${#b} -gt "$width" ] && width=${#b}
+    if removable "$status"; then
+      paths[$n]=$p
+      brs[$n]=${b:-}
+      whys[$n]=$why
+      n=$((n + 1))
+    else
+      # The main worktree is not a decision, so it is not reported as one.
+      [ "$status" = main ] && continue
+      keeps[$k]="${b:-(detached)}	$why"
+      k=$((k + 1))
+    fi
+  done < <(scan_worktrees)
+
+  if [ "$k" -gt 0 ]; then
+    printf 'keeping:\n'
+    for ((i = 0; i < k; i++)); do
+      IFS=$'\t' read -r b why <<<"${keeps[$i]}"
+      printf '  %-*s %s\n' "$width" "$b" "$why"
+    done
+    printf '\n'
+  fi
+
+  if [ "$n" -eq 0 ]; then
+    printf 'nothing to clean: every worktree here is still live.\n'
+    return 0
+  fi
+
+  if [ "$apply" -eq 1 ]; then printf 'removing:\n'; else printf 'would remove:\n'; fi
+  for ((i = 0; i < n; i++)); do
+    printf '  %-*s %s\n' "$width" "${brs[$i]:-(detached)}" "${whys[$i]}"
+  done
+
+  if [ "$apply" -eq 0 ]; then
+    printf '\nnothing was removed.  Re-run as `%s clean --yes` to remove the %d above.\n' \
+      "$prog" "$n"
+    return 0
+  fi
+
+  printf '\n'
+
+  # Prune first: it clears the records of worktrees whose directories have
+  # already been deleted, which `worktree remove` cannot do.
+  git -C "$main_wt" worktree prune
+
+  local left=''
+  for ((i = 0; i < n; i++)); do
+    p=${paths[$i]}
+    b=${brs[$i]}
+    if [ -d "$p" ]; then
+      if ! git -C "$main_wt" worktree remove "$p"; then
+        warn "could not remove $(tilde "$p"); left alone"
+        continue
+      fi
+      [ -n "$here" ] && [ "$p" = "$here" ] && left=1
+      removed=$((removed + 1))
+    fi
+    delete_branch "$b"
+  done
+
+  printf '\nremoved %d worktree(s); %d left.\n' "$removed" "$k"
+  [ -n "$left" ] && emit_cd "$main_wt"
+  return 0
+}
+
+# -d refuses to delete a branch whose commits are not merged, and the branches
+# `clean` removes include the squash-merged ones, whose commits by definition
+# are not.  -D is the answer, and printing the tip keeps it recoverable:
+# `git branch <name> <sha>` puts it back, and the reflog holds it for 90 days
+# whether or not you write the sha down.
+delete_branch() {
+  local b=$1 sha
+  [ -n "$b" ] || return 0
+  git -C "$main_wt" show-ref --quiet --verify "refs/heads/$b" || return 0
+  sha=$(git -C "$main_wt" rev-parse --short "$b" 2>/dev/null)
+  if git -C "$main_wt" branch -d "$b" >/dev/null 2>&1; then
+    printf '  deleted branch %s (was %s)\n' "$b" "$sha"
+  elif git -C "$main_wt" branch -D "$b" >/dev/null 2>&1; then
+    printf '  deleted branch %s (was %s -- `git branch %s %s` restores it)\n' \
+      "$b" "$sha" "$b" "$sha"
+  else
+    warn "kept branch $b: git would not delete it"
+  fi
+  return 0
+}
+
+# The difference from delete_branch: an explicit `rm` of unfinished work keeps
+# the branch unless asked twice, so the commits stay reachable by name.
+delete_branch_safely() {
+  local b=$1 sha
+  [ -n "$b" ] || return 0
+  git -C "$main_wt" show-ref --quiet --verify "refs/heads/$b" || return 0
+  sha=$(git -C "$main_wt" rev-parse --short "$b" 2>/dev/null)
+  if git -C "$main_wt" branch -d "$b" >/dev/null 2>&1; then
+    printf 'deleted branch %s (was %s)\n' "$b" "$sha"
+  else
+    say "kept branch $b: it has commits of its own (\`git branch -D $b\` drops them)"
+  fi
+  return 0
+}
+
+# ── rm ──────────────────────────────────────────────────────────────────────
+
+cmd_rm() {
+  local force=0 here p b target rc=0 n=0 i
+  local -a targets=()
+
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -f | --force) force=1 ;;
+      -h | --help) usage; return 0 ;;
+      -*) die "unknown option: $1 (try \`$prog --help\`)" ;;
+      *) targets[$n]=$1; n=$((n + 1)) ;;
+    esac
+    shift
+  done
+
+  here=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ "$n" -eq 0 ]; then
+    [ -n "$here" ] || die 'no branch given, and not inside a worktree'
+    targets[0]=$here
+    n=1
+  fi
+
+  for ((i = 0; i < n; i++)); do
+    target=${targets[$i]}
+    if [ -d "$target" ]; then
+      p=$(git -C "$target" rev-parse --show-toplevel 2>/dev/null)
+    else
+      p=$(worktree_of_branch "${target#"$remote"/}") || p=''
+    fi
+    [ -n "$p" ] || { warn "no worktree for '$target'"; rc=1; continue; }
+    if [ "$p" = "$main_wt" ]; then
+      warn 'that is the main worktree; not removing it'
+      rc=1
+      continue
+    fi
+
+    b=$(git -C "$p" symbolic-ref --quiet --short HEAD 2>/dev/null)
+
+    if [ "$force" -eq 1 ]; then
+      git -C "$main_wt" worktree remove --force "$p" || { rc=1; continue; }
+    elif ! git -C "$main_wt" worktree remove "$p" 2>/dev/null; then
+      # `worktree remove` refuses a dirty tree, which is right; saying so in
+      # the tool's own words, with the flag that overrides it, beats git's
+      # advice to use `git worktree remove -f`.
+      warn "$(tilde "$p") has uncommitted changes; \`$prog rm --force\` removes it anyway"
+      rc=1
+      continue
+    fi
+
+    printf 'removed %s\n' "$(tilde "$p")"
+    if [ "$force" -eq 1 ]; then delete_branch "$b"; else delete_branch_safely "$b"; fi
+    [ -n "$here" ] && [ "$p" = "$here" ] && emit_cd "$main_wt"
+  done
+  return $rc
+}
+
+# ── path, main ──────────────────────────────────────────────────────────────
+
+cmd_path() {
+  [ $# -eq 1 ] || die "usage: $prog path <branch>"
+  local branch=${1#"$remote"/} p
+  if p=$(worktree_of_branch "$branch"); then
+    printf '%s\n' "$p"
+  else
+    printf '%s\n' "$wt_root/$branch"
+  fi
+}
+
+cmd_main() {
+  printf '%s\n' "$main_wt"
+  emit_cd "$main_wt"
+}
+
+# ── Dispatch ────────────────────────────────────────────────────────────────
+#
+# Anything that is not a subcommand belongs to `new`, so the common case needs
+# no subcommand at all -- `git wt 82-m4-7-mathematics` -- and its options work
+# without one either.  An unknown option is `new`'s to complain about, by
+# name, rather than something to answer with the whole usage message.
+
+case ${1:-} in
+  '') cmd_main ;;
+  -h | --help | help) usage ;;
+  new | add) shift; cmd_new "$@" ;;
+  list | ls) shift; cmd_list "$@" ;;
+  clean | prune) shift; cmd_clean "$@" ;;
+  rm | remove) shift; cmd_rm "$@" ;;
+  path) shift; cmd_path "$@" ;;
+  main) shift; cmd_main "$@" ;;
+  *) cmd_new "$@" ;;
+esac

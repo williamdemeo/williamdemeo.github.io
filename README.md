@@ -39,6 +39,7 @@ run. Nothing else to set up. Run `make` on its own to list every target.
 | `docs/GITHUB_PROJECT.md` | Project roadmap, partly generated from GitHub. Not published. |
 | `archive/` | Preserved content from the retired Octopress site. Not published. |
 | `scripts/python/` | Project tooling — issue population, plan rendering, migration helpers. |
+| `scripts/git/` | Worktree tooling: `wt <branch>` to start work, `wt clean` to tidy up after a merge. See its README. |
 | `.github/workflows/` | Strict build on pull requests; build and deploy on `main`. |
 
 ## Publishing
