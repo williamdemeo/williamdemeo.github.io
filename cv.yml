@@ -31,10 +31,16 @@
 #              a source entry, so an abbreviation only one copy used lives here
 #              rather than being lost or smuggled into the prose.
 #
-# `disputed:`  Two copies assert different facts and the disagreement is
-#              unresolved.  These are William's to settle, not the merge's, and
-#              a field that says so is better than a silent pick.  Every one is
-#              listed in ADR-003.
+#              Three of them are not variants but errors -- "Adjunct
+#              Instructor", "Ali Latfi", "MathematicsHonolulu" -- kept only so
+#              the copies that contain them still resolve to the right entry.
+#              Each says so where it sits.  Nothing renders `aliases:`.
+#
+# `disputed:`  Two copies assert different facts and the disagreement is not
+#              the merge's to settle.  **None are open**: the three this merge
+#              found were settled by William and are recorded in ADR-003 with
+#              what he decided.  The field stays documented because the next
+#              edit to this file may well find another.
 #
 # `sources:`   Not used.  Provenance is proved by the checker against the
 #              snapshots rather than asserted per entry -- a hand-maintained
@@ -144,12 +150,10 @@ appointments:
     note: >-
       Taught courses in foundations of computing, big data, and artificial
       intelligence.  18 months.
-    disputed: >-
-      Title and end date.  The 2022 CV says "Adjunct Instructor" and leaves the
-      appointment open ("2022--"); the 2025 README says "Senior University
-      Lecturer" and "2022--2023".  The README is the more recent statement and
-      is used, but the two were written a year apart about the same job and only
-      William can say which is right.
+    # Settled by William: the title was Senior University Lecturer.  The 2022
+    # CV's "Adjunct Instructor" is wrong, and survives in `aliases:` only so
+    # that copy's line still resolves to this entry.  Its open-ended "2022--"
+    # was never a disagreement -- it was written during the appointment.
 
   - role: Software Engineer
     kind: industry
@@ -320,13 +324,10 @@ projects:
     url: https://ualib.org
     aliases: [agda-algebras, ualib.gitlab.io/agda-algebras]
     status: work in progress
-    disputed: >-
-      Coauthor.  The 2021 Zola copy says "with Jacques Carette"; the 2021
-      LaTeX in the job-app repository says "with Hyeyoung Shin".  Both worked on
-      it and neither copy is obviously the later word.  Carette is used here
-      because the Birkhoff paper the library is built around is joint with him,
-      but this is William's to settle.
-    also_credited: Hyeyoung Shin
+    # Settled by William: Jacques Carette is the coauthor.  The 2021 LaTeX in
+    # the job-app repository credited someone else; that attribution was wrong
+    # and is not carried.  It is in none of the four copies this file is checked
+    # against, so nothing here depends on it.
 
   - title: Complex Analysis Exams
     url: http://complexanalysis.gitlab.io
@@ -345,7 +346,7 @@ projects:
 teaching:
   - institution: New Jersey Institute of Technology
     as: Senior University Lecturer
-    aliases: [Adjunct Instructor]
+    aliases: [Adjunct Instructor]  # the 2022 CV's title, which is wrong
     courses:
       - {code: "DS 644", title: "Introduction to Big Data", level: graduate course, term: Spring 2023, url: "https://github.com/williamdemeo/ds644-spring2023"}
       - {code: "CS 644", title: "Introduction to Big Data", level: graduate course, term: Fall 2022}
@@ -671,11 +672,14 @@ advising:
   - institution: University of Colorado, Boulder
     what: >-
       Served on the doctoral candidacy exam committee for the following ph.d.
-      students: Jordan DuBeau, Ali Latfi, Athena Sparks, Michael Wheeler.
+      students: Jordan DuBeau, Ali Lotfi, Athena Sparks, Michael Wheeler.
       Served on the dissertation defense committee for Jeffrey Shriner.
-    aliases: [Ali Lotfi, Jeffrey Shriner]
-    # "Latfi" in three copies, "Lotfi" on the exam syllabus filed in the
-    # job-app repository.  Both spellings are kept rather than one guessed at.
+    # Settled by William: Lotfi.  All three legacy copies spell it "Latfi"; the
+    # comprehensive-exam syllabus filed in the job-app repository spells it
+    # "Lotfi", and that is right.  The misspelling stays in `aliases:` only so
+    # those three copies' entries still resolve here -- it is not a variant, it
+    # is an error being carried for the checker's benefit.
+    aliases: [Ali Latfi]
 
   - institution: Iowa State University
     what: >-

@@ -44,7 +44,8 @@ material that no other one has:
   multiple views* (AFOSR AMOS review, Maui 2004) and *Approximating eigenvalues
   of large stochastic matrices* (Copper Mountain, 1998).
 - **Only the 2022 PDF** has the NJIT appointment as *Adjunct Instructor*, which
-  is not an addition so much as a contradiction. See the open questions below.
+  is not an addition but a contradiction — and, as it turns out, an error. See
+  the three disagreements below.
 
 That is the argument for doing this at all. Any one of the four could have been
 adopted as the source, and roughly a fifth of the record would have gone
@@ -194,25 +195,36 @@ and each is a change to ADR-006's file rather than to `cv.yml`:
   `bibliography.json` names the conference rather than its proceedings volume,
   which is ADR-006's own rule about saying what the publisher records.
 
-## Open questions, which are William's
+## The three things the copies disagreed about, and how they were settled
 
-Three disagreements between copies are recorded in `cv.yml` as `disputed:`
-rather than resolved by whoever did the merge. A merge is not entitled to decide
-which of two things someone wrote about their own career is true.
+A merge is not entitled to decide which of two things someone wrote about their
+own career is true, so these were referred back rather than picked. **All three
+have since been decided by William**, and none is open:
 
-1. **The NJIT appointment.** The 2022 PDF says *Adjunct Instructor*, `2022--`,
-   open-ended. The 2025 README says *Senior University Lecturer*, `2022--2023`.
-   `docs/about.md` follows the README. The README is used, being the later
-   statement, but the two were written a year apart about the same job.
-2. **The Agda Universal Algebra Library's coauthor.** The Zola copy says *with
-   Jacques Carette*; the 2021 LaTeX in the job-app repository says *with Hyeyoung
-   Shin*. Both worked on it. Carette is used, because the Birkhoff paper the
-   library is built around is joint with him, and Shin is recorded in
-   `also_credited`.
-3. **Ali Latfi or Ali Lotfi.** Three copies spell it *Latfi*; the exam syllabus
-   filed in the job-app repository spells it *Lotfi*. Both spellings are kept
-   rather than one guessed at. This one is a person's name, so it is worth
-   getting right.
+1. **The NJIT appointment: *Senior University Lecturer*.** The 2022 PDF said
+   *Adjunct Instructor*; that is wrong, not a different-but-defensible earlier
+   title. It survives in `aliases:` only so that copy's line still resolves to
+   the right entry, labelled there as the error it is. Its open-ended `2022--`
+   was never really a disagreement — the document was written while the
+   appointment was current, and a range left open in 2022 does not contradict
+   one closed in 2025. `docs/about.md` already said 2022–2023.
+2. **The Agda Universal Algebra Library: coauthored with Jacques Carette.** The
+   2021 LaTeX in the job-app repository credited a second person; **that
+   attribution is wrong and is not carried.** It appears in none of the four
+   copies this repository checks against, so nothing here depended on it. Given
+   ADR-002 makes coauthor attribution a correctness requirement rather than a
+   courtesy, an attribution that is not right is worth removing rather than
+   hedging.
+3. **Ali Lotfi**, not *Latfi*. All three legacy copies spell it *Latfi*; the
+   comprehensive-exam syllabus filed in the job-app repository spells it
+   *Lotfi*, and the syllabus is right. So the majority of the copies were wrong
+   together, which is a reminder of what a merge that resolves conflicts by
+   counting would have produced. The misspelling stays in `aliases:` for the
+   checker's sake and is marked there as an error.
+
+Two of the three went the way the *older* or *rarer* copy pointed. Recency and
+frequency were both available as tie-breakers here and both would have got one
+of these wrong; that is why they were referred back instead.
 
 ## Consequences
 
