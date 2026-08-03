@@ -64,7 +64,7 @@ consumes.
 </div>
 
 <div class="project-card" markdown>
-**[Universal algebra and lattice theory](https://arxiv.org/abs/1204.4305)**
+**[Universal algebra and lattice theory](universal-algebra.md)**
 
 The mathematics the rest of this rests on: congruence lattices of finite
 algebras and the finite lattice representation problem, and later work on the

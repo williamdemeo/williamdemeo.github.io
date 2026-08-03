@@ -307,6 +307,7 @@ nav:
       - projects/index.md
       - projects/agda-algebras.md
       - projects/cardano-ledger.md
+      - projects/universal-algebra.md
   # A section rather than a plain link, and the reason is in `features` above:
   # the blog plugin attaches Archive and Categories under `blog/index.md`'s
   # parent, and a top-level link has none.  `navigation.indexes` then makes
