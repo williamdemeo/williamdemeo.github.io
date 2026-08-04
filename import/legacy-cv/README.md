@@ -24,8 +24,17 @@ Fetched from `raw.githubusercontent.com/williamdemeo/cv/main/README.md`.
 
     sha256  7060955340c8e03906643f62058ae5a9abd5b2b06ba2d641a289a4c62e9cdeea
 
-Verbatim, including the two headings that are artifacts of the page break in
-whatever produced it (`# Talks (cont.)`) rather than sections of their own.
+Verbatim, and a conversion of the 2024 LaTeX CV rather than a document written
+by hand — which is where `# Talks (cont.)` comes from (a `\newpage` in the
+source, not a section) and where `MathematicsHonolulu` comes from (a dropped
+`\hfill`). ADR-003 has the detail.
+
+**That checksum will stop matching upstream, and should.** #16 asks for a
+deprecation note on that README pointing here; once it is added, the live file
+and this snapshot differ by exactly that note. The snapshot is deliberately the
+version *before* it — a copy of the note this repository caused would be
+provenance of nothing. `check_cv_sources.py` reads this file and never the
+network, so upstream can change freely without touching any check here.
 
 ## `demeo_cv-2022.txt`
 
