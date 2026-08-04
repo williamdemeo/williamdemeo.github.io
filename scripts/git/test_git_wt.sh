@@ -34,7 +34,9 @@ if [ $? -eq 127 ]; then
   exit 2
 fi
 
-tmp=$(mktemp -d)
+# With a template rather than bare `mktemp -d`, which is a GNU extension: the
+# BSD mktemp on macOS wants one, and `make wt-test` should work there.
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/git-wt-test.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 
 # Hermetic: no ~/.gitconfig, no /etc/gitconfig, no credential helper, and a
@@ -324,6 +326,33 @@ GIT_WT_HOME="$main" run "$tmp" path remote-only
 is "$out" "$roots/remote-only" 'GIT_WT_HOME: works on that repository from outside any'
 GIT_WT_HOME="$tmp/not-a-repo" run "$tmp" list
 is "$rc" 1 'GIT_WT_HOME: a path that is not a repository fails'
+
+# ── Paths with spaces ───────────────────────────────────────────────────────
+#
+# Arguments reach the option scan as ${@+"$@"} and the rm targets as
+# ${arr[@]+"${arr[@]}"}.  Those guards exist for bash 3.2, which treats an
+# empty array under `set -u` as an unbound variable; the inner quotes are what
+# stop the arguments being split on whitespace and glob-expanded on the way
+# through.  A worktree root with a space in it exercises both -- and a
+# regression here is silent, because everything without a space keeps working.
+
+spaced="$tmp/work trees"
+
+GIT_WT_ROOT="$spaced" run "$main" spaced-branch
+is "$dest" "$spaced/spaced-branch" 'spaces: a worktree root containing a space works'
+exists "$spaced/spaced-branch" 'spaces: the worktree is really there'
+
+GIT_WT_ROOT="$spaced" run "$main" list
+has "$out" 'spaced-branch' 'spaces: list reports it'
+
+GIT_WT_ROOT="$spaced" run "$main" rm "$spaced/spaced-branch"
+is "$rc" 0 'spaces: rm accepts a path containing spaces'
+absent "$spaced/spaced-branch" 'spaces: and removes exactly it'
+
+# `clean` accepts --yes, and nothing else that quietly means the same thing.
+run "$main" clean --force
+is "$rc" 1 'clean: --force is not a synonym for --yes'
+has "$out" 'unknown option: --force' 'clean: and says so rather than removing anything'
 
 # ── Several projects ────────────────────────────────────────────────────────
 #

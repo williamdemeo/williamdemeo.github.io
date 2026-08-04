@@ -610,7 +610,11 @@ cmd_clean() {
 
   while [ $# -gt 0 ]; do
     case $1 in
-      -y | --yes | --force) apply=1 ;;
+      # --yes only.  `rm --force` means something else entirely -- remove a
+      # worktree despite uncommitted changes -- and one flag that means "go
+      # ahead" in a destructive command and "override the safety check" in the
+      # neighbouring one is how an unintended removal happens.
+      -y | --yes) apply=1 ;;
       --dry-run) apply=0 ;;
       -n | --no-fetch) do_fetch=0 ;;
       -h | --help) usage; return 0 ;;
