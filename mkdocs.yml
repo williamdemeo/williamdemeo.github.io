@@ -73,9 +73,10 @@ not_in_nav: |
 theme:
   name: material
   language: en
-  # One partial only: partials/source.html, which drops the attribute that
+  # Two overrides: partials/source.html, which drops the attribute that
   # makes Material fetch repository facts from api.github.com on every page
-  # load.  See the file for the reasoning.
+  # load, and 404.html, which replaces Material's boilerplate not-found page
+  # with an unfillable Agda goal (#98).  Each file carries its reasoning.
   custom_dir: overrides
   features:
     - navigation.instant
