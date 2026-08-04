@@ -1,0 +1,55 @@
+# William DeMeo
+
+> Mathematician and formal verification engineer. Machine-checked mathematics:
+> proofs and production systems in Agda, universal algebra and lattice theory,
+> and AI tooling that lets language models work inside a proof assistant.
+> PhD in mathematics (universal algebra); currently on the Formal Methods team
+> at IO, working on the machine-checked Cardano ledger specification and on
+> agda-native-air, an MCP server exposing Agda's interaction protocol to
+> language models.
+
+This site is being rebuilt; some sections (talks, teaching, research
+narrative) are still migrating. Progress:
+https://github.com/williamdemeo/williamdemeo.github.io/issues
+
+## Projects
+
+- [Projects index](https://williamdemeo.github.io/projects/): the portfolio,
+  ordered by relevance — AI for formal verification first.
+- [agda-algebras](https://williamdemeo.github.io/projects/agda-algebras/): the
+  Agda Universal Algebra Library — first constructive, machine-checked proof of
+  Birkhoff's HSP theorem in Martin-Löf type theory. Docs:
+  https://agda-algebras.universalalgebra.org/ Source:
+  https://github.com/ualib/agda-algebras
+- [Cardano ledger specification](https://williamdemeo.github.io/projects/cardano-ledger/):
+  formal methods at production scale — an Agda specification tracking a live
+  system. Source: https://github.com/IntersectMBO/formal-ledger-specifications
+- [agda-native-air](https://github.com/formalverification/agda-native-air): MCP
+  server and agent loops that let language models drive Agda's interaction
+  protocol — typechecker feedback as dense, verifiable reward signal. Project
+  page forthcoming.
+
+## Research record
+
+- [Publications](https://williamdemeo.github.io/publications/): peer-reviewed
+  papers in universal algebra, lattice theory, and formal verification, with
+  DOIs and arXiv links.
+- [PhD thesis](https://arxiv.org/abs/1204.4305): congruence lattices of finite
+  algebras.
+- [CV](https://williamdemeo.github.io/cv/)
+- [About](https://williamdemeo.github.io/about/)
+
+## Writing
+
+- [Blog](https://williamdemeo.github.io/blog/): formal verification,
+  mathematics, and tooling.
+- [Congruences of partial algebras](https://williamdemeo.github.io/blog/congruences-of-partial-algebras/)
+- [3-SAT and partition lattices](https://williamdemeo.github.io/blog/three-sat-and-partition-lattices/)
+
+## Contact
+
+- [Contact](https://williamdemeo.github.io/contact/)
+- GitHub: https://github.com/williamdemeo
+- Google Scholar: https://scholar.google.com/citations?user=y1OQ07QAAAAJ
+- ORCID: https://orcid.org/0000-0003-1832-5690
+- arXiv: https://arxiv.org/a/demeo_w_1
