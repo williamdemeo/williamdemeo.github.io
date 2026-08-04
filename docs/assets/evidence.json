@@ -1,0 +1,44 @@
+{
+  "generated_by": "scripts/python/count_evidence.py",
+  "source": {
+    "repo": "https://github.com/ualib/agda-algebras",
+    "commit": "594bc1c273ccc292d3bb92419c8ef4a00592c97a",
+    "commit_date": "2026-08-01"
+  },
+  "measures": [
+    {
+      "id": "modules",
+      "value": 370,
+      "label": "Agda modules",
+      "detail": "370 of 370 carry --safe",
+      "command": "find src -name '*.lagda.md' | wc -l",
+      "href": "https://github.com/ualib/agda-algebras"
+    },
+    {
+      "id": "lines",
+      "value": 65459,
+      "label": "lines of Agda",
+      "detail": "code fences only; prose not counted",
+      "command": "awk fence-extraction over src/**/*.lagda.md",
+      "href": "https://github.com/ualib/agda-algebras"
+    },
+    {
+      "id": "postulates",
+      "value": 0,
+      "label": "postulates",
+      "detail": "--safe rejects them; counted anyway",
+      "command": "grep -cE '^\\s*postulate\\b' over the fenced code",
+      "href": "https://github.com/ualib/agda-algebras",
+      "emphasis": true
+    },
+    {
+      "id": "requests",
+      "value": 0,
+      "label": "third-party requests",
+      "detail": "on every page of this site",
+      "command": "make offline-audit",
+      "href": "design/style.md#checks",
+      "emphasis": true
+    }
+  ]
+}

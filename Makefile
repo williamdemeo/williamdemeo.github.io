@@ -139,6 +139,22 @@ guard-gh:
 	  echo "error: the GitHub CLI (gh) is required for this target."; \
 	  echo "       install it, then run: gh auth login"; exit 1; }
 
+# ── Evidence strip ──────────────────────────────────────────────────────────
+#
+# The home page's evidence strip renders docs/assets/evidence.json, which is
+# committed so the site build needs no checkout and no network.  This target
+# is the deliberate act that refreshes it; the JSON records the commit it was
+# counted from, so a stale number is at least a recorded one.  See #95.
+
+.PHONY: evidence
+
+## Recount the evidence-strip numbers; AA points at an agda-algebras checkout
+evidence:
+	@test -n "$(AA)" || { \
+	  echo "usage: make evidence AA=/path/to/agda-algebras"; exit 1; }
+	python3 scripts/python/count_evidence.py "$(AA)" > docs/assets/evidence.json
+	@echo "wrote docs/assets/evidence.json"
+
 # ── Math rendering audit ────────────────────────────────────────────────────
 #
 # Renders every expression in a content tree with the KaTeX bundle the site

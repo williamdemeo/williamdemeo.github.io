@@ -144,6 +144,10 @@ extra_javascript:
   - assets/katex/katex.min.js
   - assets/katex/auto-render.min.js
   - javascripts/katex-init.js
+  # Count-up for the home page's evidence strip (M3-2c, #95).  The strip's
+  # numbers are in the HTML already; with this script absent, off, or under
+  # reduced motion, the page simply shows them.
+  - javascripts/evidence.js
 
 markdown_extensions:
   - abbr
@@ -282,6 +286,10 @@ hooks:
   # page's writing list cannot go stale.  Same reasoning as the redirect hook:
   # about sixty lines against a dependency to pin in two places.  See #35.
   - scripts/python/recent_posts_hook.py
+  # Expands `<!-- evidence-strip -->` from docs/assets/evidence.json, so the
+  # displayed numbers and the commands that produced them cannot drift apart.
+  # `make evidence` regenerates the JSON; see #95 and ADR-009.
+  - scripts/python/evidence_hook.py
 
 nav:
   - Home: index.md
