@@ -34,9 +34,17 @@ function pages(dir) {
 // Runs in the page.  Returns one record per text-bearing element.
 const MEASURE = () => {
   const parse = c => {
-    const m = c.match(/[\d.]+/g);
+    // Chromium serialises a colour it cannot write as rgb() -- the result of
+    // a color-mix(), for one -- in the css-color-4 form `color(srgb r g b)`,
+    // whose channels are 0..1 rather than 0..255.  Read as 0..255 they are
+    // near-black: a false failure against a dark surface and, worse, a false
+    // pass against a light one.  Alpha is 0..1 in every form and is not
+    // scaled.  (The exponent part matters too: Chromium writes tiny channels
+    // like `6e-05`, which digits-and-dots alone would split in two.)
+    const m = c.match(/[\d.]+(?:e-?\d+)?/gi);
     if (!m) return null;
-    return { r: +m[0], g: +m[1], b: +m[2], a: m.length > 3 ? +m[3] : 1 };
+    const k = c.startsWith('color(') ? 255 : 1;
+    return { r: m[0] * k, g: m[1] * k, b: m[2] * k, a: m.length > 3 ? +m[3] : 1 };
   };
   const lin = v => (v /= 255) <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
   const lum = c => 0.2126 * lin(c.r) + 0.7152 * lin(c.g) + 0.0722 * lin(c.b);

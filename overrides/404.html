@@ -1,0 +1,193 @@
+{#-
+  The 404 as an open goal (#98, M3-3c).
+
+  GitHub Pages serves 404.html from the site root for every URL that resolves
+  to nothing, which makes this the one page every typo'd link reaches.
+  Material's default is `<h1>404 - Not found</h1>` over the full docs frame.
+  This file shadows it -- Material resolves templates from `custom_dir`
+  first, the same mechanism as overrides/partials/source.html -- and turns
+  the page into an Agda goal that cannot be filled.
+
+  Four blocks are overridden:
+
+    htmltitle  MkDocs renders error templates with no `page` object, so the
+               default title collapses to the bare site name.
+    extrahead  The styles, scoped to this page.  They live here rather than
+               in extra.css because they style nothing else and because
+               extra.css is where every other issue works; last in <head>,
+               they win cascade ties against it.  Tokens only, no raw
+               colours or sizes, same rule as extra.css -- the two
+               structural values no token covers are flagged where they
+               occur.
+    site_nav   Emptied.  The nav sidebar is the docs frame, and a wrong URL
+               is not a docs page; search stays available in the header.
+    content    The goal itself.
+
+  URLs: mkdocs/commands/build.py::_build_template renders error templates
+  with base_url taken from site_url's *path* ('/'), not a relative prefix,
+  so the links and stylesheet hrefs below resolve however deep the missing
+  URL is.  That is also why this page cannot be previewed from file:// --
+  use `mkdocs serve` and request any bogus path.
+
+  The empty .goal-404__sky element is the mount point for the constellation
+  background (#94, M3-2b), which arrives slightly scattered behind the goal.
+  Text-first until that lands: nothing here moves, fetches, or scripts.
+
+  The Pygments spans in the goal block are frozen output of
+  pygments.lexers.AgdaLexer over the two lines (whitespace spans dropped),
+  so the block is coloured exactly like every other Agda block on the site.
+  The hole carries its own class instead of the lexer's `c c-Directive`,
+  which keeps Material's comment colour off it without a specificity fight.
+
+  Keep in step with the upstream template on a Material upgrade: the block
+  names and the md-* classes are Material's (9.5.49).
+-#}
+{% extends "main.html" %}
+
+{% block htmltitle %}
+  <title>404 · page not found — {{ config.site_name }}</title>
+{% endblock %}
+
+{% block extrahead %}
+  <style>
+    .md-typeset .goal-404 {
+      position: relative;
+      /* Keeps the sky's z-index: -1 inside this box instead of letting it
+         drop behind an ancestor's background. */
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      text-align: center;
+      /* Centre the composition in the main column.  No token measures the
+         viewport; svh so a phone's collapsing URL bar does not jump it. */
+      min-height: 60vh;
+      min-height: 60svh;
+      padding: var(--space-16) 0;
+    }
+
+    /* The flex gap owns the vertical rhythm, as in the project card. */
+    .md-typeset .goal-404 > * {
+      margin: 0;
+    }
+
+    /* #94's mount point.  Empty and inert until the constellation lands. */
+    .goal-404__sky {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* The h5 recipe from extra.css: the page's one heading, worn lightly,
+       so the goal block below it stays the signature. */
+    .md-typeset h1.goal-404__eyebrow {
+      font-family: var(--font-body), sans-serif;
+      font-size: var(--type-small);
+      font-weight: var(--strong-weight);
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+      color: var(--c-fg-muted);
+    }
+
+    .md-typeset .goal-404__goal {
+      width: fit-content;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .md-typeset .goal-404__goal pre {
+      margin: 0;
+    }
+
+    /* extra.css pins pre > code to --type-code; this block is the page and
+       gets heading sizes instead -- h3, and h2 from Material's own 60em
+       breakpoint up.  The h3 size is also what keeps the wider line under
+       360px on a phone. */
+    .md-typeset .goal-404__goal pre > code {
+      font-size: var(--type-h3);
+      padding: var(--space-6) var(--space-8);
+    }
+
+    @media screen and (min-width: 60em) {
+      .md-typeset .goal-404__goal pre > code {
+        font-size: var(--type-h2);
+      }
+    }
+
+    /* agda2-mode paints an interactive hole green; this one wears the
+       site's accent.  A ring rather than a border, so the glyphs around it
+       do not shift by a pixel.  The text leans 20% toward the ink because
+       the bare accent measures 4.63:1 on the wash in light -- passing, but
+       the thinnest ratio on the site; the mix clears 5.8:1 in both themes
+       (fg opposes bg in each, so one rule widens both) and keeps the hue. */
+    .md-typeset .goal-404__hole {
+      background-color: var(--c-accent-wash);
+      color: color-mix(in srgb, var(--c-accent) 80%, var(--c-fg));
+      border-radius: var(--radius-sm);
+      box-shadow: 0 0 0 var(--border-width)
+        color-mix(in srgb, var(--c-accent) 45%, transparent);
+      padding: 0 var(--space-1);
+    }
+
+    /* Material offers to copy every code block.  An unfillable hole is not
+       worth copying. */
+    .md-typeset .goal-404__goal .md-clipboard {
+      display: none;
+    }
+
+    .md-typeset .goal-404__hint {
+      color: var(--c-fg-muted);
+      max-width: var(--measure);
+    }
+
+    .md-typeset .goal-404__paths {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2) var(--space-8);
+    }
+
+    /* A pointer's way into Material's search overlay -- the same checkbox
+       the header's own magnifier toggles -- dressed as a site link.  The
+       keyboard path is the header's search field itself, plus the s, f and
+       / bindings Material puts on every page. */
+    .md-typeset .goal-404__paths label {
+      color: var(--c-accent);
+      border-bottom: var(--border-width) solid
+        color-mix(in srgb, var(--c-accent) 35%, transparent);
+      cursor: pointer;
+      transition: border-color 120ms, color 120ms;
+    }
+
+    .md-typeset .goal-404__paths label:hover {
+      color: var(--c-accent-hover);
+      border-bottom-color: var(--c-accent);
+    }
+  </style>
+{% endblock %}
+
+{% block site_nav %}{% endblock %}
+
+{% block content %}
+  <div class="goal-404">
+    <div class="goal-404__sky" aria-hidden="true"></div>
+    <h1 class="goal-404__eyebrow">404 · page not found</h1>
+    <div class="highlight goal-404__goal">
+{#- Column 0 from here: everything inside <pre> renders verbatim. -#}
+<pre><code><span class="nf">_</span> <span class="ow">:</span> ThisPage ≡ Found
+_ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span></code></pre>
+    </div>
+    <p class="goal-404__hint">This hole cannot be filled.  Try the index, or search.</p>
+    <nav class="goal-404__paths" aria-label="Where to go instead">
+      {#- base_url, not `nav.homepage.url | url`: the latter renders as
+          "/."  here (no `page` object to relativise against), and for an
+          error template base_url *is* the site root's path. -#}
+      <a href="{{ base_url }}">index</a>
+      <a href="{{ 'projects/' | url }}">projects</a>
+      <label for="__search">search</label>
+    </nav>
+  </div>
+{% endblock %}
