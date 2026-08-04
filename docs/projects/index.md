@@ -37,9 +37,10 @@ Skills encoding Agda workflow knowledge, and the agent loops built on them.
 <div class="project-card" markdown>
 **[agda-algebras](agda-algebras.md)**
 
-A library of universal algebra in Agda, containing the first constructive,
-machine-checked proof of Birkhoff's HSP theorem in Martin-Löf type theory, joint
-with Jacques Carette.
+A formalization of universal algebra in Agda, built as a substrate for research
+in the subject; its flagship result is the first constructive, machine-checked
+proof of Birkhoff's HSP theorem in Martin-Löf type theory, joint with Jacques
+Carette.
 
 `Agda`{.tag} `type theory`{.tag} `universal algebra`{.tag} `setoids`{.tag}
 
@@ -64,16 +65,17 @@ consumes.
 </div>
 
 <div class="project-card" markdown>
-**[Universal algebra and lattice theory](https://arxiv.org/abs/1204.4305)**
+**[Universal algebra and lattice theory](universal-algebra.md)**
 
-The mathematics the rest of this rests on: congruence lattices of finite
-algebras and the finite lattice representation problem, and later work on the
-algebraic approach to constraint satisfaction.
+The finite lattice representation problem, open since the 1960s: my thesis
+settled every lattice with at most seven elements but one and introduced the
+methods that did it.  With the later work on the complexity of constraint
+satisfaction, and a machine-checked revival now under way.
 
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 
 [Thesis](https://arxiv.org/abs/1204.4305) ·
-[Papers](https://scholar.google.com/citations?user=y1OQ07QAAAAJ)
+[Papers](../publications.md)
 {.project-links}
 </div>
 
