@@ -3,15 +3,14 @@
 # sidebar and the TOC here and nowhere else (M3-2a, #93).  Inner pages keep
 # the frame they genuinely benefit from.
 #
-# The top of the page is a hero grid, not a float.  The portrait sits in the
-# grid's second column, which is why none of #88's float problems (an h2 rule
-# drawn behind the photo, prose squeezed at narrow widths) can occur here --
-# there is no float for a rule to run behind.  #88 remains open for floated
-# images elsewhere.  The second column is reserved: M3-2d (#96) replaces the
-# portrait with the typed-proof terminal, and the portrait then moves to
-# About.  The h1 is the claim, not the name -- the name is in the header bar,
-# the eyebrow line, and the <title> that `title:` below sets for nav and
-# search.
+# The top of the page is a hero grid, not a float.  The grid's second column
+# is deliberately empty: it is reserved for the typed-proof terminal of M3-2d
+# (#96), and until that ships it is clear sky for the constellation backdrop
+# (M3-2b, #94).  A portrait sat there in this page's first cut; it is gone
+# rather than moved -- a photograph is decoration on a page whose argument is
+# evidence -- and #88 (floated images) remains open for other pages.  The h1
+# is the claim, not the name -- the name is in the header bar, the eyebrow
+# line, and the <title> that `title:` below sets for nav and search.
 #
 # The card order is a subset of ADR-008's, in ADR-008's relative order, and the
 # tags are copied from docs/projects/index.md.  Neither is a per-page call.
@@ -46,10 +45,6 @@ signal.
 { .hero-actions }
 
 </div>
-
-<figure class="hero-side" markdown>
-![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ width="440" height="370" }
-</figure>
 
 </div>
 

@@ -466,14 +466,15 @@
  *   [action](…){.md-button .md-button--primary} [action](…){.md-button}
  *   {.hero-actions}
  *   </div>
- *   <figure class="hero-side" markdown> …image or, later, M3-2d's terminal… </figure>
  *   </div>
  *
- * A grid, not a float, which is what retires #88's failure modes on this page:
- * no rule can draw behind the portrait and no line box gets squeezed, because
- * nothing is in flow around it.  The second column is component-agnostic on
- * purpose -- M3-2d (#96) swaps the figure for the typed-proof terminal without
- * touching these rules.
+ * A grid, not a float, and its second column is deliberately empty.  The
+ * column is reserved for M3-2d's typed-proof terminal (#96); until that
+ * ships it is clear sky for the constellation backdrop (M3-2b, #94).  The
+ * min-block-size below is what keeps that sky open: it holds the stage at
+ * the height the portrait used to establish, so the empty column reads as
+ * canvas rather than collapse, and `align-items: center` seats the copy in
+ * it.
  */
 
 .md-typeset .hero {
@@ -482,6 +483,9 @@
   gap: var(--space-12);
   align-items: center;
   margin: var(--space-8) 0;
+  /* 400px at the 20px root -- the height the 440x370 portrait used to give
+     the stage at full content width. */
+  min-block-size: 20rem;
 }
 
 /* Grid items refuse to shrink below their content's min-width by default;
@@ -518,28 +522,14 @@
   margin-bottom: 0;
 }
 
-.md-typeset .hero-side {
-  margin: 0;
-}
-
-.md-typeset .hero-side img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: var(--border-width) solid var(--c-line);
-  border-radius: var(--radius-md);
-}
-
-/* Material's mobile breakpoint, same value the timeline uses.  The copy comes
- * first and the figure follows; the grid's gap keeps owning the spacing. */
+/* Material's mobile breakpoint, same value the timeline uses.  Stacked, the
+ * stage is not held open: a phone screen has no second column to keep clear,
+ * so the min-block-size returns to auto and the copy sets the height. */
 @media screen and (max-width: 44.9375em) {
   .md-typeset .hero {
     grid-template-columns: 1fr;
     gap: var(--space-6);
-  }
-
-  .md-typeset .hero-side {
-    max-width: 24rem;
+    min-block-size: auto;
   }
 }
 
