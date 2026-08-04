@@ -98,8 +98,9 @@ system under active development.
 <div class="project-card" markdown>
 **[Universal algebra and lattice theory](projects/universal-algebra.md)**
 
-Congruence lattices of finite algebras, and the algebraic approach to
-determining the complexity of constraint satisfaction problems.
+The finite lattice representation problem, open since the 1960s, and the
+algebraic approach to the complexity of constraint satisfaction.  A thesis
+result, and a machine-checked revival now under way.
 
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 

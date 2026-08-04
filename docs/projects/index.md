@@ -67,9 +67,10 @@ consumes.
 <div class="project-card" markdown>
 **[Universal algebra and lattice theory](universal-algebra.md)**
 
-The mathematics the rest of this rests on: congruence lattices of finite
-algebras and the finite lattice representation problem, and later work on the
-algebraic approach to constraint satisfaction.
+The finite lattice representation problem, open since the 1960s: my thesis
+settled every lattice with at most seven elements but one and introduced the
+methods that did it.  With the later work on the complexity of constraint
+satisfaction, and a machine-checked revival now under way.
 
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
 

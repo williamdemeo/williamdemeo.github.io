@@ -8,12 +8,13 @@ description: >-
 
 # Universal algebra and lattice theory
 
-There are two bodies of work, and a third that is live now.  All of my work has
-appeared in peer-reviewed journals and conference proceedings.
+There are two bodies of work, and a third that is live now.  Most of it has
+appeared in peer-reviewed journals and conference proceedings; where a piece is
+an unpublished note or manuscript, this page says so.
 
 +  **The FLRP**  
-   My phd thesis attacks the *finite lattice representation problem* (FLRP), open since the
-   1960s.
+    My PhD thesis attacks the *finite lattice representation problem* (FLRP), open
+    since the 1960s.
 
     > Which finite lattices are congruence lattices of finite algebras?
 
@@ -23,25 +24,26 @@ appeared in peer-reviewed journals and conference proceedings.
     My thesis settles every lattice with at most seven elements save one, identifies
     that one, and contributes the following general methods rather than a list of cases:
 
-     +  a construction that manufactures new representable lattices to order, and
-     +  a framework for proving that a lattice of a given shape forces any group
-        representing it to have certain properties.
+    +  a construction that manufactures new representable lattices to order, and
+    +  a framework for proving that a lattice of a given shape forces any group
+       representing it to have certain properties.
 
-+  **Computational Complexity of CSPs**  
-   The decade following my phd focused on other problem areas in logic and computer
-   science, with most of my attention devoted to the *algebraic approach to constraint
-   satisfaction*, where properties of varieties of algebras tell us about the complexity of
-   computational problems.
++  **Computational complexity of CSPs**  
+    The decade following my PhD focused on other problem areas in logic and computer
+    science, with most of my attention devoted to the *algebraic approach to constraint
+    satisfaction*, where properties of varieties of algebras tell us about the
+    complexity of computational problems.
 
 +  **FLRP reprise**  
-   My colleagues and I recently met to revive the FLRP and I have been actively
-   formalizing a large portion of our lattice representation research as machine-checked
-   Agda in the [`agda-algebras`](https://agda-algebras.universalalgebra.org) library.
+    My colleagues and I recently met to revive the FLRP, and I have been actively
+    formalizing a large portion of our lattice representation research as
+    machine-checked Agda in the
+    [`agda-algebras`](https://agda-algebras.universalalgebra.org) library.
 
-   It is an exciting time to return to such seemingly impenetrable problems in
-   mathematics.  Since we have codified the underlying theory in the formal language of
-   type theory, and stated the problem in that language, we can now summon AI agents to
-   work on the problem directly in the formal language.
+    It is an exciting time to return to such seemingly impenetrable problems in
+    mathematics.  Since we have codified the underlying theory in the formal language
+    of type theory, and stated the problem in that language, we can now put AI agents
+    to work on the problem in that same language.
 
 Sole author, and joint with Barto, Bergman, Freese, Jipsen, Mayr, Mottet, Ruškuc and Valeriote · 2012– · `active`{.tag}  
 `universal algebra`{.tag} `lattice theory`{.tag} `complexity`{.tag}
@@ -344,6 +346,13 @@ their equational properties is simultaneously classifying these problems by thei
 complexity.  It is the same subject as the first half of this page, pointed at a
 different question.
 
+That reduction is sharp enough to state as a criterion: the CSP of a finite
+idempotent algebra is tractable exactly when the algebra has a *Taylor term*, and
+the general dichotomy conjecture has since been proved.  What survives the
+theorem is the practical problem.  Even at cardinality four, with a single binary
+operation, there are algebras whose CSP the known methods do not directly
+classify, and the work below is about reaching them.
+
 Three papers, and all three are about *deciding* something.
 
 +  With Cliff Bergman, [universal algebraic methods for constraint satisfaction
@@ -354,11 +363,12 @@ Three papers, and all three are about *deciding* something.
    problem.
 +  With Libor Barto and Antoine Mottet, [constraint satisfaction problems over
    finite structures](https://doi.org/10.1109/LICS52264.2021.9470670) lets the
-   structure carry operations as well as relations, connects that to the
-   algebraic question of which finite algebras admit only polynomially many
-   homomorphisms into them, and derives a complete complexity classification over
-   two-element structures, extending Schaefer's 1978 classification for
-   two-element relational structures.
+   structure carry operations as well as relations, and connects that to a
+   natural algebraic question: which finite algebras admit only polynomially many
+   homomorphisms into them?  Every equationally nontrivial one does, and that
+   single fact yields a complete complexity classification over two-element
+   structures, extending Schaefer's 1978 classification for two-element
+   relational structures.
 +  With Ralph Freese and Matthew Valeriote, [polynomial-time tests for difference
    terms in idempotent varieties](https://doi.org/10.1142/S021819671950036X)
    answers a practical question: given a finite idempotent algebra, decide in
@@ -368,30 +378,36 @@ Three papers, and all three are about *deciding* something.
 ## Bounded homomorphisms and fiber products of lattices
 
 The 2018 collaboration with Peter Mayr and Nik Ruškuc is lattice theory rather
-than representation theory, and it ends in a decision procedure.  A lattice
-epimorphism $g \colon A \to D$ is **bounded**, in the sense of McKenzie and
-Jónsson, when every preimage $g^{-1}(d)$ has both a least and a greatest element.
-The question we started from was when the kernel of a homomorphism from a
-finitely generated free lattice onto a finite lattice is a finitely generated
-sublattice of the square of the free lattice; the answer turned out to be
-boundedness.
+than representation theory, and it ends in a decision procedure.
 
-The published theorem is stated for **fiber products**.  Given epimorphisms
-$g \colon A \to D$ and $h \colon B \to D$ of finitely generated lattices, where
-$D$ satisfies a condition (D) that comes from Dean's solution to the word problem
-for finitely presented lattices, if $g$ and $h$ are bounded then the pullback
+The question we started from was a concrete one.  Take a homomorphism from a
+finitely generated free lattice onto a finite lattice.  Its kernel is a
+sublattice of the square of the free lattice; when is that kernel finitely
+generated?  We conjectured that the answer is governed by a property with a name
+already: a lattice epimorphism $g \colon A \to D$ is **bounded**, in the sense of
+McKenzie and Jónsson, when every preimage $g^{-1}(d)$ has both a least and a
+greatest element.
+
+The published theorem is stated more generally, for **fiber products**.  Let
+$g \colon A \to D$ and $h \colon B \to D$ be epimorphisms of finitely generated
+lattices, and suppose $D$ satisfies a condition (D) descended from Dean's
+solution to the word problem for finitely presented lattices.  If $g$ and $h$ are
+bounded, then the pullback
 
 $$C = \{\, (a, b) \in A \times B \mid g(a) = h(b) \,\}$$
 
-is a finitely generated sublattice of $A \times B$.  The converse fails in
-general, and we constructed a counterexample; it does hold when $A$ and $B$ are
-free, or more generally satisfy Whitman's condition and are generated by join
-prime and by meet prime elements.  Together the two directions characterize
-boundedness of $D$ in terms of finite generation of these kernels and fiber
-products, which yields the payoff: boundedness becomes decidable, in exponential
-time, for finitely presented lattices and for their finitely generated
-sublattices satisfying (D).  That generalizes an unpublished result of Freese
-and Nation.
+is a finitely generated sublattice of $A \times B$.
+
+The converse is false in general, and we built a counterexample to show it.  It
+does hold when $A$ and $B$ are free, and more generally when they satisfy
+Whitman's condition and are generated by join prime and by meet prime elements.
+
+Together the two directions characterize boundedness of $D$ in terms of finite
+generation of these kernels and fiber products, and that characterization is what
+turns a structural question into an algorithm: boundedness becomes decidable, in
+exponential time, for finitely presented lattices and for their finitely
+generated sublattices satisfying (D).  The result generalizes an unpublished
+theorem of Freese and Nation.
 
 ## Rebuilding research programs in Agda
 
@@ -399,12 +415,17 @@ and Nation.
 subject: algebras, homomorphisms, congruences, terms, varieties, the equational
 logic underneath them, and a growing layer of specific classical theories.
 Birkhoff's HSP theorem is its flagship result, not its purpose.  The purpose is a
-substrate: a machine-checked body of universal algebra big enough to do new
-research inside.
+substrate, a machine-checked body of universal algebra big enough to host new
+research rather than merely record settled results.
 
-The representation problem is the first place we are trying that, under
-`src/FLRP/`, and it is a research program with a plan rather than a formalization
-exercise.  What exists so far:
+The representation problem is the first program we are running on it, under
+`src/FLRP/`.  It is not a transcription exercise.  The tree states the open
+problem, carries the methods described above as type-checked Agda, and keeps its
+assumptions visible: every classical theorem the program leans on but has not
+proved appears as a named hypothesis rather than a postulate, so a reader can
+always see what is being taken on faith.
+
+### What is machine-checked so far
 
 +  **The problem as a type**.  `FLRP.Problem` defines a `Representable` record,
    the data of a finite algebra together with an order isomorphism from its
@@ -441,7 +462,26 @@ exercise.  What exists so far:
    $\operatorname{Eq}(6)$ isomorphic to it.  By the closure criterion a copy is
    not a representation; it is the object the closure computation runs on.
 
+### What formalizing has already changed
+
+Two things, and neither was the goal.
+
+The parachute proof got better.  Writing it in Agda forced the parachute's
+covering property to be *data* rather than an assumption discharged by
+contradiction, and the argument came out direct.  That is a small result about
+one lemma, but it is the sort of thing that only happens when a proof is made to
+answer to a compiler.
+
+The catalogue got audited.  Certifying the 35 entries meant re-deriving each
+representation from the printed algebra rather than trusting the table, and one
+entry did not survive: the congruence lattice of the algebra as printed has eight
+congruences, not the seven claimed.  Finding an error in our own manuscript is
+not a theorem, but it is exactly what a corpus is *for*, and it is not a kind of
+finding that a rerun of the original search would have produced.
+
 ## Artifacts
+
+### Papers and the thesis
 
 +  [Congruence lattices of finite algebras](https://arxiv.org/abs/1204.4305)
    (arXiv:1204.4305): the thesis, and the source for everything on this page
@@ -464,6 +504,12 @@ exercise.  What exists so far:
    of Algebra and Computation* 30:693–710, 2020; preprint
    [arXiv:1907.08046](https://arxiv.org/abs/1907.08046)): the theorem with Mayr
    and Ruškuc, its converse, and the decision procedure they yield together.
++  [Publications](../publications.md): the complete record, generated from a
+   single bibliography and checked against the publishers that hold it.  This
+   page links only the work it actually discusses.
+
+### Machine-checked
+
 +  [`FLRP.Problem`](https://agda-algebras.universalalgebra.org/FLRP/Problem/),
    [`FLRP.Parachute`](https://agda-algebras.universalalgebra.org/FLRP/Parachute/)
    and [`FLRP.Enforceable`](https://agda-algebras.universalalgebra.org/FLRP/Enforceable/)
@@ -474,37 +520,47 @@ exercise.  What exists so far:
    one of the 27 certificate modules, and
    [`FLRP.L7EqSix`](https://agda-algebras.universalalgebra.org/FLRP/L7EqSix/),
    the minimal concrete copy of the exceptional lattice.
-+  [Publications](../publications.md): the complete record, generated from a
-   single bibliography and checked against the publishers that hold it.  This
-   page links only the work it actually discusses.
 
 ## What is next
 
 The program has a bet and an insurance policy.  The bet is on a negative answer,
 pursued through enforceability: keep proving that particular interval shapes
-force particular group structure, and try to drive the classes to an empty
+force particular group structure, and drive the resulting classes toward an empty
 intersection.  The insurance policy is the positive direction on the exceptional
-lattice, so that either outcome produces a verified artifact rather than a
-verified disappointment.
+lattice.  Either way the outcome is a verified artifact, which is most of the
+reason for doing this in a proof assistant at all.
 
-Being specific about the state of the machine-checked half, since that is the
-part with numbers: of the 35 catalogue entries, 27 are certified, four are parked
-on group-theoretic representations with carriers of 90 to 216 elements that need
-the interval-to-congruence bridge at that scale, two are conditional on the
-Kurzweil–Netter duality theorem being registered as a hypothesis, one is the open
-case, and one was refuted by the checker as printed.  Nothing in the tree has yet
-proved anything new about the representation problem.  What it has done is make
-the existing corpus checkable, improve one proof in the process of formalizing
-it, and find one printed representation that does not check.
+### Where the machine-checked half stands
 
-The reason to think the third act is worth more than the sum of those is the
-tooling.  A sixty-year-old problem in universal algebra has never before had its
-methods available as a type-checked corpus that a machine can read, search and
-extend, and building that corpus is also what the [AI tooling](index.md) work is
-for.  Proof search over a formalized enforceability catalogue is a concrete thing
-to point a model at, and the answer is either a contradiction between two
-enforceable properties or a proof that no such contradiction exists.  Both are
-publishable, and both are checkable by the same compiler.
+Of the 35 catalogue entries: 27 are certified; four are parked on group-theoretic
+representations whose algebras have 90 to 216 elements and need the
+interval-to-congruence bridge at that scale; two are conditional on the
+Kurzweil–Netter duality theorem being registered as a hypothesis; one is the open
+case; and one was refuted by the checker as printed.
+
+No new mathematics about the representation problem has come out of the tree yet,
+and it would be a mistake to imply otherwise.  What has come out is a corpus that
+can be checked instead of believed, plus the two corrections above.
+
+### Why now
+
+The methods here are not new.  The closure criterion dates from around 1970 and
+the thesis material from 2012, and neither has moved the problem since.  What is
+new is that they are now a type-checked corpus a machine can read, search and
+extend, and that building corpora of exactly this kind is the same problem as the
+[AI tooling](index.md) work elsewhere on this site.
+
+The enforceability catalogue is the concrete target.  It is a finite, formally
+stated collection of results of the form "an interval of this shape forces a
+group of this kind", and the question to put to a search is sharp: is there a
+pair among them whose conclusions contradict each other?  A hit settles a
+sixty-year-old problem in the negative.  A proof that no hit is possible is the
+structural dead end the thesis conjectured, and is worth having on its own terms.
+
+Both answers are checked by the same compiler that checks the rest of the
+library, which is the property that makes it reasonable to let a machine look in
+the first place.  That is the difference between this attempt and the previous
+ones, and it is why the work is live again.
 
 Three posts develop pieces of this at length: [overalgebras and the GAP code that
 builds them](../blog/posts/2014-02-13-overalgebras.md), [a problem of Pálfy and
