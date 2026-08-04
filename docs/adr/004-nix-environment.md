@@ -1,3 +1,5 @@
+<!-- File: docs/adr/004-nix-environment.md -->
+
 # ADR-004: Adopt Nix for the development environment and CI
 
 **Status**: Accepted

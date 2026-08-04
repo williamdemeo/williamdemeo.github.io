@@ -1,3 +1,5 @@
+<!-- File: docs/adr/001-repository-consolidation.md -->
+
 # ADR-001: Consolidate both personal sites into `williamdemeo/williamdemeo.github.io`
 
 **Status**: Accepted

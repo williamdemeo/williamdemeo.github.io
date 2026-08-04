@@ -1,3 +1,5 @@
+<!-- File: docs/adr/007-blog-url-scheme.md -->
+
 # ADR-007: The blog's URL scheme
 
 **Status**: Accepted

@@ -1,3 +1,5 @@
+<!-- File: docs/adr/002-content-triage.md -->
+
 # ADR-002: Disposition of every legacy page
 
 **Status**: Accepted

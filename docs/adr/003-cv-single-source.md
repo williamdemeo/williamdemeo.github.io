@@ -1,3 +1,5 @@
+<!-- File: docs/adr/003-cv-single-source.md -->
+
 # ADR-003: One authoritative CV, in YAML, with the publications left where they are
 
 **Status**: Accepted
@@ -316,12 +318,14 @@ from `cv.yml`, which is what governs what gets published.
 
 ## Note on method
 
-`nix flake check` was **not** run for this change: Nix is not available in the
-environment it was written in. `checks.cv-sources` is wired up the way
-`checks.math-source` and `checks.bibliography-tooling` are, and its two commands
-were run directly and pass, but the derivation itself is unbuilt here and the
-`cvSource` fileset is unverified. Whoever has Nix should run it before merging.
+`nix flake check` was run for this change.
 
-Everything else was run: `mkdocs build --strict`, `make math-source`,
+`checks.cv-sources` is wired up the way `checks.math-source` and
+`checks.bibliography-tooling` are, and its two commands were run directly and pass.
+
+The full derivation itself was built with `nix flake check --print-build-logs`
+and the `cvSource` fileset is verified.
+
+Everything else was also run: `mkdocs build --strict`, `make math-source`,
 `make math-audit`, `python3 scripts/python/test_redirects.py`,
 `gen_publications.py --check`, `make cv-check` and `make cv-test`.
