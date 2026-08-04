@@ -102,6 +102,7 @@
      constellation moves the highest --i, and these two move with it. */
   --motion-labels-at: 3.7s;
   --motion-twinkle-at: 5.2s;
+  --motion-count: 0.9s;         /* a figure counting up to its value         */
   --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 

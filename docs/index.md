@@ -57,6 +57,8 @@ signal.
 
 </div>
 
+<!-- evidence-strip -->
+
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked
 mathematics**: proofs and production systems in Agda, and tooling that lets
