@@ -152,7 +152,7 @@ guard-gh:
 evidence:
 	@test -n "$(AA)" || { \
 	  echo "usage: make evidence AA=/path/to/agda-algebras"; exit 1; }
-	python3 scripts/python/count_evidence.py $(AA) > docs/assets/evidence.json
+	python3 scripts/python/count_evidence.py "$(AA)" > docs/assets/evidence.json
 	@echo "wrote docs/assets/evidence.json"
 
 # ── Math rendering audit ────────────────────────────────────────────────────

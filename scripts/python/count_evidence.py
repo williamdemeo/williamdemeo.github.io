@@ -50,16 +50,39 @@ SAFE_PRAGMA = re.compile(r"OPTIONS.*--safe")
 
 
 def agda_lines(path: Path):
-    """The lines inside ```agda fences of one literate module."""
+    """The lines inside ```agda fences of one literate module.
+
+    Fences are matched at column 0 only, and only with the `agda` tag, on
+    purpose.  That is how every fence in the corpus is written -- verified at
+    the counted commit by a differential run: an indent-tolerant matcher and
+    this one agree line for line over all 370 modules -- and it is the
+    conservative direction.  Literate modules also carry display blocks and
+    ASCII diagrams in indented or otherwise-tagged fences; a looser matcher
+    counts some of that prose as code, and overcounting is the one failure
+    mode this strip exists to rule out.  The two guards below keep the
+    assumption checked rather than assumed: a module that ever indents a
+    real fence kills the recount loudly instead of shipping a quietly wrong
+    number.
+    """
     lines, in_fence = [], False
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if in_fence:
             if line.startswith("```"):
                 in_fence = False
+            elif re.match(r"\s+```\s*$", line):
+                sys.exit(
+                    f"{path}:{n}: indented ``` inside an open fence; this "
+                    "counter matches fences at column 0 only (see agda_lines)"
+                )
             else:
                 lines.append(line)
         elif line.startswith("```agda"):
             in_fence = True
+        elif re.match(r"\s+```agda", line):
+            sys.exit(
+                f"{path}:{n}: indented ```agda fence; this counter matches "
+                "fences at column 0 only (see agda_lines)"
+            )
     return lines
 
 

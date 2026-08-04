@@ -29,6 +29,7 @@ it (ADR-009).
 from __future__ import annotations
 
 import json
+from html import escape
 from pathlib import Path
 
 from mkdocs.exceptions import PluginError
@@ -72,25 +73,31 @@ def _href(raw, page, files):
 
 
 def _render(data, page, files):
+    # The JSON is first-party and committed, but its strings still cross into
+    # attributes and text nodes: escaping is not a question of trusting the
+    # author, it is what keeps a stray `&` or `"` in a command string from
+    # shipping invalid markup.  `value` is normalized once so the zero test,
+    # the count-up's data-n and the printed figure cannot disagree about type.
     cells = []
     for m in data["measures"]:
-        classes = "ev-n ev-zero" if m.get("emphasis") and m["value"] == 0 else "ev-n"
+        value = int(m["value"])
+        classes = "ev-n ev-zero" if m.get("emphasis") and value == 0 else "ev-n"
         cells.append(
-            f'<a class="ev" href="{_href(m["href"], page, files)}" '
-            f'title="{m["command"]}">'
-            f'<span class="{classes}" data-n="{m["value"]}">{m["value"]:,}</span>'
-            f'<span class="ev-l">{m["label"]}</span>'
-            f'<span class="ev-d">{m["detail"]}</span>'
+            f'<a class="ev" href="{escape(_href(m["href"], page, files))}" '
+            f'title="{escape(m["command"])}">'
+            f'<span class="{classes}" data-n="{value}">{value:,}</span>'
+            f'<span class="ev-l">{escape(m["label"])}</span>'
+            f'<span class="ev-d">{escape(m["detail"])}</span>'
             f"</a>"
         )
     src = data["source"]
-    commit = src["commit"][:7]
+    commit = escape(src["commit"][:7])
     caption = (
         f'<p class="ev-caption">Counted, not asserted: the library figures are '
-        f'from <a href="{src["repo"]}">ualib/agda-algebras</a> at '
-        f'<code>{commit}</code> ({src["commit_date"]}), the request count from '
-        f"this site's own audit.  Hover a figure for the command that produced "
-        f"it; <code>make evidence</code> recounts.</p>"
+        f'from <a href="{escape(src["repo"])}">ualib/agda-algebras</a> at '
+        f'<code>{commit}</code> ({escape(src["commit_date"])}), the request '
+        f"count from this site's own audit.  Hover a figure for the command "
+        f"that produced it; <code>make evidence</code> recounts.</p>"
     )
     return '<div class="evidence">' + "".join(cells) + "</div>\n" + caption
 
