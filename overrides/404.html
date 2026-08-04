@@ -31,13 +31,24 @@
 
   The empty .goal-404__sky element is the mount point for the constellation
   background (#94, M3-2b), which arrives slightly scattered behind the goal.
-  Text-first until that lands: nothing here moves, fetches, or scripts.
+  Text-first until that lands: nothing here moves or fetches.  The one
+  script is six lines at the bottom that put the missing URL's own path
+  into the goal -- GitHub Pages serves this file for *every* wrong URL, so
+  the path can only be known in the visitor's browser.  It writes through
+  textContent only (the path is attacker-chosen text and must never be
+  parsed as markup), and the static `ThisPage` stands when scripts are off.
 
-  The Pygments spans in the goal block are frozen output of
-  pygments.lexers.AgdaLexer over the two lines (whitespace spans dropped),
-  so the block is coloured exactly like every other Agda block on the site.
-  The hole carries its own class instead of the lexer's `c c-Directive`,
-  which keeps Material's comment colour off it without a specificity fight.
+  The goal sits in a small terminal window: a sunken title bar, three
+  monochrome dots (the token system has no traffic-light colours, and the
+  site's depth is carried by hairlines, not ornament) and `404.agda` as
+  the filename.
+
+  The Pygments spans in the goal block follow pygments.lexers.AgdaLexer's
+  vocabulary (`nf` for the defined name, `ow` for `:` and `=`), so the block
+  is coloured exactly like every other Agda block on the site; the path
+  span wears `nf` deliberately -- it is the name the goal is about.  The
+  hole carries its own class instead of the lexer's `c c-Directive`, which
+  keeps Material's comment colour off it without a specificity fight.
 
   Keep in step with the upstream template on a Material upgrade: the block
   names and the md-* classes are Material's (9.5.49).
@@ -92,10 +103,45 @@
       color: var(--c-fg-muted);
     }
 
-    .md-typeset .goal-404__goal {
+    /* The window owns the width, the border and the corners; the highlight
+       block inside it gives both up (extra.css draws them on .highlight,
+       and this rule wins the tie by coming later in <head>). */
+    .md-typeset .goal-404__term {
       width: fit-content;
       max-width: 100%;
       text-align: left;
+      background-color: var(--c-bg-raised);
+      border: var(--border-width) solid var(--c-line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .md-typeset .goal-404__termbar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background-color: var(--c-bg-sunken);
+      border-bottom: var(--border-width) solid var(--c-line);
+    }
+
+    .md-typeset .goal-404__dot {
+      width: var(--space-2);
+      height: var(--space-2);
+      border-radius: 50%;
+      background-color: var(--c-line-strong);
+    }
+
+    .md-typeset .goal-404__termtitle {
+      margin-left: var(--space-2);
+      font-family: var(--font-mono), monospace;
+      font-size: var(--type-ui);
+      color: var(--c-fg-muted);
+    }
+
+    .md-typeset .goal-404__goal {
+      border: 0;
+      border-radius: 0;
     }
 
     .md-typeset .goal-404__goal pre {
@@ -175,10 +221,23 @@
   <div class="goal-404">
     <div class="goal-404__sky" aria-hidden="true"></div>
     <h1 class="goal-404__eyebrow">404 · page not found</h1>
-    <div class="highlight goal-404__goal">
-{#- Column 0 from here: everything inside <pre> renders verbatim. -#}
-<pre><code><span class="nf">_</span> <span class="ow">:</span> ThisPage ≡ Found
+    <div class="goal-404__term">
+      {#- Window chrome only; nothing in the bar is content. -#}
+      <div class="goal-404__termbar" aria-hidden="true">
+        <span class="goal-404__dot"></span>
+        <span class="goal-404__dot"></span>
+        <span class="goal-404__dot"></span>
+        <span class="goal-404__termtitle">404.agda</span>
+      </div>
+      <div class="highlight goal-404__goal">
+{#- Column 0 from here: everything inside <pre> renders verbatim.  The
+    span with data-goal-path is rewritten by the script below to name the
+    URL the visitor actually asked for; `ThisPage` is what stands without
+    scripts.  `∃ cv/index.html` is even parseable Agda: `/` is legal in a
+    name, so the path reads as a qualified identifier. -#}
+<pre><code><span class="nf">_</span> <span class="ow">:</span> ∃ <span class="nf" data-goal-path>ThisPage</span>
 _ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span></code></pre>
+      </div>
     </div>
     <p class="goal-404__hint">This hole cannot be filled.  Try the index, or search.</p>
     <nav class="goal-404__paths" aria-label="Where to go instead">
@@ -189,5 +248,20 @@ _ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span></code></pr
       <a href="{{ 'projects/' | url }}">projects</a>
       <label for="__search">search</label>
     </nav>
+    <script>
+      /* Name the page that was asked for.  textContent only: the path is
+         attacker-chosen text and must never be parsed as markup.  Encoded
+         whitespace is flattened so a crafted URL cannot re-shape the goal,
+         and very long paths keep their tail, which is the part that names
+         the page. */
+      (() => {
+        const el = document.querySelector('[data-goal-path]');
+        let p = location.pathname.replace(/^\/+/, '');
+        try { p = decodeURIComponent(p); } catch { /* keep it encoded */ }
+        p = p.replace(/\s+/g, ' ');
+        if (p.length > 64) p = '…' + p.slice(-63);
+        if (el && p) el.textContent = p;
+      })();
+    </script>
   </div>
 {% endblock %}
