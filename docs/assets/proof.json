@@ -1,0 +1,27 @@
+{
+  "generated_by": "scripts/python/gen_proof.py",
+  "source": {
+    "file": "agda/Free.lagda.md",
+    "sha256": "77864e7163796b893c98f037fa5c5d537c669c0dd4901a4d04b62c773fed9631",
+    "date": "2026-08-04",
+    "command": "make proof"
+  },
+  "agda": "2.8.0",
+  "lines": [
+    "  -- 𝑻 X is free: every map out of X",
+    "  -- extends to a homomorphism.",
+    "  lift-hom : hom (𝑻 X) 𝑨"
+  ],
+  "hole": "  lift-hom = {! !}",
+  "goals": [
+    {
+      "id": 0,
+      "type": "hom (𝑻 X) 𝑨"
+    }
+  ],
+  "fill": "  lift-hom = free-lift , λ f t → refl",
+  "names": [
+    "lift-hom"
+  ],
+  "check": "✓ type-checked · Agda 2.8.0"
+}

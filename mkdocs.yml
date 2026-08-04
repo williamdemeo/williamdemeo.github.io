@@ -149,6 +149,11 @@ extra_javascript:
   # numbers are in the HTML already; with this script absent, off, or under
   # reduced motion, the page simply shows them.
   - javascripts/evidence.js
+  # Replay for the typed-proof terminal (M3-2d, #96).  The completed proof
+  # is in the HTML already; this script rewinds it and types it back in,
+  # and with it absent, off, or under reduced motion, the page simply shows
+  # the finished session.
+  - javascripts/proof.js
 
 markdown_extensions:
   - abbr
@@ -291,6 +296,10 @@ hooks:
   # displayed numbers and the commands that produced them cannot drift apart.
   # `make evidence` regenerates the JSON; see #95 and ADR-009.
   - scripts/python/evidence_hook.py
+  # Expands `<!-- proof-terminal -->` from docs/assets/proof.json -- the
+  # typed-proof terminal's completed session, final state in the HTML.
+  # `make proof` re-runs the session; see #96 and ADR-009.
+  - scripts/python/proof_hook.py
 
 nav:
   - Home: index.md

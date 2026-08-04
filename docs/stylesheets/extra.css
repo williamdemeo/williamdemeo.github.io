@@ -107,6 +107,12 @@
   --md-code-hl-variable-color: var(--c-fg);
   --md-code-hl-comment-color: var(--c-fg-faint);
   --md-code-hl-generic-color: var(--c-fg-muted);
+  /* The typed-proof terminal's verdict green (M3-2d, #96), worn by the ✓
+     line and the goal pill at zero.  The pair is the 404 typed-comment's,
+     measured there (#98): dark carries the palette's own string green;
+     in light that token runs thin on these surfaces, so light gets the
+     same deeper leaf of it, 6.0:1 on the raised surface. */
+  --proof-ok: #136b34;
 }
 
 [data-md-color-scheme="slate"] {
@@ -124,6 +130,7 @@
   --md-code-hl-variable-color: var(--c-fg);
   --md-code-hl-comment-color: var(--c-fg-faint);
   --md-code-hl-generic-color: var(--c-fg-muted);
+  --proof-ok: #86efac;
 }
 
 /* ── typography ─────────────────────────────────────────────────────────── */
@@ -466,15 +473,16 @@
  *   [action](…){.md-button .md-button--primary} [action](…){.md-button}
  *   {.hero-actions}
  *   </div>
+ *   <div class="hero-side">
+ *   <!-- proof-terminal -->
+ *   </div>
  *   </div>
  *
- * A grid, not a float, and its second column is deliberately empty.  The
- * column is reserved for M3-2d's typed-proof terminal (#96); until that
- * ships it is clear sky for the constellation backdrop (M3-2b, #94).  The
- * min-block-size below is what keeps that sky open: it holds the stage at
- * the height the portrait used to establish, so the empty column reads as
- * canvas rather than collapse, and `align-items: center` seats the copy in
- * it.
+ * A grid, not a float.  The second column holds the typed-proof terminal
+ * (M3-2d, #96) over the constellation backdrop (M3-2b, #94); the
+ * min-block-size holds the stage at the height the portrait used to
+ * establish, so a column shorter than the copy reads as canvas rather than
+ * collapse, and `align-items: center` seats both columns in it.
  */
 
 .md-typeset .hero {
@@ -668,6 +676,41 @@
   }
 }
 
+/* In the hero the constellation no longer animates at all: the typed-proof
+ * replay (M3-2d, #96) is the home page's one orchestrated moment, and
+ * ADR-009 §2 allows exactly one -- see that ADR's amendment of 2026-08-04
+ * for the resolution (the demonstration outranks the identity mark on the
+ * page whose thesis is the work running).  The overrides force the final
+ * frame: the drawing is simply there, the way it is for reduced-motion
+ * readers, and the twinkle rests too, because a second timeline next to a
+ * replayable one is two signatures the moment the button is pressed.  The
+ * draw-in survives where the constellation is the signature -- the style
+ * page's demo, and the 404 when it lands there -- because those rules
+ * target `.constellation` and these target the hero's `.constellation-wrap`.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .md-typeset .constellation-wrap line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .md-typeset .constellation-wrap .star,
+  .md-typeset .constellation-wrap .star.tw {
+    animation: none;
+    opacity: 0.95;
+  }
+
+  .md-typeset .constellation-wrap .halo {
+    animation: none;
+    opacity: 0.14;
+  }
+
+  .md-typeset .constellation-wrap text {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 /* On the style page the component sits in a framed box at its natural
  * aspect rather than behind content. */
 .md-typeset .constellation-demo {
@@ -755,6 +798,188 @@
   font-size: var(--type-small);
   color: var(--c-fg-muted);
   max-width: var(--measure);
+}
+
+/* ── typed-proof terminal (M3-2d, #96) ───────────────────────────────────────
+ *
+ * Rendered by scripts/python/proof_hook.py from docs/assets/proof.json; the
+ * markup never appears in a source file, and the session it shows is one
+ * `make proof` recorded from a real Agda (ADR-009: motion is
+ * evidence-honest).  Everything below styles the FINAL state -- completed
+ * proof, zero goals, ✓ -- which is also the reduced-motion, JS-off and
+ * crawler rendering; proof.js only rewinds it and types it back in.
+ *
+ * The frame is the site's hairline box, deliberately: #98 tried
+ * terminal-window chrome (title bar, dots) on the 404's goal and reverted
+ * it.  The bar here earns its place because each of its three occupants is
+ * load-bearing -- the source link is provenance, the replay control is
+ * ADR-009's keyboard requirement, the goal pill is the state the session is
+ * about.  No dots.
+ *
+ * Colour comes from the code-block tokens: the hook emits Pygments' Agda
+ * vocabulary (`c1`, `nf`, `ow` -- the 404's precedent), so the mappings
+ * below are the same three every real code block uses; the hole wears the
+ * 404 goal's exact recipe (wash, 80/20 ink mix, hairline ring -- the ratios
+ * are recorded there); the verdict green is --proof-ok, pinned per scheme
+ * beside the syntax colours above.  Nothing here invents a hue.
+ */
+
+.md-typeset .proof {
+  border: var(--border-width) solid var(--c-line);
+  border-radius: var(--radius-md);
+  background-color: var(--c-bg-sunken);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--type-ui);
+  font-variant-ligatures: none;
+}
+
+.md-typeset .proof-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: var(--border-width) solid var(--c-line);
+  font-size: var(--type-ui-small);
+  color: var(--c-fg-muted);
+}
+
+/* The filename keeps the site's link clothes (colour plus the 35% rule);
+ * it only learns to give way, so the pill and the control never wrap. */
+.md-typeset .proof-src {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: auto;
+}
+
+/* A real <button>, like the 404's search affordance: Tab reaches it, Enter
+ * and Space fire it, the global :focus-visible ring applies.  It ships
+ * `hidden` -- proof.js reveals it only when a replay can actually run, so
+ * neither a JS-off page nor a reduced-motion one shows a dead control. */
+.md-typeset .proof-replay {
+  appearance: none;
+  background: none;
+  font: inherit;
+  color: var(--c-fg-muted);
+  border: var(--border-width) solid var(--c-line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 120ms, border-color 120ms;
+}
+
+.md-typeset .proof-replay:hover,
+.md-typeset .proof-replay:focus-visible {
+  color: var(--c-accent-hover);
+  border-color: var(--c-accent);
+}
+
+.md-typeset .proof-goals {
+  border: var(--border-width) solid var(--c-line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  transition: color 120ms, border-color 120ms;
+}
+
+/* Emptied by the replay's rewind; visibility keeps the box so the bar does
+ * not reflow when the count arrives. */
+.md-typeset .proof-goals:empty {
+  visibility: hidden;
+}
+
+.md-typeset .proof-goals-zero {
+  color: var(--proof-ok);
+  border-color: color-mix(in srgb, var(--proof-ok) 45%, transparent);
+}
+
+.md-typeset .proof-body {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  overflow-x: auto;
+}
+
+/* Every line holds its height from birth: the replay empties them all and
+ * types back in, and a terminal that grew a row per line would pump the
+ * page's layout (the 404's typed comment solves the same problem with a
+ * clip; here the row count is the thing that must not change). */
+.md-typeset .proof-line {
+  white-space: pre;
+  line-height: var(--leading-body);
+  min-height: calc(1em * var(--leading-body));
+}
+
+.md-typeset .proof .c1 { color: var(--md-code-hl-comment-color); }
+.md-typeset .proof .nf { color: var(--md-code-hl-function-color); }
+.md-typeset .proof .ow { color: var(--md-code-hl-operator-color); }
+
+/* The 404 goal-hole's recipe, by the same numbers: agda2-mode paints an
+ * interactive hole green, this site's holes wear the accent, and the 20%
+ * lean toward the ink is what clears 5.8:1 on the wash in both themes. */
+.md-typeset .proof-hole {
+  background-color: var(--c-accent-wash);
+  color: color-mix(in srgb, var(--c-accent) 80%, var(--c-fg));
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 var(--border-width)
+    color-mix(in srgb, var(--c-accent) 45%, transparent);
+  padding: 0 var(--space-1);
+}
+
+.md-typeset .proof-check {
+  color: var(--proof-ok);
+}
+
+.md-typeset .proof-check .proof-dim {
+  color: var(--c-fg-muted);
+}
+
+/* The goals HUD: agda-mode's information buffer, one line tall, under a
+ * dashed rule so it reads as the tool speaking rather than the file. */
+.md-typeset .proof-hud {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: var(--border-width) dashed var(--c-line);
+  color: var(--c-fg-faint);
+  white-space: pre;
+  min-height: calc(1em * var(--leading-body));
+}
+
+/* The caret exists only while proof.js is typing a line, which it never is
+ * under reduced motion; the media query states that rather than assumes it.
+ * A drawn box, not a glyph, so no font subset owes it a character. */
+@media (prefers-reduced-motion: no-preference) {
+  .md-typeset .proof-typing::after {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    vertical-align: text-top;
+    background-color: var(--c-accent-hover);
+    animation: proof-caret var(--motion-caret) steps(1) infinite;
+  }
+}
+
+@keyframes proof-caret {
+  50% { opacity: 0; }
+}
+
+/* Below Material's breakpoint the hero stacks and the terminal takes the
+ * full column under the copy; the UI size keeps the session's longest line
+ * inside a 390px viewport without a scrollbar (overflow-x above stays as
+ * the safety net, per the code-block convention: wrapping Agda is worse). */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .proof {
+    font-size: var(--type-ui-small);
+  }
+}
+
+/* On the style page the component sits framed at the width the hero column
+ * gives it, so the demo previews what the home page ships. */
+.md-typeset .proof-demo {
+  max-width: calc(var(--measure) * 0.8);
+  margin: var(--space-8) 0;
 }
 
 /* ── components ─────────────────────────────────────────────────────────────

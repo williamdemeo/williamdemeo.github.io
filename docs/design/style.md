@@ -503,6 +503,12 @@ the finished drawing simply appears, because the base styles *are* the final
 state and motion exists only inside a `no-preference` media query. There is
 no JavaScript in the component at all.
 
+On the home hero, since M3-2d, the drawing holds that final frame for every
+reader: the typed-proof replay is that page's one orchestrated moment, and
+ADR-009 allows exactly one per screen — the amendment of 2026-08-04 records
+the resolution. The demo below still draws itself in, because here the
+constellation *is* the signature.
+
 <div class="constellation-demo">
 --8<-- "hero-constellation.html"
 </div>
@@ -527,6 +533,58 @@ JuliaMono at full opacity: the contrast audit folds element opacity into the
 foreground colour, so a faded label would fail AA where a faded circle
 cannot. The timing values are the `--motion-*` tokens ADR-009 requires.
 
+### Typed-proof terminal
+
+The home hero's second column, and the component ADR-009's third principle
+was written for: a replay of a real Agda hole-filling session.
+[`agda/Free.lagda.md`](https://github.com/williamdemeo/williamdemeo.github.io/blob/main/agda/Free.lagda.md)
+is the session's source — a self-contained module whose lemma is the term
+algebra's freeness in miniature, `--safe`, no imports — and `make proof`
+re-runs the session with a real Agda: derive the hole variant, load, read
+the goal, give the fill, batch-check the committed file. What Agda answered
+is committed as `docs/assets/proof.json`, and everything the terminal shows
+comes from that transcript: the lines are the module's lines, the HUD's goal
+is the goal Agda reported, and the `✓ type-checked` line carries the version
+of the check that really ran. The JSON records the module's SHA-256, so a
+stale transcript is a detectable one.
+
+The page ships the *finished* session — completed proof, zero goals, the ✓
+line — so a crawler, a JS-off reader and a reduced-motion reader see the
+whole truth with no script running. Where motion is allowed, `proof.js`
+rewinds the terminal the first time it scrolls into view and types the
+session back in: colour arrives per line as each finishes, the goal count
+falls to zero, and the compiler's verdict appears whole rather than typed.
+It runs once and never loops; the ↻ replay control — a real `<button>`,
+keyboard-operable, shipped hidden so no reader ever meets a dead control —
+is the only way to see it again.
+
+Colour is borrowed, not invented: Pygments' Agda vocabulary (`nf`, `ow`,
+`c1`) over the `--md-code-hl-*` tokens every code block uses, the 404
+goal-hole's measured recipe, and the 404 typed-comment's green pair for the
+verdict. The four timing values are the `--motion-type`, `--motion-goal-beat`,
+`--motion-check-beat` and `--motion-caret` tokens, with their derivations
+recorded in `tokens.css`.
+
+<div class="proof-demo">
+<!-- proof-terminal -->
+</div>
+
+??? example "Source"
+
+    The markup is rendered by `scripts/python/proof_hook.py`; a page shows
+    the terminal by carrying the marker at column 0, in whatever frame the
+    page needs:
+
+    ```markdown
+    <div class="proof-demo">
+    <!-- proof-terminal -->
+    </div>
+    ```
+
+    On the home page the wrapper is `<div class="hero-side">`, the hero
+    grid's second column. (This fenced copy is indented, which is why it
+    renders as text: the hook expands the marker only at column 0.)
+
 ## Fonts
 
 All three faces are self-hosted, subsetted WOFF2, built by
@@ -536,7 +594,7 @@ with `make fonts`. Nothing is fetched at page load.
 | File | Characters | Size |
 | --- | --- | --- |
 | `juliamono-text.woff2` | 573 | 56 KB |
-| `juliamono-symbols.woff2` | 3,029 | 253 KB |
+| `juliamono-symbols.woff2` | 3,110 | 265 KB |
 | `juliamono-mathalpha.woff2` | 997 | 154 KB |
 | `inter-400.woff2` | 510 | 39 KB |
 | `inter-600.woff2` | 510 | 39 KB |
@@ -544,16 +602,18 @@ with `make fonts`. Nothing is fetched at page load.
 | `spacegrotesk-600.woff2` | 358 | 19 KB |
 | `newsreader-500.woff2` | 341 | 31 KB |
 
-Total: 631 KB across eight files, of which 75 KB is fetched by a page with no
+Total: 643 KB across eight files, of which 75 KB is fetched by a page with no
 notation on it at all. Newsreader is Meridian's display face and no rule names
 it while Constellation is active, so it costs 31 KB in the repository and
-nothing at page load.
+nothing at page load. (The symbol subset grew by the Dingbats block in
+M3-2d, for the ✓ on the typed-proof terminal's verdict line — a block, not a
+character, per the rule below.)
 
 JuliaMono is split three ways by `unicode-range` under one family name, so a
 page pays only for the notation it shows: a page whose code is ASCII downloads
 56 KB, `→` and `≡` add the symbol file, and an `𝑨` or a `𝓤` adds the
 mathematical alphanumerics on top. A page of Agda that uses all three carries
-about 460 KB of monospace, once, cached.
+about 475 KB of monospace, once, cached.
 
 Only the regular weight of JuliaMono ships. Material's syntax highlighting is
 colour-only — no bold, no italic in any token class — so a second code face

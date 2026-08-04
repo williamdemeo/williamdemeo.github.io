@@ -155,6 +155,32 @@ evidence:
 	python3 scripts/python/count_evidence.py "$(AA)" > docs/assets/evidence.json
 	@echo "wrote docs/assets/evidence.json"
 
+# ── Typed-proof hero ────────────────────────────────────────────────────────
+#
+# The home page's terminal replays a hole-filling session over
+# agda/Free.lagda.md; docs/assets/proof.json is that session's committed
+# transcript.  gen_proof.py derives the hole variant, drives a real Agda
+# through load / goal / give, batch-checks the committed module, and records
+# what Agda answered -- the goal text and the ✓ line's version are never
+# typed by hand (ADR-009).  The JSON is committed so the site build needs no
+# Agda; this target is the deliberate re-run.  The module imports nothing,
+# so any Agda that can parse it can check it; point AGDA at one.  See #96.
+
+AGDA ?= agda
+
+.PHONY: proof
+
+## Re-run the hero's Agda session; AGDA points at an agda binary
+# Through a temp file, unlike `evidence`: a plain redirect truncates the
+# committed transcript before the script can fail, and the likeliest failure
+# -- no Agda on this machine -- is exactly the one that leaves its owner
+# unable to regenerate what was just erased.
+proof:
+	@python3 scripts/python/gen_proof.py --agda "$(AGDA)" > docs/assets/proof.json.tmp \
+	  || { rm -f docs/assets/proof.json.tmp; exit 1; }
+	@mv docs/assets/proof.json.tmp docs/assets/proof.json
+	@echo "wrote docs/assets/proof.json"
+
 # ── Math rendering audit ────────────────────────────────────────────────────
 #
 # Renders every expression in a content tree with the KaTeX bundle the site

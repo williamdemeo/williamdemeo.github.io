@@ -63,10 +63,11 @@
   --measure: 33rem;              /* ~74 characters at the body size */
   --measure-heading: 38rem;
 
-  /* The height the home hero holds open (#93).  Its second column is empty
-     until M3-2d's terminal arrives, and without a floor the stage would
-     collapse to the copy's height; the value is what the 440x370 portrait
-     used to establish at full content width. */
+  /* The height the home hero holds open (#93).  Its second column holds the
+     typed-proof terminal (M3-2d, #96); the floor keeps the stage from
+     collapsing to the copy's height while the terminal is shorter than the
+     copy, and the value is what the 440x370 portrait used to establish at
+     full content width. */
   --hero-stage: 20rem;
 
   /* 4px grid at a 20px root. */
@@ -103,6 +104,19 @@
   --motion-labels-at: 3.7s;
   --motion-twinkle-at: 5.2s;
   --motion-count: 0.9s;         /* a figure counting up to its value         */
+  /* The typed-proof replay (M3-2d, #96).  One token per beat of the session:
+     the per-glyph delay is ~42 glyphs a second -- quick, practiced typing --
+     and proof.js jitters each keystroke +-40% around it so the rhythm reads
+     as a hand rather than a metronome.  The goal beat, the pause while an
+     open goal sits in the HUD, is deliberately --motion-count's 0.9s: "a
+     figure arrives" and "a goal is read" share one tempo.  The check beat is
+     the short settle before the compiler speaks, and the caret's 1s period
+     is Emacs' default (blink-cursor-interval 0.5s, half on, half off) --
+     the blink every Agda session actually has. */
+  --motion-type: 24ms;          /* one glyph of the proof replay typing in   */
+  --motion-goal-beat: 0.9s;     /* an open goal, read before the fill        */
+  --motion-check-beat: 0.35s;   /* zero goals settling before the ✓ line     */
+  --motion-caret: 1s;           /* the replay caret's blink period           */
   --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 

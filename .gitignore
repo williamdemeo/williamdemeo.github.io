@@ -12,3 +12,7 @@ node_modules/
 
 # Upstream font sources, fetched by `make fonts` and content-addressed.
 .fonts-cache/
+
+# Agda interface files, if agda/Free.lagda.md is checked in place rather
+# than through `make proof` (which checks a copy in a temp directory).
+_build/
