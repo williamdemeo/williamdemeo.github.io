@@ -1172,6 +1172,123 @@ Avoid the two common failure modes: a wall of publications above the fold, which
 
 ---
 
+### Issue M3-2a: Rebuild the landing page as a stage: hide nav/TOC on home, hero region (#93)
+
+**Labels**: `milestone-3-design`, `design`
+
+Raised from the 2026-08-03 design review ("a site that proves itself").  The finding, in one line: the site is *about* machine-checked mathematics but the landing page shows no mathematics, no Agda, and no proof state, inside a frame (left nav, right TOC) that reads as documentation rather than as a person.
+
+This issue is layout only — the smallest change with the largest first-impression effect.  The constellation background (M3-2b), the evidence strip (M3-2c) and the typed-proof hero (M3-2d) each land separately on the canvas this creates.
+
+## Why
+
+- The home page inherits Material's docs frame.  `hide: [navigation, toc]` in front matter is the supported one-line fix; inner pages keep the frame they genuinely benefit from.
+- The hero region needs to widen once the sidebars go, and the portrait/float arrangement (#88's subject) should give way to a hero block that can host M3-2b/d.
+
+## Tasks
+
+- [ ] `hide: navigation, toc` on `docs/index.md` only.
+- [ ] Restructure the top of the page into a hero region: eyebrow, display heading, one-paragraph claim, two actions ("watch an agent prove a theorem" → M4-3 page; "the proofs" → projects).  Grid layout that reserves the right column for M3-2d's terminal.
+- [ ] Keep the full current content below the hero (cards, recent writing, elsewhere) — this issue moves nothing out.
+- [ ] Verify the floated-portrait problem (#88) does not carry into the new hero; if the portrait moves elsewhere on the page, note it on #88.
+- [ ] `make check` and `make design-audit` green in both themes.
+
+## Acceptance criteria
+
+- [ ] Home renders with no sidebar and no TOC at every breakpoint; every other page is unchanged.
+- [ ] All hero styles come from `tokens.css` values — no raw colours or sizes.
+- [ ] Lighthouse/contrast: AA in both themes, verified by `make contrast-audit`.
+
+---
+
+### Issue M3-2b: Constellation component: Hasse diagrams as star charts, and ADR-009 (motion) (#94)
+
+**Labels**: `milestone-3-design`, `design`
+
+Raised from the 2026-08-03 design review.  The design system is already named *Constellation*; the thesis is about congruence lattices.  This issue makes the identity mark literal: Hasse diagrams rendered as star charts — nodes as stars, cover relations as hairlines — that draw themselves in and then twinkle gently.
+
+Not stock particles: N₅ and M₃ are the two forbidden sublattices of modularity and distributivity; 𝟚³ and small Con(𝑨) examples from the papers extend the set.  A reader who knows, knows instantly; one who doesn't still sees a quiet night sky.
+
+## Why
+
+- One reusable visual signature serves the hero (M3-2a), blog post headers, the 404 (M3-3c) and the social cards (#21) without re-deciding anything per page.
+- Pure inline SVG + CSS animation: no dependency, no external origin, nothing for `make offline-audit` to notice.
+
+## Tasks
+
+- [ ] An inline-SVG partial (or macro/snippet) parameterized by lattice: N₅, M₃, 𝟚³ first; Con(𝑨) variants welcome later.
+- [ ] Draw-in via stroke-dashoffset, staggered; twinkle as a subtle opacity loop on a few stars.
+- [ ] `prefers-reduced-motion: reduce` renders the final frame with no animation.
+- [ ] Colours and stroke weights from `tokens.css` only; verify against both themes.
+- [ ] A demo block on `docs/design/style.md` alongside the existing components.
+- [ ] **Write ADR-009 (motion)**: animation only demonstrates or identifies (no decoration for its own sake); one signature per screen; reduced-motion always honored; every animated property comes from tokens.  M3-2c and M3-2d are bound by it.
+
+## Acceptance criteria
+
+- [ ] The component renders correctly in both themes and passes `make design-audit`.
+- [ ] With reduced motion, nothing moves and nothing is missing.
+- [ ] ADR-009 accepted and cross-linked from ADR-005.
+
+---
+
+### Issue M3-2c: Evidence strip: computed counts, each linking to its proof (#95)
+
+**Labels**: `milestone-3-design`, `design`, `automation`
+
+Raised from the 2026-08-03 design review.  A strip of four measures under the hero: **definitions · theorems proved · postulates (0) · third-party requests (0)** — each computed by a script, each linking to the command or CI run that produced it.  "0 postulates" is the flex only this field can make; "0 third-party requests" is already true and audited (#17/ADR-005).
+
+The principle (ADR-009, arriving with M3-2b): every number on screen is evidence, not copy.
+
+## Why
+
+- The site's strongest claims are countable.  Counting them at build time means they cannot go stale silently — the same reasoning as the recent-posts hook (#35).
+- A count-up animation on first view gives the landing its second beat after the hero, at near-zero cost.
+
+## Tasks
+
+- [ ] A script (suggest `scripts/python/count_evidence.py`) that produces the numbers from the agda-algebras checkout and this site's own audit outputs; counts land in a small data file that is committed, with the producing command recorded next to each number.
+- [ ] Strip component on the home page, styled from tokens; `font-variant-numeric: tabular-nums`.
+- [ ] Count-up on first intersection; static under reduced motion; static for crawlers (numbers in the HTML).
+- [ ] Each figure links to its evidence: the counting command's doc, the CI run, or the audit target.
+- [ ] Decide refresh cadence (manual `make` target is enough for v1; note the option of a scheduled CI refresh).
+
+## Acceptance criteria
+
+- [ ] Numbers in the built page match the committed data file; regenerating changes nothing when nothing changed.
+- [ ] AA contrast both themes; `make design-audit` green.
+- [ ] With JS off, the real numbers are visible.
+
+---
+
+### Issue M3-2d: Typed-proof hero replay: the landing page type-checks a lemma (#96)
+
+**Labels**: `milestone-3-design`, `infrastructure`, `design`
+
+Raised from the 2026-08-03 design review.  The hero's right column (reserved by M3-2a) plays a typed replay of a real Agda hole-filling session: the signature types itself, a hole appears with its goal in a small HUD, the hole fills, the goal count ticks to zero, and the last line is `✓ type-checked · Agda <version>`.
+
+Depends on M3-2a (canvas) and M3-2b (ADR-009).  Blocked-by is soft — the component can be built against the style page first.
+
+## Why
+
+- This is the "show, don't tell" beat: the first thing a visitor watches is the site's subject actually happening.
+- Scripted-from-real beats randomly-flashy: the transcript is a session that happened, checked into the repo next to the page.  Same drama, plus integrity.
+
+## Tasks
+
+- [ ] Choose and record the vignette (a small, real lemma — free-lift/lift-hom territory reads well); check the source and the final `.lagda.md` into the repo.
+- [ ] Dependency-free typing engine (~80 lines): code-point-safe (astral glyphs like 𝑨), per-line colouring after type-in, goals HUD, replay control.
+- [ ] `prefers-reduced-motion`: render the finished proof and the checkmark immediately; same for crawlers (final state is the HTML).
+- [ ] Keyboard: replay reachable and operable; no motion traps.
+- [ ] JuliaMono renders every glyph in the vignette — extend the subset check if a new block appears; `make font-audit` green.
+
+## Acceptance criteria
+
+- [ ] The animation runs once on view, is replayable, and never loops unprompted.
+- [ ] With JS off or reduced motion, the hero shows the completed proof with the ✓ line.
+- [ ] `make design-audit` green; no new dependency; no external request.
+
+---
+
 ### Issue M3-3: Build the reusable component set (#19, closed)
 
 **Labels**: `milestone-3-design`, `design`
@@ -1269,6 +1386,66 @@ A pixel width cannot be responsive — at 360 px a 200 px float leaves about fif
 ## Notes
 
 Not urgent for what is published today: #18 avoids it and no other page floats an image. It will bite the first M4 or M5 page that puts a figure beside prose.
+
+---
+
+### Issue M3-3b: Hover previews on project cards (#97)
+
+**Labels**: `milestone-3-design`, `infrastructure`, `design`
+
+Raised from the 2026-08-03 design review, and it keeps the site owner's original idea: rest on a project card (or tab into it) and a preview floats up — the paper's first page, or a screenshot of the docs site, plus two or three live facts (venue/DOI, CI status, scale).
+
+The validated pattern is Wikipedia's page previews: rewarding curiosity cheaply, measured to increase precision of navigation (https://diff.wikimedia.org/2018/04/18/how-we-designed-page-previews-for-wikipedia/).
+
+## Why
+
+- The cards are the home page's second screen; today they are text in boxes.  A preview turns each card into a small promise kept.
+- Everything can be generated at build time and self-hosted: paper first pages via `pdftoppm`, site thumbnails via the audit scripts' own headless-Chromium driver (`scripts/js/_browser.mjs`) — no external origin, nothing for `make offline-audit` to flag.
+
+## Tasks
+
+- [ ] Build-time thumbnail generation for each card's primary artifact; committed outputs, content-addressed or pinned like the font pipeline.
+- [ ] Preview component: appears on `:hover` and `:focus-within`, dismissible with Escape (WCAG 1.4.13), never blocks the card's own links.
+- [ ] Layout that works at the grid's narrow breakpoint (preview below, not beside).
+- [ ] Reduced motion: no translate/fade — instant show/hide.
+- [ ] Facts rows sourced from existing data (bibliography.json, repo metadata pinned at build) — no client-side fetches.
+
+## Acceptance criteria
+
+- [ ] Keyboard-only users can open, read, and dismiss every preview.
+- [ ] `make design-audit` and `make offline-audit` green; images self-hosted.
+- [ ] Cards without a preview degrade to exactly today's card.
+
+---
+
+### Issue M3-3c: The 404 as an open goal (#98)
+
+**Labels**: `milestone-3-design`, `design`
+
+Raised from the 2026-08-03 design review.  The 404 becomes an unfillable goal:
+
+```
+_ : ThisPage ≡ Found
+_ = {! !}
+```
+
+with the line "This hole cannot be filled.  Try the index, or search."  Constellation (M3-2b) behind it, slightly scattered.  A 404 people screenshot is free distribution.
+
+## Why
+
+- GitHub Pages serves `404.html` from the site root; Material provides a default that is pure boilerplate — the one page every typo'd URL reaches is currently the least designed page on the site.
+
+## Tasks
+
+- [ ] Decide the mechanism (`overrides/404.html` template extending `main.html`, per the existing `overrides/partials/source.html` precedent) and implement.
+- [ ] The goal block set in JuliaMono; links to home, projects, and search.
+- [ ] Constellation background once M3-2b lands (ship text-first if this issue moves faster).
+- [ ] Verify GitHub Pages actually serves it for a missing path on the deployed site.
+
+## Acceptance criteria
+
+- [ ] A wrong URL on the live site shows the page, in both themes, AA contrast.
+- [ ] No external requests; audits green.
 
 ---
 
@@ -1492,6 +1669,61 @@ Earlier versions of this issue said "documentation at ualib.org", which points a
 
 ---
 
+### Issue M4-2b: The HSP scroll figure on the agda-algebras page (#101)
+
+**Labels**: `milestone-4-portfolio`, `content`, `design`
+
+Raised from the 2026-08-03 design review; an enhancement to the agda-algebras project page (#24), in the register of Ciechanowski (https://ciechanow.ski/) and Distill (https://distill.pub/): **one** scroll-driven figure, not a site full of them.
+
+A small class 𝒦 of algebras as dots.  As the reader scrolls, 𝖧 (homomorphic images), 𝖲 (subalgebras) and 𝖯 (products) apply as expanding closure regions, until the region stabilizes and the caption lands on 𝖵(𝒦) = 𝖧𝖲𝖯(𝒦) — the theorem the library proved, watched rather than read.
+
+## Why
+
+- The page's prose is already strong; this makes it *linkable by strangers* — the artifact people share is usually a figure.
+- Scroll-scrubbed SVG with no dependency is feasible: IntersectionObserver + a scroll-progress variable driving CSS/SVG transforms.
+
+## Tasks
+
+- [ ] Storyboard the four beats (𝒦 → 𝖧 → 𝖲 → 𝖯 → fixpoint) on paper before any code; keep under ~40 seconds of scroll.
+- [ ] Implement as inline SVG driven by scroll progress; no library.
+- [ ] Reduced motion / no-JS: the final frame with the equation, as a static figure with a complete caption.
+- [ ] Keyboard path: the figure's beats reachable via visible controls, not scroll alone.
+- [ ] `make design-audit` green in both themes.
+
+## Acceptance criteria
+
+- [ ] The figure tells the theorem accurately (Tarski's operator composition, closure at 𝖧𝖲𝖯) — reviewed for mathematical honesty, not just prettiness.
+- [ ] Static fallback is complete and correct on its own.
+
+---
+
+### Issue M4-2c: The library star chart: agda-algebras' import graph as a navigable sky (#102)
+
+**Labels**: `milestone-4-portfolio`, `design`
+
+Raised from the 2026-08-03 design review.  The agda-algebras module import graph as a pannable star chart: layout computed once at build time (no runtime physics), stars are modules, edges are imports; hover names the module and its headline theorem, click opens its literate page.
+
+Prior art for the appetite: the Lean community's import-graph tools (https://github.com/patrik-cihal/lean-graph).  Here it doubles as the Constellation identity (M3-2b) at its most literal, and delivers "scale you can feel" — a decade of work as one navigable sky.
+
+## Why
+
+- The library's scale is a claim the site currently makes in prose only.
+- Precomputed layout keeps the page static-friendly: an SVG with a few hundred nodes, pan/zoom via viewBox — no dependency required.
+
+## Tasks
+
+- [ ] Build-time extraction of the import graph from the agda-algebras checkout; committed layout artifact with the producing command recorded.
+- [ ] Layout experiment (layered by module hierarchy vs. force-directed run offline); pick by looking, ADR-005-style.
+- [ ] SVG render with hover labels and click-through to the literate pages; keyboard path (focusable nodes, or a search-the-chart input).
+- [ ] Performance check on mobile; consider a static PNG fallback below a viewport threshold.
+
+## Acceptance criteria
+
+- [ ] Loads without jank on a mid-range phone or falls back gracefully.
+- [ ] Every node's click-through resolves; audits green; no external requests.
+
+---
+
 ### Issue M4-3: AI for formal verification — agda-mcp, Claude Skills, agent workflows (#25)
 
 **Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
@@ -1520,6 +1752,69 @@ That last theme — formal verification as a source of dense, automatically-chec
 - [ ] It contains at least one concrete worked example, not only description.
 - [ ] The lessons-learned section makes specific, falsifiable claims grounded in observation.
 - [ ] Nothing in it is confidential to an employer.
+
+---
+
+### Issue M4-3a: Record and ship an agent proof session (asciinema replay) (#99)
+
+**Labels**: `milestone-4-portfolio`, `infrastructure`, `content`, `career`
+
+Feeds #25 (M4-3) directly: ADR-008 conditions the portfolio's whole ordering on the AI page shipping a **checkable worked example**.  This issue produces that example and its player.
+
+Record a real session of an agent (Claude) driving Agda through agda-native-air to a finished proof; ship it as a self-hosted asciinema replay on the M4-3 page, annotated beat by beat.
+
+## Why
+
+- A typechecker as dense, unfakeable reward signal, and an agent loop shaped around it — this is precisely the intersection the target roles sit at.  Watching it run says more than any paragraph.
+- asciinema-player is two files (JS + CSS) plus the `.cast` recording, all servable from this origin (https://docs.asciinema.org/manual/server/embedding/) — `make offline-audit` stays green by construction.
+- The same recording seeds the strongest M6-4 blog-post candidate ("watch Claude prove a theorem"), and the `.cast` file is itself a checkable artifact, checked into the repo.
+
+## Tasks
+
+- [ ] Choose the lemma: small enough to replay in ~60–90 seconds, real enough to be honest work (a kernel-is-a-congruence-shaped result reads well).
+- [ ] Record the session (`asciinema rec`), trim dead air, keep the recovery-from-error beat if one occurs — that beat is the most credible part.
+- [ ] Vendor `asciinema-player.min.js` + CSS under `docs/assets/`, pinned by hash like the fonts; wire the page embed.
+- [ ] Annotate alongside: what the model saw, which tool it called, what the typechecker said back.
+- [ ] Check the `.cast` into the repo next to the proof it produced; link both from the page.
+- [ ] Confirm player weight is paid only on the M4-3 page.
+
+## Acceptance criteria
+
+- [ ] #25's "concrete worked example" criterion is satisfiable by pointing at this page.
+- [ ] Replay works keyboard-only; honors reduced motion (no autoplay).
+- [ ] `make offline-audit` green — no request leaves the origin.
+
+---
+
+### Issue M4-3b: Fill the hole: a visitor-completable proof (#100)
+
+**Labels**: `milestone-4-portfolio`, `content`, `design`
+
+Raised from the 2026-08-03 design review.  A small interactive block — one goal, three candidate terms:
+
+```
+𝒾𝒹 : (𝑨 : Algebra α ρᵃ) → hom 𝑨 𝑨
+𝒾𝒹 𝑨 = {! !}
+```
+
+The right term fills the hole and the goal count hits zero; each wrong one shows the *genuine* Agda error, captured offline once.  No typechecker in the browser, no external calls, and the page says so — the honesty is part of the design.
+
+## Why
+
+- Nobody forgets the personal site where *they* proved the identity map is a homomorphism.
+- The two wrong answers teach real things (hom is a Σ-type; the termination checker exists) — a gentle on-ramp for readers who have never touched a proof assistant.
+
+## Tasks
+
+- [ ] Capture the three checker responses from a real Agda session; commit the source used.
+- [ ] Component: three `<button>`s, result region with `aria-live="polite"`, reset; all styling from tokens.
+- [ ] Works without hover; touch and keyboard equal citizens.
+- [ ] Placement decision: about page, or a teaser on home linking to it (keep home to one interactive beat per ADR-009).
+
+## Acceptance criteria
+
+- [ ] All three outcomes render correctly in both themes; audits green.
+- [ ] With JS off, the block degrades to the goal plus a sentence, not a broken widget.
 
 ---
 
@@ -1700,6 +1995,27 @@ This is the one expository entry in the portfolio, and it should be honest about
 ## Notes
 
 Sixth on the index, not fifth, once #56 resolves — ADR-008 gives the exam corpus the fifth slot ahead of it, because the corpus is the author's own original solutions with an active formalization planned, where this is exposition built on existing notes. That ordering is decided; do not re-open it here.
+
+---
+
+### Issue M4-9: Moonshot: in-browser Agda playground (watch agda-web; go/no-go criteria) (#103)
+
+**Labels**: `milestone-4-portfolio`, `decision`
+
+The moonshot from the 2026-08-03 design review, filed to be watched rather than started.  agda-web (https://github.com/agda-web) has Agda compiling to WebAssembly — ~23 MB optimized, experimental.  If it matures, a dedicated, clearly-labeled `/playground/` page where a visitor completes a guided lemma with *real* typechecking would be without precedent on a personal site.  Lean's live editor (https://live.lean-lang.org/) is the bar.
+
+Explicitly **not** scheduled: M4-3b (fill the hole) delivers most of the feeling at a fraction of the bytes, honestly.  This issue exists so the go/no-go criteria are written down and the upstream is checked deliberately rather than remembered occasionally.
+
+## Go criteria (all must hold before this gets scheduled)
+
+- [ ] agda-web (or equivalent) loads and checks a small module in a mainstream browser without patches.
+- [ ] Total transfer for the playground page can be kept under ~30 MB, lazy-loaded, with an explicit "this downloads a proof assistant" consent moment.
+- [ ] A guided lemma with hints can be completed by a non-Agda-user in under five minutes (test on a real person).
+- [ ] The page passes the site's audits (self-hosted, AA, reduced-motion) — the WASM binary is self-hostable by construction.
+
+## Until then
+
+- [ ] Revisit quarterly; note upstream status here.
 
 <!-- END GENERATED: milestone-4 -->
 
@@ -2337,6 +2653,33 @@ The qualifying-exam solutions (M2-8, #56) deserve specific attention in this iss
 ---
 
 *Revised 2026-07-30: the exam pages are no longer archived (see #12, #56), so this issue treats them as a primary search surface rather than an afterthought.*
+
+---
+
+### Issue M8-3a: Serve /llms.txt (#104)
+
+**Labels**: `milestone-8-launch`, `seo`
+
+Feeds #48 (M8-3, search/sitemap/structured data).  Serve `/llms.txt` — the emerging convention (https://github.com/answerdotai/llms-txt) for giving language models a curated, Markdown index of a site; Anthropic's own docs serve one.
+
+For a site whose author builds AI tooling for proof assistants, a site that is itself legible to language models is a credential disguised as a housekeeping file.
+
+## Why
+
+- LLM crawlers and agents increasingly check for it; cost is one static file.
+- MkDocs copies non-Markdown files in `docs/` through to the site root unchanged, so `docs/llms.txt` ships as `/llms.txt` with no plugin.
+
+## Tasks
+
+- [ ] Write `docs/llms.txt` to the llms.txt shape: H1 name, blockquote summary, sectioned link lists (projects, writing, research record, contact) with one-line descriptions.
+- [ ] Absolute URLs against the current canonical origin; add "swap origin in llms.txt" to M8-1's cutover checklist (#46).
+- [ ] Keep it in step manually for now; note the option of generating it from the nav (same reasoning as the recent-posts hook) if it proves drift-prone.
+- [ ] Verify `mkdocs build --strict` passes and `site/llms.txt` is byte-identical to the source.
+
+## Acceptance criteria
+
+- [ ] `curl https://<site>/llms.txt` returns the file after the next deploy.
+- [ ] Every URL in it resolves on the built site (no pending pages listed).
 
 ---
 
