@@ -15,10 +15,12 @@
     extrahead  The styles, scoped to this page.  They live here rather than
                in extra.css because they style nothing else and because
                extra.css is where every other issue works; last in <head>,
-               they win cascade ties against it.  Tokens only, no raw
-               colours or sizes, same rule as extra.css -- the two
-               structural values no token covers are flagged where they
-               occur.
+               they win cascade ties against it.  Written in tokens, same
+               rule as extra.css, with the exceptions flagged where they
+               occur: two structural values no token covers, and one
+               per-scheme colour pair for the typed comment's green,
+               pinned for the same reason extra.css pins its syntax
+               colours.
     site_nav   Emptied.  The nav sidebar is the docs frame, and a wrong URL
                is not a docs page; search stays available in the header.
     content    The goal itself.
@@ -203,11 +205,17 @@
       gap: var(--space-2) var(--space-8);
     }
 
-    /* A pointer's way into Material's search overlay -- the same checkbox
-       the header's own magnifier toggles -- dressed as a site link.  The
-       keyboard path is the header's search field itself, plus the s, f and
-       / bindings Material puts on every page. */
-    .md-typeset .goal-404__paths label {
+    /* A real <button> into Material's search overlay, stripped to the
+       site's link clothes, so the visible affordance is itself operable
+       by keyboard -- Tab reaches it, Enter and Space fire it, and the
+       global :focus-visible ring applies.  The script below wires it to
+       the same checkbox the header's magnifier toggles. */
+    .md-typeset .goal-404__search {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
       color: var(--c-accent);
       border-bottom: var(--border-width) solid
         color-mix(in srgb, var(--c-accent) 35%, transparent);
@@ -215,7 +223,8 @@
       transition: border-color 120ms, color 120ms;
     }
 
-    .md-typeset .goal-404__paths label:hover {
+    .md-typeset .goal-404__search:hover,
+    .md-typeset .goal-404__search:focus-visible {
       color: var(--c-accent-hover);
       border-bottom-color: var(--c-accent);
     }
@@ -245,7 +254,7 @@ _ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span>
           error template base_url *is* the site root's path. -#}
       <a href="{{ base_url }}">index</a>
       <a href="{{ 'projects/' | url }}">projects</a>
-      <label for="__search">search</label>
+      <button type="button" class="goal-404__search">search</button>
     </nav>
     <script>
       /* Name the page that was asked for.  textContent only: the path is
@@ -260,6 +269,27 @@ _ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span>
         p = p.replace(/\s+/g, ' ');
         if (p.length > 64) p = '…' + p.slice(-63);
         if (el && p) el.textContent = p;
+
+        /* The search button drives the same checkbox the header's
+           magnifier toggles, then puts the caret in the query field --
+           Material only auto-focuses it from its own `s` shortcut, not
+           from a toggle change (measured, both widths).  Synchronously,
+           not on the next frame: focus() forces the style recalc it
+           needs, and a headless frame can arrive hundreds of
+           milliseconds late.  Search is a JS feature in Material end to
+           end, so a button that needs JS gives up nothing; if the
+           search plugin is ever removed, hide the dead control
+           instead. */
+        const btn = document.querySelector('.goal-404__search');
+        const toggle = document.getElementById('__search');
+        if (btn && toggle) {
+          btn.addEventListener('click', () => {
+            toggle.click();
+            document.querySelector('.md-search__input')?.focus();
+          });
+        } else if (btn) {
+          btn.hidden = true;
+        }
       })();
     </script>
   </div>
