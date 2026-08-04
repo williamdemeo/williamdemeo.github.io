@@ -789,7 +789,7 @@ Two URL spaces need covering: the Octopress paths under `williamdemeo.github.io`
 
 ---
 
-### Issue M2-7: Establish a single source of truth for CV data (#16)
+### Issue M2-7: Establish a single source of truth for CV data (#16, closed)
 
 **Labels**: `milestone-2-migration`, `content`, `decision`
 
@@ -1172,7 +1172,7 @@ Avoid the two common failure modes: a wall of publications above the fold, which
 
 ---
 
-### Issue M3-2a: Rebuild the landing page as a stage: hide nav/TOC on home, hero region (#93)
+### Issue M3-2a: Rebuild the landing page as a stage: hide nav/TOC on home, hero region (#93, closed)
 
 **Labels**: `milestone-3-design`, `design`
 
@@ -1418,7 +1418,7 @@ The validated pattern is Wikipedia's page previews: rewarding curiosity cheaply,
 
 ---
 
-### Issue M3-3c: The 404 as an open goal (#98)
+### Issue M3-3c: The 404 as an open goal (#98, closed)
 
 **Labels**: `milestone-3-design`, `design`
 
@@ -1900,7 +1900,7 @@ A compact list with a one-line description and a link each is the right weight. 
 
 ---
 
-### Issue M4-7: Universal algebra and lattice theory — the mathematics research page (#82)
+### Issue M4-7: Universal algebra and lattice theory — the mathematics research page (#82, closed)
 
 **Labels**: `milestone-4-portfolio`, `content`, `writing`, `career`
 
@@ -2656,7 +2656,7 @@ The qualifying-exam solutions (M2-8, #56) deserve specific attention in this iss
 
 ---
 
-### Issue M8-3a: Serve /llms.txt (#104)
+### Issue M8-3a: Serve /llms.txt (#104, closed)
 
 **Labels**: `milestone-8-launch`, `seo`
 
