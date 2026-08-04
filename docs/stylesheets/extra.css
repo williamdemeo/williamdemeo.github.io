@@ -531,6 +531,159 @@
   }
 }
 
+/* ── constellation (M3-2b, #94) ──────────────────────────────────────────────
+ *
+ * Hasse diagrams drawn as star charts: the site's identity mark, and the
+ * first component governed by ADR-009 (motion).  The markup is the inline SVG
+ * in docs/_snippets/hero-constellation.html; each line and star carries a
+ * stagger index `--i`, and that is the only styling the markup holds.
+ *
+ * The base rules below are the FINAL state -- lines drawn, stars lit, labels
+ * legible.  Motion exists only inside the `no-preference` media query, so
+ * reduced-motion readers, crawlers and JS-off readers all get the finished
+ * drawing by construction rather than by a fallback path.  No JavaScript
+ * anywhere in this component.
+ *
+ * Lines carry pathLength="1", which is what lets one dasharray value draw
+ * every line to exactly its own length -- without it, dasharray is measured
+ * in user units and any line longer than the value shows a gap in its final
+ * state.
+ *
+ * The labels are real text (JuliaMono; ₅, ₃ and ₇ are in the symbols subset,
+ * 𝟚 in mathalpha) at full opacity: the contrast audit folds element opacity
+ * into the foreground colour, so a faded label would fail AA in a way a
+ * faded circle cannot.  Their font-size is a bare 11px on purpose: inside
+ * the SVG that is a length in viewBox user units -- geometry, like `r` and
+ * `stroke-width`, scaled with the drawing by the viewport transform -- not a
+ * step on the type scale.  A --type-* token (em/rem) would resolve against
+ * the page's font size and then be rescaled by the same transform, giving a
+ * size that tracks neither the type system nor the drawing.
+ */
+
+.md-typeset .constellation line {
+  stroke: var(--c-line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.md-typeset .constellation .star {
+  fill: var(--c-accent);
+  opacity: 0.95;
+}
+
+.md-typeset .constellation .halo {
+  fill: var(--c-accent);
+  opacity: 0.14;
+}
+
+.md-typeset .constellation text {
+  fill: var(--c-fg-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .md-typeset .constellation line {
+    stroke-dashoffset: 1;
+    animation: constellation-draw var(--motion-draw) var(--motion-ease) forwards;
+    animation-delay: calc(var(--i) * var(--motion-stagger));
+  }
+
+  .md-typeset .constellation .star {
+    opacity: 0;
+    animation: constellation-pop var(--motion-pop) var(--motion-ease) forwards;
+    animation-delay: calc(var(--i) * var(--motion-stagger));
+  }
+
+  .md-typeset .constellation .halo {
+    opacity: 0;
+    animation: constellation-haze var(--motion-pop) var(--motion-ease) forwards;
+    animation-delay: calc(var(--i) * var(--motion-stagger) + var(--motion-halo-lag));
+  }
+
+  /* A few stars keep shimmering after the draw-in.  The second delay holds
+     the twinkle back until the drawing has finished; the token records the
+     derivation. */
+  .md-typeset .constellation .star.tw {
+    animation:
+      constellation-pop var(--motion-pop) var(--motion-ease) forwards,
+      constellation-twinkle var(--motion-twinkle) ease-in-out infinite;
+    animation-delay: calc(var(--i) * var(--motion-stagger)), var(--motion-twinkle-at);
+  }
+
+  .md-typeset .constellation text {
+    opacity: 0;
+    animation: constellation-label var(--motion-label) var(--motion-ease) forwards;
+    animation-delay: var(--motion-labels-at);
+  }
+}
+
+@keyframes constellation-draw { to { stroke-dashoffset: 0; } }
+@keyframes constellation-pop { to { opacity: 0.95; } }
+@keyframes constellation-haze { to { opacity: 0.14; } }
+@keyframes constellation-label { to { opacity: 1; } }
+@keyframes constellation-twinkle {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.35; }
+}
+
+/* In the hero the constellation is the background layer: absolutely placed
+ * under the two grid columns, cropped by `slice`, and inert to the pointer.
+ * The rules target the snippet's wrapper div, because the wrapper is what
+ * Markdown guarantees arrives intact (see the comment in docs/index.md). */
+.md-typeset .hero {
+  position: relative;
+}
+
+.md-typeset .hero > .constellation-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.md-typeset .constellation-wrap .constellation {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.md-typeset .hero > .hero-copy,
+.md-typeset .hero > .hero-side {
+  position: relative;
+  z-index: 1;
+}
+
+/* Below the breakpoint the columns stack over the drawing, so it recedes:
+ * the whole layer dims and the labels leave rather than fail contrast under
+ * an ancestor opacity the audit would fold in. */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .hero > .constellation-wrap {
+    opacity: 0.35;
+  }
+
+  .md-typeset .hero > .constellation-wrap text {
+    display: none;
+  }
+}
+
+/* On the style page the component sits in a framed box at its natural
+ * aspect rather than behind content. */
+.md-typeset .constellation-demo {
+  border: var(--border-width) solid var(--c-line);
+  border-radius: var(--radius-md);
+  background-color: var(--c-bg-sunken);
+  margin: var(--space-8) 0;
+}
+
+.md-typeset .constellation-demo .constellation {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 420;
+}
+
 /* ── components ─────────────────────────────────────────────────────────────
  *
  * Four components carry most of the site: a project card, a publication entry,

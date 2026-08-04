@@ -28,6 +28,15 @@ hide:
 ---
 
 <div class="hero" markdown>
+
+<!-- The wrapper div is load-bearing: Python-Markdown does not treat <svg> as
+     a block-level element, so an unwrapped include inside this markdown div
+     would be parsed as inline HTML and shredded.  A plain div is block-level
+     and its contents pass through untouched. -->
+<div class="constellation-wrap">
+--8<-- "hero-constellation.html"
+</div>
+
 <div class="hero-copy" markdown>
 
 William DeMeo · formal verification × AI

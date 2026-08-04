@@ -483,6 +483,50 @@ up on the dash whatever their width. Below Material's mobile breakpoint the
 gutter costs more width than it earns and the entry stacks under its date,
 keeping the rule and the node.
 
+### Constellation
+
+The identity mark, and the first component governed by [ADR-009's motion
+rules](../adr/009-motion.md): Hasse diagrams drawn as star charts. N₅ and M₃
+are the two lattices whose absence characterizes modularity and
+distributivity; 𝟚³ is the Boolean cube; L₇ — the 2×3 grid plus one element
+comparable only to bottom and top — is [the exceptional
+lattice](../projects/universal-algebra.md#the-one-that-got-away), still the
+smallest lattice not known to be the congruence lattice of a finite algebra.
+A reader who knows the diagrams reads a signature; one who doesn't sees a
+night sky. It backs the home hero, and it is the intended backdrop for the
+404 and the social cards.
+
+The drawing animates in once — lines first, stars with them, labels after —
+and a few stars keep a slow shimmer. In L₇ the star that never settles is
+the extra element, the one the open problem is about. Under `prefers-reduced-motion: reduce`
+the finished drawing simply appears, because the base styles *are* the final
+state and motion exists only inside a `no-preference` media query. There is
+no JavaScript in the component at all.
+
+<div class="constellation-demo">
+--8<-- "hero-constellation.html"
+</div>
+
+??? example "Source"
+
+    The markup is one snippet, included where it is needed:
+
+    ```markdown
+    <div class="constellation-demo">
+    --8<-- "hero-constellation.html"
+    </div>
+    ```
+
+    In the hero it is included directly inside `<div class="hero" markdown>`,
+    where it becomes the background layer behind both grid columns.
+
+Every colour and stroke comes from `tokens.css` — the accent for stars, the
+strong line for edges, the faint foreground for labels — so the drawing
+adapts to both themes with no rules of its own. The labels are real text in
+JuliaMono at full opacity: the contrast audit folds element opacity into the
+foreground colour, so a faded label would fail AA where a faded circle
+cannot. The timing values are the `--motion-*` tokens ADR-009 requires.
+
 ## Fonts
 
 All three faces are self-hosted, subsetted WOFF2, built by

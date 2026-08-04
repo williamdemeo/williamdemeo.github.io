@@ -8,7 +8,7 @@
 
 **Deciders**: William DeMeo
 
-**Related**: [#17](https://github.com/williamdemeo/williamdemeo.github.io/issues/17) (M3-1), [#20](https://github.com/williamdemeo/williamdemeo.github.io/issues/20) (M3-4, KaTeX), [#19](https://github.com/williamdemeo/williamdemeo.github.io/issues/19) (M3-3, components), [#21](https://github.com/williamdemeo/williamdemeo.github.io/issues/21) (M3-5, social cards), [ADR-004](004-nix-environment.md)
+**Related**: [#17](https://github.com/williamdemeo/williamdemeo.github.io/issues/17) (M3-1), [#20](https://github.com/williamdemeo/williamdemeo.github.io/issues/20) (M3-4, KaTeX), [#19](https://github.com/williamdemeo/williamdemeo.github.io/issues/19) (M3-3, components), [#21](https://github.com/williamdemeo/williamdemeo.github.io/issues/21) (M3-5, social cards), [ADR-004](004-nix-environment.md), [ADR-009](009-motion.md) (motion)
 
 ---
 
