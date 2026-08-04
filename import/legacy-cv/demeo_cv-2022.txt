@@ -1,0 +1,398 @@
+williamdemeo.org Page 1 of 5 williamdemeo@gmail.com
+William DeMeo
+Curriculum Vitae
+Contact
+Information
+570 Park Ave, Apt. 8D williamdemeo.org
+New York, NY 10065 williamdemeo@gmail.com
+Research
+Interests
+Universal algebra, algorithmic complexity, type theory, formal verification, artificial intelligence.
+Proof mechanization in Agda, functional programming for AI, ML and Big Data in Scala/Spark.
+Education
+Doctor of Philosophy in Mathematics University of Hawaii, Honolulu, May 2012
+Thesis:
+Congruence lattices of finite algebras
+Advisor:
+Ralph Freese
+Master of Science in Mathematics Courant Institute of Mathematical Sciences,
+NYU
+, New York
+Thesis:
+Approximating eigenvalues of large stochastic matrices
+Advisor:
+Jonathan Goodman
+Bachelor of Arts in Economics University of Virginia, Charlottesville
+Academic
+Appointments
+Adjunct Instructor Computer Science Dept. New Jersey Inst. of Technology Newark 2022--
+Postdoctoral Research Fellow Algebra Dept. Charles University Prague 2019--2021
+Burnett Meyer Instructor Mathematics Dept. University of Colorado Boulder 2017--2019
+Visiting Assistant Professor Mathematics Dept. University of Hawai`i Honolulu 2016--2017
+Postdoctoral Associate Mathematics Dept. Iowa State University Ames 2014--2016
+Visiting Assistant Professor Mathematics Dept. Univ South Carolina Columbia 2012--2014
+Industry
+Experience
+Senior Research Scientist Imaging Research Dept. Textron Systems Corp. Maui 2001--2006
+Worked full-time on
+afosr
+contracts developing new algorithms and parallel (
+smp
+and
+mpi
+) programs
+for processing images acquired by Haleakala Observatories, including
+Multi-frame Blind Deconvolution
+removing distorting effects of Earth's atmosphere from images of satellites and other
+neo
+s; executed
+our programs on the
+mhpcc
+supercomputer.
+Publications
+1. A machine-checked proof of Birkhoff's variety theorem in Martin-Lof type theory, with J. Carette
+(accepted)
+Proc. 27th Intl. Conf. Types for Proofs and Programs
+(
+types
+2022
+) (preprint link).
+2. Universal algebraic methods for constraint satisfaction problems, with Clifford Bergman
+Logical Methods in Computer Science;
+18
+:12:1--12:37, 2022; (preprint link).
+3. Constraint satisfaction problems over finite structures, with Libor Barto and Antoine Mottet
+36th
+ACM/IEEE
+Symposium on Logic in Computer Science (LICS 2021);
+pp. 1--13 (preprint link).
+4. Bounded homomorphisms and fiber products of lattices, with P. Mayr and N. Ruskuc
+International
+Journal of Algebra and Computation;
+30
+:693--710, 2020; (preprint link).
+5. Polynomial-time tests for difference terms in idempotent varieties, with R. Freese and M. Valeriote
+International Journal of Algebra and Computation;
+29
+:927--949, 2019; (preprint link).
+6. Isotopic algebras with nonisomorphic congruence lattices,
+Algebra Universalis
+72
+:295--298, 2014.
+7. Expansions of finite algebras & their congruence lattices,
+Algebra Universalis
+69
+:257--278, 2013.
+8. Proceedings of Algebras and Lattices in Hawaii 2018 (editor) with K. Adaricheva, J. Hyndman.
+9. Topics in nonabelian harmonic analysis and
+dsp
+applications, (best paper award)
+International Symposium on Musical Acoustics (ISMA 2004);
+(preprint link).
+10. Characterizing musical signals with Wigner-Ville interferences,
+International Computer Music Conference (ICMC 2002);
+(preprint link).
+11. Approximating eigenvalues of large stochastic matrices,
+8th Copper Mt. Conference on Iterative Methods
+1998 (preprint link).
+williamdemeo.org Page 2 of 5 williamdemeo@gmail.com
+Grants &
+Awards
+NSF Research Grant
+(no. 1500218)
+2015--2018
+Project Title:
+Algebras and algorithms, structure and complexity theory
+Role:
+Postdoctoral research fellow on a team with 6 senior scientists and 3 postdocs
+Description:
+3-yr collaborative research on algebraic approaches to constraint satisfaction problems
+Magellan Scholar Grant
+2013--2014
+Project Title:
+What does a nonabelian group sound like?
+Role:
+Faculty mentor for undergraduate research
+Description:
+See
+soundmath.github.io/GroupSound/GroupSound
+ARCS Sarah Ann Martin Award
+for Outstanding Research in Mathematics Honolulu 2011
+Best Paper Award
+, International Symposium on Musical Acoustics Nara 2004
+Synergistic
+Activities
+Organizer,
+BLAST 2019 Conference
+Boulder 2019
+Organizer,
+Algebras and Lattices in Hawai`i Conf.
+to honor Freese, Lampe & Nation
+Honolulu 2018
+Organizer,
+Workshop on Computational Universal Algebra
+Louisville 2013
+Editor for
+Algebra Universalis
+2018--present
+Referee for
+Algebra Universalis
+,
+Order
+, and
+J. Logic & Analysis
+2012--present
+University of Colorado, Boulder
+Served on doctoral candidacy exam committee for the following ph.d. students:
+Jordan DuBeau
+,
+Ali Latfi
+,
+Athena Sparks
+,
+Michael Wheeler
+.
+Served on dissertation defense committee for
+Jeffrey Shriner
+.
+Iowa State University
+REU mentor for Charlotte Aten (mathematics major, University of Rochester)
+Honors thesis advisor for Joshua Thompson (mathematics major, honors program)
+Putnam Exam mentor at weekly exam practice meetings
+Iowa 4-H Youth Conference volunteer mentor (link)
+Data Science
+Certificates
+Smart Contracts SUNY at Buffalo
+4-week Coursera course; grade: 96.4%
+Verified Certificate earned 5 Sep 2021
+Blockchain Basics SUNY at Buffalo
+4-week Coursera course; grade: 100%
+Verified Certificate earned 6 Aug 2021
+Big Data Analysis with Scala and Spark
+Ecole Polytechnique Federale de Lausanne
+4-week Coursera course; grade: 93.4%
+Verified Certificate earned 24 Nov 2017
+Functional Programming Principles in Scala
+Ecole Polytechnique Federale de Lausanne
+6-week Coursera course; grade: 100%
+Verified Certificate earned 17 Nov 2016
+Functional Program Design in Scala
+Ecole Polytechnique Federale de Lausanne
+4-week Coursera course; grade: 100%
+Verified Certificate earned 6 Aug 2016
+Parallel Programming in Scala
+Ecole Polytechnique Federale de Lausanne
+4-week Coursera course; grade: 100%
+Verified Certificate earned 27 Jun 2016
+Summer Schools
+Attended
+Computer-aided Mathematical Proof Cambridge University
+Topics: bringing proof technology into mainstream mathematics July 10--14, 2017
+LMS/EPSRC Short Course in Computational Group Theory University of St. Andrews
+Topics: permutation & finitely presented groups, constructive recognition Jul 29--Aug 2, 2013
+Midlands Graduate School in the Foundations of Computing Science Univ of Nottingham 2014
+Topics: lambda calculus, denotational semantics, type theory, Univ of Birmingham 2016, 2019
+category theory, proof theory, univalent foundations University of Sheffield 2021
+Oregon Programming Languages Summer School University of Oregon
+Topics: type theory, logic, semantics, verification, 3--21 Jul 2018
+parallelism, concurrency, gradual type systems 26 Jun--8 Jul 2017
+16--28 Jun 2014
+williamdemeo.org Page 3 of 5 williamdemeo@gmail.com
+Teaching
+Experience
+New Jersey Institute of Technology
+(as Adjunct Instructor)
+CS 370: Introduction to Artificial Intelligence Spring 2022
+CS 241: Foundations of Computer Science I Spring 2022
+Charles University in Prague
+(as Postdoctoral Research Fellow)
+NMAG 405: Universal Algebra Winter 2020
+University of Colorado, Boulder
+(as Burnett Meyer Instructor)
+Math 2001: Discrete Mathematics (with Lean prover component) Spring 2019
+Math 2001: Discrete Mathematics (with Lean prover component) Fall 2018
+Math 3140: Abstract Algebra Fall 2018
+Math 6000: Model Theory (graduate course) Spring 2018
+Math 2130: Linear Algebra Spring 2018
+Math 2130: Linear Algebra Fall 2017
+University of Hawaii
+(as Visiting Assistant Professor)
+Math 215: Applied Calculus Spring 2017
+Math 480: Senior Seminar Spring 2017
+Math 244: Calculus IV Fall 2016
+Math 321: Introduction to Advanced Math Fall 2016
+Iowa State University
+(as Postdoctoral Associate)
+Math 317: Linear Algebra Spring 2016
+Math 317: Linear Algebra Fall 2015
+Math 160: Survey of Calculus Fall 2015
+Math 207: Elementary Linear Algebra Spring 2015
+Math 165: Calculus I Spring 2015
+Math 301: Abstract Algebra Fall 2014
+Math 165: Calculus I Fall 2014
+University of South Carolina
+(as Visiting Assistant Professor)
+Math 700: Linear Algebra (graduate course) Spring 2014
+Math 141: Calculus I Spring 2014
+Math 374: Discrete Structures Fall 2013
+Math 122: Calculus for Business and Social Sciences Fall 2013
+Math 374: Discrete Structures Spring 2013
+Math 122: Calculus for Business and Social Sciences Spring 2013
+Math 241: Vector Calculus Fall 2012
+Math 122: Calculus for Business and Social Sciences Fall 2012
+williamdemeo.org Page 4 of 5 williamdemeo@gmail.com
+Talks
+Complexity of the Homomorphism Problem for Boolean Models
+(preprint) Online, 2020
+European virtual CSP seminar
+Computational Tools for Universal Algebra Research
+Vols am Schlern, Italy 2020
+CSP World Congress 2020
+Formalizing Universal Algebra with Dependent and Inductive Types
+(html docs) Denver, CO 2020
+AMS Joint Mathematics Meetings; Special Session: Algebras and Algorithms
+Computing Difference Term Operations in Polynomial Time
+(preprint) Denver, CO 2018
+BLAST Conference, University of Denver
+Why Universal Algebra Needs Inductive, Dependent Types
+Eugene, OR 2018
+Oregon Programming Languages Summer School
+A Tutorial Introduction to the Lean Prover
+Boulder, CO 2018
+University of Colorado Logic Seminar
+The Lambda Calculus and Dependent Type Theory
+Boulder, CO 2018
+University of Colorado Logic Seminar
+Representing Finite Lattices as Congruence Lattices
+Fort Collins, CO 2017
+Colorado State University Algebra Seminar
+A Polynomial-time Test for Difference Terms in Idempotent Varieties
+(preprint) Nashville, TN 2017
+BLAST Conference, Vanderbilt University
+Algebraic approach to complexity of constraint satisfaction
+(preprint) Honolulu, HI 2017
+University of Hawaii Logic and Analysis Seminar
+Universal Algebraic Methods for Constraint Satisfaction Problems
+(preprint) Denver, CO 2016
+AMS Fall Western Sectional Meeting: Special Session in Algebraic Logic
+The Rectangularity Theorem of Barto and Kozik
+Boulder, CO 2016
+Algebras and Algorithms: Structure and Complexity Theory
+Constraint Satisfaction Problems and Universal Algebra
+Birmingham, England 2016
+Midlands Graduate School in the Foundation of Computing Science
+Permutability in Diamonds
+Ames, IA 2016
+Iowa State Algebra and Combinatorics Seminar
+Which Commutative Idempotent Binars are Tractable?
+Nashville, TN 2015
+Vanderbilt Shanks workshop: Open Problems in Universal Algebra
+Which Commutative Idempotent Binars are Tractable?
+Nashville, TN 2015
+Vanderbilt Shanks workshop: Open Problems in Universal Algebra
+Some Small Finite Algebras Yielding Tractable CSP Templates
+Ames, IA 2015
+Iowa State Algebra and Combinatorics Seminar
+Algebraic CSP and Tractability of Commutative Idempotent Binars
+Denton, TX 2015
+BLAST Conference, University of North Texas
+Isotopic Algebras
+Ames, IA 2015
+Iowa State Algebra and Combinatorics Seminar
+What Does a Nonabelian Group Sound Like?
+Baltimore, MD 2014
+MAA Special Session: At the Intersection of Mathematics and the Arts
+Interval Enforceable Properties of Finite Groups
+(slides) Louisville, KY 2013
+AMS Special Session on Finite Universal Algebra
+Tutorial: UACalc at the command line and in the cloud
+Louisville, KY 2013
+Workshop on Computational Universal Algebra
+williamdemeo.org Page 5 of 5 williamdemeo@gmail.com
+Talks (cont.)
+Approximating Eigenvalues of Large Stochastic Matrices
+Columbia, SC 2013
+University of South Carolina Combinatorics Seminar
+Congruence Lattices of Finite Algebras (plenary lecture)
+(slides) Orange, CA 2013
+BLAST Conference, Chapman University
+Transposition Principles for Subgroups and Equivalence Relations
+(slides) Asheville, NC 2013
+Zassenhaus Group Theory Conference
+Isotopic Algebras with Nonisomorphic Congruence Lattices
+(slides) Boulder, CO 2013
+AMS Special Session on Algebras, Lattices, and Varieties
+Synchronizing Automata and the
+Cerny Conjecture
+(slides) Boulder, CO 2013
+Graduate Algebra Seminar, University of Colorado
+The Finite Lattice Representation Problem in Four Parts
+Columbia, SC 2012
+University of South Carolina Algebra and Logic Seminar
+Interval Sublattice Enforceable Properties of Finite Groups
+(slides) Columbus, OH 2012
+The 31st Ohio State-Denison Mathematics Conference
+Expansions of Finite Algebras and their Congruence Lattices
+(slides) Honolulu, HI 2012
+American Mathematical Society sectional meeting
+Intervals in Subgroup Lattices and Permutation Representations
+Cullowhee, NC 2012
+Western Carolina University Group Theory Seminar
+Recent Progress on the Finite Lattice Representation Problem
+Honolulu, HI 2011
+Achievement Rewards for College Scientists: Scholar Presentations
+The Finite Lattice Representation Problem
+Seoul, KOR 2009
+First Joint Meeting of the Korean and American Mathematical Societies
+References
+Clifford Bergman
+y
+Professor of Mathematics
+Iowa State University
+396 Carver Hall
+Ames, Iowa 50011
+phone: 515-294-1752
+email:
+cbergman@iastate.edu
+Venanzio Capretta
+Assistant Professor of Computer Science
+University of Nottingham
+Room B83 Computer Science
+Jubilee Campus, Wollaton Road
+Nottingham NG8 1BB UK
+Venanzio.Capretta@nottingham.ac.uk
+Ralph Freese
+Professor of Mathematics
+University of Hawaii
+2565 McCarthy Mall
+Honolulu, HI 96822
+phone: 808-956-4680
+email:
+ralph@math.hawaii.edu
+Peter Jipsen
+Professor of Mathematics
+Chapman University
+545 W. Palm Ave
+Orange, CA 92866
+phone: 714-744-7918
+email:
+jipsen@chapman.edu
+George McNulty
+Professor of Mathematics
+University of South Carolina
+1523 Greene Street
+Columbia, SC 29208
+phone: 803-777-7469
+email:
+mcnulty@math.sc.edu
+Peter Mayr
+y
+Assistant Professor of Mathematics
+University of Colorado, Boulder
+2300 Colorado Avenue
+Boulder, CO 80309
+phone: 303-492-7754
+email:
+peter.mayr@colorado.edu
+y
+teaching reference

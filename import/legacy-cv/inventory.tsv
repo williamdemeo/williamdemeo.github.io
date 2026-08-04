@@ -1,0 +1,776 @@
+# Every entry in the four CV copies ADR-003 merged, as extracted by
+# scripts/python/check_cv_sources.py.  Regenerate with `make cv-inventory`;
+# `make cv-check` fails when this file and the copies disagree.
+#
+# Committed so that what the checker reads is reviewable in a diff, and so
+# that an extractor which breaks and finds nothing fails a check instead of
+# reporting a clean run over an empty list.  Do not edit by hand.
+#
+# id	section	text
+cvrepo:contact-information:williamdemeo-org	Contact Information	[williamdemeo.org](http://williamdemeo.org)\
+cvrepo:contact-information:williamdemeo-gmail-com	Contact Information	<williamdemeo@gmail.com>
+cvrepo:research-interests:computational-complexity-type-theory-artific	Research Interests	Computational complexity, type theory, artificial intelligence (dsLLM, RAG, Scala/Spark, PyTorch).\
+cvrepo:research-interests:computer-aided-mathematics-itp-in-agda-and-l	Research Interests	Computer-aided mathematics (ITP in Agda and Lean); formal methods for blockchain research.
+cvrepo:education:doctor-of-philosophy-in-mathematics-universi	Education	**Doctor of Philosophy in Mathematics** [University of Hawaii](https://math.hawaii.edu/wordpress/), Honolulu, May 2012\
+cvrepo:education:thesis-congruence-lattices-of-finite-algebra	Education	*Thesis:* [Congruence lattices of finite algebras](https://arxiv.org/abs/1204.4305) *Advisor:* [Ralph Freese](http://math.hawaii.edu/~ralph/)
+cvrepo:education:master-of-science-in-mathematics-courant-ins	Education	**Master of Science in Mathematics** [Courant Institute of Mathematical Sciences, NYU](https://cims.nyu.edu/), New York
+cvrepo:education:thesis-approximating-eigenvalues-of-large-st	Education	*Thesis:* [Approximating eigenvalues of large stochastic matrices](https://williamdemeo.github.io/MSThesis/) *Advisor:* [Jonathan Goodman](https://www.math.nyu.edu/faculty/goodman/index.html)
+cvrepo:education:bachelor-of-arts-in-economics-university-of	Education	**Bachelor of Arts in Economics** [University of Virginia](https://www.virginia.edu/), Charlottesville
+cvrepo:employment-history:formal-verification-engineer-formal-methods	Employment History	**Formal Verification Engineer** Formal Methods Team, [IOHK](https://iohk.io/), Boulder 2023--present\
+cvrepo:employment-history:formal-verification-of-the-cardano-blockchai	Employment History	*Formal verification of the [Cardano blockchain ledger specification](https://github.com/input-output-hk/formal-ledger-specifications) in Agda.* (2 years)
+cvrepo:employment-history:senior-university-lecturer-computer-sci-dept	Employment History	**Senior University Lecturer** [Computer Sci Dept, New Jersey Inst of Tech,](https://cs.njit.edu/) Newark 2022--2023\
+cvrepo:employment-history:taught-courses-in-foundations-of-computing-b	Employment History	*Taught courses in [foundations of computing](https://github.com/williamdemeo/cs241-spring2022), [big data](https://github.com/williamdemeo/ds644-spring2023), and [artificial intelligence](https://github.com/williamdemeo/cs370-fall2022)*. (18 months)
+cvrepo:employment-history:software-engineer-library-team-relationalai	Employment History	**Software Engineer** [Library Team, RelationalAI](https://relational.ai/), New York 2022--2023\
+cvrepo:employment-history:developed-standard-library-of-the-rel-declar	Employment History	*Developed [Standard Library](https://docs.relational.ai/rel/ref/lib/stdlib) of the [Rel declarative programming language](https://docs.relational.ai/rel/intro/overview).* (9 months)
+cvrepo:employment-history:postdoctoral-research-fellow-algebra-dept-ch	Employment History	**Postdoctoral Research Fellow** [Algebra Dept, Charles University](https://ka.karlin.mff.cuni.cz/), Prague 2019--2021
+cvrepo:employment-history:burnett-meyer-instructor-mathematics-dept-un	Employment History	**Burnett Meyer Instructor** [Mathematics Dept, University of Colorado](https://www.colorado.edu/math/), Boulder 2017--2019
+cvrepo:employment-history:visiting-assistant-professor-mathematics-dep	Employment History	**Visiting Assistant Professor** [Mathematics Dept, University of Hawaii](https://math.hawaii.edu/wordpress/), Honolulu 2016--2017
+cvrepo:employment-history:postdoctoral-associate-mathematics-dept-iowa	Employment History	**Postdoctoral Associate** [Mathematics Dept, Iowa State University](https://math.iastate.edu/), Ames 2014--2016
+cvrepo:employment-history:visiting-assistant-professor-mathematics-dep~2	Employment History	**Visiting Assistant Professor** [Mathematics Dept, Univ South Carolina](https://sc.edu/study/colleges_schools/artsandsciences/mathematics/index.php), Columbia 2012--2014
+cvrepo:employment-history:research-scientist-imaging-research-dept-tex	Employment History	**Research Scientist** [Imaging Research Dept, Textron Systems Corp](https://www.textronsystems.com/), Maui 2001--2006\
+cvrepo:employment-history:developed-new-algorithms-and-parallel-progra	Employment History	*Developed new algorithms and parallel programs for processing images from the [Haleakala Observatories](https://about.ifa.hawaii.edu/facility/haleakala-observatories/).*
+cvrepo:publications:formal-specification-of-the-cardano-blockcha	Publications	[Formal Specification of the Cardano Blockchain Ledger, Mechanized in Agda](https://drops.dagstuhl.de/entities/document/10.4230/OASIcs.FMBC.2024.2), with Knispel, et al.\
+cvrepo:publications:5th-international-workshop-on-formal-methods	Publications	*5th International Workshop on Formal Methods for Blockchains* (FMBC) 2024 [(pdf link)](https://drops.dagstuhl.de/storage/01oasics/oasics-vol118-fmbc2024/OASIcs.FMBC.2024.2/OASIcs.FMBC.2024.2.pdf)
+cvrepo:publications:a-machine-checked-proof-of-birkhoff-s-variet	Publications	[A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory](https://arxiv.org/abs/2101.10166), with J. Carette\
+cvrepo:publications:proc-27th-intl-conf-types-for-proofs-and-pro	Publications	*Proc. 27th Intl. Conf. Types for Proofs and Programs* (TYPES) 2022 [(preprint link)](https://arxiv.org/abs/2101.10166)
+cvrepo:publications:universal-algebraic-methods-for-constraint-s	Publications	[Universal algebraic methods for constraint satisfaction problems](https://lmcs.episciences.org/8975), with Clifford Bergman\
+cvrepo:publications:logical-methods-in-computer-science-lmcs-202	Publications	*Logical Methods in Computer Science* (LMCS) 2022 [(pdf link)](https://lmcs.episciences.org/8975/pdf)
+cvrepo:publications:constraint-satisfaction-problems-over-finite	Publications	[Constraint satisfaction problems over finite structures](https://ieeexplore.ieee.org/document/9470670), with L. Barto and A. Mottet\
+cvrepo:publications:36th-acm-ieee-symposium-on-logic-in-computer	Publications	*36th ACM/IEEE Symposium on Logic in Computer Science* (LICS) 2021 [(preprint link)](https://arxiv.org/abs/2010.04958)
+cvrepo:publications:bounded-homomorphisms-and-fiber-products-of	Publications	[Bounded homomorphisms and fiber products of lattices](https://www.worldscientific.com/doi/10.1142/S0218196720500174), with P. Mayr and N. Ruškuc\
+cvrepo:publications:international-journal-of-algebra-and-computa	Publications	*International Journal of Algebra and Computation* (IJAC) 2020 [(preprint link)](https://arxiv.org/abs/1907.08046)
+cvrepo:publications:polynomial-time-tests-for-difference-terms-i	Publications	[Polynomial-time tests for difference terms in idempotent varieties](https://www.worldscientific.com/doi/10.1142/S021819671950036X), with R. Freese and M. Valeriote\
+cvrepo:publications:international-journal-of-algebra-and-computa~2	Publications	*International Journal of Algebra and Computation* (IJAC) 2019 [(preprint link)](https://arxiv.org/abs/2011.07879)
+cvrepo:publications:isotopic-algebras-with-nonisomorphic-congrue	Publications	[Isotopic algebras with nonisomorphic congruence lattices](https://link.springer.com/article/10.1007/s00012-014-0301-4),\
+cvrepo:publications:algebra-universalis-2014-preprint-link	Publications	*Algebra Universalis* 2014 [(preprint link)](https://arxiv.org/abs/1301.7481)
+cvrepo:publications:expansions-of-finite-algebras-their-congruen	Publications	[Expansions of finite algebras & their congruence lattices](https://link.springer.com/article/10.1007/s00012-013-0226-3),\
+cvrepo:publications:algebra-universalis-2013-preprint-link	Publications	*Algebra Universalis* 2013 [(preprint link)](https://arxiv.org/abs/1205.1106)
+cvrepo:publications:proceedings-of-algebras-and-lattices-in-hawa	Publications	[Proceedings of Algebras and Lattices in Hawaii 2018](http://www.lulu.com/shop/kira-adaricheva-and-william-demeo-and-jennifer-hyndman/algebras-and-lattices-in-hawaii-honoring-ralph-freese-bill-lampe-and-jb-nation/paperback/product-23634583.html), editor, with K. Adaricheva and J. Hyndman
+cvrepo:publications:topics-in-nonabelian-harmonic-analysis-and-d	Publications	[Topics in nonabelian harmonic analysis and DSP applications](https://github.com/williamdemeo/ISMA2004/raw/master/DeMeo-ISMA2004-FinalPaper.pdf) (best paper award)\
+cvrepo:publications:international-symposium-on-musical-acoustics	Publications	*International Symposium on Musical Acoustics* (ISMA) 2004 [(preprint link)](https://github.com/williamdemeo/ISMA2004/raw/master/DeMeo-ISMA2004-FinalPaper.pdf)
+cvrepo:publications:characterizing-musical-signals-with-wigner-v	Publications	[Characterizing musical signals with Wigner-Ville interferences](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.385.3582&rep=rep1&type=pdf)\
+cvrepo:publications:international-computer-music-conference-icmc	Publications	*International Computer Music Conference* (ICMC) 2002 [(preprint link)](https://github.com/williamdemeo/ICMC2002/raw/master/DeMeo-ICMC2002.pdf)
+cvrepo:publications:approximating-eigenvalues-of-large-stochasti	Publications	[Approximating eigenvalues of large stochastic matrices](https://williamdemeo.github.io/MSThesis)\
+cvrepo:publications:8th-copper-mt-conference-on-iterative-method	Publications	*8th Copper Mt. Conference on Iterative Methods* 1998 [(preprint link)](https://williamdemeo.github.io/MSThesis)
+cvrepo:grants-awards:nsf-research-grant-no-1500218-2015-2018	Grants & Awards	**NSF Research Grant** (no. 1500218) 2015--2018\
+cvrepo:grants-awards:project-title-algebras-and-algorithms-struct	Grants & Awards	*Project Title:* *Algebras and algorithms, structure and complexity theory*\
+cvrepo:grants-awards:role-postdoctoral-research-fellow-on-a-team	Grants & Awards	*Role:* Postdoctoral research fellow on a team with 6 senior scientists and 3 postdocs\
+cvrepo:grants-awards:description-3-yr-collaborative-research-on-a	Grants & Awards	*Description:* 3-yr collaborative research on algebraic approaches to constraint satisfaction problems
+cvrepo:grants-awards:magellan-scholar-grant-2013-2014	Grants & Awards	**Magellan Scholar Grant** 2013--2014\
+cvrepo:grants-awards:project-title-what-does-a-nonabelian-group-s	Grants & Awards	*Project Title:* *What does a nonabelian group sound like?*\
+cvrepo:grants-awards:role-faculty-mentor-for-undergraduate-resear	Grants & Awards	*Role:* Faculty mentor for undergraduate research\
+cvrepo:grants-awards:description-see-soundmath-github-io-groupsou	Grants & Awards	*Description:* See [soundmath.github.io/GroupSound/GroupSound](http://soundmath.github.io/GroupSound/)
+cvrepo:grants-awards:arcs-sarah-ann-martin-award-for-outstanding	Grants & Awards	**ARCS Sarah Ann Martin Award** for Outstanding Research in MathematicsHonolulu 2011
+cvrepo:grants-awards:best-paper-award-international-symposium-on	Grants & Awards	**Best Paper Award**, International Symposium on Musical Acoustics Nara, Japan 2004
+cvrepo:tech-training-certificat:smart-contracts-suny-buffalo-sep-2021	Tech Training Certifications	[Smart Contracts](https://www.coursera.org/learn/scala-spark-big-data/home/welcome), SUNY Buffalo, Sep 2021\
+cvrepo:tech-training-certificat:4-week-coursera-course-grade-96-4-link-to-ve	Tech Training Certifications	4-week Coursera course; grade: 96.4% [link to verified certificate](https://www.coursera.org/account/accomplishments/verify/UTGLFVHW79WV)
+cvrepo:tech-training-certificat:blockchain-basics-suny-buffalo-aug-2021	Tech Training Certifications	[Blockchain Basics](https://www.coursera.org/learn/scala-spark-big-data/home/welcome), SUNY Buffalo, Aug 2021\
+cvrepo:tech-training-certificat:4-week-coursera-course-grade-100-link-to-ver	Tech Training Certifications	4-week Coursera course; grade: 100% [link to verified certificate](https://www.coursera.org/account/accomplishments/verify/4NP2MX787UAG)
+cvrepo:tech-training-certificat:big-data-analysis-with-scala-and-spark-epfl	Tech Training Certifications	[Big Data Analysis with Scala and Spark](https://www.coursera.org/learn/scala-spark-big-data/home/welcome), [EPFL](https://www.epfl.ch/schools/ic/), Nov 2017\
+cvrepo:tech-training-certificat:4-week-coursera-course-grade-93-4-link-to-ve	Tech Training Certifications	4-week Coursera course; grade: 93.4% [link to verified certificate](https://www.coursera.org/account/accomplishments/records/93DVEX3QH86L)
+cvrepo:tech-training-certificat:parallel-programming-in-scala-epfl-jun-2016	Tech Training Certifications	[Parallel Programming in Scala](https://www.coursera.org/learn/parprog1), [EPFL](https://www.epfl.ch/schools/ic/), Jun 2016\
+cvrepo:tech-training-certificat:4-week-coursera-course-grade-100-link-to-ver~2	Tech Training Certifications	4-week Coursera course; grade: 100% [link to verified certificate](https://www.coursera.org/account/accomplishments/records/3XV34H6BTTHC)
+cvrepo:tech-training-certificat:functional-program-design-in-scala-epfl-aug	Tech Training Certifications	[Functional Program Design in Scala](https://www.coursera.org/learn/progfun2/home), [EPFL](https://www.epfl.ch/schools/ic/), Aug 2016\
+cvrepo:tech-training-certificat:4-week-coursera-course-grade-100-link-to-ver~3	Tech Training Certifications	4-week Coursera course; grade: 100% [link to verified certificate](https://www.coursera.org/account/accomplishments/records/2WE2UZSR5AAZ)
+cvrepo:tech-training-certificat:functional-programming-principles-in-scala-e	Tech Training Certifications	[Functional Programming Principles in Scala](https://www.coursera.org/learn/progfun1/home), [EPFL](https://www.epfl.ch/schools/ic/), Nov 2016\
+cvrepo:tech-training-certificat:6-week-coursera-course-grade-100-link-to-ver	Tech Training Certifications	6-week Coursera course; grade: 100% [link to verified certificate](https://www.coursera.org/account/accomplishments/records/CKWD8PLCPW4E)
+cvrepo:tech-training-certificat:startup-engineering-stanford-university-sep	Tech Training Certifications	[Startup Engineering](https://www.coursera.org/course/startup) Stanford University, Sep 2013\
+cvrepo:tech-training-certificat:12-week-coursera-course-grade-99-3-link-to-v	Tech Training Certifications	12-week Coursera course; grade: 99.3% [link to verified certificate](https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=970374)
+cvrepo:workshops-summer-schools:agda-implementors-meeting-xxxix-university-2	Workshops & Summer Schools Attended	[Agda Implementors' Meeting XXXIX](https://wiki.portal.chalmers.se/agda/Main/AIMXXXIX)Chalmers University, 25--30 Nov 2024
+cvrepo:workshops-summer-schools:agda-implementors-meeting-xxxviii-of-swansea	Workshops & Summer Schools Attended	[Agda Implementors' Meeting XXXVIII](https://wiki.portal.chalmers.se/agda/Main/AIMXXXVIII)University of Swansea, 13--18 May 2024
+cvrepo:workshops-summer-schools:computer-aided-mathematical-proof-cambridge	Workshops & Summer Schools Attended	[Computer-aided Mathematical Proof](https://www.newton.ac.uk/event/bprw01) Cambridge University, 10--14 Jul 2017\
+cvrepo:workshops-summer-schools:topic-bringing-proof-technology-into-mainstr	Workshops & Summer Schools Attended	*Topic*. bringing proof technology into mainstream mathematics
+cvrepo:workshops-summer-schools:lms-epsrc-short-course-in-computational-grou	Workshops & Summer Schools Attended	[LMS/EPSRC Short Course in Computational Group Theory](http://www-circa.mcs.st-and.ac.uk/cgt2013/) University of St Andrews, 29 Jul--2 Aug 2013\
+cvrepo:workshops-summer-schools:topics-permutation-finitely-presented-groups	Workshops & Summer Schools Attended	*Topics*. permutation & finitely presented groups, constructive recognition
+cvrepo:workshops-summer-schools:midlands-graduate-school-in-the-foundations	Workshops & Summer Schools Attended	[Midlands Graduate School in the Foundations of Computing Science](http://www.cs.nott.ac.uk/MGS/)\
+cvrepo:workshops-summer-schools:univ-of-nottingham-2014	Workshops & Summer Schools Attended	[Univ of Nottingham 2014](http://www.cs.nott.ac.uk/~psztxa/mgs.2014/)\
+cvrepo:workshops-summer-schools:univ-of-birmingham-2016-2019	Workshops & Summer Schools Attended	[Univ of Birmingham 2016](http://www.cs.bham.ac.uk/~pbl/mgs2016/), [2019](http://events.cs.bham.ac.uk/mgs2019/)\
+cvrepo:workshops-summer-schools:topics-lambda-calculus-denotational-semantic	Workshops & Summer Schools Attended	*Topics*. lambda calculus, denotational semantics, type theory, category theory, proof theory, univalent foundations
+cvrepo:workshops-summer-schools:oregon-programming-languages-summer-school	Workshops & Summer Schools Attended	[Oregon Programming Languages Summer School](https://www.cs.uoregon.edu/research/summerschool/)\
+cvrepo:workshops-summer-schools:university-of-oregon-3-21-jul-2018-26-jun-8	Workshops & Summer Schools Attended	University of Oregon, [3--21 Jul 2018](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php), [26 Jun--8 Jul 2017](https://www.cs.uoregon.edu/research/summerschool/summer17), [16--28 Jun 2014](https://www.cs.uoregon.edu/research/summerschool/summer14/curriculum.html)\
+cvrepo:workshops-summer-schools:topics-type-theory-logic-semantics-verificat	Workshops & Summer Schools Attended	*Topics*. type theory, logic, semantics, verification, parallelism, concurrency, gradual type systems
+cvrepo:synergistic-activities:organizer-blast-2019-conference-boulder-2019	Synergistic Activities	Organizer, [*BLAST 2019 Conference*](https://math.colorado.edu/blast/2019/index.html) Boulder 2019\
+cvrepo:synergistic-activities:organizer-algebras-and-lattices-in-hawaii-co	Synergistic Activities	Organizer, [*Algebras and Lattices in Hawaii Conf. to honor Freese, Lampe & Nation*](https://universalalgebra.github.io/ALH-2018/) Honolulu 2018\
+cvrepo:synergistic-activities:organizer-workshop-on-computational-universa	Synergistic Activities	Organizer, [*Workshop on Computational Universal Algebra*](http://universalalgebra.wordpress.com/meetings/2013-workshop-on-computational-universal-algebra/) Louisville 2013\
+cvrepo:synergistic-activities:editor-for-algebra-universalis-2018-present	Synergistic Activities	Editor for *Algebra Universalis* 2018--present\
+cvrepo:synergistic-activities:referee-for-algebra-universalis-order-and-j	Synergistic Activities	Referee for *Algebra Universalis*, *Order*, and *J. Logic & Analysis* 2012--present
+cvrepo:synergistic-activities:university-of-colorado-boulder	Synergistic Activities	**University of Colorado, Boulder**\
+cvrepo:synergistic-activities:served-on-doctoral-candidacy-exam-committee	Synergistic Activities	Served on doctoral candidacy exam committee for the following ph.d. students:\
+cvrepo:synergistic-activities:jordan-dubeau-ali-latfi-athena-sparks-michae	Synergistic Activities	Jordan DuBeau, Ali Latfi, Athena Sparks, Michael Wheeler.\
+cvrepo:synergistic-activities:served-on-dissertation-defense-committee-for	Synergistic Activities	Served on dissertation defense committee for Jeffrey Shriner.
+cvrepo:synergistic-activities:iowa-state-university	Synergistic Activities	**Iowa State University**\
+cvrepo:synergistic-activities:reu-mentor-for-charlotte-aten-mathematics-ma	Synergistic Activities	REU mentor for Charlotte Aten (mathematics major, University of Rochester)\
+cvrepo:synergistic-activities:honors-thesis-advisor-for-joshua-thompson-ma	Synergistic Activities	Honors thesis advisor for Joshua Thompson (mathematics major, honors program)\
+cvrepo:synergistic-activities:putnam-exam-mentor-at-weekly-exam-practice-m	Synergistic Activities	Putnam Exam mentor at weekly exam practice meetings
+cvrepo:teaching-experience:new-jersey-institute-of-technology-as-senior	Teaching Experience	**New Jersey Institute of Technology** (as Senior University Lecturer)
+cvrepo:teaching-experience:ds-644-introduction-to-big-data-graduate-cou	Teaching Experience	[DS 644: Introduction to Big Data](https://github.com/williamdemeo/ds644-spring2023) (graduate course) Spring 2023
+cvrepo:teaching-experience:cs-644-introduction-to-big-data-graduate-cou	Teaching Experience	CS 644: Introduction to Big Data (graduate course) Fall 2022
+cvrepo:teaching-experience:cs-370-introduction-to-artificial-intelligen	Teaching Experience	[CS 370: Introduction to Artificial Intelligence](https://github.com/williamdemeo/cs370-fall2022) Fall 2022
+cvrepo:teaching-experience:cs-370-introduction-to-artificial-intelligen~2	Teaching Experience	[CS 370: Introduction to Artificial Intelligence](https://github.com/williamdemeo/cs370-spring2022) Spring 2022
+cvrepo:teaching-experience:cs-241-foundations-of-computer-science-i-spr	Teaching Experience	[CS 241: Foundations of Computer Science I](https://github.com/williamdemeo/cs241-spring2022) Spring 2022
+cvrepo:teaching-experience:charles-university-in-prague-as-postdoctoral	Teaching Experience	**Charles University in Prague** (as Postdoctoral Research Fellow)
+cvrepo:teaching-experience:nmag-405-universal-algebra-winter-2020	Teaching Experience	[NMAG 405: Universal Algebra](https://gitlab.com/universalalgebra/charlesuniversity/nmag405) Winter 2020
+cvrepo:teaching-experience:university-of-colorado-boulder-as-burnett-me	Teaching Experience	**University of Colorado, Boulder** (as Burnett Meyer Instructor)
+cvrepo:teaching-experience:math-2001-discrete-mathematics-lean-prover-c	Teaching Experience	[Math 2001: Discrete Mathematics](https://github.com/williamdemeo/math2001-spring2019)(with Lean prover component) Spring 2019
+cvrepo:teaching-experience:math-2001-discrete-mathematics-with-lean-pro	Teaching Experience	Math 2001: Discrete Mathematics (with Lean prover component) Fall 2018
+cvrepo:teaching-experience:math-3140-abstract-algebra-fall-2018	Teaching Experience	[Math 3140: Abstract Algebra](https://github.com/williamdemeo/math3140-fall2018) Fall 2018
+cvrepo:teaching-experience:math-6000-model-theory-course-spring-2018	Teaching Experience	[Math 6000: Model Theory](https://github.com/williamdemeo/math6000-spring2018)(graduate course) Spring 2018
+cvrepo:teaching-experience:math-2130-linear-algebra-spring-2018	Teaching Experience	[Math 2130: Linear Algebra](https://github.com/williamdemeo/math2130-spring2018) Spring 2018
+cvrepo:teaching-experience:math-2130-linear-algebra-fall-2017	Teaching Experience	Math 2130: Linear Algebra Fall 2017
+cvrepo:teaching-experience:university-of-hawaii-as-visiting-assistant-p	Teaching Experience	**University of Hawaii** (as Visiting Assistant Professor)
+cvrepo:teaching-experience:math-215-applied-calculus-spring-2017	Teaching Experience	Math 215: Applied Calculus Spring 2017
+cvrepo:teaching-experience:math-480-senior-seminar-spring-2017	Teaching Experience	Math 480: Senior Seminar Spring 2017
+cvrepo:teaching-experience:math-244-calculus-iv-fall-2016	Teaching Experience	[Math 244: Calculus IV](https://github.com/williamdemeo/math244-fall2016) Fall 2016
+cvrepo:teaching-experience:math-321-introduction-to-advanced-math-fall	Teaching Experience	[Math 321: Introduction to Advanced Math](https://github.com/williamdemeo/math321-fall2016) Fall 2016
+cvrepo:teaching-experience:iowa-state-university-as-postdoctoral-associ	Teaching Experience	**Iowa State University** (as Postdoctoral Associate)
+cvrepo:teaching-experience:math-317-linear-algebra-spring-2016	Teaching Experience	[Math 317: Linear Algebra](https://github.com/williamdemeo/Math317-Spring2016) Spring 2016
+cvrepo:teaching-experience:math-317-linear-algebra-fall-2015	Teaching Experience	Math 317: Linear Algebra Fall 2015
+cvrepo:teaching-experience:math-160-survey-of-calculus-fall-2015	Teaching Experience	[Math 160: Survey of Calculus](https://github.com/williamdemeo/Math160-Fall2015) Fall 2015
+cvrepo:teaching-experience:math-207-elementary-linear-algebra-spring-20	Teaching Experience	[Math 207: Elementary Linear Algebra](https://github.com/williamdemeo/Math207-Spring2015) Spring 2015
+cvrepo:teaching-experience:math-165-calculus-i-spring-2015	Teaching Experience	[Math 165: Calculus I](https://github.com/williamdemeo/Math165-Spring2015) Spring 2015
+cvrepo:teaching-experience:math-301-abstract-algebra-fall-2014	Teaching Experience	Math 301: Abstract Algebra Fall 2014
+cvrepo:teaching-experience:math-165-calculus-i-fall-2014	Teaching Experience	Math 165: Calculus I Fall 2014
+cvrepo:teaching-experience:university-of-south-carolina-as-visiting-ass	Teaching Experience	**University of South Carolina** (as Visiting Assistant Professor)
+cvrepo:teaching-experience:math-700-linear-algebra-graduate-course-spri	Teaching Experience	[Math 700: Linear Algebra](https://github.com/williamdemeo/Math700Spring2014) (graduate course) Spring 2014
+cvrepo:teaching-experience:math-141-calculus-i-spring-2014	Teaching Experience	[Math 141: Calculus I](https://github.com/williamdemeo/Math141Spring2014) Spring 2014
+cvrepo:teaching-experience:math-374-discrete-structures-fall-2013	Teaching Experience	Math 374: Discrete Structures Fall 2013
+cvrepo:teaching-experience:math-122-calculus-for-business-and-social-sc	Teaching Experience	Math 122: Calculus for Business and Social Sciences Fall 2013
+cvrepo:teaching-experience:math-374-discrete-structures-spring-2013	Teaching Experience	Math 374: Discrete Structures Spring 2013
+cvrepo:teaching-experience:math-122-calculus-for-business-and-social-sc~2	Teaching Experience	Math 122: Calculus for Business and Social Sciences Spring 2013
+cvrepo:teaching-experience:math-241-vector-calculus-fall-2012	Teaching Experience	Math 241: Vector Calculus Fall 2012
+cvrepo:teaching-experience:math-122-calculus-for-business-and-social-sc~3	Teaching Experience	Math 122: Calculus for Business and Social Sciences Fall 2012
+cvrepo:teaching-experience:university-of-hawaii-as-graduate-student-ins	Teaching Experience	**University of Hawaii** (as Graduate Student Instructor)
+cvrepo:teaching-experience:math-371-probability-theory-summer-2011	Teaching Experience	Math 371: Probability Theory Summer 2011
+cvrepo:teaching-experience:math-100-mathematical-reasoning-summer-2010	Teaching Experience	Math 100: Mathematical Reasoning Summer 2010
+cvrepo:teaching-experience:math-215-applied-calculus-i-summer-2009	Teaching Experience	Math 215: Applied Calculus I Summer 2009
+cvrepo:talks:birkhoff-s-theorem-in-dependent-type-theory	Talks	[*Birkhoff's Theorem in Dependent Type Theory*](https://types21.liacs.nl/timetable/event/proof-assistants-applications/) [(preprint)](https://arxiv.org/abs/2101.10166) Online 2021\
+cvrepo:talks:types-2021	Talks	[TYPES 2021](https://types21.liacs.nl/)
+cvrepo:talks:complexity-of-the-homomorphism-problem-for-b	Talks	[*Complexity of the Homomorphism Problem for Boolean Models*](https://gitpitch.com/UniversalAlgebra/hom-csp?grs=gitlab#/1) [(preprint)](https://arxiv.org/abs/2010.04958) Online 2020\
+cvrepo:talks:european-virtual-csp-seminar	Talks	[European virtual CSP seminar](https://csp-seminar.org/talks/william-demeo)
+cvrepo:talks:computational-tools-for-universal-algebra-re	Talks	[*Computational Tools for Universal Algebra Research*](https://williamdemeo.gitlab.io/talks/vols/) Völs am Schlern, Italy 2020\
+cvrepo:talks:csp-world-congress-2020	Talks	[CSP World Congress 2020](https://cspworldcongress.wordpress.com/)
+cvrepo:talks:formalizing-universal-algebra-with-dependent	Talks	[*Formalizing Universal Algebra with Dependent and Inductive Types*](https://williamdemeo.gitlab.io/agda-ualib/index.html) [(html docs)](https://ualib.org) Denver 2020\
+cvrepo:talks:ams-joint-mathematics-meetings-special-sessi	Talks	[AMS Joint Mathematics Meetings; Special Session: Algebras and Algorithms](https://www.jointmathematicsmeetings.org//meetings/national/jmm2020/2245_program_ss56.html#title)
+cvrepo:talks:computing-difference-term-operations-in-poly	Talks	*Computing Difference Term Operations in Polynomial Time* [(preprint)](https://arxiv.org/abs/2011.07879) Denver 2018\
+cvrepo:talks:blast-conference-university-of-denver	Talks	[BLAST Conference, University of Denver](https://www.cs.du.edu/~wesfussn/blast.html)
+cvrepo:talks:why-universal-algebra-needs-inductive-depend	Talks	*Why Universal Algebra Needs Inductive, Dependent Types* Eugene 2018\
+cvrepo:talks:oregon-programming-languages-summer-school	Talks	Oregon Programming Languages Summer School
+cvrepo:talks:a-tutorial-introduction-to-the-lean-prover-b	Talks	*A Tutorial Introduction to the Lean Prover* Boulder 2018\
+cvrepo:talks:university-of-colorado-logic-seminar	Talks	University of Colorado Logic Seminar
+cvrepo:talks:the-lambda-calculus-and-dependent-type-theor	Talks	*The Lambda Calculus and Dependent Type Theory* Boulder 2018\
+cvrepo:talks:university-of-colorado-logic-seminar~2	Talks	University of Colorado Logic Seminar
+cvrepo:talks:representing-finite-lattices-as-congruence-l	Talks	*Representing Finite Lattices as Congruence Lattices* Fort Collins 2017\
+cvrepo:talks:colorado-state-university-algebra-seminar	Talks	Colorado State University Algebra Seminar
+cvrepo:talks:a-polynomial-time-test-for-difference-terms	Talks	[*A Polynomial-time Test for Difference Terms in Idempotent Varieties*](https://gitpitch.com/UniversalAlgebra/term-conditions#/1) [(preprint)](https://arxiv.org/abs/2011.07879) Nashville 2017\
+cvrepo:talks:blast-conference-vanderbilt-university	Talks	BLAST Conference, Vanderbilt University
+cvrepo:talks:algebraic-approach-to-complexity-of-constrai	Talks	[*Algebraic approach to complexity of constraint satisfaction*](https://github.com/williamdemeo/Talks/blob/master/UH/LogicSeminar/UH-logic-seminar-2016.pdf) [(preprint)](https://arxiv.org/abs/1611.02867) Honolulu 2017\
+cvrepo:talks:university-of-hawaii-logic-and-analysis-semi	Talks	University of Hawaii Logic and Analysis Seminar
+cvrepo:talks:universal-algebraic-methods-for-constraint-s	Talks	*Universal Algebraic Methods for Constraint Satisfaction Problems* [(preprint)](https://arxiv.org/abs/1611.02867) Denver 2016\
+cvrepo:talks:ams-fall-western-sectional-meeting-special-s	Talks	[AMS Fall Western Sectional Meeting: Special Session in Algebraic Logic](http://www.ams.org/meetings/sectional/2235_program_ss1.html)
+cvrepo:talks:the-rectangularity-theorem-of-barto-and-kozi	Talks	[*The Rectangularity Theorem of Barto and Kozik*](https://github.com/williamdemeo/Talks/tree/master/Boulder/slides) Boulder 2016\
+cvrepo:talks:algebras-and-algorithms-structure-and-comple	Talks	[Algebras and Algorithms: Structure and Complexity Theory](http://math.colorado.edu/algebra2016/index.html)
+cvrepo:talks:constraint-satisfaction-problems-and-univers	Talks	[*Constraint Satisfaction Problems and Universal Algebra*](https://github.com/williamdemeo/Talks/tree/master/MGS/2016) Birmingham, UK 2016\
+cvrepo:talks:midlands-graduate-school-in-the-foundation-o	Talks	[Midlands Graduate School in the Foundation of Computing Science](http://www.cs.bham.ac.uk/~pbl/mgs2016/)
+cvrepo:talks:permutability-in-diamonds-ames-2016	Talks	*Permutability in Diamonds* Ames 2016\
+cvrepo:talks:iowa-state-algebra-and-combinatorics-seminar	Talks	[Iowa State Algebra and Combinatorics Seminar](http://orion.math.iastate.edu/jdhsmith/math/smarks15.htm)
+cvrepo:talks:which-commutative-idempotent-binars-are-trac	Talks	[*Which Commutative Idempotent Binars are Tractable?*](http://www.math.vanderbilt.edu/~moorm10/shanks/talks/demeo-slides.pdf) Nashville 2015\
+cvrepo:talks:vanderbilt-shanks-workshop-open-problems-in	Talks	[Vanderbilt Shanks workshop: Open Problems in Universal Algebra](http://www.math.vanderbilt.edu/~moorm10/shanks/)
+cvrepo:talks:some-small-finite-algebras-yielding-tractabl	Talks	*Some Small Finite Algebras Yielding Tractable CSP Templates* Ames 2015\
+cvrepo:talks:iowa-state-algebra-and-combinatorics-seminar~2	Talks	[Iowa State Algebra and Combinatorics Seminar](http://orion.math.iastate.edu/jdhsmith/math/smarks15.htm)
+cvrepo:talks:algebraic-csp-and-tractability-of-commutativ	Talks	[*Algebraic CSP and Tractability of Commutative Idempotent Binars*](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2015) Denton 2015\
+cvrepo:talks:blast-conference-university-of-north-texas	Talks	[BLAST Conference, University of North Texas](https://math.unt.edu/blast2015unt)
+cvrepo:talks:isotopic-algebras-ames-2015	Talks	*Isotopic Algebras* Ames 2015\
+cvrepo:talks:iowa-state-algebra-and-combinatorics-seminar~3	Talks	[Iowa State Algebra and Combinatorics Seminar](http://orion.math.iastate.edu/jdhsmith/math/smarks15.htm)
+cvrepo:talks:what-does-a-nonabelian-group-sound-like-balt	Talks	[*What Does a Nonabelian Group Sound Like?*](https://jointmathematicsmeetings.org/amsmtgs/2160_abstracts/1096-c5-2578.pdf) Baltimore 2014\
+cvrepo:talks:maa-special-session-at-the-intersection-of-m	Talks	[MAA Special Session: At the Intersection of Mathematics and the Arts](https://jointmathematicsmeetings.org/meetings/national/jmm2014/2160_program_thursday.html)
+cvrepo:talks:interval-enforceable-properties-of-finite-gr	Talks	[Interval Enforceable Properties of Finite Groups](https://github.com/williamdemeo/Talks/tree/master/AMS/Louisville2013) Louisville 2013\
+cvrepo:talks:ams-special-session-on-finite-universal-alge	Talks	AMS Special Session on Finite Universal Algebra
+cvrepo:talks:tutorial-uacalc-at-the-command-line-and-in-t	Talks	*Tutorial: UACalc at the command line and in the cloud* Louisville 2013\
+cvrepo:talks:workshop-on-computational-universal-algebra	Talks	Workshop on Computational Universal Algebra
+cvrepo:talks-cont:approximating-eigenvalues-of-large-stochasti	Talks (cont.)	*Approximating Eigenvalues of Large Stochastic Matrices* Columbia 2013\
+cvrepo:talks-cont:university-of-south-carolina-combinatorics-s	Talks (cont.)	University of South Carolina Combinatorics Seminar
+cvrepo:talks-cont:congruence-lattices-of-finite-algebras-plena	Talks (cont.)	[*Congruence Lattices of Finite Algebras (plenary lecture)*](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2013) Orange 2013\
+cvrepo:talks-cont:blast-conference-chapman-university	Talks (cont.)	BLAST Conference, Chapman University
+cvrepo:talks-cont:transposition-principles-for-subgroups-and-e	Talks (cont.)	[*Transposition Principles for Subgroups and Equivalence Relations*](https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/WCU-2013) Asheville 2013\
+cvrepo:talks-cont:zassenhaus-group-theory-conference	Talks (cont.)	Zassenhaus Group Theory Conference
+cvrepo:talks-cont:isotopic-algebras-with-nonisomorphic-congrue	Talks (cont.)	[*Isotopic Algebras with Nonisomorphic Congruence Lattices*](https://github.com/williamdemeo/Talks/tree/master/AMS/Boulder2013) Boulder 2013\
+cvrepo:talks-cont:ams-special-session-on-algebras-lattices-and	Talks (cont.)	AMS Special Session on Algebras, Lattices, and Varieties
+cvrepo:talks-cont:synchronizing-automata-and-the-cerny-conject	Talks (cont.)	[*Synchronizing Automata and the Černý Conjecture*](https://williamdemeo.files.wordpress.com/2012/12/cugradalgebraseminar.pdf) Boulder 2013\
+cvrepo:talks-cont:graduate-algebra-seminar-university-of-color	Talks (cont.)	Graduate Algebra Seminar, University of Colorado
+cvrepo:talks-cont:the-finite-lattice-representation-problem-in	Talks (cont.)	*The Finite Lattice Representation Problem in Four Parts* Columbia 2012\
+cvrepo:talks-cont:university-of-south-carolina-algebra-and-log	Talks (cont.)	University of South Carolina Algebra and Logic Seminar
+cvrepo:talks-cont:interval-sublattice-enforceable-properties-o	Talks (cont.)	[*Interval Sublattice Enforceable Properties of Finite Groups*](https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/OSU-2012) Columbus 2012\
+cvrepo:talks-cont:the-31st-ohio-state-denison-mathematics-conf	Talks (cont.)	The 31st Ohio State-Denison Mathematics Conference
+cvrepo:talks-cont:expansions-of-finite-algebras-and-their-cong	Talks (cont.)	[*Expansions of Finite Algebras and their Congruence Lattices*](https://github.com/williamdemeo/Talks/tree/master/AMS/Honolulu2012) Honolulu 2012\
+cvrepo:talks-cont:american-mathematical-society-sectional-meet	Talks (cont.)	American Mathematical Society sectional meeting
+cvrepo:talks-cont:intervals-in-subgroup-lattices-and-permutati	Talks (cont.)	*Intervals in Subgroup Lattices and Permutation Representations* Cullowhee 2012\
+cvrepo:talks-cont:western-carolina-university-group-theory-sem	Talks (cont.)	Western Carolina University Group Theory Seminar
+cvrepo:talks-cont:recent-progress-on-the-finite-lattice-repres	Talks (cont.)	*Recent Progress on the Finite Lattice Representation Problem* Honolulu 2011\
+cvrepo:talks-cont:achievement-rewards-for-college-scientists-s	Talks (cont.)	Achievement Rewards for College Scientists: Scholar Presentations
+cvrepo:talks-cont:the-finite-lattice-representation-problem-se	Talks (cont.)	*The Finite Lattice Representation Problem* Seoul, Korea 2009\
+cvrepo:talks-cont:first-joint-meeting-of-the-korean-and-americ	Talks (cont.)	First Joint Meeting of the Korean and American Mathematical Societies
+cvrepo:references:clifford-bergman	References	**Clifford Bergman** `*`
+cvrepo:references:professor-of-mathematics	References	Professor of Mathematics
+cvrepo:references:iowa-state-university	References	Iowa State University
+cvrepo:references:396-carver-hall	References	396 Carver Hall
+cvrepo:references:ames-iowa-50011	References	Ames, Iowa 50011
+cvrepo:references:cbergman-at-iastate-dot-edu	References	[cbergman at iastate dot edu](mailto:cbergman@iastate.edu)
+cvrepo:references:venanzio-capretta	References	**Venanzio Capretta**
+cvrepo:references:assistant-professor-of-computer-science	References	Assistant Professor of Computer Science
+cvrepo:references:university-of-nottingham	References	University of Nottingham
+cvrepo:references:room-b83-computer-science	References	Room B83 Computer Science
+cvrepo:references:jubilee-campus-wollaton-road	References	Jubilee Campus, Wollaton Road
+cvrepo:references:nottingham-ng8-1bb-uk	References	Nottingham NG8 1BB UK
+cvrepo:references:venanzio-dot-capretta-at-nottingham-dot-ac-d	References	[Venanzio dot Capretta at nottingham dot ac dot uk](mailto:Venanzio.Capretta@nottingham.ac.uk)
+cvrepo:references:ralph-freese	References	**Ralph Freese**
+cvrepo:references:professor-of-mathematics~2	References	Professor of Mathematics
+cvrepo:references:university-of-hawaii	References	University of Hawaii
+cvrepo:references:2565-mccarthy-mall	References	2565 McCarthy Mall
+cvrepo:references:honolulu-hi-96822	References	Honolulu, HI 96822
+cvrepo:references:ralph-at-math-dot-hawaii-dot-edu	References	[ralph at math dot hawaii dot edu](mailto:ralph@math.hawaii.edu)
+cvrepo:references:peter-jipsen	References	**Peter Jipsen**
+cvrepo:references:professor-of-mathematics~3	References	Professor of Mathematics
+cvrepo:references:chapman-university	References	Chapman University
+cvrepo:references:545-w-palm-ave	References	545 W. Palm Ave
+cvrepo:references:orange-ca-92866	References	Orange, CA 92866
+cvrepo:references:jipsen-at-chapman-dot-edu	References	[jipsen at chapman dot edu](mailto:jipsen@chapman.edu)
+cvrepo:references:peter-mayr	References	**Peter Mayr** `*`
+cvrepo:references:assistant-professor-of-mathematics	References	Assistant Professor of Mathematics
+cvrepo:references:university-of-colorado-boulder	References	University of Colorado, Boulder
+cvrepo:references:2300-colorado-avenue	References	2300 Colorado Avenue
+cvrepo:references:boulder-co-80309	References	Boulder, CO 80309
+cvrepo:references:peter-mayr-at-colorado-dot-edu	References	[peter mayr at colorado dot edu](mailto:peter.mayr@colorado.edu)
+cvrepo:references:teaching-reference	References	`*` teaching reference
+zola:preamble:curriculum-vit-of-william-demeo-5-dec-2021	(preamble)	CURRICULUM VITÆ of WILLIAM DeMEO 5 Dec 2021
+zola:contact-information:tel-1-516-912-3162	Contact Information	tel: +1-516-912-3162
+zola:contact-information:address-570-park-ave-apt-8d-new-york-ny-1006	Contact Information	address: 570 Park Ave, Apt 8D, New York, NY 10065
+zola:contact-information:url-williamdemeo-org	Contact Information	url: [williamdemeo.org](https://williamdemeo.org)
+zola:contact-information:email-williamdemeo-gmail-com	Contact Information	email: [williamdemeo@gmail.com](mailto:williamdemeo@gmail.com)
+zola:research-interests:theory-universal-algebra-logic-complexity-th	Research Interests	*Theory*. Universal algebra, logic, complexity theory, type theory, category theory, machine learning.
+zola:research-interests:practice-proof-mechanization-in-agda-functio	Research Interests	*Practice*. Proof mechanization in Agda, functional programming for Big Data in Scala/Spark.
+zola:education:doctor-of-philosophy-in-mathematics-universi	Education	Doctor of Philosophy in Mathematics, University of Hawaii, Honolulu (May 2012).
+zola:education:thesis-congruence-lattices-of-finite-algebra	Education	Thesis: [Congruence lattices of finite algebras](https://arxiv.org/abs/1204.4305)
+zola:education:advisor-ralph-freese	Education	Advisor: Ralph Freese
+zola:education:master-of-science-in-mathematics-courant-ins	Education	Master of Science in Mathematics, Courant Institute, New York University, New York.
+zola:education:thesis-approximating-eigenvalues-of-large-st	Education	Thesis: [Approximating eigenvalues of large stochastic matrices](https://williamdemeo.github.io/MSThesis)
+zola:education:advisor-jonathan-goodman	Education	Advisor: Jonathan Goodman
+zola:education:bachelor-of-arts-in-economics-university-of	Education	Bachelor of Arts in Economics, University of Virginia, Charlottesville.
+zola:academic-appointments:postdoctoral-fellow-charles-university-dept	Academic Appointments	*Postdoctoral Fellow*, Charles University, Dept. of Algebra, Prague (2019--2021).
+zola:academic-appointments:burnett-meyer-instructor-university-of-color	Academic Appointments	*Burnett Meyer Instructor*, University of Colorado, Dept. of Mathematics, Boulder (2017--2019).
+zola:academic-appointments:visiting-assistant-professor-university-of-h	Academic Appointments	*Visiting Assistant Professor*, University of Hawaii, Dept. of Mathematics, Honolulu (2016--2017).
+zola:academic-appointments:postdoctoral-associate-iowa-state-university	Academic Appointments	*Postdoctoral Associate*, Iowa State University, Dept. of Mathematics, Ames (2014--2016).
+zola:academic-appointments:visiting-assistant-professor-univ-south-caro	Academic Appointments	*Visiting Assistant Professor*, Univ South Carolina, Dept. of Mathematics, Columbia (2012--2014).
+zola:industry-appointments:senior-research-scientist-textron-systems-co	Industry Appointments	Senior Research Scientist, Textron Systems Corp., Digital Imaging Research, Maui (2001--2006) Worked full-time on [AFOSR](https://www.afrl.af.mil/AFOSR/) contracts developing new algorithms and parallel (smp and mpi) programs for processing images acquired by [Haleakala Observatories](http://www.ifa.hawaii.edu/haleakalanew/observatories.shtml), including Multi-frame Blind Deconvolution for removing distorting effects of Earth's atmosphere from images of satellites and other NEOs; executed our programs on the [MHPCC supercomputer](http://www.mhpcc.hpc.mil/).
+zola:publications:constraint-satisfaction-problems-over-finite	Publications	[Constraint Satisfaction Problems over Finite Structures](https://ieeexplore.ieee.org/document/9470670), with Libor Barto and Antoine Mottet.
+zola:publications:36th-annual-acm-ieee-symp-on-logic-in-comp-s	Publications	*36th Annual ACM/IEEE Symp. on Logic in Comp. Sci.* (LICS 2021), pp. 1--13 ([preprint link](https://arxiv.org/abs/2010.04958))
+zola:publications:bounded-homomorphisms-and-finitely-generated	Publications	[Bounded homomorphisms and finitely generated fiber products of lattices](https://www.worldscientific.com/doi/10.1142/S0218196720500174), with Peter Mayr and Nik Ruškuc.
+zola:publications:intl-j-of-algebra-and-computation-30-693-710	Publications	*Intl. J. of Algebra and Computation* (30):693--710, 2020 ([preprint link](https://arxiv.org/abs/1907.08046))
+zola:publications:polynomial-time-tests-for-difference-terms-i	Publications	[Polynomial-time tests for difference terms in idempotent varieties](https://www.worldscientific.com/doi/10.1142/S021819671950036X), with Ralph Freese and Matthew Valeriote.
+zola:publications:international-journal-of-algebra-and-computa	Publications	*International Journal of Algebra and Computation* (29):927--949, 2019 ([preprint link](https://arxiv.org/abs/2011.07879))
+zola:publications:isotopic-algebras-with-nonisomorphic-congrue	Publications	[Isotopic algebras with nonisomorphic congruence lattices](https://link.springer.com/article/10.1007%2Fs00012-014-0301-4), *Algebra Universalis* (72):295--298, 2014 ([preprint link](https://arxiv.org/abs/1301.7481))
+zola:publications:expansions-of-finite-algebras-their-congruen	Publications	[Expansions of finite algebras & their congruence lattices](https://link.springer.com/article/10.1007/s00012-013-0226-3), *Algebra Universalis* (69):257--278, 2013 ([preprint link](https://arxiv.org/abs/1205.1106))
+zola:publications:proceedings-of-algebras-and-lattices-in-hawa	Publications	[Proceedings of Algebras and Lattices in Hawaii 2018](http://www.lulu.com/shop/kira-adaricheva-and-william-demeo-and-jennifer-hyndman/algebras-and-lattices-in-hawaii-honoring-ralph-freese-bill-lampe-and-jb-nation/paperback/product-23634583.html), editor, with K. Adaricheva, J. Hyndman ([Lulu Press](http://www.lulu.com/shop/kira-adaricheva-and-william-demeo-and-jennifer-hyndman/algebras-and-lattices-in-hawaii-honoring-ralph-freese-bill-lampe-and-jb-nation/paperback/product-23634583.html)).
+zola:publications:topics-in-nonabelian-harmonic-analysis-and-d	Publications	[Topics in nonabelian harmonic analysis and DSP applications](https://github.com/williamdemeo/ISMA2004/raw/master/DeMeo-ISMA2004-FinalPaper.pdf) (best paper award)
+zola:publications:proceedings-of-the-international-symposium-o	Publications	*Proceedings of the International Symposium on Musical Acoustics*, Nara, Japan, 2004 ([preprint link](https://github.com/williamdemeo/ISMA2004/raw/master/DeMeo-ISMA2004-FinalPaper.pdf))
+zola:publications:characterizing-musical-signals-with-wigner-v	Publications	[Characterizing musical signals with Wigner-Ville interferences](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.385.3582&rep=rep1&type=pdf)
+zola:publications:proceedings-of-the-international-computer-mu	Publications	*Proceedings of the International Computer Music Conference* (ICMC 2002), Gothenburg, Sweden, 2002 ([preprint link](https://github.com/williamdemeo/ICMC2002/raw/master/DeMeo-ICMC2002.pdf))
+zola:publications:approximating-eigenvalues-of-large-stochasti	Publications	[Approximating eigenvalues of large stochastic matrices](https://williamdemeo.github.io/MSThesis)
+zola:publications:proceedings-of-the-8th-copper-mt-conference	Publications	*Proceedings of the 8th Copper Mt. Conference on Iterative Methods*, Colorado, 1998 ([preprint link](https://williamdemeo.github.io/MSThesis))
+zola:publications:publications-in-process	Publications	*Publications in Process*.
+zola:publications:universal-algebraic-methods-for-constraint-s	Publications	[Universal algebraic methods for constraint satisfaction problems](https://arxiv.org/abs/1611.02867), with Clifford Bergman
+zola:publications:accepted-to-appear-in-logical-methods-in-com	Publications	(accepted) to appear in *Logical Methods in Computer Science* ([preprint link](https://arxiv.org/abs/1611.02867))
+zola:publications:a-machine-checked-proof-of-birkhoff-s-variet	Publications	[A machine-checked proof of Birkhoff's variety theorem in Martin-Löf type theory](https://arxiv.org/abs/2101.10166), with J. Carette
+zola:publications:submitted-27th-intl-conf-on-types-for-proofs	Publications	(submitted) *27th Intl~Conf. on Types for Proofs and Programs* (TYPES 2021) ([preprint link](https://arxiv.org/abs/2101.10166))
+zola:publications:books-these-are-works-in-progress	Publications	*Books* (these are works in progress)
+zola:publications:category-theory-a-concise-course-with-c-aten	Publications	[Category Theory: a concise course](https://categorytheory.gitlab.io), with C. Aten and V. Capretta
+zola:publications:the-agda-universal-algebra-library-with-jacq	Publications	[The Agda Universal Algebra Library](https://ualib.gitlab.io/agda-algebras), with Jacques Carette
+zola:publications:complex-analysis-exams	Publications	[Complex Analysis Exams](http://complexanalysis.gitlab.io)
+zola:publications:real-analysis-exams	Publications	[Real Analysis Exams](http://realanalysis.gitlab.io)
+zola:courses-taught:charles-university-in-prague	Courses Taught	*Charles University in Prague*
+zola:courses-taught:universal-algebra-nmag-405-winter-2020-link	Courses Taught	[Universal Algebra (NMAG 405) Winter 2020](https://gitlab.com/universalalgebra/charlesuniversity/nmag405) ([link](https://gitlab.com/universalalgebra/charlesuniversity/nmag405))
+zola:courses-taught:university-of-colorado-boulder	Courses Taught	*University of Colorado, Boulder*
+zola:courses-taught:discrete-mathematics-with-lean-prover-compon	Courses Taught	[Discrete Mathematics with Lean prover component (Math 2001) Spring 2019](https://github.com/williamdemeo/math2001-spring2019)
+zola:courses-taught:discrete-mathematics-with-lean-prover-compon~2	Courses Taught	Discrete Mathematics with Lean prover component (Math 2001) Fall 2018
+zola:courses-taught:abstract-algebra-math-3140-fall-2018	Courses Taught	[Abstract Algebra (Math 3140) Fall 2018](https://github.com/williamdemeo/math3140-fall2018)
+zola:courses-taught:model-theory-graduate-course-math-6000-sprin	Courses Taught	[Model Theory graduate course (Math 6000) Spring 2018](https://github.com/williamdemeo/math6000-spring2018)
+zola:courses-taught:linear-algebra-math-2130-spring-2018	Courses Taught	[Linear Algebra (Math 2130) Spring 2018](https://github.com/williamdemeo/math2130-spring2018)
+zola:courses-taught:linear-algebra-math-2130-fall-2017	Courses Taught	Linear Algebra (Math 2130), Fall 2017.
+zola:courses-taught:university-of-hawaii	Courses Taught	*University of Hawaii*
+zola:courses-taught:applied-calculus-math-215-spring-2017	Courses Taught	Applied Calculus (Math 215) Spring 2017
+zola:courses-taught:senior-seminar-math-480-spring-2017	Courses Taught	Senior Seminar (Math 480) Spring 2017
+zola:courses-taught:calculus-iv-math-244-fall-2016	Courses Taught	[Calculus IV (Math 244) Fall 2016](https://github.com/williamdemeo/math244-fall2016)
+zola:courses-taught:introduction-to-advanced-math-math-321-fall	Courses Taught	[Introduction to Advanced Math (Math 321) Fall 2016](https://github.com/williamdemeo/math321-fall2016)
+zola:courses-taught:iowa-state-university	Courses Taught	*Iowa State University*
+zola:courses-taught:linear-algebra-math-317-spring-2016	Courses Taught	[Linear Algebra (Math 317) Spring 2016](https://github.com/williamdemeo/Math317-Spring2016)
+zola:courses-taught:linear-algebra-math-317-fall-2015	Courses Taught	Linear Algebra (Math 317) Fall 2015
+zola:courses-taught:survey-of-calculus-math-160-fall-2015	Courses Taught	[Survey of Calculus (Math 160) Fall 2015](https://github.com/williamdemeo/Math160-Fall2015)
+zola:courses-taught:elementary-linear-algebra-math-207-spring-20	Courses Taught	[Elementary Linear Algebra (Math 207) Spring 2015](https://github.com/williamdemeo/Math207-Spring2015)
+zola:courses-taught:calculus-i-math-165-spring-2015	Courses Taught	[Calculus I (Math 165) Spring 2015](https://github.com/williamdemeo/Math165-Spring2015)
+zola:courses-taught:abstract-algebra-math-301-fall-2014	Courses Taught	Abstract Algebra (Math 301) Fall 2014
+zola:courses-taught:calculus-i-math-165-fall-2014	Courses Taught	Calculus I (Math 165) Fall 2014
+zola:courses-taught:university-of-south-carolina	Courses Taught	*University of South Carolina*
+zola:courses-taught:linear-algebra-graduate-course-math-700-spri	Courses Taught	[Linear Algebra graduate course (Math 700) Spring 2014](https://github.com/williamdemeo/Math700Spring2014)
+zola:courses-taught:calculus-i-math-141-spring-2014	Courses Taught	[Calculus I (Math 141) Spring 2014](https://github.com/williamdemeo/Math141Spring2014)
+zola:courses-taught:discrete-structures-math-374-fall-2013	Courses Taught	Discrete Structures (Math 374) Fall 2013
+zola:courses-taught:calculus-for-business-and-social-sciences-ma	Courses Taught	Calculus for Business and Social Sciences (Math 122) Fall 2013
+zola:courses-taught:discrete-structures-math-374-spring-2013	Courses Taught	Discrete Structures (Math 374) Spring 2013
+zola:courses-taught:calculus-for-business-and-social-sciences-ma~2	Courses Taught	Calculus for Business and Social Sciences (Math 122) Spring 2013
+zola:courses-taught:vector-calculus-math-241-fall-2012	Courses Taught	Vector Calculus (Math 241) Fall 2012
+zola:courses-taught:calculus-for-business-and-social-sciences-ma~3	Courses Taught	Calculus for Business and Social Sciences (Math 122) Fall 2012
+zola:courses-taught:university-of-hawaii~2	Courses Taught	*University of Hawaii*
+zola:courses-taught:probability-theory-math-371-summer-2011	Courses Taught	Probability Theory (Math 371) Summer 2011
+zola:courses-taught:applied-calculus-i-math-215-summer-2009	Courses Taught	Applied Calculus I (Math 215) Summer 2009
+zola:courses-taught:mathematical-reasoning-math-100-summer-2010	Courses Taught	Mathematical Reasoning (Math 100) Summer 2010
+zola:certificates-in-data-sci:blockchain-basics-suny-at-buffalo-4-week-cou	Certificates in Data Science	Blockchain Basics (SUNY at Buffalo) 4-week Coursera course; grade: 100% ([verified certificate](https://www.coursera.org/account/accomplishments/verify/4NP2MX787UAG))
+zola:certificates-in-data-sci:big-data-analysis-with-scala-and-spark-ecole	Certificates in Data Science	Big Data Analysis with Scala and Spark (Ecole Polytechnique Federale de Lausanne), 4-week Coursera course; grade: 93.4% ([verified certificate](https://www.coursera.org/account/accomplishments/records/93DVEX3QH86L))
+zola:certificates-in-data-sci:functional-programming-principles-in-scala-e	Certificates in Data Science	Functional Programming Principles in Scala (Ecole Polytechnique Federale de Lausanne), 6-week Coursera course; grade: 100% ([verified certificate](https://www.coursera.org/account/accomplishments/records/CKWD8PLCPW4E))
+zola:certificates-in-data-sci:functional-programming-design-in-scala-ecole	Certificates in Data Science	Functional Programming Design in Scala (Ecole Polytechnique Federale de Lausanne), 4-week Coursera course; grade: 100% ([verified certificate](https://www.coursera.org/account/accomplishments/records/2WE2UZSR5AAZ))
+zola:certificates-in-data-sci:parallel-programming-in-scala-ecole-polytech	Certificates in Data Science	Parallel Programming in Scala (Ecole Polytechnique Federale de Lausanne), 4-week Coursera course; grade: 100%, ([verified certificate](https://www.coursera.org/account/accomplishments/records/3XV34H6BTTHC))
+zola:certificates-in-data-sci:startup-engineering-stanford-university-12-w	Certificates in Data Science	Startup Engineering (Stanford University), 12-week Coursera course; grade: 99.3 ([verified certificate](https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=970374))
+zola:honors-and-awards:nsf-research-grant-no-1500218-2015-2018	Honors and Awards	NSF Research Grant (no. 1500218 (2015--2018)
+zola:honors-and-awards:project-title-algebras-and-algorithms-struct	Honors and Awards	Project Title: Algebras and algorithms, structure and complexity theory
+zola:honors-and-awards:description-3-yr-collaborative-research-on-a	Honors and Awards	Description: 3-yr collaborative research on algebraic approaches to constraint satisfaction problems
+zola:honors-and-awards:role-postdoctoral-research-fellow-on-a-team	Honors and Awards	Role: Postdoctoral research fellow on a team with 6 senior scientists and 3 postdocs
+zola:honors-and-awards:magellan-scholar-grant-2013-2014	Honors and Awards	Magellan Scholar Grant (2013--2014)
+zola:honors-and-awards:project-title-what-does-a-nonabelian-group-s	Honors and Awards	Project Title: What does a nonabelian group sound like?
+zola:honors-and-awards:description-see	Honors and Awards	Description: See http://soundmath.github.io/GroupSound/
+zola:honors-and-awards:role-faculty-mentor-for-undergraduate-resear	Honors and Awards	Role: Faculty mentor for undergraduate research
+zola:honors-and-awards:arcs-sarah-ann-martin-award-for-outstanding	Honors and Awards	ARCS Sarah Ann Martin Award for Outstanding Research in Mathematics, Honolulu 2011.
+zola:honors-and-awards:best-paper-award-international-symposium-on	Honors and Awards	Best Paper Award, International Symposium on Musical Acoustics, Nara, Japan, 2004.
+zola:synergistic-activities:organizer	Synergistic Activities	Organizer
+zola:synergistic-activities:blast-2019-conference-boulder-2019	Synergistic Activities	[BLAST 2019 Conference, Boulder 2019](https://math.colorado.edu/blast/2019/index.html)
+zola:synergistic-activities:algebras-and-lattices-in-hawaii-conference-h	Synergistic Activities	[Algebras and Lattices in Hawaii Conference, Honolulu 2018](https://universalalgebra.github.io/ALH-2018/)
+zola:synergistic-activities:workshop-on-computational-universal-algebra	Synergistic Activities	[Workshop on Computational Universal Algebra, Louisville 2013](http://universalalgebra.wordpress.com/meetings/2013-workshop-on-computational-universal-algebra/)
+zola:synergistic-activities:editor-for-journal-algebra-universalis-2018	Synergistic Activities	Editor for Journal: "Algebra Universalis" 2018--present.
+zola:synergistic-activities:referee-for-journals-algebra-universalis-ord	Synergistic Activities	Referee for Journals: "Algebra Universalis," "Order" and "Journal of Logic & Analysis," 2012--present.
+zola:synergistic-activities:working-group-on-graduate-education-universi	Synergistic Activities	Working Group on Graduate Education, University of Hawaii.
+zola:synergistic-activities:graduate-student-representative-on-committee	Synergistic Activities	Graduate Student Representative on committee of deans and department heads;
+zola:synergistic-activities:helped-draft-resolution-for-committee-on-res	Synergistic Activities	helped draft resolution for Committee on Research and Graduate Education.
+zola:synergistic-activities:graduate-student-organization-faculty-senate	Synergistic Activities	Graduate Student Organization: Faculty Senate Student Rep., Academic Committee Chair, Math Department Rep.
+zola:synergistic-activities:mentor-for-undergraduate-research-mathematic	Synergistic Activities	Mentor for Undergraduate Research: Mathematical Biology Program (mentored students in math and dsp for classifying marine life audio signals)
+zola:synergistic-activities:student-advising	Synergistic Activities	Student Advising
+zola:synergistic-activities:university-of-colorado-boulder-served-on-doc	Synergistic Activities	University of Colorado, Boulder: Served on doctoral candidacy exam committee for the following ph.d. students: Jordan DuBeau, Ali Latfi, Athena Sparks, Michael Wheeler, and Jeffrey Shriner.
+zola:synergistic-activities:iowa-state-university-reu-mentor-for-charlot	Synergistic Activities	Iowa State University: REU mentor for Charlotte Aten; Honors thesis advisor for Joshua Thompson; Putnam Exam mentor at weekly exam practice meetings; Undergraduate Tea cohost of weekly undergraduate student gatherings; Iowa 4-H Youth Conference volunteer mentor.
+zola:synergistic-activities:university-of-south-carolina-honors-thesis-m	Synergistic Activities	University of South Carolina: Honors thesis mentor for Matthew Corley; South Carolina High School Math Contest exam design committee; Faculty mentor for Pi Mu Epsilon (math honors society).
+zola:summer-schools-attended:midlands-graduate-school-in-the-foundations	Summer Schools Attended	[Midlands Graduate School in the Foundations of Computing Science, April 12--16, 2021](https://staffwww.dcs.shef.ac.uk/people/G.Struth/mgs21.html), Univ. of Sheffield (virtual); category theory, homotopy type theory, proof theory.
+zola:summer-schools-attended:midlands-graduate-school-in-the-foundations~2	Summer Schools Attended	[Midlands Graduate School in the Foundations of Computing Science, April 14--18, 2019](http://events.cs.bham.ac.uk/mgs2019/), Univ. of Birmingham; lambda calculus, category theory, univalent type theory in Agda.
+zola:summer-schools-attended:oregon-programming-languages-summer-school-j	Summer Schools Attended	[Oregon Programming Languages Summer School, July 3--21, 2018](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php), University of Oregon; parallelism and concurrency.
+zola:summer-schools-attended:computer-aided-mathematical-proof-july-10-14	Summer Schools Attended	[Computer-aided Mathematical Proof, July 10--14, 2017](https://www.newton.ac.uk/event/bprw01), Cambridge University; bringing proof technology into mainstream mathematics.
+zola:summer-schools-attended:oregon-programming-languages-summer-school-j~2	Summer Schools Attended	[Oregon Programming Languages Summer School, June 26--July 8, 2017](https://www.cs.uoregon.edu/research/summerschool/summer17), University of Oregon; dependent, gradual, substructural type systems.
+zola:summer-schools-attended:midlands-graduate-school-in-the-foundations~3	Summer Schools Attended	[Midlands Graduate School in the Foundations of Computing Science, April 11--15, 2016](http://www.cs.bham.ac.uk/~pbl/mgs2016/), University of Birmingham; type theory, denotational semantics, category theory.
+zola:summer-schools-attended:oregon-programming-languages-summer-school-j~3	Summer Schools Attended	[Oregon Programming Languages Summer School, June 16--28, 2014](https://www.cs.uoregon.edu/research/summerschool/summer14/curriculum.html), University of Oregon; type theory, logic, semantics, verification.
+zola:summer-schools-attended:midlands-graduate-school-in-the-foundations~4	Summer Schools Attended	[Midlands Graduate School in the Foundations of Computing Science, April 22--26, 2014](http://www.cs.nott.ac.uk/~psztxa/mgs.2014/), University of Nottingham; simply typed lambda calculus, domain theory, category theory.
+zola:summer-schools-attended:lms-epsrc-short-course-in-computational-grou	Summer Schools Attended	[LMS/EPSRC Short Course in Computational Group Theory, Jul 29--Aug 2, 2013](http://www-circa.mcs.st-and.ac.uk/cgt2013/), University of St. Andrews; permutation & finitely presented groups, constructive recognition.
+zola:summer-schools-attended:nato-asi-on-computational-noncommutative-alg	Summer Schools Attended	NATO ASI on Computational Noncommutative Algebra, Il Ciocco, Italy, 2003.
+zola:talks:complexity-of-the-homomorphism-problem-for-b	Talks	[Complexity of the Homomorphism Problem for Boolean Models](https://arxiv.org/abs/2010.04958)
+zola:talks:european-virtual-csp-seminar-online-2020	Talks	European virtual CSP seminar, Online, 2020.
+zola:talks:computational-tools-for-universal-algebra-re	Talks	[Computational Tools for Universal Algebra Research](https://williamdemeo.gitlab.io/talks/vols/)
+zola:talks:csp-world-congress-2020-vols-am-schlern-ital	Talks	CSP World Congress 2020, Vols am Schlern, Italy 2020.
+zola:talks:formalizing-universal-algebra-with-dependent	Talks	[Formalizing Universal Algebra with Dependent and Inductive Types](https://williamdemeo.gitlab.io/agda-ualib/index.html)
+zola:talks:ams-joint-mathematics-meetings-special-sessi	Talks	AMS Joint Mathematics Meetings; Special Session: Algebras and Algorithms, Denver, CO 2020.
+zola:talks:computing-difference-term-operations-in-poly	Talks	[Computing Difference Term Operations in Polynomial Time](https://arxiv.org/abs/2011.07879)
+zola:talks:blast-conference-university-of-denver-denver	Talks	BLAST Conference, University of Denver, Denver, CO 2018.
+zola:talks:why-universal-algebra-needs-inductive-depend	Talks	*Why Universal Algebra Needs Inductive, Dependent Types*, Oregon Programming Languages Summer School, Eugene, OR 2018.
+zola:talks:a-tutorial-introduction-to-the-lean-prover-u	Talks	*A Tutorial Introduction to the Lean Prover*, University of Colorado Logic Seminar, Boulder, CO 2018.
+zola:talks:the-lambda-calculus-and-dependent-type-theor	Talks	*The Lambda Calculus and Dependent Type Theory*, University of Colorado Logic Seminar, Boulder, CO 2018.
+zola:talks:representing-finite-lattices-as-congruence-l	Talks	*Representing Finite Lattices as Congruence Lattices*, Colorado State University Algebra Seminar, Fort Collins, CO 2017.
+zola:talks:a-polynomial-time-test-for-difference-terms	Talks	[A Polynomial-time Test for Difference Terms in Idempotent Varieties](https://arxiv.org/abs/2011.07879), BLAST Conference, Vanderbilt University, Nashville, TN 2017.
+zola:talks:algebraic-approach-to-complexity-of-constrai	Talks	[Algebraic approach to complexity of constraint satisfaction](https://arxiv.org/abs/1611.02867), University of Hawaii Logic and Analysis Seminar, Honolulu, HI 2017 ([slides](https://github.com/williamdemeo/Talks/blob/master/UH/LogicSeminar/UH-logic-seminar-2016.pdf)).
+zola:talks:universal-algebraic-methods-for-constraint-s	Talks	[Universal Algebraic Methods for Constraint Satisfaction Problems](https://arxiv.org/abs/1611.02867), AMS Fall Western Sectional Meeting: Special Session in Algebraic Logic, Denver, CO 2016.
+zola:talks:the-rectangularity-theorem-of-barto-and-kozi	Talks	[The Rectangularity Theorem of Barto and Kozik](https://github.com/williamdemeo/Talks/tree/master/Boulder/slides), Conference on Algebras and Algorithms, Boulder, CO 2016.
+zola:talks:constraint-satisfaction-problems-and-univers	Talks	[Constraint Satisfaction Problems and Universal Algebra](https://github.com/williamdemeo/Talks/tree/master/MGS/2016), Midlands Graduate School in the Foundation of Computing Science, Birmingham, England 2016.
+zola:talks:permutability-in-diamonds-iowa-state-algebra	Talks	[Permutability in Diamonds](https://github.com/williamdemeo/Talks/tree/master/ISU/AlgComSem), Iowa State Algebra and Combinatorics Seminar, Ames, IA 2016.
+zola:talks:which-commutative-idempotent-binars-are-trac	Talks	[Which Commutative Idempotent Binars are Tractable?](http://www.math.vanderbilt.edu/~moorm10/shanks/talks/demeo-slides.pdf), Vanderbilt Shanks workshop: Open Problems in Universal Algebra, Nashville, TN 2015.
+zola:talks:some-small-finite-algebras-yielding-tractabl	Talks	Some Small Finite Algebras Yielding Tractable CSP Templates, Iowa State Algebra and Combinatorics Seminar, Ames, IA 2015.
+zola:talks:algebraic-csp-and-tractability-of-commutativ	Talks	[Algebraic CSP and Tractability of Commutative Idempotent Binars](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2015), BLAST Conference, University of North Texas, Denton, TX 2015.
+zola:talks:isotopic-algebras-iowa-state-algebra-and-com	Talks	Isotopic Algebras, Iowa State Algebra and Combinatorics Seminar, Ames, IA 2015.
+zola:talks:what-does-a-nonabelian-group-sound-like-maa	Talks	What Does a Nonabelian Group Sound Like?, MAA Special Session: At the Intersection of Mathematics and the Arts, Baltimore, MD 2014.
+zola:talks:interval-enforceable-properties-of-finite-gr	Talks	[Interval Enforceable Properties of Finite Groups](https://github.com/williamdemeo/Talks/tree/master/AMS/Louisville2013), AMS Special Session on Finite Universal Algebra, Louisville, KY 2013.
+zola:talks:tutorial-uacalc-at-the-command-line-and-in-t	Talks	Tutorial: UACalc at the command line and in the cloud, Workshop on Computational Universal Algebra, Louisville, KY 2013.
+zola:talks:approximating-eigenvalues-of-large-stochasti	Talks	Approximating Eigenvalues of Large Stochastic Matrices, University of South Carolina Combinatorics Seminar, Columbia, SC 2013.
+zola:talks:congruence-lattices-of-finite-algebras-plena	Talks	[Congruence Lattices of Finite Algebras](https://github.com/williamdemeo/Talks/tree/master/BLAST/BLAST2013) (plenary lecture), BLAST Conference, Chapman University, Orange, CA 2013.
+zola:talks:transposition-principles-for-subgroups-and-e	Talks	[Transposition Principles for Subgroups and Equivalence Relations](https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/WCU-2013), Zassenhaus Group Theory Conference, Asheville, NC 2013.
+zola:talks:isotopic-algebras-with-nonisomorphic-congrue	Talks	[Isotopic Algebras with Nonisomorphic Congruence Lattices](https://github.com/williamdemeo/Talks/tree/master/AMS/Boulder2013), AMS Special Session on Algebras, Lattices, and Varieties, Boulder, CO 2013.
+zola:talks:synchronizing-automata-and-the-cerny-conject	Talks	[Synchronizing Automata and the Černy Conjecture](https://williamdemeo.files.wordpress.com/2012/12/cugradalgebraseminar.pdf), Graduate Algebra Seminar, University of Colorado, Boulder, CO 2013.
+zola:talks:the-finite-lattice-representation-problem-in	Talks	The Finite Lattice Representation Problem in Four Parts, University of South Carolina Algebra and Logic Seminar, Columbia, SC 2012.
+zola:talks:interval-sublattice-enforceable-properties-o	Talks	[Interval Sublattice Enforceable Properties of Finite Groups](https://github.com/williamdemeo/Talks/tree/master/Zassenhaus/OSU-2012), The 31st Ohio State-Denison Mathematics Conference, Columbus, OH 2012.
+zola:talks:expansions-of-finite-algebras-and-their-cong	Talks	[Expansions of Finite Algebras and their Congruence Lattices](https://github.com/williamdemeo/Talks/tree/master/AMS/Honolulu2012), American Mathematical Society sectional meeting, Honolulu, HI 2012.
+zola:talks:intervals-in-subgroup-lattices-and-permutati	Talks	Intervals in Subgroup Lattices and Permutation Representations, Western Carolina University Group Theory Seminar, Cullowhee, NC 2012.
+zola:talks:recent-progress-on-the-finite-lattice-repres	Talks	Recent Progress on the Finite Lattice Representation Problem, Achievement Rewards for College Scientists: Scholar Presentations, Honolulu, HI 2011.
+zola:talks:the-finite-lattice-representation-problem-fi	Talks	The Finite Lattice Representation Problem, First Joint Meeting of the Korean and American Mathematical Societies, Seoul, KOR 2009.
+zola:talks:object-reconstruction-from-multiple-views-ai	Talks	Object reconstruction from multiple views, Air Force Office of Scientific Research AMOS Program Review, Maui 2004.
+zola:talks:approximating-eigenvalues-of-large-stochasti~2	Talks	Approximating eigenvalues of large stochastic matrices, 8th Copper Mt. Conference on Iterative Methods, Colorado 1998.
+zola:references:clifford-bergman-cbergman-iastate-edu-profes	References	[Clifford Bergman](cbergman@iastate.edu)*, Professor of Mathematics, Iowa State University
+zola:references:venanzio-capretta-venanzio-capretta-nottingh	References	[Venanzio Capretta](Venanzio.Capretta@nottingham.ac.uk.), Assistant Professor of Computer Science, University of Nottingham
+zola:references:ralph-freese-ralph-math-hawaii-edu-professor	References	[Ralph Freese](ralph@math.hawaii.edu), Professor of Mathematics, University of Hawaii
+zola:references:peter-jipsen-jipsen-chapman-edu-professor-of	References	[Peter Jipsen](jipsen@chapman.edu), Professor of Mathematics, Chapman University
+zola:references:george-mcnulty-mcnulty-math-sc-edu-professor	References	[George McNulty](mcnulty@math.sc.edu), Professor of Mathematics, University of South Carolina
+zola:references:peter-mayr-peter-mayr-colorado-edu-assistant	References	[Peter Mayr](peter.mayr@colorado.edu)*, Assistant Professor of Mathematics, University of Colorado, Boulder
+zola:references:j-b-nation-jb-math-hawaii-edu-emeritus-profe	References	[J.B. Nation](jb@math.hawaii.edu), Emeritus Professor of Mathematics, University of Hawaii
+zola:references:teaching-reference	References	(* teaching reference)
+jobapp:contact-information:570-park-ave-apt-8d-williamdemeo-org	Contact Information	570 Park Ave, Apt. 8D williamdemeo.org
+jobapp:contact-information:new-york-ny-10065-williamdemeo-gmail-com	Contact Information	New York, NY 10065 williamdemeo@gmail.com
+jobapp:research-interests:universal-algebra-algorithmic-complexity-typ	Research Interests	Universal algebra, algorithmic complexity, type theory, formal verification, artificial intelligence.
+jobapp:research-interests:proof-mechanization-in-agda-functional-progr	Research Interests	Proof mechanization in Agda, functional programming for AI, ML and Big Data in Scala/Spark.
+jobapp:education:doctor-of-philosophy-in-mathematics-universi	Education	Doctor of Philosophy in Mathematics University of Hawaii, Honolulu, May 2012
+jobapp:education:thesis	Education	Thesis:
+jobapp:education:congruence-lattices-of-finite-algebras	Education	Congruence lattices of finite algebras
+jobapp:education:advisor	Education	Advisor:
+jobapp:education:ralph-freese	Education	Ralph Freese
+jobapp:education:master-of-science-in-mathematics-courant-ins	Education	Master of Science in Mathematics Courant Institute of Mathematical Sciences,
+jobapp:education:nyu	Education	NYU
+jobapp:education:new-york	Education	, New York
+jobapp:education:thesis~2	Education	Thesis:
+jobapp:education:approximating-eigenvalues-of-large-stochasti	Education	Approximating eigenvalues of large stochastic matrices
+jobapp:education:advisor~2	Education	Advisor:
+jobapp:education:jonathan-goodman	Education	Jonathan Goodman
+jobapp:education:bachelor-of-arts-in-economics-university-of	Education	Bachelor of Arts in Economics University of Virginia, Charlottesville
+jobapp:academic-appointments:adjunct-instructor-computer-science-dept-new	Academic Appointments	Adjunct Instructor Computer Science Dept. New Jersey Inst. of Technology Newark 2022--
+jobapp:academic-appointments:postdoctoral-research-fellow-algebra-dept-ch	Academic Appointments	Postdoctoral Research Fellow Algebra Dept. Charles University Prague 2019--2021
+jobapp:academic-appointments:burnett-meyer-instructor-mathematics-dept-un	Academic Appointments	Burnett Meyer Instructor Mathematics Dept. University of Colorado Boulder 2017--2019
+jobapp:academic-appointments:visiting-assistant-professor-mathematics-dep	Academic Appointments	Visiting Assistant Professor Mathematics Dept. University of Hawai`i Honolulu 2016--2017
+jobapp:academic-appointments:postdoctoral-associate-mathematics-dept-iowa	Academic Appointments	Postdoctoral Associate Mathematics Dept. Iowa State University Ames 2014--2016
+jobapp:academic-appointments:visiting-assistant-professor-mathematics-dep~2	Academic Appointments	Visiting Assistant Professor Mathematics Dept. Univ South Carolina Columbia 2012--2014
+jobapp:industry-experience:senior-research-scientist-imaging-research-d	Industry Experience	Senior Research Scientist Imaging Research Dept. Textron Systems Corp. Maui 2001--2006
+jobapp:industry-experience:worked-full-time-on	Industry Experience	Worked full-time on
+jobapp:industry-experience:afosr	Industry Experience	afosr
+jobapp:industry-experience:contracts-developing-new-algorithms-and-para	Industry Experience	contracts developing new algorithms and parallel (
+jobapp:industry-experience:smp	Industry Experience	smp
+jobapp:industry-experience:mpi	Industry Experience	mpi
+jobapp:industry-experience:programs	Industry Experience	) programs
+jobapp:industry-experience:for-processing-images-acquired-by-haleakala	Industry Experience	for processing images acquired by Haleakala Observatories, including
+jobapp:industry-experience:multi-frame-blind-deconvolution	Industry Experience	Multi-frame Blind Deconvolution
+jobapp:industry-experience:removing-distorting-effects-of-earth-s-atmos	Industry Experience	removing distorting effects of Earth's atmosphere from images of satellites and other
+jobapp:industry-experience:neo	Industry Experience	neo
+jobapp:industry-experience:s-executed	Industry Experience	s; executed
+jobapp:industry-experience:our-programs-on-the	Industry Experience	our programs on the
+jobapp:industry-experience:mhpcc	Industry Experience	mhpcc
+jobapp:industry-experience:supercomputer	Industry Experience	supercomputer.
+jobapp:publications:a-machine-checked-proof-of-birkhoff-s-variet	Publications	A machine-checked proof of Birkhoff's variety theorem in Martin-Lof type theory, with J. Carette
+jobapp:publications:accepted	Publications	(accepted)
+jobapp:publications:proc-27th-intl-conf-types-for-proofs-and-pro	Publications	Proc. 27th Intl. Conf. Types for Proofs and Programs
+jobapp:publications:types	Publications	types
+jobapp:publications:2022	Publications	2022
+jobapp:publications:universal-algebraic-methods-for-constraint-s	Publications	Universal algebraic methods for constraint satisfaction problems, with Clifford Bergman
+jobapp:publications:logical-methods-in-computer-science	Publications	Logical Methods in Computer Science;
+jobapp:publications:18	Publications	18
+jobapp:publications:12-1-12-37-2022-preprint-link	Publications	:12:1--12:37, 2022; (preprint link).
+jobapp:publications:constraint-satisfaction-problems-over-finite	Publications	Constraint satisfaction problems over finite structures, with Libor Barto and Antoine Mottet
+jobapp:publications:36th	Publications	36th
+jobapp:publications:acm-ieee	Publications	ACM/IEEE
+jobapp:publications:symposium-on-logic-in-computer-science-lics	Publications	Symposium on Logic in Computer Science (LICS 2021);
+jobapp:publications:pp-1-13-preprint-link	Publications	pp. 1--13 (preprint link).
+jobapp:publications:bounded-homomorphisms-and-fiber-products-of	Publications	Bounded homomorphisms and fiber products of lattices, with P. Mayr and N. Ruskuc
+jobapp:publications:international	Publications	International
+jobapp:publications:journal-of-algebra-and-computation	Publications	Journal of Algebra and Computation;
+jobapp:publications:30	Publications	30
+jobapp:publications:693-710-2020-preprint-link	Publications	:693--710, 2020; (preprint link).
+jobapp:publications:polynomial-time-tests-for-difference-terms-i	Publications	Polynomial-time tests for difference terms in idempotent varieties, with R. Freese and M. Valeriote
+jobapp:publications:international-journal-of-algebra-and-computa	Publications	International Journal of Algebra and Computation;
+jobapp:publications:29	Publications	29
+jobapp:publications:927-949-2019-preprint-link	Publications	:927--949, 2019; (preprint link).
+jobapp:publications:isotopic-algebras-with-nonisomorphic-congrue	Publications	Isotopic algebras with nonisomorphic congruence lattices,
+jobapp:publications:algebra-universalis	Publications	Algebra Universalis
+jobapp:publications:72	Publications	72
+jobapp:publications:295-298-2014	Publications	:295--298, 2014.
+jobapp:publications:expansions-of-finite-algebras-their-congruen	Publications	Expansions of finite algebras & their congruence lattices,
+jobapp:publications:algebra-universalis~2	Publications	Algebra Universalis
+jobapp:publications:69	Publications	69
+jobapp:publications:257-278-2013	Publications	:257--278, 2013.
+jobapp:publications:proceedings-of-algebras-and-lattices-in-hawa	Publications	Proceedings of Algebras and Lattices in Hawaii 2018 (editor) with K. Adaricheva, J. Hyndman.
+jobapp:publications:topics-in-nonabelian-harmonic-analysis-and	Publications	Topics in nonabelian harmonic analysis and
+jobapp:publications:dsp	Publications	dsp
+jobapp:publications:applications-best-paper-award	Publications	applications, (best paper award)
+jobapp:publications:international-symposium-on-musical-acoustics	Publications	International Symposium on Musical Acoustics (ISMA 2004);
+jobapp:publications:characterizing-musical-signals-with-wigner-v	Publications	Characterizing musical signals with Wigner-Ville interferences,
+jobapp:publications:international-computer-music-conference-icmc	Publications	International Computer Music Conference (ICMC 2002);
+jobapp:publications:approximating-eigenvalues-of-large-stochasti	Publications	Approximating eigenvalues of large stochastic matrices,
+jobapp:publications:8th-copper-mt-conference-on-iterative-method	Publications	8th Copper Mt. Conference on Iterative Methods
+jobapp:publications:1998-preprint-link	Publications	1998 (preprint link).
+jobapp:grants-awards:nsf-research-grant	Grants & Awards	NSF Research Grant
+jobapp:grants-awards:no-1500218	Grants & Awards	(no. 1500218)
+jobapp:grants-awards:2015-2018	Grants & Awards	2015--2018
+jobapp:grants-awards:project-title	Grants & Awards	Project Title:
+jobapp:grants-awards:algebras-and-algorithms-structure-and-comple	Grants & Awards	Algebras and algorithms, structure and complexity theory
+jobapp:grants-awards:role	Grants & Awards	Role:
+jobapp:grants-awards:postdoctoral-research-fellow-on-a-team-with	Grants & Awards	Postdoctoral research fellow on a team with 6 senior scientists and 3 postdocs
+jobapp:grants-awards:description	Grants & Awards	Description:
+jobapp:grants-awards:3-yr-collaborative-research-on-algebraic-app	Grants & Awards	3-yr collaborative research on algebraic approaches to constraint satisfaction problems
+jobapp:grants-awards:magellan-scholar-grant	Grants & Awards	Magellan Scholar Grant
+jobapp:grants-awards:2013-2014	Grants & Awards	2013--2014
+jobapp:grants-awards:project-title~2	Grants & Awards	Project Title:
+jobapp:grants-awards:what-does-a-nonabelian-group-sound-like	Grants & Awards	What does a nonabelian group sound like?
+jobapp:grants-awards:role~2	Grants & Awards	Role:
+jobapp:grants-awards:faculty-mentor-for-undergraduate-research	Grants & Awards	Faculty mentor for undergraduate research
+jobapp:grants-awards:description~2	Grants & Awards	Description:
+jobapp:grants-awards:soundmath-github-io-groupsound-groupsound	Grants & Awards	soundmath.github.io/GroupSound/GroupSound
+jobapp:grants-awards:arcs-sarah-ann-martin-award	Grants & Awards	ARCS Sarah Ann Martin Award
+jobapp:grants-awards:for-outstanding-research-in-mathematics-hono	Grants & Awards	for Outstanding Research in Mathematics Honolulu 2011
+jobapp:grants-awards:best-paper-award	Grants & Awards	Best Paper Award
+jobapp:grants-awards:international-symposium-on-musical-acoustics	Grants & Awards	, International Symposium on Musical Acoustics Nara 2004
+jobapp:synergistic-activities:organizer	Synergistic Activities	Organizer,
+jobapp:synergistic-activities:blast-2019-conference	Synergistic Activities	BLAST 2019 Conference
+jobapp:synergistic-activities:boulder-2019	Synergistic Activities	Boulder 2019
+jobapp:synergistic-activities:organizer~2	Synergistic Activities	Organizer,
+jobapp:synergistic-activities:algebras-and-lattices-in-hawai-i-conf	Synergistic Activities	Algebras and Lattices in Hawai`i Conf.
+jobapp:synergistic-activities:to-honor-freese-lampe-nation	Synergistic Activities	to honor Freese, Lampe & Nation
+jobapp:synergistic-activities:honolulu-2018	Synergistic Activities	Honolulu 2018
+jobapp:synergistic-activities:organizer~3	Synergistic Activities	Organizer,
+jobapp:synergistic-activities:workshop-on-computational-universal-algebra	Synergistic Activities	Workshop on Computational Universal Algebra
+jobapp:synergistic-activities:louisville-2013	Synergistic Activities	Louisville 2013
+jobapp:synergistic-activities:editor-for	Synergistic Activities	Editor for
+jobapp:synergistic-activities:algebra-universalis	Synergistic Activities	Algebra Universalis
+jobapp:synergistic-activities:2018-present	Synergistic Activities	2018--present
+jobapp:synergistic-activities:referee-for	Synergistic Activities	Referee for
+jobapp:synergistic-activities:algebra-universalis~2	Synergistic Activities	Algebra Universalis
+jobapp:synergistic-activities:order	Synergistic Activities	Order
+jobapp:synergistic-activities:j-logic-analysis	Synergistic Activities	J. Logic & Analysis
+jobapp:synergistic-activities:2012-present	Synergistic Activities	2012--present
+jobapp:synergistic-activities:university-of-colorado-boulder	Synergistic Activities	University of Colorado, Boulder
+jobapp:synergistic-activities:served-on-doctoral-candidacy-exam-committee	Synergistic Activities	Served on doctoral candidacy exam committee for the following ph.d. students:
+jobapp:synergistic-activities:jordan-dubeau	Synergistic Activities	Jordan DuBeau
+jobapp:synergistic-activities:ali-latfi	Synergistic Activities	Ali Latfi
+jobapp:synergistic-activities:athena-sparks	Synergistic Activities	Athena Sparks
+jobapp:synergistic-activities:michael-wheeler	Synergistic Activities	Michael Wheeler
+jobapp:synergistic-activities:served-on-dissertation-defense-committee-for	Synergistic Activities	Served on dissertation defense committee for
+jobapp:synergistic-activities:jeffrey-shriner	Synergistic Activities	Jeffrey Shriner
+jobapp:synergistic-activities:iowa-state-university	Synergistic Activities	Iowa State University
+jobapp:synergistic-activities:reu-mentor-for-charlotte-aten-mathematics-ma	Synergistic Activities	REU mentor for Charlotte Aten (mathematics major, University of Rochester)
+jobapp:synergistic-activities:honors-thesis-advisor-for-joshua-thompson-ma	Synergistic Activities	Honors thesis advisor for Joshua Thompson (mathematics major, honors program)
+jobapp:synergistic-activities:putnam-exam-mentor-at-weekly-exam-practice-m	Synergistic Activities	Putnam Exam mentor at weekly exam practice meetings
+jobapp:synergistic-activities:iowa-4-h-youth-conference-volunteer-mentor-l	Synergistic Activities	Iowa 4-H Youth Conference volunteer mentor (link)
+jobapp:data-science-certificate:smart-contracts-suny-at-buffalo	Data Science Certificates	Smart Contracts SUNY at Buffalo
+jobapp:data-science-certificate:4-week-coursera-course-grade-96-4	Data Science Certificates	4-week Coursera course; grade: 96.4%
+jobapp:data-science-certificate:verified-certificate-earned-5-sep-2021	Data Science Certificates	Verified Certificate earned 5 Sep 2021
+jobapp:data-science-certificate:blockchain-basics-suny-at-buffalo	Data Science Certificates	Blockchain Basics SUNY at Buffalo
+jobapp:data-science-certificate:4-week-coursera-course-grade-100	Data Science Certificates	4-week Coursera course; grade: 100%
+jobapp:data-science-certificate:verified-certificate-earned-6-aug-2021	Data Science Certificates	Verified Certificate earned 6 Aug 2021
+jobapp:data-science-certificate:big-data-analysis-with-scala-and-spark	Data Science Certificates	Big Data Analysis with Scala and Spark
+jobapp:data-science-certificate:ecole-polytechnique-federale-de-lausanne	Data Science Certificates	Ecole Polytechnique Federale de Lausanne
+jobapp:data-science-certificate:4-week-coursera-course-grade-93-4	Data Science Certificates	4-week Coursera course; grade: 93.4%
+jobapp:data-science-certificate:verified-certificate-earned-24-nov-2017	Data Science Certificates	Verified Certificate earned 24 Nov 2017
+jobapp:data-science-certificate:functional-programming-principles-in-scala	Data Science Certificates	Functional Programming Principles in Scala
+jobapp:data-science-certificate:ecole-polytechnique-federale-de-lausanne~2	Data Science Certificates	Ecole Polytechnique Federale de Lausanne
+jobapp:data-science-certificate:6-week-coursera-course-grade-100	Data Science Certificates	6-week Coursera course; grade: 100%
+jobapp:data-science-certificate:verified-certificate-earned-17-nov-2016	Data Science Certificates	Verified Certificate earned 17 Nov 2016
+jobapp:data-science-certificate:functional-program-design-in-scala	Data Science Certificates	Functional Program Design in Scala
+jobapp:data-science-certificate:ecole-polytechnique-federale-de-lausanne~3	Data Science Certificates	Ecole Polytechnique Federale de Lausanne
+jobapp:data-science-certificate:4-week-coursera-course-grade-100~2	Data Science Certificates	4-week Coursera course; grade: 100%
+jobapp:data-science-certificate:verified-certificate-earned-6-aug-2016	Data Science Certificates	Verified Certificate earned 6 Aug 2016
+jobapp:data-science-certificate:parallel-programming-in-scala	Data Science Certificates	Parallel Programming in Scala
+jobapp:data-science-certificate:ecole-polytechnique-federale-de-lausanne~4	Data Science Certificates	Ecole Polytechnique Federale de Lausanne
+jobapp:data-science-certificate:4-week-coursera-course-grade-100~3	Data Science Certificates	4-week Coursera course; grade: 100%
+jobapp:data-science-certificate:verified-certificate-earned-27-jun-2016	Data Science Certificates	Verified Certificate earned 27 Jun 2016
+jobapp:summer-schools-attended:computer-aided-mathematical-proof-cambridge	Summer Schools Attended	Computer-aided Mathematical Proof Cambridge University
+jobapp:summer-schools-attended:topics-bringing-proof-technology-into-mainst	Summer Schools Attended	Topics: bringing proof technology into mainstream mathematics July 10--14, 2017
+jobapp:summer-schools-attended:lms-epsrc-short-course-in-computational-grou	Summer Schools Attended	LMS/EPSRC Short Course in Computational Group Theory University of St. Andrews
+jobapp:summer-schools-attended:topics-permutation-finitely-presented-groups	Summer Schools Attended	Topics: permutation & finitely presented groups, constructive recognition Jul 29--Aug 2, 2013
+jobapp:summer-schools-attended:midlands-graduate-school-in-the-foundations	Summer Schools Attended	Midlands Graduate School in the Foundations of Computing Science Univ of Nottingham 2014
+jobapp:summer-schools-attended:topics-lambda-calculus-denotational-semantic	Summer Schools Attended	Topics: lambda calculus, denotational semantics, type theory, Univ of Birmingham 2016, 2019
+jobapp:summer-schools-attended:category-theory-proof-theory-univalent-found	Summer Schools Attended	category theory, proof theory, univalent foundations University of Sheffield 2021
+jobapp:summer-schools-attended:oregon-programming-languages-summer-school-u	Summer Schools Attended	Oregon Programming Languages Summer School University of Oregon
+jobapp:summer-schools-attended:topics-type-theory-logic-semantics-verificat	Summer Schools Attended	Topics: type theory, logic, semantics, verification, 3--21 Jul 2018
+jobapp:summer-schools-attended:parallelism-concurrency-gradual-type-systems	Summer Schools Attended	parallelism, concurrency, gradual type systems 26 Jun--8 Jul 2017
+jobapp:summer-schools-attended:16-28-jun-2014	Summer Schools Attended	16--28 Jun 2014
+jobapp:teaching-experience:new-jersey-institute-of-technology	Teaching Experience	New Jersey Institute of Technology
+jobapp:teaching-experience:as-adjunct-instructor	Teaching Experience	(as Adjunct Instructor)
+jobapp:teaching-experience:cs-370-introduction-to-artificial-intelligen	Teaching Experience	CS 370: Introduction to Artificial Intelligence Spring 2022
+jobapp:teaching-experience:cs-241-foundations-of-computer-science-i-spr	Teaching Experience	CS 241: Foundations of Computer Science I Spring 2022
+jobapp:teaching-experience:charles-university-in-prague	Teaching Experience	Charles University in Prague
+jobapp:teaching-experience:as-postdoctoral-research-fellow	Teaching Experience	(as Postdoctoral Research Fellow)
+jobapp:teaching-experience:nmag-405-universal-algebra-winter-2020	Teaching Experience	NMAG 405: Universal Algebra Winter 2020
+jobapp:teaching-experience:university-of-colorado-boulder	Teaching Experience	University of Colorado, Boulder
+jobapp:teaching-experience:as-burnett-meyer-instructor	Teaching Experience	(as Burnett Meyer Instructor)
+jobapp:teaching-experience:math-2001-discrete-mathematics-with-lean-pro	Teaching Experience	Math 2001: Discrete Mathematics (with Lean prover component) Spring 2019
+jobapp:teaching-experience:math-2001-discrete-mathematics-with-lean-pro~2	Teaching Experience	Math 2001: Discrete Mathematics (with Lean prover component) Fall 2018
+jobapp:teaching-experience:math-3140-abstract-algebra-fall-2018	Teaching Experience	Math 3140: Abstract Algebra Fall 2018
+jobapp:teaching-experience:math-6000-model-theory-graduate-course-sprin	Teaching Experience	Math 6000: Model Theory (graduate course) Spring 2018
+jobapp:teaching-experience:math-2130-linear-algebra-spring-2018	Teaching Experience	Math 2130: Linear Algebra Spring 2018
+jobapp:teaching-experience:math-2130-linear-algebra-fall-2017	Teaching Experience	Math 2130: Linear Algebra Fall 2017
+jobapp:teaching-experience:university-of-hawaii	Teaching Experience	University of Hawaii
+jobapp:teaching-experience:as-visiting-assistant-professor	Teaching Experience	(as Visiting Assistant Professor)
+jobapp:teaching-experience:math-215-applied-calculus-spring-2017	Teaching Experience	Math 215: Applied Calculus Spring 2017
+jobapp:teaching-experience:math-480-senior-seminar-spring-2017	Teaching Experience	Math 480: Senior Seminar Spring 2017
+jobapp:teaching-experience:math-244-calculus-iv-fall-2016	Teaching Experience	Math 244: Calculus IV Fall 2016
+jobapp:teaching-experience:math-321-introduction-to-advanced-math-fall	Teaching Experience	Math 321: Introduction to Advanced Math Fall 2016
+jobapp:teaching-experience:iowa-state-university	Teaching Experience	Iowa State University
+jobapp:teaching-experience:as-postdoctoral-associate	Teaching Experience	(as Postdoctoral Associate)
+jobapp:teaching-experience:math-317-linear-algebra-spring-2016	Teaching Experience	Math 317: Linear Algebra Spring 2016
+jobapp:teaching-experience:math-317-linear-algebra-fall-2015	Teaching Experience	Math 317: Linear Algebra Fall 2015
+jobapp:teaching-experience:math-160-survey-of-calculus-fall-2015	Teaching Experience	Math 160: Survey of Calculus Fall 2015
+jobapp:teaching-experience:math-207-elementary-linear-algebra-spring-20	Teaching Experience	Math 207: Elementary Linear Algebra Spring 2015
+jobapp:teaching-experience:math-165-calculus-i-spring-2015	Teaching Experience	Math 165: Calculus I Spring 2015
+jobapp:teaching-experience:math-301-abstract-algebra-fall-2014	Teaching Experience	Math 301: Abstract Algebra Fall 2014
+jobapp:teaching-experience:math-165-calculus-i-fall-2014	Teaching Experience	Math 165: Calculus I Fall 2014
+jobapp:teaching-experience:university-of-south-carolina	Teaching Experience	University of South Carolina
+jobapp:teaching-experience:as-visiting-assistant-professor~2	Teaching Experience	(as Visiting Assistant Professor)
+jobapp:teaching-experience:math-700-linear-algebra-graduate-course-spri	Teaching Experience	Math 700: Linear Algebra (graduate course) Spring 2014
+jobapp:teaching-experience:math-141-calculus-i-spring-2014	Teaching Experience	Math 141: Calculus I Spring 2014
+jobapp:teaching-experience:math-374-discrete-structures-fall-2013	Teaching Experience	Math 374: Discrete Structures Fall 2013
+jobapp:teaching-experience:math-122-calculus-for-business-and-social-sc	Teaching Experience	Math 122: Calculus for Business and Social Sciences Fall 2013
+jobapp:teaching-experience:math-374-discrete-structures-spring-2013	Teaching Experience	Math 374: Discrete Structures Spring 2013
+jobapp:teaching-experience:math-122-calculus-for-business-and-social-sc~2	Teaching Experience	Math 122: Calculus for Business and Social Sciences Spring 2013
+jobapp:teaching-experience:math-241-vector-calculus-fall-2012	Teaching Experience	Math 241: Vector Calculus Fall 2012
+jobapp:teaching-experience:math-122-calculus-for-business-and-social-sc~3	Teaching Experience	Math 122: Calculus for Business and Social Sciences Fall 2012
+jobapp:talks:complexity-of-the-homomorphism-problem-for-b	Talks	Complexity of the Homomorphism Problem for Boolean Models
+jobapp:talks:preprint-online-2020	Talks	(preprint) Online, 2020
+jobapp:talks:european-virtual-csp-seminar	Talks	European virtual CSP seminar
+jobapp:talks:computational-tools-for-universal-algebra-re	Talks	Computational Tools for Universal Algebra Research
+jobapp:talks:vols-am-schlern-italy-2020	Talks	Vols am Schlern, Italy 2020
+jobapp:talks:csp-world-congress-2020	Talks	CSP World Congress 2020
+jobapp:talks:formalizing-universal-algebra-with-dependent	Talks	Formalizing Universal Algebra with Dependent and Inductive Types
+jobapp:talks:html-docs-denver-co-2020	Talks	(html docs) Denver, CO 2020
+jobapp:talks:ams-joint-mathematics-meetings-special-sessi	Talks	AMS Joint Mathematics Meetings; Special Session: Algebras and Algorithms
+jobapp:talks:computing-difference-term-operations-in-poly	Talks	Computing Difference Term Operations in Polynomial Time
+jobapp:talks:preprint-denver-co-2018	Talks	(preprint) Denver, CO 2018
+jobapp:talks:blast-conference-university-of-denver	Talks	BLAST Conference, University of Denver
+jobapp:talks:why-universal-algebra-needs-inductive-depend	Talks	Why Universal Algebra Needs Inductive, Dependent Types
+jobapp:talks:eugene-or-2018	Talks	Eugene, OR 2018
+jobapp:talks:oregon-programming-languages-summer-school	Talks	Oregon Programming Languages Summer School
+jobapp:talks:a-tutorial-introduction-to-the-lean-prover	Talks	A Tutorial Introduction to the Lean Prover
+jobapp:talks:boulder-co-2018	Talks	Boulder, CO 2018
+jobapp:talks:university-of-colorado-logic-seminar	Talks	University of Colorado Logic Seminar
+jobapp:talks:the-lambda-calculus-and-dependent-type-theor	Talks	The Lambda Calculus and Dependent Type Theory
+jobapp:talks:boulder-co-2018~2	Talks	Boulder, CO 2018
+jobapp:talks:university-of-colorado-logic-seminar~2	Talks	University of Colorado Logic Seminar
+jobapp:talks:representing-finite-lattices-as-congruence-l	Talks	Representing Finite Lattices as Congruence Lattices
+jobapp:talks:fort-collins-co-2017	Talks	Fort Collins, CO 2017
+jobapp:talks:colorado-state-university-algebra-seminar	Talks	Colorado State University Algebra Seminar
+jobapp:talks:a-polynomial-time-test-for-difference-terms	Talks	A Polynomial-time Test for Difference Terms in Idempotent Varieties
+jobapp:talks:preprint-nashville-tn-2017	Talks	(preprint) Nashville, TN 2017
+jobapp:talks:blast-conference-vanderbilt-university	Talks	BLAST Conference, Vanderbilt University
+jobapp:talks:algebraic-approach-to-complexity-of-constrai	Talks	Algebraic approach to complexity of constraint satisfaction
+jobapp:talks:preprint-honolulu-hi-2017	Talks	(preprint) Honolulu, HI 2017
+jobapp:talks:university-of-hawaii-logic-and-analysis-semi	Talks	University of Hawaii Logic and Analysis Seminar
+jobapp:talks:universal-algebraic-methods-for-constraint-s	Talks	Universal Algebraic Methods for Constraint Satisfaction Problems
+jobapp:talks:preprint-denver-co-2016	Talks	(preprint) Denver, CO 2016
+jobapp:talks:ams-fall-western-sectional-meeting-special-s	Talks	AMS Fall Western Sectional Meeting: Special Session in Algebraic Logic
+jobapp:talks:the-rectangularity-theorem-of-barto-and-kozi	Talks	The Rectangularity Theorem of Barto and Kozik
+jobapp:talks:boulder-co-2016	Talks	Boulder, CO 2016
+jobapp:talks:algebras-and-algorithms-structure-and-comple	Talks	Algebras and Algorithms: Structure and Complexity Theory
+jobapp:talks:constraint-satisfaction-problems-and-univers	Talks	Constraint Satisfaction Problems and Universal Algebra
+jobapp:talks:birmingham-england-2016	Talks	Birmingham, England 2016
+jobapp:talks:midlands-graduate-school-in-the-foundation-o	Talks	Midlands Graduate School in the Foundation of Computing Science
+jobapp:talks:permutability-in-diamonds	Talks	Permutability in Diamonds
+jobapp:talks:ames-ia-2016	Talks	Ames, IA 2016
+jobapp:talks:iowa-state-algebra-and-combinatorics-seminar	Talks	Iowa State Algebra and Combinatorics Seminar
+jobapp:talks:which-commutative-idempotent-binars-are-trac	Talks	Which Commutative Idempotent Binars are Tractable?
+jobapp:talks:nashville-tn-2015	Talks	Nashville, TN 2015
+jobapp:talks:vanderbilt-shanks-workshop-open-problems-in	Talks	Vanderbilt Shanks workshop: Open Problems in Universal Algebra
+jobapp:talks:which-commutative-idempotent-binars-are-trac~2	Talks	Which Commutative Idempotent Binars are Tractable?
+jobapp:talks:nashville-tn-2015~2	Talks	Nashville, TN 2015
+jobapp:talks:vanderbilt-shanks-workshop-open-problems-in~2	Talks	Vanderbilt Shanks workshop: Open Problems in Universal Algebra
+jobapp:talks:some-small-finite-algebras-yielding-tractabl	Talks	Some Small Finite Algebras Yielding Tractable CSP Templates
+jobapp:talks:ames-ia-2015	Talks	Ames, IA 2015
+jobapp:talks:iowa-state-algebra-and-combinatorics-seminar~2	Talks	Iowa State Algebra and Combinatorics Seminar
+jobapp:talks:algebraic-csp-and-tractability-of-commutativ	Talks	Algebraic CSP and Tractability of Commutative Idempotent Binars
+jobapp:talks:denton-tx-2015	Talks	Denton, TX 2015
+jobapp:talks:blast-conference-university-of-north-texas	Talks	BLAST Conference, University of North Texas
+jobapp:talks:isotopic-algebras	Talks	Isotopic Algebras
+jobapp:talks:ames-ia-2015~2	Talks	Ames, IA 2015
+jobapp:talks:iowa-state-algebra-and-combinatorics-seminar~3	Talks	Iowa State Algebra and Combinatorics Seminar
+jobapp:talks:what-does-a-nonabelian-group-sound-like	Talks	What Does a Nonabelian Group Sound Like?
+jobapp:talks:baltimore-md-2014	Talks	Baltimore, MD 2014
+jobapp:talks:maa-special-session-at-the-intersection-of-m	Talks	MAA Special Session: At the Intersection of Mathematics and the Arts
+jobapp:talks:interval-enforceable-properties-of-finite-gr	Talks	Interval Enforceable Properties of Finite Groups
+jobapp:talks:slides-louisville-ky-2013	Talks	(slides) Louisville, KY 2013
+jobapp:talks:ams-special-session-on-finite-universal-alge	Talks	AMS Special Session on Finite Universal Algebra
+jobapp:talks:tutorial-uacalc-at-the-command-line-and-in-t	Talks	Tutorial: UACalc at the command line and in the cloud
+jobapp:talks:louisville-ky-2013	Talks	Louisville, KY 2013
+jobapp:talks:workshop-on-computational-universal-algebra	Talks	Workshop on Computational Universal Algebra
+jobapp:talks-cont:approximating-eigenvalues-of-large-stochasti	Talks (cont.)	Approximating Eigenvalues of Large Stochastic Matrices
+jobapp:talks-cont:columbia-sc-2013	Talks (cont.)	Columbia, SC 2013
+jobapp:talks-cont:university-of-south-carolina-combinatorics-s	Talks (cont.)	University of South Carolina Combinatorics Seminar
+jobapp:talks-cont:congruence-lattices-of-finite-algebras-plena	Talks (cont.)	Congruence Lattices of Finite Algebras (plenary lecture)
+jobapp:talks-cont:slides-orange-ca-2013	Talks (cont.)	(slides) Orange, CA 2013
+jobapp:talks-cont:blast-conference-chapman-university	Talks (cont.)	BLAST Conference, Chapman University
+jobapp:talks-cont:transposition-principles-for-subgroups-and-e	Talks (cont.)	Transposition Principles for Subgroups and Equivalence Relations
+jobapp:talks-cont:slides-asheville-nc-2013	Talks (cont.)	(slides) Asheville, NC 2013
+jobapp:talks-cont:zassenhaus-group-theory-conference	Talks (cont.)	Zassenhaus Group Theory Conference
+jobapp:talks-cont:isotopic-algebras-with-nonisomorphic-congrue	Talks (cont.)	Isotopic Algebras with Nonisomorphic Congruence Lattices
+jobapp:talks-cont:slides-boulder-co-2013	Talks (cont.)	(slides) Boulder, CO 2013
+jobapp:talks-cont:ams-special-session-on-algebras-lattices-and	Talks (cont.)	AMS Special Session on Algebras, Lattices, and Varieties
+jobapp:talks-cont:synchronizing-automata-and-the	Talks (cont.)	Synchronizing Automata and the
+jobapp:talks-cont:cerny-conjecture	Talks (cont.)	Cerny Conjecture
+jobapp:talks-cont:slides-boulder-co-2013~2	Talks (cont.)	(slides) Boulder, CO 2013
+jobapp:talks-cont:graduate-algebra-seminar-university-of-color	Talks (cont.)	Graduate Algebra Seminar, University of Colorado
+jobapp:talks-cont:the-finite-lattice-representation-problem-in	Talks (cont.)	The Finite Lattice Representation Problem in Four Parts
+jobapp:talks-cont:columbia-sc-2012	Talks (cont.)	Columbia, SC 2012
+jobapp:talks-cont:university-of-south-carolina-algebra-and-log	Talks (cont.)	University of South Carolina Algebra and Logic Seminar
+jobapp:talks-cont:interval-sublattice-enforceable-properties-o	Talks (cont.)	Interval Sublattice Enforceable Properties of Finite Groups
+jobapp:talks-cont:slides-columbus-oh-2012	Talks (cont.)	(slides) Columbus, OH 2012
+jobapp:talks-cont:the-31st-ohio-state-denison-mathematics-conf	Talks (cont.)	The 31st Ohio State-Denison Mathematics Conference
+jobapp:talks-cont:expansions-of-finite-algebras-and-their-cong	Talks (cont.)	Expansions of Finite Algebras and their Congruence Lattices
+jobapp:talks-cont:slides-honolulu-hi-2012	Talks (cont.)	(slides) Honolulu, HI 2012
+jobapp:talks-cont:american-mathematical-society-sectional-meet	Talks (cont.)	American Mathematical Society sectional meeting
+jobapp:talks-cont:intervals-in-subgroup-lattices-and-permutati	Talks (cont.)	Intervals in Subgroup Lattices and Permutation Representations
+jobapp:talks-cont:cullowhee-nc-2012	Talks (cont.)	Cullowhee, NC 2012
+jobapp:talks-cont:western-carolina-university-group-theory-sem	Talks (cont.)	Western Carolina University Group Theory Seminar
+jobapp:talks-cont:recent-progress-on-the-finite-lattice-repres	Talks (cont.)	Recent Progress on the Finite Lattice Representation Problem
+jobapp:talks-cont:honolulu-hi-2011	Talks (cont.)	Honolulu, HI 2011
+jobapp:talks-cont:achievement-rewards-for-college-scientists-s	Talks (cont.)	Achievement Rewards for College Scientists: Scholar Presentations
+jobapp:talks-cont:the-finite-lattice-representation-problem	Talks (cont.)	The Finite Lattice Representation Problem
+jobapp:talks-cont:seoul-kor-2009	Talks (cont.)	Seoul, KOR 2009
+jobapp:talks-cont:first-joint-meeting-of-the-korean-and-americ	Talks (cont.)	First Joint Meeting of the Korean and American Mathematical Societies
+jobapp:references:clifford-bergman	References	Clifford Bergman
+jobapp:references:professor-of-mathematics	References	Professor of Mathematics
+jobapp:references:iowa-state-university	References	Iowa State University
+jobapp:references:396-carver-hall	References	396 Carver Hall
+jobapp:references:ames-iowa-50011	References	Ames, Iowa 50011
+jobapp:references:phone-515-294-1752	References	phone: 515-294-1752
+jobapp:references:email	References	email:
+jobapp:references:cbergman-iastate-edu	References	cbergman@iastate.edu
+jobapp:references:venanzio-capretta	References	Venanzio Capretta
+jobapp:references:assistant-professor-of-computer-science	References	Assistant Professor of Computer Science
+jobapp:references:university-of-nottingham	References	University of Nottingham
+jobapp:references:room-b83-computer-science	References	Room B83 Computer Science
+jobapp:references:jubilee-campus-wollaton-road	References	Jubilee Campus, Wollaton Road
+jobapp:references:nottingham-ng8-1bb-uk	References	Nottingham NG8 1BB UK
+jobapp:references:venanzio-capretta-nottingham-ac-uk	References	Venanzio.Capretta@nottingham.ac.uk
+jobapp:references:ralph-freese	References	Ralph Freese
+jobapp:references:professor-of-mathematics~2	References	Professor of Mathematics
+jobapp:references:university-of-hawaii	References	University of Hawaii
+jobapp:references:2565-mccarthy-mall	References	2565 McCarthy Mall
+jobapp:references:honolulu-hi-96822	References	Honolulu, HI 96822
+jobapp:references:phone-808-956-4680	References	phone: 808-956-4680
+jobapp:references:email~2	References	email:
+jobapp:references:ralph-math-hawaii-edu	References	ralph@math.hawaii.edu
+jobapp:references:peter-jipsen	References	Peter Jipsen
+jobapp:references:professor-of-mathematics~3	References	Professor of Mathematics
+jobapp:references:chapman-university	References	Chapman University
+jobapp:references:545-w-palm-ave	References	545 W. Palm Ave
+jobapp:references:orange-ca-92866	References	Orange, CA 92866
+jobapp:references:phone-714-744-7918	References	phone: 714-744-7918
+jobapp:references:email~3	References	email:
+jobapp:references:jipsen-chapman-edu	References	jipsen@chapman.edu
+jobapp:references:george-mcnulty	References	George McNulty
+jobapp:references:professor-of-mathematics~4	References	Professor of Mathematics
+jobapp:references:university-of-south-carolina	References	University of South Carolina
+jobapp:references:1523-greene-street	References	1523 Greene Street
+jobapp:references:columbia-sc-29208	References	Columbia, SC 29208
+jobapp:references:phone-803-777-7469	References	phone: 803-777-7469
+jobapp:references:email~4	References	email:
+jobapp:references:mcnulty-math-sc-edu	References	mcnulty@math.sc.edu
+jobapp:references:peter-mayr	References	Peter Mayr
+jobapp:references:assistant-professor-of-mathematics	References	Assistant Professor of Mathematics
+jobapp:references:university-of-colorado-boulder	References	University of Colorado, Boulder
+jobapp:references:2300-colorado-avenue	References	2300 Colorado Avenue
+jobapp:references:boulder-co-80309	References	Boulder, CO 80309
+jobapp:references:phone-303-492-7754	References	phone: 303-492-7754
+jobapp:references:email~5	References	email:
+jobapp:references:peter-mayr-colorado-edu	References	peter.mayr@colorado.edu
+jobapp:references:teaching-reference	References	teaching reference
+site:curriculum-vitae:material-file-download-download-pdf-assets-d	Curriculum vitae	[:material-file-download: Download PDF](assets/DeMeo-CV.pdf){ .md-button }
+site:curriculum-vitae:warning-this-page-is-a-summary-and-the-pdf-i	Curriculum vitae	!!! warning "This page is a summary, and the PDF is out of date"
+site:curriculum-vitae:the-linked-pdf-predates-the-current-role-and	Curriculum vitae	The linked PDF predates the current role and does not mention any of the recent work on AI tooling for proof assistants. Both are being replaced by a single source that renders to web and PDF together ([#41](https://github.com/williamdemeo/williamdemeo.github.io/issues/41)), with the content brought current in [#42](https://github.com/williamdemeo/williamdemeo.github.io/issues/42). Full talks and teaching records arrive with Milestone 5.
+site:research-interests:interactive-theorem-proving-and-formalizatio	Research interests	Interactive theorem proving and formalization of mathematics (Agda, Lean); formal methods for production systems; AI tooling for proof assistants and machine reasoning over verifiable domains; universal algebra, lattice theory, and the algebraic approach to computational complexity.
+site:education:phd-mathematics-university-of-hawaii-2012-th	Education	**PhD, Mathematics** — University of Hawaii, 2012 : Thesis: [Congruence lattices of finite algebras](https://arxiv.org/abs/1204.4305). Advisor: [Ralph Freese](http://math.hawaii.edu/~ralph/).
+site:education:ms-mathematics-courant-institute-of-mathemat	Education	**MS, Mathematics** — Courant Institute of Mathematical Sciences, NYU : Thesis: [Approximating eigenvalues of large stochastic matrices](https://williamdemeo.github.io/MSThesis/). Advisor: [Jonathan Goodman](https://www.math.nyu.edu/faculty/goodman/index.html).
+site:education:ba-economics-university-of-virginia	Education	**BA, Economics** — University of Virginia
+site:employment:see-the-about-page-about-md-academic-appoint	Employment	See the [about page](about.md#academic-appointments) for the full table. Current position: Formal Verification Engineer, Formal Methods team, [IO](https://iohk.io/), since 2023 — formal verification of the [Cardano blockchain ledger specification](https://github.com/IntersectMBO/formal-ledger-specifications) in Agda.
+site:selected-publications:the-complete-list-including-earlier-work-in	Selected publications	The complete list, including earlier work in algebra and in signal processing, is on [arXiv](https://arxiv.org/a/demeo_w_1) and in the PDF. A full publications page is [#30](https://github.com/williamdemeo/williamdemeo.github.io/issues/30); rendering this CV to PDF from the same source is [#41](https://github.com/williamdemeo/williamdemeo.github.io/issues/41).
+site:grants-and-awards:nsf-research-grant-no-1500218-2015-2018-alge	Grants and awards	**NSF Research Grant no. 1500218** (2015–2018) : *Algebras and algorithms, structure and complexity theory.* Postdoctoral research fellow on a team of six senior scientists and three postdocs; collaborative research on algebraic approaches to constraint satisfaction.
+site:grants-and-awards:magellan-scholar-grant-2013-2014-faculty-men	Grants and awards	**Magellan Scholar Grant** (2013–2014) : Faculty mentor for undergraduate research.
+site:grants-and-awards:arcs-sarah-ann-martin-award-for-outstanding	Grants and awards	**ARCS Sarah Ann Martin Award** for outstanding research in mathematics (2011)
+site:grants-and-awards:best-paper-award-international-symposium-on	Grants and awards	**Best Paper Award**, International Symposium on Musical Acoustics, Nara, Japan (2004)
+site:teaching:a-decade-of-teaching-across-six-institutions	Teaching	A decade of teaching across six institutions, from calculus through graduate model theory, including courses that used the Lean proof assistant in an undergraduate discrete mathematics classroom. The full record arrives with Milestone 5 ([#32](https://github.com/williamdemeo/williamdemeo.github.io/issues/32)).

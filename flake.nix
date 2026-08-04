@@ -102,6 +102,25 @@
         ];
       };
 
+      # check_cv_sources.py reads cv.yml, the four CV copies, the committed
+      # inventory it compares its own extraction against, and bibliography.json
+      # -- publications live there (ADR-006) and are covered from there, which
+      # is what makes the boundary between the two files checkable.  docs/cv.md
+      # is one of the four copies, so docs/ is here for that one file; the
+      # script finds everything relative to its own location, so the layout has
+      # to match the repository's.
+      cvSource = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./cv.yml
+          ./bibliography.json
+          ./scripts/python
+          ./import/legacy-cv
+          ./import/zola-content/cv
+          ./docs/cv.md
+        ];
+      };
+
       # The worktree tooling builds the repositories it tests against in
       # $TMPDIR, so its check needs the scripts and nothing else from here --
       # not even git history, and certainly not the network.
@@ -423,6 +442,29 @@
           # cannot reach a service rather than reporting the clean run it did
           # not earn, and that the renderer's relaxed duplicate-arXiv rule
           # still catches a real duplicate.
+          # Every entry in all four legacy CV copies is either carried in
+          # cv.yml or declared an omission there with a reason (ADR-003).
+          #
+          # This is the gate that "nothing was silently lost" rests on, and it
+          # belongs here for the same reason `bibliography-tooling` does: the
+          # copies are snapshotted in the repository, so it resolves nothing and
+          # needs no network.  Reading them over the wire would have made it a
+          # check CI could not run, which is a check that stops being run.
+          #
+          # The tests are not redundant with it.  A coverage checker reports
+          # success when nothing is uncovered, and an extractor that has
+          # quietly stopped finding entries produces exactly that; the tests
+          # are what hold the failures it must still report.
+          cv-sources = pkgs.runCommandLocal "check-cv-sources"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+            }
+            ''
+              python3 ${cvSource}/scripts/python/check_cv_sources.py
+              python3 ${cvSource}/scripts/python/test_cv_sources.py
+              touch "$out"
+            '';
+
           bibliography-tooling = pkgs.runCommandLocal "check-bibliography-tooling"
             {
               nativeBuildInputs = [ this.pythonEnv ];

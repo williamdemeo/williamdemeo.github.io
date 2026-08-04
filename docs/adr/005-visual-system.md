@@ -1,3 +1,5 @@
+<!-- File: docs/adr/005-visual-system.md -->
+
 # ADR-005: The visual system, and how its constraints are checked
 
 **Status**: Accepted

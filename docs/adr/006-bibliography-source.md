@@ -1,3 +1,5 @@
+<!-- File: docs/adr/006-bibliography-source.md -->
+
 # ADR-006: One authoritative bibliography, in CSL-JSON
 
 **Status**: Accepted
