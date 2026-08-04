@@ -483,9 +483,7 @@
   gap: var(--space-12);
   align-items: center;
   margin: var(--space-8) 0;
-  /* 400px at the 20px root -- the height the 440x370 portrait used to give
-     the stage at full content width. */
-  min-block-size: 20rem;
+  min-block-size: var(--hero-stage);
 }
 
 /* Grid items refuse to shrink below their content's min-width by default;
