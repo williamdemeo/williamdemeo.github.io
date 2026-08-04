@@ -102,6 +102,14 @@
         ];
       };
 
+      # The worktree tooling builds the repositories it tests against in
+      # $TMPDIR, so its check needs the scripts and nothing else from here --
+      # not even git history, and certainly not the network.
+      worktreeSource = lib.fileset.toSource {
+        root = ./.;
+        fileset = ./scripts/git;
+      };
+
       # A dirty tree is normal during editing, so fall back rather than fail.
       revision = self.shortRev or self.dirtyShortRev or "dirty";
 
@@ -372,6 +380,33 @@
             }
             ''
               python3 ${redirectSource}/scripts/python/test_redirects.py
+              touch "$out"
+            '';
+
+          # `git wt clean` deletes worktrees and branches, and decides what to
+          # delete from four questions -- is the tree dirty, are its commits in
+          # the base branch, is the remote branch still there, is anything
+          # unpushed -- that no single git command answers.  Getting one wrong
+          # either loses work or leaves the list as cluttered as it was before
+          # the tool existed, and both failures are silent.  The test builds
+          # its own remote and clones in $TMPDIR, so it needs git and nothing
+          # else.
+          #
+          # The copy and patchShebangs are not ceremony either: the sandbox has
+          # no /usr/bin/env, so a `#!/usr/bin/env bash` script is unrunnable
+          # there -- the kernel reports it as "required file not found", which
+          # reads like a missing script rather than a missing interpreter.  The
+          # test executes git-wt the way a shell does rather than passing it to
+          # bash, because that is how it is used, so the shebang has to work.
+          worktree-tooling = pkgs.runCommandLocal "check-worktree-tooling"
+            {
+              nativeBuildInputs = [ pkgs.git ];
+            }
+            ''
+              cp -r ${worktreeSource}/scripts/git ./git-tools
+              chmod -R u+w ./git-tools
+              patchShebangs ./git-tools
+              bash ./git-tools/test_git_wt.sh
               touch "$out"
             '';
 

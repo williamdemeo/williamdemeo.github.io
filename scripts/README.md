@@ -6,6 +6,36 @@ The Python utilities live under `scripts/python/`, separated from shell scripts 
 
 ---
 
+### `git/git-wt`: starting and finishing work on a branch
+
+`scripts/git/git-wt` turns the five commands that open a worktree into one,
+and the lookup that closes one into another:
+
+```zsh
+wt 82-m4-7-mathematics   # fetch, fast-forward main, create the worktree, cd there
+wt list                  # every worktree, and whether its work has landed
+wt clean --yes           # remove the ones whose work has landed
+```
+
+Two things make it worth its own subdirectory rather than a `git` alias: it
+classifies each worktree by whether its work is safe elsewhere — which needs
+four questions no single git command answers, and which is what makes `clean`
+safe to run without reading it first — and it can change the shell's working
+directory, which a git alias cannot.
+
+Nothing in it is specific to this repository — it reads the layout out of
+whichever one it runs in — so one installed copy serves every project on the
+machine. With `GIT_WT_PROJECTS` set, `wt <project> <branch>` starts work in any
+of them from anywhere and `wt clean --all` sweeps all of them at once.
+
+Installing is two lines in `~/.zshrc`; `make wt-list` and `make wt-clean` work
+without them. See [`git/README.md`](git/README.md) for the states, the
+configuration, and the plain git commands underneath. `make wt-test` runs
+`scripts/git/test_git_wt.sh`, which drives the whole lifecycle against
+throwaway repositories in `$TMPDIR`; `nix flake check` runs it too.
+
+---
+
 ### `gh_project_populate`: automating GitHub project creation
 
 This script is used to create a GitHub project, issues, and labels for a repository

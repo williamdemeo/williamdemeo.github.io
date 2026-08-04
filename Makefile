@@ -67,6 +67,31 @@ clean:
 distclean: clean
 	@rm -rf $(VENV)
 
+# ── Worktrees ───────────────────────────────────────────────────────────────
+#
+# scripts/git/git-wt is the whole tool; these are the two of its commands that
+# do not need to change the shell's working directory, and so can be targets
+# at all.  Starting work on a branch does need to, which is what the `wt`
+# function in scripts/git/wt.sh is for -- one `source` line in ~/.zshrc, and
+# then `wt 82-m4-7-mathematics` from anywhere in the repository.  See
+# scripts/git/README.md.
+
+WT := scripts/git/git-wt
+
+.PHONY: wt-list wt-clean wt-test
+
+## List every worktree, and what `wt clean` would do to each
+wt-list:
+	@$(WT) list
+
+## Remove the worktrees whose work has landed.  Dry run unless YES=1
+wt-clean:
+	@$(WT) clean $(if $(YES),--yes,)
+
+## Unit-test the worktree tooling against throwaway repositories
+wt-test:
+	@scripts/git/test_git_wt.sh
+
 # ── Project plan ────────────────────────────────────────────────────────────
 #
 # docs/GITHUB_PROJECT.md is half hand-written prose and half generated from
