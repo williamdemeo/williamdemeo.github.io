@@ -127,7 +127,7 @@ ABBREVIATIONS = {
 #: and `Editor` are the same word.
 MARKUP = re.compile(r"[*_`~\\{}\[\]()<>|#]+")
 URL = re.compile(r"(?:https?://|www\.|mailto:)\S+", re.I)
-MD_LINK = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+MD_LINK = re.compile(r"\[([^\]]*)\]\(([^)]*)\)")
 
 
 def fold(text: str) -> str:
@@ -141,9 +141,15 @@ def tokens(text: str) -> set[str]:
 
     URLs go first and whole: tokenizing them yields `https`, `github`, `com`
     and a scatter of path fragments, which are either noise or -- worse -- a
-    coincidental match.  Link *text* survives, because that is prose.
+    coincidental match.
+
+    A link contributes both halves, and the URL rule then decides the target's
+    fate.  Dropping every target instead would have been simpler and wrong: the
+    Zola copy writes its referees as `[Clifford Bergman](cbergman@iastate.edu)`,
+    with a bare address and no `mailto:`, so the whole email would have been
+    invisible to the check and `cv.yml` could have dropped it silently.
     """
-    text = MD_LINK.sub(r" \1 ", text)
+    text = MD_LINK.sub(r" \1 \2 ", text)
     text = URL.sub(" ", text)
     text = MARKUP.sub(" ", fold(text))
     words = (ABBREVIATIONS.get(w, w) for w in re.findall(r"[a-z0-9]+", text))

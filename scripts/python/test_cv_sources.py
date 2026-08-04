@@ -57,6 +57,17 @@ check("a URL contributes nothing, but its link text does",
 check("a bare URL contributes nothing at all",
       C.tokens("https://coursera.org/verify/4NP2MX787UAG"), set())
 
+# A link target is only dropped when it is *a URL*.  The Zola copy writes its
+# referees as `[Name](bare@address)`, with no `mailto:`, so a rule that dropped
+# every target would make all seven addresses invisible and let cv.yml lose
+# them without failing anything.  Raised by review on #91.
+check("a link target that is not a URL still contributes",
+      C.tokens("[Clifford Bergman](cbergman@iastate.edu)"),
+      {"clifford", "bergman", "cbergman", "iastate", "edu"})
+
+check("...but a mailto: target is a URL, and still goes",
+      C.tokens("[jb](mailto:jb@math.hawaii.edu)"), {"jb"})
+
 check("digits survive as words; single letters do not",
       C.tokens("Math 2001 x"), {"math", "2001"})
 

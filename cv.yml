@@ -58,15 +58,17 @@ meta:
 contact:
   email: williamdemeo@gmail.com
   url: https://williamdemeo.org
-  aliases:
-    - williamdemeo.org
-    - url
-    - tel
-    - address
-    - Praha 8, Cech Republic
-    - Charles University in Prague, Sokolovska 49/83, 186 75
-    - Department of Algebra
-  # The street addresses and telephone numbers three copies carried are in
+  aliases: [williamdemeo.org]
+  # Six more aliases sat here and all six were dead.  "url", "tel" and
+  # "address" duplicate the field names, which already count as words; the
+  # other three were a Prague institutional address taken from the 2021 LaTeX
+  # in the job-app repository -- not one of the four copies this file is
+  # checked against.  `aliases:` means "how another copy wrote this", so an
+  # alias no copy contains is a provenance claim with nothing behind it.
+  # Removed on review of #91, where a misspelling in one of them is what drew
+  # attention to the fact that none of them was load-bearing.
+  #
+  # The street addresses and telephone numbers the copies do carry are in
   # `omissions:`.  A CV on a public website has no use for them.
 
 research_interests:

@@ -208,7 +208,7 @@ Six kinds, and only the last two are about the CV's content at all.
 | kind | n | why |
 | --- | --- | --- |
 | referees' office addresses and telephone numbers | 29 | The referees are carried, with title and institution. A CV published on a website is not a CV mailed to a search committee, and nothing here will render a phone number. |
-| William's own home address and telephone | 4 | Same, and more so. The Prague *institutional* address is kept, in `contact.aliases`. |
+| William's own home address and telephone | 4 | Same, and more so. `contact:` keeps the email address and the site URL, which are the two a reader could use. |
 | a copy's own title block and list sub-headings | 3 | "CURRICULUM VITÆ … 5 Dec 2021" is about the document, not the career. |
 | `docs/cv.md` page chrome | 6 | The download button, the staleness admonition, and pointers to `about.md` and to #30. #41 replaces all of them. |
 | publication status at the time of writing | 3 | "accepted", "submitted", "to appear". All three works are published, and `bibliography.json` records the version of record. Carrying the status forward would carry something that has since become false. |
