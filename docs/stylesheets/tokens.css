@@ -83,6 +83,18 @@
   --radius-sm: 2px;
   --radius-md: 4px;
   --border-width: 1px;
+
+  /* Motion (ADR-009).  Every duration, delay and easing an animation uses is
+     one of these; a new animation that needs a new number adds a token here,
+     visibly, rather than burying a constant in extra.css.  The values only
+     apply under `prefers-reduced-motion: no-preference` -- the reduced-motion
+     rendering is the final state, not a slower version of the journey. */
+  --motion-draw: 1.4s;          /* one line of a constellation drawing in    */
+  --motion-pop: 0.5s;           /* one star appearing                        */
+  --motion-stagger: 0.12s;      /* per-element offset in a drawn sequence    */
+  --motion-label: 1.2s;         /* captions fading up after the drawing      */
+  --motion-twinkle: 7s;         /* full period of the idle shimmer           */
+  --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* ══ Meridian -- alternative ═══════════════════════════════════════════════
