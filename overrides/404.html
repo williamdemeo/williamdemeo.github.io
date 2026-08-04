@@ -38,10 +38,12 @@
   textContent only (the path is attacker-chosen text and must never be
   parsed as markup), and the static `ThisPage` stands when scripts are off.
 
-  The goal sits in a small terminal window: a sunken title bar, three
-  monochrome dots (the token system has no traffic-light colours, and the
-  site's depth is carried by hairlines, not ornament) and `404.agda` as
-  the filename.
+  The goal sits in the same hairline-and-radius box as every real code
+  block on the site (extra.css draws it on .highlight), at the same
+  --type-code size: the block is supposed to read as authentic Agda, and
+  authentic Agda here looks exactly like this.  A terminal-window chrome
+  (title bar, dots, filename) was tried and reverted on review -- the
+  wire-frame box is the site's voice.
 
   The Pygments spans in the goal block follow pygments.lexers.AgdaLexer's
   vocabulary (`nf` for the defined name, `ow` for `:` and `=`), so the block
@@ -103,64 +105,21 @@
       color: var(--c-fg-muted);
     }
 
-    /* The window owns the width, the border and the corners; the highlight
-       block inside it gives both up (extra.css draws them on .highlight,
-       and this rule wins the tie by coming later in <head>). */
-    .md-typeset .goal-404__term {
+    .md-typeset .goal-404__goal {
       width: fit-content;
       max-width: 100%;
       text-align: left;
-      background-color: var(--c-bg-raised);
-      border: var(--border-width) solid var(--c-line);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-
-    .md-typeset .goal-404__termbar {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-4);
-      background-color: var(--c-bg-sunken);
-      border-bottom: var(--border-width) solid var(--c-line);
-    }
-
-    .md-typeset .goal-404__dot {
-      width: var(--space-2);
-      height: var(--space-2);
-      border-radius: 50%;
-      background-color: var(--c-line-strong);
-    }
-
-    .md-typeset .goal-404__termtitle {
-      margin-left: var(--space-2);
-      font-family: var(--font-mono), monospace;
-      font-size: var(--type-ui);
-      color: var(--c-fg-muted);
-    }
-
-    .md-typeset .goal-404__goal {
-      border: 0;
-      border-radius: 0;
     }
 
     .md-typeset .goal-404__goal pre {
       margin: 0;
     }
 
-    /* extra.css pins pre > code to --type-code; this block is the page and
-       gets heading sizes instead -- h3, and h2 from Material's own 60em
-       breakpoint up.  The h3 size is also what keeps the wider line under
-       360px on a phone. */
+    /* The type stays at the --type-code size every real block inherits;
+       only the padding is more generous than a block in running prose,
+       so the box holds the centre of an otherwise empty page. */
     .md-typeset .goal-404__goal pre > code {
-      font-size: var(--type-h3);
       padding: var(--space-6) var(--space-8);
-    }
-
-    @media screen and (min-width: 60em) {
-      .md-typeset .goal-404__goal pre > code {
-        font-size: var(--type-h2);
-      }
     }
 
     /* agda2-mode paints an interactive hole green; this one wears the
@@ -221,15 +180,7 @@
   <div class="goal-404">
     <div class="goal-404__sky" aria-hidden="true"></div>
     <h1 class="goal-404__eyebrow">404 · page not found</h1>
-    <div class="goal-404__term">
-      {#- Window chrome only; nothing in the bar is content. -#}
-      <div class="goal-404__termbar" aria-hidden="true">
-        <span class="goal-404__dot"></span>
-        <span class="goal-404__dot"></span>
-        <span class="goal-404__dot"></span>
-        <span class="goal-404__termtitle">404.agda</span>
-      </div>
-      <div class="highlight goal-404__goal">
+    <div class="highlight goal-404__goal">
 {#- Column 0 from here: everything inside <pre> renders verbatim.  The
     span with data-goal-path is rewritten by the script below to name the
     URL the visitor actually asked for; `ThisPage` is what stands without
@@ -237,7 +188,6 @@
     name, so the path reads as a qualified identifier. -#}
 <pre><code><span class="nf">_</span> <span class="ow">:</span> ∃ <span class="nf" data-goal-path>ThisPage</span>
 _ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span></code></pre>
-      </div>
     </div>
     <p class="goal-404__hint">This hole cannot be filled.  Try the index, or search.</p>
     <nav class="goal-404__paths" aria-label="Where to go instead">
