@@ -63,6 +63,12 @@
   --measure: 33rem;              /* ~74 characters at the body size */
   --measure-heading: 38rem;
 
+  /* The height the home hero holds open (#93).  Its second column is empty
+     until M3-2d's terminal arrives, and without a floor the stage would
+     collapse to the copy's height; the value is what the 440x370 portrait
+     used to establish at full content width. */
+  --hero-stage: 20rem;
+
   /* 4px grid at a 20px root. */
   --space-1: 0.2rem;
   --space-2: 0.4rem;

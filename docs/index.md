@@ -1,27 +1,16 @@
 ---
-# Two things here look like they want to be tidied up, and both are load-bearing.
-# (A YAML comment rather than an HTML one, for the reason docs/projects/index.md
-# gives: front matter is parsed and discarded, an HTML comment ships.)
+# The home page is the one page without the docs frame: `hide` drops the nav
+# sidebar and the TOC here and nowhere else (M3-2a, #93).  Inner pages keep
+# the frame they genuinely benefit from.
 #
-# 1. The "what I'm working on now" block is a bold, dated lead-in rather than an
-#    `## h2`.  `.md-typeset h2` carries a full-width border-bottom and nothing
-#    sets `clear`, so an h2 that begins while the portrait is still in flow
-#    draws its rule behind the photo and leaves a stub of rule to the right of
-#    it -- a block box is not shortened by a float, only its line boxes are.
-#    Promoting this to an h2 reintroduces that unless the hero grows to about
-#    nine lines or the portrait shrinks to about 100px.  See #18.
-#
-# 2. The portrait is `align=left` *and* a `style` width, and the split is
-#    deliberate.  `align=left` is Material's documented way to float an image,
-#    and it is what selects `img[align=left]`, the rule that gives the float
-#    its gutter -- writing the float in the `style` instead drops that, and the
-#    prose then runs to within 4px of the photograph (measured at 1440px).  The
-#    width has to be a percentage, or the float squeezes the prose to about
-#    fifteen characters a line at 360px, and a percentage is not a conforming
-#    value for the `width` *attribute* -- so it goes in the `style`, where it
-#    is ordinary CSS.  Both are why the first `h2` on the page is "Featured
-#    projects", which starts below the float.  #88 would replace all of this
-#    with a component.
+# The top of the page is a hero grid, not a float.  The grid's second column
+# is deliberately empty: it is reserved for the typed-proof terminal of M3-2d
+# (#96), and until that ships it is clear sky for the constellation backdrop
+# (M3-2b, #94).  A portrait sat there in this page's first cut; it is gone
+# rather than moved -- a photograph is decoration on a page whose argument is
+# evidence -- and #88 (floated images) remains open for other pages.  The h1
+# is the claim, not the name -- the name is in the header bar, the eyebrow
+# line, and the <title> that `title:` below sets for nav and search.
 #
 # The card order is a subset of ADR-008's, in ADR-008's relative order, and the
 # tags are copied from docs/projects/index.md.  Neither is a per-page call.
@@ -33,11 +22,31 @@ description: >-
   Mathematician and formal verification engineer working on machine-checked
   mathematics, interactive theorem proving in Agda, and AI tooling for proof
   assistants.
+hide:
+  - navigation
+  - toc
 ---
 
-# William DeMeo
+<div class="hero" markdown>
+<div class="hero-copy" markdown>
 
-![William DeMeo at the wheel of a VW bus](assets/images/william-demeo-bus.jpg){ align=left width="440" height="370" style="width: 26%" }
+William DeMeo · formal verification × AI
+{ .hero-eyebrow }
+
+# Mathematics, machine-checked.
+
+Proofs and production systems in Agda — and tooling that lets language
+models drive the proof assistant, with the typechecker as the reward
+signal.
+{ .hero-claim }
+
+[Explore the projects](projects/index.md){ .md-button .md-button--primary }
+[About me](about.md){ .md-button }
+{ .hero-actions }
+
+</div>
+
+</div>
 
 Mathematician by training with a PhD in universal algebra and lattice theory; 
 formal verification engineer by trade.  I work on **machine-checked

@@ -456,6 +456,81 @@
   background-color: var(--c-accent);
 }
 
+/* ── home hero (M3-2a, #93) ──────────────────────────────────────────────────
+ *
+ *   <div class="hero" markdown>
+ *   <div class="hero-copy" markdown>
+ *   eyebrow line {.hero-eyebrow}
+ *   # Display claim
+ *   One-paragraph claim. {.hero-claim}
+ *   [action](…){.md-button .md-button--primary} [action](…){.md-button}
+ *   {.hero-actions}
+ *   </div>
+ *   </div>
+ *
+ * A grid, not a float, and its second column is deliberately empty.  The
+ * column is reserved for M3-2d's typed-proof terminal (#96); until that
+ * ships it is clear sky for the constellation backdrop (M3-2b, #94).  The
+ * min-block-size below is what keeps that sky open: it holds the stage at
+ * the height the portrait used to establish, so the empty column reads as
+ * canvas rather than collapse, and `align-items: center` seats the copy in
+ * it.
+ */
+
+.md-typeset .hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-12);
+  align-items: center;
+  margin: var(--space-8) 0;
+  min-block-size: var(--hero-stage);
+}
+
+/* Grid items refuse to shrink below their content's min-width by default;
+ * without this a long code line in the second column (M3-2d) would widen the
+ * page rather than scroll. */
+.md-typeset .hero > * {
+  min-width: 0;
+}
+
+.md-typeset .hero-eyebrow {
+  font-size: var(--type-small);
+  font-weight: var(--strong-weight);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* The h1 keeps its type tokens; only its bottom margin tightens, because the
+ * hero's vertical rhythm is the grid's business. */
+.md-typeset .hero h1 {
+  margin-bottom: var(--space-4);
+}
+
+.md-typeset .hero-claim {
+  color: var(--c-fg-muted);
+  max-width: var(--measure);
+}
+
+.md-typeset .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: 0;
+}
+
+/* Material's mobile breakpoint, same value the timeline uses.  Stacked, the
+ * stage is not held open: a phone screen has no second column to keep clear,
+ * so the min-block-size returns to auto and the copy sets the height. */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    min-block-size: auto;
+  }
+}
+
 /* ── components ─────────────────────────────────────────────────────────────
  *
  * Four components carry most of the site: a project card, a publication entry,
