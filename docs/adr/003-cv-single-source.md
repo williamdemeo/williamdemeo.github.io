@@ -17,10 +17,39 @@ all four are now read by a check in this repository:
 
 | copy | as of | where it is read from |
 | --- | --- | --- |
-| `williamdemeo/cv`, `README.md` | January 2025 | `import/legacy-cv/cv-repo-README.md` |
+| `williamdemeo/cv`, `README.md` | the 2024 CV | `import/legacy-cv/cv-repo-README.md` |
 | `williamdemeo/job-app`, `cv/demeo_cv.pdf` (GitLab) | June 2022 | `import/legacy-cv/demeo_cv-2022.txt` |
 | the Zola site's `content/cv/index.md` | December 2021 | `import/zola-content/cv/index.md` |
 | `docs/cv.md` | current | in place |
+
+### The fifth copy, which turned out to be the first one
+
+A newer CV was found afterwards, in a **private** GitLab repository, as LaTeX
+alongside the PDF and Markdown it builds. It is not a fifth source, because it
+is not a fifth document: **its Markdown is byte-identical to the
+`williamdemeo/cv` README above** — same SHA-256,
+`7060955340c8e03906643f62058ae5a9abd5b2b06ba2d641a289a4c62e9cdeea`. That
+repository's README is a conversion of this LaTeX, so "January 2025" was the
+repository's last commit date and the 2024 CV is what it contains.
+
+The PDF was checked rather than assumed: its text was extracted with
+`pdf_text.py` and every entry tested against `cv.yml`. Of 404 entries, 19 were
+uncovered, and all 19 fall in categories already settled — eleven referee
+addresses, one venue abbreviation, four section headings, one extraction
+artifact, and a Boulder home address, the last being the same kind of thing as
+the four contact omissions below. **Nothing in it is missing from `cv.yml`.**
+
+It also explains a defect. `MathematicsHonolulu` and `XXXIXChalmers`, which
+`aliases:` carries as run-together words, are in the LaTeX as
+`Mathematics\hfill Honolulu` and `…\scshape{xxxix}}\hfill Chalmers`: the
+conversion to Markdown drops `\hfill` and closes the gap. They are conversion
+artifacts, not typos anyone made.
+
+Two things follow. The private repository stays private — only the CV was
+needed, and a document bound for a public website is a different thing from the
+applications repository around it. And the copies stay at four: a fourth
+rendering of a document already read adds 404 inventory rows, a dozen omission
+declarations, and no information.
 
 #16 guessed the GitLab PDF might be out of reach. It is not: that repository is
 public, and `cv/demeo_cv.pdf` turns out to be byte-identical to the
@@ -31,7 +60,7 @@ years older than the README.
 No copy is a superset of any other. Each of the three legacy copies carries
 material that no other one has:
 
-- **Only the 2025 README** has the RelationalAI appointment, the NJIT
+- **Only the 2024 README** has the RelationalAI appointment, the NJIT
   appointment as *Senior University Lecturer*, three of the five NJIT courses,
   the Cardano FMBC 2024 paper, the two 2024 Agda Implementors' Meetings, and the
   TYPES 2021 talk.
@@ -260,7 +289,7 @@ for the reason ADR-006 gives about the BibTeX repository: it makes the build
 depend on a second repository being reachable, and #15 already showed what a
 cross-repository dependency costs to verify from a sandbox.
 
-**Adopt the 2025 README wholesale and diff by eye.** Rejected. It is the most
+**Adopt the 2024 README wholesale and diff by eye.** Rejected. It is the most
 current copy and the most structured, and it is still missing the University of
 Hawaii graduate service, the South Carolina advising, J.B. Nation, the NATO ASI,
 and the two pre-2010 talks. "Diff it against the older copies" is what #16 asked

@@ -1,7 +1,7 @@
 # The CV, as data.  The only authoritative copy.  See ADR-003.
 #
 # Four copies of the CV existed and they disagreed: the `williamdemeo/cv`
-# README (January 2025), the Zola site's `cv/index.md` (December 2021), the
+# README (the 2024 CV), the Zola site's `cv/index.md` (December 2021), the
 # `demeo_cv.pdf` in the GitLab job-app repository (June 2022), and `docs/cv.md`.
 # They are merged here.  The three that are not `docs/cv.md` are snapshotted
 # under `import/legacy-cv/` and nothing edits them.
@@ -31,10 +31,11 @@
 #              a source entry, so an abbreviation only one copy used lives here
 #              rather than being lost or smuggled into the prose.
 #
-#              Three of them are not variants but errors -- "Adjunct
-#              Instructor", "Ali Latfi", "MathematicsHonolulu" -- kept only so
-#              the copies that contain them still resolve to the right entry.
-#              Each says so where it sits.  Nothing renders `aliases:`.
+#              Three are not variants at all.  "Adjunct Instructor" and "Ali
+#              Latfi" are errors, and "MathematicsHonolulu" is a conversion
+#              artifact -- a dropped `\hfill`.  All three are kept only so the
+#              copies containing them still resolve to the right entry.  Each
+#              says so where it sits.  Nothing renders `aliases:`.
 #
 # `disputed:`  Two copies assert different facts and the disagreement is not
 #              the merge's to settle.  **None are open**: the three this merge
@@ -166,7 +167,7 @@ appointments:
     note: >-
       Developed the Standard Library of the Rel declarative programming
       language.  9 months.
-    # Present in the 2025 README and in docs/about.md; in neither the 2021 Zola
+    # Present in the 2024 README and in docs/about.md; in neither the 2021 Zola
     # copy nor the 2022 PDF, both of which predate or overlap it.
 
   - role: Postdoctoral Research Fellow
@@ -220,7 +221,7 @@ appointments:
   - role: Senior Research Scientist
     kind: industry
     department: Imaging Research Dept.
-    # The 2025 README writes the same paragraph in the past tense, and the
+    # The 2024 README writes the same paragraph in the past tense, and the
     # PDF sets NEO and the lab acronyms in small caps, one per line.
     aliases: [Research Scientist, Digital Imaging Research, Industry Appointments,
               NEO, Developed]
@@ -266,7 +267,9 @@ grants_and_awards:
     for: for Outstanding Research in Mathematics
     place: Honolulu
     year: 2011
-    aliases: [MathematicsHonolulu]  # the 2025 README drops the space here
+    # Not a typo: the LaTeX reads "Mathematics\hfill Honolulu", and the
+    # conversion to Markdown drops the \hfill and closes the gap.  ADR-003.
+    aliases: [MathematicsHonolulu]
 
   - title: Best Paper Award
     for: International Symposium on Musical Acoustics
@@ -607,7 +610,7 @@ talks:
     place: Maui
     year: 2004
     # In the Zola copy only.  The job-app LaTeX has it commented out, and the
-    # 2025 README drops the pre-2009 talks entirely.
+    # 2024 README drops the pre-2009 talks entirely.
 
   - title: Approximating eigenvalues of large stochastic matrices
     venue: 8th Copper Mt. Conference on Iterative Methods
@@ -792,7 +795,7 @@ summer_schools:
     dates: July 10--14, 2017
     year: 2017
     topics: bringing proof technology into mainstream mathematics
-    aliases: [Topic]  # the 2025 README writes the label in the singular
+    aliases: [Topic]  # the 2024 README writes the label in the singular
     url: https://www.newton.ac.uk/event/bprw01
 
   - title: LMS/EPSRC Short Course in Computational Group Theory

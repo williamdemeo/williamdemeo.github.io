@@ -12,7 +12,7 @@ every copy reached `cv.yml` or was declared an omission there.
 
 | file | copy | as of |
 | --- | --- | --- |
-| `cv-repo-README.md` | `github.com/williamdemeo/cv`, `README.md` | January 2025 |
+| `cv-repo-README.md` | `github.com/williamdemeo/cv`, `README.md` | the 2024 CV |
 | `demeo_cv-2022.txt` | `gitlab.com/williamdemeo/job-app`, `cv/demeo_cv.pdf` | June 2022 |
 
 The other two copies were already in this repository and are read in place:
