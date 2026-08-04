@@ -31,7 +31,9 @@ function proofReplay() {
   function ms(name, fallback) {
     var raw = style.getPropertyValue(name).trim();
     var n = parseFloat(raw);
-    if (!n) return fallback;
+    // NaN means the token is absent; 0 is a value someone may set on
+    // purpose, and an instant type-in is still an honest replay.
+    if (Number.isNaN(n)) return fallback;
     return raw.endsWith("ms") ? n : n * 1000;
   }
   var TYPE = ms("--motion-type", 24);

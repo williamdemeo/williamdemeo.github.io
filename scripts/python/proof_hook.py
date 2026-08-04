@@ -80,7 +80,10 @@ def _load(config):
 
 def _code(line: str, names: set[str]) -> str:
     """One line of Agda, coloured by the rules stated above."""
-    if line.startswith("--"):
+    # The stripped line, not the raw one: the vignette lives inside an
+    # anonymous module, so its comment lines arrive indented -- and a line
+    # whose first token is `--` is wholly a comment wherever it starts.
+    if line.lstrip().startswith("--"):
         return f'<span class="c1">{escape(line)}</span>'
     out = []
     for atom in ATOMS.split(line):
