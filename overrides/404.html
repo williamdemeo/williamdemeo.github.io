@@ -31,12 +31,19 @@
 
   The empty .goal-404__sky element is the mount point for the constellation
   background (#94, M3-2b), which arrives slightly scattered behind the goal.
-  Text-first until that lands: nothing here moves or fetches.  The one
-  script is six lines at the bottom that put the missing URL's own path
-  into the goal -- GitHub Pages serves this file for *every* wrong URL, so
-  the path can only be known in the visitor's browser.  It writes through
-  textContent only (the path is attacker-chosen text and must never be
-  parsed as markup), and the static `ThisPage` stands when scripts are off.
+  Text-first until that lands: nothing here fetches, and the only motion is
+  the comment line typing itself out once -- pure CSS, one character per
+  steps() frame over a clip-path, so the full sentence is in the DOM from
+  the start (screen readers are never made to wait), the box never changes
+  size, and prefers-reduced-motion turns it off entirely.  If #94's motion
+  ADR sets stricter rules, this is the one animation to bring in line.
+
+  The one script is six lines at the bottom that put the missing URL's own
+  path into the goal -- GitHub Pages serves this file for *every* wrong
+  URL, so the path can only be known in the visitor's browser.  It writes
+  through textContent only (the path is attacker-chosen text and must never
+  be parsed as markup), and the static `ThisPage` stands when scripts are
+  off.
 
   The goal sits in the same hairline-and-radius box as every real code
   block on the site (extra.css draws it on .highlight), at the same
@@ -143,9 +150,50 @@
       display: none;
     }
 
-    .md-typeset .goal-404__hint {
-      color: var(--c-fg-muted);
-      max-width: var(--measure);
+    /* The compiler's remark arrives the way it would in a buffer: typed.
+       The animation only unclips text that is already there, one character
+       per step (56 steps, 56 characters -- keep the two in step if the
+       sentence changes), so the box never resizes and ~25 characters a
+       second reads as quick typing after a beat to find the goal. */
+    .md-typeset .goal-404__typed {
+      display: inline-block;
+      animation: goal-404-type 2.2s steps(56, end) 0.8s both;
+    }
+
+    @keyframes goal-404-type {
+      from { clip-path: inset(0 100% 0 0); }
+      to   { clip-path: inset(0 0 0 0); }
+    }
+
+    /* No base clip-path is set, so switching the animation off leaves the
+       whole line standing.  Same below 45em, where the line has to wrap:
+       a steps() clip over two wrapped lines reveals them in parallel,
+       which is a curtain, not typing. */
+    @media (prefers-reduced-motion: reduce) {
+      .md-typeset .goal-404__typed {
+        animation: none;
+      }
+    }
+
+    @media screen and (max-width: 44.9375em) {
+      .md-typeset .goal-404__typed {
+        animation: none;
+        white-space: normal;
+      }
+    }
+
+    /* An Agda comment, and on this site comments are grey -- but this one
+       is the page speaking, so it wears the classic editor green.  Pinned
+       per scheme like the syntax colours in extra.css: dark carries the
+       palette's own string green (12.5:1 on the raised surface); in light
+       that token measures 4.59:1 there, thinner than anything else on the
+       site, so light gets a deeper leaf of the same green, 6.0:1. */
+    [data-md-color-scheme="default"] .goal-404__typed {
+      color: #136b34;
+    }
+
+    [data-md-color-scheme="slate"] .goal-404__typed {
+      color: #86efac;
     }
 
     .md-typeset .goal-404__paths {
@@ -187,9 +235,10 @@
     scripts.  `∃ cv/index.html` is even parseable Agda: `/` is legal in a
     name, so the path reads as a qualified identifier. -#}
 <pre><code><span class="nf">_</span> <span class="ow">:</span> ∃ <span class="nf" data-goal-path>ThisPage</span>
-_ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span></code></pre>
+_ <span class="ow">=</span> <span class="goal-404__hole">{! !}</span>
+
+<span class="goal-404__typed">-- The hole cannot be filled.  Try the index, or search.</span></code></pre>
     </div>
-    <p class="goal-404__hint">This hole cannot be filled.  Try the index, or search.</p>
     <nav class="goal-404__paths" aria-label="Where to go instead">
       {#- base_url, not `nav.homepage.url | url`: the latter renders as
           "/."  here (no `page` object to relativise against), and for an
