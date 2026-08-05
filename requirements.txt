@@ -11,12 +11,20 @@
 # precisely the failure mode pinning avoids.
 #
 # These pin the direct dependencies only, not the full transitive closure, and
-# not Python itself or the Cairo/Pango libraries the social-card plugin needs
-# in M3-5 -- none of which pip can pin.  flake.lock pins all of them, which is
-# why the flake is the primary path.
+# not Python itself or the C libraries underneath the social-card plugin --
+# Cairo and friends come from the operating system, and pip cannot pin them.
+# flake.lock pins all of them, which is why the flake is the primary path.
+#
+# The [imaging] extra is what lets this path build the social cards (M3-5):
+# it brings Pillow and CairoSVG, unpinned like every other transitive
+# dependency, at whatever versions mkdocs-material 9.5.49 accepts.  The
+# machine still has to provide libcairo itself (on Debian/Ubuntu:
+# `apt-get install libcairo2`); a missing library surfaces as the plugin's
+# "cairosvg ... crashed" error at build time, not at install time.
 #
 # Keep in step with flake.nix: `nix flake check` runs checks.requirements-pins,
-# which fails the build if a version here does not match the Nix environment.
+# which fails the build if a version here does not match the Nix environment,
+# or if an extra named here is not satisfied there.
 
 mkdocs==1.6.1
-mkdocs-material==9.5.49
+mkdocs-material[imaging]==9.5.49

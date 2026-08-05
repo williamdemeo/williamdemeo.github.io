@@ -261,7 +261,8 @@ redirect-test: $(MKDOCS_DEP)
 # node and a Chromium; nothing from npm.  Set CHROME=/path/to/chrome if one is
 # not found automatically.  See #17.
 
-.PHONY: fonts fonts-check font-audit offline-audit contrast-audit design-audit
+.PHONY: fonts fonts-check favicon favicon-check
+.PHONY: font-audit offline-audit contrast-audit design-audit
 
 FONT_PYTHON ?= python3
 
@@ -272,6 +273,20 @@ fonts:
 ## Report whether docs/assets/fonts/ is stale; writes nothing
 fonts-check:
 	@$(FONT_PYTHON) scripts/python/build_fonts.py --check
+
+# The favicon generator, unlike `fonts`, runs on $(PYTHON): cairosvg and
+# Pillow arrive with the dev shell (they are the social plugin's own
+# imaging dependencies), so no extra install is needed there.  On the pip
+# path the script says what is missing rather than tracing back.
+# `nix flake check` runs the check, so a drifted commit fails CI.
+
+## Regenerate the site mark: header/card logo, favicons, apple-touch icon
+favicon: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_favicon.py
+
+## Report whether the committed favicon files match the generator
+favicon-check: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_favicon.py --check
 
 ## Report every font the browser actually rendered with; fails on a fallback
 font-audit: build

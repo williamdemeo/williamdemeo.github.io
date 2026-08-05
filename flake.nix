@@ -348,6 +348,23 @@
               touch "$out"
             '';
 
+          # The favicon, the apple-touch icon and the header/card mark are
+          # committed renders of one geometry in gen_favicon.py (M3-5).  A
+          # committed binary nothing compares against is the drift cv-render
+          # exists to prevent, so this re-renders and compares bytes.  It
+          # needs only what the site build already carries: the generator,
+          # its outputs and the icon all live inside siteSource, and cairosvg
+          # comes with pythonEnv's imaging dependencies.
+          favicon = pkgs.runCommandLocal "check-favicon"
+            {
+              nativeBuildInputs = [ this.pythonEnv ];
+              buildInputs = this.nativeLibs;
+            }
+            ''
+              python3 ${siteSource}/scripts/python/gen_favicon.py --check
+              touch "$out"
+            '';
+
           # requirements.txt is the supported non-Nix path (ADR-004).  Two
           # dependency sets are only safe while they agree, so this fails the
           # build when they do not.

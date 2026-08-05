@@ -71,6 +71,9 @@
 {% endblock %}
 
 {% block extrahead %}
+  {#- main.html's extrahead is the favicon links; keep them, and keep these
+      styles after them so they stay last in <head>. -#}
+  {{ super() }}
   <style>
     .md-typeset .goal-404 {
       position: relative;

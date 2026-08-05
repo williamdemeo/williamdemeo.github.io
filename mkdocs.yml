@@ -1,9 +1,9 @@
 # MkDocs configuration for williamdemeo.github.io
 #
 # Kept deliberately small at this stage.  Plugin choices that matter later --
-# blog (M6-1), redirects (M2-6), social cards (M3-5), RSS -- are added by the
-# issues that need them, so a broken plugin is always attributable to the
-# change that introduced it.
+# RSS, and before it blog (M6-1), redirects (M2-6), social cards (M3-5) --
+# are added by the issues that need them, so a broken plugin is always
+# attributable to the change that introduced it.
 
 site_name: William DeMeo
 site_description: >-
@@ -44,6 +44,12 @@ copyright: >-
 # by adding the file to `not_in_nav` leaves a green `--strict` build that
 # publishes the template anyway.  Also checked, not assumed.  See ADR-008.
 #
+# `assets/fonts/cards/` is a build input, not a site asset: the static TTFs
+# the social plugin rasterises with (M3-5), read from the source tree by
+# scripts/python/social_fonts_hook.py.  No page references a TTF -- the
+# browser gets WOFF2 -- so shipping them would be dead weight in every
+# deploy.
+#
 # Nothing in the built site may link to it: an excluded file is not a link
 # target, and `--strict` says so.
 exclude_docs: |
@@ -51,6 +57,7 @@ exclude_docs: |
   adr/
   _snippets/
   projects/_template.md
+  assets/fonts/cards/
 
 # Reachable by URL but deliberately absent from the nav.  Declaring it here
 # rather than leaving it undeclared keeps `--strict` output clean, so a page
@@ -73,10 +80,12 @@ not_in_nav: |
 theme:
   name: material
   language: en
-  # Two overrides: partials/source.html, which drops the attribute that
+  # The overrides: partials/source.html, which drops the attribute that
   # makes Material fetch repository facts from api.github.com on every page
-  # load, and 404.html, which replaces Material's boilerplate not-found page
-  # with an unfillable Agda goal (#98).  Each file carries its reasoning.
+  # load; 404.html, which replaces Material's boilerplate not-found page
+  # with an unfillable Agda goal (#98); main.html, which adds the two
+  # favicon links base.html has no knob for (M3-5); and .icons/, the site's
+  # mark as a custom icon.  Each file carries its reasoning.
   custom_dir: overrides
   features:
     - navigation.instant
@@ -125,8 +134,18 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+  # The mark (M3-5, #21): the five-element fence poset, a W of stars, from
+  # the same constellation family as the hero's lattices.  One geometry in
+  # scripts/python/gen_favicon.py generates the icon, both favicons and the
+  # apple-touch icon; `make favicon` regenerates, `make favicon-check`
+  # fails when the committed files drift.  `icon.logo` rather than `logo:`
+  # so each consumer colours it itself -- currentColor in the header, the
+  # card's text colour on social cards -- instead of shipping a colour that
+  # is right on one background and wrong on the other.
+  favicon: assets/favicon.png
   icon:
     repo: fontawesome/brands/github
+    logo: constellation-w
 
 extra_css:
   # Order matters: the faces have to be declared before the tokens that name
@@ -200,6 +219,32 @@ markdown_extensions:
 
 plugins:
   - search
+
+  # Social cards (M3-5, #21).  Every page gets a 1200x630 PNG under
+  # assets/images/social/, and the og:/twitter: meta tags that point at it --
+  # the plugin injects those itself through page.meta, so no template
+  # override is involved.  What a shared link shows is the page's
+  # `description:`, falling back to site_description above.
+  #
+  # The layout is the community edition's fixed one, themed to Constellation:
+  # the dark scheme's page background and foreground from tokens.css, which
+  # is the pair a card is read against in a feed.  Dark is also the site's
+  # default scheme, so a card and the page it opens agree.
+  #
+  # `font_family: Constellation` is deliberately not a Google Fonts name.
+  # The plugin resolves a family from its cache and only falls back to
+  # fetching from fonts.google.com when the cache has no such directory;
+  # scripts/python/social_fonts_hook.py seeds the cache from
+  # docs/assets/fonts/cards/ before the plugin looks (see the hooks list
+  # below), so Regular is Inter 400 and Bold is Space Grotesk 600 -- the
+  # site's own faces, self-hosted like every other one (#17).  If the seed
+  # ever goes missing the build fails loudly at Google's door instead of
+  # silently shipping Roboto cards.
+  - social:
+      cards_layout_options:
+        background_color: "#0c0e1d"   # --c-bg, dark scheme (tokens.css)
+        color: "#c3c8de"              # --c-fg, dark scheme
+        font_family: Constellation
 
   # The blog engine (M6-1, #35).  It ships *inside* mkdocs-material 9.5.49,
   # which requirements.txt already pins, so enabling it costs no dependency.
@@ -300,6 +345,11 @@ hooks:
   # typed-proof terminal's completed session, final state in the HTML.
   # `make proof` re-runs the session; see #96 and ADR-009.
   - scripts/python/proof_hook.py
+  # Copies the committed card faces into the social plugin's font cache
+  # before the plugin resolves them (it runs ahead of the plugin via event
+  # priority), so card generation never contacts Google Fonts -- on any
+  # machine, or in the sandboxed Nix build.  See the `social` entry above.
+  - scripts/python/social_fonts_hook.py
 
 nav:
   - Home: index.md

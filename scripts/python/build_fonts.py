@@ -19,6 +19,11 @@ and CI -- never runs this and never needs the network.
 Sources are pinned by SHA-256 rather than by a git ref.  Upstream moving a
 branch is exactly the failure this should catch, and a hash catches it whatever
 the URL says.
+
+The social-card faces (CARD_FACES below) ride the same pipeline -- same pinned
+sources, same instance locations, same repertoire -- but are emitted as static
+TTF for Pillow rather than WOFF2 for the browser, and appear in no @font-face
+rule.  See the comment above CARD_FACES.
 """
 from __future__ import annotations
 
@@ -198,6 +203,35 @@ LICENSES = [
     ("OFL-SpaceGrotesk.txt", f"{GF}/spacegrotesk/OFL.txt"),
 ]
 
+# ── social-card faces (M3-5, #21) ───────────────────────────────────────────
+#
+# The social plugin rasterises through Pillow, which reads TTF, not WOFF2, so
+# the two faces its cards use are emitted a second time here as static TTF
+# instances -- same pinned sources, same instance locations, same prose
+# repertoire as the text faces above.  They ship in the repository rather
+# than being fetched at build time because the plugin's own fallback is to
+# download from fonts.google.com, and nothing in this project may fetch a
+# font from anyone (#17); the Nix sandbox could not anyway.
+#
+# The filenames are load-bearing.  The plugin resolves a style by listing
+# `<cache_dir>/fonts/<family>/` and matching the file's stem against the
+# style name, so `Regular.ttf` and `Bold.ttf` under a directory named
+# `Constellation` are exactly what social_fonts_hook.py copies into the
+# cache: the card's titles render in the display face and its description in
+# the body face, which is the same division of labour tokens.css gives them.
+# "Bold" is Space Grotesk at wght 600, not 700, because 600 is
+# --display-weight -- the weight every heading on the site carries.
+CARD_FACES = [
+    Face("cards/Constellation/Regular.ttf", "Inter",
+         f"{GF}/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+         "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+         weight=400, axes={"wght": 400, "opsz": 16}),
+    Face("cards/Constellation/Bold.ttf", "Space Grotesk",
+         f"{GF}/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf",
+         "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+         weight=600, axes={"wght": 600}),
+]
+
 
 # ── plumbing ────────────────────────────────────────────────────────────────
 
@@ -257,7 +291,8 @@ def unicode_ranges(codepoints: set[int]) -> str:
     return ",".join(out)
 
 
-def subset(data: bytes, chars: set[str], axes: dict) -> tuple[bytes, int, set[int]]:
+def subset(data: bytes, chars: set[str], axes: dict,
+           flavor: str | None = "woff2") -> tuple[bytes, int, set[int]]:
     font = TTFont(io.BytesIO(data), fontNumber=0)
     if axes and "fvar" in font:
         have = {a.axisTag for a in font["fvar"].axes}
@@ -279,7 +314,7 @@ def subset(data: bytes, chars: set[str], axes: dict) -> tuple[bytes, int, set[in
     # run produces different bytes, which makes `--check` useless and every
     # rebuild a diff.
     font.recalcTimestamp = False
-    font.flavor = "woff2"
+    font.flavor = flavor
     buf = io.BytesIO()
     font.save(buf)
     n = len(font.getGlyphOrder())
@@ -331,23 +366,31 @@ def main() -> int:
 
     written, css, total, stale = [], [], 0, []
 
-    for face in FACES:
+    for face in FACES + CARD_FACES:
         data = fetch(face.url, face.sha256)
         if face.charset == "text":
             cmap = set(TTFont(io.BytesIO(data), lazy=True).getBestCmap())
             chars = text_charset(cmap)
         else:
             chars = {"symbols": symbols, "mathalpha": mathalpha}[face.charset]
-        blob, nglyphs, covered = subset(data, chars, face.axes)
+        # Card faces are plain TTF for Pillow, and no @font-face refers to
+        # them: no page loads these files, so they belong in the table below
+        # but not in fonts.css.
+        card = face in CARD_FACES
+        blob, nglyphs, covered = subset(data, chars, face.axes,
+                                        flavor=None if card else "woff2")
         path = OUT / face.out
         missing = {ord(c) for c in chars} - covered
         if args.check:
             if not path.exists() or path.read_bytes() != blob:
                 stale.append(face.out)
         else:
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(blob)
         total += len(blob)
         written.append((face, len(blob), nglyphs, len(covered), missing))
+        if card:
+            continue
         css.append(
             f"@font-face {{\n"
             f"  font-family: '{face.family}';\n"

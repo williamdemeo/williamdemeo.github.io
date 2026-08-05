@@ -1,3 +1,12 @@
+---
+title: Publications
+description: >-
+  Publications of William DeMeo: universal algebra and lattice theory,
+  constraint satisfaction, formal verification in Agda, and signal
+  processing — generated from one bibliography, checked against the
+  publishers of record.
+---
+
 # Publications
 
 Universal algebra and lattice theory, constraint satisfaction, formal
