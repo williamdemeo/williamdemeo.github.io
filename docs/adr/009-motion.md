@@ -108,3 +108,20 @@ today, the 404 when it lands there (#98 reserved the mount).  The mechanism
 is a hero-scoped override in `extra.css`; the component itself is
 unchanged, and so is its reduced-motion rendering, which the hero now
 simply shares.
+
+**2026-08-04 — the conflict dissolves; the draw-in returns (#96).**  The
+amendment above resolved a *simultaneity* problem: when the replay began on
+arrival, two orchestrated timelines shared the viewport.  Later the same
+day the terminal gained an entrance delay (`--motion-hero-enter`) and the
+tabs a sequenced performance, and the ruling's premise went away: the hero
+now opens with a held-back beat in exactly the seconds the constellation
+used to draw itself in.  So the draw-in returns to the home page as the
+overture — lines, stars, halos, labels on their original stagger — and the
+terminal takes the stage as the drawing lands.  What the first amendment
+got permanently right is the twinkle: an idle shimmer has no end, so beside
+a replayable demonstration it is a second timeline whenever the replay
+runs, and in the hero the twinkling stars keep their pop and lose the
+loop.  Sequenced signatures are one performance; only the unbounded one
+still yields.  The hero-scoped override in `extra.css` now says just that,
+and the constellation remains untouched where it is the signature — the
+style page's demo, the 404 when it lands there.

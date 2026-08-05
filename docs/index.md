@@ -11,8 +11,10 @@
 # after a CSS-only entrance holds the frame back while the words above land
 # (--motion-hero-enter), the five tabs playing through once in sequence
 # (--motion-tab-dwell) and halting on the last.  The constellation behind
-# it (M3-2b, #94) holds its final frame on this page -- the replay sequence
-# is the home page's one orchestrated moment (ADR-009, amended 2026-08-04).  A portrait sat in that
+# it (M3-2b, #94) draws itself in during that held-back beat -- the overture
+# to the replay -- and then rests: its idle twinkle stays suppressed here,
+# so the replay is the only ongoing timeline (ADR-009, twice amended
+# 2026-08-04).  A portrait sat in that
 # column in this page's first cut; it is gone rather than moved -- a
 # photograph is decoration on a page whose argument is evidence -- and #88
 # (floated images) remains open for other pages.  The h1 is the claim, not
