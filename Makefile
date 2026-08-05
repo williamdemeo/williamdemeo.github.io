@@ -157,20 +157,22 @@ evidence:
 
 # ── Typed-proof hero ────────────────────────────────────────────────────────
 #
-# The home page's terminal replays a hole-filling session over
-# agda/Free.lagda.md; docs/assets/proof.json is that session's committed
-# transcript.  gen_proof.py derives the hole variant, drives a real Agda
-# through load / goal / give, batch-checks the committed module, and records
-# what Agda answered -- the goal text and the ✓ line's version are never
-# typed by hand (ADR-009).  The JSON is committed so the site build needs no
-# Agda; this target is the deliberate re-run.  The module imports nothing,
-# so any Agda that can parse it can check it; point AGDA at one.  See #96.
+# The home page's terminal replays hole-filling sessions over the five
+# modules in agda/ (one per tab; gen_proof.py holds the list);
+# docs/assets/proof.json is their committed transcript.  gen_proof.py
+# derives each hole variant, drives a real Agda through load / goal / give,
+# batch-checks the committed module, and records what Agda answered -- the
+# goal text and the ✓ line's version are never typed by hand (ADR-009).
+# The JSON is committed so the site build needs no Agda; this target is the
+# deliberate re-run.  The modules import nothing and are checked with
+# --no-libraries, so any Agda that can parse them can check them; point
+# AGDA at one.  See #96.
 
 AGDA ?= agda
 
 .PHONY: proof
 
-## Re-run the hero's Agda session; AGDA points at an agda binary
+## Re-run the hero's Agda sessions; AGDA points at an agda binary
 # Through a temp file, unlike `evidence`: a plain redirect truncates the
 # committed transcript before the script can fail, and the likeliest failure
 # -- no Agda on this machine -- is exactly the one that leaves its owner

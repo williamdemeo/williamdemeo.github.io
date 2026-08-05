@@ -1,47 +1,57 @@
-"""Re-run the hero's hole-filling session and emit its transcript as JSON.
+"""Re-run the hero's hole-filling sessions and emit their transcript as JSON.
 
-The home page's terminal (M3-2d, #96) replays an Agda session, and ADR-009's
+The home page's terminal (M3-2d, #96) replays Agda sessions, and ADR-009's
 third principle binds it: anything replayed is a replay of something real.
-This script is where the something real happens.  It reads the replay block
-of `agda/Free.lagda.md`, derives the hole variant (the last line's right-hand
-side becomes `{! !}`), and drives a real Agda through the session an editor
-would have: load the file, read the goal, give the fill, watch the goal count
-reach zero.  It then batch-checks the committed file as written.  Everything
-the terminal shows is taken from what Agda answered here -- the goal text,
-the goal count, the version on the `✓` line -- never typed by hand.
+This script is where the something real happens.  For each module listed in
+`MODULES` -- one per tab of the terminal, in tab order -- it reads the replay
+block, derives the hole variant (the last line's right-hand side becomes
+`{! !}`), and drives a real Agda through the session an editor would have:
+load the file, read the goal, give the fill, watch the goal count reach
+zero.  It then batch-checks the committed file as written.  Everything the
+terminal shows is taken from what Agda answered here -- the goal text, the
+goal count, the version on the `✓` line -- never typed by hand.
 
 The output is committed as `docs/assets/proof.json`, so the site build needs
 no Agda and no re-run; regenerating is a deliberate act (`make proof`), and
-the JSON records the SHA-256 of the module it ran over, so a transcript that
-has gone stale is at least *detectably* stale -- compare the hash against the
-checked-out file.  (A git commit would be the evidence-strip precedent, but
-this transcript lives in the same repository as its source, and a commit
-recorded inside a tree cannot name that tree; the content hash can.)
+each session records the SHA-256 of the module it ran over, so a transcript
+that has gone stale is at least *detectably* stale -- compare the hash
+against the checked-out file.  (A git commit would be the evidence-strip
+precedent, but this transcript lives in the same repository as its source,
+and a commit recorded inside a tree cannot name that tree; the content hash
+can.)
 
 Usage:
 
     python3 scripts/python/gen_proof.py [--agda /path/to/agda] \
         > docs/assets/proof.json
 
-The Agda need not know any library: the module is self-contained by design
-(no imports), so any Agda new enough to parse it can run the session.
+The Agda need not know any library: the modules are self-contained by
+design (no imports), and every run passes `--no-libraries` so the machine's
+default libraries cannot leak in -- without it, a module named `Induction`
+is ambiguous against agda-stdlib on any machine whose defaults include it.
 
 ## Output fields
 
-* `source`   -- the module's repo path, its SHA-256, the run date, and the
-               command that regenerates this file.
-* `agda`     -- the version string parsed from `agda --version`.
-* `lines`    -- the replay block's lines above the one that gets the hole.
-* `hole`     -- the derived hole line, as loaded.
-* `goals`    -- what Agda reported for it: interaction-point id and goal type.
-* `fill`     -- the real last line, whose right-hand side was given.
-* `names`    -- the identifiers the renderer may colour as definitions: the
-               replay block's own definienda, listed so the hook never
-               guesses at what is a name.  Deliberately nothing else -- a
-               terminal where every known identifier is coloured is one
-               where the definiendum no longer stands out.
-* `check`    -- the `✓` line, composed here from the version of the Agda
-               that actually accepted the file.
+* `agda`     -- the version string parsed from `agda --version`, shared by
+               every session below.
+* `sessions` -- one entry per module, in tab order:
+    * `label`  -- the definiendum of the filled line; the terminal's tab
+                 label, so the tab bar never invents a name either.
+    * `source` -- the module's repo path, its SHA-256, the run date, and
+                 the command that regenerates this file.
+    * `lines`  -- the replay block's lines above the one that gets the hole.
+    * `hole`   -- the derived hole line, as loaded.
+    * `goals`  -- what Agda reported for it: interaction-point id and goal
+                 type.
+    * `fill`   -- the real last line, whose right-hand side was given.
+    * `names`  -- the identifiers the renderer may colour as definitions:
+                 the replay block's own definienda, listed so the hook
+                 never guesses at what is a name.  Deliberately nothing
+                 else -- a terminal where every known identifier is
+                 coloured is one where the definiendum no longer stands
+                 out.
+    * `check`  -- the `✓` line, composed here from the version of the Agda
+                 that actually accepted the file.
 """
 
 from __future__ import annotations
@@ -59,19 +69,26 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-#: The replayed module, relative to the repository root.  The markers inside
-#: it delimit the replay block; see the prose there.
-MODULE = "agda/Free.lagda.md"
+#: The replayed modules, relative to the repository root, in tab order --
+#: the research signature first.  The markers inside each delimit its
+#: replay block; see the prose there.
+MODULES = [
+    "agda/Free.lagda.md",
+    "agda/Induction.lagda.md",
+    "agda/Absurd.lagda.md",
+    "agda/DoubleNegation.lagda.md",
+    "agda/Absorption.lagda.md",
+]
 
 MARKED = re.compile(
     r"<!-- replay-begin -->\n```agda\n(.*?)\n```\n<!-- replay-end -->",
     re.DOTALL,
 )
 
-#: A definiendum: `name : ...` opening a declaration, at any indent (the
-#: replay block lives inside an anonymous module).  Mixfix names containing
-#: `_` are excluded -- their occurrences (`𝕌[ 𝑨 ]`) are not the token the
-#: declaration names, so a renderer could not match them anyway.
+#: A definiendum: `name : ...` opening a declaration, at any indent (a
+#: replay block may live inside an anonymous module).  Mixfix names
+#: containing `_` are excluded -- their occurrences (`𝕌[ 𝑨 ]`) are not the
+#: token the declaration names, so a renderer could not match them anyway.
 DEFINIENDUM = re.compile(
     r"^\s*([^\s_(){}\[\];.\"@-][^\s_(){}\[\];.\"@]*)\s+:\s", re.MULTILINE)
 
@@ -80,15 +97,15 @@ def fail(msg: str) -> None:
     sys.exit(f"gen_proof: {msg}")
 
 
-def replay_block(text: str) -> list[str]:
+def replay_block(module: str, text: str) -> list[str]:
     found = MARKED.findall(text)
     if len(found) != 1:
-        fail(f"{MODULE} must contain exactly one marked replay block; "
+        fail(f"{module} must contain exactly one marked replay block; "
              f"found {len(found)}")
     lines = found[0].split("\n")
     if len(lines) < 2 or " = " not in lines[-1]:
-        fail("the replay block must end in a `lhs = rhs` line to put the "
-             "hole in")
+        fail(f"{module}'s replay block must end in a `lhs = rhs` line to "
+             "put the hole in")
     return lines
 
 
@@ -99,7 +116,7 @@ def interact(agda: str, cwd: Path, commands: list[str]) -> list[dict]:
     prompts; the prompt is stripped wherever it lands.
     """
     proc = subprocess.run(
-        [agda, "--interaction-json"],
+        [agda, "--interaction-json", "--no-libraries"],
         input="".join(c + "\n" for c in commands),
         capture_output=True, text=True, cwd=cwd,
     )
@@ -125,31 +142,16 @@ def haskell_string(s: str) -> str:
     return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--agda", default="agda",
-                    help="the Agda to run the session with (default: agda)")
-    args = ap.parse_args()
-
-    if shutil.which(args.agda) is None:
-        fail(f"`{args.agda}` is not executable; pass --agda /path/to/agda "
-             "(the Makefile forwards AGDA=... here)")
-
-    src_path = ROOT / MODULE
+def session(agda: str, version: str, module: str) -> dict:
+    """Run one module's hole-filling session; return its transcript entry."""
+    src_path = ROOT / module
     text = src_path.read_text(encoding="utf-8")
-    lines = replay_block(text)
+    lines = replay_block(module, text)
     fill = lines[-1]
     lhs = fill.split(" = ", 1)[0]
     hole = f"{lhs} = {{! !}}"
     rhs = fill.split(" = ", 1)[1]
-
-    version_out = subprocess.run(
-        [args.agda, "--version"], capture_output=True, text=True, check=True
-    ).stdout
-    m = re.search(r"Agda version (\S+)", version_out)
-    if not m:
-        fail(f"could not parse `{args.agda} --version`:\n{version_out}")
-    version = m.group(1)
+    label = lhs.strip().split()[0]
 
     names = sorted(set(DEFINIENDUM.findall("\n".join(lines))))
 
@@ -162,7 +164,7 @@ def main() -> None:
         # highlighting payloads out of the response stream.
         (tmp / name).write_text(
             text.replace(fill, hole), encoding="utf-8")
-        responses = interact(args.agda, tmp, [
+        responses = interact(agda, tmp, [
             f"IOTCM {haskell_string(name)} NonInteractive Indirect "
             f"(Cmd_load {haskell_string(name)} [])",
             f"IOTCM {haskell_string(name)} NonInteractive Indirect "
@@ -172,35 +174,37 @@ def main() -> None:
         goal_states = [r["info"] for r in responses
                        if r.get("info", {}).get("kind") == "AllGoalsWarnings"]
         if len(goal_states) < 2:
-            fail("expected goal reports after the load and after the give")
+            fail(f"{module}: expected goal reports after the load and after "
+                 "the give")
         open_goals = goal_states[0]["visibleGoals"]
         if len(open_goals) != 1 or open_goals[0].get("kind") != "OfType":
-            fail(f"expected exactly one typed goal after loading the hole "
-                 f"variant; got {json.dumps(open_goals)}")
+            fail(f"{module}: expected exactly one typed goal after loading "
+                 f"the hole variant; got {json.dumps(open_goals)}")
         gave = [r for r in responses if r.get("kind") == "GiveAction"]
         if not gave:
-            fail("Agda did not accept the fill (no GiveAction in responses)")
+            fail(f"{module}: Agda did not accept the fill (no GiveAction "
+                 "in responses)")
         if goal_states[-1]["visibleGoals"]:
-            fail("goals remain after the give; the transcript would be a lie")
+            fail(f"{module}: goals remain after the give; the transcript "
+                 "would be a lie")
 
         # The `✓` line's claim is about the committed file, so the committed
         # bytes are what the final batch check runs over.
         (tmp / name).write_text(text, encoding="utf-8")
-        batch = subprocess.run([args.agda, name], capture_output=True,
-                               text=True, cwd=tmp)
+        batch = subprocess.run([agda, "--no-libraries", name],
+                               capture_output=True, text=True, cwd=tmp)
         if batch.returncode != 0:
-            fail(f"the committed module failed to type-check:\n{batch.stdout}"
-                 f"{batch.stderr}")
+            fail(f"{module} failed to type-check as committed:\n"
+                 f"{batch.stdout}{batch.stderr}")
 
-    out = {
-        "generated_by": "scripts/python/gen_proof.py",
+    return {
+        "label": label,
         "source": {
-            "file": MODULE,
+            "file": module,
             "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
             "date": date.today().isoformat(),
             "command": "make proof",
         },
-        "agda": version,
         "lines": lines[:-1],
         "hole": hole,
         "goals": [
@@ -210,6 +214,32 @@ def main() -> None:
         "fill": fill,
         "names": names,
         "check": f"✓ type-checked · Agda {version}",
+    }
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--agda", default="agda",
+                    help="the Agda to run the sessions with (default: agda)")
+    args = ap.parse_args()
+
+    if shutil.which(args.agda) is None:
+        fail(f"`{args.agda}` is not executable; pass --agda /path/to/agda "
+             "(the Makefile forwards AGDA=... here)")
+
+    version_out = subprocess.run(
+        [args.agda, "--version"], capture_output=True, text=True, check=True
+    ).stdout
+    m = re.search(r"Agda version (\S+)", version_out)
+    if not m:
+        fail(f"could not parse `{args.agda} --version`:\n{version_out}")
+    version = m.group(1)
+
+    out = {
+        "generated_by": "scripts/python/gen_proof.py",
+        "agda": version,
+        "sessions": [session(args.agda, version, module)
+                     for module in MODULES],
     }
     json.dump(out, sys.stdout, indent=2, ensure_ascii=False)
     print()

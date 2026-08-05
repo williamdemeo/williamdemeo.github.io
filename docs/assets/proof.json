@@ -1,27 +1,137 @@
 {
   "generated_by": "scripts/python/gen_proof.py",
-  "source": {
-    "file": "agda/Free.lagda.md",
-    "sha256": "77864e7163796b893c98f037fa5c5d537c669c0dd4901a4d04b62c773fed9631",
-    "date": "2026-08-04",
-    "command": "make proof"
-  },
   "agda": "2.8.0",
-  "lines": [
-    "  -- 𝑻 X is free: every map out of X",
-    "  -- extends to a homomorphism.",
-    "  lift-hom : hom (𝑻 X) 𝑨"
-  ],
-  "hole": "  lift-hom = {! !}",
-  "goals": [
+  "sessions": [
     {
-      "id": 0,
-      "type": "hom (𝑻 X) 𝑨"
+      "label": "lift-hom",
+      "source": {
+        "file": "agda/Free.lagda.md",
+        "sha256": "fc7763b433dae94b6c4ac476ff86ef56fcbed28d5646c624e8a8b7c3b8af24f4",
+        "date": "2026-08-04",
+        "command": "make proof"
+      },
+      "lines": [
+        "  -- 𝑻 X is free: every map out of X",
+        "  -- extends to a homomorphism.",
+        "  lift-hom : hom (𝑻 X) 𝑨"
+      ],
+      "hole": "  lift-hom = {! !}",
+      "goals": [
+        {
+          "id": 0,
+          "type": "hom (𝑻 X) 𝑨"
+        }
+      ],
+      "fill": "  lift-hom = free-lift , λ f t → refl",
+      "names": [
+        "lift-hom"
+      ],
+      "check": "✓ type-checked · Agda 2.8.0"
+    },
+    {
+      "label": "+-idʳ",
+      "source": {
+        "file": "agda/Induction.lagda.md",
+        "sha256": "9bc2241820134c4e9204c92e029c9625f92beb5f3482cf45490ec66af58bf9b2",
+        "date": "2026-08-04",
+        "command": "make proof"
+      },
+      "lines": [
+        "-- Induction is recursion: the step",
+        "-- case calls the proof at n.",
+        "+-idʳ : ∀ n → n + 0 ≡ n",
+        "+-idʳ zero    = refl"
+      ],
+      "hole": "+-idʳ (suc n) = {! !}",
+      "goals": [
+        {
+          "id": 0,
+          "type": "suc n + 0 ≡ suc n"
+        }
+      ],
+      "fill": "+-idʳ (suc n) = cong suc (+-idʳ n)",
+      "names": [
+        "+-idʳ"
+      ],
+      "check": "✓ type-checked · Agda 2.8.0"
+    },
+    {
+      "label": "true≢false",
+      "source": {
+        "file": "agda/Absurd.lagda.md",
+        "sha256": "cb335546fe3525b7bc104b7ee278cbef513a5132d1e525af8fa7dda4cc9d1a5b",
+        "date": "2026-08-04",
+        "command": "make proof"
+      },
+      "lines": [
+        "-- Nothing constructs true ≡ false;",
+        "-- the absurd pattern has no cases.",
+        "true≢false : true ≡ false → ⊥"
+      ],
+      "hole": "true≢false = {! !}",
+      "goals": [
+        {
+          "id": 0,
+          "type": "true ≡ false → ⊥"
+        }
+      ],
+      "fill": "true≢false = λ ()",
+      "names": [
+        "true≢false"
+      ],
+      "check": "✓ type-checked · Agda 2.8.0"
+    },
+    {
+      "label": "¬¬em",
+      "source": {
+        "file": "agda/DoubleNegation.lagda.md",
+        "sha256": "cbd3d902c1f0d0b0cfe43fc10eaab2f8d736ff984c55128ca1bf22c934ca9368",
+        "date": "2026-08-04",
+        "command": "make proof"
+      },
+      "lines": [
+        "-- Excluded middle is out of reach,",
+        "-- but its double negation is not.",
+        "¬¬em : ¬ ¬ (A ∨ ¬ A)"
+      ],
+      "hole": "¬¬em = {! !}",
+      "goals": [
+        {
+          "id": 0,
+          "type": "¬ (¬ (A ∨ ¬ A))"
+        }
+      ],
+      "fill": "¬¬em = λ k → k (inr λ a → k (inl a))",
+      "names": [
+        "¬¬em"
+      ],
+      "check": "✓ type-checked · Agda 2.8.0"
+    },
+    {
+      "label": "∧-absorb",
+      "source": {
+        "file": "agda/Absorption.lagda.md",
+        "sha256": "1b51ce158405d4492dc1df94b5fc915f7cea2bf781f157c90663b6d211fff3d1",
+        "date": "2026-08-04",
+        "command": "make proof"
+      },
+      "lines": [
+        "  -- The absorption law welds the two",
+        "  -- semilattices into one lattice.",
+        "  ∧-absorb : x ∧ (x ∨ y) ≡ x"
+      ],
+      "hole": "  ∧-absorb = {! !}",
+      "goals": [
+        {
+          "id": 0,
+          "type": "x ∧ (x ∨ y) ≡ x"
+        }
+      ],
+      "fill": "  ∧-absorb = ≤-antisym below above",
+      "names": [
+        "∧-absorb"
+      ],
+      "check": "✓ type-checked · Agda 2.8.0"
     }
-  ],
-  "fill": "  lift-hom = free-lift , λ f t → refl",
-  "names": [
-    "lift-hom"
-  ],
-  "check": "✓ type-checked · Agda 2.8.0"
+  ]
 }

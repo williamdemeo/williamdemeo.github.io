@@ -112,11 +112,12 @@ for (const file of files) {
   if (n !== nodeIds.length) console.log(`  note: ${rel} tagged ${n} nodes, matched ${nodeIds.length}`);
 }
 
-// The characters #17 names, plus the syntax a page of Agda cannot avoid.  Each
-// one is measured on its own, so the report says *which* character fell back
-// rather than that some did -- and so the check does not depend on any page
-// happening to contain them.
-const PROBE = [...'𝑨𝓤𝑆≅⨅⊔∀∘⟨⟩→₀₁₂ₙᵢ𝔸𝕏λΠΣ≡×⊤⊥¬∈∉⊢⇒↦∙≤⊑⊎∅ℕℓ𝒦𝓞𝓥·⟦⟧'];
+// The characters #17 names, plus the syntax a page of Agda cannot avoid, plus
+// the glyphs the typed-proof terminal shows (#96: ∧∨≢ʳ from the lemmas, ✓ for
+// the verdict, ↻ on the replay control).  Each one is measured on its own, so
+// the report says *which* character fell back rather than that some did -- and
+// so the check does not depend on any page happening to contain them.
+const PROBE = [...'𝑨𝓤𝑆≅⨅⊔∀∘⟨⟩→₀₁₂ₙᵢ𝔸𝕏λΠΣ≡×⊤⊥¬∈∉⊢⇒↦∙≤⊑⊎∅ℕℓ𝒦𝓞𝓥·⟦⟧∧∨≢ʳ✓↻'];
 await page.goto(server.origin + '/');
 await page.eval(chars => {
   // Inside .md-typeset, not just .md-content: the code rules are scoped to it,

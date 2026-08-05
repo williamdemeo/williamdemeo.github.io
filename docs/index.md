@@ -4,10 +4,12 @@
 # the frame they genuinely benefit from.
 #
 # The top of the page is a hero grid, not a float.  The second column is the
-# typed-proof terminal (M3-2d, #96): the replay of a real Agda session over
-# agda/Free.lagda.md, rendered *finished* by proof_hook.py from the committed
-# transcript (docs/assets/proof.json, `make proof`) and rewound by proof.js
-# only where motion is allowed.  The constellation behind it (M3-2b, #94)
+# typed-proof terminal (M3-2d, #96): replays of real Agda sessions over the
+# five modules in agda/, one lemma per tab, rendered *finished* by
+# proof_hook.py from the committed transcript (docs/assets/proof.json,
+# `make proof`) and rewound by proof.js only where motion is allowed --
+# after a CSS-only entrance holds the frame back while the words above land
+# (--motion-hero-enter).  The constellation behind it (M3-2b, #94)
 # holds its final frame on this page -- the replay is the home page's one
 # orchestrated moment (ADR-009, amended 2026-08-04).  A portrait sat in that
 # column in this page's first cut; it is gone rather than moved -- a

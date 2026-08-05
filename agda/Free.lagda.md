@@ -1,15 +1,17 @@
-# Free — the landing page's lemma
+# Free — the landing page's first lemma
 
-The terminal on [the home page](https://williamdemeo.github.io/) replays a
-hole-filling session over this module: the signature of `lift-hom` types
-itself, a hole opens with its goal, the hole fills, and the goal count falls
-to zero.  This file is that session's source, and ADR-009's evidence-honesty
-rule is the contract between the two: every line the replay shows is a line
-of this file, the goal in its HUD is what Agda reported for the hole, and the
-closing `✓ type-checked · Agda <version>` carries the version of the check
-that really ran.  `make proof` re-runs the session with a real Agda and
-regenerates the committed transcript, `docs/assets/proof.json`; the replay
-can go stale, but it cannot drift from a session that happened.
+The terminal on [the home page](https://williamdemeo.github.io/) replays
+hole-filling sessions over the five small modules in this directory, one per
+tab; this module is the first.  The session: the signature of `lift-hom`
+types itself, a hole opens with its goal, the hole fills, and the goal count
+falls to zero.  This file is that session's source, and ADR-009's
+evidence-honesty rule is the contract between the two: every line the replay
+shows is a line of this file, the goal in its HUD is what Agda reported for
+the hole, and the closing `✓ type-checked · Agda <version>` carries the
+version of the check that really ran.  `make proof` re-runs every session
+with a real Agda and regenerates the committed transcript,
+`docs/assets/proof.json`; the replays can go stale, but they cannot drift
+from sessions that happened.
 
 The lemma is the freeness of the term algebra — the existence half — in
 miniature.  `free-lift` and `lift-hom` are

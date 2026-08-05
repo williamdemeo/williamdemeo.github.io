@@ -803,11 +803,14 @@
 /* ── typed-proof terminal (M3-2d, #96) ───────────────────────────────────────
  *
  * Rendered by scripts/python/proof_hook.py from docs/assets/proof.json; the
- * markup never appears in a source file, and the session it shows is one
- * `make proof` recorded from a real Agda (ADR-009: motion is
- * evidence-honest).  Everything below styles the FINAL state -- completed
- * proof, zero goals, ✓ -- which is also the reduced-motion, JS-off and
- * crawler rendering; proof.js only rewinds it and types it back in.
+ * markup never appears in a source file, and the sessions it shows -- one
+ * per tab, one lemma each -- are ones `make proof` recorded from a real
+ * Agda (ADR-009: motion is evidence-honest).  Everything below styles the
+ * FINAL state -- completed proof, zero goals, ✓ -- which is also the
+ * reduced-motion, JS-off and crawler rendering; proof.js only rewinds it
+ * and types it back in.  The tab bar ships `hidden` (proof.js reveals it,
+ * like the replay button: no dead controls), so the JS-off rendering is a
+ * single finished terminal, the first lemma's.
  *
  * The frame is the site's hairline box, deliberately: #98 tried
  * terminal-window chrome (title bar, dots) on the 404's goal and reverted
@@ -831,6 +834,66 @@
   font-family: var(--font-mono), monospace;
   font-size: var(--type-ui);
   font-variant-ligatures: none;
+}
+
+/* The terminal holds back while the hero's words land, then fades in and
+ * the replay begins (proof.js waits for this animation's end).  CSS-only,
+ * so a JS-off reader still gets the frame -- just late; a reduced-motion
+ * reader gets it immediately, because the entrance exists only inside this
+ * media query.  `visibility` rides along so the held-back frame cannot be
+ * clicked or tabbed into before it exists visually. */
+@media (prefers-reduced-motion: no-preference) {
+  .md-typeset .proof {
+    animation: proof-enter var(--motion-check-beat) var(--motion-ease)
+      var(--motion-hero-enter) both;
+  }
+}
+
+@keyframes proof-enter {
+  from { opacity: 0; visibility: hidden; }
+  to   { opacity: 1; visibility: visible; }
+}
+
+/* One tab per lemma, labelled with the definiendum the transcript records.
+ * The row needs its own [hidden] guard: `display: flex` would out-rank the
+ * user-agent's [hidden] rule, and this bar ships hidden (see above). */
+.md-typeset .proof-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: var(--border-width) solid var(--c-line);
+  font-size: var(--type-ui-small);
+}
+
+.md-typeset .proof-tabs[hidden] {
+  display: none;
+}
+
+/* Real <button>s, like the replay control: Tab reaches the selected one
+ * (proof.js keeps the others at tabindex -1, arrow keys walk the row), the
+ * global :focus-visible ring applies.  Selection is an accent underline --
+ * the site's link grammar -- not a filled chip; the bar stays quiet. */
+.md-typeset .proof-tab {
+  appearance: none;
+  background: none;
+  font: inherit;
+  color: var(--c-fg-muted);
+  border: none;
+  border-bottom: var(--border-width) solid transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: color 120ms, border-color 120ms;
+}
+
+.md-typeset .proof-tab:hover {
+  color: var(--c-accent-hover);
+}
+
+.md-typeset .proof-tab[aria-selected="true"] {
+  color: var(--c-fg);
+  border-bottom-color: var(--c-accent);
 }
 
 .md-typeset .proof-bar {
@@ -896,9 +959,16 @@
   border-color: color-mix(in srgb, var(--proof-ok) 45%, transparent);
 }
 
+/* The floor is the tallest session's height -- six code rows (Induction has
+ * a base case the others don't) plus the HUD row and its rule -- so
+ * switching tabs never moves the page below the terminal.  Shorter sessions
+ * carry one row of air instead; a future module taller than six rows would
+ * show up immediately as a jump when its tab is chosen. */
 .md-typeset .proof-body {
   padding: var(--space-4) var(--space-4) var(--space-3);
   overflow-x: auto;
+  min-height: calc(7 * 1em * var(--leading-body)
+    + var(--space-3) + var(--space-2) + var(--space-4) + var(--space-3));
 }
 
 /* Every line holds its height from birth: the replay empties them all and

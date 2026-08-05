@@ -536,34 +536,46 @@ cannot. The timing values are the `--motion-*` tokens ADR-009 requires.
 ### Typed-proof terminal
 
 The home hero's second column, and the component ADR-009's third principle
-was written for: a replay of a real Agda hole-filling session.
-[`agda/Free.lagda.md`](https://github.com/williamdemeo/williamdemeo.github.io/blob/main/agda/Free.lagda.md)
-is the session's source — a self-contained module whose lemma is the term
-algebra's freeness in miniature, `--safe`, no imports — and `make proof`
-re-runs the session with a real Agda: derive the hole variant, load, read
+was written for: replays of real Agda hole-filling sessions, one lemma per
+tab. The five self-contained modules in
+[`agda/`](https://github.com/williamdemeo/williamdemeo.github.io/tree/main/agda)
+are the sessions' sources — the term algebra's freeness in miniature, an
+induction, an absurd pattern, the double negation of excluded middle, and
+the lattice absorption law; all `--safe`, no imports — and `make proof`
+re-runs every session with a real Agda: derive the hole variant, load, read
 the goal, give the fill, batch-check the committed file. What Agda answered
 is committed as `docs/assets/proof.json`, and everything the terminal shows
-comes from that transcript: the lines are the module's lines, the HUD's goal
-is the goal Agda reported, and the `✓ type-checked` line carries the version
-of the check that really ran. The JSON records the module's SHA-256, so a
-stale transcript is a detectable one.
+comes from that transcript: the lines are the modules' lines, each tab
+label is the lemma's own name, the HUD's goal is the goal Agda reported,
+and the `✓ type-checked` line carries the version of the check that really
+ran. Each session records its module's SHA-256, so a stale transcript is a
+detectable one.
 
-The page ships the *finished* session — completed proof, zero goals, the ✓
-line — so a crawler, a JS-off reader and a reduced-motion reader see the
-whole truth with no script running. Where motion is allowed, `proof.js`
-rewinds the terminal the first time it scrolls into view and types the
-session back in: colour arrives per line as each finishes, the goal count
-falls to zero, and the compiler's verdict appears whole rather than typed.
-It runs once and never loops; the ↻ replay control — a real `<button>`,
-keyboard-operable, shipped hidden so no reader ever meets a dead control —
-is the only way to see it again.
+The page ships the *finished* sessions — completed proofs, zero goals, the
+✓ line — so a crawler, a JS-off reader and a reduced-motion reader see the
+whole truth with no script running. Where motion is allowed the frame first
+waits its turn: a CSS-only entrance (`--motion-hero-enter`) holds it back
+while the hero's words land, then it fades in and `proof.js` types the
+first session back in — colour arriving per line as each finishes, the
+fill typed *inside* the hole's brackets the way an editor session runs, the
+brackets vanishing at the give, the goal count falling to zero, and the
+compiler's verdict appearing whole rather than typed. Each tab replays once,
+the first on arrival and the others when chosen — a user gesture, so
+nothing loops unprompted — and the ↻ replay control is the only way to see
+one again. Tab bar and replay button are real `<button>`s, keyboard-operable
+(arrow keys walk the tabs), and both ship hidden so no reader ever meets a
+dead control: the script reveals the tab bar wherever it runs — switching
+lemmas is navigation, not motion, so a reduced-motion reader keeps all five
+finished proofs — and the replay control only where a replay can actually
+run.
 
 Colour is borrowed, not invented: Pygments' Agda vocabulary (`nf`, `ow`,
 `c1`) over the `--md-code-hl-*` tokens every code block uses, the 404
 goal-hole's measured recipe, and the 404 typed-comment's green pair for the
-verdict. The four timing values are the `--motion-type`, `--motion-goal-beat`,
-`--motion-check-beat` and `--motion-caret` tokens, with their derivations
-recorded in `tokens.css`.
+verdict. The five timing values are the `--motion-type`,
+`--motion-goal-beat`, `--motion-check-beat`, `--motion-caret` and
+`--motion-hero-enter` tokens, with their derivations recorded in
+`tokens.css`.
 
 <div class="proof-demo">
 <!-- proof-terminal -->
