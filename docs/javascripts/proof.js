@@ -52,7 +52,7 @@ function proofReplay() {
   var TYPE = ms("--motion-type", 32);
   var GOAL = ms("--motion-goal-beat", 1200);
   var CHECK = ms("--motion-check-beat", 500);
-  var ENTER = ms("--motion-hero-enter", 3000);
+  var ENTER = ms("--motion-hero-enter", 3500);
   var DWELL = ms("--motion-tab-dwell", 3000);
 
   function wait(t) { return new Promise(function (r) { setTimeout(r, t); }); }

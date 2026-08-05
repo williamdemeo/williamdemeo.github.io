@@ -676,38 +676,25 @@
   }
 }
 
-/* In the hero the constellation no longer animates at all: the typed-proof
- * replay (M3-2d, #96) is the home page's one orchestrated moment, and
- * ADR-009 §2 allows exactly one -- see that ADR's amendment of 2026-08-04
- * for the resolution (the demonstration outranks the identity mark on the
- * page whose thesis is the work running).  The overrides force the final
- * frame: the drawing is simply there, the way it is for reduced-motion
- * readers, and the twinkle rests too, because a second timeline next to a
- * replayable one is two signatures the moment the button is pressed.  The
- * draw-in survives where the constellation is the signature -- the style
- * page's demo, and the 404 when it lands there -- because those rules
- * target `.constellation` and these target the hero's `.constellation-wrap`.
- */
+/* In the hero the constellation draws itself in and then RESTS: the
+ * draw-in is the overture to the typed-proof replay, not a competitor.
+ * M3-2d's first cut froze the whole drawing here (ADR-009's amendment of
+ * 2026-08-04: two orchestrated timelines in one viewport), but the
+ * terminal's entrance delay changed the facts that ruling stood on -- the
+ * frame now holds back for --motion-hero-enter while the lattices draw,
+ * and the two signatures are sequenced rather than simultaneous; see the
+ * ADR's second amendment.  What still yields is the idle twinkle: a
+ * shimmer with no end beside a replayable demonstration is two timelines
+ * the moment the replay button is pressed, so in the hero the twinkling
+ * stars keep their pop and lose the loop.  Equal specificity, later in
+ * the file, is what lets this single rule beat the base `.star.tw` rule;
+ * the style page's demo and the 404 keep the full behaviour because their
+ * rules target `.constellation` and this targets the hero's
+ * `.constellation-wrap`. */
 @media (prefers-reduced-motion: no-preference) {
-  .md-typeset .constellation-wrap line {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .md-typeset .constellation-wrap .star,
   .md-typeset .constellation-wrap .star.tw {
-    animation: none;
-    opacity: 0.95;
-  }
-
-  .md-typeset .constellation-wrap .halo {
-    animation: none;
-    opacity: 0.14;
-  }
-
-  .md-typeset .constellation-wrap text {
-    animation: none;
-    opacity: 1;
+    animation: constellation-pop var(--motion-pop) var(--motion-ease) forwards;
+    animation-delay: calc(var(--i) * var(--motion-stagger));
   }
 }
 

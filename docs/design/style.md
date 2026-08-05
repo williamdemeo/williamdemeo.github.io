@@ -503,11 +503,16 @@ the finished drawing simply appears, because the base styles *are* the final
 state and motion exists only inside a `no-preference` media query. There is
 no JavaScript in the component at all.
 
-On the home hero, since M3-2d, the drawing holds that final frame for every
-reader: the typed-proof replay is that page's one orchestrated moment, and
-ADR-009 allows exactly one per screen — the amendment of 2026-08-04 records
-the resolution. The demo below still draws itself in, because here the
-constellation *is* the signature.
+On the home hero the drawing is the *overture*: it draws itself in while
+the typed-proof terminal holds back (`--motion-hero-enter`), and then it
+rests — the idle twinkle stays suppressed there, because a shimmer with no
+end beside a replayable demonstration would be a second timeline the moment
+the replay button is pressed. ADR-009's two amendments of 2026-08-04 record
+the history: the first froze the whole drawing when the replay arrived; the
+second restored the draw-in once the terminal's entrance delay sequenced
+the two signatures instead of stacking them. The demo below keeps the full
+behaviour, shimmer included, because here the constellation *is* the
+signature.
 
 <div class="constellation-demo">
 --8<-- "hero-constellation.html"
