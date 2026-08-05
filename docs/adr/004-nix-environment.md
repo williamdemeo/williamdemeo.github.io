@@ -132,6 +132,16 @@ The native half of M3-5 is handled. The offline half is not, and the distinction
 
 A sandboxed `nix build` has no network, so enabling the plugin as-is will fail. M3-5 needs to seed `<cache_dir>/fonts/<family>/{Regular,Bold}.ttf` from the font packages the flake already provides, as a build step ahead of `mkdocs build`. That is deliberately left to M3-5 rather than done here: the font family is a decision belonging to the visual system in M3-1, and seeding a family nobody has chosen yet would be dead code that rots before it is used.
 
+**Resolved by M3-5 (#21)**, with one refinement over the sketch above: the seed
+is not the flake's Roboto but the visual system's own faces — static TTF
+instances of Inter 400 and Space Grotesk 600, emitted by `build_fonts.py` from
+the same pinned sources as the WOFF2 and committed under
+`docs/assets/fonts/cards/`.  `scripts/python/social_fonts_hook.py` copies them
+into the plugin's cache ahead of its `on_config`, an mkdocs hook rather than a
+build step so that every way of building seeds identically.  The flake needed
+no change for it; `checks.native-deps` had already proven the rasterisation
+path.
+
 ## Implementation status
 
 | Task | Status |

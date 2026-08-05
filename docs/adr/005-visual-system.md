@@ -287,9 +287,12 @@ The script names what to install if the imports fail.
 - The design tokens are in one file, which is the precondition for M3-3
   building components without bespoke CSS, and for M3-5's social cards using
   the same palette and faces.
-- ADR-004 left the social-card font family open, because choosing one was M3-1's
-  job. It is Inter and Newsreader; M3-5 can seed the plugin's cache from
-  `docs/assets/fonts/` or from the upstream TTFs `build_fonts.py` pins.
+- ADR-004 left the social-card font family open, because choosing one was
+  M3-1's job. It is the active system's pair — Inter for the description,
+  Space Grotesk 600 for the title (this bullet said "Inter and Newsreader"
+  before round two; the card follows whichever system ships). M3-5 seeded the
+  plugin's cache from static TTFs that `build_fonts.py` now emits alongside
+  the WOFF2, from the same pinned sources.
 
 ### Costs accepted
 

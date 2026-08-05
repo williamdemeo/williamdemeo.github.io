@@ -13,6 +13,11 @@ node_modules/
 # Upstream font sources, fetched by `make fonts` and content-addressed.
 .fonts-cache/
 
+# The social plugin's render cache.  Its fonts/ subtree is seeded from
+# docs/assets/fonts/cards/ by scripts/python/social_fonts_hook.py; the
+# md5-named PNGs beside it are per-page render results.  All reproducible.
+.cache/
+
 # Agda interface files, if agda/Free.lagda.md is checked in place rather
 # than through `make proof` (which checks a copy in a temp directory).
 _build/
