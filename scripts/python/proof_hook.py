@@ -168,8 +168,8 @@ def _panel(i: int, sess: dict, config) -> str:
 
 def _render(data, config):
     tabs = "".join(
-        f'<button class="proof-tab" role="tab" id="proof-tab-{i}" '
-        f'aria-controls="proof-panel-{i}" '
+        f'<button class="proof-tab" type="button" role="tab" '
+        f'id="proof-tab-{i}" aria-controls="proof-panel-{i}" '
         f'aria-selected="{"true" if i == 0 else "false"}"'
         f'{"" if i == 0 else " tabindex=\"-1\""}>'
         f'{escape(sess["label"])}</button>'
@@ -189,7 +189,15 @@ def _render(data, config):
 
 @event_priority(-100)
 def on_page_markdown(markdown, *, page, config, files):
-    if not MARKER_LINE.search(markdown):
+    found = MARKER_LINE.findall(markdown)
+    if not found:
         return None
+    # The element ids above allow one terminal per page; a second marker
+    # would silently mint duplicates with broken ARIA wiring, so the
+    # assumption the docstring states is enforced here, loudly.
+    if len(found) > 1:
+        raise PluginError(
+            f"{page.file.src_path} carries {len(found)} `{MARKER}` markers; "
+            "the terminal's element ids allow one per page.")
     html = _render(_load(config), config)
     return MARKER_LINE.sub(lambda _: html, markdown)
