@@ -355,6 +355,66 @@ def test_bibtex_carries_the_arxiv_eprint():
     assert field(entry, "archivePrefix") == "{arXiv}"
 
 
+# ── Typst ────────────────────────────────────────────────────────────────────
+#
+# The PDF's copy of the CV selection (ADR-010).  What matters here is not that
+# it is well formed -- `typst compile` says that, and `nix flake check` runs it
+# -- but that it says the same words as the Markdown snippet beside it.  Both
+# come from the same runs, and these are the tests that keep it that way.
+
+
+def typst_field(entry: str, name: str) -> str:
+    for line in entry.splitlines():
+        if line.strip().startswith(f"{name}:"):
+            return line.strip().removeprefix(f"{name}:").strip().rstrip(",")
+    return ""
+
+
+def test_the_typst_data_says_what_the_cv_snippet_says():
+    item = dict(PAPER, _cv=True)
+    entry = "\n".join(gp.typst_entry(item, {item["id"]: item}))
+    snippet = gp.render([item], "cv")
+    # Every word of the byline and the imprint, in order, in both renderings.
+    for runs in (gp.byline_runs(item), gp.imprint_runs(item, compact=True)):
+        for text, _ in runs:
+            assert gp.typst_string(text)[1:-1] in entry, text
+            assert text in snippet, text
+
+
+def test_the_typst_data_marks_the_author_the_snippet_emphasises():
+    item = {"id": "x", "type": "article-journal", "title": "T",
+            "author": [{"family": "Bergman", "given": "Clifford"},
+                       {"family": "DeMeo", "given": "William"}],
+            "issued": {"date-parts": [[2022]]}}
+    entry = "\n".join(gp.typst_entry(item, {}))
+    assert '("William DeMeo", "strong")' in entry
+    assert '("Clifford Bergman", none)' in entry
+
+
+def test_a_typst_string_escapes_what_is_syntax_inside_one():
+    assert gp.typst_string(r'a "b" \c') == r'"a \"b\" \\c"'
+
+
+def test_typst_markup_characters_cross_as_text_not_as_markup():
+    """A title is data.  `#`, `*` and `_` in one must not become formatting."""
+    assert gp.typst_string("#set _x_ *y*") == '"#set _x_ *y*"'
+
+
+def test_a_one_element_typst_array_keeps_its_trailing_comma():
+    """`(x)` is x in parentheses; `(x,)` is a one-element array."""
+    assert gp.typst_array(["1"]) == "(1,)"
+    assert gp.typst_array(["1", "2"]) == "(1, 2)"
+    assert gp.typst_array([]) == "()"
+
+
+def test_the_typst_rendering_covers_the_same_entries_as_the_cv_snippet():
+    items = [dict(PAPER, _cv=True), PREPRINT]
+    body = gp.render_typst(items)
+    assert body.count("    id: ") == len(gp.selected(items, "cv"))
+    assert '"demeo2022birkhoff"' in body
+    assert '"demeo2021birkhoff"' not in body
+
+
 def main() -> int:
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     failed = 0

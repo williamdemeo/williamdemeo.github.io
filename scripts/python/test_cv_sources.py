@@ -117,6 +117,29 @@ check("...and a rule after a blank line is not",
       [("Education", "PhD"), ("Education", "MS")])
 
 
+# ── the page's own markup ───────────────────────────────────────────────────
+#
+# Since #41 `docs/cv.md` is generated, and it is built from the M3-3 components,
+# which are `<div class="…" markdown>` wrappers around ordinary Markdown.  A
+# wrapper is not an entry; read as one it would require `cv.yml` to contain the
+# word "div", and the fix for that would be a declared omission per wrapper.
+
+SITE_HEADINGS = re.compile(r"^#{1,6}\s+(.*)$")
+
+
+def site_entries(text: str):
+    return C.markdown_entries(C.HTML_BLOCK.sub("", text), SITE_HEADINGS)
+
+
+check("a component wrapper is markup, not an entry",
+      site_entries('# Talks\n<div class="talks" markdown>\n\n- Isotopic Algebras\n\n</div>'),
+      [("Talks", "Isotopic Algebras")])
+
+check("...and the text inside an inline tag still is one",
+      site_entries("# X\nan entry with <em>emphasis</em> in it"),
+      [("X", "an entry with <em>emphasis</em> in it")])
+
+
 # ── the snapshot the PDF reader was written against ─────────────────────────
 #
 # PDF_SECTIONS is a fixed list, which is only honest while it still describes

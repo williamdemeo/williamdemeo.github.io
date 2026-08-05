@@ -252,7 +252,13 @@ grants_and_awards:
     project_title: Algebras and algorithms, structure and complexity theory
     role: >-
       Postdoctoral research fellow on a team with 6 senior scientists and 3
-      postdocs -- a team of six senior scientists and three postdocs
+      postdocs
+    # Another copy writes the same team the other way round, in words.  It sits
+    # in `aliases:` rather than in `role:` because that is the field for how
+    # another copy wrote a thing, and nothing renders it -- inside `role:` it
+    # reached the page as the same fact stated twice.  The entry's words are
+    # unchanged either way, so the coverage check is unaffected.
+    aliases: [a team of six senior scientists and three postdocs]
     description: >-
       3-yr collaborative research on algebraic approaches to constraint
       satisfaction problems
@@ -775,11 +781,14 @@ summer_schools:
       denotational semantics, type theory, univalent type theory in Agda,
       homotopy type theory, category theory, proof theory, univalent
       foundations
+    # The dates are quoted because these are flow mappings: unquoted, the comma
+    # in "April 12--16, 2021" ends the value, and the year becomes a key of its
+    # own with nothing under it.  #41 found it by rendering the file.
     attended:
-      - {institution: Univ. of Sheffield, note: virtual, dates: April 12--16, 2021, year: 2021, url: "https://staffwww.dcs.shef.ac.uk/people/G.Struth/mgs21.html"}
-      - {institution: Univ. of Birmingham, dates: April 14--18, 2019, year: 2019, url: "http://events.cs.bham.ac.uk/mgs2019/"}
-      - {institution: University of Birmingham, dates: April 11--15, 2016, year: 2016, url: "http://www.cs.bham.ac.uk/~pbl/mgs2016/"}
-      - {institution: University of Nottingham, dates: April 22--26, 2014, year: 2014, url: "http://www.cs.nott.ac.uk/~psztxa/mgs.2014/"}
+      - {institution: Univ. of Sheffield, note: virtual, dates: "April 12--16, 2021", year: 2021, url: "https://staffwww.dcs.shef.ac.uk/people/G.Struth/mgs21.html"}
+      - {institution: Univ. of Birmingham, dates: "April 14--18, 2019", year: 2019, url: "http://events.cs.bham.ac.uk/mgs2019/"}
+      - {institution: University of Birmingham, dates: "April 11--15, 2016", year: 2016, url: "http://www.cs.bham.ac.uk/~pbl/mgs2016/"}
+      - {institution: University of Nottingham, dates: "April 22--26, 2014", year: 2014, url: "http://www.cs.nott.ac.uk/~psztxa/mgs.2014/"}
 
   - title: Oregon Programming Languages Summer School
     institution: University of Oregon
@@ -787,10 +796,10 @@ summer_schools:
     topics: >-
       type theory, logic, semantics, verification, parallelism and concurrency,
       dependent, gradual, substructural type systems
-    attended:
-      - {dates: July 3--21, 2018, year: 2018, url: "https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php"}
-      - {dates: June 26--July 8, 2017, year: 2017, url: "https://www.cs.uoregon.edu/research/summerschool/summer17"}
-      - {dates: June 16--28, 2014, year: 2014, url: "https://www.cs.uoregon.edu/research/summerschool/summer14/curriculum.html"}
+    attended:  # quoted, for the reason above
+      - {dates: "July 3--21, 2018", year: 2018, url: "https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php"}
+      - {dates: "June 26--July 8, 2017", year: 2017, url: "https://www.cs.uoregon.edu/research/summerschool/summer17"}
+      - {dates: "June 16--28, 2014", year: 2014, url: "https://www.cs.uoregon.edu/research/summerschool/summer14/curriculum.html"}
 
   - title: Computer-aided Mathematical Proof
     institution: Cambridge University
@@ -929,23 +938,31 @@ omissions:
   - {id: "zola:publications:books-these-are-works-in-progress",
      reason: "sub-heading inside that copy's publication list; the four books beneath it are in `projects:`"}
 
-  # ── Page chrome and cross-references on docs/cv.md ───────────────────────
+  # ── Page chrome on docs/cv.md ────────────────────────────────────────────
   #
-  # The page is a rendering, and these are the parts of it that are about the
-  # site rather than about the CV.  #41 replaces all five when it renders this
-  # file to web and PDF.
+  # There were six of these and there are two.  #41 made the page a rendering
+  # of this file, so its `site` rows went from 14 to 233 and all but two of
+  # them are now covered by the entry they were rendered from -- which is the
+  # whole point of generating it: "the page says only what the source says" is
+  # checked here rather than asserted.
+  #
+  # The four that went were hand-written chrome the rendering replaced: the
+  # staleness admonition and its body, the pointer to `docs/about.md`, and the
+  # prose summary standing in for the teaching record until #32.  A fifth, the
+  # pointer to arXiv and #30, is replaced by the one below.  Nothing was
+  # promoted out of here into an entry above; those lines no longer exist, and
+  # `check_cv_sources.py` fails on a declaration that outlives what it was
+  # about, which is how it stayed honest.
+  #
+  # What remains is the two things on the page that are about the site rather
+  # than about the career.
   - {id: "site:curriculum-vitae:material-file-download-download-pdf-assets-d",
-     reason: "the download button; #41 replaces the PDF it points at"}
-  - {id: "site:curriculum-vitae:warning-this-page-is-a-summary-and-the-pdf-i",
-     reason: "an admonition about the page's own staleness"}
-  - {id: "site:curriculum-vitae:the-linked-pdf-predates-the-current-role-and",
-     reason: "the body of that admonition, which describes #41 and #42"}
-  - {id: "site:employment:see-the-about-page-about-md-academic-appoint",
-     reason: "a pointer to docs/about.md; the appointments themselves are in `appointments:`"}
-  - {id: "site:selected-publications:the-complete-list-including-earlier-work-in",
-     reason: "a pointer to arXiv and to #30; the publications are in bibliography.json"}
-  - {id: "site:teaching:a-decade-of-teaching-across-six-institutions",
-     reason: "a prose summary standing in for the record until #32; the record is in `teaching:`"}
+     reason: "the download button; #41 generates the PDF it points at"}
+  - id: "site:selected-publications:the-complete-record-with-abstracts-is-on-the"
+    reason: >-
+      a pointer to the publications page, which carries the whole record and
+      the abstracts.  Which publications the CV itself shows is the `_cv` flag
+      in bibliography.json (ADR-006), not anything here.
 
   # ── Publication status, as of the copy that recorded it ──────────────────
   #

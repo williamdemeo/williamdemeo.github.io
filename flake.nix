@@ -92,6 +92,12 @@
       # the scripts -- and it needs them laid out as they are in the repository,
       # because the script finds them relative to its own location.  A generated
       # file missing from this list is not checked, and nothing would say so.
+      #
+      # ./cv is the fourth output, cv/publications.typ, which the CV's PDF reads
+      # (ADR-010).  It is a whole directory rather than that one file because
+      # the two beside it are the CV's own generated source and its template,
+      # and a fileset naming one generated file in a directory of them is the
+      # shape this comment exists to warn about.
       bibliographySource = lib.fileset.toSource {
         root = ./.;
         fileset = lib.fileset.unions [
@@ -99,6 +105,30 @@
           ./scripts/python
           ./docs/_snippets
           ./docs/publications.bib
+          ./cv
+        ];
+      };
+
+      # gen_cv.py --check --pdf re-renders the page and the Typst source from
+      # cv.yml, then recompiles the PDF and compares its bytes, so it needs all
+      # of the files it writes and the ones it reads.  DeMeo-CV.pdf is named
+      # rather than the whole of docs/assets: it is the one generated file under
+      # there that this check is about, and the KaTeX bundle beside it has no
+      # business invalidating a CV render.  Comparing it against a fresh compile
+      # is the only thing that keeps it from drifting from cv.yml (ADR-010).
+      #
+      # The publications snippet is not read by this script -- the page includes
+      # it at build time and the PDF imports cv/publications.typ -- but
+      # docs/_snippets is in `bibliographySource` above, which is where that
+      # file is checked.
+      cvRenderSource = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./cv.yml
+          ./cv
+          ./scripts/python
+          ./docs/cv.md
+          ./docs/assets/DeMeo-CV.pdf
         ];
       };
 
@@ -254,6 +284,10 @@
               # fc-match, fc-list: the quickest way to tell whether a missing
               # glyph is a font problem or a Cairo problem.
               pkgs.fontconfig
+              # `make cv-pdf` (ADR-010).  One store path, 11.5 MiB to fetch,
+              # and it brings its own fonts -- which is why the CV's template
+              # asks for none from the system and the PDF is reproducible.
+              pkgs.typst
             ]
             ++ this.nativeLibs;
 
@@ -462,6 +496,29 @@
             ''
               python3 ${cvSource}/scripts/python/check_cv_sources.py
               python3 ${cvSource}/scripts/python/test_cv_sources.py
+              touch "$out"
+            '';
+
+          # The CV page, the CV's Typst source and the PDF, all three compared
+          # against a fresh render of cv.yml (ADR-010).
+          #
+          # The PDF is the part that needs saying.  It is committed, because the
+          # page links it and the site build must not need a typesetter -- and a
+          # committed binary that nothing compares against is exactly the drift
+          # the two generators here exist to prevent.  So this recompiles it and
+          # compares the bytes, which works because Typst's output is
+          # deterministic and the build date lives in the committed .typ rather
+          # than coming from the clock.  A stale PDF fails the pull request that
+          # left it stale.
+          #
+          # It doubles as the reproducibility check: if this passes on a runner
+          # and on a laptop, the two produced the same file.
+          cv-render = pkgs.runCommandLocal "check-cv-render"
+            {
+              nativeBuildInputs = [ this.pythonEnv pkgs.typst ];
+            }
+            ''
+              python3 ${cvRenderSource}/scripts/python/gen_cv.py --check --pdf
               touch "$out"
             '';
 

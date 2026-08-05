@@ -258,9 +258,21 @@ def read_zola(path: pathlib.Path):
 YAML_FRONT_MATTER = re.compile(r"\A---\n.*?\n---\n", re.S)
 HTML_COMMENT = re.compile(r"<!--.*?-->", re.S)
 
+#: A line that is one HTML tag and nothing else: `<div class="timeline"
+#: markdown>` and the `</div>` closing it.  These wrap the M3-3 components the
+#: page is built from (docs/design/style.md), and they are markup in the same
+#: sense the Markdown emphasis `MARKUP` strips is -- a `</div>` is not an entry,
+#: and reading it as one would ask `cv.yml` to contain the word "div".
+HTML_BLOCK = re.compile(r"^\s*</?[a-z][^>]*>\s*$", re.I | re.M)
+
 
 def read_site(path: pathlib.Path):
     """`docs/cv.md`, the page as it stands.
+
+    Since #41 the page is generated from `cv.yml`, so what this reads back is a
+    rendering of the source rather than a fourth opinion about it (ADR-003) --
+    and the coverage check is what holds the renderer to saying only what the
+    source says.
 
     The `--8<--` include is dropped rather than read: what it pulls in is
     generated from bibliography.json, so treating it as CV source would have
@@ -268,6 +280,7 @@ def read_site(path: pathlib.Path):
     """
     text = HTML_COMMENT.sub("", YAML_FRONT_MATTER.sub("", path.read_text(encoding="utf-8")))
     text = re.sub(r"^--8<--.*$", "", text, flags=re.M)
+    text = HTML_BLOCK.sub("", text)
     return markdown_entries(text, re.compile(r"^#{1,6}\s+(.*)$"))
 
 
