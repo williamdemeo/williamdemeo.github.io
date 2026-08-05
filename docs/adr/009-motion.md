@@ -90,3 +90,21 @@ visual review and fail this document.
 - Micro-interactions stay cheap to add (they are exempt from the signature
   budget), so restraint at the signature level does not freeze small
   improvements.
+
+## Amendments
+
+**2026-08-04 — the first one-signature conflict, resolved (#96).**  M3-2d
+puts the typed-proof replay in the home hero, where the constellation
+already drew itself in: two orchestrated timelines in one viewport, which
+principle 2 forbids.  That principle also predicts the loser — "usually the
+newer one" — and the prediction is overruled here, on principle 1's own
+ground: motion that demonstrates outranks motion that identifies on the one
+page whose thesis is the work running.  So the *constellation* yields.  In
+the hero it now renders its final frame outright — no draw-in, and no
+twinkle either, because an idle shimmer beside a replayable demonstration
+is two timelines the moment the replay button is pressed.  The drawing
+still draws itself in where it is the signature: the style page's demo
+today, the 404 when it lands there (#98 reserved the mount).  The mechanism
+is a hero-scoped override in `extra.css`; the component itself is
+unchanged, and so is its reduced-motion rendering, which the hero now
+simply shares.

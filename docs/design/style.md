@@ -503,6 +503,12 @@ the finished drawing simply appears, because the base styles *are* the final
 state and motion exists only inside a `no-preference` media query. There is
 no JavaScript in the component at all.
 
+On the home hero, since M3-2d, the drawing holds that final frame for every
+reader: the typed-proof replay is that page's one orchestrated moment, and
+ADR-009 allows exactly one per screen — the amendment of 2026-08-04 records
+the resolution. The demo below still draws itself in, because here the
+constellation *is* the signature.
+
 <div class="constellation-demo">
 --8<-- "hero-constellation.html"
 </div>
@@ -527,6 +533,73 @@ JuliaMono at full opacity: the contrast audit folds element opacity into the
 foreground colour, so a faded label would fail AA where a faded circle
 cannot. The timing values are the `--motion-*` tokens ADR-009 requires.
 
+### Typed-proof terminal
+
+The home hero's second column, and the component ADR-009's third principle
+was written for: replays of real Agda hole-filling sessions, one lemma per
+tab. The five self-contained modules in
+[`agda/`](https://github.com/williamdemeo/williamdemeo.github.io/tree/main/agda)
+are the sessions' sources — the term algebra's freeness in miniature, an
+induction, an absurd pattern, the double negation of excluded middle, and
+the lattice absorption law; all `--safe`, no imports — and `make proof`
+re-runs every session with a real Agda: derive the hole variant, load, read
+the goal, give the fill, batch-check the committed file. What Agda answered
+is committed as `docs/assets/proof.json`, and everything the terminal shows
+comes from that transcript: the lines are the modules' lines, each tab
+label is the lemma's own name, the HUD's goal is the goal Agda reported,
+and the `✓ type-checked` line carries the version of the check that really
+ran. Each session records its module's SHA-256, so a stale transcript is a
+detectable one.
+
+The page ships the *finished* sessions — completed proofs, zero goals, the
+✓ line — so a crawler, a JS-off reader and a reduced-motion reader see the
+whole truth with no script running. Where motion is allowed the frame first
+waits its turn: a CSS-only entrance (`--motion-hero-enter`) holds it back
+while the hero's words land, then it fades in and `proof.js` types the
+first session back in — colour arriving per line as each finishes, the
+fill typed *inside* the hole's brackets the way an editor session runs, the
+brackets vanishing at the give, the goal count falling to zero, and the
+compiler's verdict appearing whole rather than typed. The five sessions run
+once, as one performance: the first on arrival, each next tab taking the
+stage after a held beat (`--motion-tab-dwell`), and the run halts on the
+last — a linear pass, never a loop. Any gesture — choosing a tab, pressing
+↻ — takes the wheel and stops the auto-advance; from then on a session
+replays only when asked, and the ↻ control is the only way to see one
+again. Tab bar and replay button are real `<button>`s, keyboard-operable
+(arrow keys walk the tabs; the auto-advance never moves focus), and both
+ship hidden so no reader ever meets a dead control: the script reveals the
+tab bar wherever it runs — switching lemmas is navigation, not motion, so a
+reduced-motion reader keeps all five finished proofs — and the replay
+control only where a replay can actually run.
+
+Colour is borrowed, not invented: Pygments' Agda vocabulary (`nf`, `ow`,
+`c1`) over the `--md-code-hl-*` tokens every code block uses, the 404
+goal-hole's measured recipe, and the 404 typed-comment's green pair for the
+verdict. The timing values are the `--motion-type`, `--motion-goal-beat`,
+`--motion-check-beat`, `--motion-caret`, `--motion-hero-enter` and
+`--motion-tab-dwell` tokens, with their derivations recorded in
+`tokens.css`.
+
+<div class="proof-demo">
+<!-- proof-terminal -->
+</div>
+
+??? example "Source"
+
+    The markup is rendered by `scripts/python/proof_hook.py`; a page shows
+    the terminal by carrying the marker at column 0, in whatever frame the
+    page needs:
+
+    ```markdown
+    <div class="proof-demo">
+    <!-- proof-terminal -->
+    </div>
+    ```
+
+    On the home page the wrapper is `<div class="hero-side">`, the hero
+    grid's second column. (This fenced copy is indented, which is why it
+    renders as text: the hook expands the marker only at column 0.)
+
 ## Fonts
 
 All three faces are self-hosted, subsetted WOFF2, built by
@@ -536,7 +609,7 @@ with `make fonts`. Nothing is fetched at page load.
 | File | Characters | Size |
 | --- | --- | --- |
 | `juliamono-text.woff2` | 573 | 56 KB |
-| `juliamono-symbols.woff2` | 3,029 | 253 KB |
+| `juliamono-symbols.woff2` | 3,110 | 265 KB |
 | `juliamono-mathalpha.woff2` | 997 | 154 KB |
 | `inter-400.woff2` | 510 | 39 KB |
 | `inter-600.woff2` | 510 | 39 KB |
@@ -544,16 +617,18 @@ with `make fonts`. Nothing is fetched at page load.
 | `spacegrotesk-600.woff2` | 358 | 19 KB |
 | `newsreader-500.woff2` | 341 | 31 KB |
 
-Total: 631 KB across eight files, of which 75 KB is fetched by a page with no
+Total: 643 KB across eight files, of which 75 KB is fetched by a page with no
 notation on it at all. Newsreader is Meridian's display face and no rule names
 it while Constellation is active, so it costs 31 KB in the repository and
-nothing at page load.
+nothing at page load. (The symbol subset grew by the Dingbats block in
+M3-2d, for the ✓ on the typed-proof terminal's verdict line — a block, not a
+character, per the rule below.)
 
 JuliaMono is split three ways by `unicode-range` under one family name, so a
 page pays only for the notation it shows: a page whose code is ASCII downloads
 56 KB, `→` and `≡` add the symbol file, and an `𝑨` or a `𝓤` adds the
 mathematical alphanumerics on top. A page of Agda that uses all three carries
-about 460 KB of monospace, once, cached.
+about 475 KB of monospace, once, cached.
 
 Only the regular weight of JuliaMono ships. Material's syntax highlighting is
 colour-only — no bold, no italic in any token class — so a second code face

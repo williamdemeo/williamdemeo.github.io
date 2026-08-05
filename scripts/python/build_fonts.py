@@ -123,6 +123,7 @@ SYMBOL_BLOCKS = [
     "Number Forms",
     "Geometric Shapes",
     "Box Drawing",
+    "Dingbats",                        # ✓, the typed-proof terminal's verdict line (#96)
 ]
 MATHALPHA_BLOCKS = ["Mathematical Alphanumeric Symbols"]
 
