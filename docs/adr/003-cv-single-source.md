@@ -2,13 +2,17 @@
 
 # ADR-003: One authoritative CV, in YAML, with the publications left where they are
 
-**Status**: Accepted
+**Status**: Accepted. Two of its consequences were carried out by
+[ADR-010](010-cv-pdf-toolchain.md): `docs/cv.md` is no longer hand-written and
+`docs/assets/DeMeo-CV.pdf` is no longer the 2016 file. The counts below —
+four copies, 767 entries, 49 omissions — are what was true on this date; `make
+cv-check` reports the current ones.
 
 **Date**: 2026-08-03
 
 **Deciders**: William DeMeo
 
-**Related**: [#16](https://github.com/williamdemeo/williamdemeo.github.io/issues/16) (M2-7), [#41](https://github.com/williamdemeo/williamdemeo.github.io/issues/41) (M7-1), [#42](https://github.com/williamdemeo/williamdemeo.github.io/issues/42) (M7-2), [#31](https://github.com/williamdemeo/williamdemeo.github.io/issues/31) (M5-3), [#32](https://github.com/williamdemeo/williamdemeo.github.io/issues/32) (M5-4), [ADR-002](002-content-triage.md), [ADR-004](004-nix-environment.md), [ADR-006](006-bibliography-source.md)
+**Related**: [#16](https://github.com/williamdemeo/williamdemeo.github.io/issues/16) (M2-7), [#41](https://github.com/williamdemeo/williamdemeo.github.io/issues/41) (M7-1), [#42](https://github.com/williamdemeo/williamdemeo.github.io/issues/42) (M7-2), [#31](https://github.com/williamdemeo/williamdemeo.github.io/issues/31) (M5-3), [#32](https://github.com/williamdemeo/williamdemeo.github.io/issues/32) (M5-4), [ADR-002](002-content-triage.md), [ADR-004](004-nix-environment.md), [ADR-006](006-bibliography-source.md), [ADR-010](010-cv-pdf-toolchain.md)
 
 ---
 

@@ -37,6 +37,9 @@ run. Nothing else to set up. Run `make` on its own to list every target.
 | `docs/blog/posts/` | Blog posts, one file per post. URL scheme and front matter: `docs/adr/007-blog-url-scheme.md`. |
 | `docs/adr/` | Architecture decision records. Not published. |
 | `docs/GITHUB_PROJECT.md` | Project roadmap, partly generated from GitHub. Not published. |
+| `cv.yml` | The CV, as data, and the only authoritative copy. `docs/cv.md` and the PDF are rendered from it by `make cv-pdf`. See `docs/adr/003-cv-single-source.md`. |
+| `cv/` | The CV's PDF: a hand-written Typst template, and the two generated files it typesets. See `docs/adr/010-cv-pdf-toolchain.md`. |
+| `bibliography.json` | The only authoritative publication list. `make publications` renders it. See `docs/adr/006-bibliography-source.md`. |
 | `archive/` | Preserved content from the retired Octopress site. Not published. |
 | `scripts/python/` | Project tooling — issue population, plan rendering, migration helpers. |
 | `scripts/git/` | Worktree tooling: `wt <branch>` to start work, `wt clean` to tidy up after a merge. See its README. |

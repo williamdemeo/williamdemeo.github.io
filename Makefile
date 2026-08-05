@@ -333,7 +333,43 @@ publications-test: $(MKDOCS_DEP)
 # redirect scripts.  Nothing new in requirements.txt, so nothing for flake.nix
 # to match under ADR-004's requirements-pins check.
 
+# ── Rendering it ────────────────────────────────────────────────────────────
+#
+# `cv` writes docs/cv.md and cv/cv.typ; `cv-pdf` also compiles
+# docs/assets/DeMeo-CV.pdf, which is the file the page's download button points
+# at and so is committed like every other generated file here.  ADR-010 records
+# the toolchain and why the PDF is a committed artifact rather than one the
+# site build produces.
+#
+# The two checks answer different questions.  `cv-render-check` asks whether the
+# page and the Typst source still match cv.yml, needs nothing but Python, and
+# runs anywhere.  `cv-pdf-check` additionally recompiles the PDF and compares
+# the bytes, which is what stops the committed PDF drifting from the source it
+# claims to come from -- and it needs typst, which the dev shell provides.
+# `nix flake check` runs the second, so both are gated.
+#
+# Typst is not in requirements.txt.  It is not a Python package, so ADR-004's
+# requirements-pins check has nothing to match, and nothing about the pip path
+# changes: `make serve` and `make check` never touch the PDF.
+
+.PHONY: cv cv-pdf cv-render-check cv-pdf-check
 .PHONY: cv-check cv-inventory cv-explain cv-test
+
+## Regenerate docs/cv.md and cv/cv.typ from cv.yml
+cv: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_cv.py
+
+## Regenerate those and compile docs/assets/DeMeo-CV.pdf (needs typst)
+cv-pdf: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_cv.py --pdf
+
+## Report whether the generated CV page and Typst source are stale
+cv-render-check: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_cv.py --check
+
+## ...and whether the committed PDF still matches them (needs typst)
+cv-pdf-check: $(MKDOCS_DEP)
+	@$(PYTHON) scripts/python/gen_cv.py --check --pdf
 
 ## Fail if any entry in any legacy CV copy is neither carried nor declared
 cv-check: $(MKDOCS_DEP)

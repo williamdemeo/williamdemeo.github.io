@@ -2,8 +2,9 @@
 """Render bibliography.json to Markdown, and check it is internally sound.
 
 bibliography.json is the only authoritative publication list (ADR-006).  This
-emits the Markdown the publications page and the CV consume, so neither holds a
-second copy that can drift.
+emits the Markdown the publications page and the CV page consume, the BibTeX
+anyone citing this work wants, and the data the CV's PDF template reads
+(ADR-010) -- so none of the four holds a second copy that can drift.
 
 Two modes:
 
@@ -34,7 +35,7 @@ import sys
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE = REPO_ROOT / "bibliography.json"
 
-#: Three renderings of one list.  The page one groups by kind and carries
+#: Four renderings of one list.  The page one groups by kind and carries
 #: abstracts; the CV one is the entries marked `_cv`, a little tighter; the
 #: BibTeX one is for anyone who wants to cite this work.  The Markdown two are
 #: snippets rather than pages, so a page includes what it wants and no page
@@ -45,6 +46,13 @@ OUTPUTS = {
     "cv": SNIPPETS / "publications-cv.md",
 }
 BIBTEX = REPO_ROOT / "docs" / "publications.bib"
+
+#: The fourth: the same `_cv` selection, as data the CV's Typst template reads
+#: (ADR-010).  The PDF has to carry the publications and must not re-derive
+#: them from `cv.yml`, which holds ids and no metadata (ADR-003) -- so it reads
+#: them from here, and the CV page, the publications page and the PDF are three
+#: renderings of one file rather than three lists that agree today.
+TYPST = REPO_ROOT / "cv" / "publications.typ"
 
 #: `2101.10166`, or the pre-2007 form `math/0512345`.
 ARXIV_ID = re.compile(r"^(\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Z]{2})?/\d{7})$")
@@ -194,26 +202,76 @@ def artifactless(items: list[dict]) -> list[str]:
     ]
 
 
-def authors_md(item: dict) -> str:
+# ── Runs ─────────────────────────────────────────────────────────────────────
+#
+# A run is a piece of text and the emphasis it carries: `(text, "strong")`,
+# `(text, "em")`, or `(text, None)` for plain.  Both renderings are built from
+# the same runs rather than one from the other, which is what makes "the PDF
+# says what the page says" a property of this file instead of something to
+# remember.  The Typst side needs it in particular: it takes the data as string
+# literals, so nothing in a title can be mistaken there for a formatting mark.
+
+Run = tuple[str, str | None]
+
+MD_MARKUP = {"strong": "**{}**", "em": "*{}*"}
+
+
+def md_runs(runs: list[Run]) -> str:
+    return "".join(MD_MARKUP.get(style, "{}").format(text) for text, style in runs)
+
+
+def join_runs(segments: list[list[Run]], separator: str) -> list[Run]:
+    out: list[Run] = []
+    for i, segment in enumerate(segments):
+        if i:
+            out.append((separator, None))
+        out += segment
+    return out
+
+
+def rstrip_period(runs: list[Run]) -> list[Run]:
+    """Drop a trailing full stop, as `str.rstrip('.')` does over the whole line."""
+    while runs:
+        text, style = runs[-1]
+        trimmed = text.rstrip(".")
+        if trimmed:
+            return runs[:-1] + [(trimmed, style)]
+        runs = runs[:-1]
+    return runs
+
+
+def author_runs(item: dict) -> list[Run]:
     """Authors, with the site owner emphasised, in source order."""
-    parts = []
+    parts: list[Run] = []
     for a in item.get("author") or []:
         if a.get("literal"):
-            parts.append(a["literal"])
+            parts.append((a["literal"], None))
             continue
         name = " ".join(filter(None, [a.get("given"), a.get("family")]))
-        parts.append(f"**{name}**" if a.get("family") == SURNAME else name)
+        parts.append((name, "strong" if a.get("family") == SURNAME else None))
     if not parts:
-        return ""
+        return []
     # "et al." is a continuation, not a coordinate author: "A, B, et al.", never
     # "A and et al.".
-    tail = ""
-    if parts and parts[-1].lower().rstrip(".") == "et al":
-        parts, tail = parts[:-1], ", et al."
-    if len(parts) == 1:
-        return parts[0] + tail
-    joined = ", ".join(parts[:-1]) + (", and " if len(parts) > 2 else " and ") + parts[-1]
-    return joined + tail
+    tail: list[Run] = []
+    if parts[-1][0].lower().rstrip(".") == "et al":
+        parts, tail = parts[:-1], [(", et al.", None)]
+    if len(parts) < 2:
+        return parts + tail
+    last = ", and " if len(parts) > 2 else " and "
+    return join_runs([[p] for p in parts[:-1]], ", ") + [(last, None), parts[-1]] + tail
+
+
+def authors_md(item: dict) -> str:
+    return md_runs(author_runs(item))
+
+
+def byline_runs(item: dict) -> list[Run]:
+    """The author line as an entry renders it: authors, the note, a full stop."""
+    runs = rstrip_period(author_runs(item))
+    if item.get("_note"):
+        runs = runs + [(".  ", None), (item["_note"], "em")]
+    return runs + [(".", None)]
 
 
 #: How to label the link to the version of record, by CSL type.  A reader
@@ -248,7 +306,7 @@ def published_link(item: dict) -> tuple[str, str] | None:
     return None
 
 
-def links_md(item: dict, by_id: dict[str, dict]) -> list[str]:
+def link_pairs(item: dict, by_id: dict[str, dict]) -> list[tuple[str, str]]:
     """The published version and the preprint, side by side, in that order."""
     out = []
 
@@ -258,18 +316,22 @@ def links_md(item: dict, by_id: dict[str, dict]) -> list[str]:
     if published is not None:
         link = published_link(published)
         if link:
-            out.append(f"[Published version]({link[1]})")
+            out.append(("Published version", link[1]))
     else:
         link = published_link(item)
         if link:
-            out.append(f"[{link[0]}]({link[1]})")
+            out.append(link)
 
     if item.get("_arxiv"):
-        out.append(f"[arXiv preprint](https://arxiv.org/abs/{item['_arxiv']})")
+        out.append(("arXiv preprint", f"https://arxiv.org/abs/{item['_arxiv']}"))
     return out
 
 
-def imprint_md(item: dict, *, compact: bool = False) -> str:
+def links_md(item: dict, by_id: dict[str, dict]) -> list[str]:
+    return [f"[{label}]({url})" for label, url in link_pairs(item, by_id)]
+
+
+def imprint_runs(item: dict, *, compact: bool = False) -> list[Run]:
     """Venue, date, volume, issue and pages -- everything the record supports.
 
     Deliberately in the order a citation is read aloud, and deliberately
@@ -280,41 +342,45 @@ def imprint_md(item: dict, *, compact: bool = False) -> str:
     DOI, since the link beside it already goes there and a CV is read down a
     page rather than cited from.
     """
-    bits = []
+    bits: list[list[Run]] = []
     venue = item.get("container-title")
     if venue:
         short = item.get("container-title-short")
-        bits.append(f"*{venue}*" + (f" ({short})" if short else ""))
+        bits.append([(venue, "em")] + ([(f" ({short})", None)] if short else []))
     elif item.get("genre"):
         thesis = item["genre"]
         if item.get("publisher"):
             thesis += f", {item['publisher']}"
-        bits.append(thesis)
+        bits.append([(thesis, None)])
     elif item.get("_arxiv"):
         # Nowhere else to say what this is.  "arXiv preprint arXiv:1234.56789"
         # is redundant read aloud and is how the things are actually cited.
-        bits.append(f"arXiv preprint arXiv:{item['_arxiv']}")
+        bits.append([(f"arXiv preprint arXiv:{item['_arxiv']}", None)])
 
     if item.get("event-place"):
-        bits.append(item["event-place"])
+        bits.append([(item["event-place"], None)])
 
     series = item.get("collection-title")
     if series and item.get("volume"):
-        bits.append(f"{series} Volume {item['volume']}")
+        bits.append([(f"{series} Volume {item['volume']}", None)])
     elif item.get("volume"):
-        bits.append(f"Volume {item['volume']}")
+        bits.append([(f"Volume {item['volume']}", None)])
     if item.get("issue"):
-        bits.append(f"Issue {item['issue']}")
+        bits.append([(f"Issue {item['issue']}", None)])
 
     date = str(year(item) or "") if compact else issued_text(item)
     if date:
-        bits.append(date)
+        bits.append([(date, None)])
     if item.get("page"):
-        bits.append(f"pages {item['page']}")
+        bits.append([(f"pages {item['page']}", None)])
 
-    line = ", ".join(bits)
-    if line:
-        line += "."
+    if not bits:
+        return []
+    return join_runs(bits, ", ") + [(".", None)]
+
+
+def imprint_md(item: dict, *, compact: bool = False) -> str:
+    line = md_runs(imprint_runs(item, compact=compact))
     # The DOI belongs in the citation, not in the row of links: it is what a
     # reader copies to cite the work, and it is what makes the entry checkable.
     if item.get("DOI") and not compact:
@@ -355,10 +421,7 @@ def entry_md(item: dict, by_id: dict[str, dict], *, compact: bool) -> list[str]:
         title += " *(editor)*"
     lines = [f"{bullet} {title}  "]
 
-    byline = authors_md(item).rstrip(".")
-    if item.get("_note"):
-        byline += f".  *{item['_note']}*"
-    lines.append(f"{indent}{byline.rstrip('.')}.  ")
+    lines.append(f"{indent}{md_runs(byline_runs(item))}  ")
 
     imprint = imprint_md(item, compact=compact)
     if imprint:
@@ -414,6 +477,69 @@ def render(items: list[dict], style: str = "page") -> str:
         for it in members:
             lines += entry_md(it, by_id, compact=False)
     return "\n".join(lines).rstrip() + "\n"
+
+
+# ── Typst ────────────────────────────────────────────────────────────────────
+#
+# The CV's PDF (ADR-010).  This emits data, not layout: `cv/cv.typ` decides how
+# a publication looks on paper and this decides what it says, which is the same
+# division the Markdown snippet observes -- the entries below are the runs the
+# CV snippet renders, and neither is derived from the other.
+#
+# Everything crosses as a Typst *string literal* rather than as markup, so a
+# title containing `#`, `*` or `_` cannot be read there as a formatting mark.
+# Two characters are syntax inside a string and both are escaped.
+
+
+def typst_string(value: str) -> str:
+    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def typst_array(items: list[str]) -> str:
+    """A Typst array.  A one-element one needs the trailing comma: `(x,)` is an
+    array and `(x)` is just `x` in parentheses."""
+    body = ", ".join(items)
+    return f"({body},)" if len(items) == 1 else f"({body})"
+
+
+def typst_runs(runs: list[Run]) -> str:
+    return typst_array([
+        f"({typst_string(text)}, {typst_string(style) if style else 'none'})"
+        for text, style in runs
+    ])
+
+
+def typst_entry(item: dict, by_id: dict[str, dict]) -> list[str]:
+    links = [f"({typst_string(label)}, {typst_string(url)})"
+             for label, url in link_pairs(item, by_id)]
+    return [
+        "  (",
+        f"    id: {typst_string(item['id'])},",
+        f"    title: {typst_string(item['title'])},",
+        f"    editor: {'true' if item.get('_role') == 'editor' else 'false'},",
+        f"    byline: {typst_runs(byline_runs(item))},",
+        f"    imprint: {typst_runs(imprint_runs(item, compact=True))},",
+        f"    links: {typst_array(links)},",
+        "  ),",
+    ]
+
+
+def render_typst(items: list[dict]) -> str:
+    by_id = {it["id"]: it for it in items if it.get("id")}
+    lines = [
+        "// Generated from bibliography.json by scripts/python/gen_publications.py.",
+        "// Do not edit: `make publications` regenerates it.  See ADR-006, ADR-010.",
+        "//",
+        "// The CV's selection -- the entries marked `_cv` there -- newest first, as",
+        "// the runs the CV's Markdown snippet renders: (text, \"strong\" | \"em\" | none).",
+        "// cv/cv.typ turns them into a page.",
+        "",
+        "#let publications = (",
+    ]
+    for item in selected(items, "cv"):
+        lines += typst_entry(item, by_id)
+    lines.append(")")
+    return "\n".join(lines) + "\n"
 
 
 # ── BibTeX ───────────────────────────────────────────────────────────────────
@@ -569,6 +695,7 @@ def main() -> int:
     generated = [(path, render(items, style), len(selected(items, style)))
                  for style, path in OUTPUTS.items()]
     generated.append((BIBTEX, render_bibtex(items), len(items)))
+    generated.append((TYPST, render_typst(items), len(selected(items, "cv"))))
     for path, wanted, count in generated:
         if args.check:
             # The generated files are committed, so "is the file current?" is a
