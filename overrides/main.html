@@ -14,11 +14,15 @@
   dark browser chrome alike without a media query.
 
   404.html extends this file and overrides extrahead for its own scoped
-  styles; it opens with {{ super() }}, so these links reach that page too.
+  styles; it opens with super(), so these links reach that page too.  This
+  block opens with super() for the same reason pointed upstream: base.html's
+  extrahead is empty in 9.5.49, but a Material upgrade may put content
+  there, and an override must not silently swallow it.
 -#}
 {% extends "base.html" %}
 
 {% block extrahead %}
+  {{ super() }}
   <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg' | url }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png' | url }}">
 {% endblock %}

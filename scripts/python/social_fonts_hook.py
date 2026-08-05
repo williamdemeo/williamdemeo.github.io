@@ -44,8 +44,16 @@ def on_config(config):
 
     # A missing source directory falls through to copytree's FileNotFoundError
     # on purpose: the alternative is the plugin quietly downloading Roboto.
+    # copytree creates the destination and every missing parent (it calls
+    # os.makedirs), so a wholly absent cache -- the Nix sandbox's normal
+    # state -- needs no preparatory mkdir.
     dest = os.path.join(social.config.cache_dir, "fonts")
     for family in sorted(os.listdir(SOURCE)):
         src = os.path.join(SOURCE, family)
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(dest, family), dirs_exist_ok=True)
+
+    # Convention, not correctness: mkdocs keeps the original config when an
+    # on_config returns None, so this changes nothing -- but returning it
+    # matches the usual signature and costs a line.
+    return config
