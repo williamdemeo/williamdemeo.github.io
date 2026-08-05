@@ -13,11 +13,15 @@
  * then the fill typed *inside* the hole's brackets the way an editor
  * session runs, the brackets vanishing at the give, the goal count falling
  * to zero -- and the ✓ line appears rather than types, because the visitor
- * typed the code and the compiler answers in whole lines.  Each panel runs
- * once: the first on scroll into view, the others when their tab is chosen
- * (a user gesture, so ADR-009's "never loops unprompted" holds), and the
- * replay button is the only way to see one again.  Tablist and buttons
- * ship hidden so that without this script there is no dead control.
+ * typed the code and the compiler answers in whole lines.  The five
+ * sessions run once, as one performance: the first on scroll into view,
+ * then each next tab taking the stage after a held beat
+ * (--motion-tab-dwell), halting on the last -- a linear run, no loop, so
+ * ADR-009's "never loops unprompted" holds.  Any gesture -- choosing a
+ * tab, pressing ↻ -- takes the wheel and stops the auto-advance; from then
+ * on a panel replays only when chosen, and the replay button is the only
+ * way to see one again.  Tablist and buttons ship hidden so that without
+ * this script there is no dead control.
  *
  * Timing comes from the --motion-* tokens, read from computed style the way
  * evidence.js reads --motion-count, so tokens.css remains the one place
@@ -45,10 +49,11 @@ function proofReplay() {
     if (Number.isNaN(n)) return fallback;
     return raw.endsWith("ms") ? n : n * 1000;
   }
-  var TYPE = ms("--motion-type", 24);
-  var GOAL = ms("--motion-goal-beat", 900);
-  var CHECK = ms("--motion-check-beat", 350);
-  var ENTER = ms("--motion-hero-enter", 3500);
+  var TYPE = ms("--motion-type", 32);
+  var GOAL = ms("--motion-goal-beat", 1200);
+  var CHECK = ms("--motion-check-beat", 500);
+  var ENTER = ms("--motion-hero-enter", 3000);
+  var DWELL = ms("--motion-tab-dwell", 3000);
 
   function wait(t) { return new Promise(function (r) { setTimeout(r, t); }); }
 
@@ -94,6 +99,9 @@ function proofReplay() {
       .map(build);
     if (!panels.length || panels.indexOf(null) !== -1) return;
     var active = 0;
+    // True until the visitor's first gesture: while it holds, the finished
+    // panels hand the stage to the next tab on their own.
+    var auto = true;
 
     function goals(p, n) {
       p.pill.textContent = n + (n === 1 ? " goal" : " goals");
@@ -197,11 +205,14 @@ function proofReplay() {
           q = q.then(step(function () { return type(line); }));
         }
       });
-      q.then(step(function () { p.check.el.innerHTML = p.check.html; }));
+      // The caller chains the auto-advance on this; a cancelled run
+      // resolves early with its steps skipped, and the chain checks the
+      // wheel (auto) before moving anyway.
+      return q.then(step(function () { p.check.el.innerHTML = p.check.html; }));
     }
 
     function select(i) {
-      if (i === active) return;
+      if (i === active) return null;
       if (canReplay) settle(panels[active]);
       panels[active].el.hidden = true;
       tabs.forEach(function (t, j) {
@@ -211,11 +222,30 @@ function proofReplay() {
       });
       active = i;
       panels[i].el.hidden = false;
-      if (canReplay && !panels[i].played) play(panels[i]);
+      if (canReplay && !panels[i].played) return play(panels[i]);
+      return null;
+    }
+
+    // The performance: play the current tab, hold the finished proof for
+    // one dwell, hand the stage to the next tab, halt after the last.
+    // Focus is never moved -- the show changes, the keyboard stays put.
+    function sequence(i) {
+      var done = i === active && !panels[i].played
+        ? play(panels[i])
+        : select(i);
+      Promise.resolve(done).then(function () {
+        if (!auto || i + 1 >= panels.length) return;
+        wait(DWELL).then(function () {
+          if (auto) sequence(i + 1);
+        });
+      });
     }
 
     tabs.forEach(function (tab, i) {
-      tab.addEventListener("click", function () { select(i); });
+      tab.addEventListener("click", function () {
+        auto = false;
+        select(i);
+      });
     });
     if (tablist && tabs.length > 1) {
       tablist.addEventListener("keydown", function (e) {
@@ -229,6 +259,7 @@ function proofReplay() {
         else if (e.key === "End") to = tabs.length - 1;
         else return;
         e.preventDefault();
+        auto = false;
         tabs[to].focus();
         select(to);
       });
@@ -258,7 +289,10 @@ function proofReplay() {
 
     panels.forEach(function (p) {
       p.button.hidden = false;
-      p.button.addEventListener("click", function () { play(p); });
+      p.button.addEventListener("click", function () {
+        auto = false;
+        play(p);
+      });
     });
 
     io = new IntersectionObserver(function (entries) {
@@ -266,7 +300,7 @@ function proofReplay() {
         if (!entry.isIntersecting) return;
         io.disconnect();
         entered.then(function () {
-          if (!panels[active].played) play(panels[active]);
+          if (auto && !panels[active].played) sequence(active);
         });
       });
     }, { threshold: 0.35 });

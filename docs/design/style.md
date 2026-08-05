@@ -559,22 +559,25 @@ while the hero's words land, then it fades in and `proof.js` types the
 first session back in — colour arriving per line as each finishes, the
 fill typed *inside* the hole's brackets the way an editor session runs, the
 brackets vanishing at the give, the goal count falling to zero, and the
-compiler's verdict appearing whole rather than typed. Each tab replays once,
-the first on arrival and the others when chosen — a user gesture, so
-nothing loops unprompted — and the ↻ replay control is the only way to see
-one again. Tab bar and replay button are real `<button>`s, keyboard-operable
-(arrow keys walk the tabs), and both ship hidden so no reader ever meets a
-dead control: the script reveals the tab bar wherever it runs — switching
-lemmas is navigation, not motion, so a reduced-motion reader keeps all five
-finished proofs — and the replay control only where a replay can actually
-run.
+compiler's verdict appearing whole rather than typed. The five sessions run
+once, as one performance: the first on arrival, each next tab taking the
+stage after a held beat (`--motion-tab-dwell`), and the run halts on the
+last — a linear pass, never a loop. Any gesture — choosing a tab, pressing
+↻ — takes the wheel and stops the auto-advance; from then on a session
+replays only when asked, and the ↻ control is the only way to see one
+again. Tab bar and replay button are real `<button>`s, keyboard-operable
+(arrow keys walk the tabs; the auto-advance never moves focus), and both
+ship hidden so no reader ever meets a dead control: the script reveals the
+tab bar wherever it runs — switching lemmas is navigation, not motion, so a
+reduced-motion reader keeps all five finished proofs — and the replay
+control only where a replay can actually run.
 
 Colour is borrowed, not invented: Pygments' Agda vocabulary (`nf`, `ow`,
 `c1`) over the `--md-code-hl-*` tokens every code block uses, the 404
 goal-hole's measured recipe, and the 404 typed-comment's green pair for the
-verdict. The five timing values are the `--motion-type`,
-`--motion-goal-beat`, `--motion-check-beat`, `--motion-caret` and
-`--motion-hero-enter` tokens, with their derivations recorded in
+verdict. The timing values are the `--motion-type`, `--motion-goal-beat`,
+`--motion-check-beat`, `--motion-caret`, `--motion-hero-enter` and
+`--motion-tab-dwell` tokens, with their derivations recorded in
 `tokens.css`.
 
 <div class="proof-demo">

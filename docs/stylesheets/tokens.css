@@ -105,24 +105,28 @@
   --motion-twinkle-at: 5.2s;
   --motion-count: 0.9s;         /* a figure counting up to its value         */
   /* The typed-proof replay (M3-2d, #96).  One token per beat of the session:
-     the per-glyph delay is ~42 glyphs a second -- quick, practiced typing --
-     and proof.js jitters each keystroke +-40% around it so the rhythm reads
-     as a hand rather than a metronome.  The goal beat, the pause while an
-     open goal sits in the HUD, is deliberately --motion-count's 0.9s: "a
-     figure arrives" and "a goal is read" share one tempo.  The check beat is
-     the short settle before the compiler speaks, and the caret's 1s period
-     is Emacs' default (blink-cursor-interval 0.5s, half on, half off) --
-     the blink every Agda session actually has. */
-  --motion-type: 24ms;          /* one glyph of the proof replay typing in   */
-  --motion-goal-beat: 0.9s;     /* an open goal, read before the fill        */
-  --motion-check-beat: 0.35s;   /* zero goals settling before the ✓ line     */
+     the per-glyph delay is ~31 glyphs a second -- unhurried, practiced
+     typing -- and proof.js jitters each keystroke +-40% around it so the
+     rhythm reads as a hand rather than a metronome.  The goal beat, the
+     pause while an open goal sits in the HUD, is --motion-label's 1.2s: a
+     caption is read, a goal is read, one tempo.  The check beat, the settle
+     before the compiler speaks, is --motion-pop's 0.5s.  The caret's 1s
+     period is Emacs' default (blink-cursor-interval 0.5s, half on, half
+     off) -- the blink every Agda session actually has. */
+  --motion-type: 32ms;          /* one glyph of the proof replay typing in   */
+  --motion-goal-beat: 1.2s;     /* an open goal, read before the fill        */
+  --motion-check-beat: 0.5s;    /* zero goals settling before the ✓ line     */
   --motion-caret: 1s;           /* the replay caret's blink period           */
-  /* The terminal's entrance: the frame holds back this long after landing,
-     then fades in over one check beat and the replay begins.  3.5s sits on
-     the constellation's label anchor (--motion-labels-at, 3.7s): the beat
-     the hero already established as "the words have been read, the second
-     voice may enter", rounded down so the fade completes by the old mark. */
-  --motion-hero-enter: 3.5s;    /* the proof terminal waiting its turn       */
+  /* The terminal's entrance, and the dwell between lemmas.  The frame holds
+     back 3s after landing, then fades in over one check beat and the replay
+     begins; 3s holds just inside the constellation's label anchor
+     (--motion-labels-at, 3.7s) -- the beat the hero established as "the
+     words have been read, the second voice may enter" -- and entrance plus
+     fade land at 3.5s, still inside it.  The dwell reuses the same figure
+     deliberately: a finished proof holds the stage exactly as long as the
+     empty stage held before the first one. */
+  --motion-hero-enter: 3s;      /* the proof terminal waiting its turn       */
+  --motion-tab-dwell: 3s;       /* a finished lemma holding the stage        */
   --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
